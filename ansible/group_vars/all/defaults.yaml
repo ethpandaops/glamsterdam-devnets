@@ -1,0 +1,87 @@
+ansible_user: devops
+ansible_python_interpreter: /usr/bin/python3
+# Template name refers to the name of the devnet without number
+# Generally refer to the first word of the repository name
+# e.g. peerdas, or pectra
+devnet_name: template
+
+# IPv6 Specific configuration
+global_ipv6_enabled: true
+
+# Per-service IPv6 offset within the host's assigned prefix.
+# DO /124 has only ::3..::f usable, so offsets must stay small.
+# Use end of range for static assignments, start will be auto assigned to remaining containers.
+service_ipv6_offsets:
+  nginx_proxy: 15     # :f
+  execution: 14       # :e
+  snooper_engine: 13  # :d
+  snooper_rpc: 12     # :c
+  beacon: 11          # :b
+  validator: 10       # :a
+
+# Derive host IPv6 prefix from the Terraform-provided `ipv6` host var.
+# Hetzner gives a /64, DO gives a /124.
+host_ipv6_prefix_length: "{{ '64' if cloud | default('') == 'hetzner' else '124' }}"
+host_ipv6_prefix: "{{ (ipv6 | default('')) | ansible.utils.ipsubnet(host_ipv6_prefix_length | int) if (ipv6 | default('')) | length > 0 else '' }}"
+
+######################################################
+##
+##          Role specific overwrites
+##
+######################################################
+
+# role: ethpandaops.general.bootstrap
+bootstrap_user: root
+bootstrap_default_user_authorized_keys_github:
+  - barnabasbusa
+  - parithosh
+  - samcm
+  - savid
+  - skylenet
+  - pk910
+  - mattevans
+  - qu0b
+
+# role: robertdebock.fail2ban
+fail2ban_loglevel: INFO
+fail2ban_logtarget: /var/log/fail2ban.log
+fail2ban_maxretry: 10
+fail2ban_bantime: 600
+fail2ban_ignoreips:
+  - "127.0.0.1/8 ::1"
+  - "{{ lookup('ansible.builtin.url', 'http://ifconfig.me/ip', split_lines=False) }}/32" # Avoid banning ourself
+
+
+# role: ethpandaops.general.docker_network
+docker_network_name: shared
+docker_network_enable_ipv6: "{{ global_ipv6_enabled | default(false) | bool and (host_ipv6_prefix | default('') | length > 0) }}"
+docker_network_driver_options: >-
+  {{ {'com.docker.network.bridge.gateway_mode_ipv6': 'routed'}
+     if (docker_network_enable_ipv6 | bool) else {} }}
+docker_network_ipam_config: >-
+  {{ [{'subnet': host_ipv6_prefix,
+       'gateway': host_ipv6_prefix | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address')}]
+     if (docker_network_enable_ipv6 | bool) else [] }}
+docker_network_ipv6_pool: >-
+  {{ (host_ipv6_prefix | ansible.utils.ipsubnet(124, 0))
+     if (docker_network_enable_ipv6 | bool) else '' }}
+
+docker_networks_shared:
+  - name: "{{ docker_network_name }}"
+
+# role: geerlingguy.docker
+docker_users:
+  - devops
+docker_daemon_options:
+  "log-driver": "json-file"
+  "log-opts":
+      "max-size": "500m"
+      "max-file": "8"
+  "registry-mirrors": ["https://docker-cache.ethquokkaops.io","https://docker.ethquokkaops.io/gh"]
+  "features": { "containerd-snapshotter": false } # This is a temp fix for a docker 29 in combinations with our pull through cache, can be safely removed once the cache is working again with docker 29+
+
+# role: ethpandaops.general.prometheus
+prometheus_container_networks: "{{ docker_networks_shared }}"
+
+# role: ethpandaops.general.ethereum_node
+ethereum_node_images_always_pull: true
