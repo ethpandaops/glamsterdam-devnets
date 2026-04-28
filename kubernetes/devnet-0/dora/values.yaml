@@ -86,5 +86,5 @@ dora:
     bucket: <path:/secrets/services/services.enc.yaml#dora | jsonPath {.s3_bucket}>
     path: "glamsterdam-devnet-0"
 
-  endpointsUrl: "https://raw.githubusercontent.com/ethpandaops/template-devnets/refs/heads/master/kubernetes/devnet-0/dora/endpoints-cl.yaml"
-  executionEndpointsUrl: "https://raw.githubusercontent.com/ethpandaops/template-devnets/refs/heads/master/kubernetes/devnet-0/dora/endpoints-el.yaml"
+  endpointsUrl: "https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/refs/heads/master/kubernetes/devnet-0/dora/endpoints-cl.yaml"
+  executionEndpointsUrl: "https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/refs/heads/master/kubernetes/devnet-0/dora/endpoints-el.yaml"
