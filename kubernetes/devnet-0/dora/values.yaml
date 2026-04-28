@@ -75,7 +75,7 @@ dora:
     pandaops:
       credentials:
         username: ""
-        password: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>"
+        password: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>"
 
   blockDbEngine: "s3"
   blockDbConfig:

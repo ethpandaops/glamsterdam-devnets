@@ -35,8 +35,8 @@ powfaucet:
   httpProxyCount: 2
 
   faucetTitle: "glamsterdam-devnet-0 PoW Faucet"
-  faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.faucet_private_key}>"
-  faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-0.ethpandaops.io"
+  faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_private_key}>"
+  faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-0.ethpandaops.io"
   faucetExplorerLink: "https://explorer.glamsterdam-devnet-0.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000
 

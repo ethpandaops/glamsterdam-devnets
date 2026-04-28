@@ -37,35 +37,35 @@ dugtrio:
   # Rpc
   - url: http://prysm-geth-001:5052
     name: rpc-prysm-geth-001
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: bootnode-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lighthouse-ethrex-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lighthouse-geth-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lighthouse-nethermind-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lodestar-ethrex-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lodestar-geth-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: lodestar-nethermind-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: nimbus-ethrex-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-nimbus-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: nimbus-geth-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: nimbus-nethermind-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: prysm-ethrex-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: prysm-geth-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: prysm-nethermind-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: teku-ethrex-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-teku-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: teku-geth-1
-  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.template-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
     name: teku-nethermind-1
