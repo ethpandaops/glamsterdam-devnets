@@ -25,10 +25,21 @@
 variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
-    { name = "bootnode", count = 1, cloud = "digitalocean" },
-    { name = "mev-relay", count = 1, cloud = "hetzner", size = "ccx53" },
-    { name = "lighthouse-geth", count = 2, cloud = "digitalocean", validator_start = 0, validator_end = 400 },
-    { name = "lighthouse-geth", count = 1, cloud = "hetzner", validator_start = 400, validator_end = 500 },
-    { name = "prysm-nethermind", count = 1, cloud = "hetzner", validator_start = 500, validator_end = 550 },
+    { name = "bootnode", count = 1, cloud = "hetzner" },
+    { name = "lighthouse-geth", count = 1, cloud = "hetzner", validator_start = 0, validator_end = 500 },
+    { name = "prysm-geth", count = 1, cloud = "hetzner", validator_start = 50, validator_end = 1000 },
+    { name = "teku-geth", count = 1, cloud = "hetzner", validator_start = 1000, validator_end = 1500 },
+    { name = "nimbus-geth", count = 1, cloud = "hetzner", validator_start = 1500, validator_end = 2000 },
+    { name = "lodestar-geth", count = 1, cloud = "hetzner", validator_start = 2000, validator_end = 2500 },
+    { name = "lighthouse-nethermind", count = 1, cloud = "hetzner", validator_start = 2500, validator_end = 3000 },
+    { name = "prysm-nethermind", count = 1, cloud = "digitalocean", validator_start = 3000, validator_end = 3500 },
+    { name = "teku-nethermind", count = 1, cloud = "hetzner", validator_start = 3500, validator_end = 4000 },
+    { name = "nimbus-nethermind", count = 1, cloud = "hetzner", validator_start = 4000, validator_end = 4500 },
+    { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", validator_start = 4500, validator_end = 5000 },
+    { name = "lighthouse-ethrex", count = 1, cloud = "hetzner", validator_start = 5000, validator_end = 5500 },
+    { name = "prysm-ethrex", count = 1, cloud = "hetzner", validator_start = 5500, validator_end = 6000 },
+    { name = "teku-ethrex", count = 1, cloud = "digitalocean", validator_start = 6000, validator_end = 6500 },
+    { name = "nimbus-ethrex", count = 1, cloud = "hetzner", validator_start = 6500, validator_end = 7000 },
+    { name = "lodestar-ethrex", count = 1, cloud = "hetzner", validator_start = 7000, validator_end = 7500 }
   ]
 }

@@ -1,20 +1,20 @@
 default_ethereum_client_images:
   ### Consensus layer clients
-  lighthouse: sigp/lighthouse:latest
-  lodestar: chainsafe/lodestar:latest
-  nimbus: statusim/nimbus-eth2:multiarch-latest
-  prysm: gcr.io/offchainlabs/prysm/beacon-chain:latest
-  prysm_validator: gcr.io/offchainlabs/prysm/validator:latest
-  teku: consensys/teku:latest
-  grandine: ethpandaops/grandine:develop
+  lighthouse: ethpandaops/lighthouse:glamsterdam-devnet-0
+  lodestar: ethpandaops/lodestar:glamsterdam-devnet-0
+  nimbus: ethpandaops/nimbus-eth2:glamsterdam-devnet-0
+  prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-0
+  prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-0
+  teku: ethpandaops/teku:glamsterdam-devnet-0
+  grandine: ethpandaops/grandine:glamsterdam-devnet-0
   ### Execution layer clients
-  besu: hyperledger/besu:latest
-  geth: ethereum/client-go:stable
-  erigon: erigontech/erigon:main-latest
-  nethermind: nethermindeth/nethermind:master
-  reth: ghcr.io/paradigmxyz/reth:latest
-  nimbusel: ethpandaops/nimbus-eth1:master
-  ethrex: ghcr.io/lambdaclass/ethrex:latest
+  besu: ethpandaops/besu:glamsterdam-devnet-0
+  geth: ethpandaops/geth:glamsterdam-devnet-0
+  erigon: ethpandaops/erigon:glamsterdam-devnet-0
+  nethermind: ethpandaops/nethermind:glamsterdam-devnet-0
+  reth: ethpandaops/reth:glamsterdam-devnet-0
+  nimbusel: ethpandaops/nimbus-eth1:glamsterdam-devnet-0
+  ethrex: ethpandaops/ethrex:glamsterdam-devnet-0
 
 default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop
@@ -32,7 +32,7 @@ default_tooling_images:
   fauceth: skylenet/fauceth:fix_fee_estimation
   powfaucet: pk910/powfaucet:v2-stable
   homepage: ethpandaops/ethereum-testnet-homepage:latest
-  checkpointz: ethpandaops/checkpointz:latest
+  checkpointz: ethpandaops/checkpointz:gloas-latest
   blockscout: blockscout/blockscout:latest
   blockscout_frontend: docker.ethquokkaops.io/gh/blockscout/frontend:latest
   beacon_metrics_gazer: dapplion/beacon-metrics-gazer:latest
@@ -41,13 +41,13 @@ default_tooling_images:
   blobscan_indexer: blossomlabs/blobscan-indexer:latest
   dora: ethpandaops/dora:master-latest
   dugtrio: ethpandaops/dugtrio:latest
-  ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:5.2.2
+  ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.0.2
   tracoor: ethpandaops/tracoor:latest
   ncli: status-im/nimbus-eth2:unstable
   lcli: ethpandaops/lighthouse:unstable
   zcli: electra
   assertoor: ethpandaops/assertoor:master-latest
-  erpc: docker.ethquokkaops.io/gh/erpc/erpc:0.0.49
+  erpc: docker.ethquokkaops.io/gh/erpc/erpc:latest
   prometheus: prom/prometheus:v2.40.7
   node_exporter: prom/node-exporter:v1.5.0
   cl_bootnode: protolambda/eth2-bootnode:cleanup

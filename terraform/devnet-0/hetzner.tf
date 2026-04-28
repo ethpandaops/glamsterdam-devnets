@@ -18,9 +18,7 @@ variable "hetzner_fullnode_size" {
 
 variable "hetzner_regions" {
   default = [
-    "nbg1",
     "fsn1",
-    "hel1"
   ]
 }
 
