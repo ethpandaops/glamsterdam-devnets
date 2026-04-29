@@ -30,7 +30,7 @@ dora:
 
   name: glamsterdam-devnet-0
   configPath: "https://config.glamsterdam-devnet-0.ethpandaops.io/cl/config.yaml"
-  validatorNamesInventory: "https://config.glamsterdam-devnet-0.ethpandaops.io/api/v1/nodes/validator-ranges"
+  validatorNamesInventory: "https://gist.githubusercontent.com/pk910/3b88f90de161b81515f08863a13cf7a6/raw/88b66bce2feb6b030a6a725109aeb874e84e359e/gistfile1.txt"
   ethExplorerLink: "https://explorer.glamsterdam-devnet-0.ethpandaops.io"
   publicRpcUrl: "https://rpc.glamsterdam-devnet-0.ethpandaops.io"
   rainbowkitProjectId: "15fe4ab4d5c0bcb6f0dc7c398301ff0e"
