@@ -1,6 +1,6 @@
 {
   "config": {
-    "chainId": 7074513953,
+    "chainId": 7081018485,
     "homesteadBlock": 0,
     "eip150Block": 0,
     "eip155Block": 0,
@@ -32,16 +32,28 @@
         "max": 9,
         "baseFeeUpdateFraction": 5007716
       },
+      "bpo1": {
+        "target": 10,
+        "max": 15,
+        "baseFeeUpdateFraction": 8346193
+      },
+      "bpo2": {
+        "target": 14,
+        "max": 21,
+        "baseFeeUpdateFraction": 11684671
+      },
       "amsterdam": {
-        "target": 6,
-        "max": 9,
-        "baseFeeUpdateFraction": 5007716
+        "target": 14,
+        "max": 21,
+        "baseFeeUpdateFraction": 11684671
       }
     },
     "depositContractAddress": "0x00000000219ab540356cBB839Cbe05303d7705Fa",
     "pragueTime": 0,
     "osakaTime": 0,
-    "amsterdamTime": 1777415303
+    "bpo1Time": 0,
+    "bpo2Time": 1777422257,
+    "amsterdamTime": 1777422641
   },
   "alloc": {
     "0x0000000000000000000000000000000000000000": {
@@ -955,5 +967,5 @@
   "nonce": "0x1234",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "timestamp": "1777414859"
+  "timestamp": "1777421813"
 }
