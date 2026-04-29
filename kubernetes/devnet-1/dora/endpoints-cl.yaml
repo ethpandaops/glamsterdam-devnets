@@ -1,0 +1,42 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/dora-endpoints-cl.yaml.j2
+# Consensus layer endpoints
+
+- url: https://bn-bootnode-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: bootnode-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: lighthouse-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lighthouse-geth-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: lighthouse-geth-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lodestar-ethrex-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: lodestar-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lodestar-geth-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: lodestar-geth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-ethrex-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: prysm-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-geth-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: prysm-geth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-ethrex-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: teku-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-geth-1.srv.glamsterdam-devnet-1.ethpandaops.io
+  name: teku-geth-1
+  authGroup: pandaops
+  priority: -1
+

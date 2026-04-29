@@ -1,0 +1,15 @@
+lighthouse-geth-1: 0-500
+prysm-geth-1: 500-1000
+teku-geth-1: 1000-1500
+nimbus-geth-1: 1500-2000
+lodestar-geth-1: 2000-2500
+lighthouse-nethermind-1: 2500-3000
+prysm-nethermind-1: 3000-3500
+teku-nethermind-1: 3500-4000
+nimbus-nethermind-1: 4000-4500
+lodestar-nethermind-1: 4500-5000
+lighthouse-ethrex-1: 5000-5500
+prysm-ethrex-1: 5500-6000
+teku-ethrex-1: 6000-6500
+nimbus-ethrex-1: 6500-7000
+lodestar-ethrex-1: 7000-7500

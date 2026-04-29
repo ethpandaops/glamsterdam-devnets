@@ -1,0 +1,159 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/forky.yaml.j2
+
+forky:
+  fullnameOverride: forky
+  replicas: 1
+  image:
+    repository: ethpandaops/forky
+    tag: latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 256m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: forky.glamsterdam-devnet-0.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  postgresql:
+    enabled: true
+    fullnameOverride: "forky-postgresql"
+    image:
+      registry: docker.io
+      repository: bitnamilegacy/postgresql
+      tag: 16.4.0-debian-12-r2
+    auth:
+      username: <path:/secrets/services/services.enc.yaml#forky | jsonPath {.postgres.devnets.username}>
+      password: <path:/secrets/services/services.enc.yaml#forky | jsonPath {.postgres.devnets.password}>
+    primary:
+      persistence:
+        enabled: true
+        size: 20Gi
+      resources:
+        requests:
+          cpu: 1000m
+          memory: 2Gi
+        limits:
+          cpu: 2000m
+          memory: 4Gi
+
+  config:
+    listen_addr: ":5555"
+    pprof_addr: ":6060"
+    log_level: "debug"
+    metrics:
+      addr: ":9090"
+      enabled: true
+    forky:
+      retention_period: "24h"
+      store:
+        type: s3
+        config:
+          region: us-east-1
+          bucket_name: glamsterdam-devnet-0/forky
+          endpoint: https://<path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.account_ids.ethdevops}>.r2.cloudflarestorage.com/ethpandaops-devnet-dumpster
+          access_key: <path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.r2.devnets.access_key_id}>
+          access_secret: <path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.r2.devnets.secret_access_key}>
+      indexer: {}
+      ethereum:
+        network:
+          name: "glamsterdam-devnet-0"
+          spec:
+            seconds_per_slot: 12
+            slots_per_epoch: 32
+            genesis_time: 1777428522
+      sources:
+        - name: bootnode-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lodestar-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lodestar-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: lodestar-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: nimbus-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: nimbus-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: nimbus-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: prysm-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: prysm-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: prysm-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-geth-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-0.ethpandaops.io
+            polling_interval: "12s"
