@@ -26,6 +26,7 @@ variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
     { name = "bootnode", count = 1, cloud = "hetzner" },
+    { name = "buildoor-prysm-geth", count = 1, cloud = "hetzner" },
     { name = "lighthouse-geth", count = 1, cloud = "hetzner", validator_start = 0, validator_end = 500 },
     { name = "prysm-geth", count = 1, cloud = "hetzner", validator_start = 500, validator_end = 1000 },
     { name = "teku-geth", count = 1, cloud = "hetzner", validator_start = 1000, validator_end = 1500 },
