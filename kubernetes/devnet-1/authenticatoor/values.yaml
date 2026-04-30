@@ -1,5 +1,5 @@
-service-authenticatoor:
-  fullnameOverride: service-authenticatoor
+authenticatoor:
+  fullnameOverride: authenticatoor
 
   image:
     repository: ethpandaops/service-authenticatoor
