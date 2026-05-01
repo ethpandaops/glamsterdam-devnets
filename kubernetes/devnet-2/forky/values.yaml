@@ -92,6 +92,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
+        - name: grandine-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
         - name: grandine-geth-1
           type: "beacon_node"
           config:
@@ -106,6 +111,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
         - name: lighthouse-geth-1
           type: "beacon_node"
@@ -122,6 +132,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
+        - name: lodestar-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
         - name: lodestar-geth-1
           type: "beacon_node"
           config:
@@ -136,6 +151,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
+        - name: nimbus-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
         - name: nimbus-geth-1
           type: "beacon_node"
@@ -152,6 +172,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
+        - name: prysm-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
         - name: prysm-geth-1
           type: "beacon_node"
           config:
@@ -166,6 +191,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-devnet-2.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-2.ethpandaops.io
             polling_interval: "12s"
         - name: teku-geth-1
           type: "beacon_node"
