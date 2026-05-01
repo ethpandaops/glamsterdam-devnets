@@ -34,6 +34,7 @@ besu_container_command_extra_args:
   - --sync-mode=FULL
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
+  - --target-gas-limit=150000000
 besu_container_pull: true
 
 prometheus_config: |

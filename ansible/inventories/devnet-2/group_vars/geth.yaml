@@ -25,7 +25,7 @@ geth_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-
+  - --miner.gaslimit=150000000
 geth_container_pull: true
 
 prometheus_config: |
