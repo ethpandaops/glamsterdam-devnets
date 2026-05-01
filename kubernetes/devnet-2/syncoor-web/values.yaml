@@ -1,0 +1,74 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/syncoor-web.yaml.j2
+
+syncoor-web:
+  fullnameOverride: syncoor-web
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web
+            tag: master
+            pullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+
+  configMaps:
+    config:
+      enabled: true
+      data:
+        config.json: |
+          {
+            "directories": [
+              {
+                "name": "cl-full-checkpoint-sync",
+                "displayName": "CL Fullnode + CL Checkpoint Sync",
+                "url": "https://syncoor-data.ethpandaops.io/devnets/glamsterdam-devnet-2"
+              },
+              {
+                "name": "cl-super-checkpoint-sync",
+                "displayName": "CL Supernode + CL Checkpoint Sync",
+                "url": "https://syncoor-data.ethpandaops.io/devnets/glamsterdam-devnet-2-clsupernode"
+              },
+              {
+                "name": "cl-full-genesis-sync",
+                "displayName": "CL Fullnode + CL Genesis Sync",
+                "url": "https://syncoor-data.ethpandaops.io/devnets/glamsterdam-devnet-2-clcheckpointsyncdisabled"
+              },
+              {
+                "name": "cl-super-genesis-sync",
+                "displayName": "CL Supernode + CL Genesis Sync",
+                "url": "https://syncoor-data.ethpandaops.io/devnets/glamsterdam-devnet-2-clsupernode-clcheckpointsyncdisabled"
+              }
+            ],
+            "syncoorApiEndpoints": [
+              {
+                "name": "Syncoor",
+                "url": "https://syncoor-api.glamsterdam-devnet-2.ethpandaops.io"
+              }
+            ]
+          }
+
+  ingress:
+    main:
+      className: ingress-nginx-public
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+          sub_filter_types text/html;
+          sub_filter_once off;
+      hosts:
+        - host: syncoor.glamsterdam-devnet-2.ethpandaops.io
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: main
+                port: http

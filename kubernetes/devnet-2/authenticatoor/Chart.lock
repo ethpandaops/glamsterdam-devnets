@@ -1,0 +1,6 @@
+dependencies:
+- name: authenticatoor
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.1.0
+digest: sha256:038f86af363a75416efde6ef400e6d8dfefadd140b1475fd5218885d87569763
+generated: "2026-05-01T14:37:31.523902+02:00"

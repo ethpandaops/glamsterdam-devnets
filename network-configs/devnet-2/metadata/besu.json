@@ -31,11 +31,6 @@
         "target": 10,
         "max": 15,
         "baseFeeUpdateFraction": 8346193
-      },
-      "bpo2": {
-        "target": 14,
-        "max": 21,
-        "baseFeeUpdateFraction": 11684671
       }
     },
     "depositContractAddress": "0x00000000219ab540356cBB839Cbe05303d7705Fa",
@@ -44,8 +39,7 @@
     "pragueTime": 0,
     "osakaTime": 0,
     "bpo1Time": 0,
-    "bpo2Time": 1777638984,
-    "amsterdamTime": 1777639368
+    "amsterdamTime": 1777640784
   },
   "alloc": {
     "0x0000000000000000000000000000000000000000": {
@@ -956,9 +950,9 @@
   "baseFeePerGas": "0x3B9ACA00",
   "difficulty": "0x0",
   "extraData": "",
-  "gasLimit": "0x3938700",
+  "gasLimit": "0x8f0d180",
   "nonce": "0x1234",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "timestamp": "1777638540"
+  "timestamp": "1777640340"
 }
