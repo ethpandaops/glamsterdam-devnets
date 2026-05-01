@@ -162,7 +162,7 @@ reth_container_command_extra_args:
   - --http.api=trace,rpc,eth,net,debug,web3,admin,flashbots,txpool
   - --ws.api=trace,rpc,eth,net,debug,web3,admin,flashbots,txpool
   - --ws.origins=*
-  - --builder.gaslimit=60000000
+  - --builder.gaslimit=150000000
   - --engine.persistence-threshold=0
   - --engine.memory-block-buffer-target=0
   - --rpc.eth-proof-window=3
