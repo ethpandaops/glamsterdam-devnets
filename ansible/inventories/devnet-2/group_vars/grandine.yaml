@@ -44,6 +44,7 @@ grandine_container_command_extra_args:
   - --boot-nodes={{ ethereum_cl_bootnodes | join(',') }}
   - --graffiti={{ ansible_hostname }}
   - --features=LogHttpRequests
+  - --default-gas-limit=1500000000
 
 grandine_validator_container_volumes:
   - "{{ grandine_validator_datadir }}:/validator-data"
