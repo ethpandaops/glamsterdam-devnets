@@ -25,6 +25,7 @@ ethrex_container_volumes:
 ethrex_container_command_extra_args:
   - --network=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --builder.gas-limit=150000000
 
 prometheus_config: |
   global:
