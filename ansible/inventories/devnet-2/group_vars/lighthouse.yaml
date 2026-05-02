@@ -48,6 +48,20 @@ lighthouse_validator_container_volumes:
 lighthouse_validator_container_command_extra_args:
   - --testnet-dir=/network-config
   - --graffiti={{ ansible_hostname }}
-  - --gas-limit 150000000
+  - --gas-limit=150000000
+  - --builder-proposals
 lighthouse_validator_datadir: /data/lighthouse-validator
 lighthouse_container_pull: true
+
+lighthouse_validator_container_command:
+  - lighthouse
+  - validator_client
+  - --validators-dir=/validator-data/keys
+  - --secrets-dir=/validator-data/secrets
+  - --beacon-nodes=https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password | string }}@bn-bootnode-1.srv.glamsterdam-devnet-2.ethpandaops.io
+  - --init-slashing-protection
+  - --suggested-fee-recipient={{ lighthouse_validator_fee_recipient }}
+  - --metrics
+  - --metrics-address=0.0.0.0
+  - --metrics-allow-origin=*
+  - --metrics-port={{ lighthouse_ports_metrics }}
