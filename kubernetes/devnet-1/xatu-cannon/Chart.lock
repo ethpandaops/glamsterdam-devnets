@@ -1,6 +1,0 @@
-dependencies:
-- name: xatu-cannon
-  repository: https://ethpandaops.github.io/ethereum-helm-charts
-  version: 0.2.2
-digest: sha256:db13c82e0dbc63ba90ec91d30dedb8d8bab717c1a983c7510646d49b69f975af
-generated: "2026-04-30T00:31:30.300399+02:00"

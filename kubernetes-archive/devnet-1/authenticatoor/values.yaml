@@ -1,0 +1,38 @@
+authenticatoor:
+  fullnameOverride: authenticatoor
+
+  image:
+    repository: ethpandaops/service-authenticatoor
+    tag: main
+    pullPolicy: Always
+
+  issuer: "https://auth.glamsterdam-devnet-1.ethpandaops.io"
+
+  cloudflareAccess:
+    verifyJWT: true
+    teamDomain: "ethpandaops.cloudflareaccess.com"
+    # Empty audTag means: accept assertions from any application in the team
+    # (signature + issuer still pin them to ethpandaops). Set to a specific
+    # AUD tag to lock down to one CF Access app.
+    audTag: ""
+
+  persistence:
+    enabled: true
+    size: 32Mi
+
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    hosts:
+      - host: auth.glamsterdam-devnet-1.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi

@@ -1,0 +1,36 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/authenticatoor.yaml.j2
+
+authenticatoor:
+  fullnameOverride: authenticatoor
+
+  image:
+    repository: ethpandaops/service-authenticatoor
+    tag: main
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+  issuer: "https://auth.glamsterdam-devnet-2.ethpandaops.io"
+
+  cloudflareAccess:
+    verifyJWT: true
+    teamDomain: "ethpandaops.cloudflareaccess.com"
+    audTag: ""
+
+  persistence:
+    enabled: true
+    size: "32Mi"
+
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    hosts:
+      - host: auth.glamsterdam-devnet-2.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
