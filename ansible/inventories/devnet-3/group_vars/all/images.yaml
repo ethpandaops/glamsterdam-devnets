@@ -3,8 +3,8 @@ default_ethereum_client_images:
   lighthouse: ethpandaops/lighthouse:glamsterdam-devnet-2
   lodestar: ethpandaops/lodestar:glamsterdam-devnet-2
   nimbus: ethpandaops/nimbus-eth2:glamsterdam-devnet-2
-  prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-2
-  prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-2
+  prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-3
+  prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-3
   teku: ethpandaops/teku:glamsterdam-devnet-2
   grandine: ethpandaops/grandine:glamsterdam-devnet-2
   ### Execution layer clients
