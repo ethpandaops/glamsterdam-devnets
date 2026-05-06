@@ -1,0 +1,50 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/powfaucet.yaml.j2
+
+powfaucet:
+  fullnameOverride: powfaucet
+
+  image:
+    repository: pk910/powfaucet
+    tag: v2-stable
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 400m
+      memory: 1Gi
+
+  ingress:
+    enabled: true
+
+    className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+
+    hosts:
+      - host: faucet.glamsterdam-devnet-3.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+  httpProxyCount: 2
+
+  faucetTitle: "glamsterdam-devnet-3 PoW Faucet"
+  faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_private_key}>"
+  faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-3.ethpandaops.io"
+  faucetExplorerLink: "https://explorer.glamsterdam-devnet-3.ethpandaops.io/tx/{txid}"
+  faucetTxGasLimit: 100000
+
+  faucetCaptchaEnabled: true
+  faucetCaptchaSitekey: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.site_key}>"
+  faucetCaptchaSecret: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.secret_key}>"
+
+  faucetRecurringLimitsAmountWei: 500000000000000000000 # 500 ETH
+  faucetPowEnabled: true
+  faucetPowRewardPerHash: 1000000000000000000 # 1 ETH
+  faucetPowDifficulty: 10
