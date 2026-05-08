@@ -4,8 +4,8 @@ buildoor-overview:
   fullnameOverride: buildoor-overview
   image:
     repository: ethpandaops/buildoor
-    tag: main
-    pullPolicy: IfNotPresent
+    tag: main-latest
+    pullPolicy: Always
 
 
   resources:
@@ -34,4 +34,4 @@ buildoor-overview:
 
   hosts:
 
-    - https://buildoor-prysm-geth-1.srv.glamsterdam-devnet-3.ethpandaops.io
+    - https://api-buildoor-prysm-geth-1.srv.glamsterdam-devnet-3.ethpandaops.io
