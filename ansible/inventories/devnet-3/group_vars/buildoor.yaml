@@ -38,6 +38,7 @@ buildoor_container_env:
   VIRTUAL_HOST: "{{ server_fqdn }}"
   VIRTUAL_PORT: "{{ buildoor_api_port | string }}"
   LETSENCRYPT_HOST: "{{ server_fqdn }}"
+  BUILDOOR_INJECT_HEAD_HTML: '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script>'
 
 # Buildoor host-only overrides
 ethereum_node_cl: prysm

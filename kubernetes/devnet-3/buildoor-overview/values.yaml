@@ -1,0 +1,37 @@
+# Manually staged. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/buildoor-overview.yaml.j2
+
+buildoor-overview:
+  fullnameOverride: buildoor-overview
+  image:
+    repository: ethpandaops/buildoor
+    tag: main
+    pullPolicy: IfNotPresent
+
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.0.js" integrity="sha384-j6D+DanVUQs7XYmJaMXGwg2VdBq07F/ekc+bP5CNPsLOYCv4TKf8r3JBWqxwakKL" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+
+    hosts:
+      - host: buildoor.glamsterdam-devnet-3.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  hosts:
+
+    - https://buildoor-prysm-geth-1.srv.glamsterdam-devnet-3.ethpandaops.io

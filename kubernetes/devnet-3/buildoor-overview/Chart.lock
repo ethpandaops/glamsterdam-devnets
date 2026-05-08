@@ -1,0 +1,6 @@
+dependencies:
+- name: buildoor-overview
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.0.1
+digest: sha256:672b145d1693e43a7f815d82f42c5dc572ca7a2f230f2f6350d4c14241e67ba5
+generated: "2026-05-09T00:15:00.000000+02:00"
