@@ -46,13 +46,13 @@
 #     - role: ethpandaops.general.vector
 #       tags: [init-server, vector]
 
-# - hosts: dns_server
-#   become: true
-#   roles:
-#     - role: ethpandaops.general.dns_server
-#       tags: [init-server, dns_server]
-#     - role: ethpandaops.general.wildcard_cert_issuer
-#       tags: [init-server, wildcard_cert]
+- hosts: dns_server
+  become: true
+  roles:
+    - role: ethpandaops.general.dns_server
+      tags: [init-server, dns_server]
+    - role: ethpandaops.general.wildcard_cert_issuer
+      tags: [init-server, wildcard_cert]
 
 - hosts: bootnode
   become: true
