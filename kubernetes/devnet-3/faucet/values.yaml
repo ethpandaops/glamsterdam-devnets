@@ -88,7 +88,7 @@ powfaucet:
 
   faucetAuthenticatoorEnabled: true
   faucetAuthenticatoorAuthUrl: "https://auth.glamsterdam-devnet-3.ethpandaops.io"
-  faucetAuthenticatoorExpectedAudience: "ethpandaops.io"
+  faucetAuthenticatoorExpectedAudience: "glamsterdam-devnet-3.ethpandaops.io"
   faucetAuthenticatoorGrants:
     - duration: 86400
       limitAmount: 0
