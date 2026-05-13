@@ -8,7 +8,7 @@ ethereum_cl_bootnodes: >-
     )
     +
     (
-      [primary_bootnode]
+      [primary_bootnode, 'prysm-geth-1', 'prysm-geth-2', 'lodestar-geth-1', 'lodestar-geth-2']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
       | select('defined')
       | list
