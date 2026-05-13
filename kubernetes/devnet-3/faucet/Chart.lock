@@ -1,6 +1,6 @@
 dependencies:
 - name: powfaucet
   repository: https://ethpandaops.github.io/ethereum-helm-charts
-  version: 0.0.4
-digest: sha256:f75bbcfb558f64196ea3441a6fe832f04111be02e97a8ebf25ed72acf79e5fec
-generated: "2026-05-06T17:37:39.696098+02:00"
+  version: 1.0.0
+digest: sha256:0ca18b6fd9dafcc8bf6597a03d769dee0ec6dcdffdf523197ff8dce70d0b717b
+generated: "2026-05-09T17:29:30+02:00"
