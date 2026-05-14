@@ -1,5 +1,4 @@
-# Manually staged. Replace with ansible-generated output once the chart
-# (buildoor-overview 0.0.1) is published to the upstream helm-charts repo.
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/Chart.yaml.j2
 
 apiVersion: v2
 name: buildoor
