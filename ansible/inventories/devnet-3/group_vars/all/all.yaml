@@ -336,9 +336,8 @@ otelcol_contrib_config: |
         - type: container
           format: docker
           add_metadata_from_filepath: true
-          on_error: drop_quiet
         - type: filter
-          expr: 'attributes["container.name"] == nil or attributes["container.name"] matches "^(otelcol|ethereum-metrics-exporter|nginx-proxy|node_exporter|prometheus|snooper-.*)$"'
+          expr: 'attributes["container.name"] != nil and attributes["container.name"] matches "^(otelcol|ethereum-metrics-exporter|nginx-proxy|node_exporter|prometheus|snooper-.*)$"'
         - type: json_parser
           if: 'body matches "^\\s*\\{"'
           on_error: send
