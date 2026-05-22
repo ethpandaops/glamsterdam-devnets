@@ -35,6 +35,8 @@ variable "nodes" {
     { name = "grandine-nethermind", count = 1, cloud = "hetzner", validator_start = 1800, validator_end = 2000 },
     { name = "lighthouse-nethermind", count = 1, cloud = "hetzner", validator_start = 2000, validator_end = 2200 },
     { name = "lighthouse-ethrex", count = 1, cloud = "hetzner", validator_start = 2200, validator_end = 2400 },
+    { name = "nimbus-ethrex", count = 1, cloud = "hetzner", validator_start = 2400, validator_end = 2600 },
+    { name = "nimbus-nethermind", count = 1, cloud = "hetzner", validator_start = 2600, validator_end = 2800 },
   ]
 
   validation {
