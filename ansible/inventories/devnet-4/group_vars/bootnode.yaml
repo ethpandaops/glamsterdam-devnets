@@ -41,88 +41,68 @@ bootnodoor_container_env:
   LETSENCRYPT_HOST: "bootnodoor-{{ server_fqdn }}"
 
 # role: ethpandaops.general.ethereum_node
-ethereum_node_el: geth
-ethereum_node_cl: teku
+ethereum_node_el: nethermind
+ethereum_node_cl: prysm
 ethereum_node_cl_validator_enabled: false
 
-# role: ethpandaops.general.teku
-teku_container_name: beacon
-teku_container_image: "{{ default_ethereum_client_images.teku }}"
-teku_container_env:
+# role: ethpandaops.general.ethereum_node
+ethereum_node_cl: prysm
+prysm_container_tty: true
+prysm_pprof_enabled: true
+prysm_validator_container_tty: true
+# role: ethpandaops.general.prysm
+prysm_container_name: beacon
+prysm_validator_container_name: validator
+prysm_container_image: "{{ default_ethereum_client_images.prysm }}"
+prysm_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-teku_container_volumes:
-  - "{{ teku_datadir }}:/data"
-  - "{{ teku_auth_jwt_path }}:/execution-auth.jwt:ro"
+prysm_container_volumes:
+  - "{{ prysm_datadir }}:/data"
+  - "{{ prysm_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-teku_container_command_extra_args:
-  - --network=/network-config/config.yaml
+prysm_container_entrypoint:
+  - /app/cmd/beacon-chain/beacon-chain
+prysm_container_command_extra_args: >-
+  {{ prysm_container_command_extra_simple_args }}
+prysm_container_command_extra_simple_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
   - --genesis-state=/network-config/genesis.ssz
-  - --p2p-peer-upper-bound=100
-  - --data-storage-non-canonical-blocks-enabled=true
-  - --data-storage-mode=ARCHIVE
-  - --logging=info
-  - --Xlog-include-p2p-warnings-enabled
-  - --metrics-block-timing-tracking-enabled
-  - >-
-    --p2p-discovery-bootnodes={{
-      (
-        (
-          groups['bootnode']
-          | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
-          | select('defined')
-          | list
-        )
-        +
-        (
-          groups['bootnode']
-          | map('extract', hostvars, ['bootnodoor_fact_enr'])
-          | select('defined')
-          | list
-        )
-      )
-      | join(',')
-    }}
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --min-sync-peers=1
+  - --verbosity=debug
+  - --subscribe-all-subnets
 
-# role: ethpandaops.general.geth
-geth_container_name: execution
-geth_container_image: "{{ default_ethereum_client_images.geth }}"
-geth_container_env:
+
+# role: ethpandaops.general.ethereum_node
+ethereum_node_el: nethermind
+# role: ethpandaops.general.nethermind
+nethermind_container_name: execution
+nethermind_container_image: "{{ default_ethereum_client_images.nethermind }}"
+nethermind_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
-geth_container_volumes:
-  - "{{ geth_datadir }}:/data"
-  - "{{ geth_auth_jwt_path }}:/execution-auth.jwt:ro"
+nethermind_container_entrypoint:
+  - /nethermind/nethermind
+nethermind_container_volumes:
+  - "{{ nethermind_datadir }}:/data"
+  - "{{ nethermind_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-geth_container_command_extra_args:
-  - --override.genesis=/network-config/genesis.json
-  - --http.api=eth,net,web3,debug,admin
-  - --http.vhosts=*
-  - --networkid={{ ethereum_network_id }}
-  - --syncmode=full
-  - --gcmode=archive
-  - --state.scheme=hash
-  - >-
-    --bootnodes={{
-      (
-        (
-          groups['bootnode']
-          | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enode'])
-          | select('defined')
-          | list
-        )
-        +
-        (
-          groups['bootnode']
-          | map('extract', hostvars, ['bootnodoor_fact_enode'])
-          | select('defined')
-          | list
-        )
-      )
-      | join(',')
-    }}
+nethermind_container_command_extra_args:
+  - --Init.ChainSpecPath=/network-config/chainspec.json
+  - --JsonRpc.EnabledModules=Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Debug,Admin
+  - --Pruning.Mode=None
+  - --config=none
+  - --log=DEBUG
+  - --Seq.MinLevel=Info
+  - --Seq.ServerUrl={{ nethermind_seq_server }}
+  - --Seq.ApiKey={{ nethermind_seq_api_key }}
+  - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
+nethermind_container_pull: true
+
 
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write
