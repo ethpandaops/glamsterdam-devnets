@@ -17,6 +17,16 @@
   name: grandine-nethermind-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
+  name: lighthouse-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
+  name: lighthouse-nethermind-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
 - url: https://bn-lodestar-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
   name: lodestar-ethrex-1
   authGroup: pandaops

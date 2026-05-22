@@ -25,6 +25,18 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-grandine-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io:8961
+- url: https://rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
+  name: lighthouse-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io:8961
+- url: https://rpc-lighthouse-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
+  name: lighthouse-nethermind-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io:8961
 - url: https://rpc-lodestar-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
   name: lodestar-ethrex-1
   authGroup: pandaops

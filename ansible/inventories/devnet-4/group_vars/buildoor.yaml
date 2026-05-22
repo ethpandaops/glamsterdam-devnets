@@ -1,4 +1,4 @@
-# NOTE: precedence over sibling groups (prysm/geth) is established via
+# NOTE: precedence over sibling groups (prysm/ethrex) is established via
 # `[buildoor:vars] ansible_group_priority=100` in inventory.ini — that variable
 # is consulted while loading group_vars, so it cannot be set here.
 
@@ -43,7 +43,7 @@ buildoor_container_env:
 
 # Buildoor host-only overrides
 ethereum_node_cl: prysm
-ethereum_node_el: geth
+ethereum_node_el: ethrex
 ethereum_node_cl_validator_enabled: false
 ethereum_node_mev_boost_enabled: false
 

@@ -97,6 +97,16 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
             polling_interval: "12s"
+        - name: lighthouse-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
+            polling_interval: "12s"
         - name: lodestar-ethrex-1
           type: "beacon_node"
           config:

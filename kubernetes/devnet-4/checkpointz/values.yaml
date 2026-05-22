@@ -62,6 +62,12 @@ checkpointz:
         - name: grandine-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
           dataProvider: true
+        - name: lighthouse-ethrex-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
+          dataProvider: true
+        - name: lighthouse-nethermind-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-4.ethpandaops.io
+          dataProvider: true
         - name: lodestar-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-4.ethpandaops.io
           dataProvider: true

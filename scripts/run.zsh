@@ -1,6 +1,6 @@
 #!/bin/zsh
-node="bootnode-1"
-network="devnet-2"
+node="prysm-ethrex-1"
+network="devnet-4"
 domain="ethpandaops.io"
 srv="srv"
 prefix="glamsterdam"
