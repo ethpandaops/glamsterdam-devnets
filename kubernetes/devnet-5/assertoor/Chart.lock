@@ -1,0 +1,6 @@
+dependencies:
+- name: assertoor
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 1.2.0
+digest: sha256:bfe90fdc55ea79425920ba64b6681573680c15234903390f3dd0fa7db62317f4
+generated: "2026-06-04T14:35:30.802258+02:00"
