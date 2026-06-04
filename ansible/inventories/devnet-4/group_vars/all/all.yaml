@@ -296,9 +296,6 @@ docker_nginx_proxy_wildcard_cert_psk: "{{ secret_cert_encryption_psk }}"
 otlp_endpoint: "https://otlp.analytics.production.platform.ethpandaops.io"
 otlp_deployment_env: production
 
-# otelcol-contrib is no longer used at the edge; the role removes its container.
-otelcol_contrib_cleanup: true
-
 # role: ethpandaops.general.vector
 vector_config: |
   # Docker container logs (clean per-container metadata straight from the Docker API)
