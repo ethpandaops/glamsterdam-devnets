@@ -36,7 +36,7 @@ buildoor_wallet_privkey: "{{ secret_buildoor_wallet_privkey }}"
 # Builder BLS private key
 buildoor_builder_privkey: "{{ secret_buildoor_builder_privkey }}"
 buildoor_container_command_extra_args:
-  - --validator-ranges-url="https://config.{{ network_subdomain }}/api/v1/nodes/validator-ranges"
+  - --validator-ranges-url=https://config.{{ network_subdomain }}/api/v1/nodes/validator-ranges
 buildoor_container_env:
   VIRTUAL_HOST: api-{{ server_fqdn }}
   VIRTUAL_PORT: "{{ buildoor_api_port | string }}"
