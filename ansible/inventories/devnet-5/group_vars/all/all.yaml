@@ -180,6 +180,10 @@ gen_kubernetes_config_dora_frontend_rainbowkit_id: "15fe4ab4d5c0bcb6f0dc7c398301
 gen_kubernetes_config_dora_execution_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-el.yaml"
 gen_kubernetes_config_dora_consensus_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-cl.yaml"
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+# ePBS (EIP-7732) provides a protocol-native builder market — no external
+# mev-boost relay is deployed on this devnet, so drop the dora mevRelays entry
+# to avoid timeout spam on the non-existent mev-relay-1 hostname.
+gen_kubernetes_config_dora_mev_relays: []
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
