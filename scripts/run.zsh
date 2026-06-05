@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 node="prysm-ethrex-1"
-network="devnet-4"
+network="devnet-5"
 domain="ethpandaops.io"
 srv="srv"
 prefix="glamsterdam"
@@ -13,6 +13,61 @@ beacon_prefix=$(yq -r '.ethereum_node_beacon_prefix' ../ansible/inventories/$net
 bn_endpoint="${BEACON_ENDPOINT:-https://$sops_name:$sops_password@$beacon_prefix$node.$srv.$prefix-$network.$domain}"
 rpc_endpoint="${RPC_ENDPOINT:-https://$sops_name:$sops_password@$rpc_prefix$node.$srv.$prefix-$network.$domain}"
 bootnode_endpoint="${BOOTNODE_ENDPOINT:-https://bootnode-1.$prefix-$network.$domain}"
+
+# Verify every external tool run.zsh depends on is installed.
+# Pass 1 to print every tool; pass 0 (or empty) to print only missing tools.
+check_deps() {
+  local verbose="$1"
+  local tools=(sops yq curl jq awk bc python3 docker cast ethdo ethereal eth2-val-tools)
+  local os
+  case "$(uname -s)" in
+    Darwin) os="macos" ;;
+    Linux)  os="linux" ;;
+    *)      os="other" ;;
+  esac
+  typeset -A hints
+  if [[ "$os" == "macos" ]]; then
+    hints[sops]="brew install sops"
+    hints[yq]="brew install yq"
+    hints[curl]="preinstalled on macOS"
+    hints[jq]="brew install jq"
+    hints[awk]="preinstalled on macOS"
+    hints[bc]="preinstalled on macOS"
+    hints[python3]="preinstalled on macOS (or: brew install python)"
+    hints[docker]="https://docs.docker.com/desktop/install/mac-install/"
+  else
+    hints[sops]="apt install sops  # or download from https://github.com/getsops/sops/releases"
+    hints[yq]="apt install yq  # or download from https://github.com/mikefarah/yq/releases"
+    hints[curl]="apt install curl"
+    hints[jq]="apt install jq"
+    hints[awk]="apt install gawk"
+    hints[bc]="apt install bc"
+    hints[python3]="apt install python3"
+    hints[docker]="https://docs.docker.com/engine/install/"
+  fi
+  hints[cast]="curl -L https://foundry.paradigm.xyz | bash && foundryup"
+  hints[ethdo]="go install github.com/wealdtech/ethdo@latest"
+  hints[ethereal]="go install github.com/wealdtech/ethereal/v2@latest"
+  hints[eth2-val-tools]="go install github.com/protolambda/eth2-val-tools@latest"
+
+  local missing=0
+  [[ "$verbose" == "1" ]] && { echo "Checking dependencies for run.zsh..."; echo "" }
+  for tool in "${tools[@]}"; do
+    if command -v "$tool" >/dev/null 2>&1; then
+      [[ "$verbose" == "1" ]] && printf "  \033[32m✓\033[0m %s\n" "$tool"
+    else
+      printf "  \033[31m✗\033[0m %s — install: %s\n" "$tool" "${hints[$tool]}" >&2
+      missing=$((missing + 1))
+    fi
+  done
+  if [[ $missing -eq 0 ]]; then
+    [[ "$verbose" == "1" ]] && { echo ""; echo "All dependencies present." }
+    return 0
+  fi
+  echo "" >&2
+  echo "$missing tool(s) missing. Install them and retry." >&2
+  return 1
+}
 
 # Helper function to display available options
 print_usage() {
@@ -51,6 +106,7 @@ print_usage() {
   echo "  exit s e                          Exit from the network from validator index start to end - mandatory argument"
   echo "  set_withdrawal_addr s e address   Set the withdrawal credentials for validator index start (mandatory) to end (optional) and Ethereum address"
   echo "  full_withdrawal s e               Withdraw from the network from validator index start to end - mandatory argument"
+  echo "  check_deps                        Verify every external tool this script depends on is installed"
   echo "  help                              Print this help message"
   echo ""
   echo " To use an alternative endpoint run the script by setting the environment variable:"
@@ -141,7 +197,7 @@ for arg in "${command[@]}"; do
         echo "  Example: ${0} get_balance 0xf97e180c050e5ab072211ad2c213eb5aee4df134"
         exit;
       elif [[ (${#command[2]} == 42) && (${command[2]} == 0x*) ]]; then
-        balance=$(curl -s  --header 'Content-Type: application/json' --data-raw '{"jsonrpc":"2.0","method":"eth_getBalance", "params":["'${command[2]}'","latest"], "id":0}' $rpc_endpoint | jq -r '.result' | python -c "import sys; print(int(sys.stdin.read(), 16) / 1e18)")
+        balance=$(curl -s  --header 'Content-Type: application/json' --data-raw '{"jsonrpc":"2.0","method":"eth_getBalance", "params":["'${command[2]}'","latest"], "id":0}' $rpc_endpoint | jq -r '.result' | python3 -c "import sys; print(int(sys.stdin.read(), 16) / 1e18)")
         echo "balance ${command[2]}: $balance Ether"
         exit;
       else
@@ -470,6 +526,9 @@ for arg in "${command[@]}"; do
 
           echo "Starting nonce: $nonce | Deposit per validator: ${deposit_eth} ETH"
 
+          tmpdir=$(mktemp -d)
+          # zsh's background job table caps at 1024; batch so the active set stays well below.
+          batch_size=500
           i=0
           while read x; do
             account_name="$(echo "$x" | jq -r '.account')"
@@ -478,6 +537,7 @@ for arg in "${command[@]}"; do
             signature_val="0x$(echo "$x" | jq -r '.signature')"
             data_root="0x$(echo "$x" | jq -r '.deposit_data_root')"
             echo "Sending deposit for validator $account_name (nonce: $((nonce + i)))"
+            echo "$account_name" > "$tmpdir/cast-$i.name"
             cast send \
               --private-key "$privatekey" \
               --rpc-url "$rpc_endpoint" \
@@ -486,13 +546,37 @@ for arg in "${command[@]}"; do
               --gas-limit 200000 \
               "$deposit_contract_address" \
               "deposit(bytes,bytes,bytes,bytes32)" \
-              "$pubkey_val" "$withdrawal_creds" "$signature_val" "$data_root" > /dev/null 2>&1 &
+              "$pubkey_val" "$withdrawal_creds" "$signature_val" "$data_root" > "$tmpdir/cast-$i.log" 2>&1 &
             i=$((i + 1))
+            if (( i % batch_size == 0 )); then
+              wait
+              echo "Drained batch — $i submitted so far..."
+            fi
           done < deposits_$prefix-$network-${command[2]}_${command[3]}.txt
 
-          echo "Submitted $i deposits in parallel, waiting for confirmations..."
+          echo "Submitted $i deposits in batches of $batch_size, waiting for final batch..."
           wait
-          echo "All $i deposits confirmed"
+          echo ""
+          ok=0
+          fail=0
+          for ((j=0; j<i; j++)); do
+            log="$tmpdir/cast-$j.log"
+            name=$(cat "$tmpdir/cast-$j.name" 2>/dev/null)
+            txhash=$(grep -E '^transactionHash' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            tx_status=$(grep -E '^status' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            if [[ "$tx_status" == "1" ]]; then
+              printf "  \033[32m✓\033[0m %s — %s\n" "$name" "$txhash"
+              ok=$((ok + 1))
+            else
+              printf "  \033[31m✗\033[0m %s — failed (status=%s tx=%s)\n" \
+                "$name" "${tx_status:-no-receipt}" "${txhash:-none}"
+              grep -iE 'error|revert' "$log" 2>/dev/null | head -1 | sed 's/^/      /'
+              fail=$((fail + 1))
+            fi
+          done
+          echo ""
+          echo "$ok confirmed, $fail failed (of $i submitted)"
+          rm -rf "$tmpdir"
           exit;
         else
           echo "Exiting without depositing to the network"
@@ -764,6 +848,9 @@ for arg in "${command[@]}"; do
         rm -rf /tmp/set_withdrawal_addr
         echo
       fi
+      ;;
+    "check_deps")
+      check_deps 1 || exit 1
       ;;
     "help")
       print_usage "${command[@]}"

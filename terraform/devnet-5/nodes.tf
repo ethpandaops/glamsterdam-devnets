@@ -37,6 +37,12 @@ variable "nodes" {
     { name = "lighthouse-ethrex", count = 1, cloud = "hetzner", validator_start = 2200, validator_end = 2400 },
     { name = "nimbus-ethrex", count = 1, cloud = "hetzner", validator_start = 2400, validator_end = 2600 },
     { name = "nimbus-nethermind", count = 1, cloud = "hetzner", validator_start = 2600, validator_end = 2800 },
+    { name = "prysm-erigon", count = 1, cloud = "hetzner", validator_start = 2800, validator_end = 3000 },
+    { name = "lodestar-erigon", count = 1, cloud = "hetzner", validator_start = 3000, validator_end = 3200 },
+    { name = "grandine-erigon", count = 1, cloud = "hetzner", validator_start = 3200, validator_end = 3400 },
+    { name = "lighthouse-erigon", count = 1, cloud = "hetzner", validator_start = 3400, validator_end = 3600 },
+    { name = "nimbus-erigon", count = 1, cloud = "hetzner", validator_start = 3600, validator_end = 3800 },
+    { name = "teku-erigon", count = 1, cloud = "hetzner", validator_start = 3800, validator_end = 4000 },
   ]
 
   validation {

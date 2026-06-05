@@ -9,6 +9,10 @@
   name: buildoor-prysm-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: grandine-erigon-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-grandine-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: grandine-ethrex-1
   authGroup: pandaops
@@ -17,6 +21,11 @@
   name: grandine-nethermind-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-lighthouse-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lighthouse-erigon-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
 - url: https://bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lighthouse-ethrex-1
   authGroup: pandaops
@@ -27,6 +36,10 @@
   authGroup: pandaops
   priority: -1
   archive: true
+- url: https://bn-lodestar-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lodestar-erigon-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lodestar-ethrex-1
   authGroup: pandaops
@@ -43,12 +56,20 @@
   name: lodestar-nethermind-2
   authGroup: pandaops
   priority: -1
+- url: https://bn-nimbus-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: nimbus-erigon-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-nimbus-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: nimbus-ethrex-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-nimbus-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: nimbus-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: prysm-erigon-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-prysm-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
@@ -65,6 +86,10 @@
   priority: -1
 - url: https://bn-prysm-nethermind-2.srv.glamsterdam-devnet-5.ethpandaops.io
   name: prysm-nethermind-2
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-erigon-1
   authGroup: pandaops
   priority: -1
 

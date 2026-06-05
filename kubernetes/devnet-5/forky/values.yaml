@@ -87,6 +87,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
+        - name: grandine-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
         - name: grandine-ethrex-1
           type: "beacon_node"
           config:
@@ -96,6 +101,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
+        - name: lighthouse-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
         - name: lighthouse-ethrex-1
           type: "beacon_node"
@@ -107,6 +117,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
+        - name: lodestar-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
         - name: lodestar-ethrex-1
           type: "beacon_node"
           config:
@@ -116,6 +131,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
+        - name: nimbus-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
         - name: nimbus-ethrex-1
           type: "beacon_node"
@@ -127,6 +147,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
+        - name: prysm-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
         - name: prysm-ethrex-1
           type: "beacon_node"
           config:
@@ -136,4 +161,9 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
