@@ -1,3 +1,4 @@
+---
 #  ░██████╗░██╗░░░░░░█████╗░██████╗░░█████╗░██╗░░░░░  ██╗░░░██╗░█████╗░██████╗░░██████╗
 #  ██╔════╝░██║░░░░░██╔══██╗██╔══██╗██╔══██╗██║░░░░░  ██║░░░██║██╔══██╗██╔══██╗██╔════╝
 #  ██║░░██╗░██║░░░░░██║░░██║██████╦╝███████║██║░░░░░  ╚██╗░██╔╝███████║██████╔╝╚█████╗░
@@ -7,7 +8,7 @@
 
 domain: ethpandaops.io
 network_subdomain: "{{ ethereum_network_name }}.{{ domain }}"
-network_server_subdomain: "srv.{{ network_subdomain }}"
+network_server_subdomain: srv.{{ network_subdomain }}
 server_fqdn: "{{ inventory_hostname }}.{{ network_server_subdomain }}"
 network_iteration: "{{ ethereum_network_name.split('-')[1:] | join('-') }}"
 
@@ -18,8 +19,8 @@ ethereum_network_deposit_contract: >-
 ethereum_network_deposit_contract_block: >-
   {{ lookup('file', eth_testnet_config_local_dir_src + '/deposit_contract_block.txt') }}
 
-ethereum_node_rpc_prefix: "rpc-" # prefix for rpc URLs
-ethereum_node_beacon_prefix: "bn-" # prefix for beacon URLs
+ethereum_node_rpc_prefix: rpc- # prefix for rpc URLs
+ethereum_node_beacon_prefix: bn- # prefix for beacon URLs
 ethereum_node_rcp_hostname: "{{ ethereum_node_rpc_prefix }}{{ server_fqdn }}"
 ethereum_node_beacon_hostname: "{{ ethereum_node_beacon_prefix }}{{ server_fqdn }}"
 
@@ -30,8 +31,9 @@ checkpoint_sync_node: "{{ primary_bootnode }}"
 ethereum_node_cl_checkpoint_sync_enabled: true
 
 checkpoint_sync_url: https://checkpoint-sync.{{ ethereum_network_name }}.{{ domain }}
-#checkpoint_sync_url: https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@{{ ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
-checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@{{ ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
+# checkpoint_sync_url: https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@{{ ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
+checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@{{
+  ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
 
 #  ██████╗░░█████╗░██╗░░░░░███████╗  ██╗░░░██╗░█████╗░██████╗░░██████╗
 #  ██╔══██╗██╔══██╗██║░░░░░██╔════╝  ██║░░░██║██╔══██╗██╔══██╗██╔════╝
@@ -43,21 +45,24 @@ checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethe
 # role: ethpandaops.general.ethereum_genesis
 ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
 ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
-ethereum_genesis_network_seed: "glamsterdam-devnet-5"
-ethereum_genesis_chain_id: "70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}"
+ethereum_genesis_network_seed: glamsterdam-devnet-5
+ethereum_genesis_chain_id: 70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
-ethereum_genesis_generator_output_dir: "../network-configs/{{ network_iteration }}"
+ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
 ethereum_genesis_timestamp: "1780577940"
 ethereum_genesis_timedelay: 60
 ethereum_genesis_timestamp_relative_cmd:
-  Linux: "date +%s -d '+45 minutes'"
-  Darwin: "date -v +35M +%s"
+  Linux: date +%s -d '+45 minutes'
+  Darwin: date -v +35M +%s
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
-  cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml', split_lines=false) }}" # noqa yaml[line-length]
-  cl/mnemonics.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/mnemonics.yaml', split_lines=false) }}" # noqa yaml[line-length]
-  el/genesis-config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/el/genesis-config.yaml', split_lines=false) }}" # noqa yaml[line-length]
+  cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
+  cl/mnemonics.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/mnemonics.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
+  el/genesis-config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/el/genesis-config.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
@@ -108,8 +113,10 @@ ethereum_genesis_validator_keyranges: >-
 
 # role: ethpandaops.general.bootstrap
 bootstrap_default_user_authorized_keys_plain:
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbboxOo0jyL3DNxqZ6UTEnZPEzPDPnujEYaClqNWSLWkphczHKAnJPkrwbAWB4JbJKjsAJ5kn53f10KPnUyZvJ5Jn8Rpf7RM7+56MYaBg84gVoA2KeIYxUa7h8neY7J61Galp0c6cOK+hp1lPsoiBSdCW/Rtbv6ALCcVe+4+uCW5FRoJcNRJfGRLRnjh1pw57HQw9O55mf319s4rVUq4umznQ0CciEx3rVMtXf4xjIZDZAhNpGaBh8AtHauaMZCOGociAIquYYqoSQnnmnOBiduRa5OkvGZomgybNQivlYboDeF6sQ71KVzRXSI+mxCYbSp246lqSdQtQsjFA54NYl/qWgAql0uqCqsZidW+XBjquyItRl2Rfzzy5Fk/gMOAJXHQYp4POfgFbqtxjWpfnuOKqW/1IGWcIt2g016effUqGgj/oePX0g+duFdszSKK773rJBySgafFF6XWNqagrLmE4LUGC+6P3oxzYTSFGeUVA21OayL+K40XPpJti5zns= # devops-eth2-shared"
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWh9NW66VD4BPKETNyZeZrGN1f7G6dkihW3eAc7cbJPFQGIpnWc2tGq5o13vWW+SoCh16nkYM2oak+PJQxXYTiQnrMJSmSFd7E0DmdcoKadGJEnfosrH++aOZf/eVLe5q3E9NQFVSdOPo1MCRRTuZxPkuMxS6QikW3otWrA3F2vFgmYyki3Cy8huQzHKUZGicividYcUSFTydR2L0oWUNve3FyqMQQQPnfaJ1RvrkeGtdhRSAxa6L0jzgRK7fjpUyhKOofr7kCKARGELRRiB9QikRAoHU2/D/2jtJjKlTCJxArzXyDF2IcQCco+5Oe9x4c7Xch32dbscJSmjaAvsxRnu7GEFCS7b6kKGvwcoq5vJzvp3RBBR7Mosxv6pcM/q7Z4RhXOFVFFiPVl1dqkqSPkUrHwg8LtWOxC+GAl36vxhHLdDEV/RhbSAzO6SfYEWYGH1w7u4oiy2XAT2cNCO0j0tSHS5chX+d7TzwAbBE2HuPL84GVGHZG875hmiE+Dok= # github-actions-ci"
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbboxOo0jyL3DNxqZ6UTEnZPEzPDPnujEYaClqNWSLWkphczHKAnJPkrwbAWB4JbJKjsAJ5kn53f10KPnUyZvJ5Jn8Rpf7RM7+56MYaBg84gVoA2KeIYxUa7h8neY7J61Galp0c6cOK+hp1lPsoiBSdCW/Rtbv6ALCcVe+4+uCW5FRoJcNRJfGRLRnjh1pw57HQw9O55mf319s4rVUq4umznQ0CciEx3rVMtXf4xjIZDZAhNpGaBh8AtHauaMZCOGociAIquYYqoSQnnmnOBiduRa5OkvGZomgybNQivlYboDeF6sQ71KVzRXSI+mxCYbSp246lqSdQtQsjFA54NYl/qWgAql0uqCqsZidW+XBjquyItRl2Rfzzy5Fk/gMOAJXHQYp4POfgFbqtxjWpfnuOKqW/1IGWcIt2g016effUqGgj/oePX0g+duFdszSKK773rJBySgafFF6XWNqagrLmE4LUGC+6P3oxzYTSFGeUVA21OayL+K40XPpJti5zns=
+    # devops-eth2-shared"
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWh9NW66VD4BPKETNyZeZrGN1f7G6dkihW3eAc7cbJPFQGIpnWc2tGq5o13vWW+SoCh16nkYM2oak+PJQxXYTiQnrMJSmSFd7E0DmdcoKadGJEnfosrH++aOZf/eVLe5q3E9NQFVSdOPo1MCRRTuZxPkuMxS6QikW3otWrA3F2vFgmYyki3Cy8huQzHKUZGicividYcUSFTydR2L0oWUNve3FyqMQQQPnfaJ1RvrkeGtdhRSAxa6L0jzgRK7fjpUyhKOofr7kCKARGELRRiB9QikRAoHU2/D/2jtJjKlTCJxArzXyDF2IcQCco+5Oe9x4c7Xch32dbscJSmjaAvsxRnu7GEFCS7b6kKGvwcoq5vJzvp3RBBR7Mosxv6pcM/q7Z4RhXOFVFFiPVl1dqkqSPkUrHwg8LtWOxC+GAl36vxhHLdDEV/RhbSAzO6SfYEWYGH1w7u4oiy2XAT2cNCO0j0tSHS5chX+d7TzwAbBE2HuPL84GVGHZG875hmiE+Dok=
+    # github-actions-ci"
 bootstrap_default_user_authorized_keys_github_all:
   - barnabasbusa
   - parithosh
@@ -150,11 +157,16 @@ ethereum_node_el_ports_ws_rpc: 8546
 ethereum_node_el_ports_engine: 8551
 ethereum_node_el_ports_metrics: 6060
 ethereum_node_ipv6_enabled: true
-ethereum_node_el_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.execution) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
-ethereum_node_cl_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.beacon) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
-ethereum_node_validator_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.validator) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
-ethereum_node_snooper_rpc_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_rpc) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
-ethereum_node_snooper_engine_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_engine) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
+ethereum_node_el_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.execution) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_cl_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.beacon) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_validator_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.validator) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_snooper_rpc_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_rpc) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_snooper_engine_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_engine) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
 ethereum_node_skip_cleanup: true
 ethereum_node_docker_watchtower_enabled: true
 ethereum_node_docker_watchtower_containers_list:
@@ -167,7 +179,7 @@ docker_watchtower_container_additional_args:
   - --stop-timeout=300s
   - --include-restarting
 ethereum_node_json_rpc_snooper_engine_enabled: true
-ethereum_node_json_rpc_snooper_engine_name: "snooper-engine"
+ethereum_node_json_rpc_snooper_engine_name: snooper-engine
 ethereum_node_json_rpc_snooper_engine_port: 8561
 ethereum_node_json_rpc_snooper_engine_public_port: 8961
 ethereum_node_json_rpc_snooper_engine_container_env:
@@ -176,9 +188,11 @@ ethereum_node_json_rpc_snooper_engine_container_env:
 
 # role: ethpandaops.general.generate_kubernetes_config
 gen_kubernetes_config_dora_execution_snooper_port: 8961
-gen_kubernetes_config_dora_frontend_rainbowkit_id: "15fe4ab4d5c0bcb6f0dc7c398301ff0e"
-gen_kubernetes_config_dora_execution_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-el.yaml"
-gen_kubernetes_config_dora_consensus_endpoints_url: "https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{ network_iteration }}/dora/endpoints-cl.yaml"
+gen_kubernetes_config_dora_frontend_rainbowkit_id: 15fe4ab4d5c0bcb6f0dc7c398301ff0e
+gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
+  network_iteration }}/dora/endpoints-el.yaml
+gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
+  network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
 
 # role: ethpandaops.general.xatu_sentry
@@ -251,12 +265,13 @@ docker_nginx_proxy_docker_gen_container_image: "{{ default_tooling_images.nginx_
 docker_nginx_proxy_acme_companion_container_image: "{{ default_tooling_images.nginx_proxy_acme }}"
 
 # role: ethpandaops.general.docker_nginx_proxy
-docker_nginx_proxy_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.nginx_proxy) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6 | bool) else '' }}"
+docker_nginx_proxy_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.nginx_proxy) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
 docker_nginx_proxy_container_name: nginx-proxy
-docker_nginx_proxy_default_email: "certs@{{ domain }}"
+docker_nginx_proxy_default_email: certs@{{ domain }}
 docker_nginx_proxy_docker_gen_container_name: nginx-proxy-gen
 docker_nginx_proxy_docker_gen_container_env:
-  RESOLVERS: "1.1.1.1"
+  RESOLVERS: 1.1.1.1
   ENABLE_IPV6: "true"
 docker_nginx_proxy_acme_companion_enabled: false
 docker_nginx_proxy_acme_companion_container_name: nginx-proxy-acme
@@ -285,7 +300,7 @@ docker_nginx_proxy_cert_linker_container_image: "{{ default_tooling_images.nginx
 docker_nginx_proxy_cert_loader_container_networks: []
 docker_nginx_proxy_cert_linker_container_networks: []
 docker_nginx_proxy_wildcard_cert: "{{ network_server_subdomain }}"
-docker_nginx_proxy_wildcard_cert_url: "http://cert.{{ network_server_subdomain }}/{{ network_server_subdomain }}-latest.tar.enc"
+docker_nginx_proxy_wildcard_cert_url: http://cert.{{ network_server_subdomain }}/{{ network_server_subdomain }}-latest.tar.enc
 docker_nginx_proxy_wildcard_cert_psk: "{{ secret_cert_encryption_psk }}"
 
 # OTLP egress to the prod analytics gateway (Vector ships container logs here).
@@ -293,7 +308,7 @@ docker_nginx_proxy_wildcard_cert_psk: "{{ secret_cert_encryption_psk }}"
 # rather than secret_loki.username: the sops username drifts stale between devnet
 # iterations, while the gateway only validates the (constant) password — so using
 # the network name keeps log attribution correct no matter what sops holds.
-otlp_endpoint: "https://otlp.analytics.production.platform.ethpandaops.io"
+otlp_endpoint: https://otlp.analytics.production.platform.ethpandaops.io
 otlp_deployment_env: production
 
 # role: ethpandaops.general.vector

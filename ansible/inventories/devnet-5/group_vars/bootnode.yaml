@@ -1,3 +1,4 @@
+---
 ethereum_cl_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enr'] }}"
 ethereum_el_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enode'] }}"
 
@@ -6,8 +7,8 @@ eth_inventory_web_container_networks: "{{ docker_networks_shared }}"
 eth_inventory_web_container_env:
   VIRTUAL_HOST: "{{ server_fqdn }}"
   VIRTUAL_PORT: "80"
-  VIRTUAL_PATH: "/meta/api"
-  VIRTUAL_DEST: "/"
+  VIRTUAL_PATH: /meta/api
+  VIRTUAL_DEST: /
   LETSENCRYPT_HOST: "{{ server_fqdn }}"
 
 # role: ethpandaops.general.bootnodoor
@@ -20,8 +21,8 @@ bootnodoor_set_facts: true
 bootnodoor_el_enabled: true
 bootnodoor_cl_enabled: true
 
-bootnodoor_container_name: "bootnodoor"
-bootnodoor_container_image: "ethpandaops/bootnodoor:master"
+bootnodoor_container_name: bootnodoor
+bootnodoor_container_image: ethpandaops/bootnodoor:master
 bootnodoor_container_networks: "{{ docker_networks_shared }}"
 bootnodoor_p2p_port: 9010
 bootnodoor_ui_port: 8004
@@ -36,17 +37,15 @@ bootnodoor_container_volumes_extra:
 
 bootnodoor_container_command_extra_args: []
 bootnodoor_container_env:
-  VIRTUAL_HOST: "bootnodoor-{{ server_fqdn }}"
+  VIRTUAL_HOST: bootnodoor-{{ server_fqdn }}
   VIRTUAL_PORT: "{{ bootnodoor_ui_port | string }}"
-  LETSENCRYPT_HOST: "bootnodoor-{{ server_fqdn }}"
+  LETSENCRYPT_HOST: bootnodoor-{{ server_fqdn }}
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: nethermind
 ethereum_node_cl: prysm
 ethereum_node_cl_validator_enabled: false
 
-# role: ethpandaops.general.ethereum_node
-ethereum_node_cl: prysm
 prysm_container_tty: true
 prysm_pprof_enabled: true
 prysm_validator_container_tty: true
@@ -75,9 +74,6 @@ prysm_container_command_extra_simple_args:
   - --verbosity=debug
   - --subscribe-all-subnets
 
-
-# role: ethpandaops.general.ethereum_node
-ethereum_node_el: nethermind
 # role: ethpandaops.general.nethermind
 nethermind_container_name: execution
 nethermind_container_image: "{{ default_ethereum_client_images.nethermind }}"
@@ -102,7 +98,6 @@ nethermind_container_command_extra_args:
   - --Seq.ApiKey={{ nethermind_seq_api_key }}
   - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
 nethermind_container_pull: true
-
 
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write

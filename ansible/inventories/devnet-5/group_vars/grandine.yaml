@@ -1,3 +1,4 @@
+---
 # role: ethpandaops.general.bootstrap
 bootstrap_default_user_authorized_keys_github_team_cl:
   - sauliusgrigaitis
@@ -7,10 +8,10 @@ bootstrap_default_user_authorized_keys_github_team_cl:
 
 # role: geerlingguy.docker
 docker_daemon_options:
-  "log-driver": "json-file"
-  "log-opts":
-      "max-size": "500m"
-      "max-file": "40"
+  log-driver: json-file
+  log-opts:
+    max-size: 500m
+    max-file: "40"
 
 # role: validator_keys
 validator_keys_sync_files:
@@ -34,7 +35,7 @@ grandine_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-  GRANDINE_LOG: "fork_choice_control=debug,p2p=debug"
+  GRANDINE_LOG: fork_choice_control=debug,p2p=debug
 grandine_container_volumes:
   - "{{ grandine_datadir }}:/data"
   - "{{ grandine_auth_jwt_path }}:/execution-auth.jwt:ro"
