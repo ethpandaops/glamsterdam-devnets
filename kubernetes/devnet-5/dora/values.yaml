@@ -31,6 +31,7 @@ dora:
   name: glamsterdam-devnet-5
   configPath: "https://config.glamsterdam-devnet-5.ethpandaops.io/cl/config.yaml"
   validatorNamesInventory: "https://config.glamsterdam-devnet-5.ethpandaops.io/api/v1/nodes/validator-ranges"
+  buildoorOverviewUrl: "https://buildoor.glamsterdam-devnet-5.ethpandaops.io"
   ethExplorerLink: "https://explorer.glamsterdam-devnet-5.ethpandaops.io"
   publicRpcUrl: "https://rpc.glamsterdam-devnet-5.ethpandaops.io"
   rainbowkitProjectId: "15fe4ab4d5c0bcb6f0dc7c398301ff0e"
