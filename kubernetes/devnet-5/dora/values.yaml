@@ -66,10 +66,6 @@ dora:
       persistence:
         size: "80Gi"
 
-  mevRelays:
-    - index: 0
-      name: "Flashbots"
-      url: "http://mev-relay-1.glamsterdam-devnet-5.ethpandaops.io:9062/"
 
   authGroups:
     pandaops:
