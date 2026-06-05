@@ -43,6 +43,8 @@ variable "nodes" {
     { name = "lighthouse-erigon", count = 1, cloud = "hetzner", validator_start = 3400, validator_end = 3600 },
     { name = "nimbus-erigon", count = 1, cloud = "hetzner", validator_start = 3600, validator_end = 3800 },
     { name = "teku-erigon", count = 1, cloud = "hetzner", validator_start = 3800, validator_end = 4000 },
+    { name = "teku-ethrex", count = 1, cloud = "hetzner", validator_start = 4000, validator_end = 4200 },
+    { name = "teku-nethermind", count = 1, cloud = "hetzner", validator_start = 4200, validator_end = 4400 },
   ]
 
   validation {

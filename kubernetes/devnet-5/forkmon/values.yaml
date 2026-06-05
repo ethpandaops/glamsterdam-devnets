@@ -66,6 +66,10 @@ forkmon:
     name: prysm-nethermind-2
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
     name: teku-erigon-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+    name: teku-ethrex-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+    name: teku-nethermind-1
 
   config: |
     # How often to reload data from the nodes

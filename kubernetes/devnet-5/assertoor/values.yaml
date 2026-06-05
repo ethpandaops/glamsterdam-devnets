@@ -103,6 +103,12 @@ assertoor:
     - name:  teku-erigon-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
+    - name:  teku-ethrex-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+    - name:  teku-nethermind-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
 
   validatorNamesInventory: https://config.glamsterdam-devnet-5.ethpandaops.io/api/v1/nodes/validator-ranges
   globalVariables:
@@ -130,6 +136,8 @@ assertoor:
       - prysm-nethermind-1
       - prysm-nethermind-2
       - teku-erigon-1
+      - teku-ethrex-1
+      - teku-nethermind-1
     validatorPairNames:
       - grandine-erigon-1
       - grandine-ethrex-1
@@ -150,5 +158,7 @@ assertoor:
       - prysm-nethermind-1
       - prysm-nethermind-2
       - teku-erigon-1
+      - teku-ethrex-1
+      - teku-nethermind-1
 
   assertoorTests: []

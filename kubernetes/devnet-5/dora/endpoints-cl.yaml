@@ -92,4 +92,12 @@
   name: teku-erigon-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
 

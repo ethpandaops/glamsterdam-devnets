@@ -56,6 +56,9 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io"
       name: "nimbus-nethermind-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io"
+      name: "teku-nethermind-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io"
       name: "grandine-erigon-1"
       priority: 5
@@ -92,11 +95,8 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"
       name: "nimbus-ethrex-1"
       priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-nethermind-2.srv.glamsterdam-devnet-5.ethpandaops.io"
-      name: "prysm-nethermind-2"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-nethermind-2.srv.glamsterdam-devnet-5.ethpandaops.io"
-      name: "lodestar-nethermind-2"
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"
+      name: "teku-ethrex-1"
       priority: 5
   faucetExplorerLink: "https://explorer.glamsterdam-devnet-5.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000

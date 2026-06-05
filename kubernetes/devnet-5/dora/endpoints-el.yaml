@@ -133,3 +133,15 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io:8961
+- url: https://rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io:8961
+- url: https://rpc-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io:8961
