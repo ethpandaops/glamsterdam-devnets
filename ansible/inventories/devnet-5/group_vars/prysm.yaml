@@ -54,6 +54,7 @@ prysm_container_command_extra_simple_args:
   - --min-sync-peers=1
   - --verbosity=debug
   - --subscribe-all-subnets
+  - --p2p-colocation-whitelist=0.0.0.0/0,::/0
 prysm_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
 
