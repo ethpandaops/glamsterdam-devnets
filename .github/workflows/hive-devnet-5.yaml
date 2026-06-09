@@ -74,20 +74,19 @@ env:
   CL_S3_PATH: spec-glamsterdam-devnet-5
   CL_S3_PUBLIC_URL: https://hive.ethpandaops.io/#/test/spec-glamsterdam-devnet-5/
   INSTALL_RCLONE_VERSION: v1.68.2
-  EEST_BUILD_ARG_FIXTURES: https://github.com/ethereum/execution-spec-tests/releases/download/glamsterdam-devnet-5%40v1.0.0/fixtures_glamsterdam-devnet-5.tar.gz
-  EEST_BUILD_ARG_BRANCH: hive
+  # TODO: when a glamsterdam-devnet-5 fixtures release is published on
+  # ethereum/execution-spec-tests, set EEST_BUILD_ARG_FIXTURES to that
+  # tarball URL and re-add `--sim.buildarg fixtures=${EEST_BUILD_ARG_FIXTURES}`
+  # to the EEST flags below. Until then we use the simulator's built-in
+  # default (`stable@latest`).
   GLOBAL_EXTRA_FLAGS: >-
     --client.checktimelimit=180s
     --sim.parallelism=4
     --docker.auth
     --docker.buildoutput
   EEST_ENGINE_FLAGS: >-
-    --sim.buildarg fixtures=${EEST_BUILD_ARG_FIXTURES}
-    --sim.buildarg branch=${EEST_BUILD_ARG_BRANCH}
     --sim.loglevel=3
   EEST_RLP_FLAGS: >-
-    --sim.buildarg fixtures=${EEST_BUILD_ARG_FIXTURES}
-    --sim.buildarg branch=${EEST_BUILD_ARG_BRANCH}
     --sim.loglevel=3
   RPC_COMPAT_FLAGS: >-
     --sim.loglevel=3
