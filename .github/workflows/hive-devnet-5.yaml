@@ -1,7 +1,7 @@
 name: Hive - Devnet 5
 # EL + CL spec/conformance tests for glamsterdam-devnet-5.
 #
-# EL job: hive on ethereum/hive@master, running the standard eest
+# EL job: hive on ethereum/hive@master, running the standard eels
 # simulators (consume-engine / consume-rlp) against each EL client's
 # devnet-5 image, same shape as the template-devnet-0 workflow.
 #
@@ -22,8 +22,8 @@ on:
       el_simulator:
         type: string
         default: >-
-          "ethereum/eest/consume-engine",
-          "ethereum/eest/consume-rlp"
+          "ethereum/eels/consume-engine",
+          "ethereum/eels/consume-rlp"
         description: EL simulators.
       el_common_client_tag:
         type: string
@@ -114,7 +114,7 @@ jobs:
     runs-on: >-
       ${{
         matrix.simulator == 'ethereum/rpc-compat' && 'ubuntu-latest' ||
-        contains(matrix.simulator, 'ethereum/eest/') && 'self-hosted-ghr-size-m-x64' ||
+        contains(matrix.simulator, 'ethereum/eels/') && 'self-hosted-ghr-size-m-x64' ||
         'ubuntu-latest'
       }}
     concurrency:
@@ -143,8 +143,8 @@ jobs:
           extra_flags: >-
             ${{ env.GLOBAL_EXTRA_FLAGS }}
             ${{ matrix.simulator == 'ethereum/rpc-compat' && env.RPC_COMPAT_FLAGS || '' }}
-            ${{ matrix.simulator == 'ethereum/eest/consume-engine' && env.EEST_ENGINE_FLAGS || '' }}
-            ${{ matrix.simulator == 'ethereum/eest/consume-rlp' && env.EEST_RLP_FLAGS || '' }}
+            ${{ matrix.simulator == 'ethereum/eels/consume-engine' && env.EEST_ENGINE_FLAGS || '' }}
+            ${{ matrix.simulator == 'ethereum/eels/consume-rlp' && env.EEST_RLP_FLAGS || '' }}
           s3_upload: true
           s3_bucket: ${{ env.S3_BUCKET }}
           s3_path: ${{ env.EL_S3_PATH }}
