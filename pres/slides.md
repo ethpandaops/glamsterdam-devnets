@@ -259,49 +259,49 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 <h4 class="glams">SFI — Scheduled, locked in</h4>
 
-- **[7708](https://eips.ethereum.org/EIPS/eip-7708)** ETH transfers emit a log
-- **[7732](https://eips.ethereum.org/EIPS/eip-7732)** Enshrined PBS
-- **[7778](https://eips.ethereum.org/EIPS/eip-7778)** Block gas accounting w/o refunds
-- **[7843](https://eips.ethereum.org/EIPS/eip-7843)** SLOTNUM opcode
-- **[7928](https://eips.ethereum.org/EIPS/eip-7928)** Block-Level Access Lists
-- **[7954](https://eips.ethereum.org/EIPS/eip-7954)** Increase max contract size
-- **[7976](https://eips.ethereum.org/EIPS/eip-7976)** Calldata floor cost
-- **[7981](https://eips.ethereum.org/EIPS/eip-7981)** Access list cost
-- **[8024](https://eips.ethereum.org/EIPS/eip-8024)** SWAPN/DUPN/EXCHANGE
-- **[8037](https://eips.ethereum.org/EIPS/eip-8037)** State creation gas
+- **[7708](https://eips.ethereum.org/EIPS/eip-7708)** <span class="bal">(bd2)</span> ETH transfers emit a log
+- **[7732](https://eips.ethereum.org/EIPS/eip-7732)** <span class="epbs">(ed0)</span> Enshrined PBS
+- **[7778](https://eips.ethereum.org/EIPS/eip-7778)** <span class="bal">(bd2)</span> Block gas accounting w/o refunds
+- **[7843](https://eips.ethereum.org/EIPS/eip-7843)** <span class="bal">(bd2)</span> SLOTNUM opcode
+- **[7928](https://eips.ethereum.org/EIPS/eip-7928)** <span class="bal">(bd0)</span> Block-Level Access Lists
+- **[7954](https://eips.ethereum.org/EIPS/eip-7954)** <span class="bal">(bd3)</span> Increase max contract size
+- **[7976](https://eips.ethereum.org/EIPS/eip-7976)** <span class="bal">(bd5)</span> Calldata floor cost
+- **[7981](https://eips.ethereum.org/EIPS/eip-7981)** <span class="bal">(bd5)</span> Access list cost
+- **[8024](https://eips.ethereum.org/EIPS/eip-8024)** <span class="bal">(bd2)</span> SWAPN/DUPN/EXCHANGE
+- **[8037](https://eips.ethereum.org/EIPS/eip-8037)** <span class="bal">(bd3)</span> State creation gas
 
 <h4 class="bal">PFI — Proposed, not yet on devnet</h4>
 
-- **[7610](https://eips.ethereum.org/EIPS/eip-7610)** Revert creation w/ non-empty storage
-- **[7979](https://eips.ethereum.org/EIPS/eip-7979)** Call & Return opcodes
-- **[8163](https://eips.ethereum.org/EIPS/eip-8163)** Reserve `EXTENSION (0xae)` opcode
+- **[7610](https://eips.ethereum.org/EIPS/eip-7610)** <span style="color:var(--muted)">(not yet)</span> Revert creation w/ non-empty storage
+- **[7979](https://eips.ethereum.org/EIPS/eip-7979)** <span style="color:var(--muted)">(not yet)</span> Call & Return opcodes
+- **[8163](https://eips.ethereum.org/EIPS/eip-8163)** <span style="color:var(--muted)">(not yet)</span> Reserve `EXTENSION (0xae)` opcode
 
 </div>
 <div class="col">
 
 <h4 class="epbs">CFI — Still being considered</h4>
 
-- **[2780](https://eips.ethereum.org/EIPS/eip-2780)** <span class="d6">(on d6)</span> Reduce intrinsic tx gas
-- **[7688](https://eips.ethereum.org/EIPS/eip-7688)** Forward-compatible CL data structures
-- **[7904](https://eips.ethereum.org/EIPS/eip-7904)** General Repricing
-- **[7997](https://eips.ethereum.org/EIPS/eip-7997)** <span class="d6">(on d6)</span> Deterministic Factory Predeploy
-- **[8038](https://eips.ethereum.org/EIPS/eip-8038)** <span class="d6">(on d6)</span> State-access gas update
-- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** <span class="d6">(on d5)</span> Exclude slashed validators
-- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** <span class="d6">(on d5)</span> Increase exit & churn
+- **[2780](https://eips.ethereum.org/EIPS/eip-2780)** <span class="glams">(gd6 planned)</span> Reduce intrinsic tx gas
+- **[7688](https://eips.ethereum.org/EIPS/eip-7688)** <span style="color:var(--muted)">(not yet)</span> Forward-compatible CL data structures
+- **[7904](https://eips.ethereum.org/EIPS/eip-7904)** <span style="color:var(--muted)">(not yet)</span> General Repricing
+- **[7997](https://eips.ethereum.org/EIPS/eip-7997)** <span class="glams">(gd6 planned)</span> Deterministic Factory Predeploy
+- **[8038](https://eips.ethereum.org/EIPS/eip-8038)** <span class="glams">(gd6 planned)</span> State-access gas update
+- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** <span class="glams">(gd5)</span> Exclude slashed validators
+- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** <span class="glams">(gd5)</span> Increase exit & churn
 - **[8080](https://eips.ethereum.org/EIPS/eip-8080)** <span style="color:var(--gas);font-weight:600">(DFI risk)</span> Exits via consolidation queue
-- **[8246](https://eips.ethereum.org/EIPS/eip-8246)** <span class="d6">(on d6)</span> Remove SELFDESTRUCT burn
+- **[8246](https://eips.ethereum.org/EIPS/eip-8246)** <span class="glams">(gd6 planned)</span> Remove SELFDESTRUCT burn
 
 <h4 class="bal">CFI — Networking</h4>
 
-- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** eth/70 partial block receipts
-- **[8070](https://eips.ethereum.org/EIPS/eip-8070)** <span class="d6">(on d6, opt)</span> eth/72 Sparse Blobpool
-- **[8136](https://eips.ethereum.org/EIPS/eip-8136)** Cell-Level Deltas for Data Column Broadcast
-- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** eth/71 BAL exchange
+- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** <span class="bal">(bd3 opt)</span> eth/70 partial block receipts
+- **[8070](https://eips.ethereum.org/EIPS/eip-8070)** <span class="glams">(gd6 planned, opt)</span> eth/72 Sparse Blobpool
+- **[8136](https://eips.ethereum.org/EIPS/eip-8136)** <span style="color:var(--muted)">(not yet)</span> Cell-Level Deltas for Data Column Broadcast
+- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** <span class="bal">(bd3 opt)</span> eth/71 BAL exchange
 
 </div>
 </div>
 
-**Scope still in flight** — more PFI promotions expected; some CFI items may DFI before fork freeze.
+<span class="bal">bd</span>* = bal-devnet · <span class="epbs">ed</span>* = epbs-devnet · <span class="glams">gd</span>* = glamsterdam-devnet · <span style="color:var(--muted)">(not yet)</span> = not on any devnet · <span style="color:var(--gas);font-weight:600">(DFI risk)</span> = may not land
 
 ---
 
