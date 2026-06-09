@@ -52,13 +52,6 @@ on:
         type: string
         default: 'v1.7.0-alpha.10'
         description: ethereum/consensus-spec-tests tag (prysm cannot override).
-      cl_scope:
-        type: choice
-        default: 'minimal'
-        options:
-          - minimal
-          - mainnet
-        description: Spec-test preset to run.
       cl_hive_version:
         type: string
         default: 'barnabasbusa/hive@cl-specs-simulator'
@@ -166,7 +159,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: >-
-        ${{ github.head_ref || inputs }}-cl-${{ matrix.client }}-${{ inputs.cl_scope }}
+        ${{ github.head_ref || inputs }}-cl-${{ matrix.client }}
     strategy:
       fail-fast: false
       matrix:
@@ -202,7 +195,6 @@ jobs:
             --docker.buildoutput
             --sim.buildarg CL_SPECS_SOURCE_REF=${{ inputs.cl_source_ref }}
             --sim.buildarg CL_SPECS_TESTS_REF=${{ inputs.cl_consensus_spec_tests_ref }}
-            --sim.buildarg CL_SPECS_SCOPE=${{ inputs.cl_scope }}
             --sim.buildarg CL_SPECS_NETWORK=glamsterdam-devnet-5
           s3_upload: true
           s3_bucket: ${{ env.S3_BUCKET }}
