@@ -171,11 +171,6 @@ jobs:
       fail-fast: false
       matrix:
         client: ${{ fromJSON(format('[{0}]', inputs.cl_client)) }}
-    env:
-      CL_SPECS_SOURCE_REF: ${{ inputs.cl_source_ref }}
-      CL_SPECS_TESTS_REF: ${{ inputs.cl_consensus_spec_tests_ref }}
-      CL_SPECS_NETWORK: glamsterdam-devnet-5
-      CL_SPECS_SCOPE: ${{ inputs.cl_scope }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: ethpandaops/hive-github-action/helpers/self-hosted-runner-dependencies@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
@@ -196,10 +191,19 @@ jobs:
           hive_version: ${{ steps.hive_ref.outputs.tag }}
           client: ${{ matrix.client }}
           simulator: cl
+          # CL_SPECS_* are not forwarded to the simulator container via env
+          # (hive only sets HIVE_SIMULATOR/HIVE_PARALLELISM/HIVE_LOGLEVEL/
+          # HIVE_TEST_PATTERN/HIVE_RANDOM_SEED). We pass them as
+          # --sim.buildarg so the cl simulator's Dockerfile bakes them as
+          # ENV before the cl-sim binary runs.
           extra_flags: >-
             --client-file simulators/cl/clients/default.yaml
             --sim.parallelism=1
             --docker.buildoutput
+            --sim.buildarg CL_SPECS_SOURCE_REF=${{ inputs.cl_source_ref }}
+            --sim.buildarg CL_SPECS_TESTS_REF=${{ inputs.cl_consensus_spec_tests_ref }}
+            --sim.buildarg CL_SPECS_SCOPE=${{ inputs.cl_scope }}
+            --sim.buildarg CL_SPECS_NETWORK=glamsterdam-devnet-5
           s3_upload: true
           s3_bucket: ${{ env.S3_BUCKET }}
           s3_path: ${{ env.CL_S3_PATH }}
