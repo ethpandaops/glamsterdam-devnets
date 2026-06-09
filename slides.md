@@ -118,7 +118,7 @@ Barnabas Busa · ethPandaOps · 2026-06-04
 
 ## Why three repos?
 
-Glamsterdam = <span class="epbs">ePBS</span> (EIP-7732) **+** <span class="bal">BAL</span> (EIP-7928) **+** <span class="gas">state-growth gas reform</span>.
+Glamsterdam = <span class="epbs">ePBS</span> (EIP-7732) **+** <span class="bal">BAL</span> (EIP-7928) **+** <span class="gas">gas repricings</span>.
 
 Each big feature got its **own devnet line** first to debug in isolation, then the two tracks **merged** into the joint `glamsterdam-` line.
 
@@ -132,37 +132,9 @@ Two early feature tracks, one combined Glamsterdam track.
 
 ---
 
-## <span class="bal">Track 1 — `bal-devnets`</span> (early)
+## <span class="bal">Track 1 — `bal-devnets`</span>
 
-**Scope:** Block-Level Access Lists (EIP-7928) + state-growth gas EIPs.
-Ran for **~7 months** total.
-
-| Devnet   | Genesis    | Killed     | Headline change                          |
-| -------- | ---------- | ---------- | ---------------------------------------- |
-| [devnet-0](https://notes.ethereum.org/@ethpandaops/bal-devnet-0) | 2025-11-04 | 2025-12-18 | First BAL end-to-end                     |
-| [devnet-1](https://notes.ethereum.org/@ethpandaops/bal-devnet-1) | 2025-12-18 | 2026-02-06 | Stress tools, debug RPCs for BAL diffs   |
-| [devnet-2](https://notes.ethereum.org/@ethpandaops/bal-devnet-2) | 2026-02-06 | 2026-04-08 | +7708, 7778, 7843, 8024                  |
-| [devnet-3](https://notes.ethereum.org/@ethpandaops/bal-devnet-3) | 2026-04-08 | 2026-04-29 | +7954, 7976, 7981, 8037 (state-gas)      |
-
-Fork epochs: Fulu @ 0, **Gloas @ 1** early → **Gloas @ 2** from devnet-3.
-
----
-
-## <span class="bal">Track 1 — `bal-devnets`</span> (late)
-
-| Devnet   | Genesis    | Killed/Replaced | Headline change                                   |
-| -------- | ---------- | --------------- | ------------------------------------------------- |
-| [devnet-5](https://notes.ethereum.org/@ethpandaops/bal-devnet-5) | 2026-04-29 | 2026-05-01      | EIP-8037 v2 + frame accounting                    |
-| [devnet-6](https://notes.ethereum.org/@ethpandaops/bal-devnet-6) | 2026-05-01 | 2026-05-18      | EIP-8037 stabilisation (cpsb = 1174)              |
-| [devnet-7](https://notes.ethereum.org/@ethpandaops/bal-devnet-7) | 2026-05-18 | current         | **Last `bal-`** — cpsb 1174→1530, gas 96M→150M    |
-
-- EL clients grew from 5 → 7 (added Erigon, Nimbus-EL, Ethrex).
-- CL stayed lean: only Lighthouse and Lodestar.
-- `eth/70` + `eth/71` promoted from optional → mandatory in devnet-7.
-
----
-
-## bal-devnet feature creep
+**7 devnets · ~7 months · 11 EIPs landed**
 
 ```
 bal-devnet-0 : 7928
@@ -174,21 +146,29 @@ bal-devnet-6 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (cpsb=1174 stable)
 bal-devnet-7 : 7708 7778 7843 7928 7954 7975 7976 7981 8024 8037 8159
 ```
 
-Each devnet layered one more state-gas / network-protocol EIP onto the BAL base.
+- **d0–d1** — first BAL end-to-end (just 7928)
+- **d2** — EVM extras layered on (7708, 7778, 7843, 8024)
+- **d3 → d7** — repricings stabilise; cpsb **1174 → 1530**, gas **96M → 150M**, `eth/70` + `eth/71` promoted to mandatory
+
+EL fleet grew **5 → 7** (added Erigon, Nimbus-EL, Ethrex). CL stayed lean: **Lighthouse + Lodestar only**.
 
 ---
 
 ## <span class="epbs">Track 2 — `epbs-devnets`</span>
 
-**Scope:** EIP-7732 (Enshrined Proposer–Builder Separation) only.
-Self-built payloads, minimal preset, consensus-specs **v1.7.0-alpha.2**, engine V5 APIs.
+**Scope:** EIP-7732 (Enshrined PBS) only. **2 devnets · ~6 weeks.**
 
-| Devnet   | Genesis    | Killed     | EL              | CL                                       |
-| -------- | ---------- | ---------- | --------------- | ---------------------------------------- |
-| [devnet-0](https://notes.ethereum.org/@ethpandaops/epbs-devnet-0) | 2026-03-04 | 2026-03-31 | Geth            | Lighthouse, Lodestar, Nimbus, Prysm, Teku |
-| [devnet-1](https://notes.ethereum.org/@ethpandaops/epbs-devnet-1) | 2026-03-31 | 2026-04-17 | Geth, Nethermind| Prysm, Lodestar                          |
+<div style="text-align:center;">
+<span class="stat epbs-c"><span class="num">2</span>ELs (Geth + Nethermind)</span>
+<span class="stat epbs-c"><span class="num">5</span>CLs touched ePBS</span>
+</div>
 
-Track retired once ePBS folded into the Glamsterdam line.
+Narrow EL set on purpose — ePBS lives in the CL.
+**Lighthouse · Lodestar · Nimbus · Prysm · Teku** all took a turn.
+
+**Honest caveat:** 7732 still not fully implemented across clients. Payloads self-built.
+
+Track retired once ePBS folded into Glamsterdam.
 
 ---
 
@@ -210,21 +190,38 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 ## What changed across glamsterdam devnets
 
-**devnet-2 / devnet-3** — consensus-specs v1.7.0-alpha.8, ePBS-focused, EL feature set still light.
+<div class="eip-grid">
+<div class="col">
 
-**devnet-4** — adopted bal-devnet-7 EL feature set in full:
-- EIP-8037 params tightened (cpsb 1174→1530, storage set 32→64, per-account 112→120)
+<h4 class="glams">devnet-2 / -3</h4>
+
+- ePBS-focused
+- EL feature set still light
+
+<h4 class="glams">devnet-4</h4>
+
+- Adopted **bal-d7 EL set in full**
+- cpsb 1174 → 1530
 - `eth/70` + `eth/71` mandatory
-- Reference gas limit 96M → 150M
+- Gas 96M → 150M
 
-**devnet-5** *(today)* — consensus-specs v1.7.0-alpha.10:
-- CL now passes per-validator **target gas limit** to EL via `PayloadAttributesV4` (no more static EL flag)
-- Reference gas limit bumped 150M → **190M**
-- ePBS (7732) implementation still incomplete across clients — payloads self-built
+</div>
+<div class="col">
 
-**devnet-6** *(mid-June)* — execution-specs `tests-bal@v7.2.0` on `devnets/bal/7`:
-- New EIPs: **2780, 7997, 8038, 8070, 8246**; ePBS (7732) spec bump
-- EIP-8037 holds at cpsb = 1530; open networking PR for BAL (7928)
+<h4 class="glams">devnet-5 <em>(today)</em></h4>
+
+- CL passes per-validator **target gas limit** via `PayloadAttributesV4`
+- Gas 150M → **190M**
+- ePBS still self-built across clients
+
+<h4 class="glams">devnet-6 <em>(mid-June)</em></h4>
+
+- +5 EIPs: **2780, 7997, 8038, 8070, 8246**
+- ePBS (7732) spec bump
+- BAL networking PR open
+
+</div>
+</div>
 
 ---
 
@@ -249,54 +246,62 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 ---
 
-## Glamsterdam EIPs — full menu
+## Glamsterdam scope — per [EIP-7773](https://eips.ethereum.org/EIPS/eip-7773)
 
 <div style="text-align:center;">
-<span class="stat total"><span class="num">19</span>EIPs total</span>
-<span class="stat bal-c"><span class="num">11</span>from bal-</span>
-<span class="stat epbs-c"><span class="num">1</span>from epbs-</span>
-<span class="stat d6-c"><span class="num">+5</span>new in glam-dev-6</span>
+<span class="stat total"><span class="num">10</span>SFI — locked in</span>
+<span class="stat bal-c"><span class="num">3</span>PFI — proposed</span>
+<span class="stat epbs-c"><span class="num">13</span>CFI — still in flight</span>
 </div>
 
 <div class="eip-grid">
 <div class="col">
 
-<h4 class="epbs">Consensus / ePBS</h4>
+<h4 class="glams">SFI — Scheduled, locked in</h4>
 
+- **[7708](https://eips.ethereum.org/EIPS/eip-7708)** ETH transfers emit a log
 - **[7732](https://eips.ethereum.org/EIPS/eip-7732)** Enshrined PBS
-- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** Exclude slashed validators
-- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** Increase exit & churn
-
-<h4 class="bal">BAL & networking</h4>
-
+- **[7778](https://eips.ethereum.org/EIPS/eip-7778)** Block gas accounting w/o refunds
+- **[7843](https://eips.ethereum.org/EIPS/eip-7843)** SLOTNUM opcode
 - **[7928](https://eips.ethereum.org/EIPS/eip-7928)** Block-Level Access Lists
-- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** eth/70 partial block receipts
-- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** eth/71 BAL exchange
-- **[8070](https://eips.ethereum.org/EIPS/eip-8070)** <span class="d6">(glam-dev-6, opt)</span> eth/72 Sparse Blobpool
+- **[7954](https://eips.ethereum.org/EIPS/eip-7954)** Increase max contract size
+- **[7976](https://eips.ethereum.org/EIPS/eip-7976)** Calldata floor cost
+- **[7981](https://eips.ethereum.org/EIPS/eip-7981)** Access list cost
+- **[8024](https://eips.ethereum.org/EIPS/eip-8024)** SWAPN/DUPN/EXCHANGE
+- **[8037](https://eips.ethereum.org/EIPS/eip-8037)** State creation gas
+
+<h4 class="bal">PFI — Proposed, not yet on devnet</h4>
+
+- **[7610](https://eips.ethereum.org/EIPS/eip-7610)** Revert creation w/ non-empty storage
+- **[7979](https://eips.ethereum.org/EIPS/eip-7979)** Call & Return opcodes
+- **[8163](https://eips.ethereum.org/EIPS/eip-8163)** Reserve `EXTENSION (0xae)` opcode
 
 </div>
 <div class="col">
 
-<h4 class="gas">State-growth gas reform</h4>
+<h4 class="epbs">CFI — Still being considered</h4>
 
-- **[2780](https://eips.ethereum.org/EIPS/eip-2780)** <span class="d6">(glam-dev-6)</span> Reduce intrinsic tx gas
-- **[7778](https://eips.ethereum.org/EIPS/eip-7778)** Block gas accounting w/o refunds
-- **[7976](https://eips.ethereum.org/EIPS/eip-7976)** Calldata floor cost (64/64)
-- **[7981](https://eips.ethereum.org/EIPS/eip-7981)** Access list cost
-- **[8037](https://eips.ethereum.org/EIPS/eip-8037)** State creation gas
-- **[8038](https://eips.ethereum.org/EIPS/eip-8038)** <span class="d6">(glam-dev-6)</span> State-access gas update
+- **[2780](https://eips.ethereum.org/EIPS/eip-2780)** <span class="d6">(on d6)</span> Reduce intrinsic tx gas
+- **[7688](https://eips.ethereum.org/EIPS/eip-7688)** Forward-compatible CL data structures
+- **[7904](https://eips.ethereum.org/EIPS/eip-7904)** General Repricing
+- **[7997](https://eips.ethereum.org/EIPS/eip-7997)** <span class="d6">(on d6)</span> Deterministic Factory Predeploy
+- **[8038](https://eips.ethereum.org/EIPS/eip-8038)** <span class="d6">(on d6)</span> State-access gas update
+- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** Exclude slashed validators
+- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** Increase exit & churn
+- **[8080](https://eips.ethereum.org/EIPS/eip-8080)** Exits via consolidation queue
+- **[8246](https://eips.ethereum.org/EIPS/eip-8246)** <span class="d6">(on d6)</span> Remove SELFDESTRUCT burn
 
-<h4 class="evm">EVM additions</h4>
+<h4 class="bal">CFI — Networking</h4>
 
-- **[7708](https://eips.ethereum.org/EIPS/eip-7708)** ETH transfers emit a log
-- **[7843](https://eips.ethereum.org/EIPS/eip-7843)** SLOTNUM opcode
-- **[7954](https://eips.ethereum.org/EIPS/eip-7954)** Increase max contract size
-- **[8024](https://eips.ethereum.org/EIPS/eip-8024)** SWAPN/DUPN/EXCHANGE
-- **[7997](https://eips.ethereum.org/EIPS/eip-7997)** <span class="d6">(glam-dev-6)</span> Deterministic Factory Predeploy
-- **[8246](https://eips.ethereum.org/EIPS/eip-8246)** <span class="d6">(glam-dev-6)</span> Remove SELFDESTRUCT burn
+- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** <span class="d6">(on d7)</span> eth/70 partial block receipts
+- **[8070](https://eips.ethereum.org/EIPS/eip-8070)** <span class="d6">(on d6, opt)</span> eth/72 Sparse Blobpool
+- **[8136](https://eips.ethereum.org/EIPS/eip-8136)** Cell-Level Deltas for Data Column Broadcast
+- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** <span class="d6">(on d7)</span> eth/71 BAL exchange
 
 </div>
 </div>
+
+**Scope still in flight** — more PFI promotions expected; some CFI items may DFI before fork freeze.
 
 ---
 
@@ -305,35 +310,22 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 <div class="eip-grid">
 <div class="col">
 
-<h4>Genesis &amp; deploy</h4>
+<h4>Spin up &amp; drive</h4>
 
-- **ethereum-genesis-generator** — single source of truth for fork params
-- **terraform** — Hetzner / DigitalOcean machine provisioning
-- **ansible** — clients + node-local agents
-- **kubernetes + ArgoCD** — per-devnet ops stack
-
-<h4>Testing &amp; load</h4>
-
+- **ethereum-genesis-generator** — one source of truth for fork params
 - **Assertoor** — continuous test scenarios
-- **Hive** — client compliance suite (per-devnet workflows)
 - **spamoor** — tx, blob, MEV load gen
-- **buildoor** — validator lifecycle (deposits, exits, top-ups)
+- **buildoor** — ePBS bid generator
+- **Benchmarkoor** — client performance benchmarking
 
 </div>
 <div class="col">
 
-<h4>Observability</h4>
+<h4>Watch &amp; debug</h4>
 
 - **Xatu** — beacon + execution event capture
-- **ethereum-metrics-exporter** — uniform metrics across clients
-- **Grafana** — dashboards (`*.ethpandaops.io`)
 - **Dora** — per-devnet block explorer (now supports EL and BAL data too)
-
-<h4>Debug</h4>
-
-- **panda CLI** — query everything from one place
-- **ClickHouse** (`external.otel_logs`) — all container logs, one query surface
-- **single auth proxy** — core devs share our access without per-network creds
+- **panda CLI** — fetch + read compact logs across every devnet, no SSH
 
 </div>
 </div>
