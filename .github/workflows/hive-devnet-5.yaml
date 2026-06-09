@@ -1,0 +1,203 @@
+name: Hive - Devnet 5
+# EL + CL spec/conformance tests for glamsterdam-devnet-5.
+#
+# EL job: hive on ethereum/hive@master, running the standard eest
+# simulators (consume-engine / consume-rlp) against each EL client's
+# devnet-5 image, same shape as the template-devnet-0 workflow.
+#
+# CL job: hive on barnabasbusa/hive@cl-specs-simulator (PR
+# ethereum/hive#1537) until that lands; runs the `cl` simulator (which
+# fires each CL client's native consensus-spec-tests runner) against
+# the six CL clients on their glamsterdam-devnet-5 branches. Flip
+# `cl_hive_version` to `ethereum/hive@master` once #1537 merges.
+
+on:
+  workflow_dispatch:
+    # GitHub limits us to 10 workflow inputs.
+    inputs:
+      el_client:
+        type: string
+        default: '"besu","erigon","go-ethereum","nethermind","nimbus-el","reth"'
+        description: EL clients (comma-separated quoted JSON fragment).
+      el_simulator:
+        type: string
+        default: >-
+          "ethereum/eest/consume-engine",
+          "ethereum/eest/consume-rlp"
+        description: EL simulators.
+      el_common_client_tag:
+        type: string
+        default: 'glamsterdam-devnet-5'
+        description: Common image tag for EL clients (overrides per-client tags).
+      el_client_source:
+        type: choice
+        default: 'docker'
+        options:
+          - docker
+          - git
+        description: EL client source — pre-built docker images or git build.
+      el_hive_version:
+        type: string
+        default: 'ethereum/hive@master'
+        description: hive repo@ref for the EL job.
+      cl_client:
+        type: string
+        default: '"lighthouse-specs","lodestar-specs","nimbus-specs","teku-specs","prysm-specs","grandine-specs"'
+        description: CL spec-runner images (comma-separated quoted JSON fragment).
+      cl_source_ref:
+        type: string
+        default: 'glamsterdam-devnet-5'
+        description: Branch/tag/SHA on each CL client repo.
+      cl_consensus_spec_tests_ref:
+        type: string
+        default: 'v1.7.0-alpha.10'
+        description: ethereum/consensus-spec-tests tag (prysm cannot override).
+      cl_scope:
+        type: choice
+        default: 'minimal'
+        options:
+          - minimal
+          - mainnet
+        description: Spec-test preset to run.
+      cl_hive_version:
+        type: string
+        default: 'barnabasbusa/hive@cl-specs-simulator'
+        description: hive repo@ref carrying the `cl` simulator.
+
+env:
+  GOPROXY: "${{ vars.GOPROXY }}"
+  # EL → spec-/EL-results path used by the EL view in hive-ui.
+  S3_BUCKET: hive-results
+  EL_S3_PATH: glamsterdam-devnet-5
+  EL_S3_PUBLIC_URL: https://hive.ethpandaops.io/#/test/glamsterdam-devnet-5/
+  # CL → separate path so the CL run doesn't collide with the EL listing.jsonl.
+  CL_S3_PATH: spec-glamsterdam-devnet-5
+  CL_S3_PUBLIC_URL: https://hive.ethpandaops.io/#/test/spec-glamsterdam-devnet-5/
+  INSTALL_RCLONE_VERSION: v1.68.2
+  EEST_BUILD_ARG_FIXTURES: https://github.com/ethereum/execution-spec-tests/releases/download/glamsterdam-devnet-5%40v1.0.0/fixtures_glamsterdam-devnet-5.tar.gz
+  EEST_BUILD_ARG_BRANCH: hive
+  GLOBAL_EXTRA_FLAGS: >-
+    --client.checktimelimit=180s
+    --sim.parallelism=4
+    --docker.auth
+    --docker.buildoutput
+  EEST_ENGINE_FLAGS: >-
+    --sim.buildarg fixtures=${EEST_BUILD_ARG_FIXTURES}
+    --sim.buildarg branch=${EEST_BUILD_ARG_BRANCH}
+    --sim.loglevel=3
+  EEST_RLP_FLAGS: >-
+    --sim.buildarg fixtures=${EEST_BUILD_ARG_FIXTURES}
+    --sim.buildarg branch=${EEST_BUILD_ARG_BRANCH}
+    --sim.loglevel=3
+  RPC_COMPAT_FLAGS: >-
+    --sim.loglevel=3
+
+jobs:
+  prepare-el:
+    runs-on: ubuntu-latest
+    outputs:
+      hive_repo: ${{ steps.client_config.outputs.hive_repo }}
+      hive_tag: ${{ steps.client_config.outputs.hive_tag }}
+      client_config: ${{ steps.client_config.outputs.client_config }}
+    steps:
+      - uses: ethpandaops/hive-github-action/helpers/client-config@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
+        id: client_config
+        with:
+          common_client_tag: ${{ inputs.el_common_client_tag }}
+          client_source: ${{ inputs.el_client_source }}
+          hive_version: ${{ inputs.el_hive_version }}
+          goproxy: ${{ env.GOPROXY }}
+
+  test-el:
+    needs: prepare-el
+    timeout-minutes: 540
+    runs-on: >-
+      ${{
+        matrix.simulator == 'ethereum/rpc-compat' && 'ubuntu-latest' ||
+        contains(matrix.simulator, 'ethereum/eest/') && 'self-hosted-ghr-size-m-x64' ||
+        'ubuntu-latest'
+      }}
+    concurrency:
+      group: >-
+        ${{ github.head_ref || inputs }}-el-${{ matrix.client }}-${{ matrix.simulator }}
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJSON(format('[{0}]', inputs.el_client)) }}
+        simulator: ${{ fromJSON(format('[{0}]', inputs.el_simulator)) }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: ethpandaops/hive-github-action/helpers/self-hosted-runner-dependencies@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
+        if: runner.environment != 'github-hosted'
+      - uses: ethpandaops/actions/docker-login@99b48ca2b233a2eff93e6a6df76e46b718aca108
+        with:
+          username: ethpandaops
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: ethpandaops/hive-github-action@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
+        with:
+          hive_repository: ${{ needs.prepare-el.outputs.hive_repo }}
+          hive_version: ${{ needs.prepare-el.outputs.hive_tag }}
+          client: ${{ matrix.client }}
+          simulator: ${{ matrix.simulator }}
+          client_config: ${{ needs.prepare-el.outputs.client_config }}
+          extra_flags: >-
+            ${{ env.GLOBAL_EXTRA_FLAGS }}
+            ${{ matrix.simulator == 'ethereum/rpc-compat' && env.RPC_COMPAT_FLAGS || '' }}
+            ${{ matrix.simulator == 'ethereum/eest/consume-engine' && env.EEST_ENGINE_FLAGS || '' }}
+            ${{ matrix.simulator == 'ethereum/eest/consume-rlp' && env.EEST_RLP_FLAGS || '' }}
+          s3_upload: true
+          s3_bucket: ${{ env.S3_BUCKET }}
+          s3_path: ${{ env.EL_S3_PATH }}
+          s3_public_url: ${{ env.EL_S3_PUBLIC_URL }}
+          rclone_config: ${{ secrets.HIVE_RCLONE_CONFIG }}
+          rclone_version: ${{ env.INSTALL_RCLONE_VERSION }}
+          workflow_artifact_upload: true
+          website_upload: true
+
+  test-cl:
+    timeout-minutes: 360
+    runs-on: ubuntu-latest
+    concurrency:
+      group: >-
+        ${{ github.head_ref || inputs }}-cl-${{ matrix.client }}-${{ inputs.cl_scope }}
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJSON(format('[{0}]', inputs.cl_client)) }}
+    env:
+      CL_SPECS_SOURCE_REF: ${{ inputs.cl_source_ref }}
+      CL_SPECS_TESTS_REF: ${{ inputs.cl_consensus_spec_tests_ref }}
+      CL_SPECS_NETWORK: glamsterdam-devnet-5
+      CL_SPECS_SCOPE: ${{ inputs.cl_scope }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: ethpandaops/hive-github-action/helpers/self-hosted-runner-dependencies@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
+        if: runner.environment != 'github-hosted'
+      - uses: ethpandaops/actions/docker-login@99b48ca2b233a2eff93e6a6df76e46b718aca108
+        with:
+          username: ethpandaops
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Split "owner/repo@ref" into the two args the hive-github-action wants.
+      - id: hive_ref
+        run: |
+          ref="${{ inputs.cl_hive_version }}"
+          echo "repo=${ref%@*}" >> "$GITHUB_OUTPUT"
+          echo "tag=${ref#*@}"  >> "$GITHUB_OUTPUT"
+      - uses: ethpandaops/hive-github-action@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
+        with:
+          hive_repository: ${{ steps.hive_ref.outputs.repo }}
+          hive_version: ${{ steps.hive_ref.outputs.tag }}
+          client: ${{ matrix.client }}
+          simulator: cl
+          extra_flags: >-
+            --client-file simulators/cl/clients/default.yaml
+            --sim.parallelism=1
+            --docker.buildoutput
+          s3_upload: true
+          s3_bucket: ${{ env.S3_BUCKET }}
+          s3_path: ${{ env.CL_S3_PATH }}
+          s3_public_url: ${{ env.CL_S3_PUBLIC_URL }}
+          rclone_config: ${{ secrets.HIVE_RCLONE_CONFIG }}
+          rclone_version: ${{ env.INSTALL_RCLONE_VERSION }}
+          workflow_artifact_upload: true
+          website_upload: true
