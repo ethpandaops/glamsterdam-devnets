@@ -212,7 +212,7 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 - CL passes per-validator **target gas limit** via `PayloadAttributesV4`
 - Gas 150M → **190M**
-- ePBS still self-built across clients
+- **Public P2P bids live** — produced by **buildoor**
 
 <h4 class="glams">devnet-6 <em>(mid-June)</em></h4>
 
