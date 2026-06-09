@@ -178,13 +178,13 @@ Track retired once ePBS folded into Glamsterdam.
 
 | Devnet   | Genesis        | Killed/Replaced | Notes                                                |
 | -------- | -------------- | --------------- | ---------------------------------------------------- |
-| [devnet-2](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-2) | 2026-04-30     | ~2026-05-06     | First glamsterdam spin; CL-focused, Gloas @ 1        |
+| [devnet-0](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-0) | 2026-04-29     | 2026-04-30      | First spin, 7500 val, Gloas @ 2 — **interop craziness**, crashed fast and hard |
+| [devnet-1](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-1) | 2026-04-30     | ~2026-05-01     | 4000 val — still crashing; rolled into devnet-2 |
+| [devnet-2](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-2) | 2026-05-01     | ~2026-05-06     | 2800 validators, CL-focused, Gloas @ 1               |
 | [devnet-3](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-3) | 2026-05-06     | 2026-05-20      | Same spec as devnet-2 — infra reroll                 |
 | [devnet-4](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-4) | 2026-05-22     | 2026-06-04      | bal-devnet-7 EL set + EIP-8037 cpsb 1174→1530, gas →150M |
 | [devnet-5](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-5) | 2026-06-04     | just launched   | **First glamsterdam CL+EL** — dynamic `targetGasLimit`, gas 190M |
 | [devnet-6](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-6) | mid-June 2026  | planned         | +EIP-2780, 7997, 8038, 8070, 8246; ePBS (7732) updated |
-
-Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 ---
 
@@ -235,8 +235,10 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 2026-Mar ─ epbs-devnet-1         ┘  (track retired)
 2026-Apr ─ bal-devnet-3
 2026-Apr ─ bal-devnet-5          ┐
-2026-Apr ─ glamsterdam-devnet-2  │  (tracks converge)
+2026-Apr ─ glamsterdam-devnet-0  │  (tracks converge — interop crashes)
+2026-Apr ─ glamsterdam-devnet-1  │  (still crashing, rolled next day)
 2026-May ─ bal-devnet-6          │
+2026-May ─ glamsterdam-devnet-2  │
 2026-May ─ glamsterdam-devnet-3  │
 2026-May ─ bal-devnet-7          ┘  (last bal-)
 2026-May ─ glamsterdam-devnet-4
