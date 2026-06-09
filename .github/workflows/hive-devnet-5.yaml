@@ -17,7 +17,7 @@ on:
     inputs:
       el_client:
         type: string
-        default: '"besu","erigon","go-ethereum","nethermind","nimbus-el","reth"'
+        default: '"erigon","nethermind","ethrex"'
         description: EL clients (comma-separated quoted JSON fragment).
       el_simulator:
         type: string
@@ -107,6 +107,14 @@ jobs:
           client_source: ${{ inputs.el_client_source }}
           hive_version: ${{ inputs.el_hive_version }}
           goproxy: ${{ env.GOPROXY }}
+          # Override the helper's default (docker.ethquokkaops.io/...) and pull
+          # from Docker Hub directly under the ethpandaops org.
+          client_images: |
+            {
+              "erigon":     "ethpandaops/erigon:glamsterdam-devnet-5",
+              "nethermind": "ethpandaops/nethermind:glamsterdam-devnet-5",
+              "ethrex":     "ethpandaops/ethrex:glamsterdam-devnet-5"
+            }
 
   test-el:
     needs: prepare-el
