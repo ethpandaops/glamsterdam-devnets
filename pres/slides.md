@@ -112,7 +112,7 @@ style: |
 # From <span style="color:#60a5fa">`bal-`</span> and <span style="color:#c084fc">`epbs-`</span> to <span style="color:#5eead4">`glamsterdam-`</span>
 ## A short history of the Glamsterdam fork devnets
 
-Barnabas Busa · ethPandaOps · 2026-06-04
+Barnabas Busa · ethPandaOps · 2026-06-09
 
 ---
 
