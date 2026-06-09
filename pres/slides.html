@@ -210,7 +210,7 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
+;" data-marpit-pagination-total="10">
 <h1 id="from-span-stylecolor60a5fabal-span-and-span-stylecolorc084fcepbs-span-to-span-stylecolor5eead4glamsterdam-span">From <span style="color:#60a5fa"><code>bal-</code></span> and <span style="color:#c084fc"><code>epbs-</code></span> to <span style="color:#5eead4"><code>glamsterdam-</code></span></h1>
 <h2 id="a-short-history-of-the-glamsterdam-fork-devnets">A short history of the Glamsterdam fork devnets</h2>
 <p>Barnabas Busa · ethPandaOps · 2026-06-04</p>
@@ -417,9 +417,9 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
+;" data-marpit-pagination-total="10">
 <h2 id="why-three-repos">Why three repos?</h2>
-<p>Glamsterdam = <span class="epbs">ePBS</span> (EIP-7732) <strong>+</strong> <span class="bal">BAL</span> (EIP-7928) <strong>+</strong> <span class="gas">state-growth gas reform</span>.</p>
+<p>Glamsterdam = <span class="epbs">ePBS</span> (EIP-7732) <strong>+</strong> <span class="bal">BAL</span> (EIP-7928) <strong>+</strong> <span class="gas">gas repricings</span>.</p>
 <p>Each big feature got its <strong>own devnet line</strong> first to debug in isolation, then the two tracks <strong>merged</strong> into the joint <code>glamsterdam-</code> line.</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code>  bal-devnets    ─┐
                   ├─► glamsterdam-devnets
@@ -629,47 +629,23 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="span-classbaltrack-1--bal-devnetsspan-early"><span class="bal">Track 1 — <code>bal-devnets</code></span> (early)</h2>
-<p><strong>Scope:</strong> Block-Level Access Lists (EIP-7928) + state-growth gas EIPs.<br />
-Ran for <strong>~7 months</strong> total.</p>
-<table>
-<thead>
-<tr>
-<th>Devnet</th>
-<th>Genesis</th>
-<th>Killed</th>
-<th>Headline change</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-0">devnet-0</a></td>
-<td>2025-11-04</td>
-<td>2025-12-18</td>
-<td>First BAL end-to-end</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-1">devnet-1</a></td>
-<td>2025-12-18</td>
-<td>2026-02-06</td>
-<td>Stress tools, debug RPCs for BAL diffs</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-2">devnet-2</a></td>
-<td>2026-02-06</td>
-<td>2026-04-08</td>
-<td>+7708, 7778, 7843, 8024</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-3">devnet-3</a></td>
-<td>2026-04-08</td>
-<td>2026-04-29</td>
-<td>+7954, 7976, 7981, 8037 (state-gas)</td>
-</tr>
-</tbody>
-</table>
-<p>Fork epochs: Fulu @ 0, <strong>Gloas @ 1</strong> early → <strong>Gloas @ 2</strong> from devnet-3.</p>
+;" data-marpit-pagination-total="10">
+<h2 id="span-classbaltrack-1--bal-devnetsspan"><span class="bal">Track 1 — <code>bal-devnets</code></span></h2>
+<p><strong>7 devnets · ~7 months · 11 EIPs landed</strong></p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code>bal-devnet-0 : 7928
+bal-devnet-1 : 7928
+bal-devnet-2 : 7708 7778 7843 7928 8024
+bal-devnet-3 : 7708 7778 7843 7928 7954 8024 8037           (+opt 7975/8159)
+bal-devnet-5 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (+opt 7975/8159)
+bal-devnet-6 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (cpsb=1174 stable)
+bal-devnet-7 : 7708 7778 7843 7928 7954 7975 7976 7981 8024 8037 8159
+</code></pre>
+<ul>
+<li><strong>d0–d1</strong> — first BAL end-to-end (just 7928)</li>
+<li><strong>d2</strong> — EVM extras layered on (7708, 7778, 7843, 8024)</li>
+<li><strong>d3 → d7</strong> — repricings stabilise; cpsb <strong>1174 → 1530</strong>, gas <strong>96M → 150M</strong>, <code>eth/70</code> + <code>eth/71</code> promoted to mandatory</li>
+</ul>
+<p>EL fleet grew <strong>5 → 7</strong> (added Erigon, Nimbus-EL, Ethrex). CL stayed lean: <strong>Lighthouse + Lodestar only</strong>.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -873,43 +849,17 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="span-classbaltrack-1--bal-devnetsspan-late"><span class="bal">Track 1 — <code>bal-devnets</code></span> (late)</h2>
-<table>
-<thead>
-<tr>
-<th>Devnet</th>
-<th>Genesis</th>
-<th>Killed/Replaced</th>
-<th>Headline change</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-5">devnet-5</a></td>
-<td>2026-04-29</td>
-<td>2026-05-01</td>
-<td>EIP-8037 v2 + frame accounting</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-6">devnet-6</a></td>
-<td>2026-05-01</td>
-<td>2026-05-18</td>
-<td>EIP-8037 stabilisation (cpsb = 1174)</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/bal-devnet-7">devnet-7</a></td>
-<td>2026-05-18</td>
-<td>current</td>
-<td><strong>Last <code>bal-</code></strong> — cpsb 1174→1530, gas 96M→150M</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>EL clients grew from 5 → 7 (added Erigon, Nimbus-EL, Ethrex).</li>
-<li>CL stayed lean: only Lighthouse and Lodestar.</li>
-<li><code>eth/70</code> + <code>eth/71</code> promoted from optional → mandatory in devnet-7.</li>
-</ul>
+;" data-marpit-pagination-total="10">
+<h2 id="span-classepbstrack-2--epbs-devnetsspan"><span class="epbs">Track 2 — <code>epbs-devnets</code></span></h2>
+<p><strong>Scope:</strong> EIP-7732 (Enshrined PBS) only. <strong>2 devnets · ~6 weeks.</strong></p>
+<div style="text-align:center;">
+<span class="stat epbs-c"><span class="num">2</span>ELs (Geth + Nethermind)</span>
+<span class="stat epbs-c"><span class="num">5</span>CLs touched ePBS</span>
+</div>
+<p>Narrow EL set on purpose — ePBS lives in the CL.<br />
+<strong>Lighthouse · Lodestar · Nimbus · Prysm · Teku</strong> all took a turn.</p>
+<p><strong>Honest caveat:</strong> 7732 still not fully implemented across clients. Payloads self-built.</p>
+<p>Track retired once ePBS folded into Glamsterdam.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -1113,17 +1063,52 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="bal-devnet-feature-creep">bal-devnet feature creep</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>bal-devnet-0 : 7928
-bal-devnet-1 : 7928
-bal-devnet-2 : 7708 7778 7843 7928 8024
-bal-devnet-3 : 7708 7778 7843 7928 7954 8024 8037           (+opt 7975/8159)
-bal-devnet-5 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (+opt 7975/8159)
-bal-devnet-6 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (cpsb=1174 stable)
-bal-devnet-7 : 7708 7778 7843 7928 7954 7975 7976 7981 8024 8037 8159
-</code></pre>
-<p>Each devnet layered one more state-gas / network-protocol EIP onto the BAL base.</p>
+;" data-marpit-pagination-total="10">
+<h2 id="span-classglamstrack-3--glamsterdam-devnetsspan"><span class="glams">Track 3 — <code>glamsterdam-devnets</code></span></h2>
+<p><strong>Scope:</strong> Everything from <code>bal-devnet-7</code> <strong>+ ePBS (EIP-7732)</strong> under one roof.</p>
+<table>
+<thead>
+<tr>
+<th>Devnet</th>
+<th>Genesis</th>
+<th>Killed/Replaced</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-2">devnet-2</a></td>
+<td>2026-04-30</td>
+<td>~2026-05-06</td>
+<td>First glamsterdam spin; CL-focused, Gloas @ 1</td>
+</tr>
+<tr>
+<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-3">devnet-3</a></td>
+<td>2026-05-06</td>
+<td>2026-05-20</td>
+<td>Same spec as devnet-2 — infra reroll</td>
+</tr>
+<tr>
+<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-4">devnet-4</a></td>
+<td>2026-05-22</td>
+<td>2026-06-04</td>
+<td>bal-devnet-7 EL set + EIP-8037 cpsb 1174→1530, gas →150M</td>
+</tr>
+<tr>
+<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-5">devnet-5</a></td>
+<td>2026-06-04</td>
+<td>just launched</td>
+<td><strong>First glamsterdam CL+EL</strong> — dynamic <code>targetGasLimit</code>, gas 190M</td>
+</tr>
+<tr>
+<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-6">devnet-6</a></td>
+<td>mid-June 2026</td>
+<td>planned</td>
+<td>+EIP-2780, 7997, 8038, 8070, 8246; ePBS (7732) updated</td>
+</tr>
+</tbody>
+</table>
+<p>Repo skips <code>devnet-0/1</code>: numbering inherited from earlier ePBS attempts.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -1327,38 +1312,38 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="span-classepbstrack-2--epbs-devnetsspan"><span class="epbs">Track 2 — <code>epbs-devnets</code></span></h2>
-<p><strong>Scope:</strong> EIP-7732 (Enshrined Proposer–Builder Separation) only.<br />
-Self-built payloads, minimal preset, consensus-specs <strong>v1.7.0-alpha.2</strong>, engine V5 APIs.</p>
-<table>
-<thead>
-<tr>
-<th>Devnet</th>
-<th>Genesis</th>
-<th>Killed</th>
-<th>EL</th>
-<th>CL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/epbs-devnet-0">devnet-0</a></td>
-<td>2026-03-04</td>
-<td>2026-03-31</td>
-<td>Geth</td>
-<td>Lighthouse, Lodestar, Nimbus, Prysm, Teku</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/epbs-devnet-1">devnet-1</a></td>
-<td>2026-03-31</td>
-<td>2026-04-17</td>
-<td>Geth, Nethermind</td>
-<td>Prysm, Lodestar</td>
-</tr>
-</tbody>
-</table>
-<p>Track retired once ePBS folded into the Glamsterdam line.</p>
+;" data-marpit-pagination-total="10">
+<h2 id="what-changed-across-glamsterdam-devnets">What changed across glamsterdam devnets</h2>
+<div class="eip-grid">
+<div class="col">
+<h4 class="glams">devnet-2 / -3</h4>
+<ul>
+<li>ePBS-focused</li>
+<li>EL feature set still light</li>
+</ul>
+<h4 class="glams">devnet-4</h4>
+<ul>
+<li>Adopted <strong>bal-d7 EL set in full</strong></li>
+<li>cpsb 1174 → 1530</li>
+<li><code>eth/70</code> + <code>eth/71</code> mandatory</li>
+<li>Gas 96M → 150M</li>
+</ul>
+</div>
+<div class="col">
+<h4 class="glams">devnet-5 <em>(today)</em></h4>
+<ul>
+<li>CL passes per-validator <strong>target gas limit</strong> via <code>PayloadAttributesV4</code></li>
+<li>Gas 150M → <strong>190M</strong></li>
+<li>ePBS still self-built across clients</li>
+</ul>
+<h4 class="glams">devnet-6 <em>(mid-June)</em></h4>
+<ul>
+<li>+5 EIPs: <strong>2780, 7997, 8038, 8070, 8246</strong></li>
+<li>ePBS (7732) spec bump</li>
+<li>BAL networking PR open</li>
+</ul>
+</div>
+</div>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -1562,52 +1547,23 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="span-classglamstrack-3--glamsterdam-devnetsspan"><span class="glams">Track 3 — <code>glamsterdam-devnets</code></span></h2>
-<p><strong>Scope:</strong> Everything from <code>bal-devnet-7</code> <strong>+ ePBS (EIP-7732)</strong> under one roof.</p>
-<table>
-<thead>
-<tr>
-<th>Devnet</th>
-<th>Genesis</th>
-<th>Killed/Replaced</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-2">devnet-2</a></td>
-<td>2026-04-30</td>
-<td>~2026-05-06</td>
-<td>First glamsterdam spin; CL-focused, Gloas @ 1</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-3">devnet-3</a></td>
-<td>2026-05-06</td>
-<td>2026-05-20</td>
-<td>Same spec as devnet-2 — infra reroll</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-4">devnet-4</a></td>
-<td>2026-05-22</td>
-<td>2026-06-04</td>
-<td>bal-devnet-7 EL set + EIP-8037 cpsb 1174→1530, gas →150M</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-5">devnet-5</a></td>
-<td>2026-06-04</td>
-<td>just launched</td>
-<td><strong>First glamsterdam CL+EL</strong> — dynamic <code>targetGasLimit</code>, gas 190M</td>
-</tr>
-<tr>
-<td><a href="https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-6">devnet-6</a></td>
-<td>mid-June 2026</td>
-<td>planned</td>
-<td>+EIP-2780, 7997, 8038, 8070, 8246; ePBS (7732) updated</td>
-</tr>
-</tbody>
-</table>
-<p>Repo skips <code>devnet-0/1</code>: numbering inherited from earlier ePBS attempts.</p>
+;" data-marpit-pagination-total="10">
+<h2 id="all-devnets-one-timeline">All devnets, one timeline</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code>2025-Nov ─ bal-devnet-0
+2025-Dec ─ bal-devnet-1
+2026-Feb ─ bal-devnet-2
+2026-Mar ─ epbs-devnet-0         ┐
+2026-Mar ─ epbs-devnet-1         ┘  (track retired)
+2026-Apr ─ bal-devnet-3
+2026-Apr ─ bal-devnet-5          ┐
+2026-Apr ─ glamsterdam-devnet-2  │  (tracks converge)
+2026-May ─ bal-devnet-6          │
+2026-May ─ glamsterdam-devnet-3  │
+2026-May ─ bal-devnet-7          ┘  (last bal-)
+2026-May ─ glamsterdam-devnet-4
+2026-Jun ─ glamsterdam-devnet-5  ← we are here
+2026-Jun ─ glamsterdam-devnet-6  (planned, mid-June)
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -1811,26 +1767,58 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="what-changed-across-glamsterdam-devnets">What changed across glamsterdam devnets</h2>
-<p><strong>devnet-2 / devnet-3</strong> — consensus-specs v1.7.0-alpha.8, ePBS-focused, EL feature set still light.</p>
-<p><strong>devnet-4</strong> — adopted bal-devnet-7 EL feature set in full:</p>
+;" data-marpit-pagination-total="10">
+<h2 id="glamsterdam-scope--per-eip-7773">Glamsterdam scope — per <a href="https://eips.ethereum.org/EIPS/eip-7773">EIP-7773</a></h2>
+<div style="text-align:center;">
+<span class="stat total"><span class="num">10</span>SFI — locked in</span>
+<span class="stat bal-c"><span class="num">3</span>PFI — proposed</span>
+<span class="stat epbs-c"><span class="num">13</span>CFI — still in flight</span>
+</div>
+<div class="eip-grid">
+<div class="col">
+<h4 class="glams">SFI — Scheduled, locked in</h4>
 <ul>
-<li>EIP-8037 params tightened (cpsb 1174→1530, storage set 32→64, per-account 112→120)</li>
-<li><code>eth/70</code> + <code>eth/71</code> mandatory</li>
-<li>Reference gas limit 96M → 150M</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7708">7708</a></strong> ETH transfers emit a log</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7732">7732</a></strong> Enshrined PBS</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7778">7778</a></strong> Block gas accounting w/o refunds</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7843">7843</a></strong> SLOTNUM opcode</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7928">7928</a></strong> Block-Level Access Lists</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7954">7954</a></strong> Increase max contract size</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7976">7976</a></strong> Calldata floor cost</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7981">7981</a></strong> Access list cost</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8024">8024</a></strong> SWAPN/DUPN/EXCHANGE</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8037">8037</a></strong> State creation gas</li>
 </ul>
-<p><strong>devnet-5</strong> <em>(today)</em> — consensus-specs v1.7.0-alpha.10:</p>
+<h4 class="bal">PFI — Proposed, not yet on devnet</h4>
 <ul>
-<li>CL now passes per-validator <strong>target gas limit</strong> to EL via <code>PayloadAttributesV4</code> (no more static EL flag)</li>
-<li>Reference gas limit bumped 150M → <strong>190M</strong></li>
-<li>ePBS (7732) implementation still incomplete across clients — payloads self-built</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7610">7610</a></strong> Revert creation w/ non-empty storage</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7979">7979</a></strong> Call &amp; Return opcodes</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8163">8163</a></strong> Reserve <code>EXTENSION (0xae)</code> opcode</li>
 </ul>
-<p><strong>devnet-6</strong> <em>(mid-June)</em> — execution-specs <code>tests-bal@v7.2.0</code> on <code>devnets/bal/7</code>:</p>
+</div>
+<div class="col">
+<h4 class="epbs">CFI — Still being considered</h4>
 <ul>
-<li>New EIPs: <strong>2780, 7997, 8038, 8070, 8246</strong>; ePBS (7732) spec bump</li>
-<li>EIP-8037 holds at cpsb = 1530; open networking PR for BAL (7928)</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-2780">2780</a></strong> <span class="d6">(on d6)</span> Reduce intrinsic tx gas</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7688">7688</a></strong> Forward-compatible CL data structures</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7904">7904</a></strong> General Repricing</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7997">7997</a></strong> <span class="d6">(on d6)</span> Deterministic Factory Predeploy</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8038">8038</a></strong> <span class="d6">(on d6)</span> State-access gas update</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8045">8045</a></strong> Exclude slashed validators</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8061">8061</a></strong> Increase exit &amp; churn</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8080">8080</a></strong> Exits via consolidation queue</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8246">8246</a></strong> <span class="d6">(on d6)</span> Remove SELFDESTRUCT burn</li>
 </ul>
+<h4 class="bal">CFI — Networking</h4>
+<ul>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7975">7975</a></strong> <span class="d6">(on d7)</span> eth/70 partial block receipts</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8070">8070</a></strong> <span class="d6">(on d6, opt)</span> eth/72 Sparse Blobpool</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8136">8136</a></strong> Cell-Level Deltas for Data Column Broadcast</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8159">8159</a></strong> <span class="d6">(on d7)</span> eth/71 BAL exchange</li>
+</ul>
+</div>
+</div>
+<p><strong>Scope still in flight</strong> — more PFI promotions expected; some CFI items may DFI before fork freeze.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-theme="default" data-style=":root {
   --bal:   #2563eb;
@@ -2034,512 +2022,31 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="all-devnets-one-timeline">All devnets, one timeline</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>2025-Nov ─ bal-devnet-0
-2025-Dec ─ bal-devnet-1
-2026-Feb ─ bal-devnet-2
-2026-Mar ─ epbs-devnet-0         ┐
-2026-Mar ─ epbs-devnet-1         ┘  (track retired)
-2026-Apr ─ bal-devnet-3
-2026-Apr ─ bal-devnet-5          ┐
-2026-Apr ─ glamsterdam-devnet-2  │  (tracks converge)
-2026-May ─ bal-devnet-6          │
-2026-May ─ glamsterdam-devnet-3  │
-2026-May ─ bal-devnet-7          ┘  (last bal-)
-2026-May ─ glamsterdam-devnet-4
-2026-Jun ─ glamsterdam-devnet-5  ← we are here
-2026-Jun ─ glamsterdam-devnet-6  (planned, mid-June)
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-theme="default" data-style=":root {
-  --bal:   #2563eb;
-  --epbs:  #9333ea;
-  --glams: #0d9488;
-  --d6:    #0d9488;
-  --gas:   #ea580c;
-  --evm:   #16a34a;
-  --muted: #475569;
-}
-section {
-  font-size: 22px;
-  padding: 50px 60px;
-  justify-content: flex-start;
-  background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);
-}
-section.lead {
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: #f8fafc;
-}
-section.lead h1 { color: #f8fafc; }
-section.lead h2 { color: #94a3b8; }
-section.lead code {
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-h1 { font-size: 38px; margin-bottom: 0.3em; color: #0f172a; }
-h2 { font-size: 30px; margin-bottom: 0.3em; color: #0f172a; }
-h3 { font-size: 24px; color: var(--muted); }
-strong { color: #0f172a; }
-a { color: var(--bal); }
-table {
-  font-size: 18px;
-  width: 100%;
-  border-collapse: collapse;
-}
-th { background: #e2e8f0; color: #0f172a; }
-th, td { padding: 4px 8px; vertical-align: top; border-bottom: 1px solid #cbd5e1; }
-pre, code {
-  font-size: 16px;
-  line-height: 1.25;
-}
-code { background: #e2e8f0; padding: 1px 5px; border-radius: 3px; }
-pre {
-  padding: 8px 12px;
-  overflow: hidden;
-  background: #1e293b;
-  color: #e2e8f0;
-  border-radius: 6px;
-}
-pre code { background: transparent; color: inherit; padding: 0; }
-ul, ol { margin: 0.3em 0; }
-li { margin: 0.15em 0; }
-p { margin: 0.4em 0; }
-.bal   { color: var(--bal);   font-weight: 600; }
-.epbs  { color: var(--epbs);  font-weight: 600; }
-.glams { color: var(--glams); font-weight: 600; }
-.gas   { color: var(--gas);   font-weight: 600; }
-.evm   { color: var(--evm);   font-weight: 600; }
-.d6    { color: var(--d6);    font-weight: 700; }
-.stat {
-  display: inline-block;
-  padding: 10px 22px;
-  margin: 6px 4px;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px solid #cbd5e1;
-  font-size: 18px;
-}
-.stat .num { font-size: 38px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }
-.stat.total { border-color: var(--glams); }
-.stat.total .num { color: var(--glams); }
-.stat.bal-c   { border-color: var(--bal); }
-.stat.bal-c .num   { color: var(--bal); }
-.stat.epbs-c  { border-color: var(--epbs); }
-.stat.epbs-c .num  { color: var(--epbs); }
-.stat.d6-c    { border-color: var(--d6); }
-.stat.d6-c .num    { color: var(--d6); }
-.eip-grid {
-  display: flex;
-  gap: 40px;
-  margin-top: 10px;
-}
-.eip-grid .col { flex: 1; min-width: 0; }
-.eip-grid h4 {
-  margin: 0 0 6px 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-.eip-grid ul {
-  margin: 0 0 16px 0;
-  padding-left: 22px;
-  font-size: 19px;
-  color: #0f172a;
-}
-.eip-grid li { margin: 3px 0; line-height: 1.35; }
-.eip-grid li strong { color: #0f172a; }
-.eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-" lang="en-US" data-marpit-pagination="10" style="--paginate:true;--theme:default;--style::root {
-  --bal:   #2563eb;
-  --epbs:  #9333ea;
-  --glams: #0d9488;
-  --d6:    #0d9488;
-  --gas:   #ea580c;
-  --evm:   #16a34a;
-  --muted: #475569;
-}
-section {
-  font-size: 22px;
-  padding: 50px 60px;
-  justify-content: flex-start;
-  background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);
-}
-section.lead {
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: #f8fafc;
-}
-section.lead h1 { color: #f8fafc; }
-section.lead h2 { color: #94a3b8; }
-section.lead code {
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-h1 { font-size: 38px; margin-bottom: 0.3em; color: #0f172a; }
-h2 { font-size: 30px; margin-bottom: 0.3em; color: #0f172a; }
-h3 { font-size: 24px; color: var(--muted); }
-strong { color: #0f172a; }
-a { color: var(--bal); }
-table {
-  font-size: 18px;
-  width: 100%;
-  border-collapse: collapse;
-}
-th { background: #e2e8f0; color: #0f172a; }
-th, td { padding: 4px 8px; vertical-align: top; border-bottom: 1px solid #cbd5e1; }
-pre, code {
-  font-size: 16px;
-  line-height: 1.25;
-}
-code { background: #e2e8f0; padding: 1px 5px; border-radius: 3px; }
-pre {
-  padding: 8px 12px;
-  overflow: hidden;
-  background: #1e293b;
-  color: #e2e8f0;
-  border-radius: 6px;
-}
-pre code { background: transparent; color: inherit; padding: 0; }
-ul, ol { margin: 0.3em 0; }
-li { margin: 0.15em 0; }
-p { margin: 0.4em 0; }
-.bal   { color: var(--bal);   font-weight: 600; }
-.epbs  { color: var(--epbs);  font-weight: 600; }
-.glams { color: var(--glams); font-weight: 600; }
-.gas   { color: var(--gas);   font-weight: 600; }
-.evm   { color: var(--evm);   font-weight: 600; }
-.d6    { color: var(--d6);    font-weight: 700; }
-.stat {
-  display: inline-block;
-  padding: 10px 22px;
-  margin: 6px 4px;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px solid #cbd5e1;
-  font-size: 18px;
-}
-.stat .num { font-size: 38px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }
-.stat.total { border-color: var(--glams); }
-.stat.total .num { color: var(--glams); }
-.stat.bal-c   { border-color: var(--bal); }
-.stat.bal-c .num   { color: var(--bal); }
-.stat.epbs-c  { border-color: var(--epbs); }
-.stat.epbs-c .num  { color: var(--epbs); }
-.stat.d6-c    { border-color: var(--d6); }
-.stat.d6-c .num    { color: var(--d6); }
-.eip-grid {
-  display: flex;
-  gap: 40px;
-  margin-top: 10px;
-}
-.eip-grid .col { flex: 1; min-width: 0; }
-.eip-grid h4 {
-  margin: 0 0 6px 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-.eip-grid ul {
-  margin: 0 0 16px 0;
-  padding-left: 22px;
-  font-size: 19px;
-  color: #0f172a;
-}
-.eip-grid li { margin: 3px 0; line-height: 1.35; }
-.eip-grid li strong { color: #0f172a; }
-.eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
-<h2 id="glamsterdam-eips--full-menu">Glamsterdam EIPs — full menu</h2>
-<div style="text-align:center;">
-<span class="stat total"><span class="num">19</span>EIPs total</span>
-<span class="stat bal-c"><span class="num">11</span>from bal-</span>
-<span class="stat epbs-c"><span class="num">1</span>from epbs-</span>
-<span class="stat d6-c"><span class="num">+5</span>new in glam-dev-6</span>
-</div>
-<div class="eip-grid">
-<div class="col">
-<h4 class="epbs">Consensus / ePBS</h4>
-<ul>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7732">7732</a></strong> Enshrined PBS</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8045">8045</a></strong> Exclude slashed validators</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8061">8061</a></strong> Increase exit &amp; churn</li>
-</ul>
-<h4 class="bal">BAL & networking</h4>
-<ul>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7928">7928</a></strong> Block-Level Access Lists</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7975">7975</a></strong> eth/70 partial block receipts</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8159">8159</a></strong> eth/71 BAL exchange</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8070">8070</a></strong> <span class="d6">(glam-dev-6, opt)</span> eth/72 Sparse Blobpool</li>
-</ul>
-</div>
-<div class="col">
-<h4 class="gas">State-growth gas reform</h4>
-<ul>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-2780">2780</a></strong> <span class="d6">(glam-dev-6)</span> Reduce intrinsic tx gas</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7778">7778</a></strong> Block gas accounting w/o refunds</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7976">7976</a></strong> Calldata floor cost (64/64)</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7981">7981</a></strong> Access list cost</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8037">8037</a></strong> State creation gas</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8038">8038</a></strong> <span class="d6">(glam-dev-6)</span> State-access gas update</li>
-</ul>
-<h4 class="evm">EVM additions</h4>
-<ul>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7708">7708</a></strong> ETH transfers emit a log</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7843">7843</a></strong> SLOTNUM opcode</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7954">7954</a></strong> Increase max contract size</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8024">8024</a></strong> SWAPN/DUPN/EXCHANGE</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7997">7997</a></strong> <span class="d6">(glam-dev-6)</span> Deterministic Factory Predeploy</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8246">8246</a></strong> <span class="d6">(glam-dev-6)</span> Remove SELFDESTRUCT burn</li>
-</ul>
-</div>
-</div>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-theme="default" data-style=":root {
-  --bal:   #2563eb;
-  --epbs:  #9333ea;
-  --glams: #0d9488;
-  --d6:    #0d9488;
-  --gas:   #ea580c;
-  --evm:   #16a34a;
-  --muted: #475569;
-}
-section {
-  font-size: 22px;
-  padding: 50px 60px;
-  justify-content: flex-start;
-  background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);
-}
-section.lead {
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: #f8fafc;
-}
-section.lead h1 { color: #f8fafc; }
-section.lead h2 { color: #94a3b8; }
-section.lead code {
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-h1 { font-size: 38px; margin-bottom: 0.3em; color: #0f172a; }
-h2 { font-size: 30px; margin-bottom: 0.3em; color: #0f172a; }
-h3 { font-size: 24px; color: var(--muted); }
-strong { color: #0f172a; }
-a { color: var(--bal); }
-table {
-  font-size: 18px;
-  width: 100%;
-  border-collapse: collapse;
-}
-th { background: #e2e8f0; color: #0f172a; }
-th, td { padding: 4px 8px; vertical-align: top; border-bottom: 1px solid #cbd5e1; }
-pre, code {
-  font-size: 16px;
-  line-height: 1.25;
-}
-code { background: #e2e8f0; padding: 1px 5px; border-radius: 3px; }
-pre {
-  padding: 8px 12px;
-  overflow: hidden;
-  background: #1e293b;
-  color: #e2e8f0;
-  border-radius: 6px;
-}
-pre code { background: transparent; color: inherit; padding: 0; }
-ul, ol { margin: 0.3em 0; }
-li { margin: 0.15em 0; }
-p { margin: 0.4em 0; }
-.bal   { color: var(--bal);   font-weight: 600; }
-.epbs  { color: var(--epbs);  font-weight: 600; }
-.glams { color: var(--glams); font-weight: 600; }
-.gas   { color: var(--gas);   font-weight: 600; }
-.evm   { color: var(--evm);   font-weight: 600; }
-.d6    { color: var(--d6);    font-weight: 700; }
-.stat {
-  display: inline-block;
-  padding: 10px 22px;
-  margin: 6px 4px;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px solid #cbd5e1;
-  font-size: 18px;
-}
-.stat .num { font-size: 38px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }
-.stat.total { border-color: var(--glams); }
-.stat.total .num { color: var(--glams); }
-.stat.bal-c   { border-color: var(--bal); }
-.stat.bal-c .num   { color: var(--bal); }
-.stat.epbs-c  { border-color: var(--epbs); }
-.stat.epbs-c .num  { color: var(--epbs); }
-.stat.d6-c    { border-color: var(--d6); }
-.stat.d6-c .num    { color: var(--d6); }
-.eip-grid {
-  display: flex;
-  gap: 40px;
-  margin-top: 10px;
-}
-.eip-grid .col { flex: 1; min-width: 0; }
-.eip-grid h4 {
-  margin: 0 0 6px 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-.eip-grid ul {
-  margin: 0 0 16px 0;
-  padding-left: 22px;
-  font-size: 19px;
-  color: #0f172a;
-}
-.eip-grid li { margin: 3px 0; line-height: 1.35; }
-.eip-grid li strong { color: #0f172a; }
-.eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-" lang="en-US" data-marpit-pagination="11" style="--paginate:true;--theme:default;--style::root {
-  --bal:   #2563eb;
-  --epbs:  #9333ea;
-  --glams: #0d9488;
-  --d6:    #0d9488;
-  --gas:   #ea580c;
-  --evm:   #16a34a;
-  --muted: #475569;
-}
-section {
-  font-size: 22px;
-  padding: 50px 60px;
-  justify-content: flex-start;
-  background: linear-gradient(135deg, #fafafa 0%, #f1f5f9 100%);
-}
-section.lead {
-  justify-content: center;
-  text-align: center;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color: #f8fafc;
-}
-section.lead h1 { color: #f8fafc; }
-section.lead h2 { color: #94a3b8; }
-section.lead code {
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-h1 { font-size: 38px; margin-bottom: 0.3em; color: #0f172a; }
-h2 { font-size: 30px; margin-bottom: 0.3em; color: #0f172a; }
-h3 { font-size: 24px; color: var(--muted); }
-strong { color: #0f172a; }
-a { color: var(--bal); }
-table {
-  font-size: 18px;
-  width: 100%;
-  border-collapse: collapse;
-}
-th { background: #e2e8f0; color: #0f172a; }
-th, td { padding: 4px 8px; vertical-align: top; border-bottom: 1px solid #cbd5e1; }
-pre, code {
-  font-size: 16px;
-  line-height: 1.25;
-}
-code { background: #e2e8f0; padding: 1px 5px; border-radius: 3px; }
-pre {
-  padding: 8px 12px;
-  overflow: hidden;
-  background: #1e293b;
-  color: #e2e8f0;
-  border-radius: 6px;
-}
-pre code { background: transparent; color: inherit; padding: 0; }
-ul, ol { margin: 0.3em 0; }
-li { margin: 0.15em 0; }
-p { margin: 0.4em 0; }
-.bal   { color: var(--bal);   font-weight: 600; }
-.epbs  { color: var(--epbs);  font-weight: 600; }
-.glams { color: var(--glams); font-weight: 600; }
-.gas   { color: var(--gas);   font-weight: 600; }
-.evm   { color: var(--evm);   font-weight: 600; }
-.d6    { color: var(--d6);    font-weight: 700; }
-.stat {
-  display: inline-block;
-  padding: 10px 22px;
-  margin: 6px 4px;
-  border-radius: 10px;
-  background: #fff;
-  border: 2px solid #cbd5e1;
-  font-size: 18px;
-}
-.stat .num { font-size: 38px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }
-.stat.total { border-color: var(--glams); }
-.stat.total .num { color: var(--glams); }
-.stat.bal-c   { border-color: var(--bal); }
-.stat.bal-c .num   { color: var(--bal); }
-.stat.epbs-c  { border-color: var(--epbs); }
-.stat.epbs-c .num  { color: var(--epbs); }
-.stat.d6-c    { border-color: var(--d6); }
-.stat.d6-c .num    { color: var(--d6); }
-.eip-grid {
-  display: flex;
-  gap: 40px;
-  margin-top: 10px;
-}
-.eip-grid .col { flex: 1; min-width: 0; }
-.eip-grid h4 {
-  margin: 0 0 6px 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-.eip-grid ul {
-  margin: 0 0 16px 0;
-  padding-left: 22px;
-  font-size: 19px;
-  color: #0f172a;
-}
-.eip-grid li { margin: 3px 0; line-height: 1.35; }
-.eip-grid li strong { color: #0f172a; }
-.eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
+;" data-marpit-pagination-total="10">
 <h2 id="day-to-day-devnet-tooling">Day-to-day devnet tooling</h2>
 <div class="eip-grid">
 <div class="col">
-<h4>Genesis &amp; deploy</h4>
+<h4>Spin up &amp; drive</h4>
 <ul>
-<li><strong>ethereum-genesis-generator</strong> — single source of truth for fork params</li>
-<li><strong>terraform</strong> — Hetzner / DigitalOcean machine provisioning</li>
-<li><strong>ansible</strong> — clients + node-local agents</li>
-<li><strong>kubernetes + ArgoCD</strong> — per-devnet ops stack</li>
-</ul>
-<h4>Testing &amp; load</h4>
-<ul>
+<li><strong>ethereum-genesis-generator</strong> — one source of truth for fork params</li>
 <li><strong>Assertoor</strong> — continuous test scenarios</li>
-<li><strong>Hive</strong> — client compliance suite (per-devnet workflows)</li>
 <li><strong>spamoor</strong> — tx, blob, MEV load gen</li>
-<li><strong>buildoor</strong> — validator lifecycle (deposits, exits, top-ups)</li>
+<li><strong>buildoor</strong> — ePBS bid generator</li>
+<li><strong>Benchmarkoor</strong> — client performance benchmarking</li>
 </ul>
 </div>
 <div class="col">
-<h4>Observability</h4>
+<h4>Watch &amp; debug</h4>
 <ul>
 <li><strong>Xatu</strong> — beacon + execution event capture</li>
-<li><strong>ethereum-metrics-exporter</strong> — uniform metrics across clients</li>
-<li><strong>Grafana</strong> — dashboards (<code>*.ethpandaops.io</code>)</li>
 <li><strong>Dora</strong> — per-devnet block explorer (now supports EL and BAL data too)</li>
-</ul>
-<h4>Debug</h4>
-<ul>
-<li><strong>panda CLI</strong> — query everything from one place</li>
-<li><strong>ClickHouse</strong> (<code>external.otel_logs</code>) — all container logs, one query surface</li>
-<li><strong>single auth proxy</strong> — core devs share our access without per-network creds</li>
+<li><strong>panda CLI</strong> — fetch + read compact logs across every devnet, no SSH</li>
 </ul>
 </div>
 </div>
 <p>Same stack will be ran on mainnet shadowforks, public testnets, these devnets, and all future devnets — Glamsterdam isn't a one-off.</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-class="lead" data-theme="default" data-style=":root {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-class="lead" data-theme="default" data-style=":root {
   --bal:   #2563eb;
   --epbs:  #9333ea;
   --glams: #0d9488;
@@ -2640,7 +2147,7 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-" lang="en-US" class="lead" data-marpit-pagination="12" style="--paginate:true;--class:lead;--theme:default;--style::root {
+" lang="en-US" class="lead" data-marpit-pagination="10" style="--paginate:true;--class:lead;--theme:default;--style::root {
   --bal:   #2563eb;
   --epbs:  #9333ea;
   --glams: #0d9488;
@@ -2741,7 +2248,7 @@ p { margin: 0.4em 0; }
 .eip-grid li { margin: 3px 0; line-height: 1.35; }
 .eip-grid li strong { color: #0f172a; }
 .eip-grid li .d6 { color: var(--d6); font-weight: 700; }
-;" data-marpit-pagination-total="12">
+;" data-marpit-pagination-total="10">
 <h1 id="questions">Questions?</h1>
 <p><code>github.com/ethpandaops/{bal,epbs,glamsterdam}-devnets</code><br />
 Specs: <code>notes.ethereum.org/@ethpandaops/&lt;network&gt;</code></p>
