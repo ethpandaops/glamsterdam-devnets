@@ -1804,17 +1804,17 @@ p { margin: 0.4em 0; }
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-7904">7904</a></strong> General Repricing</li>
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-7997">7997</a></strong> <span class="d6">(on d6)</span> Deterministic Factory Predeploy</li>
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-8038">8038</a></strong> <span class="d6">(on d6)</span> State-access gas update</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8045">8045</a></strong> Exclude slashed validators</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8061">8061</a></strong> Increase exit &amp; churn</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8080">8080</a></strong> Exits via consolidation queue</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8045">8045</a></strong> <span class="d6">(on d5)</span> Exclude slashed validators</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8061">8061</a></strong> <span class="d6">(on d5)</span> Increase exit &amp; churn</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8080">8080</a></strong> <span style="color:var(--gas);font-weight:600">(DFI risk)</span> Exits via consolidation queue</li>
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-8246">8246</a></strong> <span class="d6">(on d6)</span> Remove SELFDESTRUCT burn</li>
 </ul>
 <h4 class="bal">CFI — Networking</h4>
 <ul>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7975">7975</a></strong> <span class="d6">(on d7)</span> eth/70 partial block receipts</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-7975">7975</a></strong> eth/70 partial block receipts</li>
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-8070">8070</a></strong> <span class="d6">(on d6, opt)</span> eth/72 Sparse Blobpool</li>
 <li><strong><a href="https://eips.ethereum.org/EIPS/eip-8136">8136</a></strong> Cell-Level Deltas for Data Column Broadcast</li>
-<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8159">8159</a></strong> <span class="d6">(on d7)</span> eth/71 BAL exchange</li>
+<li><strong><a href="https://eips.ethereum.org/EIPS/eip-8159">8159</a></strong> eth/71 BAL exchange</li>
 </ul>
 </div>
 </div>
@@ -2028,19 +2028,19 @@ p { margin: 0.4em 0; }
 <div class="col">
 <h4>Spin up &amp; drive</h4>
 <ul>
-<li><strong>ethereum-genesis-generator</strong> — one source of truth for fork params</li>
-<li><strong>Assertoor</strong> — continuous test scenarios</li>
-<li><strong>spamoor</strong> — tx, blob, MEV load gen</li>
-<li><strong>buildoor</strong> — ePBS bid generator</li>
-<li><strong>Benchmarkoor</strong> — client performance benchmarking</li>
+<li><strong>ethereum-genesis-generator</strong> — generates EL+CL testnet genesis, serves via HTTP</li>
+<li><strong>Assertoor</strong> — testnet testing tool, continuous scenarios</li>
+<li><strong>spamoor</strong> — transaction generator for testnets</li>
+<li><strong>buildoor</strong> — block builder for ePBS <em>and</em> traditional Builder API</li>
+<li><strong>Benchmarkoor</strong> — execution client benchmarking</li>
 </ul>
 </div>
 <div class="col">
 <h4>Watch &amp; debug</h4>
 <ul>
-<li><strong>Xatu</strong> — beacon + execution event capture</li>
-<li><strong>Dora</strong> — per-devnet block explorer (now supports EL and BAL data too)</li>
-<li><strong>panda CLI</strong> — fetch + read compact logs across every devnet, no SSH</li>
+<li><strong>Xatu</strong> — network monitoring, collection clients + centralized pipeline</li>
+<li><strong>Dora</strong> — slot explorer (now EL + BAL aware)</li>
+<li><strong>panda</strong> — CLI + MCP gateway to ClickHouse, Prometheus, Loki, and EL/CL nodes</li>
 </ul>
 </div>
 </div>

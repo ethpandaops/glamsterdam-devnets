@@ -286,17 +286,17 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 - **[7904](https://eips.ethereum.org/EIPS/eip-7904)** General Repricing
 - **[7997](https://eips.ethereum.org/EIPS/eip-7997)** <span class="d6">(on d6)</span> Deterministic Factory Predeploy
 - **[8038](https://eips.ethereum.org/EIPS/eip-8038)** <span class="d6">(on d6)</span> State-access gas update
-- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** Exclude slashed validators
-- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** Increase exit & churn
-- **[8080](https://eips.ethereum.org/EIPS/eip-8080)** Exits via consolidation queue
+- **[8045](https://eips.ethereum.org/EIPS/eip-8045)** <span class="d6">(on d5)</span> Exclude slashed validators
+- **[8061](https://eips.ethereum.org/EIPS/eip-8061)** <span class="d6">(on d5)</span> Increase exit & churn
+- **[8080](https://eips.ethereum.org/EIPS/eip-8080)** <span style="color:var(--gas);font-weight:600">(DFI risk)</span> Exits via consolidation queue
 - **[8246](https://eips.ethereum.org/EIPS/eip-8246)** <span class="d6">(on d6)</span> Remove SELFDESTRUCT burn
 
 <h4 class="bal">CFI — Networking</h4>
 
-- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** <span class="d6">(on d7)</span> eth/70 partial block receipts
+- **[7975](https://eips.ethereum.org/EIPS/eip-7975)** eth/70 partial block receipts
 - **[8070](https://eips.ethereum.org/EIPS/eip-8070)** <span class="d6">(on d6, opt)</span> eth/72 Sparse Blobpool
 - **[8136](https://eips.ethereum.org/EIPS/eip-8136)** Cell-Level Deltas for Data Column Broadcast
-- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** <span class="d6">(on d7)</span> eth/71 BAL exchange
+- **[8159](https://eips.ethereum.org/EIPS/eip-8159)** eth/71 BAL exchange
 
 </div>
 </div>
@@ -312,20 +312,20 @@ Repo skips `devnet-0/1`: numbering inherited from earlier ePBS attempts.
 
 <h4>Spin up &amp; drive</h4>
 
-- **ethereum-genesis-generator** — one source of truth for fork params
-- **Assertoor** — continuous test scenarios
-- **spamoor** — tx, blob, MEV load gen
-- **buildoor** — ePBS bid generator
-- **Benchmarkoor** — client performance benchmarking
+- **ethereum-genesis-generator** — generates EL+CL testnet genesis, serves via HTTP
+- **Assertoor** — testnet testing tool, continuous scenarios
+- **spamoor** — transaction generator for testnets
+- **buildoor** — block builder for ePBS *and* traditional Builder API
+- **Benchmarkoor** — execution client benchmarking
 
 </div>
 <div class="col">
 
 <h4>Watch &amp; debug</h4>
 
-- **Xatu** — beacon + execution event capture
-- **Dora** — per-devnet block explorer (now supports EL and BAL data too)
-- **panda CLI** — fetch + read compact logs across every devnet, no SSH
+- **Xatu** — network monitoring, collection clients + centralized pipeline
+- **Dora** — slot explorer (now EL + BAL aware)
+- **panda** — CLI + MCP gateway to ClickHouse, Prometheus, Loki, and EL/CL nodes
 
 </div>
 </div>
