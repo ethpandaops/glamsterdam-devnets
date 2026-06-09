@@ -146,9 +146,9 @@ bal-devnet-6 : 7708 7778 7843 7928 7954 7976 7981 8024 8037 (cpsb=1174 stable)
 bal-devnet-7 : 7708 7778 7843 7928 7954 7975 7976 7981 8024 8037 8159
 ```
 
-- **d0–d1** — first BAL end-to-end (just 7928)
-- **d2** — EVM extras layered on (7708, 7778, 7843, 8024)
-- **d3 → d7** — repricings stabilise; cpsb **1174 → 1530**, gas **96M → 150M**, `eth/70` + `eth/71` promoted to mandatory
+- **bd0–bd1** — first BAL end-to-end (just 7928)
+- **bd2** — EVM extras layered on (7708, 7778, 7843, 8024)
+- **bd3 → bd7** — repricings stabilise; cpsb **1174 → 1530**, gas **96M → 150M**, `eth/70` + `eth/71` promoted to mandatory
 
 EL fleet grew **5 → 7** (added Erigon, Nimbus-EL, Ethrex). CL stayed lean: **Lighthouse + Lodestar only**.
 
