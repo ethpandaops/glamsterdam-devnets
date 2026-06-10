@@ -17,7 +17,9 @@ Status   | Network    | Links   | Ansible                                       
  🔴 | devnet-0   | -    | - | - | [🔗](kubernetes-archive/devnet-0)
  🔴 | devnet-1   | -    | - | - | [🔗](kubernetes-archive/devnet-1)
  🔴 | devnet-2   | [Network config](network-configs/devnet-2)    | - | - | [🔗](kubernetes-archive/devnet-2)
- 🟢 | [devnet-3](https://glamsterdam-devnet-3.ethpandaops.io/)   | [Network config](network-configs/devnet-3)    | - | - | [🔗](kubernetes/devnet-3)
+ 🔴 | devnet-3   | [Network config](network-configs/devnet-3)    | - | - | [🔗](kubernetes-archive/devnet-3)
+ 🔴 | devnet-4   | [Network config](network-configs/devnet-4)    | - | - | [🔗](kubernetes-archive/devnet-4)
+ 🟢 | [devnet-5](https://glamsterdam-devnet-5.ethpandaops.io/)   | [Network config](network-configs/devnet-5)    | - | - | [🔗](kubernetes/devnet-5)
 
 # Development
 ## Version management for tools
