@@ -34,9 +34,6 @@ dugtrio:
     - "^/teku/v[0-9]+/admin/.*"
 
   endpoints:
-  # Rpc
-  - url: http://prysm-geth-001:5052
-    name: rpc-prysm-geth-001
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-5.ethpandaops.io
     name: bootnode-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
