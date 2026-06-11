@@ -105,6 +105,26 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: buildoor-lighthouse-nethermind-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-5
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: buildoor-lodestar-ethrex-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-5
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: buildoor-prysm-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-5

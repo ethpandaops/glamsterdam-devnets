@@ -14,6 +14,8 @@
 #     - size            : Instance size override (provider-specific)
 #     - region          : Region override (digitalocean) or location (hetzner)
 #     - supernode       : Force supernode=true/false (auto-detected from name)
+#     - builder_start   : First builder index (buildoor nodes only). Exposes a
+#                         builder_index=N server tag and inventory var per instance.
 #
 # Examples:
 #   { name = "bootnode", count = 1, cloud = "digitalocean" }
@@ -26,7 +28,9 @@ variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
     { name = "bootnode", count = 1, cloud = "hetzner" },
-    { name = "buildoor-prysm-ethrex", count = 1, cloud = "hetzner" },
+    { name = "buildoor-prysm-ethrex", count = 1, cloud = "hetzner", builder_start = 0 },
+    { name = "buildoor-lighthouse-nethermind", count = 1, cloud = "hetzner", builder_start = 1 },
+    { name = "buildoor-lodestar-ethrex", count = 1, cloud = "hetzner", builder_start = 2 },
     { name = "prysm-ethrex", count = 2, cloud = "hetzner", validator_start = 0, validator_end = 400 },
     { name = "lodestar-ethrex", count = 2, cloud = "hetzner", validator_start = 400, validator_end = 800 },
     { name = "grandine-ethrex", count = 1, cloud = "hetzner", validator_start = 800, validator_end = 1000 },

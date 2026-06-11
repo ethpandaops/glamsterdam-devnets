@@ -39,6 +39,8 @@ spamoor:
   authTokenKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.spamoor_private_key}>-spamoor-jwt"
   rpcEndpoints:
   - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-5.ethpandaops.io"
+  - "group(buildoor,lighthouse,nethermind,1,buildoor-lighthouse-nethermind-1)name(buildoor-lighthouse-nethermind-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io"
+  - "group(buildoor,lodestar,ethrex,1,buildoor-lodestar-ethrex-1)name(buildoor-lodestar-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"
   - "group(buildoor,prysm,ethrex,1,buildoor-prysm-ethrex-1)name(buildoor-prysm-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"
   - "group(grandine-erigon-1)name(grandine-erigon-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io"
   - "group(grandine-ethrex-1)name(grandine-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"

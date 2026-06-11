@@ -83,6 +83,16 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-5.ethpandaops.io
             polling_interval: "12s"
+        - name: buildoor-lighthouse-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
+        - name: buildoor-lodestar-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
+            polling_interval: "12s"
         - name: buildoor-prysm-ethrex-1
           type: "beacon_node"
           config:

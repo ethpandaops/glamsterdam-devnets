@@ -30,4 +30,6 @@ buildoor-overview:
             pathType: Prefix
 
   hosts:
+    - https://api-buildoor-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
+    - https://api-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
     - https://api-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io
