@@ -98,7 +98,7 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-5.ethpandaops.io"
       name: "teku-ethrex-1"
       priority: 5
-  faucetExplorerLink: "https://explorer.glamsterdam-devnet-5.ethpandaops.io/tx/{txid}"
+  faucetExplorerLink: "https://dora.glamsterdam-devnet-5.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000
 
   faucetCaptchaEnabled: true

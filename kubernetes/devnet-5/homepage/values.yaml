@@ -99,7 +99,6 @@ testnet-homepage:
         faucetUrl: https://faucet.glamsterdam-devnet-5.ethpandaops.io
         rpcUrl: https://rpc.glamsterdam-devnet-5.ethpandaops.io
         beaconRpcUrl: https://beacon.glamsterdam-devnet-5.ethpandaops.io
-        explorerUrl: https://explorer.glamsterdam-devnet-5.ethpandaops.io
         forkmonUrl: https://forkmon.glamsterdam-devnet-5.ethpandaops.io
         assertoorUrl: https://assertoor.glamsterdam-devnet-5.ethpandaops.io
         beaconexplorerUrl: "https://glamsterdam-devnet-5.beaconcha.in"
@@ -131,8 +130,6 @@ testnet-homepage:
         dataLookup: rpcUrl
       - name: "Beacon RPC"
         dataLookup: beaconRpcUrl
-      - name: "Explorer"
-        dataLookup: explorerUrl
       - name: "Dora the Explorer"
         dataLookup: doraUrl
       - name: "Syncoor"
