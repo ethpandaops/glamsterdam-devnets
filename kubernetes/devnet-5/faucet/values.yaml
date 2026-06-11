@@ -106,6 +106,7 @@ powfaucet:
   faucetCaptchaSecret: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.secret_key}>"
 
   faucetRecurringLimitsAmountWei: 500000000000000000000 # 500 ETH
+  faucetMaxDropWei: 500000000000000000000 # 500 ETH
   faucetPowEnabled: true
   faucetPowRewardPerHash: 1000000000000000000 # 1 ETH
   faucetPowDifficulty: 10
