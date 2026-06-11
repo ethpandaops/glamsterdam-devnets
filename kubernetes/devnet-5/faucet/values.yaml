@@ -5,7 +5,7 @@ powfaucet:
 
   image:
     repository: pk910/powfaucet
-    tag: v2-stable
+    tag: v2.5.0
     pullPolicy: IfNotPresent
 
   resources:
