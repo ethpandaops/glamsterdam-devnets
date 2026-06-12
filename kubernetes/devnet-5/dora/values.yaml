@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: ethpandaops/dora
-    tag: pk910-gloas-bugs-latest
+    tag: master
     pullPolicy: Always
   resources:
     requests:
