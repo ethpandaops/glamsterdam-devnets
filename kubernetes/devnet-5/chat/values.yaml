@@ -1,0 +1,86 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/chat.yaml.j2
+# Everything nests under the dependency chart's name — the generated wrapper
+# chart (Chart.yaml.j2) has no templates of its own, so top-level values
+# never reach the panda-chat subchart.
+panda-chat:
+  fullnameOverride: chat
+
+  network: glamsterdam-devnet-5
+  chainId: "7095321190"
+
+  image:
+    repository: ethpandaops/chat
+    tag: hermes-agent-panda-2026.6.5-12400d1
+    pullPolicy: IfNotPresent
+
+  llm:
+    provider: openrouter
+    model: anthropic/claude-sonnet-4.6
+    apiKeyEnv: OPENROUTER_API_KEY
+
+  # Override the chart's default prompt (panda-chat values.yaml). Pilot override
+  # ahead of an ansible/chart bump; mirrors ethereum-helm-charts panda-chat 0.3.x.
+  systemPrompt: |
+    You are the EthPandaOps assistant for the Ethereum devnet "glamsterdam-devnet-5", scoped to it alone.
+    Tools: `panda` (query live data), `faucet` (fund accounts), `join-devnet` (join the network).
+    Discover before querying (the `panda` skill shows how); never invent APIs, tables, or node names.
+    Report exactly what the tools return — never fabricate; if data is missing or sources disagree, say so.
+    Lead with the numbers, in plain English. Be concise.
+
+  # Panda integration (panda-server sidecar + Authentik bot identity). Off =
+  # plain LLM chat; the bot credentials are only referenced when on, so the
+  # devnet can run chat before services.enc.yaml#chat has panda_bot_* keys.
+  panda:
+    enabled: true
+
+  # LLM-call tracing → EthPandaOps Langfuse (keys from services.enc.yaml#chat).
+  langfuse:
+    enabled: true
+    baseUrl: "https://langfuse.analytics.production.platform.ethpandaops.io"
+
+  devnetTools:
+    faucet:
+      enabled: true
+      url: "https://faucet.glamsterdam-devnet-5.ethpandaops.io"
+    join:
+      configUrl: "https://config.glamsterdam-devnet-5.ethpandaops.io"
+      rpcUrl: "https://rpc.glamsterdam-devnet-5.ethpandaops.io"
+      explorerUrl: "https://dora.glamsterdam-devnet-5.ethpandaops.io"
+
+  credentials:
+    # Stable OW<->Hermes bearer: the chart can't preserve a generated one under
+    # ArgoCD (client-side `helm template`), so it must be a fixed sops value.
+    apiServerKey: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.api_server_key}>"
+    llmApiKey: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.llm_api_key}>"
+    panda:
+      botUsername: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.panda_bot_username}>"
+      botToken: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.panda_bot_token}>"
+    langfuse:
+      publicKey: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.langfuse_public_key}>"
+      secretKey: "<path:/secrets/services/services.enc.yaml#chat | jsonPath {.langfuse_secret_key}>"
+
+  open-webui:
+    sso:
+      enabled: true
+      trustedHeader:
+        enabled: true
+    openaiBaseApiUrls:
+      - "http://chat-hermes:8642/v1"
+    extraEnvVars:
+      - name: ENABLE_OLLAMA_API
+        value: "false"
+      - name: ENABLE_LOGIN_FORM
+        value: "false"
+      - name: OPENAI_API_KEYS
+        valueFrom:
+          secretKeyRef:
+            name: chat-hermes-secret
+            key: API_SERVER_KEY
+    ingress:
+      host: chat.glamsterdam-devnet-5.ethpandaops.io
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/configuration-snippet: |
+          sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+          sub_filter_types text/html;
+          sub_filter_once off;
