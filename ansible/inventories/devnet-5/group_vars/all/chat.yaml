@@ -1,0 +1,26 @@
+# AI chat (panda-chat) — glamsterdam-devnet-5.
+# role: ethpandaops.general.generate_kubernetes_config
+#
+# Prereqs (shared with the bal-devnet-7 pilot; central, not per-devnet):
+#   - `chat` section in services.enc.yaml with llm_api_key,
+#     langfuse_public_key, langfuse_secret_key, and (panda on) the Authentik
+#     service-account panda_bot_username / panda_bot_token.
+#   - Cloudflare Access guard: the wildcard chat.*.ethpandaops.io app in
+#     ethPandaOps/cloudflare/terraform/chat.tf (allow: Ethereum Github Org).
+#     Trusted-header SSO is on by default (chat_auth_enabled).
+#   - hermes-agent-panda image with the dispatch entrypoint (panda-chat chart
+#     >= 0.2.0 runs the two-container pod) and panda >= 0.32.0.
+
+gen_kubernetes_config_chat_enabled: true
+# Pinned image: CI publishes to GHCR (private) and mirrors to Docker Hub.
+# <base>-<chat repo git sha>.
+gen_kubernetes_config_chat_image: "ethpandaops/chat:hermes-agent-panda-2026.6.5-12400d1"
+gen_kubernetes_config_chat_chart_version: "0.3.0"
+# services.enc.yaml#chat llm_api_key is an OpenRouter key (sk-or-v1-...).
+gen_kubernetes_config_chat_llm_provider: "openrouter"
+gen_kubernetes_config_chat_llm_api_key_env: "OPENROUTER_API_KEY"
+gen_kubernetes_config_chat_llm_model: "anthropic/claude-sonnet-4.6"
+# Panda on: renders the panda-server sidecar and seeds the panda CLI config
+# (/opt/data/.config/panda/config.yaml -> local server). Reuses the central
+# Authentik panda-chat service account + services.enc.yaml#chat panda_bot_*.
+gen_kubernetes_config_chat_panda_enabled: true
