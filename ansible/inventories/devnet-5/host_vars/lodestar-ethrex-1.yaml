@@ -1,9 +1,0 @@
-default_ethereum_client_images:
-  lodestar: ethpandaops/lodestar:deathstar
-
-  ethrex: ethpandaops/ethrex:glamsterdam-devnet-5
-
-lodestar_validator_container_command_extra_args:
-  - --paramsFile=/network-config/config.yaml
-  - --graffiti=deathstar
-  - --defaultGasLimit=190000000

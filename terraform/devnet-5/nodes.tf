@@ -49,6 +49,24 @@ variable "nodes" {
     { name = "teku-erigon", count = 1, cloud = "hetzner", validator_start = 3800, validator_end = 4000 },
     { name = "teku-ethrex", count = 1, cloud = "hetzner", validator_start = 4000, validator_end = 4200 },
     { name = "teku-nethermind", count = 1, cloud = "hetzner", validator_start = 4200, validator_end = 4400 },
+    { name = "teku-geth", count = 1, cloud = "digitalocean", validator_start = 4400, validator_end = 4600 },
+    { name = "nimbus-geth", count = 1, cloud = "digitalocean", validator_start = 4600, validator_end = 4800 },
+    { name = "lodestar-geth", count = 1, cloud = "digitalocean", validator_start = 4800, validator_end = 5000 },
+    { name = "grandine-geth", count = 1, cloud = "digitalocean", validator_start = 5000, validator_end = 5200 },
+    { name = "prysm-geth", count = 1, cloud = "digitalocean", validator_start = 5200, validator_end = 5400 },
+    { name = "lighthouse-geth", count = 1, cloud = "digitalocean", validator_start = 5400, validator_end = 5600 },
+    { name = "teku-reth", count = 1, cloud = "digitalocean", validator_start = 5600, validator_end = 5800 },
+    { name = "nimbus-reth", count = 1, cloud = "digitalocean", validator_start = 5800, validator_end = 6000 },
+    { name = "lodestar-reth", count = 1, cloud = "digitalocean", validator_start = 6000, validator_end = 6200 },
+    { name = "grandine-reth", count = 1, cloud = "digitalocean", validator_start = 6200, validator_end = 6400 },
+    { name = "prysm-reth", count = 1, cloud = "digitalocean", validator_start = 6400, validator_end = 6600 },
+    { name = "lighthouse-reth", count = 1, cloud = "digitalocean", validator_start = 6600, validator_end = 6800 },
+    { name = "teku-besu", count = 1, cloud = "digitalocean", validator_start = 6800, validator_end = 7000 },
+    { name = "nimbus-besu", count = 1, cloud = "digitalocean", validator_start = 7000, validator_end = 7200 },
+    { name = "lodestar-besu", count = 1, cloud = "digitalocean", validator_start = 7200, validator_end = 7400 },
+    { name = "grandine-besu", count = 1, cloud = "digitalocean", validator_start = 7400, validator_end = 7600 },
+    { name = "prysm-besu", count = 1, cloud = "digitalocean", validator_start = 7600, validator_end = 7800 },
+    { name = "lighthouse-besu", count = 1, cloud = "digitalocean", validator_start = 7800, validator_end = 8000 }
   ]
 
   validation {

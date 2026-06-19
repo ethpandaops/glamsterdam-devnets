@@ -18,6 +18,10 @@
   name: buildoor-prysm-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: grandine-besu-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-grandine-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: grandine-erigon-1
   authGroup: pandaops
@@ -26,10 +30,23 @@
   name: grandine-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: grandine-geth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-grandine-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: grandine-nethermind-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: grandine-reth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lighthouse-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lighthouse-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
 - url: https://bn-lighthouse-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lighthouse-erigon-1
   authGroup: pandaops
@@ -40,11 +57,25 @@
   authGroup: pandaops
   priority: -1
   archive: true
+- url: https://bn-lighthouse-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lighthouse-geth-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
 - url: https://bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lighthouse-nethermind-1
   authGroup: pandaops
   priority: -1
   archive: true
+- url: https://bn-lighthouse-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lighthouse-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lodestar-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lodestar-besu-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-lodestar-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lodestar-erigon-1
   authGroup: pandaops
@@ -57,12 +88,24 @@
   name: lodestar-ethrex-2
   authGroup: pandaops
   priority: -1
+- url: https://bn-lodestar-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lodestar-geth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-lodestar-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lodestar-nethermind-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-lodestar-nethermind-2.srv.glamsterdam-devnet-5.ethpandaops.io
   name: lodestar-nethermind-2
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lodestar-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: lodestar-reth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-nimbus-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: nimbus-besu-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-nimbus-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
@@ -73,8 +116,20 @@
   name: nimbus-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-nimbus-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: nimbus-geth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-nimbus-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: nimbus-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-nimbus-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: nimbus-reth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: prysm-besu-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-prysm-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
@@ -89,12 +144,24 @@
   name: prysm-ethrex-2
   authGroup: pandaops
   priority: -1
+- url: https://bn-prysm-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: prysm-geth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-prysm-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: prysm-nethermind-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-prysm-nethermind-2.srv.glamsterdam-devnet-5.ethpandaops.io
   name: prysm-nethermind-2
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: prysm-reth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-besu-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-besu-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-teku-erigon-1.srv.glamsterdam-devnet-5.ethpandaops.io
@@ -105,8 +172,16 @@
   name: teku-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-teku-geth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-geth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-teku-nethermind-1.srv.glamsterdam-devnet-5.ethpandaops.io
   name: teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-reth-1.srv.glamsterdam-devnet-5.ethpandaops.io
+  name: teku-reth-1
   authGroup: pandaops
   priority: -1
 
