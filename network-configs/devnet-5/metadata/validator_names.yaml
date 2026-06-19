@@ -2,4 +2,4 @@
 
 # post-genesis deposits
 - 2800-2859: { src: "test-keys", from: 2800, to: 2859 }
-- 2860-4459: { src: "main-mnemonic", from: 2800, to: 4399 }
+- 2860-8000: { src: "main-mnemonic", from: 2800, to: 8000 }
