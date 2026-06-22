@@ -1,5 +1,5 @@
 - 0-2799: { src: "main-mnemonic", from: 0, to: 2799 }
-
 # post-genesis deposits
 - 2800-2859: { src: "test-keys", from: 2800, to: 2859 }
-- 2860-8000: { src: "main-mnemonic", from: 2800, to: 8000 }
+- 2860-4459: { src: "main-mnemonic", from: 2800, to: 4399 }
+- 4470-8069: { src: "main-mnemonic", from: 4400, to: 7999 }
