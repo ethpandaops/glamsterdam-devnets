@@ -1,0 +1,18 @@
+---
+default_ethereum_client_images:
+  ### Consensus layer clients
+  lighthouse: ethpandaops/lighthouse:glamsterdam-devnet-5
+  lodestar: ethpandaops/lodestar:deathstar
+  nimbus: ethpandaops/nimbus-eth2:glamsterdam-devnet-5
+  prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-5
+  prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-5
+  teku: ethpandaops/teku:glamsterdam-devnet-5
+  grandine: ethpandaops/grandine:glamsterdam-devnet-5
+  ### Execution layer clients
+  besu: ethpandaops/besu:glamsterdam-devnet-5
+  geth: ethpandaops/geth:glamsterdam-devnet-5
+  erigon: ethpandaops/erigon:glamsterdam-devnet-5
+  nethermind: ethpandaops/nethermind:glamsterdam-devnet-5
+  reth: ethpandaops/reth:glamsterdam-devnet-5
+  nimbusel: ethpandaops/nimbus-eth1:glamsterdam-devnet-5
+  ethrex: ethpandaops/ethrex:glamsterdam-devnet-5
