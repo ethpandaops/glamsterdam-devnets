@@ -39,7 +39,7 @@ variable "nodes" {
     { name = "lighthouse-ethrex", count = 1, cloud = "digitalocean", validator_start = 400, validator_end = 600 },
     { name = "nimbus-ethrex", count = 1, cloud = "digitalocean", validator_start = 600, validator_end = 800 },
     { name = "teku-ethrex", count = 1, cloud = "digitalocean", validator_start = 800, validator_end = 1000 },
-    
+
     # Geth
     { name = "prysm-geth", count = 1, cloud = "digitalocean", validator_start = 1000, validator_end = 1200 },
     { name = "lodestar-geth", count = 1, cloud = "digitalocean", validator_start = 1200, validator_end = 1400 },
@@ -53,7 +53,7 @@ variable "nodes" {
     { name = "lighthouse-besu", count = 1, cloud = "digitalocean", validator_start = 2400, validator_end = 2600 },
     { name = "nimbus-besu", count = 1, cloud = "digitalocean", validator_start = 2600, validator_end = 2800 },
     { name = "teku-besu", count = 1, cloud = "digitalocean", validator_start = 2800, validator_end = 3000 },
-     
+
   ]
 
   validation {
