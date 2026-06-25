@@ -5,7 +5,7 @@ authenticatoor:
 
   image:
     repository: ethpandaops/service-authenticatoor
-    tag: main
+    tag: main-latest
     pullPolicy: Always
   resources:
     requests:
