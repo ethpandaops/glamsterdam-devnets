@@ -16,3 +16,7 @@ default_ethereum_client_images:
   reth: ethpandaops/reth:glamsterdam-devnet-5
   nimbusel: ethpandaops/nimbus-eth1:glamsterdam-devnet-5
   ethrex: ethpandaops/ethrex:glamsterdam-devnet-5
+lodestar_validator_container_command_extra_args:
+  - --paramsFile=/network-config/config.yaml
+  - --graffiti=deathstar-{{ ansible_hostname }}
+  - --defaultGasLimit=190000000

@@ -45,7 +45,7 @@ nimbus_container_command_extra_simple_args:
   - --validator-monitor-auto=false
   - --doppelganger-detection=off
   - --log-level=DEBUG
-  - --light-client-data-serve=false
+  - --light-client-data-serve=true
   - --graffiti={{ ansible_hostname }}
   - --suggested-gas-limit=190000000
 
