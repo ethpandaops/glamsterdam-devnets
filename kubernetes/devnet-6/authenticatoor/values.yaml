@@ -6,7 +6,7 @@ authenticatoor:
   image:
     repository: ethpandaops/service-authenticatoor
     tag: main
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   resources:
     requests:
       cpu: 50m

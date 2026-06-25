@@ -2,7 +2,7 @@
 default_ethereum_client_images:
   ### Consensus layer clients
   lighthouse: ethpandaops/lighthouse:glamsterdam-devnet-5
-  lodestar: ethpandaops/lodestar:deathstar
+  lodestar: ethpandaops/lodestar:deathstar-devnet-6
   nimbus: ethpandaops/nimbus-eth2:glamsterdam-devnet-5
   prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-5
   prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-5
