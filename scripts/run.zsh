@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
-node="prysm-ethrex-1"
-network="devnet-5"
+node="prysm-geth-1"
+network="devnet-6"
 domain="ethpandaops.io"
 srv="srv"
 prefix="glamsterdam"
