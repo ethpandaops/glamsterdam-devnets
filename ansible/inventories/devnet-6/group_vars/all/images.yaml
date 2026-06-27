@@ -42,14 +42,14 @@ default_tooling_images:
   eth_fauceth: chainflag/eth-faucet:latest
   blobscan: blossomlabs/blobscan:latest
   blobscan_indexer: blossomlabs/blobscan-indexer:latest
-  dora: ethpandaops/dora:master
+  dora: ethpandaops/dora:master-latest
   dugtrio: ethpandaops/dugtrio:latest
   ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.1.2
   tracoor: ethpandaops/tracoor:latest
   ncli: status-im/nimbus-eth2:unstable
   lcli: ethpandaops/lighthouse:unstable
   zcli: electra
-  assertoor: ethpandaops/assertoor:master
+  assertoor: ethpandaops/assertoor:master-latest
   erpc: docker.ethquokkaops.io/gh/erpc/erpc:latest
   prometheus: prom/prometheus:v2.40.7
   node_exporter: prom/node-exporter:v1.5.0
