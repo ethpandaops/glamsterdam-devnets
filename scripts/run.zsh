@@ -13,6 +13,10 @@ beacon_prefix=$(yq -r '.ethereum_node_beacon_prefix' ../ansible/inventories/$net
 bn_endpoint="${BEACON_ENDPOINT:-https://$sops_name:$sops_password@$beacon_prefix$node.$srv.$prefix-$network.$domain}"
 rpc_endpoint="${RPC_ENDPOINT:-https://$sops_name:$sops_password@$rpc_prefix$node.$srv.$prefix-$network.$domain}"
 bootnode_endpoint="${BOOTNODE_ENDPOINT:-https://bootnode-1.$prefix-$network.$domain}"
+assertoor_endpoint="${ASSERTOOR_ENDPOINT:-https://assertoor.$prefix-$network.$domain}"
+auth_endpoint="${AUTH_ENDPOINT:-https://auth.$prefix-$network.$domain}"
+slashing_test_id="validator-slashing-single"
+slashing_playbook="${ASSERTOOR_SLASHING_PLAYBOOK:-https://raw.githubusercontent.com/ethpandaops/assertoor/master/playbooks/dev/$slashing_test_id.yaml}"
 
 # Verify every external tool run.zsh depends on is installed.
 # Pass 1 to print every tool; pass 0 (or empty) to print only missing tools.
@@ -69,6 +73,80 @@ check_deps() {
   return 1
 }
 
+# Mint a JWT for the assertoor API. The assertoor API (POST endpoints)
+# requires a Bearer token issued by the devnet auth provider, which is itself
+# gated by Cloudflare Access. A CF Access service token
+# (CF_ACCESS_CLIENT_ID / CF_ACCESS_CLIENT_SECRET) gets us through CF Access to
+# /auth/token, which returns the JWT assertoor accepts. Set ASSERTOOR_TOKEN
+# directly to skip the exchange (e.g. a token you minted by hand).
+get_assertoor_token() {
+  if [[ -n "$ASSERTOOR_TOKEN" ]]; then
+    echo "$ASSERTOOR_TOKEN"
+    return 0
+  fi
+
+  # The minted JWT is valid for ~30 minutes, so cache it (owner-only) and
+  # reuse it across runs while it still has more than 60s of life left,
+  # rather than hitting the auth provider on every invocation.
+  local cache="${TMPDIR:-/tmp}/.assertoor_token_${prefix}-${network}.json"
+  if [[ -f "$cache" ]]; then
+    local cached_tok cached_exp
+    cached_tok=$(jq -r '.token // empty' "$cache" 2>/dev/null)
+    cached_exp=$(jq -r '.expr // 0' "$cache" 2>/dev/null)
+    if [[ -n "$cached_tok" ]] && (( cached_exp > $(date +%s) + 60 )); then
+      echo "$cached_tok"
+      return 0
+    fi
+  fi
+
+  if [[ -z "$CF_ACCESS_CLIENT_ID" || -z "$CF_ACCESS_CLIENT_SECRET" ]]; then
+    echo "Assertoor API requires authentication and no cached token is valid." >&2
+    echo "Set a Cloudflare Access service token:" >&2
+    echo "  export CF_ACCESS_CLIENT_ID=...    CF_ACCESS_CLIENT_SECRET=..." >&2
+    echo "or provide a ready JWT directly: export ASSERTOOR_TOKEN=..." >&2
+    return 1
+  fi
+
+  # Reject obviously malformed creds early (a common mistake is exporting the
+  # whole 'CF-Access-Client-Id: <id>' header line instead of just the value).
+  if [[ "$CF_ACCESS_CLIENT_ID" != *.access || "$CF_ACCESS_CLIENT_ID" == *[[:space:]]* ]]; then
+    echo "CF_ACCESS_CLIENT_ID does not look like a CF Access client id (expected '<id>.access', no spaces)." >&2
+    echo "Got: '${CF_ACCESS_CLIENT_ID}'" >&2
+    return 1
+  fi
+
+  local body http_code tok
+  body=$(curl -s -w $'\n%{http_code}' "$auth_endpoint/auth/token" \
+    -H "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+    -H "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET")
+  http_code=${body##*$'\n'}
+  body=${body%$'\n'*}
+
+  # Cloudflare Access bounces unauthorized service tokens with a 3xx to its
+  # own login page instead of passing through to /auth/token. A 401/403 means
+  # the same. Either way the token is not accepted for this Access app.
+  if [[ "$http_code" == 3* || "$http_code" == "401" || "$http_code" == "403" ]]; then
+    echo "Cloudflare Access rejected the service token at $auth_endpoint (HTTP $http_code)." >&2
+    echo "This CF Access token is not authorized for the auth app — add it to that" >&2
+    echo "application's CF Access 'Service Auth' policy, or export a different token." >&2
+    return 1
+  fi
+  if [[ "$http_code" != "200" ]]; then
+    echo "Unexpected response from $auth_endpoint/auth/token (HTTP $http_code):" >&2
+    echo "${body:0:300}" >&2
+    return 1
+  fi
+
+  tok=$(echo "$body" | jq -r '.token // empty' 2>/dev/null)
+  if [[ -z "$tok" ]]; then
+    echo "Auth provider returned 200 but no token field:" >&2
+    echo "${body:0:300}" >&2
+    return 1
+  fi
+  (umask 077; echo "$body" > "$cache")
+  echo "$tok"
+}
+
 # Helper function to display available options
 print_usage() {
   echo "Usage:"
@@ -103,8 +181,9 @@ print_usage() {
   echo "  fork_choice                       Get the fork choice of the network"
   echo "  send_blob n                       Send "n" number of blob(s) to the network [default 1]"
   echo "  deposit s e [type]                Deposit to the network from validator index start to end - optional withdrawal type (0x00, 0x01, 0x02)"
-  echo "  topup validator_index[,index2,...] eth_amount  Top-up one or more validators with additional ETH (Pectra upgrade feature)"
+  echo "  topup indices eth_amount          Top-up one or more validators with additional ETH (Pectra). indices: 5 | 1,2,3 | 1..10 (inclusive range)"
   echo "  exit s e                          Exit from the network from validator index start to end - mandatory argument"
+  echo "  slash index|start..end            Slash a validator (or inclusive range) via the assertoor proposer-slashing playbook"
   echo "  set_withdrawal_addr s e address   Set the withdrawal credentials for validator index start (mandatory) to end (optional) and Ethereum address"
   echo "  full_withdrawal s e               Withdraw from the network from validator index start to end - mandatory argument"
   echo "  check_deps                        Verify every external tool this script depends on is installed"
@@ -235,6 +314,13 @@ for arg in "${command[@]}"; do
       [[ -n "$(tail -c1 "$mapping_file" 2>/dev/null)" ]] && printf '\n' >> "$mapping_file"
       printf '%s\n' "$new_lines" >> "$mapping_file"
       echo "Updated $mapping_file"
+
+      # Refresh the inventory web on the bootnode so it serves the new mapping.
+      ( cd ../ansible && ansible-playbook -i "inventories/$network/inventory.ini" \
+          --tags ethereum_inventory_web --limit bootnode playbook.yaml )
+
+      # Roll Dora so it re-pulls the updated validator-names inventory.
+      kubectl --context services -n "$prefix-$network" rollout restart deployment/dora
       exit 0
       ;;
     "latest_root")
@@ -688,6 +774,7 @@ for arg in "${command[@]}"; do
         echo "  Usage: ${0} topup validator_index[,index2,...] eth_amount"
         echo "  Example: ${0} topup 5 35"
         echo "  Example: ${0} topup 1,2,3 10"
+        echo "  Example: ${0} topup 1..10 10        # inclusive range, same as 1,2,...,10"
         exit;
       else
         validator_indices=${command[2]}
@@ -699,42 +786,66 @@ for arg in "${command[@]}"; do
           exit 1
         fi
 
-        # Parse validator indices (handle both single index and comma-separated list)
-        VALIDATOR_ARRAY=(${(s:,:)validator_indices})
-
-        # Validate all validator indices and get their info
-        declare -a validator_pubkeys
-
-        for validator_index in "${VALIDATOR_ARRAY[@]}"; do
-          # Validate that each index is a number
-          if ! [[ "$validator_index" =~ ^[0-9]+$ ]]; then
-            echo "Error: Validator index '$validator_index' must be a positive integer."
+        # Parse validator indices: comma-separated list of single indices and/or
+        # inclusive ranges (e.g. "1..10" expands to 1 2 3 ... 10).
+        VALIDATOR_ARRAY=()
+        for token in ${(s:,:)validator_indices}; do
+          if [[ "$token" =~ ^[0-9]+\.\.[0-9]+$ ]]; then
+            range_start=${token%%..*}
+            range_end=${token##*..}
+            if (( range_start > range_end )); then
+              echo "Error: invalid range '$token' (start > end)."
+              exit 1
+            fi
+            for ((n=range_start; n<=range_end; n++)); do
+              VALIDATOR_ARRAY+=("$n")
+            done
+          elif [[ "$token" =~ ^[0-9]+$ ]]; then
+            VALIDATOR_ARRAY+=("$token")
+          else
+            echo "Error: '$token' is not a valid validator index or range."
             exit 1
           fi
+        done
 
-          # Get validator info
+        # Resolve each validator's pubkey from the beacon node.
+        declare -a validator_pubkeys
+        for validator_index in "${VALIDATOR_ARRAY[@]}"; do
           validator_info=$(curl -s "$bn_endpoint/eth/v1/beacon/states/head/validators/$validator_index")
           if [[ $(echo "$validator_info" | jq -r '.data') == "null" ]]; then
             echo "Error: Validator $validator_index not found."
             exit 1
           fi
-
-          validator_pubkey=$(echo "$validator_info" | jq -r '.data.validator.pubkey')
-          validator_pubkeys+=("$validator_pubkey")
+          validator_pubkeys+=("$(echo "$validator_info" | jq -r '.data.validator.pubkey')")
         done
 
-        # Get common info
-        deposit_contract_address=$(curl -s $bn_endpoint/eth/v1/config/spec | jq -r '.data.DEPOSIT_CONTRACT_ADDRESS')
+        # Get common info. We submit top-ups straight to the deposit contract via
+        # `cast send` (like `deposit`) rather than `ethereal validator topup`:
+        # ethereal ignores --nonce when online and can't run offline for topups, so
+        # parallel ethereal calls all collide on one nonce. cast honours --nonce, so
+        # each top-up gets its own and they can all broadcast at once.
         deposit_path="m/44'/60'/0'/0/7"
         privatekey=$(ethereal hd keys --path="$deposit_path" --seed="$sops_mnemonic" | awk '/Private key/{print $NF}')
         publickey=$(ethereal hd keys --path="$deposit_path" --seed="$sops_mnemonic" | awk '/Ethereum address/{print $NF}')
+        deposit_contract_address=$(curl -s $bn_endpoint/eth/v1/config/spec | jq -r '.data.DEPOSIT_CONTRACT_ADDRESS')
+
+        # A top-up is a deposit reusing an existing validator's pubkey. The consensus
+        # layer ignores the withdrawal credentials and signature for an already-known
+        # validator, so we send zeros for both; the execution-layer deposit contract
+        # only checks that deposit_data_root matches the SSZ root of the deposit data.
+        zero_wc="0x$(printf '0%.0s' {1..64})"
+        zero_sig="0x$(printf '0%.0s' {1..192})"
 
         echo ""
         echo "Top-up Summary:"
         echo "  Validators: ${#VALIDATOR_ARRAY} validator(s)"
-        for ((i=1; i<=${#VALIDATOR_ARRAY}; i++)); do
-          echo "    ${VALIDATOR_ARRAY[$i]}: ${validator_pubkeys[$i]}"
-        done
+        if (( ${#VALIDATOR_ARRAY} <= 20 )); then
+          for ((i=1; i<=${#VALIDATOR_ARRAY}; i++)); do
+            echo "    ${VALIDATOR_ARRAY[$i]}: ${validator_pubkeys[$i]}"
+          done
+        else
+          echo "    ${VALIDATOR_ARRAY[1]} .. ${VALIDATOR_ARRAY[-1]}"
+        fi
         echo "  Amount per validator: $eth_amount ETH"
         echo "  Total amount: $(echo "${#VALIDATOR_ARRAY} * $eth_amount" | bc) ETH"
         echo "  Deposit Contract: $deposit_contract_address"
@@ -743,102 +854,92 @@ for arg in "${command[@]}"; do
         read -r response
 
         if [[ $response == "y" ]]; then
-          echo "Submitting top-ups using ethereal..."
+          tmpdir=$(mktemp -d)
+
+          # Compute deposit_data_root for each validator locally (zero wc + zero sig).
+          printf '%s\n' "${validator_pubkeys[@]}" > "$tmpdir/pubkeys.txt"
+          python3 - "$eth_amount" "$tmpdir/pubkeys.txt" "$tmpdir/roots.txt" <<'PY'
+import sys, hashlib
+from decimal import Decimal
+def h(b): return hashlib.sha256(b).digest()
+amount_gwei = int(Decimal(sys.argv[1]) * (10**9))
+wc = b'\x00'*32
+sig = b'\x00'*96
+sig_root = h(h(sig[0:64]) + h(sig[64:96] + b'\x00'*32))
+amount_root = amount_gwei.to_bytes(8, 'little') + b'\x00'*24
+out = []
+with open(sys.argv[2]) as f:
+    for line in f:
+        pk = line.strip()
+        if not pk:
+            continue
+        pub = bytes.fromhex(pk[2:] if pk.startswith('0x') else pk)
+        pub_root = h(pub + b'\x00'*16)
+        out.append('0x' + h(h(pub_root + wc) + h(amount_root + sig_root)).hex())
+with open(sys.argv[3], 'w') as f:
+    f.write('\n'.join(out) + '\n')
+PY
+          roots=("${(@f)$(cat "$tmpdir/roots.txt")}")
+
+          # Fetch the nonce once and assign each top-up an explicit, incrementing
+          # nonce so they can all be broadcast in parallel (same as `deposit`).
+          nonce_hex=$(curl -s --header 'Content-Type: application/json' --data-raw '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["'$publickey'","pending"],"id":0}' $rpc_endpoint | jq -r '.result')
+          nonce=$(( ${nonce_hex} ))
+          echo "Starting nonce: $nonce | Top-up per validator: ${eth_amount} ETH"
           echo ""
 
-          # Process each validator
-          for ((i=1; i<=${#VALIDATOR_ARRAY}; i++)); do
-            validator_index="${VALIDATOR_ARRAY[$i]}"
-            validator_pubkey="${validator_pubkeys[$i]}"
-
-            echo "Processing validator $validator_index ($i/${#VALIDATOR_ARRAY})..."
-            echo "Command: ethereal validator topup --from=\"$publickey\" --validator=\"$validator_pubkey\" --topup-amount=\"${eth_amount}eth\" --no-safety-checks"
-
-            # Submit topup for this validator with retry logic
-            topup_success=false
-            for retry in {1..3}; do
-              echo "Attempt $retry/3..."
-              topup_output=$(ethereal validator topup \
-                --from="$publickey" \
-                --validator="$validator_pubkey" \
-                --topup-amount="${eth_amount}eth" \
-                --privatekey="$privatekey" \
-                --connection="$rpc_endpoint" \
-                --consensus-connection="$bn_endpoint" \
-                --no-safety-checks \
-                --timeout=60s 2>&1)
-
-              if [[ $? -eq 0 ]]; then
-                topup_success=true
-                break
-              else
-                echo "Attempt $retry failed. Error: $topup_output"
-                if [[ $retry -lt 3 ]]; then
-                  echo "Retrying in 5 seconds..."
-                  sleep 5
-                fi
-              fi
-            done
-
-            if [[ "$topup_success" == "true" ]]; then
-              # Extract transaction hash from output
-              tx_hash=$(echo "$topup_output" | grep -oE '0x[a-fA-F0-9]{64}' | head -1)
-              if [[ -n "$tx_hash" ]]; then
-                echo "Transaction hash: $tx_hash"
-                echo "Waiting for transaction confirmation..."
-
-                # Wait for transaction to be mined
-                for attempt in {1..30}; do
-                  receipt_response=$(curl -s --header 'Content-Type: application/json' --data-raw "{\"jsonrpc\":\"2.0\",\"method\":\"eth_getTransactionReceipt\", \"params\":[\"$tx_hash\"], \"id\":0}" $rpc_endpoint)
-
-                  # Debug: show raw response if it's not valid JSON
-                  if ! echo "$receipt_response" | jq . >/dev/null 2>&1; then
-                    echo "Invalid JSON response: $receipt_response"
-                    echo "Retrying..."
-                    sleep 2
-                    continue
-                  fi
-
-                  receipt_result=$(echo "$receipt_response" | jq -r '.result // empty')
-                  if [[ -n "$receipt_result" && "$receipt_result" != "null" ]]; then
-                    tx_status=$(echo "$receipt_result" | jq -r '.status // empty')
-                    if [[ "$tx_status" == "0x1" ]]; then
-                      echo "✓ Validator $validator_index top-up successful! (confirmed)"
-                      break
-                    else
-                      echo "✗ Validator $validator_index top-up failed! (transaction reverted)"
-                      break
-                    fi
-                  fi
-                  echo "Waiting for confirmation... (attempt $attempt/30)"
-                  sleep 2
-                done
-
-                if [[ $attempt -eq 30 ]]; then
-                  echo "⚠ Transaction confirmation timeout for validator $validator_index"
-                fi
-              else
-                echo "✓ Validator $validator_index top-up successful! (no tx hash found)"
-              fi
-            else
-              echo "✗ Validator $validator_index top-up failed!"
-              echo "Error output: $topup_output"
-            fi
-            echo ""
-
-            # Small delay between transactions
-            if [[ $i -lt ${#VALIDATOR_ARRAY} ]]; then
-              echo "Waiting 2 seconds before next transaction..."
-              sleep 2
+          # zsh's background job table caps at 1024; batch so the active set stays well below.
+          batch_size=500
+          i=0
+          for validator_index in "${VALIDATOR_ARRAY[@]}"; do
+            validator_pubkey="${validator_pubkeys[$((i + 1))]}"
+            data_root="${roots[$((i + 1))]}"
+            echo "Sending top-up for validator $validator_index (nonce: $((nonce + i)))"
+            echo "$validator_index" > "$tmpdir/cast-$i.name"
+            cast send \
+              --private-key "$privatekey" \
+              --rpc-url "$rpc_endpoint" \
+              --nonce $((nonce + i)) \
+              --value "${eth_amount}ether" \
+              --gas-limit 200000 \
+              "$deposit_contract_address" \
+              "deposit(bytes,bytes,bytes,bytes32)" \
+              "$validator_pubkey" "$zero_wc" "$zero_sig" "$data_root" > "$tmpdir/cast-$i.log" 2>&1 &
+            i=$((i + 1))
+            if (( i % batch_size == 0 )); then
+              wait
+              echo "Drained batch — $i submitted so far..."
             fi
           done
 
-          echo "Top-up process completed for ${#VALIDATOR_ARRAY} validator(s)."
+          echo "Submitted $i top-ups in batches of $batch_size, waiting for final batch..."
+          wait
+          echo ""
+          ok=0
+          fail=0
+          for ((j=0; j<i; j++)); do
+            log="$tmpdir/cast-$j.log"
+            name=$(cat "$tmpdir/cast-$j.name" 2>/dev/null)
+            txhash=$(grep -E '^transactionHash' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            tx_status=$(grep -E '^status' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            if [[ "$tx_status" == "1" ]]; then
+              printf "  \033[32m✓\033[0m validator %s — %s\n" "$name" "$txhash"
+              ok=$((ok + 1))
+            else
+              printf "  \033[31m✗\033[0m validator %s — failed (status=%s tx=%s)\n" \
+                "$name" "${tx_status:-no-receipt}" "${txhash:-none}"
+              grep -iE 'error|revert' "$log" 2>/dev/null | head -1 | sed 's/^/      /'
+              fail=$((fail + 1))
+            fi
+          done
+          echo ""
+          echo "$ok confirmed, $fail failed (of $i submitted)"
+          rm -rf "$tmpdir"
+          exit;
         else
           echo "Top-up cancelled."
+          exit;
         fi
-
-        exit;
       fi
       ;;
     "exit")
@@ -886,6 +987,100 @@ for arg in "${command[@]}"; do
           echo "validator $i exit submitted"
           exit;
         fi
+        exit;
+      fi
+      ;;
+    "slash")
+      # Trigger an assertoor proposer-slashing run against a single validator
+      # or an inclusive contiguous range. The validator-slashing-single playbook
+      # takes a start index and a count, so ranges must be contiguous (start..end).
+      # The genesis mnemonic is passed through so the slashing targets this
+      # devnet's validators rather than the playbook's hardcoded kurtosis default.
+      if [[ -z "${command[2]}" ]]; then
+        echo "Slash calls for one validator index or an inclusive range!"
+        echo "  Usage: ${0} slash index"
+        echo "         ${0} slash start..end"
+        echo "  Example: ${0} slash 0       # slash validator 0"
+        echo "  Example: ${0} slash 0..2    # slash validators 0, 1, 2"
+        exit;
+      else
+        slash_arg="${command[2]}"
+        if [[ "$slash_arg" =~ ^[0-9]+\.\.[0-9]+$ ]]; then
+          slash_start=${slash_arg%%..*}
+          slash_end=${slash_arg##*..}
+          if (( slash_start > slash_end )); then
+            echo "Error: invalid range '$slash_arg' (start > end)."
+            exit 1
+          fi
+        elif [[ "$slash_arg" =~ ^[0-9]+$ ]]; then
+          slash_start=$slash_arg
+          slash_end=$slash_arg
+        else
+          echo "Error: '$slash_arg' is not a valid validator index or range."
+          exit 1
+        fi
+        slash_count=$((slash_end - slash_start + 1))
+
+        echo "Slashing validator(s) $slash_start..$slash_end ($slash_count total) on ${prefix}-${network}"
+        echo "  Assertoor: $assertoor_endpoint"
+        echo "Continue? (y/n)"
+        read -r response
+        if [[ $response != "y" ]]; then
+          echo "Slashing cancelled."
+          exit;
+        fi
+
+        slash_token=$(get_assertoor_token) || exit 1
+
+        # Make sure the slashing test is registered; on a fresh assertoor it
+        # won't be, so register it from the upstream playbook before scheduling.
+        slash_registered=$(curl -s -H "Authorization: Bearer $slash_token" \
+          "$assertoor_endpoint/api/v1/tests" \
+          | jq -r --arg id "$slashing_test_id" '[.data[]?.id] | index($id) != null')
+        if [[ "$slash_registered" != "true" ]]; then
+          echo "Test '$slashing_test_id' not registered; registering from $slashing_playbook"
+          slash_reg=$(curl -s \
+            -H "Authorization: Bearer $slash_token" \
+            -H "Content-Type: application/json" \
+            -X POST "$assertoor_endpoint/api/v1/tests/register_external" \
+            -d "$(jq -n --arg file "$slashing_playbook" '{file: $file}')")
+          if [[ "$(echo "$slash_reg" | jq -r '.data.test_id // empty')" != "$slashing_test_id" ]]; then
+            echo "Failed to register slashing test:"
+            echo "$slash_reg" | jq . 2>/dev/null || echo "$slash_reg"
+            exit 1
+          fi
+          echo "Registered test '$slashing_test_id'"
+        fi
+
+        slash_payload=$(jq -n \
+          --arg test "$slashing_test_id" \
+          --arg mnemonic "$sops_mnemonic" \
+          --argjson index "$slash_start" \
+          --argjson count "$slash_count" \
+          '{test_id: $test, allow_duplicate: true,
+            config: {validatorMnemonic: $mnemonic, validatorIndex: $index, validatorCount: $count}}')
+
+        slash_response=$(curl -s \
+          -H "Authorization: Bearer $slash_token" \
+          -H "Content-Type: application/json" \
+          -X POST "$assertoor_endpoint/api/v1/test_runs/schedule" \
+          -d "$slash_payload")
+
+        slash_status=$(echo "$slash_response" | jq -r '.status // empty' 2>/dev/null)
+        if [[ "$slash_status" != "OK" ]]; then
+          echo "Failed to schedule slashing run:"
+          echo "$slash_response" | jq . 2>/dev/null || echo "$slash_response"
+          # A rejected Bearer token means the cached JWT is stale/invalid;
+          # drop it so the next run mints a fresh one.
+          if [[ "$slash_status" == *unauthorized* ]]; then
+            rm -f "${TMPDIR:-/tmp}/.assertoor_token_${prefix}-${network}.json"
+            echo "(cleared cached auth token — re-run to mint a fresh one)" >&2
+          fi
+          exit 1
+        fi
+        slash_run_id=$(echo "$slash_response" | jq -r '.data.run_id')
+        echo "Scheduled slashing run #$slash_run_id"
+        echo "  Watch: $assertoor_endpoint/run/$slash_run_id"
         exit;
       fi
       ;;
