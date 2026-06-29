@@ -54,6 +54,13 @@ variable "nodes" {
     { name = "nimbus-besu", count = 1, cloud = "digitalocean", validator_start = 2600, validator_end = 2800 },
     { name = "teku-besu", count = 1, cloud = "digitalocean", validator_start = 2800, validator_end = 3000 },
 
+    # Nethermind
+    { name = "prysm-nethermind", count = 1, cloud = "digitalocean", validator_start = 3000, validator_end = 3200 },
+    { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", validator_start = 3200, validator_end = 3400 },
+    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", validator_start = 3400, validator_end = 3600 },
+    { name = "nimbus-nethermind", count = 1, cloud = "digitalocean", validator_start = 3600, validator_end = 3800 },
+    { name = "teku-nethermind", count = 1, cloud = "digitalocean", validator_start = 3800, validator_end = 4000 }
+
   ]
 
   validation {
