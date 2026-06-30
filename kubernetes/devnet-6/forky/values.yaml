@@ -118,6 +118,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
+        - name: lighthouse-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
         - name: lodestar-besu-1
           type: "beacon_node"
           config:
@@ -137,6 +142,11 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: lodestar-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
         - name: nimbus-besu-1
           type: "beacon_node"
@@ -158,6 +168,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
+        - name: nimbus-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
         - name: prysm-besu-1
           type: "beacon_node"
           config:
@@ -178,6 +193,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
+        - name: prysm-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
         - name: teku-besu-1
           type: "beacon_node"
           config:
@@ -197,4 +217,9 @@ forky:
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: teku-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"

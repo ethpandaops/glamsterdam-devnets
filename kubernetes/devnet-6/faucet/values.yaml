@@ -74,6 +74,21 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "teku-geth-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "lighthouse-nimbusel-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "prysm-nimbusel-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "lodestar-nimbusel-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "nimbus-nimbusel-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "teku-nimbusel-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "lighthouse-besu-1"
       priority: 5
@@ -82,21 +97,6 @@ powfaucet:
       priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "lodestar-besu-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "buildoor-lodestar-besu-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "nimbus-besu-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "teku-besu-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "lighthouse-ethrex-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "prysm-ethrex-1"
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-6.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000

@@ -38,6 +38,11 @@
   authGroup: pandaops
   priority: -1
   archive: true
+- url: https://bn-lighthouse-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: lighthouse-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
 - url: https://bn-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: lodestar-besu-1
   authGroup: pandaops
@@ -52,6 +57,10 @@
   priority: -1
 - url: https://bn-lodestar-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: lodestar-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lodestar-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: lodestar-nimbusel-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-nimbus-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -70,6 +79,10 @@
   name: nimbus-nethermind-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: nimbus-nimbusel-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-prysm-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: prysm-besu-1
   authGroup: pandaops
@@ -86,6 +99,10 @@
   name: prysm-nethermind-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-prysm-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: prysm-nimbusel-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-teku-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: teku-besu-1
   authGroup: pandaops
@@ -100,6 +117,10 @@
   priority: -1
 - url: https://bn-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: teku-nimbusel-1
   authGroup: pandaops
   priority: -1
 
