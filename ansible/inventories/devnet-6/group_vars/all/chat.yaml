@@ -14,7 +14,7 @@
 gen_kubernetes_config_chat_enabled: true
 # Pinned image: CI publishes to GHCR (private) and mirrors to Docker Hub.
 # <base>-<chat repo git sha>.
-gen_kubernetes_config_chat_image: "ethpandaops/chat:hermes-agent-panda-2026.6.5-12400d1"
+gen_kubernetes_config_chat_image: "ethpandaops/chat:hermes-agent-panda-2026.6.5-20c0647"
 gen_kubernetes_config_chat_chart_version: "0.3.0"
 # services.enc.yaml#chat llm_api_key is an OpenRouter key (sk-or-v1-...).
 gen_kubernetes_config_chat_llm_provider: "openrouter"

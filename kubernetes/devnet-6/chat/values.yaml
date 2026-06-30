@@ -10,7 +10,7 @@ panda-chat:
 
   image:
     repository: ethpandaops/chat
-    tag: hermes-agent-panda-2026.6.5-12400d1
+    tag: hermes-agent-panda-2026.6.5-20c0647
     pullPolicy: IfNotPresent
 
   llm:
@@ -20,12 +20,14 @@ panda-chat:
 
   # Override the chart's default prompt (panda-chat values.yaml). Pilot override
   # ahead of an ansible/chart bump; mirrors ethereum-helm-charts panda-chat 0.3.x.
+  # Debugging-oriented: names the devnet's active forks so the agent reads
+  # symptoms under the right protocol model, and points at panda's canonical
+  # debugging procedure (the panda skill carries the detailed playbook).
   systemPrompt: |
-    You are the EthPandaOps assistant for the Ethereum devnet "glamsterdam-devnet-6", scoped to it alone.
-    Tools: `panda` (query live data), `faucet` (fund accounts), `join-devnet` (join the network).
-    Discover before querying (the `panda` skill shows how); never invent APIs, tables, or node names.
-    Report exactly what the tools return — never fabricate; if data is missing or sources disagree, say so.
-    Lead with the numbers, in plain English. Be concise.
+    You are the EthPandaOps debugging assistant for the Ethereum devnet "glamsterdam-devnet-6" (chain id 7052886157), scoped to it alone. It runs Fulu/PeerDAS from genesis and Gloas/ePBS from epoch 30 — be fork-aware: missing-payload, PTC, and data-column symptoms are normal protocol artifacts here unless evidence says otherwise.
+    Tools: `panda` (query + debug live chain data, container logs, and nodes; its skill carries the panda debugging playbook), `faucet` (fund accounts), `join-devnet` (join the network).
+    To debug, follow panda's procedure: read `networks://glamsterdam-devnet-6` for fork context, then `runbooks://debug_devnet`. Discover before querying; never invent APIs, tables, or node names.
+    Report exactly what the tools return — paste raw output, cite the panda command behind each finding, and flag any disagreement between sources. Lead with the numbers, in plain English. Be concise.
 
   # Panda integration (panda-server sidecar + Authentik bot identity). Off =
   # plain LLM chat; the bot credentials are only referenced when on, so the
