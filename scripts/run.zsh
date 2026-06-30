@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-node="prysm-geth-1"
+node="teku-geth-1"
 network="devnet-6"
 domain="ethpandaops.io"
 srv="srv"
@@ -321,6 +321,19 @@ for arg in "${command[@]}"; do
 
       # Roll Dora so it re-pulls the updated validator-names inventory.
       kubectl --context services -n "$prefix-$network" rollout restart deployment/dora
+
+      # Commit ONLY the updated mapping to master. Passing the pathspec to
+      # `git commit` makes a partial commit: it takes the working-tree content of
+      # just this file and ignores the index, so any other modified or untracked
+      # files in the tree are never swept into the commit.
+      if git diff --quiet HEAD -- "$mapping_file"; then
+        echo "No changes to $mapping_file to commit."
+      elif git commit -m "$prefix-$network: sync validator_names.yaml" -- "$mapping_file"; then
+        git push origin HEAD:master
+      else
+        echo "git commit failed; not pushing." >&2
+        exit 1
+      fi
       exit 0
       ;;
     "latest_root")
@@ -726,7 +739,7 @@ for arg in "${command[@]}"; do
               --rpc-url "$rpc_endpoint" \
               --nonce $((nonce + i)) \
               --value "${deposit_eth}ether" \
-              --gas-limit 200000 \
+              --gas-limit 2000000 \
               "$deposit_contract_address" \
               "deposit(bytes,bytes,bytes,bytes32)" \
               "$pubkey_val" "$withdrawal_creds" "$signature_val" "$data_root" > "$tmpdir/cast-$i.log" 2>&1 &
@@ -901,7 +914,7 @@ PY
               --rpc-url "$rpc_endpoint" \
               --nonce $((nonce + i)) \
               --value "${eth_amount}ether" \
-              --gas-limit 200000 \
+              --gas-limit 2000000 \
               "$deposit_contract_address" \
               "deposit(bytes,bytes,bytes,bytes32)" \
               "$validator_pubkey" "$zero_wc" "$zero_sig" "$data_root" > "$tmpdir/cast-$i.log" 2>&1 &
