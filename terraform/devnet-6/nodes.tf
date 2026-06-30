@@ -66,7 +66,14 @@ variable "nodes" {
     { name = "lodestar-nimbusel", count = 1, cloud = "digitalocean", validator_start = 4200, validator_end = 4400 },
     { name = "lighthouse-nimbusel", count = 1, cloud = "digitalocean", validator_start = 4400, validator_end = 4600 },
     { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", validator_start = 4600, validator_end = 4800 },
-    { name = "teku-nimbusel", count = 1, cloud = "digitalocean", validator_start = 4800, validator_end = 5000 }
+    { name = "teku-nimbusel", count = 1, cloud = "digitalocean", validator_start = 4800, validator_end = 5000 },
+
+    # Reth
+    { name = "prysm-reth", count = 1, cloud = "digitalocean", validator_start = 5000, validator_end = 5200 },
+    { name = "lodestar-reth", count = 1, cloud = "digitalocean", validator_start = 5200, validator_end = 5400 },
+    { name = "lighthouse-reth", count = 1, cloud = "digitalocean", validator_start = 5400, validator_end = 5600 },
+    { name = "nimbus-reth", count = 1, cloud = "digitalocean", validator_start = 5600, validator_end = 5800 },
+    { name = "teku-reth", count = 1, cloud = "digitalocean", validator_start = 5800, validator_end = 6000 }
 
   ]
 

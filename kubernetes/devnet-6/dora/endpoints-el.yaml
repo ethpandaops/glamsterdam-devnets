@@ -55,6 +55,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-lighthouse-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-lighthouse-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: lighthouse-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: lodestar-besu-1
   authGroup: pandaops
@@ -85,6 +91,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-lodestar-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-lodestar-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: lodestar-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lodestar-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-nimbus-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: nimbus-besu-1
   authGroup: pandaops
@@ -115,6 +127,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-nimbus-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-nimbus-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: nimbus-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-nimbus-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-prysm-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: prysm-besu-1
   authGroup: pandaops
@@ -145,6 +163,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-prysm-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-prysm-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: prysm-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-prysm-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-teku-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: teku-besu-1
   authGroup: pandaops
@@ -175,3 +199,9 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-teku-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-teku-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: teku-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
