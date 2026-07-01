@@ -93,7 +93,7 @@ powfaucet:
       name: "lodestar-nimbusel-1"
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-6.ethpandaops.io/tx/{txid}"
-  faucetTxGasLimit: 100000
+  faucetTxGasLimit: 250000
 
   faucetCaptchaEnabled: false
   faucetCaptchaSitekey: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.site_key}>"
