@@ -163,6 +163,7 @@ print_usage() {
   echo "  get_slot n                        Get the slot number n [default head]"
   echo "  get_block n                       Get the block number n [default latest]"
   echo "  get_balance address               Get the balance of address - mandatory argument"
+  echo "  fund address eth_amount           Send eth_amount ETH from the main wallet (m/44'/60'/0'/0/7) to address"
   echo "  finalized_epoch                   Get the finalized epoch"
   echo "  finalized_slot                    Get the finalized slot"
   echo "  finalized_slot_verbose            Get the finalized slot with verbose output"
@@ -401,6 +402,27 @@ for arg in "${command[@]}"; do
         echo "  Example: ${0} get_balance 0xf97e180c050e5ab072211ad2c213eb5aee4df134"
         exit;
       fi
+      ;;
+    "fund")
+      # Send ETH from the main funding wallet (m/44'/60'/0'/0/7) to any address.
+      #   Example: ${0} fund 0x877d64e72b7E1f5034Aec55d910C877B2B7104da 1000
+      target="${command[2]}"
+      fund_eth="${command[3]}"
+      if [[ -z "$target" || -z "$fund_eth" ]]; then
+        echo "Usage: ${0} fund <address> <eth_amount>"
+        exit 1
+      elif ! [[ (${#target} == 42) && ($target == 0x*) ]]; then
+        echo "You did not provide a valid address as the second argument"
+        exit 1
+      elif ! [[ "$fund_eth" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+        echo "Amount must be a positive number of ETH"
+        exit 1
+      fi
+      privatekey=$(ethereal hd keys --path="m/44'/60'/0'/0/7" --seed="$sops_mnemonic" | awk '/Private key/{print $NF}')
+      from=$(ethereal hd keys --path="m/44'/60'/0'/0/7" --seed="$sops_mnemonic" | awk '/Ethereum address/{print $NF}')
+      echo "Funding $target with ${fund_eth} ETH from main wallet $from ..."
+      cast send --private-key "$privatekey" --rpc-url "$rpc_endpoint" --value "${fund_eth}ether" "$target"
+      exit $?
       ;;
     "finalized_epoch")
       # Get the finalized slot of the network
