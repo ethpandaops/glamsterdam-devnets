@@ -98,6 +98,21 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "teku-reth-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "lighthouse-erigon-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "prysm-erigon-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "lodestar-erigon-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "nimbus-erigon-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "teku-erigon-1"
+      priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-6.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000
 
