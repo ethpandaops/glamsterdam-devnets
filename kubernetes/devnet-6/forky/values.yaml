@@ -98,6 +98,36 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
+        - name: grandine-besu-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: grandine-ethrex-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: grandine-geth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: grandine-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: grandine-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
+        - name: grandine-reth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
         - name: lighthouse-besu-1
           type: "beacon_node"
           config:

@@ -18,6 +18,30 @@
   name: buildoor-prysm-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-besu-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-geth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-reth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: lighthouse-besu-1
   authGroup: pandaops

@@ -25,6 +25,42 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-geth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-nethermind-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: lighthouse-besu-1
   authGroup: pandaops

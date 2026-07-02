@@ -73,7 +73,15 @@ variable "nodes" {
     { name = "lodestar-reth", count = 1, cloud = "digitalocean", validator_start = 5200, validator_end = 5400 },
     { name = "lighthouse-reth", count = 1, cloud = "digitalocean", validator_start = 5400, validator_end = 5600 },
     { name = "nimbus-reth", count = 1, cloud = "digitalocean", validator_start = 5600, validator_end = 5800 },
-    { name = "teku-reth", count = 1, cloud = "digitalocean", validator_start = 5800, validator_end = 6000 }
+    { name = "teku-reth", count = 1, cloud = "digitalocean", validator_start = 5800, validator_end = 6000 },
+
+    # Grandine
+    { name = "grandine-ethrex", count = 1, cloud = "digitalocean", validator_start = 6000, validator_end = 6200 },
+    { name = "grandine-geth", count = 1, cloud = "digitalocean", validator_start = 6200, validator_end = 6400 },
+    { name = "grandine-besu", count = 1, cloud = "digitalocean", validator_start = 6400, validator_end = 6600 },
+    { name = "grandine-nethermind", count = 1, cloud = "digitalocean", validator_start = 6600, validator_end = 6800 },
+    { name = "grandine-nimbusel", count = 1, cloud = "digitalocean", validator_start = 6800, validator_end = 7000 },
+    { name = "grandine-reth", count = 1, cloud = "digitalocean", validator_start = 7000, validator_end = 7200 }
 
   ]
 

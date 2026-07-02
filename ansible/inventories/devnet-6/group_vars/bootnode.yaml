@@ -2,25 +2,25 @@
 # ethereum_cl_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enr'] }}"
 # ethereum_el_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enode'] }}"
 
-# ethereum_cl_bootnodes: >-
-#   {{
-#     (
-#       ['prysm-ethrex-1', 'prysm-nethermind-1', 'lodestar-ethrex-1', 'lodestar-nethermind-1']
-#       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
-#       | select('defined')
-#       | list
-#     )
-#   }}
+ethereum_cl_bootnodes: >-
+  {{
+    (
+      ['prysm-ethrex-1', 'prysm-nethermind-1', 'lodestar-ethrex-1', 'lodestar-nethermind-1']
+      | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
+      | select('defined')
+      | list
+    )
+  }}
 
-# ethereum_el_bootnodes: >-
-#   {{
-#     (
-#       ['prysm-ethrex-1', 'prysm-nethermind-1', 'lodestar-ethrex-1', 'lodestar-nethermind-1']
-#       | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enode'])
-#       | select('defined')
-#       | list
-#     )
-#   }}
+ethereum_el_bootnodes: >-
+  {{
+    (
+      ['prysm-ethrex-1', 'prysm-nethermind-1', 'lodestar-ethrex-1', 'lodestar-nethermind-1']
+      | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enode'])
+      | select('defined')
+      | list
+    )
+  }}
 
 
 
@@ -86,7 +86,7 @@ prysm_container_volumes:
 prysm_container_entrypoint:
   - /app/cmd/beacon-chain/beacon-chain
 prysm_container_command_extra_args: >-
-  {{ prysm_container_command_extra_simple_args }}
+  {{ prysm_container_command_extra_simple_args + prysm_container_command_extra_bootnode_args }}
 prysm_container_command_extra_simple_args:
   - --grpc-gateway-corsdomain=*
   - --chain-config-file=/network-config/config.yaml

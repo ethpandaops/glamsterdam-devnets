@@ -4,8 +4,8 @@ buildoor-overview:
   fullnameOverride: buildoor-overview
   image:
     repository: ethpandaops/buildoor
-    tag: main-latest
-    pullPolicy: Always
+    tag: fix-epbs-blinded-header-publish
+    pullPolicy: IfNotPresent
 
   resources:
     requests:

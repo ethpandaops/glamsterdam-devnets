@@ -30,6 +30,18 @@ forkmon:
     name: buildoor-lodestar-besu-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
     name: buildoor-prysm-ethrex-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-besu-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-ethrex-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-geth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-nethermind-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-nimbusel-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-nimbusel-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: grandine-reth-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
     name: lighthouse-besu-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
