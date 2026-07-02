@@ -34,7 +34,7 @@ default_tooling_images:
   forky: ethpandaops/forky:latest
   fauceth: skylenet/fauceth:fix_fee_estimation
   powfaucet: pk910/powfaucet:v2.5.0
-  powfaucet_agents: ghcr.io/qu0b/powfaucet:v2.5.0-agent.3
+  powfaucet_agents: ghcr.io/qu0b/powfaucet:v2.5.0-agent.4
   homepage: ethpandaops/ethereum-testnet-homepage:latest
   checkpointz: ethpandaops/checkpointz:gloas-latest
   blockscout: blockscout/blockscout:latest

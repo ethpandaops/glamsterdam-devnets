@@ -5,7 +5,7 @@ powfaucet:
 
   image:
     repository: ghcr.io/qu0b/powfaucet
-    tag: v2.5.0-agent.3
+    tag: v2.5.0-agent.4
     pullPolicy: IfNotPresent
 
   resources:
