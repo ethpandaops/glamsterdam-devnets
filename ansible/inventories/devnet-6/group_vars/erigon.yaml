@@ -7,8 +7,6 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
-# TEMP: run erigon EL-only first to watch it sync; validators disabled until we flip this back
-ethereum_node_cl_validator_enabled: false
 
 # role: ethpandaops.general.erigon
 erigon_container_name: execution
@@ -24,7 +22,6 @@ erigon_container_command_extra_args:
   - --networkid={{ ethereum_network_id }}
   - --db.size.limit=500GB
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --miner.gaslimit=150000000
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
