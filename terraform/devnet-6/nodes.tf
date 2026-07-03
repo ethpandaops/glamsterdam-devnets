@@ -32,6 +32,7 @@ variable "nodes" {
     { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", builder_start = 0 },
     { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1 },
     { name = "buildoor-lodestar-besu", count = 1, cloud = "digitalocean", builder_start = 2 },
+    { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3, region = "ams3" },
 
     # Ethrex
     { name = "prysm-ethrex", count = 1, cloud = "digitalocean", validator_start = 0, validator_end = 200 },

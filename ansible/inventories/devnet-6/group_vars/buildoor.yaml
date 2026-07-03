@@ -46,6 +46,10 @@ lodestar_container_command_extra_args: >-
   {{ lodestar_container_command_extra_simple_args
      + ['--emitPayloadAttributes'] }}
 
+teku_container_command_extra_args: >-
+  {{ teku_container_command_extra_simple_args
+     + ['--Xfork-choice-updated-always-send-payload-attributes=true'] }}
+
 
 ethereum_node_docker_watchtower_containers_list:
   - execution

@@ -98,6 +98,11 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
             polling_interval: "12s"
+        - name: buildoor-teku-nethermind-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            polling_interval: "12s"
         - name: grandine-besu-1
           type: "beacon_node"
           config:

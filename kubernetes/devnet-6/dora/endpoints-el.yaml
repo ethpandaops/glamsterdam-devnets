@@ -25,6 +25,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: buildoor-teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: grandine-besu-1
   authGroup: pandaops

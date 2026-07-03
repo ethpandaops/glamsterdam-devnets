@@ -18,6 +18,10 @@
   name: buildoor-prysm-ethrex-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: buildoor-teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: grandine-besu-1
   authGroup: pandaops

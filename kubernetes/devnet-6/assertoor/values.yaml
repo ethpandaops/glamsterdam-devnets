@@ -49,6 +49,9 @@ assertoor:
     - name:  buildoor-prysm-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  buildoor-teku-nethermind-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  grandine-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -184,6 +187,7 @@ assertoor:
       - buildoor-lighthouse-geth-1
       - buildoor-lodestar-besu-1
       - buildoor-prysm-ethrex-1
+      - buildoor-teku-nethermind-1
       - grandine-besu-1
       - grandine-erigon-1
       - grandine-ethrex-1
