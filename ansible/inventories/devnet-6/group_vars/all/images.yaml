@@ -44,7 +44,7 @@ default_tooling_images:
   blobscan: blossomlabs/blobscan:latest
   blobscan_indexer: blossomlabs/blobscan-indexer:latest
   dora: ethpandaops/dora:master-latest
-  dugtrio: ethpandaops/dugtrio:latest
+  dugtrio: ethpandaops/dugtrio:bbusa-endpoint-failover
   ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.1.2
   tracoor: ethpandaops/tracoor:latest
   ncli: status-im/nimbus-eth2:unstable

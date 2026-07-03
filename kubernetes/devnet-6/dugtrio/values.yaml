@@ -4,7 +4,7 @@ dugtrio:
   fullnameOverride: dugtrio
   image:
     repository: ethpandaops/dugtrio
-    tag: latest
+    tag: bbusa-endpoint-failover
     pullPolicy: Always
   resources:
     requests:
