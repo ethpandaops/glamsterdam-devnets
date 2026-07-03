@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: ethpandaops/dora
-    tag: pk910-builder-fixes-latest
+    tag: master-latest
     pullPolicy: Always
   resources:
     requests:

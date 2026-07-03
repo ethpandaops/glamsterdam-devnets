@@ -88,7 +88,8 @@ variable "nodes" {
     { name = "lodestar-erigon", count = 1, cloud = "digitalocean", validator_start = 7400, validator_end = 7600 },
     { name = "lighthouse-erigon", count = 1, cloud = "digitalocean", validator_start = 7600, validator_end = 7800 },
     { name = "nimbus-erigon", count = 1, cloud = "digitalocean", validator_start = 7800, validator_end = 8000 },
-    { name = "teku-erigon", count = 1, cloud = "digitalocean", validator_start = 8000, validator_end = 8200 }
+    { name = "teku-erigon", count = 1, cloud = "digitalocean", validator_start = 8000, validator_end = 8200 },
+    { name = "grandine-erigon", count = 1, cloud = "digitalocean", validator_start = 8200, validator_end = 8400 },
 
   ]
 

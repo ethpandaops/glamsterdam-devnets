@@ -22,6 +22,10 @@
   name: grandine-besu-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-grandine-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: grandine-erigon-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: grandine-ethrex-1
   authGroup: pandaops

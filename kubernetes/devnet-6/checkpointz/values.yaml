@@ -65,6 +65,9 @@ checkpointz:
         - name: grandine-besu-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
           dataProvider: true
+        - name: grandine-erigon-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+          dataProvider: true
         - name: grandine-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
           dataProvider: true
