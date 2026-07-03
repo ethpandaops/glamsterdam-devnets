@@ -7,6 +7,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
+# TEMP: run erigon EL-only first to watch it sync; validators disabled until we flip this back
+ethereum_node_cl_validator_enabled: false
 
 # role: ethpandaops.general.erigon
 erigon_container_name: execution

@@ -81,7 +81,14 @@ variable "nodes" {
     { name = "grandine-besu", count = 1, cloud = "digitalocean", validator_start = 6400, validator_end = 6600 },
     { name = "grandine-nethermind", count = 1, cloud = "digitalocean", validator_start = 6600, validator_end = 6800 },
     { name = "grandine-nimbusel", count = 1, cloud = "digitalocean", validator_start = 6800, validator_end = 7000 },
-    { name = "grandine-reth", count = 1, cloud = "digitalocean", validator_start = 7000, validator_end = 7200 }
+    { name = "grandine-reth", count = 1, cloud = "digitalocean", validator_start = 7000, validator_end = 7200 },
+
+    # Erigon
+    { name = "prysm-erigon", count = 1, cloud = "digitalocean", validator_start = 7200, validator_end = 7400 },
+    { name = "lodestar-erigon", count = 1, cloud = "digitalocean", validator_start = 7400, validator_end = 7600 },
+    { name = "lighthouse-erigon", count = 1, cloud = "digitalocean", validator_start = 7600, validator_end = 7800 },
+    { name = "nimbus-erigon", count = 1, cloud = "digitalocean", validator_start = 7800, validator_end = 8000 },
+    { name = "teku-erigon", count = 1, cloud = "digitalocean", validator_start = 8000, validator_end = 8200 }
 
   ]
 

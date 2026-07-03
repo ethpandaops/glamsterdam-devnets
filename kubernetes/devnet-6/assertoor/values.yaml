@@ -70,6 +70,9 @@ assertoor:
     - name:  lighthouse-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  lighthouse-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  lighthouse-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -88,6 +91,9 @@ assertoor:
     - name:  lodestar-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  lodestar-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  lodestar-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -106,6 +112,9 @@ assertoor:
     - name:  nimbus-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  nimbus-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  nimbus-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -124,6 +133,9 @@ assertoor:
     - name:  prysm-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  prysm-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  prysm-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -142,6 +154,9 @@ assertoor:
     - name:  teku-besu-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  teku-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-erigon-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  teku-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -173,30 +188,35 @@ assertoor:
       - grandine-nimbusel-1
       - grandine-reth-1
       - lighthouse-besu-1
+      - lighthouse-erigon-1
       - lighthouse-ethrex-1
       - lighthouse-geth-1
       - lighthouse-nethermind-1
       - lighthouse-nimbusel-1
       - lighthouse-reth-1
       - lodestar-besu-1
+      - lodestar-erigon-1
       - lodestar-ethrex-1
       - lodestar-geth-1
       - lodestar-nethermind-1
       - lodestar-nimbusel-1
       - lodestar-reth-1
       - nimbus-besu-1
+      - nimbus-erigon-1
       - nimbus-ethrex-1
       - nimbus-geth-1
       - nimbus-nethermind-1
       - nimbus-nimbusel-1
       - nimbus-reth-1
       - prysm-besu-1
+      - prysm-erigon-1
       - prysm-ethrex-1
       - prysm-geth-1
       - prysm-nethermind-1
       - prysm-nimbusel-1
       - prysm-reth-1
       - teku-besu-1
+      - teku-erigon-1
       - teku-ethrex-1
       - teku-geth-1
       - teku-nethermind-1
@@ -210,29 +230,34 @@ assertoor:
       - grandine-nimbusel-1
       - grandine-reth-1
       - lighthouse-besu-1
+      - lighthouse-erigon-1
       - lighthouse-ethrex-1
       - lighthouse-geth-1
       - lighthouse-nethermind-1
       - lighthouse-nimbusel-1
       - lighthouse-reth-1
       - lodestar-besu-1
+      - lodestar-erigon-1
       - lodestar-ethrex-1
       - lodestar-geth-1
       - lodestar-nethermind-1
       - lodestar-nimbusel-1
       - lodestar-reth-1
       - nimbus-besu-1
+      - nimbus-erigon-1
       - nimbus-ethrex-1
       - nimbus-geth-1
       - nimbus-nethermind-1
       - nimbus-nimbusel-1
       - nimbus-reth-1
       - prysm-besu-1
+      - prysm-erigon-1
       - prysm-geth-1
       - prysm-nethermind-1
       - prysm-nimbusel-1
       - prysm-reth-1
       - teku-besu-1
+      - teku-erigon-1
       - teku-ethrex-1
       - teku-geth-1
       - teku-nethermind-1
