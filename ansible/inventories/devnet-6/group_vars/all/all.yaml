@@ -199,10 +199,51 @@ gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
 xatu_sentry_config_name: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
-xatu_sentry_config_server_address: "{{ secret_xatu_sentry.server_address }}"
+# Per-devnet xatu pipeline (mca-xatu-devnets in platform): the ingest host is
+# derived from the network name so new devnets need no wiring here.
+xatu_sentry_config_server_address: "{{ ethereum_network_name }}-ingest.xatu.ethpandaops.io:443"
 xatu_sentry_config_server_auth_user: "{{ secret_xatu_sentry.user }}"
 xatu_sentry_config_server_auth_password: "{{ secret_xatu_sentry.password }}"
 xatu_sentry_config_network_name_override: "{{ ethereum_network_name }}"
+
+# Full config override: adds the Gloas SSE topics, which the sentry's default
+# subscription set deliberately excludes.
+xatu_sentry_config: |
+  logging: "info"
+  metricsAddr: ":9090"
+  name: "{{ xatu_sentry_config_name }}"
+  ntpServer: time.google.com
+  ethereum:
+    beaconNodeAddress: {{ xatu_sentry_config_beacon_uri }}
+    overrideNetworkName: {{ xatu_sentry_config_network_name_override }}
+    beaconSubscriptions:
+      - attestation
+      - single_attestation
+      - block
+      - block_gossip
+      - chain_reorg
+      - finalized_checkpoint
+      - head
+      - voluntary_exit
+      - contribution_and_proof
+      - blob_sidecar
+      - data_column_sidecar
+      - execution_payload
+      - execution_payload_gossip
+      - execution_payload_available
+      - execution_payload_bid
+      - payload_attestation_message
+      - proposer_preferences
+  outputs:
+  - name: grpc
+    type: xatu
+    config:
+      address: {{ xatu_sentry_config_server_address }}
+      tls: {{ xatu_sentry_config_server_tls_enabled }}
+      maxQueueSize: 100000
+      workers: 5
+      headers:
+        authorization: "Basic {{ (xatu_sentry_config_server_auth_user + ":" + xatu_sentry_config_server_auth_password) | b64encode }}"
 
 # role: ethpandaops.general.ethereum_metrics_exporter
 ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
