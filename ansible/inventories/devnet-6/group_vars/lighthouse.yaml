@@ -41,6 +41,8 @@ lighthouse_container_command_extra_simple_args:
   - --suggested-fee-recipient={{ lighthouse_validator_fee_recipient }}
   - --ignore-ws-check
   - --enable-mplex
+  - --telemetry-collector-url=http://vector:4317
+  - --telemetry-service-name={{ ethereum_network_name }}-{{ inventory_hostname }}
 lighthouse_validator_container_volumes:
   - "{{ lighthouse_validator_datadir }}:/validator-data"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
