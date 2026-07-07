@@ -5,6 +5,10 @@
   name: bootnode-1
   authGroup: pandaops
   priority: -1
+- url: https://bn-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: buildoor-grandine-reth-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: buildoor-lighthouse-geth-1
   authGroup: pandaops

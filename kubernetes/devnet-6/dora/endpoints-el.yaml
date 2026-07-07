@@ -7,6 +7,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
+- url: https://rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+  name: buildoor-grandine-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io:8961
 - url: https://rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
   name: buildoor-lighthouse-geth-1
   authGroup: pandaops

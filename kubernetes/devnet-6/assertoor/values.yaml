@@ -40,6 +40,9 @@ assertoor:
     - name:  bootnode-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    - name:  buildoor-grandine-reth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - name:  buildoor-lighthouse-geth-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
@@ -184,6 +187,7 @@ assertoor:
     walletPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.assertoor_private_key}>"
     clientPairNames:
       - bootnode-1
+      - buildoor-grandine-reth-1
       - buildoor-lighthouse-geth-1
       - buildoor-lodestar-besu-1
       - buildoor-prysm-ethrex-1

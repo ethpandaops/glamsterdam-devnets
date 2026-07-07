@@ -50,6 +50,10 @@ teku_container_command_extra_args: >-
   {{ teku_container_command_extra_simple_args
      + ['--Xfork-choice-updated-always-send-payload-attributes=true'] }}
 
+grandine_container_command_extra_args: >-
+  {{ grandine_container_command_extra_simple_args
+     + ['--features=AlwaysPrepareExecutionPayload'] }}
+
 
 ethereum_node_docker_watchtower_containers_list:
   - execution

@@ -105,6 +105,16 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: buildoor-grandine-reth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-6
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: buildoor-lighthouse-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-6

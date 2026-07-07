@@ -30,6 +30,7 @@ buildoor-overview:
             pathType: Prefix
 
   hosts:
+    - https://api-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - https://api-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - https://api-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io
     - https://api-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io

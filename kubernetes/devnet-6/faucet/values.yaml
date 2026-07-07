@@ -86,6 +86,9 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "grandine-reth-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+      name: "buildoor-grandine-reth-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "lighthouse-reth-1"
       priority: 5
@@ -94,9 +97,6 @@ powfaucet:
       priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
       name: "lodestar-reth-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
-      name: "nimbus-reth-1"
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-6.ethpandaops.io/tx/{txid}"
   faucetTxGasLimit: 100000

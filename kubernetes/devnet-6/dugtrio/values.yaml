@@ -36,6 +36,8 @@ dugtrio:
   endpoints:
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io
     name: bootnode-1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io
+    name: buildoor-grandine-reth-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io
     name: buildoor-lighthouse-geth-1
   - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io

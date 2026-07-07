@@ -39,6 +39,7 @@ spamoor:
   authTokenKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.spamoor_private_key}>-spamoor-jwt"
   rpcEndpoints:
   - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io"
+  - "group(buildoor,grandine,reth,1,buildoor-grandine-reth-1)name(buildoor-grandine-reth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
   - "group(buildoor,lighthouse,geth,1,buildoor-lighthouse-geth-1)name(buildoor-lighthouse-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
   - "group(buildoor,lodestar,besu,1,buildoor-lodestar-besu-1)name(buildoor-lodestar-besu-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-6.ethpandaops.io"
   - "group(buildoor,prysm,ethrex,1,buildoor-prysm-ethrex-1)name(buildoor-prysm-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-6.ethpandaops.io"
