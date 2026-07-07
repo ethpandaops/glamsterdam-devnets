@@ -1,5 +1,9 @@
+# The cannon for this devnet runs from the platform repo (mca-xatu-devnets
+# stamps a per-devnet cannon on the utility cluster) and writes canonical
+# data straight to clickhouse-raw. This chart fed the retired
+# xatu-experimental pipeline.
 xatu-cannon:
-  enabled: true
+  enabled: false
   fullnameOverride: xatu-cannon
   image:
     repository: ethpandaops/xatu

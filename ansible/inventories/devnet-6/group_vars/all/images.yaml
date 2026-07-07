@@ -23,7 +23,9 @@ default_tooling_images:
   mev_relay: ethpandaops/mev-boost-relay:main
   buildoor: ethpandaops/buildoor:main-latest
   authenticatoor: ethpandaops/service-authenticatoor:main-latest
-  xatu_sentry: ethpandaops/xatu:latest
+  # Gloas event support ships on the release/gloas builds until
+  # ethpandaops/xatu#795 merges to master (xatu:latest cannot decode Gloas).
+  xatu_sentry: ethpandaops/xatu:0.0.43-gloas
   xatu_cannon: ethpandaops/xatu:latest
   xatu_mimicry: ethpandaops/xatu:latest
   xatu_cl_mimicry: ethpandaops/xatu:latest
