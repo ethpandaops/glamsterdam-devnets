@@ -35,8 +35,7 @@ spamoor:
     enabled: true
 
   privateKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.spamoor_private_key}>"
-  enableAuth: true
-  authTokenKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.spamoor_private_key}>-spamoor-jwt"
+  authProviderUrl: "https://auth.glamsterdam-devnet-6.ethpandaops.io"
   rpcEndpoints:
   - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-6.ethpandaops.io"
   - "group(buildoor,grandine,reth,1,buildoor-grandine-reth-1)name(buildoor-grandine-reth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-reth-1.srv.glamsterdam-devnet-6.ethpandaops.io"
