@@ -21,6 +21,7 @@ Status   | Network    | Links   | Ansible                                       
  🔴 | [devnet-4](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-4)| [Network config](network-configs/devnet-4)    | - | - | [🔗](kubernetes/devnet-4)
 Off | [devnet-5](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-5)| [Network config](network-configs/devnet-5)    | - | - | [🔗](kubernetes/devnet-5)
  On | [devnet-6](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-6)| [Network config](network-configs/devnet-6)    | - | - | [🔗](kubernetes/devnet-6)
+WIP | [devnet-7](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-7)| [Network config](network-configs/devnet-7)    | - | - | -
 # Development
 ## Version management for tools
 
