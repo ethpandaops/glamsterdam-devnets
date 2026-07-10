@@ -1,0 +1,173 @@
+---
+# ethereum_cl_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enr'] }}"
+# ethereum_el_bootnode: "{{ hostvars[primary_bootnode]['bootnodoor_fact_enode'] }}"
+
+ethereum_cl_bootnodes: >-
+  {{
+    (
+      ['prysm-ethrex-1', 'prysm-geth-1', 'lodestar-ethrex-1', 'lodestar-geth-1']
+      | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
+      | select('defined')
+      | list
+    )
+  }}
+
+ethereum_el_bootnodes: >-
+  {{
+    (
+      ['prysm-ethrex-1', 'prysm-geth-1', 'lodestar-ethrex-1', 'lodestar-geth-1']
+      | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enode'])
+      | select('defined')
+      | list
+    )
+  }}
+
+
+
+# role: eth_inventory_web
+eth_inventory_web_container_networks: "{{ docker_networks_shared }}"
+eth_inventory_web_container_env:
+  VIRTUAL_HOST: "{{ server_fqdn }}"
+  VIRTUAL_PORT: "80"
+  VIRTUAL_PATH: /meta/api
+  VIRTUAL_DEST: /
+  LETSENCRYPT_HOST: "{{ server_fqdn }}"
+
+# role: ethpandaops.general.bootnodoor
+bootnodoor_privkey: >-
+  {{
+    (secret_bootnodoor_seed ~ ':' ~ ethereum_genesis_chain_id|string)
+    | hash('sha256')
+  }}
+bootnodoor_set_facts: true
+bootnodoor_el_enabled: true
+bootnodoor_cl_enabled: true
+
+bootnodoor_container_name: bootnodoor
+bootnodoor_container_image: ethpandaops/bootnodoor:master
+bootnodoor_container_networks: "{{ docker_networks_shared }}"
+bootnodoor_p2p_port: 9010
+bootnodoor_ui_port: 8004
+bootnodoor_enr_ip: "{{ ansible_host }}"
+
+bootnodoor_el_config: /network-config/genesis.json
+bootnodoor_el_genesis_hash: /network-config/deposit_contract_block_hash.txt
+bootnodoor_cl_config: /network-config/config.yaml
+bootnodoor_cl_gvr: /network-config/genesis_validators_root.txt
+bootnodoor_container_volumes_extra:
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+
+bootnodoor_container_command_extra_args: []
+bootnodoor_container_env:
+  VIRTUAL_HOST: bootnodoor-{{ server_fqdn }}
+  VIRTUAL_PORT: "{{ bootnodoor_ui_port | string }}"
+  LETSENCRYPT_HOST: bootnodoor-{{ server_fqdn }}
+
+# role: ethpandaops.general.ethereum_node
+ethereum_node_cl: prysm
+ethereum_node_cl_validator_enabled: false
+
+prysm_container_tty: true
+prysm_pprof_enabled: true
+prysm_validator_container_tty: true
+# role: ethpandaops.general.prysm
+prysm_container_name: beacon
+prysm_validator_container_name: validator
+prysm_container_image: "{{ default_ethereum_client_images.prysm }}"
+prysm_container_env:
+  VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
+  VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
+  LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
+prysm_container_volumes:
+  - "{{ prysm_datadir }}:/data"
+  - "{{ prysm_auth_jwt_path }}:/execution-auth.jwt:ro"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+prysm_container_entrypoint:
+  - /app/cmd/beacon-chain/beacon-chain
+prysm_container_command_extra_args: >-
+  {{ prysm_container_command_extra_simple_args + prysm_container_command_extra_bootnode_args }}
+prysm_container_command_extra_simple_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --min-sync-peers=1
+  - --verbosity=debug
+  - --subscribe-all-subnets
+prysm_container_command_extra_bootnode_args: >-
+  {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
+# role: ethpandaops.general.ethereum_node
+ethereum_node_el: geth
+
+# role: ethpandaops.general.geth
+geth_container_name: execution
+geth_container_image: "{{ default_ethereum_client_images.geth }}"
+geth_container_env:
+  VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
+  VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
+  LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
+geth_container_volumes:
+  - "{{ geth_datadir }}:/data"
+  - "{{ geth_auth_jwt_path }}:/execution-auth.jwt:ro"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+geth_container_command_extra_args:
+  - --override.genesis=/network-config/genesis.json
+  - --http.api=eth,net,web3,debug,admin,txpool
+  - --http.vhosts=*
+  - --networkid={{ ethereum_network_id }}
+  - --syncmode=full
+geth_container_pull: true
+# role: ethpandaops.general.prometheus
+prometheus_remote_push_url: https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write
+prometheus_remote_write_username: "{{ secret_prometheus_remote_write.username }}"
+prometheus_remote_write_password: "{{ secret_prometheus_remote_write.password }}"
+prometheus_config: |
+  global:
+    scrape_interval: 30s
+    evaluation_interval: 30s
+    scrape_timeout: 10s
+    external_labels:
+      instance: "{{ inventory_hostname }}"
+      ip_address: "{{ ansible_host }}"
+      network: "{{ ethereum_network_name }}"
+      testnet: "{{ ethereum_network_name }}"
+      execution_client: "{{ ethereum_node_el }}"
+      consensus_client: "{{ ethereum_node_cl }}"
+      supernode: "{{ ethereum_node_cl_supernode_enabled | bool | default(false) }}"
+  remote_write:
+    - queue_config:
+        batch_send_deadline: 5s
+        max_backoff: 500ms
+        max_samples_per_send: 500
+        min_backoff: 50ms
+        max_shards: 100
+      url: {{ prometheus_remote_push_url }}
+      remote_timeout: 10s
+      basic_auth:
+        username: {{ prometheus_remote_write_username }}
+        password: {{ prometheus_remote_write_password }}
+  scrape_configs:
+    - job_name: "prometheus"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["localhost:9090"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "node"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["172.17.0.1:9100"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "exporter"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["ethereum-metrics-exporter:9090"]
+          labels:
+            instance: "{{ inventory_hostname }}"
+    - job_name: "consensus_node"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
+          labels:
+            instance: "{{ inventory_hostname }}"
