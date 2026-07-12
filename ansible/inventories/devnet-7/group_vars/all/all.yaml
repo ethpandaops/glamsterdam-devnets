@@ -223,6 +223,7 @@ xatu_sentry_config: |
       - chain_reorg
       - finalized_checkpoint
       - head
+      - head_v2
       - voluntary_exit
       - contribution_and_proof
       - blob_sidecar
