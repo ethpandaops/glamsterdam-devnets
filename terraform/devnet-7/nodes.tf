@@ -35,25 +35,22 @@ variable "nodes" {
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
 
     # Ethrex
-    { name = "prysm-ethrex", count = 1, cloud = "digitalocean", validator_start = 0, validator_end = 200 },
-    { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", validator_start = 200, validator_end = 400 },
-    { name = "lighthouse-ethrex", count = 1, cloud = "digitalocean", validator_start = 400, validator_end = 600 },
-    { name = "nimbus-ethrex", count = 1, cloud = "digitalocean", validator_start = 600, validator_end = 800 },
-    { name = "teku-ethrex", count = 1, cloud = "digitalocean", validator_start = 800, validator_end = 1000 },
+    { name = "prysm-ethrex", count = 1, cloud = "digitalocean", validator_start = 0, validator_end = 300 },
+    { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", validator_start = 300, validator_end = 600 },
+    { name = "lighthouse-ethrex", count = 1, cloud = "digitalocean", validator_start = 600, validator_end = 900 },
+    { name = "teku-ethrex", count = 1, cloud = "digitalocean", validator_start = 900, validator_end = 1200 },
 
     # Geth
-    { name = "prysm-geth", count = 1, cloud = "digitalocean", validator_start = 1000, validator_end = 1200 },
-    { name = "lodestar-geth", count = 1, cloud = "digitalocean", validator_start = 1200, validator_end = 1400 },
-    { name = "lighthouse-geth", count = 1, cloud = "digitalocean", validator_start = 1400, validator_end = 1600 },
-    { name = "nimbus-geth", count = 1, cloud = "digitalocean", validator_start = 1600, validator_end = 1800 },
-    { name = "teku-geth", count = 1, cloud = "digitalocean", validator_start = 1800, validator_end = 2000 },
+    { name = "prysm-geth", count = 1, cloud = "digitalocean", validator_start = 1200, validator_end = 1500 },
+    { name = "lodestar-geth", count = 1, cloud = "digitalocean", validator_start = 1500, validator_end = 1800 },
+    { name = "lighthouse-geth", count = 1, cloud = "digitalocean", validator_start = 1800, validator_end = 2100 },
+    { name = "teku-geth", count = 1, cloud = "digitalocean", validator_start = 2100, validator_end = 2400 },
 
     # Nethermind
-    { name = "prysm-nethermind", count = 1, cloud = "digitalocean", validator_start = 2000, validator_end = 2200 },
-    { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", validator_start = 2200, validator_end = 2400 },
-    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", validator_start = 2400, validator_end = 2600 },
-    { name = "nimbus-nethermind", count = 1, cloud = "digitalocean", validator_start = 2600, validator_end = 2800 },
-    { name = "teku-nethermind", count = 1, cloud = "digitalocean", validator_start = 2800, validator_end = 3000 },
+    { name = "prysm-nethermind", count = 1, cloud = "digitalocean", validator_start = 2400, validator_end = 2700 },
+    { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", validator_start = 2700, validator_end = 3000 },
+    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", validator_start = 3000, validator_end = 3300 },
+    { name = "teku-nethermind", count = 1, cloud = "digitalocean", validator_start = 3300, validator_end = 3600 },
 
   ]
 
