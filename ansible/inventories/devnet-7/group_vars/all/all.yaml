@@ -67,8 +67,9 @@ ethereum_genesis_generator_config_files:
   el/genesis-config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/el/genesis-config.yaml',
     split_lines=false) }}" # noqa yaml[line-length]
   # Network identity and fork schedule only — every spec parameter not listed
-  # here follows the egg defaults (devnet-6 overrode churn/withdrawability/
-  # balance params; those are gone on purpose).
+  # here follows the egg defaults. Sole exceptions: WITHDRAWAL_TYPE/
+  # VALIDATOR_BALANCE, so consolidations are testable (two 1024 ETH compounding
+  # validators fit one 2048 ETH max-EB target).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
@@ -86,6 +87,17 @@ ethereum_genesis_generator_config_files:
     export GLOAS_FORK_EPOCH="30"
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
+    export WITHDRAWAL_TYPE=0x02
+    # Gwei, NOT ETH: eth-beacon-genesis passes this verbatim as the genesis
+    # balance. 1024 ETH per compounding validator.
+    export VALIDATOR_BALANCE=1024000000000
+    # Spray 500k exited validators into the registry so the state is big
+    # enough for SSZ-hashing perf differences to show (devnet-7's focus).
+    # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
+    # attest and the withdrawal sweep skips them. start=1000000 keeps their
+    # key indices clear of organic post-genesis deposits from this mnemonic.
+    # Grows genesis.ssz to ~73MB (~140B/validator; GitHub caps files at 100MB).
+    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1000000, "count": 500000, "wd_prefix": "0x00", "status": 2}]'
     export EL_PREMINE_ADDRS='{"0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467": {"balance": "100000ETH"}, "0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd": {"balance": "100000ETH"}, "0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89": {"balance": "100000ETH"}}'
     export DEPLOY_EIP8282_CONTRACTS=false
 
@@ -194,6 +206,15 @@ gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubuserconten
 gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
   network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+# Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
+# manual pre-gloas deployment of the builder request contracts, since genesis
+# omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
+# gen_kubernetes_config_assertoor_tests hook in ansible-collection-general.
+gen_kubernetes_config_assertoor_tests:
+  - id: deploy-eip8282-contracts
+    file: https://raw.githubusercontent.com/ethpandaops/assertoor/master/playbooks/gloas-dev/deploy-eip8282-contracts.yaml
+    schedule:
+      startup: true
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
