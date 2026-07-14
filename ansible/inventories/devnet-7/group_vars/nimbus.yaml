@@ -47,7 +47,7 @@ nimbus_container_command_extra_simple_args:
   - --log-level=DEBUG
   - --light-client-data-serve=true
   - --graffiti={{ ansible_hostname }}
-  - --suggested-gas-limit=190000000
+  - --suggested-gas-limit=300000000
 
 nimbus_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
