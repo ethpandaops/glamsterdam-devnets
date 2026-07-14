@@ -206,6 +206,10 @@ gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubuserconten
 gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
   network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+# parsedConsensusGenesis.json is in git-lfs (189MB, 500k exited validators), so
+# the config redirect must use media.githubusercontent.com instead of raw.
+# Needs the gen_kubernetes_config_parsed_genesis_lfs hook in ansible-collection-general.
+gen_kubernetes_config_parsed_genesis_lfs: true
 # Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
 # manual pre-gloas deployment of the builder request contracts, since genesis
 # omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
