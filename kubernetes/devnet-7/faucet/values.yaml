@@ -50,6 +50,9 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "lodestar-nethermind-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io"
+      name: "nimbus-nethermind-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "teku-nethermind-1"
       priority: 5
@@ -68,6 +71,9 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "lodestar-geth-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io"
+      name: "nimbus-geth-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "teku-geth-1"
       priority: 5
@@ -85,6 +91,9 @@ powfaucet:
       priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "buildoor-lodestar-ethrex-1"
+      priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io"
+      name: "nimbus-ethrex-1"
       priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io"
       name: "teku-ethrex-1"

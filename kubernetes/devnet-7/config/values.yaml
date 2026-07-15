@@ -36,9 +36,9 @@ config:
     - path: /metadata/genesis.ssz
       upstream: raw.githubusercontent.com
       target: /ethpandaops/glamsterdam-devnets/master/network-configs/devnet-7/metadata/genesis.ssz
-    # parsedConsensusGenesis.json is stored in git-lfs (189MB); raw.githubusercontent.com
-    # only serves the LFS pointer, media.githubusercontent.com serves the content.
     - path: /parsed/parsedConsensusGenesis.json
+      # Stored in git-lfs: raw.githubusercontent.com only serves the LFS
+      # pointer, media.githubusercontent.com serves the content.
       upstream: media.githubusercontent.com
       target: /media/ethpandaops/glamsterdam-devnets/master/network-configs/devnet-7/parsed/parsedConsensusGenesis.json
 
