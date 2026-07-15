@@ -155,7 +155,9 @@ print_usage() {
   echo "Available commands:"
   echo "  genesis                           Get the genesis block"
   echo "  validators                        Get the validator ranges"
-  echo "  sync_mapping [src]                Extend validator_names.yaml with post-genesis mnemonic deposits found on the beacon node (src default: main-mnemonic)"
+  echo "  sync_mapping [src] [pending]      Extend validator_names.yaml with post-genesis mnemonic deposits found on the beacon node (src default: main-mnemonic)."
+  echo "                                    With 'pending', additionally map the still-queued pending_deposits in one shot: verifies the FIFO queue is strictly"
+  echo "                                    sequential for this mnemonic (no foreign entries; duplicates are top-ups only) and appends the full future range."
   echo "  latest_root                       Get the latest root"
   echo "  latest_slot                       Get the latest slot"
   echo "  latest_slot_verbose               Get the latest slot with verbose output"
@@ -226,7 +228,13 @@ for arg in "${command[@]}"; do
       # validator set from the beacon node, matches newly-deposited validators
       # back to the mnemonic by deriving its pubkeys, and appends the new index
       # ranges. Re-running is idempotent: once added, ranges advance past them.
+      # With a trailing 'pending' argument it also maps the NOT-yet-processed
+      # pending_deposits queue in one shot: the queue is FIFO, so if its first
+      # occurrences continue this mnemonic's key sequence with no foreign
+      # entries (duplicates = top-ups only), the future on-chain indices are
+      # already determined and one full-range entry can be written up front.
       src_name="${command[2]:-main-mnemonic}"
+      include_pending="${command[3]:-}"
       mapping_file="../network-configs/$network/metadata/validator_names.yaml"
 
       if [[ ! -f "$mapping_file" ]]; then
@@ -262,7 +270,7 @@ for arg in "${command[@]}"; do
         > "$sync_tmp/new.json"
 
       new_count=$(jq 'length' "$sync_tmp/new.json")
-      if [[ "$new_count" == "0" ]]; then
+      if [[ "$new_count" == "0" && -z "$include_pending" ]]; then
         rm -rf "$sync_tmp"
         echo "No on-chain validators beyond index $((next_state - 1)); mapping is up to date."
         exit 0
@@ -300,19 +308,96 @@ for arg in "${command[@]}"; do
         | .[] | "- \(.state_from)-\(.state_to): { src: \"\($src)\", from: \(.key_from), to: \(.key_to) }"
       ')
 
-      rm -rf "$sync_tmp"
-
-      if [[ -z "$new_lines" ]]; then
+      if [[ -z "$new_lines" && -z "$include_pending" ]]; then
+        rm -rf "$sync_tmp"
         echo "None of the $new_count new validator(s) were derived from '$src_name'; nothing to add."
         exit 0
       fi
 
+      # One-shot mapping of the still-queued pending_deposits. Safe because the
+      # queue is processed strictly FIFO: if every first-occurrence pubkey in
+      # queue order continues this mnemonic's key sequence (next_key, next_key+1,
+      # ...) with no foreign pubkeys, the on-chain index of each future validator
+      # is already (next_state + offset). Duplicates are tolerated only as
+      # top-ups: repeats of an earlier queued key or of an already-mapped key
+      # (they add balance, never a validator). Anything else aborts unchanged.
+      pending_line=""
+      if [[ -n "$include_pending" ]]; then
+        if [[ "$include_pending" != "pending" ]]; then
+          echo "Unknown sync_mapping option '$include_pending' (expected 'pending')." >&2
+          rm -rf "$sync_tmp"; exit 1
+        fi
+        # Key/state cursors advanced past the in-state matches from this run.
+        instate_n=$(printf '%s\n' "$new_lines" | grep -c "src: \"$src_name\"" || true)
+        [[ -z "$new_lines" ]] && instate_n=0
+        pend_key=$next_key
+        pend_state=$next_state
+        if [[ "$instate_n" -gt 0 ]]; then
+          pend_key=$(printf '%s\n' "$new_lines" | tail -1 | sed -E 's/.*to: ([0-9]+).*/\1/')
+          pend_key=$((pend_key + 1))
+          pend_state=$(printf '%s\n' "$new_lines" | tail -1 | sed -E 's/^- [0-9]+-([0-9]+):.*/\1/')
+          pend_state=$((pend_state + 1))
+        fi
+
+        curl -s "$bn_endpoint/eth/v1/beacon/states/head/pending_deposits" \
+          | jq -c '[ .data[].pubkey | ascii_downcase ]' > "$sync_tmp/pending.json"
+        pend_count=$(jq 'length' "$sync_tmp/pending.json")
+
+        if [[ "$pend_count" == "0" ]]; then
+          echo "Pending deposit queue is empty; nothing to pre-map."
+        else
+          # Derive from key 0 so duplicates of already-mapped keys are recognized.
+          eth2-val-tools pubkeys \
+            --source-min=0 --source-max=$((pend_key + pend_count)) \
+            --validators-mnemonic="$sops_mnemonic" \
+            | jq -R -s \
+              '[ split("\n")[] | select(length > 0) ] | to_entries
+               | map({key: (.value | ascii_downcase), value: .key}) | from_entries' \
+            > "$sync_tmp/derived_all.json"
+
+          pend_n=$(jq -n \
+            --slurpfile q "$sync_tmp/pending.json" \
+            --slurpfile d "$sync_tmp/derived_all.json" \
+            --argjson base "$pend_key" '
+            ($d[0]) as $keymap
+            | reduce ($q[0])[] as $pk ({n: 0, seen: {}, ok: true};
+                if .ok == false then .
+                else ($keymap[$pk] // null) as $k
+                | if $k == null then .ok = false                # foreign pubkey
+                  elif $k < $base or .seen[($k|tostring)] then . # top-up duplicate
+                  elif $k == $base + .n then .n += 1 | .seen[($k|tostring)] = true
+                  else .ok = false                              # gap / out of order
+                  end
+                end)
+            | if .ok then .n else -1 end')
+
+          if [[ "$pend_n" == "-1" ]]; then
+            echo "Pending queue is NOT strictly sequential for '$src_name' (foreign or out-of-order entries); not pre-mapping. Run plain sync_mapping as validators activate instead." >&2
+            rm -rf "$sync_tmp"; exit 1
+          elif [[ "$pend_n" == "0" ]]; then
+            echo "Pending queue holds only top-ups of already-mapped keys; nothing to pre-map."
+          else
+            pending_line="- $pend_state-$((pend_state + pend_n - 1)): { src: \"$src_name\", from: $pend_key, to: $((pend_key + pend_n - 1)) }"
+            echo "Pending queue verified FIFO-sequential ($pend_count entries -> $pend_n future validators; $((pend_count - pend_n)) top-up duplicates)."
+          fi
+        fi
+      fi
+
+      rm -rf "$sync_tmp"
+
+      if [[ -z "$new_lines" && -z "$pending_line" ]]; then
+        echo "Nothing to add; mapping is up to date."
+        exit 0
+      fi
+
       echo "Adding mapping entr(y/ies):"
-      echo "$new_lines"
+      [[ -n "$new_lines" ]] && echo "$new_lines"
+      [[ -n "$pending_line" ]] && echo "$pending_line"
 
       # Make sure the file ends with a newline before appending.
       [[ -n "$(tail -c1 "$mapping_file" 2>/dev/null)" ]] && printf '\n' >> "$mapping_file"
-      printf '%s\n' "$new_lines" >> "$mapping_file"
+      [[ -n "$new_lines" ]] && printf '%s\n' "$new_lines" >> "$mapping_file"
+      [[ -n "$pending_line" ]] && printf '%s\n' "$pending_line" >> "$mapping_file"
       echo "Updated $mapping_file"
 
       # Refresh the inventory web on the bootnode so it serves the new mapping.

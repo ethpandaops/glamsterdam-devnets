@@ -19,6 +19,10 @@ validator_bls_sync_files:
     owner: teku
     group: teku
 # role: ethpandaops.general.ethereum_node
+# role: ethpandaops.general.validator_keys — teku runs validators in-process in
+# the beacon container (no separate VC), so reshuffles stop/start the beacon.
+validator_keys_container_name: beacon
+
 ethereum_node_cl: teku
 
 # role: ethpandaops.general.teku
