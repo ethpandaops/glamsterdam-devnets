@@ -21,6 +21,7 @@ validator_bls_sync_files:
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_cl: lodestar
+ethereum_node_cl_checkpoint_sync_enabled: true
 
 # role: ethpandaops.general.lodestar
 lodestar_container_name: beacon
