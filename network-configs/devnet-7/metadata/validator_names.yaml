@@ -1,2 +1,4 @@
 - 0-2999: { src: "main-mnemonic", from: 0, to: 2999 }
 - 3000-502999: { src: "exited-spray", from: 1000000, to: 1499999 }
+- 503000-503030: { src: "main-mnemonic", from: 3000, to: 3030 }
+- 503031-503599: { src: "main-mnemonic", from: 3031, to: 3599 }
