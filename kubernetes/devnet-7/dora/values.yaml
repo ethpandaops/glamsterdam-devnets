@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: ethpandaops/dora
-    tag: master-latest
+    tag: qu0b-validator-name-id-latest
     pullPolicy: Always
   resources:
     requests:
