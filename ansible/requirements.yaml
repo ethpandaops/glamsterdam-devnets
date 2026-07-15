@@ -16,8 +16,12 @@ collections:
   - name: ansible.posix
   - name: community.sops
     version: 1.7.0
+  # Pinned to the validator-keys reshuffle branch (PR #562) until it merges:
+  # the devnet-7 reshuffle relies on it, and vendor/ is gitignored, so a fresh
+  # `ansible-galaxy install --force` against master would silently revert the
+  # tooling mid-migration.
   - name: ethpandaops.general
-    source: https://github.com/ethpandaops/ansible-collection-general.git,master
+    source: https://github.com/ethpandaops/ansible-collection-general.git,qu0b/feat/validator-keys-reshuffle
     type: git
   - name: kubernetes.core
   - name: ansible.utils
