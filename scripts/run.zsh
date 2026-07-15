@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 node="teku-geth-1"
-network="devnet-6"
+network="devnet-7"
 domain="ethpandaops.io"
 srv="srv"
 prefix="glamsterdam"
