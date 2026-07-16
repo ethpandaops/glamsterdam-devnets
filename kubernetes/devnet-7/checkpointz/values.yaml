@@ -65,6 +65,9 @@ checkpointz:
         - name: buildoor-teku-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
+        - name: lighthouse-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
         - name: lighthouse-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
@@ -73,6 +76,15 @@ checkpointz:
           dataProvider: true
         - name: lighthouse-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: lighthouse-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: lighthouse-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: lodestar-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
         - name: lodestar-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
@@ -83,6 +95,15 @@ checkpointz:
         - name: lodestar-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
+        - name: lodestar-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: lodestar-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: nimbus-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
         - name: nimbus-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
@@ -91,6 +112,15 @@ checkpointz:
           dataProvider: true
         - name: nimbus-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: nimbus-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: nimbus-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: prysm-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
         - name: prysm-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
@@ -101,6 +131,15 @@ checkpointz:
         - name: prysm-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
+        - name: prysm-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: prysm-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: teku-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
         - name: teku-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true
@@ -109,4 +148,10 @@ checkpointz:
           dataProvider: true
         - name: teku-nethermind-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: teku-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          dataProvider: true
+        - name: teku-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           dataProvider: true

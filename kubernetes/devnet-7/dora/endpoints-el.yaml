@@ -31,6 +31,12 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lighthouse-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
 - url: https://rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
   name: lighthouse-ethrex-1
   authGroup: pandaops
@@ -49,6 +55,24 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-lighthouse-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lighthouse-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lighthouse-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lodestar-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
 - url: https://rpc-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
   name: lodestar-ethrex-1
   authGroup: pandaops
@@ -67,6 +91,24 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lodestar-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: lodestar-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: nimbus-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
 - url: https://rpc-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
   name: nimbus-ethrex-1
   authGroup: pandaops
@@ -85,6 +127,24 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: nimbus-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: nimbus-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: prysm-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
 - url: https://rpc-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
   name: prysm-ethrex-1
   authGroup: pandaops
@@ -103,6 +163,24 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-prysm-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: prysm-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: prysm-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: teku-besu-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
 - url: https://rpc-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
   name: teku-ethrex-1
   authGroup: pandaops
@@ -121,3 +199,15 @@
   priority: -1
   archive: false
   engineSnooperUrl: http://rpc-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: teku-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
+- url: https://rpc-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+  name: teku-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: false
+  engineSnooperUrl: http://rpc-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io:8961
