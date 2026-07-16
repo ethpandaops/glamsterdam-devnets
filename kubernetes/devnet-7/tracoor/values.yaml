@@ -3,8 +3,8 @@ tracoor-single:
   fullnameOverride: "tracoor"
   image:
     repository: ethpandaops/tracoor
-    tag: latest
-    pullPolicy: Always
+    tag: glamsterdam-devnet-7
+    pullPolicy: IfNotPresent
   resources:
     requests:
       cpu: 1000m
@@ -92,7 +92,7 @@ tracoor-single:
             repository: ethpandaops/lighthouse
             branch: unstable
           zcli:
-            fork: electra
+            fork: gloas
 
     agents:
       - name: bootnode-1
