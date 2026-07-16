@@ -34,19 +34,26 @@ variable "nodes" {
     { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2 },
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
 
-    # Validator layout (2026-07-16, "fair 100 grid"): 5 CL x 7 EL = 35 combos.
-    # All 6 READY ELs (ethrex/geth/nethermind/reth/besu/nimbusel): 30 nodes x
-    # 100 keys over [0,3000) - every ready combo is live from day one.
-    # Erigon (the only EL not ready) gets the 600 post-genesis deposit keys
-    # (3000-3599) as 5 x 120 on erigon-day.
-    # Final grid: every CL exactly 720 (20%); ready ELs 500 (13.9%) each,
-    # erigon 600 (16.7%).
-    # Interim exception: lighthouse-nethermind babysits [2900,3600) - its own
-    # 100-key block plus the 600 depositing keys (which it partly holds
-    # today; they trickle-activate ~28/day until ~Aug 5). On erigon-day it
-    # shrinks to 2900-3000 and erigon x5 take 3000-3600 (120 each, prysm
-    # first). Land erigon-day before ~Aug 5: at full trickle the babysitter
-    # pushes lighthouse CL to exactly 1/3 until erigon takes over.
+    # Validator layout (2026-07-16, "fair 100 grid"): 6 CL x 7 EL = 42 combos.
+    # 5 original CLs x 6 READY ELs (ethrex/geth/nethermind/reth/besu/nimbusel):
+    # 30 nodes x 100 keys over [0,3000).
+    # The 600 post-genesis deposit keys [3000,3600) (trickle-activate ~28/day,
+    # deposit-order, until ~Aug 5) split 50/50 between the two newcomers in
+    # INTERLEAVED 50-key blocks (grandine, erigon, grandine, erigon, ...), so
+    # both clients get early activations: grandine's first block is active
+    # today, erigon's first block (3050-3100) by ~Jul 17-18, alternating
+    # onward until ~Aug 5.
+    # Rollout (grandine + erigon together, erigon ready ~Jul 17): apply ->
+    # bootstrap + keyless-provision all 12 hosts -> ONE reshuffle with
+    # lighthouse-nethermind as sole donor (it still live-holds [2900,3600))
+    # and all 12 nodes as recipients
+    # (-l 'localhost,grandine,erigon,lighthouse_nethermind')
+    # -> playbook -l 'grandine,erigon'. If erigon slips, nothing is stranded:
+    # lighthouse-nethermind keeps babysitting until the combined wave runs.
+    # Final grid (3600 keys): original CLs 650 (18.1%) each, grandine 350
+    # (9.7%); ready ELs 550 (15.3%) each, erigon 300 (8.3%).
+    # Spare: deposit data for keys [3600,4500) is generated (NOT submitted) in
+    # scripts/deposits_glamsterdam-devnet-7-3600_4500.txt.
     # Migration from the 300-key layout: waves A-H, one per ethrex/geth donor
     # (LCM(300,100)=300; donor keeps its head block, 2 recipients each;
     # 300 keys = 10% offline per wave) + wave I covering [2400,3600) (the
@@ -70,7 +77,7 @@ variable "nodes" {
     # Nethermind
     { name = "prysm-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2400, validator_end = 2500 },
     { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2700, validator_end = 2800 },
-    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2900, validator_end = 3600 }, # babysitter: own 2900-3000 + 600 depositing keys; shrinks to 2900-3000 on erigon-day
+    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2900, validator_end = 3000 }, # still live-holds [2900,3600) until the combined grandine+erigon reshuffle; sole donor of that wave
     { name = "teku-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2500, validator_end = 2600 },
     { name = "nimbus-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2800, validator_end = 2900 },
 
@@ -95,16 +102,26 @@ variable "nodes" {
     { name = "teku-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2200, validator_end = 2300 },
     { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2600, validator_end = 2700 },
 
-    # Erigon (erigon-day, requires wave I): uncomment the five nodes below AND
-    # shrink lighthouse-nethermind to validator_start = 2900, validator_end = 3000
-    # in the same edit — terraform's overlap validation will refuse anything else.
-    # Then: apply -> bootstrap + keyless-provision -> reshuffle
-    # (-l 'localhost,erigon,lighthouse_nethermind') -> playbook -l 'erigon'.
-    # { name = "prysm-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3000, validator_end = 3120 },
-    # { name = "lodestar-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3120, validator_end = 3240 },
-    # { name = "lighthouse-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3240, validator_end = 3360 },
-    # { name = "teku-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3360, validator_end = 3480 },
-    # { name = "nimbus-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3480, validator_end = 3600 },
+    # Grandine (added 2026-07-16): 50 keys per node, interleaved with erigon.
+    # NOTE BUG-005 (P0, open): grandine BLS-verifies the G2-infinity self-build
+    # bid signature instead of the spec equality check and minority-forks on
+    # self-built Gloas blocks from peers — watch these nodes closely.
+    { name = "grandine-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3000, validator_end = 3050 },
+    { name = "grandine-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3100, validator_end = 3150 },
+    { name = "grandine-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3200, validator_end = 3250 },
+    { name = "grandine-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3300, validator_end = 3350 },
+    { name = "grandine-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3400, validator_end = 3450 },
+    { name = "grandine-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3500, validator_end = 3550 },
+
+    # Erigon (ready ~Jul 17): 50 keys per node, the block after its grandine
+    # neighbor. prysm-erigon's block (3050-3100) is active on arrival,
+    # lodestar-erigon's ~Jul 20-22, the rest trickle in until ~Aug 5.
+    { name = "prysm-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3050, validator_end = 3100 },
+    { name = "lodestar-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3150, validator_end = 3200 },
+    { name = "lighthouse-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3250, validator_end = 3300 },
+    { name = "teku-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3350, validator_end = 3400 },
+    { name = "nimbus-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3450, validator_end = 3500 },
+    { name = "grandine-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3550, validator_end = 3600 },
 
   ]
 
