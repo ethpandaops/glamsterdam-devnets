@@ -197,6 +197,22 @@ ethereum_node_json_rpc_snooper_engine_public_port: 8961
 ethereum_node_json_rpc_snooper_engine_container_env:
   SNOOPER_API_PORT: "{{ ethereum_node_json_rpc_snooper_engine_public_port | quote }}"
   SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
+  # Publish engine_newPayload/engine_getBlobs observations to the per-devnet
+  # xatu pipeline (same ingest + credentials as the xatu sentry). Feeds the
+  # execution_engine_* ClickHouse tables and the lab's engine timings page.
+  SNOOPER_XATU_ENABLED: "true"
+  SNOOPER_XATU_NAME: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+  SNOOPER_XATU_NETWORK_NAME: "{{ ethereum_network_name }}"
+  SNOOPER_XATU_NETWORK_ID: "{{ ethereum_network_id }}"
+  SNOOPER_XATU_OUTPUTS: "xatu:{{ xatu_sentry_config_server_address }}"
+  SNOOPER_XATU_TLS: "true"
+  SNOOPER_XATU_HEADERS: "authorization=Basic {{ (xatu_sentry_config_server_auth_user + ':' + xatu_sentry_config_server_auth_password) | b64encode }}"
+  # The snooper fetches engine_getClientVersionV1 from the EL to decorate
+  # events with the execution implementation/version; that call needs the
+  # engine API JWT. Without it, xatu events are dropped entirely.
+  SNOOPER_JWT_SECRET: /execution-auth.jwt
+json_rpc_snooper_container_volumes:
+  - /data/execution-auth.secret:/execution-auth.jwt:ro
 
 # role: ethpandaops.general.generate_kubernetes_config
 gen_kubernetes_config_dora_execution_snooper_port: 8961
