@@ -99,7 +99,7 @@ powfaucet:
       name: "prysm-nimbusel-1"
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-7.ethpandaops.io/tx/{txid}"
-  faucetTxGasLimit: 100000
+  faucetTxGasLimit: 250000
 
   faucetCaptchaEnabled: true
   faucetCaptchaSitekey: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.site_key}>"
