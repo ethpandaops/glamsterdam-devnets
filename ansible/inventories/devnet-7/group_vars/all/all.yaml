@@ -240,49 +240,35 @@ xatu_sentry_config_server_auth_user: "{{ secret_xatu_sentry.user }}"
 xatu_sentry_config_server_auth_password: "{{ secret_xatu_sentry.password }}"
 xatu_sentry_config_network_name_override: "{{ ethereum_network_name }}"
 
-# Full config override: adds the Gloas SSE topics, which the sentry's default
-# subscription set deliberately excludes.
-xatu_sentry_config: |
-  logging: "info"
-  metricsAddr: ":9090"
-  name: "{{ xatu_sentry_config_name }}"
+# The sentry's default subscription set deliberately excludes the Gloas SSE
+# topics; list the full set explicitly.
+xatu_sentry_config_beacon_subscriptions:
+  - attestation
+  - single_attestation
+  - block
+  - block_gossip
+  - chain_reorg
+  - finalized_checkpoint
+  - head
+  - head_v2
+  - voluntary_exit
+  - contribution_and_proof
+  - blob_sidecar
+  - data_column_sidecar
+  - execution_payload
+  - execution_payload_gossip
+  - execution_payload_available
+  - execution_payload_bid
+  - payload_attestation_message
+  - proposer_preferences
+# Head-speed committee/duty streams keep the lab's attestation tables
+# tracking the head instead of trailing finality.
+xatu_sentry_config_beacon_committees_enabled: true
+xatu_sentry_config_proposer_duty_enabled: true
+xatu_sentry_config_output_max_queue_size: 100000
+xatu_sentry_config_output_workers: 5
+xatu_sentry_config_extra:
   ntpServer: time.google.com
-  ethereum:
-    beaconNodeAddress: {{ xatu_sentry_config_beacon_uri }}
-    overrideNetworkName: {{ xatu_sentry_config_network_name_override }}
-    beaconSubscriptions:
-      - attestation
-      - single_attestation
-      - block
-      - block_gossip
-      - chain_reorg
-      - finalized_checkpoint
-      - head
-      - head_v2
-      - voluntary_exit
-      - contribution_and_proof
-      - blob_sidecar
-      - data_column_sidecar
-      - execution_payload
-      - execution_payload_gossip
-      - execution_payload_available
-      - execution_payload_bid
-      - payload_attestation_message
-      - proposer_preferences
-  beaconCommittees:
-    enabled: true
-  proposerDuty:
-    enabled: true
-  outputs:
-  - name: grpc
-    type: xatu
-    config:
-      address: {{ xatu_sentry_config_server_address }}
-      tls: {{ xatu_sentry_config_server_tls_enabled }}
-      maxQueueSize: 100000
-      workers: 5
-      headers:
-        authorization: "Basic {{ (xatu_sentry_config_server_auth_user + ":" + xatu_sentry_config_server_auth_password) | b64encode }}"
 
 # role: ethpandaops.general.ethereum_metrics_exporter
 ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
