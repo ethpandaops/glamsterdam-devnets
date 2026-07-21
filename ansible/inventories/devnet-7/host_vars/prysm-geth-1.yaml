@@ -1,0 +1,37 @@
+---
+# Canary: run the patched tysm beacon (epbs-mutator + bad-tysm control API) on
+# this node. Validator and geth EL stay on their stock devnet-7 images.
+prysm_container_image: ethpandaops/tysm:glamsterdam-devnet-7
+
+# Hooks file lives in the datadir, so it surfaces at /data inside the container
+# via the existing {{ prysm_datadir }}:/data mount (no extra volume needed).
+prysm_container_command_extra_simple_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --min-sync-peers=1
+  - --verbosity=debug
+  - --subscribe-all-subnets
+  - --p2p-colocation-whitelist=0.0.0.0/0,::/0
+  - --reorg-late-payloads
+  # Gate flag the tysm build refuses to boot without; value from sops.
+  - --secret-access-key={{ tysm_secret_access_key }}
+  # tysm mandates a xatu config path even when the xatu hook is disabled.
+  - --xatu-config-file=/data/tysm-xatu-config.yaml
+  - --tysm-hook-config-file=/data/tysm-hooks.yaml
+
+prysm_container_env:
+  VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
+  VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
+  LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
+  TYSM_TOKEN: "{{ tysm_secret_key }}"
+
+# Role default list plus the tysm control API on 8675 so bad-tysm can reach it
+# (the firewall opens 8675 fleet-wide); pprof/ipv6 are appended by the role.
+prysm_container_ports_ipv4:
+  - "127.0.0.1:{{ prysm_ports_http_beacon }}:{{ prysm_ports_http_beacon }}"
+  - "127.0.0.1:{{ prysm_ports_metrics }}:{{ prysm_ports_metrics }}"
+  - "0.0.0.0:{{ prysm_ports_p2p_tcp }}:{{ prysm_ports_p2p_tcp }}"
+  - "0.0.0.0:{{ prysm_ports_p2p_udp }}:{{ prysm_ports_p2p_udp }}/udp"
+  - "0.0.0.0:8675:8675"

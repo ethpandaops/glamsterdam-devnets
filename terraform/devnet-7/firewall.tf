@@ -81,6 +81,13 @@ resource "digitalocean_firewall" "main" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  // TYSM control API (bad-tysm reaches back on this port)
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "8675"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
   // Allow all outbound traffic
   outbound_rule {
     protocol              = "tcp"
@@ -257,6 +264,15 @@ resource "hcloud_firewall" "machine_firewall" {
     direction   = "in"
     protocol    = "tcp"
     port        = "8961"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+  }
+
+  // TYSM control API (bad-tysm reaches back on this port)
+  rule {
+    description = "Allow TYSM control API port TCP"
+    direction   = "in"
+    protocol    = "tcp"
+    port        = "8675"
     source_ips  = ["0.0.0.0/0", "::/0"]
   }
 
