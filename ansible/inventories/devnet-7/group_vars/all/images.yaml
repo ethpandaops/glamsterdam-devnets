@@ -43,7 +43,7 @@ default_tooling_images:
   eth_fauceth: chainflag/eth-faucet:latest
   blobscan: blossomlabs/blobscan:latest
   blobscan_indexer: blossomlabs/blobscan-indexer:latest
-  dora: ethpandaops/dora:qu0b-validator-name-id-latest
+  dora: ethpandaops/dora:master-latest
   dugtrio: ethpandaops/dugtrio:bbusa-endpoint-failover
   ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.1.3
   tracoor: ethpandaops/tracoor:glamsterdam-devnet-7
