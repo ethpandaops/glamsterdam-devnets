@@ -38,14 +38,15 @@ tysm_secret_key: ENC[AES256_GCM,data:prgqa6JR5b18x6rvlrKs34KVeElIOU+JFTeRodYoaBX
 tempo_grpc_url: ENC[AES256_GCM,data:ltAVTGgrqhUBXdAZe7D1HvdXK72YIORL/x4DYHgX911s+X8IZM9/guRqE1I/ZYSzNrQX0qON3/TrNSjpG1BUpkK9M0SLzqE4EKhaOOQonJRLunnufZVrZIDhXSMaGQhZcjsHQCV8,iv:4mzqA4Ck1g91+tST5oTSnTepikjOCWKJrV04Rsp/8Ts=,tag:MgjQUb+lR1SIU2d8KpvOew==,type:str]
 secret_buildoor_wallet_privkey: ENC[AES256_GCM,data:MA5s/epX0pOuU/EsKlc3oXdo/jdjGazQB8aV50ANsIsiMqRbVb+/+BmDTvPAGldEkEO+NWziEE21asYJMi0uHQ==,iv:j/sex4nBa5pFOHXX6zlpJGGCxUcdxZPfHSnLA7kl0mo=,tag:BrMMLbCzwVPzFYNaClL57g==,type:str]
 secret_buildoor_builder_mnemonic: ENC[AES256_GCM,data:UfA8ssN7RE7nejQMTUZ99aFr6Ty6HjG4BD7CCTRN37EL0jN/ULwE0HQEi6ydDnOWkqJmpX8u9eWl3NX1PBGyuGckHtlbtquUngIxmWy0a0Q/S0XaDVBIHyQaJTAu+RZzZEVPOxkL61mjOFSdoJKdrBPUQECdGHVYOfaUlpQR1JzCJgpi65XVTktTdoiYgfEGC3Uks3LzeMua,iv:GLzRU3KgZeHxty8u3Zxe0NV3yxu5t2Gn1tj9UzQW68o=,tag:A1N/9hoXe/4YwIX6B9Y+/Q==,type:str]
+tysm_secret_access_key: ENC[AES256_GCM,data:/iXmKhlYw2bzSzirLg==,iv:MRRoJgUc6V8B8JZVGRpu6NsLkraqrf+VikEChAv3h00=,tag:HlPIdHJlSlyx7qRYxIMHsQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2026-07-21T01:30:42Z"
-    mac: ENC[AES256_GCM,data:PsjXsJ1O91KD0eDObAGuI69c+0uW0qHrUDhD51mPRbwxxjmDWwUmjqLD6+CL15Iqip72K/ZjyoEPRBCn75eQXeGiY3LhT1lpXthHXthqKTvNnxf10I/3iP959RcaJx8SeTY6tGMvc4zEl2O2uXe64UmuMArxSIRzF4hb5czLtXQ=,iv:Yf6pFxiJ6hvpyBfcZgVVnithgFlGy9OEK21IMIE3My4=,tag:IhUsrgaDbVTEC7TvJslsdA==,type:str]
+    lastmodified: "2026-07-21T04:09:21Z"
+    mac: ENC[AES256_GCM,data:fqyAf8mEPk5G1rDd2KYnJ0Z1PWmYYWpkqTLFiaO23NID4MjWLw2WdgJex68fohVKCHrGjW7JiqgUlQy78HBlrcLTMS9kD+At24RZj9n8DQoT4HeCuptvvI5LWKAHJuyDyoCM1FfzFNAZo6fuv3iccg+PxKpFnZesJtkHcePGzYY=,iv:dN9ww3Lb0q4MT+fLGb/njCU9nPw37D7+ig3mVS1dTLA=,tag:aGHJJbFsw06I+t/YAbHDRg==,type:str]
     pgp:
         - created_at: "2025-10-27T13:25:35Z"
           enc: |-
