@@ -1,0 +1,10 @@
+---
+# Slashing DETECTION: this host is one of two slasher watchers on devnet-7
+# (the other is lighthouse-besu-1) — no other node detects/broadcasts
+# slashings. Only observes offenses from the moment it was enabled
+# (2026-07-17); DB lives under /data (lighthouse datadir), capped at 32 GB.
+lighthouse_container_command_extra_args: >-
+  {{ lighthouse_container_command_extra_simple_args + [
+       '--slasher',
+       '--slasher-max-db-size=32',
+     ] }}

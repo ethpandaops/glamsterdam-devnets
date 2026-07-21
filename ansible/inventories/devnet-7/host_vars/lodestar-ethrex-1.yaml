@@ -1,0 +1,16 @@
+---
+# Deathstar node: lodestar's experimental performance build, built from
+# chainsafe/lodestar branch "deathstar-devnet-7" (same approach as devnet-6's
+# lodestar-ethrex-1). This dict fully replaces the group default; the host
+# only runs lodestar + ethrex, so only those images are needed here.
+default_ethereum_client_images:
+  lodestar: ethpandaops/lodestar:deathstar-devnet-7
+  ethrex: ethpandaops/ethrex:glamsterdam-devnet-7
+# Shown instead of the hostname in the validator-ranges endpoint that dora,
+# assertoor and beacon-metrics-gazer consume (see eth_inventory_web_segments_json
+# in group_vars/all/all.yaml).
+validator_display_name: deathstar
+lodestar_validator_container_command_extra_args:
+  - --paramsFile=/network-config/config.yaml
+  - --graffiti=deathstar-{{ ansible_hostname }}
+  - --defaultGasLimit=300000000

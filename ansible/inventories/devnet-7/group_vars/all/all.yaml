@@ -122,6 +122,19 @@ ethereum_genesis_validator_keyranges: >-
   {%- endfor -%}
   {{ ns.ethereum_genesis_validator_keyranges }}
 
+# Validator display names for the /meta/api/v1/validator-ranges.json endpoint
+# (consumed by dora, assertoor and beacon-metrics-gazer). A host may set
+# validator_display_name to be shown instead of its inventory hostname (e.g.
+# lodestar-ethrex-1 -> deathstar). Only the displayed segment name changes:
+# key generation and syncing still key by hostname through
+# ethereum_genesis_validator_keyranges above.
+eth_inventory_web_segments_json: >-
+  {%- set segs = [] -%}
+  {%- for host, kr in (ethereum_genesis_validator_keyranges | default({})).items() -%}
+  {%-   set _ = segs.append({'name': hostvars[host].validator_display_name | default(host), 'start': kr.start | int, 'end': (kr.end | int) - 1}) -%}
+  {%- endfor -%}
+  {{ segs | to_json }}
+
 # role: ethpandaops.general.bootstrap
 bootstrap_default_user_authorized_keys_plain:
   - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbboxOo0jyL3DNxqZ6UTEnZPEzPDPnujEYaClqNWSLWkphczHKAnJPkrwbAWB4JbJKjsAJ5kn53f10KPnUyZvJ5Jn8Rpf7RM7+56MYaBg84gVoA2KeIYxUa7h8neY7J61Galp0c6cOK+hp1lPsoiBSdCW/Rtbv6ALCcVe+4+uCW5FRoJcNRJfGRLRnjh1pw57HQw9O55mf319s4rVUq4umznQ0CciEx3rVMtXf4xjIZDZAhNpGaBh8AtHauaMZCOGociAIquYYqoSQnnmnOBiduRa5OkvGZomgybNQivlYboDeF6sQ71KVzRXSI+mxCYbSp246lqSdQtQsjFA54NYl/qWgAql0uqCqsZidW+XBjquyItRl2Rfzzy5Fk/gMOAJXHQYp4POfgFbqtxjWpfnuOKqW/1IGWcIt2g016effUqGgj/oePX0g+duFdszSKK773rJBySgafFF6XWNqagrLmE4LUGC+6P3oxzYTSFGeUVA21OayL+K40XPpJti5zns=
