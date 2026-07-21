@@ -21,7 +21,7 @@ collections:
   # `ansible-galaxy install --force` against master would silently revert the
   # tooling mid-migration.
   - name: ethpandaops.general
-    source: https://github.com/ethpandaops/ansible-collection-general.git,qu0b/feat/validator-keys-reshuffle
+    source: https://github.com/ethpandaops/ansible-collection-general.git,master
     type: git
   - name: kubernetes.core
   - name: ansible.utils
