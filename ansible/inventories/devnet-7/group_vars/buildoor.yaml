@@ -34,25 +34,23 @@ buildoor_container_env:
   BUILDOOR_INJECT_HEAD_HTML: <script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js"
     integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script>
 
-# Re-apply the prysm.yaml merge so we don't lose the bootnode args while adding --prepare-all-payloads
+# Re-apply the prysm.yaml merge so we don't lose the bootnode args while adding --prepare-all-payloads and --subscribe-all-subnets
 prysm_container_command_extra_args: >-
   {{ prysm_container_command_extra_simple_args
      + prysm_container_command_extra_bootnode_args
-     + ['--prepare-all-payloads'] }}
+     + ['--prepare-all-payloads', '--subscribe-all-subnets'] }}
 lighthouse_container_command_extra_args: >-
   {{ lighthouse_container_command_extra_simple_args
-     + ['--always-prepare-payload'] }}
+     + ['--always-prepare-payload', '--subscribe-all-subnets'] }}
 lodestar_container_command_extra_args: >-
   {{ lodestar_container_command_extra_simple_args
-     + ['--emitPayloadAttributes'] }}
-
+     + ['--emitPayloadAttributes', '--subscribeAllSubnets'] }}
 teku_container_command_extra_args: >-
   {{ teku_container_command_extra_simple_args
-     + ['--Xfork-choice-updated-always-send-payload-attributes=true'] }}
-
+     + ['--Xfork-choice-updated-always-send-payload-attributes=true', '--p2p-subscribe-all-subnets-enabled'] }}
 grandine_container_command_extra_args: >-
   {{ grandine_container_command_extra_simple_args
-     + ['--features=AlwaysPrepareExecutionPayload'] }}
+     + ['--features=AlwaysPrepareExecutionPayload', '--subscribe-all-subnets'] }}
 
 
 ethereum_node_docker_watchtower_containers_list:
