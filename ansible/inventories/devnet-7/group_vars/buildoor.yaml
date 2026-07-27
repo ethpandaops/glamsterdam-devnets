@@ -41,7 +41,7 @@ prysm_container_command_extra_args: >-
      + ['--prepare-all-payloads', '--subscribe-all-subnets'] }}
 lighthouse_container_command_extra_args: >-
   {{ lighthouse_container_command_extra_simple_args
-     + ['--always-prepare-payload', '--subscribe-all-subnets'] }}
+     + ['--always-prepare-payload', '--subscribe-all-subnets', '--import-all-attestations'] }}
 lodestar_container_command_extra_args: >-
   {{ lodestar_container_command_extra_simple_args
      + ['--emitPayloadAttributes', '--subscribeAllSubnets'] }}
