@@ -7,3 +7,4 @@ erigon_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --log.console.verbosity=debug
   - --pprof
+  - --pprof.addr=0.0.0.0
