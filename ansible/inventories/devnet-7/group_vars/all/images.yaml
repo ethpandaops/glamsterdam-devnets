@@ -9,7 +9,7 @@ default_ethereum_client_images:
   teku: ethpandaops/teku:glamsterdam-devnet-7
   grandine: ethpandaops/grandine:glamsterdam-devnet-7
   ### Execution layer clients
-  besu: ethpandaops/besu:glamsterdam-devnet-7
+  besu: ethpandaops/besu:glamsterdam-devnet-7-caa5abf 
   geth: ethpandaops/geth:glamsterdam-devnet-7
   erigon: ethpandaops/erigon:glamsterdam-devnet-7
   nethermind: ethpandaops/nethermind:glamsterdam-devnet-7
