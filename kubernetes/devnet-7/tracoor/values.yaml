@@ -4,7 +4,9 @@ tracoor-single:
   image:
     repository: ethpandaops/tracoor
     tag: glamsterdam-devnet-7
-    pullPolicy: IfNotPresent
+    # Always: the tag is mutable and rebuilt per release-branch push, so
+    # IfNotPresent pins the node to whatever it cached first.
+    pullPolicy: Always
   resources:
     requests:
       cpu: 1000m
