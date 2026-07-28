@@ -1,5 +1,9 @@
+# xatu cannon config schema changed upstream and the xatu-server output was
+# dropped in favour of writing to clickhouse directly; needs migrating.
+# Subchart has no enabled gate, so replicas: 0 is what stops it.
 xatu-cannon:
-  enabled: true
+  enabled: false
+  replicas: 0
   fullnameOverride: xatu-cannon
   image:
     repository: ethpandaops/xatu
