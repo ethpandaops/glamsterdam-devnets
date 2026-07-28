@@ -100,7 +100,7 @@ tracoor-single:
       - name: bootnode-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -111,7 +111,7 @@ tracoor-single:
       - name: buildoor-lighthouse-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -122,7 +122,7 @@ tracoor-single:
       - name: buildoor-lodestar-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -133,7 +133,7 @@ tracoor-single:
       - name: buildoor-prysm-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -144,7 +144,7 @@ tracoor-single:
       - name: buildoor-teku-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -155,7 +155,7 @@ tracoor-single:
       - name: grandine-besu-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -166,7 +166,7 @@ tracoor-single:
       - name: grandine-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -177,7 +177,7 @@ tracoor-single:
       - name: grandine-reth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -188,7 +188,7 @@ tracoor-single:
       - name: lighthouse-besu-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -199,7 +199,7 @@ tracoor-single:
       - name: lighthouse-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -210,7 +210,7 @@ tracoor-single:
       - name: lighthouse-reth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -221,7 +221,7 @@ tracoor-single:
       - name: lodestar-erigon-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -232,7 +232,7 @@ tracoor-single:
       - name: lodestar-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -243,7 +243,7 @@ tracoor-single:
       - name: lodestar-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -254,7 +254,7 @@ tracoor-single:
       - name: nimbus-erigon-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -265,7 +265,7 @@ tracoor-single:
       - name: nimbus-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -276,7 +276,7 @@ tracoor-single:
       - name: prysm-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -287,7 +287,7 @@ tracoor-single:
       - name: prysm-nimbusel-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -298,7 +298,7 @@ tracoor-single:
       - name: teku-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -309,7 +309,7 @@ tracoor-single:
       - name: teku-nimbusel-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 10
+          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
