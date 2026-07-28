@@ -44,7 +44,6 @@ hooks:
               applyProbability: 1.0
             value_inflate:
               mode: "uint64_max"
-              pct: 200
               absolute: 0
               multiplier: 10.0
         execution_payload_envelope:
