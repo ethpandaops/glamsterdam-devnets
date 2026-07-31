@@ -33,8 +33,7 @@ default_tooling_images:
   forkmon: skylenet/nodemonitor:darkmode
   forky: ethpandaops/forky:latest
   fauceth: skylenet/fauceth:fix_fee_estimation
-  powfaucet: pk910/powfaucet:v2.5.0
-  powfaucet_agents: ghcr.io/qu0b/powfaucet:v2.5.0-agent.4
+  powfaucet: ghcr.io/qu0b/powfaucet:v2.5.0-agent.5 # v2-latest ships a broken client bundle (jsxDEV in prod build); this is v2.5.0 + the 250000 ethTxGasLimit default. Revert to upstream once a fixed release exists.
   homepage: ethpandaops/ethereum-testnet-homepage:latest
   checkpointz: ethpandaops/checkpointz:gloas-latest
   blockscout: blockscout/blockscout:latest

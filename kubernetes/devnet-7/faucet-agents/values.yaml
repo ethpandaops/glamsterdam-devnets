@@ -1,7 +1,7 @@
 # Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/powfaucet.yaml.j2
 
 powfaucet:
-  fullnameOverride: powfaucet
+  fullnameOverride: powfaucet-agents
 
   image:
     repository: ghcr.io/qu0b/powfaucet
@@ -21,21 +21,21 @@ powfaucet:
 
     className: ingress-nginx-public
     annotations:
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/configuration-snippet: |
-        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
-        sub_filter_types text/html;
-        sub_filter_once off;
+      # Lock the faucet behind basic auth that only the panda proxy holds, so it
+      # is reachable solely via the proxy (which authenticates the caller first).
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: powfaucet-agents-basic-auth
+      nginx.ingress.kubernetes.io/auth-realm: "panda proxy only"
 
     hosts:
-      - host: faucet.glamsterdam-devnet-7.ethpandaops.io
+      - host: faucet-agents.glamsterdam-devnet-7.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
   httpProxyCount: 2
 
-  faucetTitle: "glamsterdam-devnet-7 PoW Faucet"
-  faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_private_key}>"
+  faucetTitle: "glamsterdam-devnet-7 Agent Faucet"
+  faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_agents_private_key}>"
   faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-7.ethpandaops.io"
   faucetRpcEndpoints:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-7.ethpandaops.io"
@@ -100,41 +100,28 @@ powfaucet:
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-7.ethpandaops.io/tx/{txid}"
 
-  faucetCaptchaEnabled: true
+  faucetCaptchaEnabled: false
   faucetCaptchaSitekey: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.site_key}>"
   faucetCaptchaSecret: "<path:/secrets/services/services.enc.yaml#hcaptcha | jsonPath {.secret_key}>"
 
   # IP-reputation checks make no sense when the faucet is only reached via the
   # panda proxy (every request carries the proxy's IP), so agents disable it.
-  faucetIpinfoEnabled: true
+  faucetIpinfoEnabled: false
 
   # Same reason: behind the proxy all traffic shares one IP, so per-IP
   # concurrency collapses to one global session. Limit per target address only.
-  faucetConcurrencyByAddrOnly: false
+  faucetConcurrencyByAddrOnly: true
 
   # And per-IP recurring limits would be one global budget for all agents.
-  faucetRecurringLimitsByAddrOnly: false
+  faucetRecurringLimitsByAddrOnly: true
 
   faucetRecurringLimitsAmountWei: 5000000000000000000000 # 5000 ETH
   faucetMaxDropWei: 500000000000000000000 # 500 ETH
   faucetPowEnabled: true
   faucetPowRewardPerHash: 1000000000000000000 # 1 ETH
-  faucetPowDifficulty: 10
-
-  faucetAuthenticatoorEnabled: true
-  faucetAuthenticatoorAuthUrl: "https://auth.glamsterdam-devnet-7.ethpandaops.io"
-  faucetAuthenticatoorExpectedAudience: "glamsterdam-devnet-7.ethpandaops.io"
-  faucetAuthenticatoorGrants:
-    - duration: 86400
-      limitAmount: 0
-      limitCount: 0
-      rewardFactor: 10
-    - duration: 86400
-      limitCount: 1
-      overrideMaxDrop: 100000000000000000000
-      skipModules:
-      - pow
-      - recurring-limits
-      - faucet-outflow
+  faucetPowDifficulty: 8
 
 
+  extraEnv:
+    - name: FAUCET_ETH_REST_WALLET_KEY
+      value: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_agents_rest_private_key}>"
