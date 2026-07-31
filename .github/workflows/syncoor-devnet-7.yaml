@@ -22,7 +22,9 @@ on:
           run-timeout: timeout in minutes.
           cl-synctype: "checkpoint" (sync from checkpoint) or "genesis" (sync from genesis).
           cl-nodetype: "fullnode" (normal node) or "supernode" (subscribes to all custody groups).
-          runs-on: GitHub runner label (ccx13: 2c/8GB RAM/80GB disk, ccx23: 4c/16GB RAM/160GB disk, ccx33: 8c/32GB RAM/240GB disk, ccx43: 16c/64GB RAM/360GB disk).
+          runs-on: GitHub runner label.
+          DigitalOcean: self-hosted-ghr-size-l-do-x64, self-hosted-ghr-size-xl-do-x64.
+          Hetzner: self-hosted-ghr-size-ccx13-x64 (2c/8GB RAM/80GB disk), ccx23 (4c/16GB/160GB), ccx33 (8c/32GB/240GB), ccx43 (16c/64GB/360GB).
           Example: {"run-timeout": "1800", "cl-synctype": ["checkpoint"], "cl-nodetype": ["fullnode"]}
         required: false
         default: >-
@@ -30,7 +32,7 @@ on:
             "run-timeout": "600",
             "cl-synctype": ["checkpoint"],
             "cl-nodetype": ["fullnode"],
-            "runs-on": "self-hosted-ghr-size-ccx33-x64"
+            "runs-on": "self-hosted-ghr-size-l-do-x64"
           }
         type: string
       checkpoint-sync-url:
@@ -91,7 +93,7 @@ jobs:
     # - 48h -> 2880m
     # - 72h -> 4320m
     timeout-minutes: ${{ github.event_name == 'schedule' && 500 || fromJSON(fromJSON(inputs.runconfig || '{}')['run-timeout'] || '1800') }}
-    runs-on: ${{ fromJSON(inputs.runconfig || '{}')['runs-on'] || 'self-hosted-ghr-size-ccx33-x64' }}
+    runs-on: ${{ fromJSON(inputs.runconfig || '{}')['runs-on'] || 'self-hosted-ghr-size-l-do-x64' }}
     concurrency:
       group: >-
         ${{ github.event_name }}-${{ matrix.network }}-${{ matrix.el-client }}-${{ matrix.cl-client }}-${{ matrix.cl-nodetype }}-${{ matrix.cl-synctype }}
