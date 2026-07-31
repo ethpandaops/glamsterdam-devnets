@@ -1,4 +1,4 @@
-name: Syncoor - Devnet 6
+name: Syncoor - Devnet 7
 
 on:
   #schedule:
@@ -53,13 +53,13 @@ on:
         required: false
         default: >-
           {
-            "besu": "ethpandaops/besu:glamsterdam-devnet-6",
-            "geth": "ethpandaops/geth:glamsterdam-devnet-6",
-            "erigon": "ethpandaops/erigon:glamsterdam-devnet-6",
-            "nethermind": "ethpandaops/nethermind:glamsterdam-devnet-6",
-            "reth": "ethpandaops/reth:glamsterdam-devnet-6",
-            "nimbusel": "ethpandaops/nimbus-eth1:glamsterdam-devnet-6",
-            "ethrex": "ethpandaops/ethrex:glamsterdam-devnet-6"
+            "besu": "ethpandaops/besu:glamsterdam-devnet-7-caa5abf",
+            "geth": "ethpandaops/geth:glamsterdam-devnet-7",
+            "erigon": "ethpandaops/erigon:glamsterdam-devnet-7",
+            "nethermind": "ethpandaops/nethermind:glamsterdam-devnet-7",
+            "reth": "ethpandaops/reth:glamsterdam-devnet-7",
+            "nimbusel": "ethpandaops/nimbus-eth1:glamsterdam-devnet-7",
+            "ethrex": "ethpandaops/ethrex:glamsterdam-devnet-7"
           }
         type: string
       cl-image:
@@ -67,12 +67,12 @@ on:
         required: false
         default: >-
           {
-            "lighthouse": "ethpandaops/lighthouse:glamsterdam-devnet-6",
-            "teku": "ethpandaops/teku:glamsterdam-devnet-6",
-            "prysm": "ethpandaops/prysm-beacon-chain:glamsterdam-devnet-6",
-            "nimbus": "ethpandaops/nimbus-eth2:glamsterdam-devnet-6",
-            "lodestar": "ethpandaops/lodestar:glamsterdam-devnet-6",
-            "grandine": "ethpandaops/grandine:glamsterdam-devnet-6"
+            "lighthouse": "ethpandaops/lighthouse:glamsterdam-devnet-7",
+            "teku": "ethpandaops/teku:glamsterdam-devnet-7",
+            "prysm": "ethpandaops/prysm-beacon-chain:glamsterdam-devnet-7",
+            "nimbus": "ethpandaops/nimbus-eth2:glamsterdam-devnet-7",
+            "lodestar": "ethpandaops/lodestar:glamsterdam-devnet-7",
+            "grandine": "ethpandaops/grandine:glamsterdam-devnet-7"
           }
         type: string
 
@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        network: ["glamsterdam-devnet-6"]
+        network: ["glamsterdam-devnet-7"]
         el-client: >-
           ${{
             fromJSON(format('[{0}]', inputs.el-client || '
@@ -141,25 +141,25 @@ jobs:
         run: |
           cat > /tmp/default-el-images.json <<'EOF'
           {
-            "besu": "ethpandaops/besu:glamsterdam-devnet-6",
-            "geth": "ethpandaops/geth:glamsterdam-devnet-6",
-            "erigon": "ethpandaops/erigon:glamsterdam-devnet-6",
-            "nethermind": "ethpandaops/nethermind:glamsterdam-devnet-6",
-            "reth": "ethpandaops/reth:glamsterdam-devnet-6",
-            "nimbusel": "ethpandaops/nimbus-eth1:glamsterdam-devnet-6",
-            "ethrex": "ethpandaops/ethrex:glamsterdam-devnet-6"
+            "besu": "ethpandaops/besu:glamsterdam-devnet-7-caa5abf",
+            "geth": "ethpandaops/geth:glamsterdam-devnet-7",
+            "erigon": "ethpandaops/erigon:glamsterdam-devnet-7",
+            "nethermind": "ethpandaops/nethermind:glamsterdam-devnet-7",
+            "reth": "ethpandaops/reth:glamsterdam-devnet-7",
+            "nimbusel": "ethpandaops/nimbus-eth1:glamsterdam-devnet-7",
+            "ethrex": "ethpandaops/ethrex:glamsterdam-devnet-7"
           }
           EOF
           echo "el-images=$(cat /tmp/default-el-images.json | jq -c .)" >> $GITHUB_OUTPUT
 
           cat > /tmp/default-cl-images.json <<'EOF'
           {
-            "lighthouse": "ethpandaops/lighthouse:glamsterdam-devnet-6",
-            "teku": "ethpandaops/teku:glamsterdam-devnet-6",
-            "prysm": "ethpandaops/prysm-beacon-chain:glamsterdam-devnet-6",
-            "nimbus": "ethpandaops/nimbus-eth2:glamsterdam-devnet-6",
-            "lodestar": "ethpandaops/lodestar:glamsterdam-devnet-6",
-            "grandine": "ethpandaops/grandine:glamsterdam-devnet-6"
+            "lighthouse": "ethpandaops/lighthouse:glamsterdam-devnet-7",
+            "teku": "ethpandaops/teku:glamsterdam-devnet-7",
+            "prysm": "ethpandaops/prysm-beacon-chain:glamsterdam-devnet-7",
+            "nimbus": "ethpandaops/nimbus-eth2:glamsterdam-devnet-7",
+            "lodestar": "ethpandaops/lodestar:glamsterdam-devnet-7",
+            "grandine": "ethpandaops/grandine:glamsterdam-devnet-7"
           }
           EOF
           echo "cl-images=$(cat /tmp/default-cl-images.json | jq -c .)" >> $GITHUB_OUTPUT
