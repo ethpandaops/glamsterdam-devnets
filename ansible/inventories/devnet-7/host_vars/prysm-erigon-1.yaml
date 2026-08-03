@@ -1,6 +1,6 @@
 ---
 # Canary: run the patched tysm beacon (epbs-mutator + bad-tysm control API) on
-# this node. Validator and geth EL stay on their stock devnet-7 images.
+# this node. Validator and erigon EL stay on their stock devnet-7 images.
 # tysm_enabled makes the playbook template the hook + xatu config files into
 # the prysm datadir before the beacon container starts.
 tysm_enabled: true
