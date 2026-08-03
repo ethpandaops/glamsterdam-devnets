@@ -4,7 +4,7 @@ buildoor-overview:
   fullnameOverride: buildoor-overview
   image:
     repository: ethpandaops/buildoor
-    tag: main-latest
+    tag: pk910-multi-key-latest
     pullPolicy: Always
 
   resources:

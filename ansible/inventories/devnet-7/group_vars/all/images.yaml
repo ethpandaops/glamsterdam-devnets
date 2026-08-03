@@ -21,7 +21,7 @@ default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop
   mev_builder: ethpandaops/reth-rbuilder:develop
   mev_relay: ethpandaops/mev-boost-relay:main
-  buildoor: ethpandaops/buildoor:main-latest
+  buildoor: ethpandaops/buildoor:pk910-multi-key-latest
   authenticatoor: ethpandaops/service-authenticatoor:main-latest
   xatu_sentry: ethpandaops/xatu:glamsterdam-devnet-7
   xatu_cannon: ethpandaops/xatu:latest
