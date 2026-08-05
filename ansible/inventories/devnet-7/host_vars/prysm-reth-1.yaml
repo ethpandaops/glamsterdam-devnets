@@ -1,13 +1,12 @@
 ---
-# Canary: run the patched tysm beacon (epbs-mutator + bad-tysm control API) on
-# this node. Validator and reth EL stay on their stock devnet-7 images.
-# tysm_enabled makes the playbook template the hook + xatu config files into
-# the prysm datadir before the beacon container starts.
+# Canary: patched tysm beacon (epbs-mutator + bad-tysm control API), stock EL.
 tysm_enabled: true
 prysm_container_image: ethpandaops/tysm:glamsterdam-devnet-7
 
-# Hooks file lives in the datadir, so it surfaces at /data inside the container
-# via the existing {{ prysm_datadir }}:/data mount (no extra volume needed).
+# tysm chaos fleet tag: shown in validator-ranges (dora) and block graffiti.
+validator_display_name: tysm-reth-1
+
+# Hooks file lives in the datadir, so it surfaces at /data via the mount.
 prysm_container_command_extra_simple_args:
   - --grpc-gateway-corsdomain=*
   - --chain-config-file=/network-config/config.yaml
@@ -30,8 +29,7 @@ prysm_container_env:
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
   TYSM_TOKEN: "{{ tysm_secret_key }}"
 
-# Role default list plus the tysm control API on 8675 so bad-tysm can reach it
-# (the firewall opens 8675 fleet-wide); pprof/ipv6 are appended by the role.
+# Role defaults plus the tysm control API on 8675 that bad-tysm drives.
 prysm_container_ports_ipv4:
   - "127.0.0.1:{{ prysm_ports_http_beacon }}:{{ prysm_ports_http_beacon }}"
   - "127.0.0.1:{{ prysm_ports_metrics }}:{{ prysm_ports_metrics }}"
