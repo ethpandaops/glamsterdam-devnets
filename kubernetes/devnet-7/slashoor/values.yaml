@@ -6,8 +6,8 @@ slashoor:
 
   image:
     repository: ethpandaops/slashoor
-    tag: v0.1.2
-    pullPolicy: IfNotPresent
+    tag: master
+    pullPolicy: Always
   resources:
     requests:
       cpu: 100m

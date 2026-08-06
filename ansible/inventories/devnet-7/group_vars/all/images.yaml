@@ -65,4 +65,4 @@ default_tooling_images:
   blobber: ethpandaops/blobber:latest
   syncoor_web: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web:master
   syncoor_server: docker.ethquokkaops.io/gh/ethpandaops/syncoor:master
-  slashoor: ethpandaops/slashoor:v0.1.2
+  slashoor: ethpandaops/slashoor:master
