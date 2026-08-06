@@ -1,0 +1,91 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/slashoor.yaml.j2
+
+slashoor:
+  fullnameOverride: slashoor
+  replicas: 1
+
+  image:
+    repository: ethpandaops/slashoor
+    tag: v0.1.0
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+  config:
+    beacon:
+      endpoints:
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+      timeout: 30s
+
+    indexer:
+      max_epochs_to_keep: 54000
+
+    detector:
+      enabled: true
+
+    submitter:
+      enabled: true
+      dry_run: false
+
+    proposer:
+      enabled: true
+
+    dora:
+      enabled: true
+      url: https://dora.glamsterdam-devnet-7.ethpandaops.io
+      scan_on_startup: true
+
+    # Committee resolution for deep history needs archive states; the Dora
+    # scan covers older proposer slashings, so keep the backfill shallow.
+    backfill_slots: 320
