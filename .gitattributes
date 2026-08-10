@@ -1,1 +1,2 @@
 network-configs/devnet-7/parsed/parsedConsensusGenesis.json filter=lfs diff=lfs merge=lfs -text
+network-configs/devnet-8/parsed/parsedConsensusGenesis.json filter=lfs diff=lfs merge=lfs -text
