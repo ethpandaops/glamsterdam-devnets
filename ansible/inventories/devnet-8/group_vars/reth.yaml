@@ -22,6 +22,7 @@ reth_container_volumes:
 reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --disable-discv4-discovery
   - --http.api=trace,rpc,eth,net,debug,web3,admin,txpool
   # Pre-fork target for reth's local payload builder; post-fork the CL-registered
   # limit takes over. Left on 150M in devnet-7, which contradicted genesis.
