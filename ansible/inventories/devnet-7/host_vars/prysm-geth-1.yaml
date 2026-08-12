@@ -1,0 +1,23 @@
+---
+# mempool-lens target node: runs the txtracker/peerstats-instrumented geth
+# build (https://github.com/cskiraly/go-ethereum branch mempool-lens) and
+# exposes those namespaces on the WS API. WS shares the HTTP RPC port, so the
+# existing rpc- vhost serves wss:// with no extra nginx config.
+# NOTE: the image below must be built (eth-client-docker-image-builder from
+# the cskiraly branch) before this host is re-provisioned.
+geth_container_image: ethpandaops/geth:cskiraly-mempool-lens
+
+# Full copy of group_vars/geth.yaml args + WS on the same port with the
+# txtracker/peerstats namespaces (host_vars replace the group list wholesale).
+geth_container_command_extra_args:
+  - --override.genesis=/network-config/genesis.json
+  - --http.api=eth,net,web3,debug,admin,txpool
+  - --http.vhosts=*
+  - --networkid={{ ethereum_network_id }}
+  - --syncmode=full
+  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --ws
+  - --ws.addr=0.0.0.0
+  - --ws.port={{ ethereum_node_el_ports_http_rpc }}
+  - --ws.api=eth,net,web3,txtracker,peerstats,admin
+  - --ws.origins=*

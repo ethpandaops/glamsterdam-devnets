@@ -17,7 +17,9 @@ collections:
   - name: community.sops
     version: 1.7.0
   - name: ethpandaops.general
-    source: https://github.com/ethpandaops/ansible-collection-general.git,master
+    # mempool-lens chart template; back to master once
+    # ansible-collection-general#573 is merged
+    source: https://github.com/ethpandaops/ansible-collection-general.git,bbusa/mempool-lens
     type: git
   - name: kubernetes.core
   - name: ansible.utils
