@@ -50,9 +50,9 @@ ethereum_genesis_network_seed: glamsterdam-devnet-8
 ethereum_genesis_chain_id: 70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Pinned genesis: 2026-08-13 11:00:00 UTC (13:00 CEST). Gloas at epoch 1536 hits
-# 2026-08-20 06:50:24 UTC, the 200M gas bump at epoch 1566 10:02:24 UTC.
-ethereum_genesis_timestamp: 1786618800
+# Pinned genesis: 2026-08-13 14:00:00 UTC (16:00 CEST). Gloas at epoch 1536 hits
+# 2026-08-20 09:50:24 UTC, the 200M gas bump at epoch 1566 13:02:24 UTC.
+ethereum_genesis_timestamp: 1786629600
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
