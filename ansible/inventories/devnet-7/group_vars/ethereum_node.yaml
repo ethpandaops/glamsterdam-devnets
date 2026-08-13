@@ -20,14 +20,14 @@ ethereum_el_bootnodes: >-
   {{
     (
       [primary_bootnode]
-      | map('extract', hostvars, ['bootnodoor_fact_enode'])
+      | map('extract', hostvars, ['bootnodoor_fact_el_enr'])
       | select('defined')
       | list
     )
     +
     (
       [primary_bootnode, 'prysm-ethrex-1', 'prysm-geth-1', 'lodestar-ethrex-1', 'lodestar-geth-1', 'nimbus-ethrex-1', 'nimbus-geth-1', 'lighthouse-ethrex-1', 'lighthouse-geth-1']
-      | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enode'])
+      | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr'])
       | select('defined')
       | list
     )
