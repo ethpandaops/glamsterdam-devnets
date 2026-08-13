@@ -4,16 +4,14 @@ tracoor-single:
   image:
     repository: ethpandaops/tracoor
     tag: glamsterdam-devnet-7
-    # Always: the tag is mutable and rebuilt per release-branch push, so
-    # IfNotPresent pins the node to whatever it cached first.
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   resources:
     requests:
       cpu: 1000m
       memory: 2Gi
     limits:
       cpu: 2000m
-      memory: 6Gi
+      memory: 4Gi
   ingress:
     http:
       enabled: true
@@ -46,10 +44,10 @@ tracoor-single:
         size: 20Gi
       resources:
         requests:
-          cpu: 1500m
+          cpu: 1000m
           memory: 2Gi
         limits:
-          cpu: 4000m
+          cpu: 2000m
           memory: 4Gi
 
   config:
@@ -81,6 +79,7 @@ tracoor-single:
             beaconStates: 100h
             executionBlockTraces: 100h
             beaconBlocks: 100h
+            executionPayloadEnvelopes: 100h
       ethereum:
         config:
           repository: ethpandaops/glamsterdam-devnets
@@ -100,7 +99,6 @@ tracoor-single:
       - name: bootnode-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -111,7 +109,6 @@ tracoor-single:
       - name: buildoor-lighthouse-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -122,7 +119,6 @@ tracoor-single:
       - name: buildoor-lodestar-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -133,7 +129,6 @@ tracoor-single:
       - name: buildoor-prysm-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -144,7 +139,6 @@ tracoor-single:
       - name: buildoor-teku-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -155,7 +149,6 @@ tracoor-single:
       - name: grandine-besu-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -163,10 +156,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: grandine-erigon-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: grandine-ethrex-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: grandine-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -174,10 +186,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: grandine-nethermind-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: grandine-nimbusel-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: grandine-reth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -188,7 +219,6 @@ tracoor-single:
       - name: lighthouse-besu-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -196,10 +226,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lighthouse-erigon-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: lighthouse-ethrex-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: lighthouse-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -207,10 +256,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lighthouse-nethermind-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: lighthouse-nimbusel-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: lighthouse-reth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -218,10 +286,19 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lodestar-besu-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: lodestar-erigon-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -229,10 +306,19 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lodestar-ethrex-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: lodestar-geth-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -243,7 +329,6 @@ tracoor-single:
       - name: lodestar-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -251,10 +336,39 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: lodestar-nimbusel-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: lodestar-reth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: nimbus-besu-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: nimbus-erigon-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -262,10 +376,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: nimbus-ethrex-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: nimbus-geth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: nimbus-nethermind-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -273,10 +406,49 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: nimbus-nimbusel-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: nimbus-reth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: prysm-besu-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: prysm-erigon-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: prysm-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -284,10 +456,29 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: prysm-geth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: prysm-nethermind-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: prysm-nimbusel-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -295,10 +486,39 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: prysm-reth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: teku-besu-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-besu-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: teku-erigon-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-erigon-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: teku-ethrex-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-ethrex-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
@@ -306,14 +526,43 @@ tracoor-single:
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true
+      - name: teku-geth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-geth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: teku-nethermind-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nethermind-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
       - name: teku-nimbusel-1
         ethereum:
           overrideNetworkName: glamsterdam-devnet-7
-          maxConcurrentFetches: 6
           beacon:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
           execution:
             nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-nimbusel-1.srv.glamsterdam-devnet-7.ethpandaops.io
+            traceDisableMemory: true
+            traceDisableStack: true
+            traceDisableStorage: true
+      - name: teku-reth-1
+        ethereum:
+          overrideNetworkName: glamsterdam-devnet-7
+          beacon:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
+          execution:
+            nodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-reth-1.srv.glamsterdam-devnet-7.ethpandaops.io
             traceDisableMemory: true
             traceDisableStack: true
             traceDisableStorage: true

@@ -25,3 +25,4 @@ lodestar_validator_container_command_extra_args:
   - --paramsFile=/network-config/config.yaml
   - --graffiti=deathstar-{{ ansible_hostname }}
   - --defaultGasLimit=300000000
+  - --adversarial.equivocate.blockProposal=true

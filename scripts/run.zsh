@@ -147,49 +147,75 @@ get_assertoor_token() {
   echo "$tok"
 }
 
+# Expand a comma-separated list of validator indices and inclusive ranges
+# ("5", "1,2,3", "1..10") into one index per line.
+expand_validator_indices() {
+  local token n range_start range_end
+  for token in ${(s:,:)1}; do
+    if [[ "$token" =~ ^[0-9]+\.\.[0-9]+$ ]]; then
+      range_start=${token%%..*}
+      range_end=${token##*..}
+      if (( range_start > range_end )); then
+        echo "Error: invalid range '$token' (start > end)." >&2
+        return 1
+      fi
+      for ((n=range_start; n<=range_end; n++)); do
+        echo "$n"
+      done
+    elif [[ "$token" =~ ^[0-9]+$ ]]; then
+      echo "$token"
+    else
+      echo "Error: '$token' is not a valid validator index or range." >&2
+      return 1
+    fi
+  done
+}
+
 # Helper function to display available options
 print_usage() {
   echo "Usage:"
   echo "  ./run.zsh [command]"
   echo
   echo "Available commands:"
+  echo "  check_deps                        Verify every external tool this script depends on is installed"
+  echo "  consolidate indices               Self-consolidate: switch validators from 0x01 to 0x02 compounding withdrawal credentials"
+  echo "  consolidate sources target        Consolidate one or more source validators into a target (EIP-7251). sources: 5 | 1,2,3 | 1..10 (inclusive range)"
+  echo "  deposit s e [type]                Deposit to the network from validator index start to end - optional withdrawal type (0x00, 0x01, 0x02)"
+  echo "  epoch_summary n                   Get the epoch summary for epoch n [default current - 1 epoch]"
+  echo "  exit s e                          Exit from the network from validator index start to end - mandatory argument"
+  echo "  finalized_epoch                   Get the finalized epoch"
+  echo "  finalized_slot                    Get the finalized slot"
+  echo "  finalized_slot_exec_payload       Get the finalized slot execution payload"
+  echo "  finalized_slot_verbose            Get the finalized slot with verbose output"
+  echo "  fork_choice                       Get the fork choice of the network"
+  echo "  full_withdrawal s e               Withdraw from the network from validator index start to end - mandatory argument"
   echo "  genesis                           Get the genesis block"
-  echo "  validators                        Get the validator ranges"
-  echo "  sync_mapping [src] [pending]      Extend validator_names.yaml with post-genesis mnemonic deposits found on the beacon node (src default: main-mnemonic)."
-  echo "                                    With 'pending', additionally map the still-queued pending_deposits in one shot: verifies the FIFO queue is strictly"
-  echo "                                    sequential for this mnemonic (no foreign entries; duplicates are top-ups only) and appends the full future range."
+  echo "  get_balance address               Get the balance of address - mandatory argument"
+  echo "  get_beacon                        Get the beacon of the network"
+  echo "  get_block n                       Get the block number n [default latest]"
+  echo "  get_block_for_slot n              Get the block for a given slot - mandatory argument"
+  echo "  get_enodes                        Get the enodes of the network"
+  echo "  get_enrs                          Get the ENRs of the network"
+  echo "  get_inventory                     Get the inventory of the network"
+  echo "  get_peerid                        Get the peerid of the network"
+  echo "  get_rpc                           Get the rpc of the network"
+  echo "  get_slot n                        Get the slot number n [default head]"
+  echo "  get_slot_for_blob txhash          Get the slot for a given blob given txhash, or send blob now"
+  echo "  get_slot_for_blob_verbose txhash  Get the slot for a given blob with verbose output given txhash, or send blob now"
+  echo "  help                              Print this help message"
+  echo "  latest_block                      Get the latest block"
   echo "  latest_root                       Get the latest root"
   echo "  latest_slot                       Get the latest slot"
   echo "  latest_slot_verbose               Get the latest slot with verbose output"
-  echo "  latest_block                      Get the latest block"
-  echo "  get_slot n                        Get the slot number n [default head]"
-  echo "  get_block n                       Get the block number n [default latest]"
-  echo "  get_balance address               Get the balance of address - mandatory argument"
-  echo "  finalized_epoch                   Get the finalized epoch"
-  echo "  finalized_slot                    Get the finalized slot"
-  echo "  finalized_slot_verbose            Get the finalized slot with verbose output"
-  echo "  finalized_slot_exec_payload       Get the finalized slot execution payload"
-  echo "  epoch_summary n                   Get the epoch summary for epoch n [default current - 1 epoch]"
-  echo "  get_slot_for_blob txhash          Get the slot for a given blob given txhash, or send blob now"
-  echo "  get_slot_for_blob_verbose txhash  Get the slot for a given blob with verbose output given txhash, or send blob now"
-  echo "  get_block_for_slot n              Get the block for a given slot - mandatory argument"
-  echo "  whose_validator_for_slot n        Get the validator for a given slot "n" - mandatory argument"
-  echo "  get_enrs                          Get the ENRs of the network"
-  echo "  get_enodes                        Get the enodes of the network"
-  echo "  get_peerid                        Get the peerid of the network"
-  echo "  get_rpc                           Get the rpc of the network"
-  echo "  get_beacon                        Get the beacon of the network"
-  echo "  get_inventory                     Get the inventory of the network"
-  echo "  fork_choice                       Get the fork choice of the network"
   echo "  send_blob n                       Send "n" number of blob(s) to the network [default 1]"
-  echo "  deposit s e [type]                Deposit to the network from validator index start to end - optional withdrawal type (0x00, 0x01, 0x02)"
-  echo "  topup indices eth_amount          Top-up one or more validators with additional ETH (Pectra). indices: 5 | 1,2,3 | 1..10 (inclusive range)"
-  echo "  exit s e                          Exit from the network from validator index start to end - mandatory argument"
-  echo "  slash index|start..end            Slash a validator (or inclusive range) via the assertoor proposer-slashing playbook"
   echo "  set_withdrawal_addr s e address   Set the withdrawal credentials for validator index start (mandatory) to end (optional) and Ethereum address"
-  echo "  full_withdrawal s e               Withdraw from the network from validator index start to end - mandatory argument"
-  echo "  check_deps                        Verify every external tool this script depends on is installed"
-  echo "  help                              Print this help message"
+  echo "  slash index|start..end            Slash a validator (or inclusive range) via the assertoor proposer-slashing playbook"
+  echo "  sync_mapping [src] [pending]      Extend validator_names.yaml with post-genesis mnemonic deposits found on the beacon node (src default: main-mnemonic)."
+  echo "                                    With 'pending', additionally map the still-queued pending_deposits in one shot: verifies the FIFO queue is strictly"
+  echo "                                    sequential for this mnemonic (no foreign entries; duplicates are top-ups only) and appends the full future range."
+  echo "  topup indices eth_amount          Top-up one or more validators with additional ETH (Pectra). indices: 5 | 1,2,3 | 1..10 (inclusive range)"
+  echo "  validators                        Get the validator ranges"
+  echo "  whose_validator_for_slot n        Get the validator for a given slot "n" - mandatory argument"
   echo ""
   echo " To use an alternative endpoint run the script by setting the environment variable:"
   echo "    BEACON_ENDPOINT=https://bn.alternative.beacon.endpoint \\"
@@ -884,27 +910,8 @@ for arg in "${command[@]}"; do
           exit 1
         fi
 
-        # Parse validator indices: comma-separated list of single indices and/or
-        # inclusive ranges (e.g. "1..10" expands to 1 2 3 ... 10).
-        VALIDATOR_ARRAY=()
-        for token in ${(s:,:)validator_indices}; do
-          if [[ "$token" =~ ^[0-9]+\.\.[0-9]+$ ]]; then
-            range_start=${token%%..*}
-            range_end=${token##*..}
-            if (( range_start > range_end )); then
-              echo "Error: invalid range '$token' (start > end)."
-              exit 1
-            fi
-            for ((n=range_start; n<=range_end; n++)); do
-              VALIDATOR_ARRAY+=("$n")
-            done
-          elif [[ "$token" =~ ^[0-9]+$ ]]; then
-            VALIDATOR_ARRAY+=("$token")
-          else
-            echo "Error: '$token' is not a valid validator index or range."
-            exit 1
-          fi
-        done
+        topup_indices=$(expand_validator_indices "$validator_indices") || exit 1
+        VALIDATOR_ARRAY=("${(@f)topup_indices}")
 
         # Resolve each validator's pubkey from the beacon node.
         declare -a validator_pubkeys
@@ -1036,6 +1043,276 @@ PY
           exit;
         else
           echo "Top-up cancelled."
+          exit;
+        fi
+      fi
+      ;;
+    "consolidate")
+      # EIP-7251 consolidation requests. Two shapes:
+      #   consolidate <sources> <target>  move the sources' balance into target
+      #   consolidate <indices>           self-consolidation: 0x01 -> 0x02 credentials
+      # Requests go to the consolidation predeploy and are only honoured when they
+      # come from the source validator's own execution withdrawal address, so every
+      # source in one run must share that address (it signs and pays the fee).
+      if [[ $# -lt 2 || $# -gt 3 ]]; then
+        echo "Consolidate calls for 1 or 2 arguments!"
+        echo "  Usage: ${0} consolidate sourceIndex[,index2,...] targetIndex"
+        echo "         ${0} consolidate validator_index[,index2,...]"
+        echo "  Example: ${0} consolidate 5 6           # consolidate validator 5 into validator 6"
+        echo "  Example: ${0} consolidate 1,2,3 10      # consolidate validators 1, 2 and 3 into validator 10"
+        echo "  Example: ${0} consolidate 1..10 10      # inclusive range, same as 1,2,...,10"
+        echo "  Example: ${0} consolidate 5             # self-consolidate: switch validator 5 to 0x02 credentials"
+        echo "  Example: ${0} consolidate 1..10         # switch validators 1-10 to 0x02 compounding credentials"
+        exit;
+      else
+        consolidation_contract="${CONSOLIDATION_CONTRACT:-0x0000BBdDc7CE488642fb579F8B00f3a590007251}"
+        if [[ $# -eq 2 ]]; then
+          consolidate_mode="self"
+          source_spec="${command[2]}"
+        else
+          consolidate_mode="consolidate"
+          source_spec="${command[2]}"
+          target_index="${command[3]}"
+          if [[ ! "$target_index" =~ ^[0-9]+$ ]]; then
+            echo "Error: '$target_index' is not a valid target validator index."
+            exit 1
+          fi
+        fi
+
+        source_list=$(expand_validator_indices "$source_spec") || exit 1
+        SOURCE_ARRAY=("${(@f)source_list}")
+
+        if [[ "$(cast code "$consolidation_contract" --rpc-url "$rpc_endpoint" 2>/dev/null)" == "0x" ]]; then
+          echo "Consolidation predeploy $consolidation_contract has no code on ${prefix}-${network}."
+          exit 1
+        fi
+
+        spec=$(curl -s "$bn_endpoint/eth/v1/config/spec")
+        slots_per_epoch=$(echo "$spec" | jq -r '.data.SLOTS_PER_EPOCH')
+        shard_committee_period=$(echo "$spec" | jq -r '.data.SHARD_COMMITTEE_PERIOD')
+        head_slot=$(curl -s "$bn_endpoint/eth/v1/beacon/headers/head" | jq -r '.data.header.message.slot')
+        if [[ -z "$head_slot" || "$head_slot" == "null" || -z "$slots_per_epoch" || "$slots_per_epoch" == "null" ]]; then
+          echo "Could not read the head slot / spec from $bn_endpoint."
+          exit 1
+        fi
+        current_epoch=$((head_slot / slots_per_epoch))
+
+        # Resolve every source: pubkey, withdrawal address and eligibility.
+        declare -a source_indices source_pubkeys
+        sender_address=""
+        for validator_index in "${SOURCE_ARRAY[@]}"; do
+          validator_info=$(curl -s "$bn_endpoint/eth/v1/beacon/states/head/validators/$validator_index")
+          if [[ $(echo "$validator_info" | jq -r '.data') == "null" ]]; then
+            echo "Error: Validator $validator_index not found."
+            exit 1
+          fi
+          validator_pubkey=$(echo "$validator_info" | jq -r '.data.validator.pubkey')
+          validator_creds=$(echo "$validator_info" | jq -r '.data.validator.withdrawal_credentials')
+          validator_status=$(echo "$validator_info" | jq -r '.data.status')
+          validator_activation=$(echo "$validator_info" | jq -r '.data.validator.activation_epoch')
+          creds_type="${validator_creds:2:2}"
+
+          if [[ "$creds_type" != "01" && "$creds_type" != "02" ]]; then
+            echo "Error: validator $validator_index still has BLS (0x00) withdrawal credentials."
+            echo "  Set an execution address first: ${0} set_withdrawal_addr $validator_index $validator_index <address>"
+            exit 1
+          fi
+          if [[ "$consolidate_mode" == "self" && "$creds_type" == "02" ]]; then
+            echo "Skipping validator $validator_index (already compounding, 0x02)."
+            continue
+          fi
+          if [[ "$validator_status" != "active_ongoing" ]]; then
+            echo "Error: validator $validator_index is $validator_status; consolidation requests are only honoured for active, non-exiting validators."
+            exit 1
+          fi
+          # Only a real consolidation carries the SHARD_COMMITTEE_PERIOD wait;
+          # a switch to compounding is valid from activation.
+          if [[ "$consolidate_mode" == "consolidate" ]] && (( current_epoch < validator_activation + shard_committee_period )); then
+            echo "Error: validator $validator_index activated at epoch $validator_activation; it can only be consolidated from epoch $((validator_activation + shard_committee_period)) (current: $current_epoch)."
+            exit 1
+          fi
+
+          validator_address="0x${validator_creds:26}"
+          if [[ -z "$sender_address" ]]; then
+            sender_address="$validator_address"
+          elif [[ "${validator_address:l}" != "${sender_address:l}" ]]; then
+            echo "Error: validator $validator_index withdraws to $validator_address, earlier sources withdraw to $sender_address."
+            echo "  Every source in one run must share a withdrawal address — split the run per address."
+            exit 1
+          fi
+
+          source_indices+=("$validator_index")
+          source_pubkeys+=("$validator_pubkey")
+        done
+
+        if (( ${#source_indices} == 0 )); then
+          echo "Nothing to do."
+          exit;
+        fi
+
+        if [[ "$consolidate_mode" == "consolidate" ]]; then
+          if (( ${source_indices[(I)$target_index]} )); then
+            echo "Error: validator $target_index is both a source and the target; use '${0} consolidate $target_index' for a self-consolidation."
+            exit 1
+          fi
+          target_info=$(curl -s "$bn_endpoint/eth/v1/beacon/states/head/validators/$target_index")
+          if [[ $(echo "$target_info" | jq -r '.data') == "null" ]]; then
+            echo "Error: Target validator $target_index not found."
+            exit 1
+          fi
+          target_pubkey=$(echo "$target_info" | jq -r '.data.validator.pubkey')
+          target_creds=$(echo "$target_info" | jq -r '.data.validator.withdrawal_credentials')
+          target_status=$(echo "$target_info" | jq -r '.data.status')
+          # A consolidation target must already be compounding; the CL drops the
+          # request otherwise. Point at the fix rather than letting it be dropped.
+          if [[ "${target_creds:2:2}" == "00" ]]; then
+            echo "Error: target validator $target_index still has BLS (0x00) withdrawal credentials, so it cannot receive a consolidation."
+            echo "  Give it an execution address first, then self-consolidate it to 0x02:"
+            echo "    ${0} set_withdrawal_addr $target_index $target_index <address>"
+            echo "    ${0} consolidate $target_index"
+            exit 1
+          fi
+          if [[ "${target_creds:2:2}" != "02" ]]; then
+            echo "Error: target validator $target_index does not have compounding (0x02) withdrawal credentials, so it cannot receive a consolidation."
+            echo "  Self-consolidate it first and wait for that request to be processed, then re-run this:"
+            echo "    ${0} consolidate $target_index"
+            exit 1
+          fi
+          if [[ "$target_status" != "active_ongoing" ]]; then
+            echo "Error: target validator $target_index is $target_status; the target must be active and not exiting."
+            exit 1
+          fi
+        fi
+
+        # The predeploy keeps whatever value is sent and its fee climbs with every
+        # request queued beyond MAX_CONSOLIDATION_REQUESTS_PER_PAYLOAD per block, so
+        # a batch priced at the current fee can face a higher one by the time the
+        # later transactions are mined. Overpay wildly — the fee is wei-scale, and
+        # 1 gwei still covers a queue several hundred requests deep.
+        fee_hex=$(cast call "$consolidation_contract" --rpc-url "$rpc_endpoint" 2>/dev/null)
+        fee_wei=$(cast to-dec "$fee_hex" 2>/dev/null)
+        if [[ ! "$fee_wei" =~ ^[0-9]+$ ]]; then
+          echo "Could not read the current fee from the consolidation predeploy $consolidation_contract."
+          exit 1
+        fi
+        send_fee=$((fee_wei * 8))
+        (( send_fee < 1000000000 )) && send_fee=1000000000
+        send_fee="${CONSOLIDATION_FEE_WEI:-$send_fee}"
+
+        # The request must be signed by the source validators' withdrawal address.
+        # Genesis validators point at the genesis generator's default address, whose
+        # key is not derivable from the mnemonic — only validators deposited with an
+        # address off this mnemonic can be consolidated, unless a key is passed in.
+        privatekey="${CONSOLIDATION_PRIVATE_KEY:-}"
+        if [[ -z "$privatekey" ]]; then
+          for n in {0..15}; do
+            hd_keys=$(ethereal hd keys --path="m/44'/60'/0'/0/$n" --seed="$sops_mnemonic")
+            hd_address=$(echo "$hd_keys" | awk '/Ethereum address/{print $NF}')
+            if [[ "${hd_address:l}" == "${sender_address:l}" ]]; then
+              privatekey=$(echo "$hd_keys" | awk '/Private key/{print $NF}')
+              signer_account="mnemonic account $n"
+              break
+            fi
+          done
+        else
+          signer_account="CONSOLIDATION_PRIVATE_KEY"
+        fi
+        if [[ -z "$privatekey" ]]; then
+          echo "No private key found for withdrawal address $sender_address (searched mnemonic accounts 0-15)."
+          echo "  Consolidation requests must come from that address; pass its key with CONSOLIDATION_PRIVATE_KEY=0x..."
+          exit 1
+        fi
+
+        echo ""
+        if [[ "$consolidate_mode" == "self" ]]; then
+          echo "Switch-to-compounding Summary:"
+        else
+          echo "Consolidation Summary:"
+        fi
+        echo "  Sources: ${#source_indices} validator(s)"
+        if (( ${#source_indices} <= 20 )); then
+          for ((i=1; i<=${#source_indices}; i++)); do
+            echo "    ${source_indices[$i]}: ${source_pubkeys[$i]}"
+          done
+        else
+          echo "    ${source_indices[1]} .. ${source_indices[-1]}"
+        fi
+        if [[ "$consolidate_mode" == "consolidate" ]]; then
+          echo "  Target: $target_index ($target_pubkey)"
+        else
+          echo "  Target: each source itself (0x01 -> 0x02 credentials)"
+        fi
+        echo "  From: $sender_address ($signer_account)"
+        echo "  Contract: $consolidation_contract"
+        echo "  Fee: $fee_wei wei, sending $send_fee wei per request"
+        echo ""
+        echo "Continue? (y/n)"
+        read -r response
+
+        if [[ $response == "y" ]]; then
+          tmpdir=$(mktemp -d)
+
+          nonce_hex=$(curl -s --header 'Content-Type: application/json' --data-raw '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["'$sender_address'","pending"],"id":0}' $rpc_endpoint | jq -r '.result')
+          nonce=$(( ${nonce_hex} ))
+          echo "Starting nonce: $nonce"
+          echo ""
+
+          # zsh's background job table caps at 1024; batch so the active set stays well below.
+          batch_size=500
+          i=0
+          for validator_index in "${source_indices[@]}"; do
+            source_pubkey="${source_pubkeys[$((i + 1))]}"
+            if [[ "$consolidate_mode" == "self" ]]; then
+              request_target="$source_pubkey"
+            else
+              request_target="$target_pubkey"
+            fi
+            # Calldata is source_pubkey (48 bytes) ++ target_pubkey (48 bytes).
+            echo "Sending consolidation request for validator $validator_index (nonce: $((nonce + i)))"
+            echo "$validator_index" > "$tmpdir/cast-$i.name"
+            cast send \
+              --private-key "$privatekey" \
+              --rpc-url "$rpc_endpoint" \
+              --nonce $((nonce + i)) \
+              --value "$send_fee" \
+              --gas-limit 2000000 \
+              "$consolidation_contract" \
+              "0x${source_pubkey#0x}${request_target#0x}" > "$tmpdir/cast-$i.log" 2>&1 &
+            i=$((i + 1))
+            if (( i % batch_size == 0 )); then
+              wait
+              echo "Drained batch — $i submitted so far..."
+            fi
+          done
+
+          echo "Submitted $i consolidation requests in batches of $batch_size, waiting for final batch..."
+          wait
+          echo ""
+          ok=0
+          fail=0
+          for ((j=0; j<i; j++)); do
+            log="$tmpdir/cast-$j.log"
+            name=$(cat "$tmpdir/cast-$j.name" 2>/dev/null)
+            txhash=$(grep -E '^transactionHash' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            tx_status=$(grep -E '^status' "$log" 2>/dev/null | awk '{print $2}' | head -1)
+            if [[ "$tx_status" == "1" ]]; then
+              printf "  \033[32m✓\033[0m validator %s — %s\n" "$name" "$txhash"
+              ok=$((ok + 1))
+            else
+              printf "  \033[31m✗\033[0m validator %s — failed (status=%s tx=%s)\n" \
+                "$name" "${tx_status:-no-receipt}" "${txhash:-none}"
+              grep -iE 'error|revert' "$log" 2>/dev/null | head -1 | sed 's/^/      /'
+              fail=$((fail + 1))
+            fi
+          done
+          echo ""
+          echo "$ok confirmed, $fail failed (of $i submitted)"
+          echo "A confirmed request is only accepted by the CL if it still passes the checks at inclusion; watch the queue:"
+          echo "  curl -s $bn_endpoint/eth/v1/beacon/states/head/pending_consolidations | jq"
+          rm -rf "$tmpdir"
+          exit;
+        else
+          echo "Consolidation cancelled."
           exit;
         fi
       fi

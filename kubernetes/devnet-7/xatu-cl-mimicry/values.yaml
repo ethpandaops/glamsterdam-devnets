@@ -1,8 +1,5 @@
-# xatu removed the cl-mimicry command upstream; superseded by tysm.
-# Subchart has no enabled gate, so replicas: 0 is what stops it.
 xatu-cl-mimicry:
-  enabled: false
-  replicas: 0
+  enabled: true
   fullnameOverride: xatu-cl-mimicry
   image:
     repository: ethpandaops/xatu
