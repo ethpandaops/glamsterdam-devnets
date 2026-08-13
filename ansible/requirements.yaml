@@ -19,7 +19,7 @@ collections:
   - name: ethpandaops.general
     # mempool-lens chart template; back to master once
     # ansible-collection-general#573 is merged
-    source: https://github.com/ethpandaops/ansible-collection-general.git,bbusa/mempool-lens
+    source: https://github.com/ethpandaops/ansible-collection-general.git,master
     type: git
   - name: kubernetes.core
   - name: ansible.utils
