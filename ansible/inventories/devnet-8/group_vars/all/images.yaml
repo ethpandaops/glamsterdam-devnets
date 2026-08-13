@@ -1,68 +1,68 @@
 ---
 default_ethereum_client_images:
   ### Consensus layer clients
-  lighthouse: ethpandaops/lighthouse:glamsterdam-devnet-8
-  lodestar: ethpandaops/lodestar:glamsterdam-devnet-8
-  nimbus: ethpandaops/nimbus-eth2:glamsterdam-devnet-8
-  prysm: ethpandaops/prysm-beacon-chain:glamsterdam-devnet-8
-  prysm_validator: ethpandaops/prysm-validator:glamsterdam-devnet-8
-  teku: ethpandaops/teku:glamsterdam-devnet-8
-  grandine: ethpandaops/grandine:glamsterdam-devnet-8
+  lighthouse: registry-1.docker.io/ethpandaops/lighthouse:glamsterdam-devnet-8
+  lodestar: registry-1.docker.io/ethpandaops/lodestar:glamsterdam-devnet-8
+  nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:glamsterdam-devnet-8
+  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:glamsterdam-devnet-8
+  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:glamsterdam-devnet-8
+  teku: registry-1.docker.io/ethpandaops/teku:glamsterdam-devnet-8
+  grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-8
   ### Execution layer clients
-  besu: ethpandaops/besu:glamsterdam-devnet-8
-  geth: ethpandaops/geth:glamsterdam-devnet-8
-  erigon: ethpandaops/erigon:glamsterdam-devnet-8
-  nethermind: ethpandaops/nethermind:glamsterdam-devnet-8
-  reth: ethpandaops/reth:glamsterdam-devnet-8
-  nimbusel: ethpandaops/nimbus-eth1:glamsterdam-devnet-8
-  ethrex: ethpandaops/ethrex:glamsterdam-devnet-8
+  besu: registry-1.docker.io/ethpandaops/besu:glamsterdam-devnet-8
+  geth: registry-1.docker.io/ethpandaops/geth:glamsterdam-devnet-8
+  erigon: registry-1.docker.io/ethpandaops/erigon:glamsterdam-devnet-8
+  nethermind: registry-1.docker.io/ethpandaops/nethermind:glamsterdam-devnet-8
+  reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-8
+  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:glamsterdam-devnet-8
+  ethrex: registry-1.docker.io/ethpandaops/ethrex:glamsterdam-devnet-8
 
 default_tooling_images:
-  mev_boost: ethpandaops/mev-boost:develop
-  mev_builder: ethpandaops/reth-rbuilder:develop
-  mev_relay: ethpandaops/mev-boost-relay:main
-  buildoor: ethpandaops/buildoor:pk910-multi-key-latest
-  authenticatoor: ethpandaops/service-authenticatoor:main-latest
-  xatu_sentry: ethpandaops/xatu:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
-  xatu_cannon: ethpandaops/xatu:latest
-  xatu_mimicry: ethpandaops/xatu:latest
-  xatu_cl_mimicry: ethpandaops/xatu:latest
-  xatu_relay_monitor: ethpandaops/xatu:latest
-  ethereum_metrics_exporter: ethpandaops/ethereum-metrics-exporter:latest
-  tx_fuzz: ethpandaops/tx-fuzz:latest
-  forkmon: skylenet/nodemonitor:darkmode
-  forky: ethpandaops/forky:latest
-  fauceth: skylenet/fauceth:fix_fee_estimation
-  powfaucet: pk910/powfaucet:v2.5.1 # fixed client bundle + 250000 ethTxGasLimit default
-  homepage: ethpandaops/ethereum-testnet-homepage:latest
-  checkpointz: ethpandaops/checkpointz:gloas-latest
-  blockscout: blockscout/blockscout:latest
+  mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop
+  mev_builder: registry-1.docker.io/ethpandaops/reth-rbuilder:develop
+  mev_relay: registry-1.docker.io/ethpandaops/mev-boost-relay:main
+  buildoor: registry-1.docker.io/ethpandaops/buildoor:pk910-multi-key-latest
+  authenticatoor: registry-1.docker.io/ethpandaops/service-authenticatoor:main-latest
+  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
+  xatu_cannon: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_cl_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_relay_monitor: registry-1.docker.io/ethpandaops/xatu:latest
+  ethereum_metrics_exporter: registry-1.docker.io/ethpandaops/ethereum-metrics-exporter:latest
+  tx_fuzz: registry-1.docker.io/ethpandaops/tx-fuzz:latest
+  forkmon: registry-1.docker.io/skylenet/nodemonitor:darkmode
+  forky: registry-1.docker.io/ethpandaops/forky:latest
+  fauceth: registry-1.docker.io/skylenet/fauceth:fix_fee_estimation
+  powfaucet: registry-1.docker.io/pk910/powfaucet:v2.5.1 # fixed client bundle + 250000 ethTxGasLimit default
+  homepage: registry-1.docker.io/ethpandaops/ethereum-testnet-homepage:latest
+  checkpointz: registry-1.docker.io/ethpandaops/checkpointz:gloas-latest
+  blockscout: registry-1.docker.io/blockscout/blockscout:latest
   blockscout_frontend: docker.ethquokkaops.io/gh/blockscout/frontend:latest
-  beacon_metrics_gazer: dapplion/beacon-metrics-gazer:latest
-  eth_fauceth: chainflag/eth-faucet:latest
-  blobscan: blossomlabs/blobscan:latest
-  blobscan_indexer: blossomlabs/blobscan-indexer:latest
-  dora: ethpandaops/dora:master-latest
-  dugtrio: ethpandaops/dugtrio:bbusa-endpoint-failover
-  ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.2.0
-  tracoor: ethpandaops/tracoor:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
-  ncli: status-im/nimbus-eth2:unstable
-  lcli: ethpandaops/lighthouse:unstable
+  beacon_metrics_gazer: registry-1.docker.io/dapplion/beacon-metrics-gazer:latest
+  eth_fauceth: registry-1.docker.io/chainflag/eth-faucet:latest
+  blobscan: registry-1.docker.io/blossomlabs/blobscan:latest
+  blobscan_indexer: registry-1.docker.io/blossomlabs/blobscan-indexer:latest
+  dora: registry-1.docker.io/ethpandaops/dora:master-latest
+  dugtrio: registry-1.docker.io/ethpandaops/dugtrio:bbusa-endpoint-failover
+  ethereum_genesis_generator: registry-1.docker.io/ethpandaops/ethereum-genesis-generator:6.2.0
+  tracoor: registry-1.docker.io/ethpandaops/tracoor:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
+  ncli: registry-1.docker.io/status-im/nimbus-eth2:unstable
+  lcli: registry-1.docker.io/ethpandaops/lighthouse:unstable
   zcli: gloas
-  assertoor: ethpandaops/assertoor:master-latest
+  assertoor: registry-1.docker.io/ethpandaops/assertoor:master-latest
   erpc: docker.ethquokkaops.io/gh/erpc/erpc:latest
-  prometheus: prom/prometheus:v2.40.7
-  node_exporter: prom/node-exporter:v1.5.0
-  cl_bootnode: protolambda/eth2-bootnode:cleanup
-  json_rpc_snooper: ethpandaops/rpc-snooper:latest
-  nginx_proxy: nginx:alpine
-  nginx_proxy_gen: nginxproxy/docker-gen
-  nginx_proxy_acme: nginxproxy/acme-companion
-  nginx_proxy_cert_loader: ethpandaops/debian-docker:latest
-  nginx_proxy_cert_linker: nginxproxy/docker-gen
-  vector: timberio/vector:0.56.0-alpine
-  spamoor: ethpandaops/spamoor:master-latest
-  blobber: ethpandaops/blobber:latest
+  prometheus: registry-1.docker.io/prom/prometheus:v2.40.7
+  node_exporter: registry-1.docker.io/prom/node-exporter:v1.5.0
+  cl_bootnode: registry-1.docker.io/protolambda/eth2-bootnode:cleanup
+  json_rpc_snooper: registry-1.docker.io/ethpandaops/rpc-snooper:latest
+  nginx_proxy: registry-1.docker.io/library/nginx:alpine
+  nginx_proxy_gen: registry-1.docker.io/nginxproxy/docker-gen
+  nginx_proxy_acme: registry-1.docker.io/nginxproxy/acme-companion
+  nginx_proxy_cert_loader: registry-1.docker.io/ethpandaops/debian-docker:latest
+  nginx_proxy_cert_linker: registry-1.docker.io/nginxproxy/docker-gen
+  vector: registry-1.docker.io/timberio/vector:0.56.0-alpine
+  spamoor: registry-1.docker.io/ethpandaops/spamoor:master-latest
+  blobber: registry-1.docker.io/ethpandaops/blobber:latest
   syncoor_web: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web:master
   syncoor_server: docker.ethquokkaops.io/gh/ethpandaops/syncoor:master
-  slashoor: ethpandaops/slashoor:master
+  slashoor: registry-1.docker.io/ethpandaops/slashoor:master
