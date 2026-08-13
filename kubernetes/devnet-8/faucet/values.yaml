@@ -34,7 +34,7 @@ powfaucet:
             pathType: Prefix
   httpProxyCount: 2
 
-  faucetTitle: "glamsterdam-devnet-8 PoW Faucet"
+  faucetTitle: "Plataberget PoW Faucet"
   faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_private_key}>"
   faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   faucetRpcEndpoints:

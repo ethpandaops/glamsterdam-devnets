@@ -28,7 +28,7 @@ dora:
           - path: /
             pathType: Prefix
 
-  name: glamsterdam-devnet-8
+  name: plataberget
   configPath: "https://config.glamsterdam-devnet-8.ethpandaops.io/cl/config.yaml"
   validatorNamesInventory: "https://config.glamsterdam-devnet-8.ethpandaops.io/api/v1/nodes/validator-ranges"
   buildoorOverviewUrl: "https://buildoor.glamsterdam-devnet-8.ethpandaops.io"
