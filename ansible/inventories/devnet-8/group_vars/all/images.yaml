@@ -37,7 +37,7 @@ default_tooling_images:
   homepage: registry-1.docker.io/ethpandaops/ethereum-testnet-homepage:latest
   checkpointz: registry-1.docker.io/ethpandaops/checkpointz:gloas-latest
   blockscout: registry-1.docker.io/blockscout/blockscout:latest
-  blockscout_frontend: docker.ethquokkaops.io/gh/blockscout/frontend:latest
+  blockscout_frontend: ghcr.io/blockscout/frontend:latest
   beacon_metrics_gazer: registry-1.docker.io/dapplion/beacon-metrics-gazer:latest
   eth_fauceth: registry-1.docker.io/chainflag/eth-faucet:latest
   blobscan: registry-1.docker.io/blossomlabs/blobscan:latest
@@ -50,7 +50,7 @@ default_tooling_images:
   lcli: registry-1.docker.io/ethpandaops/lighthouse:unstable
   zcli: gloas
   assertoor: registry-1.docker.io/ethpandaops/assertoor:master-latest
-  erpc: docker.ethquokkaops.io/gh/erpc/erpc:latest
+  erpc: ghcr.io/erpc/erpc:latest
   prometheus: registry-1.docker.io/prom/prometheus:v2.40.7
   node_exporter: registry-1.docker.io/prom/node-exporter:v1.5.0
   cl_bootnode: registry-1.docker.io/protolambda/eth2-bootnode:cleanup
@@ -63,6 +63,6 @@ default_tooling_images:
   vector: registry-1.docker.io/timberio/vector:0.56.0-alpine
   spamoor: registry-1.docker.io/ethpandaops/spamoor:master-latest
   blobber: registry-1.docker.io/ethpandaops/blobber:latest
-  syncoor_web: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web:master
-  syncoor_server: docker.ethquokkaops.io/gh/ethpandaops/syncoor:master
+  syncoor_web: ghcr.io/ethpandaops/syncoor-web:master
+  syncoor_server: ghcr.io/ethpandaops/syncoor:master
   slashoor: registry-1.docker.io/ethpandaops/slashoor:master

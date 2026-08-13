@@ -39,14 +39,17 @@ tempo_grpc_url: ENC[AES256_GCM,data:ltAVTGgrqhUBXdAZe7D1HvdXK72YIORL/x4DYHgX911s
 secret_buildoor_wallet_privkey: ENC[AES256_GCM,data:MA5s/epX0pOuU/EsKlc3oXdo/jdjGazQB8aV50ANsIsiMqRbVb+/+BmDTvPAGldEkEO+NWziEE21asYJMi0uHQ==,iv:j/sex4nBa5pFOHXX6zlpJGGCxUcdxZPfHSnLA7kl0mo=,tag:BrMMLbCzwVPzFYNaClL57g==,type:str]
 secret_buildoor_builder_mnemonic: ENC[AES256_GCM,data:UfA8ssN7RE7nejQMTUZ99aFr6Ty6HjG4BD7CCTRN37EL0jN/ULwE0HQEi6ydDnOWkqJmpX8u9eWl3NX1PBGyuGckHtlbtquUngIxmWy0a0Q/S0XaDVBIHyQaJTAu+RZzZEVPOxkL61mjOFSdoJKdrBPUQECdGHVYOfaUlpQR1JzCJgpi65XVTktTdoiYgfEGC3Uks3LzeMua,iv:GLzRU3KgZeHxty8u3Zxe0NV3yxu5t2Gn1tj9UzQW68o=,tag:A1N/9hoXe/4YwIX6B9Y+/Q==,type:str]
 tysm_secret_access_key: ENC[AES256_GCM,data:/iXmKhlYw2bzSzirLg==,iv:MRRoJgUc6V8B8JZVGRpu6NsLkraqrf+VikEChAv3h00=,tag:HlPIdHJlSlyx7qRYxIMHsQ==,type:str]
+secret_dockerhub:
+    username: ENC[AES256_GCM,data:CROGDtAGPOxIBOI=,iv:kd9imvumG1WRBSUKfgjfpHIOhrUy6jHL2h6808Z0IUY=,tag:SdMBMeINeT1iouCPZWBR9g==,type:str]
+    token: ENC[AES256_GCM,data:eSROwx/YdGm+LxygbpG1Zrqftilp5ogfXkVpratOBQId0D3a,iv:/1UyFsGqodzel2opDTR62ZVbRvQMB6EGCmehv9SlxZ8=,tag:0S/W4eXpZlVJ893u1eTpvg==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2026-08-13T09:45:08Z"
-    mac: ENC[AES256_GCM,data:E+DBjRbpKuXWHjDfERrwKJ21GBwUmGME9eyRkt9Z2kTPCuB/HIPmXzU07RQ8FAh6g3Kw/LhbtvLtlVHL7LIczbBcps4dPY673VdueCwXUiEnC6iE6QZSqrr3eRqowFT/giXlI0EjiZc33c1sib1FzrOqrtlvHid98Ni3uZ9Qd6I=,iv:mUqMDmYWN5k89AJkBXg9P88OWmWAvK0fno6K2tPekos=,tag:9NAvhB3X6BXr6f0h13ld1w==,type:str]
+    lastmodified: "2026-08-13T11:10:40Z"
+    mac: ENC[AES256_GCM,data:65c7SV4iVwmSsjag1beZAKqZeo2oU82u/4pqPz5cjvaKvjolQGuA9EUhlQIylCXAymky90RtvycHNdOwJVUrcd7dOGsW4ZMlABSmHuxpGPjcIDOHZcEUPDZgwZItcE4J/8nlm++XuFVpRHPVde50O8aQmImB2y6X63ZeTUGXj7g=,iv:Bn6H9CKhTCjAHYb+bs8Qpzf2z5MBptziqb0oVu/YaFM=,tag:bfeKfMJ/YtC8qEm1sP0DNQ==,type:str]
     pgp:
         - created_at: "2025-10-27T13:25:35Z"
           enc: |-
