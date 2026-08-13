@@ -65,6 +65,5 @@ prysm_validator_container_command_extra_args:
   - --chain-config-file=/network-config/config.yaml
   # Hosts that set validator_display_name stamp it; the rest keep the hostname.
   - --graffiti={{ validator_display_name | default(ansible_hostname) }}
-  - --suggested-gas-limit={{ ethereum_network_gas_limit }}
   - --enable-builder
 prysm_validator_datadir: /data/prysm-validator

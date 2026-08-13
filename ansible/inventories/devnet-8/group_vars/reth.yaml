@@ -24,9 +24,6 @@ reth_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --disable-discv4-discovery
   - --http.api=trace,rpc,eth,net,debug,web3,admin,txpool
-  # Pre-fork target for reth's local payload builder; post-fork the CL-registered
-  # limit takes over. Left on 150M in devnet-7, which contradicted genesis.
-  - --builder.gaslimit={{ ethereum_network_gas_limit }}
 prometheus_config: |
   global:
     scrape_interval: 30s

@@ -44,7 +44,7 @@ default_tooling_images:
   blobscan_indexer: blossomlabs/blobscan-indexer:latest
   dora: ethpandaops/dora:master-latest
   dugtrio: ethpandaops/dugtrio:bbusa-endpoint-failover
-  ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.1.3
+  ethereum_genesis_generator: ethpandaops/ethereum-genesis-generator:6.2.0
   tracoor: ethpandaops/tracoor:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
   ncli: status-im/nimbus-eth2:unstable
   lcli: ethpandaops/lighthouse:unstable

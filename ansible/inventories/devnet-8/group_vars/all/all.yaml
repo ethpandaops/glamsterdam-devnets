@@ -43,15 +43,6 @@ checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethe
 #  ██║░░██║╚█████╔╝███████╗███████╗  ░░╚██╔╝░░██║░░██║██║░░██║██████╔╝
 #  ╚═╝░░╚═╝░╚════╝░╚══════╝╚══════╝  ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░
 
-# The one number the network's gas limit hangs off: genesis GENESIS_GASLIMIT and
-# every CL's builder-registration flag read it, so genesis and the proposers'
-# registrations cannot disagree. Post-Amsterdam the EL takes its target gas limit
-# from the CL-registered value (geth miner/worker.go: gasCeil is replaced by
-# genParams.targetGasLimit once IsAmsterdam), which is why pinning the CL flags
-# matters — all five CLs still default to 60M, so an unpinned validator votes the
-# limit down by 1/1024 on every block it proposes.
-ethereum_network_gas_limit: 300000000
-
 # role: ethpandaops.general.ethereum_genesis
 ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
 ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
@@ -59,11 +50,9 @@ ethereum_genesis_network_seed: glamsterdam-devnet-8
 ethereum_genesis_chain_id: 70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Genesis time is left relative (collection default: now + 45 minutes). The role
-# skips generation once network-configs/devnet-8 exists, so it resolves exactly
-# once — on the run that creates the committed artifacts. Pin an absolute
-# ethereum_genesis_timestamp here only if the launch slot has to be fixed ahead
-# of that run.
+# Pinned genesis: 2026-08-13 11:00:00 UTC (13:00 CEST). Gloas at epoch 1536 hits
+# 2026-08-20 06:50:24 UTC, the 200M gas bump at epoch 1566 10:02:24 UTC.
+ethereum_genesis_timestamp: 1786618800
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -78,14 +67,14 @@ ethereum_genesis_generator_config_files:
   # here follows the egg defaults, which already carry the devnet-8 ePBS numbers
   # (consensus-specs v1.7.0-alpha.13: MAX_BUILDER_DEPOSIT_REQUESTS_PER_PAYLOAD 64,
   # MAX_BUILDER_EXIT_REQUESTS_PER_PAYLOAD 16, MAX_BUILDERS_PER_WITHDRAWALS_SWEEP
-  # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exceptions: GENESIS_GASLIMIT
-  # (matches the CL gas-limit registrations) and WITHDRAWAL_TYPE/VALIDATOR_BALANCE,
-  # so consolidations are testable (two 1024 ETH compounding validators fit one
-  # 2048 ETH max-EB target).
+  # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exception: WITHDRAWAL_TYPE,
+  # so all genesis validators carry compounding (0x02) credentials. At 32 ETH x
+  # 84k = 2.69M total stake, consolidations only work post-Gloas: above the
+  # EIP-8061 floor (2.16M) but far below the Electra one (18.9M), ~1 per epoch.
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
-    export NUMBER_OF_VALIDATORS=3600
+    export NUMBER_OF_VALIDATORS=84000
     export GENESIS_FORK_VERSION="0x10{{ ethereum_genesis_fork_version_suffix }}"
     export ALTAIR_FORK_VERSION="0x20{{ ethereum_genesis_fork_version_suffix }}"
     export BELLATRIX_FORK_VERSION="0x30{{ ethereum_genesis_fork_version_suffix }}"
@@ -94,28 +83,14 @@ ethereum_genesis_generator_config_files:
     export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
-    export BPO_1_EPOCH="1"
-    export BPO_2_EPOCH="2"
-    export GLOAS_FORK_EPOCH="38"
+    export GLOAS_FORK_EPOCH="1536"
+    export GAS_LIMIT_SCHEDULE='[{"epoch": 1566, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
-    export GENESIS_GASLIMIT={{ ethereum_network_gas_limit }}
+    export GENESIS_GASLIMIT=60000000
     export WITHDRAWAL_TYPE=0x02
-    # Gwei, NOT ETH: eth-beacon-genesis passes this verbatim as the genesis
-    # balance. 1024 ETH per compounding validator.
-    export VALIDATOR_BALANCE=1024000000000
-    # Spray 500k exited validators into the registry so the state is big enough
-    # for SSZ-hashing perf differences to show. Kept identical to devnet-7 on
-    # purpose: devnet-8 re-measures the same block-processing/hashing numbers
-    # after the EIP-7688 optimisation round, which only compares if the registry
-    # size is unchanged.
-    # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
-    # attest and the withdrawal sweep skips them. start=1000000 keeps their
-    # key indices clear of organic post-genesis deposits from this mnemonic.
-    # Grows genesis.ssz to ~73MB (~140B/validator; GitHub caps files at 100MB).
     export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1000000, "count": 500000, "wd_prefix": "0x00", "status": 2}]'
     export EL_PREMINE_ADDRS='{"0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467": {"balance": "100000ETH"}, "0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd": {"balance": "100000ETH"}, "0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89": {"balance": "100000ETH"}}'
-    export DEPLOY_EIP8282_CONTRACTS=false
 
 # 0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467: 100000ETH - arbitrum
 # 0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd: 100000ETH - optimism
