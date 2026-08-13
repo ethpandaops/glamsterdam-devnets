@@ -89,7 +89,6 @@ ethereum_genesis_generator_config_files:
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
     export WITHDRAWAL_TYPE=0x02
-    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1000000, "count": 500000, "wd_prefix": "0x00", "status": 2}]'
     export EL_PREMINE_ADDRS='{"0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467": {"balance": "100000ETH"}, "0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd": {"balance": "100000ETH"}, "0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89": {"balance": "100000ETH"}}'
 
 # 0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467: 100000ETH - arbitrum
@@ -223,10 +222,6 @@ gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubuserconten
 gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
   network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
-# parsedConsensusGenesis.json is in git-lfs (189MB, 500k exited validators), so
-# the config redirect must use media.githubusercontent.com instead of raw.
-# Needs the gen_kubernetes_config_parsed_genesis_lfs hook in ansible-collection-general.
-gen_kubernetes_config_parsed_genesis_lfs: true
 # Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
 # manual pre-gloas deployment of the builder request contracts, since genesis
 # omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
