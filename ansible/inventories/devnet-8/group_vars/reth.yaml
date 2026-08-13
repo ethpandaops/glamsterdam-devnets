@@ -23,9 +23,6 @@ reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --disable-discv4-discovery
-  # discv5 otherwise binds its own default UDP 9200, which the container never
-  # publishes — the ENR would advertise an unreachable port.
-  - --discovery.v5.port={{ reth_ports_p2p }}
   - --http.api=trace,rpc,eth,net,debug,web3,admin,txpool
 prometheus_config: |
   global:
