@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: registry-1.docker.io/ethpandaops/dora
-    tag: master-latest
+    tag: pk910-early-builder-deposits-latest
     pullPolicy: Always
   resources:
     requests:
