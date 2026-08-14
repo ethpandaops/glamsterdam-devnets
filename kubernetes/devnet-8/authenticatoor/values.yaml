@@ -16,6 +16,9 @@ authenticatoor:
       memory: 128Mi
 
   issuer: "https://auth.glamsterdam-devnet-8.ethpandaops.io"
+  allowedReturnHosts:
+    - "*.glamsterdam-devnet-8.ethpandaops.io"
+    - "*.plataberget.ethpandaops.io"
 
   cloudflareAccess:
     verifyJWT: true
