@@ -3,7 +3,7 @@ tracoor-single:
   fullnameOverride: "tracoor"
   image:
     repository: registry-1.docker.io/ethpandaops/tracoor
-    tag: glamsterdam-devnet-7
+    tag: glamsterdam-devnet-8
     pullPolicy: IfNotPresent
   resources:
     requests:
