@@ -45,7 +45,7 @@ default_tooling_images:
   dora: registry-1.docker.io/ethpandaops/dora:master-latest
   dugtrio: registry-1.docker.io/ethpandaops/dugtrio:bbusa-endpoint-failover
   ethereum_genesis_generator: registry-1.docker.io/ethpandaops/ethereum-genesis-generator:6.2.0
-  tracoor: registry-1.docker.io/ethpandaops/tracoor:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
+  tracoor: registry-1.docker.io/ethpandaops/tracoor:0.0.2-glamsterdam-devnet-8 # pinned: floating tag + IfNotPresent won't re-pull
   ncli: registry-1.docker.io/status-im/nimbus-eth2:unstable
   lcli: registry-1.docker.io/ethpandaops/lighthouse:unstable
   zcli: gloas

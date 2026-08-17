@@ -3,14 +3,14 @@ tracoor-single:
   fullnameOverride: "tracoor"
   image:
     repository: registry-1.docker.io/ethpandaops/tracoor
-    tag: glamsterdam-devnet-7
+    tag: 0.0.2-glamsterdam-devnet-8
     pullPolicy: IfNotPresent
   resources:
     requests:
       cpu: 1000m
       memory: 2Gi
     limits:
-      cpu: 2000m
+      cpu: 4000m
       memory: 4Gi
   ingress:
     http:
