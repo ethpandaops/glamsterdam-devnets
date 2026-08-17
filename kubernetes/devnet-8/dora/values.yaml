@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: registry-1.docker.io/ethpandaops/dora
-    tag: pk910-ens-multi-network
+    tag: master-latest
     pullPolicy: Always
   resources:
     requests:
