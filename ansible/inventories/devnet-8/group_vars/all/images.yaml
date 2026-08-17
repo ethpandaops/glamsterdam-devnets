@@ -6,7 +6,7 @@ default_ethereum_client_images:
   nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
   prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:glamsterdam-devnet-8
   prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:glamsterdam-devnet-8
-  teku: registry-1.docker.io/ethpandaops/teku:master
+  teku: registry-1.docker.io/ethpandaops/teku:glamsterdam-devnet-8
   grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-8
   ### Execution layer clients
   besu: registry-1.docker.io/ethpandaops/besu:glamsterdam-devnet-8
