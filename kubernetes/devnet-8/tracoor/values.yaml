@@ -1,6 +1,8 @@
 # Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/tracoor.yaml.j2
 tracoor-single:
   fullnameOverride: "tracoor"
+  # TEMPORARY: scaled to 0 for the PR#66 postgres migration. Restore to 1 after.
+  replicas: 0
   image:
     repository: registry-1.docker.io/ethpandaops/tracoor
     tag: glamsterdam-devnet-8
