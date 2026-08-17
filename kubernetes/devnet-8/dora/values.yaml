@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: registry-1.docker.io/ethpandaops/dora
-    tag: master-latest
+    tag: pk910-ens-multi-network
     pullPolicy: Always
   resources:
     requests:
@@ -86,6 +86,11 @@ dora:
   ensRegistries:
   - "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e" # official address
   - "0xd9d427CE03c05eFA28C7420e2D11f6fb44eE95eF" # devnet registry (spamoor)
+  ensRemoteNetworks:
+    - endpoints:
+      - url: https://ethereum-rpc.publicnode.com
+      name: mainnet
+
 
   endpointsUrl: "https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/refs/heads/master/kubernetes/devnet-8/dora/endpoints-cl.yaml"
   executionEndpointsUrl: "https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/refs/heads/master/kubernetes/devnet-8/dora/endpoints-el.yaml"
