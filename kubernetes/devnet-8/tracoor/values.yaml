@@ -10,7 +10,7 @@ tracoor-single:
       cpu: 1000m
       memory: 2Gi
     limits:
-      cpu: 2000m
+      cpu: 4000m
       memory: 4Gi
   ingress:
     http:
