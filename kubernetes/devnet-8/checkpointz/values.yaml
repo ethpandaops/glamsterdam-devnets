@@ -27,10 +27,15 @@ checkpointz:
         paths:
           - path: /
             pathType: Prefix
+      - host: checkpoint-sync.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
     tls:
     - hosts:
       - checkpoint-sync.glamsterdam-devnet-8.ethpandaops.io
+      - checkpoint-sync.plataberget.ethpandaops.io
       secretName: glamsterdam-devnet-8-checkpoint-sync-tls
 
   config:

@@ -29,6 +29,10 @@ testnet-homepage:
         paths:
           - path: /
             pathType: Prefix
+      - host: plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   customMarkdown: |-
     ## Network Spec

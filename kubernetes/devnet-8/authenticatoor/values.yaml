@@ -37,3 +37,7 @@ authenticatoor:
         paths:
           - path: /
             pathType: Prefix
+      - host: auth.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
