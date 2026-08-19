@@ -21,6 +21,10 @@ erpc:
         paths:
           - path: /
             pathType: Prefix
+      - host: rpc.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   config: |
     logLevel: info
