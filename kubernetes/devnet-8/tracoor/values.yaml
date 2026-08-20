@@ -3,7 +3,7 @@ tracoor-single:
   fullnameOverride: "tracoor"
   image:
     repository: registry-1.docker.io/ethpandaops/tracoor
-    tag: 0.0.2-glamsterdam-devnet-8
+    tag: 0.0.3-glamsterdam-devnet-8
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -80,6 +80,27 @@ tracoor-single:
             executionBlockTraces: 100h
             beaconBlocks: 100h
             executionPayloadEnvelopes: 100h
+        promotion:
+          enabled: true
+          lagEpochs: 2
+          checkInterval: 30s
+          slotsPerEpoch: 32
+          secondsPerSlot: 12s
+          rateCapPerHour: 30
+          rareCapPerHour: 120
+          reorgCapPerHour: 1000
+          baselineEveryNEpochs: 8
+          gapTrigger: 2
+          syncParticipationFloor: 0.95
+          store:
+            type: s3
+            config:
+              region: us-east-1
+              bucket_name: glamsterdam-devnet-8/tracoor-corpus
+              endpoint: https://<path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.account_ids.ethdevops}>.r2.cloudflarestorage.com/ethpandaops-devnet-dumpster
+              prefer_urls: true
+              access_key: <path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.r2.devnets.access_key_id}>
+              access_secret: <path:/secrets/services/services.enc.yaml#cloudflare | jsonPath {.r2.devnets.secret_access_key}>
       ethereum:
         config:
           repository: ethpandaops/glamsterdam-devnets
