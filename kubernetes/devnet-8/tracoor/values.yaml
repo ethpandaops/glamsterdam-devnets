@@ -27,6 +27,10 @@ tracoor-single:
           paths:
             - path: /
               pathType: Prefix
+        - host: tracoor.plataberget.ethpandaops.io
+          paths:
+            - path: /
+              pathType: Prefix
 
   postgresql:
     enabled: true

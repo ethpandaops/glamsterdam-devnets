@@ -30,6 +30,10 @@ assertoor:
         paths:
           - path: /
             pathType: Prefix
+      - host: assertoor.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   persistence:
     enabled: true

@@ -27,6 +27,10 @@ dora:
         paths:
           - path: /
             pathType: Prefix
+      - host: dora.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   name: plataberget
   configPath: "https://config.glamsterdam-devnet-8.ethpandaops.io/cl/config.yaml"
