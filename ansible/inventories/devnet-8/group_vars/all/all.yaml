@@ -101,7 +101,7 @@ ethereum_genesis_generator_config_files:
 # have to be funded explicitly or the faucet hands out nothing. Same addresses on
 # every glamsterdam devnet - the vault entry is per devnet family, not per devnet.
 # 0x877d64e72b7e1f5034aec55d910c877b2b7104da: 50000000ETH - faucet-agents, pays every agent claim
-# 0x2aa5f02f347089910eea88279c405149ec8540d5: 50000000ETH - faucet-agents, backs the session/status balance
+# 0x2aa5f02f347089910eea88279c405149ec8540d5: 50000000ETH - faucet-agents, the balance the faucet reports, and pays browser-path claims
 
 # DEPLOY_EIP8282_CONTRACTS=false: the builder deposit/exit contracts are NOT in
 # genesis — the deploy-eip8282-contracts assertoor playbook below puts them on
