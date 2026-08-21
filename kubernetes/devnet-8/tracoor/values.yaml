@@ -84,6 +84,11 @@ tracoor-single:
             executionBlockTraces: 100h
             beaconBlocks: 100h
             executionPayloadEnvelopes: 100h
+          permanentStore:
+            blocks:
+              enabled: true
+            executionPayloadEnvelopes:
+              enabled: true
         promotion:
           enabled: true
           lagEpochs: 2
@@ -93,7 +98,7 @@ tracoor-single:
           rateCapPerHour: 30
           rareCapPerHour: 120
           reorgCapPerHour: 1000
-          baselineEveryNEpochs: 8
+          baselineEveryNEpochs: 0
           gapTrigger: 2
           syncParticipationFloor: 0.95
           store:
