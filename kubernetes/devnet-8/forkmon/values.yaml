@@ -20,6 +20,10 @@ forkmon:
         paths:
           - path: /
             pathType: Prefix
+      - host: forkmon.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
   network: plataberget
   endpoints:
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io

@@ -28,6 +28,10 @@ buildoor-overview:
         paths:
           - path: /
             pathType: Prefix
+      - host: buildoor.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   hosts:
     - https://api-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io

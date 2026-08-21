@@ -20,15 +20,16 @@ powfaucet:
     enabled: true
 
     className: ingress-nginx-public
-    annotations:
-      # Lock the faucet behind basic auth that only the panda proxy holds, so it
-      # is reachable solely via the proxy (which authenticates the caller first).
-      nginx.ingress.kubernetes.io/auth-type: basic
-      nginx.ingress.kubernetes.io/auth-secret: powfaucet-agents-basic-auth
-      nginx.ingress.kubernetes.io/auth-realm: "panda proxy only"
+    # Lock the faucet behind basic auth that only the panda proxy holds, so it is
+    # reachable solely via the proxy (which authenticates the caller first).
+    basicAuth: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.username}>:{PLAIN}<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.password}>"
 
     hosts:
       - host: faucet-agents.glamsterdam-devnet-8.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+      - host: faucet-agents.plataberget.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
