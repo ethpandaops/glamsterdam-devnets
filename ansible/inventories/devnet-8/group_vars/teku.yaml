@@ -45,7 +45,7 @@ teku_container_command_extra_simple_args:
   - --network=plataberget
   - --p2p-discovery-bootnodes={{ ethereum_cl_bootnodes | join(',') }}
   - --validators-graffiti={{ ansible_hostname }}
-  - --logging=debug
+  - --logging=info
   - --Xlog-include-p2p-warnings-enabled
   - --metrics-block-timing-tracking-enabled
   - --rest-api-docs-enabled
