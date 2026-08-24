@@ -29,6 +29,8 @@ besu_container_command_extra_args:
   - --color-enabled=false
   - --cache-last-blocks=2048
   - --rpc-http-max-active-connections=1000
+  # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
+  - --rpc-gas-cap=200000000
 besu_container_pull: true
 
 prometheus_config: |

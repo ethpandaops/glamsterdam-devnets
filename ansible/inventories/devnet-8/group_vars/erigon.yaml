@@ -25,6 +25,8 @@ erigon_container_command_extra_args:
   - --discovery.v4=false
   - --discovery.v5=true
   - --log.console.verbosity=debug
+  # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
+  - --rpc.gascap=200000000
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
