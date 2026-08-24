@@ -59,3 +59,15 @@ ethereum_node_docker_watchtower_containers_list:
   - validator
   - xatu-sentry
   - buildoor
+
+# 16 GiB buildoor tier (vs 32 GiB matrix): override group_vars/ethrex.yaml so ethrex fits in RAM.
+# - --syncmode=snap   : avoids full-sync batch commit-ahead (the #7127 restart hazard) and large diff-layer backlog
+# - --rocksdb.block-cache-size=4294967296 : cap the 12 GiB default RocksDB block cache to 4 GiB
+ethrex_container_command_extra_args:
+  - --network=/network-config/genesis.json
+  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --p2p.discv4=false
+  - --p2p.discv5=true
+  - --http.api=eth,net,web3,admin,debug
+  - --syncmode=snap
+  - --rocksdb.block-cache-size=4294967296
