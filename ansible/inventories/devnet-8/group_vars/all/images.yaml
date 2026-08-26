@@ -9,12 +9,12 @@ default_ethereum_client_images:
   teku: registry-1.docker.io/ethpandaops/teku:master
   grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-8
   ### Execution layer clients
-  besu: registry-1.docker.io/ethpandaops/besu:master
+  besu: registry-1.docker.io/ethpandaops/besu:main
   geth: registry-1.docker.io/ethpandaops/geth:master
   erigon: registry-1.docker.io/ethpandaops/erigon:glamsterdam-devnet-8
-  nethermind: registry-1.docker.io/ethpandaops/nethermind:glamsterdam-devnet-8
+  nethermind: registry-1.docker.io/ethpandaops/nethermind:master
   reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-8
-  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:glamsterdam-devnet-8
+  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
   ethrex: registry-1.docker.io/ethpandaops/ethrex:glamsterdam-devnet-8
 
 default_tooling_images:

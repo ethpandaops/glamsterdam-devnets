@@ -27,10 +27,6 @@ spamoor:
         paths:
           - path: /
             pathType: Prefix
-      - host: spamoor.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
   customArgs:
     - --fulu-activation=1786622400
@@ -43,8 +39,12 @@ spamoor:
   rpcEndpoints:
   - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(bootnode-2)name(bootnode-2)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+  - "group(buildoor,grandine,nimbusel,1,buildoor-grandine-nimbusel-1)name(buildoor-grandine-nimbusel-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(buildoor,lighthouse,geth,1,buildoor-lighthouse-geth-1)name(buildoor-lighthouse-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+  - "group(buildoor,lighthouse,reth,1,buildoor-lighthouse-reth-1)name(buildoor-lighthouse-reth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+  - "group(buildoor,lodestar,besu,1,buildoor-lodestar-besu-1)name(buildoor-lodestar-besu-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(buildoor,lodestar,ethrex,1,buildoor-lodestar-ethrex-1)name(buildoor-lodestar-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+  - "group(buildoor,nimbus,erigon,1,buildoor-nimbus-erigon-1)name(buildoor-nimbus-erigon-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(buildoor,prysm,ethrex,1,buildoor-prysm-ethrex-1)name(buildoor-prysm-ethrex-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(buildoor,teku,nethermind,1,buildoor-teku-nethermind-1)name(buildoor-teku-nethermind-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   - "group(grandine-besu-1)name(grandine-besu-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io"

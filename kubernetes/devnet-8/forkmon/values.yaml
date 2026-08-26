@@ -20,20 +20,24 @@ forkmon:
         paths:
           - path: /
             pathType: Prefix
-      - host: forkmon.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
-  network: plataberget
+  network: glamsterdam-devnet-8
   endpoints:
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io
     name: bootnode-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-2.srv.glamsterdam-devnet-8.ethpandaops.io
     name: bootnode-2
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    name: buildoor-grandine-nimbusel-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
     name: buildoor-lighthouse-geth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    name: buildoor-lighthouse-reth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    name: buildoor-lodestar-besu-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
     name: buildoor-lodestar-ethrex-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    name: buildoor-nimbus-erigon-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
     name: buildoor-prysm-ethrex-1
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io

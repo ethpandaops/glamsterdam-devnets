@@ -29,10 +29,6 @@ testnet-homepage:
         paths:
           - path: /
             pathType: Prefix
-      - host: plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
   customMarkdown: |-
     ## Network Spec
@@ -88,7 +84,7 @@ testnet-homepage:
   config:
     baseURL: https://glamsterdam-devnet-8.ethpandaops.io
     languageCode: en-us
-    title: Plataberget
+    title: glamsterdam-devnet-8
     theme: PaperMod
     markup:
       highlight:
@@ -111,7 +107,7 @@ testnet-homepage:
         blobscanUrl: https://blobscan.com
         blobscanethpandaUrl: https://blobscan.glamsterdam-devnet-8.ethpandaops.io
         ethstatsUrl: https://ethstats.glamsterdam-devnet-8.ethpandaops.io
-        chainName: "Plataberget"
+        chainName: "glamsterdam-devnet-8"
         chainId: "7091047534"
         github: https://github.com/ethpandaops/glamsterdam-devnets/tree/master/network-configs/devnet-8/metadata
         syncoorUrl: https://syncoor.glamsterdam-devnet-8.ethpandaops.io

@@ -30,10 +30,6 @@ assertoor:
         paths:
           - path: /
             pathType: Prefix
-      - host: assertoor.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
   persistence:
     enabled: true
@@ -47,12 +43,24 @@ assertoor:
     - name:  bootnode-2
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-2.srv.glamsterdam-devnet-8.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-2.srv.glamsterdam-devnet-8.ethpandaops.io
+    - name:  buildoor-grandine-nimbusel-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - name:  buildoor-lighthouse-geth-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - name:  buildoor-lighthouse-reth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - name:  buildoor-lodestar-besu-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - name:  buildoor-lodestar-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - name:  buildoor-nimbus-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - name:  buildoor-prysm-ethrex-1
       executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
       consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
@@ -318,8 +326,12 @@ assertoor:
     clientPairNames:
       - bootnode-1
       - bootnode-2
+      - buildoor-grandine-nimbusel-1
       - buildoor-lighthouse-geth-1
+      - buildoor-lighthouse-reth-1
+      - buildoor-lodestar-besu-1
       - buildoor-lodestar-ethrex-1
+      - buildoor-nimbus-erigon-1
       - buildoor-prysm-ethrex-1
       - buildoor-teku-nethermind-1
       - grandine-besu-1

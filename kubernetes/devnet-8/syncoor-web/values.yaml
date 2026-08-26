@@ -72,10 +72,3 @@ syncoor-web:
               service:
                 identifier: main
                 port: http
-        - host: syncoor.plataberget.ethpandaops.io
-          paths:
-            - path: /
-              pathType: Prefix
-              service:
-                identifier: main
-                port: http

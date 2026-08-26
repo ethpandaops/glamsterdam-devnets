@@ -9,13 +9,30 @@
   name: bootnode-2
   authGroup: pandaops
   priority: -1
+- url: https://bn-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
+  name: buildoor-grandine-nimbusel-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
   name: buildoor-lighthouse-geth-1
   authGroup: pandaops
   priority: -1
   archive: true
+- url: https://bn-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+  name: buildoor-lighthouse-reth-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
+  name: buildoor-lodestar-besu-1
+  authGroup: pandaops
+  priority: -1
 - url: https://bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
   name: buildoor-lodestar-ethrex-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
+  name: buildoor-nimbus-erigon-1
   authGroup: pandaops
   priority: -1
 - url: https://bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io

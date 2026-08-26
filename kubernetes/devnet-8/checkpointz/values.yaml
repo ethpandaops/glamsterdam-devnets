@@ -27,15 +27,10 @@ checkpointz:
         paths:
           - path: /
             pathType: Prefix
-      - host: checkpoint-sync.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
     tls:
     - hosts:
       - checkpoint-sync.glamsterdam-devnet-8.ethpandaops.io
-      - checkpoint-sync.plataberget.ethpandaops.io
       secretName: glamsterdam-devnet-8-checkpoint-sync-tls
 
   config:
@@ -61,11 +56,23 @@ checkpointz:
         - name: bootnode-2
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-2.srv.glamsterdam-devnet-8.ethpandaops.io
           dataProvider: true
+        - name: buildoor-grandine-nimbusel-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
+          dataProvider: true
         - name: buildoor-lighthouse-geth-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
           dataProvider: true
+        - name: buildoor-lighthouse-reth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-lodestar-besu-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
+          dataProvider: true
         - name: buildoor-lodestar-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-nimbus-erigon-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
           dataProvider: true
         - name: buildoor-prysm-ethrex-1
           address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io

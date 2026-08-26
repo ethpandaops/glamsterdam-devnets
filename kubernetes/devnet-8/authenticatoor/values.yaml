@@ -16,9 +16,6 @@ authenticatoor:
       memory: 128Mi
 
   issuer: "https://auth.glamsterdam-devnet-8.ethpandaops.io"
-  allowedReturnHosts:
-    - "*.glamsterdam-devnet-8.ethpandaops.io"
-    - "*.plataberget.ethpandaops.io"
 
   cloudflareAccess:
     verifyJWT: true
@@ -34,10 +31,6 @@ authenticatoor:
     className: ingress-nginx-public
     hosts:
       - host: auth.glamsterdam-devnet-8.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
-      - host: auth.plataberget.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix

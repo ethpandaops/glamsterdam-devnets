@@ -28,13 +28,13 @@ buildoor-overview:
         paths:
           - path: /
             pathType: Prefix
-      - host: buildoor.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
   hosts:
+    - https://api-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - https://api-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - https://api-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - https://api-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - https://api-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
+    - https://api-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - https://api-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
     - https://api-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io

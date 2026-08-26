@@ -28,10 +28,6 @@ forky:
         paths:
           - path: /
             pathType: Prefix
-      - host: forky.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
 
   postgresql:
     enabled: true
@@ -76,7 +72,7 @@ forky:
       indexer: {}
       ethereum:
         network:
-          name: "plataberget"
+          name: "glamsterdam-devnet-8"
           spec:
             seconds_per_slot: 12
             slots_per_epoch: 32
@@ -87,15 +83,35 @@ forky:
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io
             polling_interval: "12s"
+        - name: buildoor-grandine-nimbusel-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io
+            polling_interval: "12s"
         - name: buildoor-lighthouse-geth-1
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-8.ethpandaops.io
             polling_interval: "12s"
+        - name: buildoor-lighthouse-reth-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io
+            polling_interval: "12s"
+        - name: buildoor-lodestar-besu-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io
+            polling_interval: "12s"
         - name: buildoor-lodestar-ethrex-1
           type: "beacon_node"
           config:
             address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-8.ethpandaops.io
+            polling_interval: "12s"
+        - name: buildoor-nimbus-erigon-1
+          type: "beacon_node"
+          config:
+            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-nimbus-erigon-1.srv.glamsterdam-devnet-8.ethpandaops.io
             polling_interval: "12s"
         - name: buildoor-prysm-ethrex-1
           type: "beacon_node"

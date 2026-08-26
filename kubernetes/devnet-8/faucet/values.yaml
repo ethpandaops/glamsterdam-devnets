@@ -32,13 +32,9 @@ powfaucet:
         paths:
           - path: /
             pathType: Prefix
-      - host: faucet.plataberget.ethpandaops.io
-        paths:
-          - path: /
-            pathType: Prefix
   httpProxyCount: 2
 
-  faucetTitle: "Plataberget PoW Faucet"
+  faucetTitle: "glamsterdam-devnet-8 PoW Faucet"
   faucetPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_private_key}>"
   faucetRpcUrl: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io"
   faucetRpcEndpoints:
@@ -93,14 +89,14 @@ powfaucet:
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
       name: "lighthouse-reth-1"
       priority: 5
+    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-lighthouse-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+      name: "buildoor-lighthouse-reth-1"
+      priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
       name: "prysm-reth-1"
       priority: 5
     - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
       name: "lodestar-reth-1"
-      priority: 5
-    - url: "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-reth-1.srv.glamsterdam-devnet-8.ethpandaops.io"
-      name: "nimbus-reth-1"
       priority: 5
   faucetExplorerLink: "https://dora.glamsterdam-devnet-8.ethpandaops.io/tx/{txid}"
 
