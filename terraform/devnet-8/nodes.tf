@@ -33,6 +33,10 @@ variable "nodes" {
     { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1 },
     { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2 },
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
+    { name = "buildoor-grandine-nimbusel", count = 1, cloud = "digitalocean", builder_start = 4 },
+    { name = "buildoor-lighthouse-reth", count = 1, cloud = "digitalocean", builder_start = 5 },
+    { name = "buildoor-lodestar-besu", count = 1, cloud = "digitalocean", builder_start = 6 },
+    { name = "buildoor-nimbus-erigon", count = 1, cloud = "digitalocean", builder_start = 7 },
 
     # Validator layout: 6 CL x 7 EL = 42 combos x 2000 keys over [0,84000),
     # same ordering as devnet-7's final grid; grandine and erigon interleaved
