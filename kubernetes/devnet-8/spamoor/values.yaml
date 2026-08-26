@@ -27,6 +27,10 @@ spamoor:
         paths:
           - path: /
             pathType: Prefix
+      - host: spamoor.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   customArgs:
     - --fulu-activation=1786622400

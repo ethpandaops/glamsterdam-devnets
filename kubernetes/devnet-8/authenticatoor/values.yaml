@@ -16,6 +16,11 @@ authenticatoor:
       memory: 128Mi
 
   issuer: "https://auth.glamsterdam-devnet-8.ethpandaops.io"
+  # Logins must be allowed to return to the alias hosts too. Setting this
+  # replaces the chart default of "*.<issuer parent zone>", so list that as well.
+  allowedReturnHosts:
+    - "*.glamsterdam-devnet-8.ethpandaops.io"
+    - "*.plataberget.ethpandaops.io"
 
   cloudflareAccess:
     verifyJWT: true
@@ -31,6 +36,10 @@ authenticatoor:
     className: ingress-nginx-public
     hosts:
       - host: auth.glamsterdam-devnet-8.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+      - host: auth.plataberget.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix

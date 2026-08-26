@@ -4,7 +4,7 @@ buildoor-overview:
   fullnameOverride: buildoor-overview
   image:
     repository: registry-1.docker.io/ethpandaops/buildoor
-    tag: pk910-multi-key-latest
+    tag: main-latest
     pullPolicy: Always
 
   resources:
@@ -25,6 +25,10 @@ buildoor-overview:
         sub_filter_once off;
     hosts:
       - host: buildoor.glamsterdam-devnet-8.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+      - host: buildoor.plataberget.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix

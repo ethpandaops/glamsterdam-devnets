@@ -27,6 +27,10 @@ dugtrio:
         paths:
           - path: /
             pathType: Prefix
+      - host: beacon.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   dugtrioFrontendTitle: "Dugtrio: glamsterdam-devnet-8"
   dugtrioProxyCount: 2

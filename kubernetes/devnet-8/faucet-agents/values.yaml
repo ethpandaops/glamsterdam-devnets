@@ -29,6 +29,10 @@ powfaucet:
         paths:
           - path: /
             pathType: Prefix
+      - host: faucet-agents.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
   httpProxyCount: 2
 
   faucetTitle: "Plataberget Agent Faucet"

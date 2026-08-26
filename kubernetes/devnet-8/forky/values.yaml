@@ -28,6 +28,10 @@ forky:
         paths:
           - path: /
             pathType: Prefix
+      - host: forky.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
 
   postgresql:
     enabled: true
