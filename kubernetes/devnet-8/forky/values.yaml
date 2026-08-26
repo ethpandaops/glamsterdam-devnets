@@ -72,7 +72,7 @@ forky:
       indexer: {}
       ethereum:
         network:
-          name: "glamsterdam-devnet-8"
+          name: "Plataberget"
           spec:
             seconds_per_slot: 12
             slots_per_epoch: 32

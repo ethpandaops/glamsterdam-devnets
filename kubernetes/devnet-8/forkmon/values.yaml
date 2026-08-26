@@ -20,7 +20,7 @@ forkmon:
         paths:
           - path: /
             pathType: Prefix
-  network: glamsterdam-devnet-8
+  network: "Plataberget"
   endpoints:
   - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-8.ethpandaops.io
     name: bootnode-1
