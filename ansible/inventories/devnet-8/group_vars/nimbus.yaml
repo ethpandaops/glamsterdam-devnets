@@ -48,7 +48,7 @@ nimbus_container_command_extra_simple_args:
   - --network=/network-config
   - --validator-monitor-auto=false
   - --doppelganger-detection=off
-  - --log-level=INFO
+  - --log-level=DEBUG
   - --light-client-data-serve=true
   - --graffiti={{ ansible_hostname }}
 
