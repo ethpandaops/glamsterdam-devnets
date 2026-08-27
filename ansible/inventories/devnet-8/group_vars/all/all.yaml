@@ -232,6 +232,7 @@ gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubuserconten
 gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
   network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+gen_kubernetes_config_dora_xatu_enabled: true
 # Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
 # manual pre-gloas deployment of the builder request contracts, since genesis
 # omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
