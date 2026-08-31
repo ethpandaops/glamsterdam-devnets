@@ -68,13 +68,18 @@ ethereum_genesis_generator_config_files:
   # (consensus-specs v1.7.0-alpha.13: MAX_BUILDER_DEPOSIT_REQUESTS_PER_PAYLOAD 64,
   # MAX_BUILDER_EXIT_REQUESTS_PER_PAYLOAD 16, MAX_BUILDERS_PER_WITHDRAWALS_SWEEP
   # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exception: WITHDRAWAL_TYPE,
-  # so all genesis validators carry compounding (0x02) credentials. At 32 ETH x
-  # 1M = 32M total stake, above both the Electra churn floor (18.9M) and the
-  # EIP-8061 one (2.16M), so consolidations work pre- and post-Gloas.
+  # so all genesis validators carry compounding (0x02) credentials.
+  #
+  # SMOKE TEST: 39000 validators (39 nodes x 1000) instead of 1000000, so every
+  # genesis key is actually online and the chain finalises at 45-node scale.
+  # Caveat: 39000 x 32 ETH = 1.248M ETH total stake, which is BELOW both the
+  # Electra churn floor (18.9M) and the EIP-8061 one (2.16M) — the churn /
+  # consolidation regime therefore differs from the real run. Restore 1000000
+  # together with terraform/devnet-9/nodes.tf before the big network.
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
-    export NUMBER_OF_VALIDATORS=1000000
+    export NUMBER_OF_VALIDATORS=39000
     export GENESIS_FORK_VERSION="0x10{{ ethereum_genesis_fork_version_suffix }}"
     export ALTAIR_FORK_VERSION="0x20{{ ethereum_genesis_fork_version_suffix }}"
     export BELLATRIX_FORK_VERSION="0x30{{ ethereum_genesis_fork_version_suffix }}"
