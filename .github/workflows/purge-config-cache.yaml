@@ -1,0 +1,47 @@
+name: Purge config cache
+
+# Cloudflare caches the genesis artifacts these hosts serve for a day
+# (ethpandaops/ethPandaOps -> cloudflare/terraform/cache-rules.tf), so a
+# regenerated genesis has to be purged explicitly. Nothing else on those hosts
+# is cached, so nothing else needs purging.
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'network-configs/*/metadata/genesis.ssz'
+      - 'network-configs/*/parsed/parsedConsensusGenesis.json'
+
+permissions:
+  contents: read
+
+jobs:
+  purge:
+    name: Purge Cloudflare cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Purge changed networks
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_CACHE_PURGE_TOKEN }}
+          CF_ZONE: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          set -euo pipefail
+
+          hosts=$(git diff --name-only HEAD^ HEAD \
+            -- 'network-configs/*/metadata/genesis.ssz' \
+               'network-configs/*/parsed/parsedConsensusGenesis.json' \
+            | cut -d/ -f2 | sort -u \
+            | sed 's|.*|config.glamsterdam-&.ethpandaops.io|')
+
+          echo "Purging:"
+          echo "$hosts"
+
+          echo "$hosts" | jq -Rn '{hosts: [inputs]}' | curl -sS --fail-with-body \
+            -X POST "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/purge_cache" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data @-
