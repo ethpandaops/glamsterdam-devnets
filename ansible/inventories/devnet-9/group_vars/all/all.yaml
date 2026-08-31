@@ -65,7 +65,7 @@ ethereum_genesis_generator_config_files:
     split_lines=false) }}" # noqa yaml[line-length]
   # Network identity and fork schedule only — every spec parameter not listed
   # here follows the egg defaults, which already carry the devnet-8 ePBS numbers
-  # (consensus-specs v1.7.0-alpha.13: MAX_BUILDER_DEPOSIT_REQUESTS_PER_PAYLOAD 64,
+  # (consensus-specs v1.7.0-alpha.14: MAX_BUILDER_DEPOSIT_REQUESTS_PER_PAYLOAD 64,
   # MAX_BUILDER_EXIT_REQUESTS_PER_PAYLOAD 16, MAX_BUILDERS_PER_WITHDRAWALS_SWEEP
   # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exception: WITHDRAWAL_TYPE,
   # so all genesis validators carry compounding (0x02) credentials.
@@ -98,11 +98,20 @@ ethereum_genesis_generator_config_files:
     # 6x) so the 4M-entry state stresses SSZ hashing and registry scans.
     # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
     # attest and the withdrawal sweep skips them. start=1100000 keeps a
-    # 100k-key gap above the 1M genesis set. SHUFFLE_VALIDATORS interleaves
+    # 100k-key gap above the 1M genesis set the full run restores (the smoke
+    # test's 39000 leaves a far wider one). SHUFFLE_VALIDATORS interleaves
     # them with the active set block-wise instead of one tail block;
     # the resulting mnemonic-index -> on-chain-index mapping lands in
-    # metadata/validator_names.yaml. Genesis.ssz grows to ~560MB — keep it
-    # out of git (devnet-7's 73MB was already near GitHub's 100MB cap).
+    # metadata/validator_names.yaml, and ethereum_inventory_web merges that
+    # with the host key segments (genesis generator's
+    # apps/validator-mapping/merge.sh) so /meta/api/v1/validator-ranges.json
+    # reports ON-CHAIN indices rather than mnemonic ones. That merge only
+    # exists in ansible-collection-general master: refresh ansible/vendor/
+    # before a run, or the published ranges are silently wrong.
+    # The 3M spray is deliberately kept at smoke-test scale - exercising the
+    # ~560MB genesis and the R2 distribution path is the point of the smoke run.
+    # Genesis.ssz grows to ~560MB — keep it out of git (devnet-7's 73MB was
+    # already near GitHub's 100MB cap).
     export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1100000, "count": 3000000, "wd_prefix": "0x00", "status": 2}]'
     export SHUFFLE_VALIDATORS=true
     export DEPLOY_EIP8282_CONTRACTS=true

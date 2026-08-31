@@ -61,6 +61,40 @@
     - role: ethpandaops.general.wildcard_cert_issuer
       tags: [init-server, wildcard_cert]
 
+# devnet-9 distributes the network config out-of-band: both
+# eth_testnet_config_local_dir_enabled and _tarball_enabled are false, which
+# makes every task in ethereum_testnet_config a no-op, and the files arrive via
+# `ansible-playbook s3_playbook.yaml -t download` instead. Nothing enforced that
+# ordering, so a fresh or replaced host sailed past the no-op role and started
+# geth with --override.genesis=/network-config/genesis.json against an empty
+# directory. Fail here instead, naming the command to run. Skipped when the role
+# is actually distributing the config, so other inventories are unaffected.
+- name: Verify the network config reached every node
+  hosts: bootnode:ethereum_node
+  gather_facts: false
+  become: true
+  tags: [ethereum, eth_testnet_config, ethereum_testnet_config, ethereum_node]
+  tasks:
+    - name: Check the network config reached the host
+      when: not (eth_testnet_config_local_dir_enabled | default(false) | bool
+                 or eth_testnet_config_tarball_enabled | default(false) | bool
+                 or eth_testnet_config_git_enabled | default(false) | bool)
+      block:
+        - name: Stat the distributed genesis state
+          ansible.builtin.stat:
+            path: "{{ eth_testnet_config_dir }}/genesis.ssz"
+          register: eth_testnet_config_genesis
+
+        - name: Fail if the network config was never distributed
+          ansible.builtin.fail:
+            msg: >-
+              {{ eth_testnet_config_dir }}/genesis.ssz is missing on
+              {{ inventory_hostname }}, and ethereum_testnet_config is configured
+              to distribute nothing. Run
+              `ansible-playbook s3_playbook.yaml -t download` first
+              (preceded once per genesis by `-t upload` on the controller).
+          when: not eth_testnet_config_genesis.stat.exists
+
 - hosts: bootnode
   become: true
   roles:

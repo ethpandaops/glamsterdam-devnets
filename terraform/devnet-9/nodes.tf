@@ -32,10 +32,12 @@ variable "nodes" {
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
 
     # SMOKE TEST GRID — tooling shakeout before the 1000-node run.
-    # Every CL/EL combination of the mainnet-weighted grid is kept, one node each
-    # (39 combos), so every client role, image and config path is exercised. Only the
-    # per-combo multiplicity is dropped, i.e. the shape of the matrix is identical,
-    # the weights are not. 1000 validators per node, contiguous ranges in file order
+    # 39 of the 42 CL x EL combinations, one node each, so every client role, image
+    # and config path is exercised. Mostly the per-combo multiplicity is dropped —
+    # the weights go, not the shape — but three combinations are absent entirely and
+    # get no smoke coverage: lodestar-nimbusel, grandine-nimbusel, grandine-ethrex.
+    # Add them here if the point is to shake out every client pairing.
+    # 1000 validators per node, contiguous ranges in file order
     # over [0,39000) (NUMBER_OF_VALIDATORS=39000, see group_vars/all/all.yaml) so
     # every genesis validator is online and the chain can finalise.
     # Restore the weighted 1000-node grid with `git checkout` on this file (and reset

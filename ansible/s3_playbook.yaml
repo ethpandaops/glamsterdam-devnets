@@ -27,9 +27,11 @@
 #     secret_access_key: <R2 API token secret>
 #     public_base_url: https://<custom-domain-or-pub-xxxx.r2.dev>
 #
-# Files already present on a host are NOT re-downloaded. After a re-genesis
-# under the same devnet name, force a refresh with:
-#        ansible-playbook s3_playbook.yaml -t download -e s3_config_force_download=true
+# Files already present on a host are NOT re-downloaded, unless their sha1
+# differs from the controller's copy — a truncated or corrupt file is repaired
+# automatically. After a re-genesis under the same devnet name the checksums
+# change too, so that is picked up as well; -e s3_config_force_download=true
+# remains available to re-fetch unconditionally.
 
 - name: Upload network config to R2
   hosts: localhost
@@ -94,6 +96,7 @@
         paths: "{{ s3_config_src }}"
         recurse: true
         file_type: file
+        get_checksum: true
       delegate_to: localhost
       become: false
       run_once: true # noqa: run-once[task] - play pins mitogen_linear
@@ -107,11 +110,16 @@
       when: s3_config_find.files | length == 0
       run_once: true # noqa: run-once[task] - play pins mitogen_linear
 
-    - name: Compute file paths relative to the config root
+    - name: Compute file paths and checksums relative to the config root
       ansible.builtin.set_fact:
         s3_config_relpaths: >-
           {{ s3_config_find.files | map(attribute='path')
              | map('relpath', s3_config_src) | list }}
+        # relpath -> sha1, so get_url can verify what actually landed on disk.
+        s3_config_checksums: >-
+          {{ dict(s3_config_find.files
+                  | map(attribute='path') | map('relpath', s3_config_src)
+                  | zip(s3_config_find.files | map(attribute='checksum'))) }}
       run_once: true # noqa: run-once[task] - play pins mitogen_linear
 
     - name: Create network config directories
@@ -121,10 +129,17 @@
         mode: "0755"
       loop: "{{ [''] + (s3_config_relpaths | map('dirname') | reject('eq', '') | unique | list) }}"
 
+    # checksum: makes this self-healing. Without it, an interrupted transfer of
+    # the ~560MB genesis.ssz (or an r2.dev rate-limit mid-stream) leaves a
+    # truncated file that force=false never re-fetches, and the play still
+    # reports ok — the host is then permanently stuck on a corrupt genesis.
+    # With it, get_url re-downloads anything whose sha1 does not match the
+    # controller's copy, and fails loudly if the fetched bytes are still wrong.
     - name: Download network config files from {{ s3_config_base_url }}
       ansible.builtin.get_url:
         url: "{{ s3_config_base_url }}/{{ item }}"
         dest: "{{ (eth_testnet_config_dir, item) | path_join }}"
         mode: "0644"
+        checksum: "sha1:{{ s3_config_checksums[item] }}"
         force: "{{ s3_config_force_download | default(false) | bool }}"
       loop: "{{ s3_config_relpaths }}"
