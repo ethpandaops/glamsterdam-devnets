@@ -55,8 +55,8 @@ variable "cloudflare_api_token" {
 variable "glamsterdam_hcloud_token" {
   type        = string
   sensitive   = true
-  default     = ""
-  description = "Hetzner Cloud API Token (optional if not using Hetzner)"
+  default     = null
+  description = "Hetzner Cloud API Token (optional; falls back to HCLOUD_TOKEN env var)"
 }
 
 variable "ethereum_network" {

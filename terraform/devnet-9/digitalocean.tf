@@ -26,7 +26,7 @@ variable "digitalocean_regions" {
     "nyc1",
     "sgp1",
     "lon1",
-    "nyc3",
+    "sfo2",
     "ams3",
     "fra1",
     "tor1",
