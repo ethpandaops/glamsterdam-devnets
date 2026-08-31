@@ -1,0 +1,163 @@
+# Genesis config distribution via Cloudflare R2.
+#
+# The ethereum_testnet_config role rsyncs the generated network config from the
+# controller to every host. With ~500MB files and hundreds of hosts, pushing
+# that from a laptop does not scale, so R2 is used as a fan-out proxy: the
+# controller uploads once, every host pulls from the bucket.
+#
+#   1. Push the generated config once from the controller to the bucket:
+#        ansible-playbook s3_playbook.yaml -t upload
+#
+#   2. Every host pulls it back down with the same tool:
+#        ansible-playbook s3_playbook.yaml -t download
+#      Files land in eth_testnet_config_dir, exactly where the
+#      ethereum_testnet_config role would have put them. Keep
+#      eth_testnet_config_local_dir_enabled and eth_testnet_config_tarball_enabled
+#      false in the devnet group_vars so playbook.yaml doesn't try to distribute
+#      the config a second way.
+#
+# Both directions are authenticated against the R2 S3 endpoint, so the bucket
+# stays private — no public access, no presigned URLs. Only the objects under
+# genesis-files/<devnet>/metadata/ are synced, so one bucket serves every devnet.
+#
+# s3cmd must be present on the hosts. It ships via bootstrap: devnet-9's
+# group_vars/all/all.yaml adds s3cmd to bootstrap_default_common_packages.
+# The task below installs it anyway so a freshly provisioned host works without
+# a bootstrap re-run.
+#
+# Required sops secret (inventories/<devnet>/group_vars/all/all.sops.yaml):
+#   secret_r2:
+#     bucket: <bucket name>
+#     account_id: <cloudflare account id>
+#     access_key_id: <R2 API token access key, Object Read & Write>
+#     secret_access_key: <R2 API token secret>
+#
+# The fleet only ever reads, so a separate Object-Read-only token for the
+# download play is worth minting; point s3_config_download_access_key_id /
+# s3_config_download_secret_access_key at it. They default to the read-write
+# credentials above.
+#
+# s3cmd sync compares size and md5, so a re-genesis under the same devnet name
+# refreshes the changed files on the next download run. No force flag needed.
+
+- name: Upload network config to R2
+  hosts: localhost
+  gather_facts: false
+  tags: [upload]
+  vars: &s3_config_vars
+    s3_config_bucket: "{{ secret_r2.bucket }}"
+    s3_config_endpoint: "{{ secret_r2.account_id }}.r2.cloudflarestorage.com"
+    s3_config_prefix: "genesis-files/{{ ethereum_network_name }}/metadata"
+    s3_config_src: "{{ (playbook_dir, eth_testnet_config_local_dir_src) | path_join | realpath }}"
+  tasks:
+    - name: Check that the generated network config exists
+      ansible.builtin.stat:
+        path: "{{ s3_config_src }}/genesis.ssz"
+      register: s3_config_genesis
+
+    - name: Fail if the network config has not been generated
+      ansible.builtin.fail:
+        msg: >-
+          {{ s3_config_src }} has no genesis.ssz.
+          Generate it first: ansible-playbook playbook.yaml -t ethereum_genesis
+      when: not s3_config_genesis.stat.exists
+
+    # Credentials go on the command line, not env vars: s3cmd only falls back to
+    # AWS_* env vars when the config file yielded no access key (S3/Config.py),
+    # and the controller's ~/.s3cfg has one. no_log keeps the secret out of
+    # ansible output; disable for debugging with -e s3_config_no_log=false.
+    - name: Upload network config to R2 bucket {{ s3_config_bucket }}
+      ansible.builtin.command:
+        argv:
+          - s3cmd
+          - sync
+          - --follow-symlinks
+          - --region=auto
+          - --host={{ s3_config_endpoint }}
+          - --host-bucket={{ s3_config_endpoint }}
+          - --access_key={{ secret_r2.access_key_id }}
+          - --secret_key={{ secret_r2.secret_access_key }}
+          - "{{ s3_config_src }}/"
+          - "s3://{{ s3_config_bucket }}/{{ s3_config_prefix }}/"
+      no_log: "{{ s3_config_no_log | default(true) }}"
+      register: s3_config_upload
+      changed_when: "'upload:' in s3_config_upload.stdout"
+
+- name: Download network config from R2
+  hosts: bootnode:ethereum_node
+  serial: "{{ batch_count | default('100%') }}"
+  become: true
+  gather_facts: false
+  tags: [download]
+  vars:
+    <<: *s3_config_vars
+    s3_config_download_access_key_id: "{{ secret_r2.access_key_id }}"
+    s3_config_download_secret_access_key: "{{ secret_r2.secret_access_key }}"
+  tasks:
+    - name: Ensure s3cmd is installed
+      ansible.builtin.package:
+        name: s3cmd
+        state: present
+
+    - name: Create network config directory
+      ansible.builtin.file:
+        path: "{{ eth_testnet_config_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    # Unlike the controller, hosts have no ~/.s3cfg, so s3cmd picks the
+    # credentials up from the environment (S3/Config.py falls back to AWS_* when
+    # the config file yielded no access key). Keeping them out of argv keeps them
+    # out of the host's process list.
+    #
+    # The trailing slashes matter: they scope the sync to this devnet's metadata
+    # prefix instead of walking the whole bucket.
+    - name: Sync this devnet's config prefix from R2 into {{ eth_testnet_config_dir }}
+      ansible.builtin.command:
+        argv:
+          - s3cmd
+          - sync
+          - --no-progress
+          - --region=auto
+          - --host={{ s3_config_endpoint }}
+          - --host-bucket={{ s3_config_endpoint }}
+          - "s3://{{ s3_config_bucket }}/{{ s3_config_prefix }}/"
+          - "{{ eth_testnet_config_dir }}/"
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ s3_config_download_access_key_id }}"
+        AWS_SECRET_ACCESS_KEY: "{{ s3_config_download_secret_access_key }}"
+      no_log: "{{ s3_config_no_log | default(true) }}"
+      register: s3_config_download
+      changed_when: "'download:' in s3_config_download.stdout"
+
+    # s3cmd stores no POSIX metadata (the upload is a plain sync, no --preserve),
+    # so modes would otherwise be whatever root's umask produces. The
+    # ethereum_testnet_config role rsyncs in archive mode as root, reproducing
+    # the controller's 0755 dirs / 0644 files owned by root; match that exactly.
+    # Symbolic X sets the execute bit on directories only, so files stay 0644.
+    - name: Match the file permissions the ethereum_testnet_config role would set
+      ansible.builtin.file:
+        path: "{{ eth_testnet_config_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwX,g=rX,o=rX
+        recurse: true
+
+    # An empty or wrongly-prefixed bucket makes s3cmd sync exit 0 having
+    # transferred nothing, which would only surface later as a client failing to
+    # start. Fail here instead.
+    - name: Check that genesis.ssz arrived
+      ansible.builtin.stat:
+        path: "{{ eth_testnet_config_dir }}/genesis.ssz"
+      register: s3_config_synced_genesis
+
+    - name: Fail if the sync produced no genesis.ssz
+      ansible.builtin.fail:
+        msg: >-
+          s3cmd sync left no genesis.ssz in {{ eth_testnet_config_dir }}.
+          Check that the upload ran for this devnet:
+          s3://{{ s3_config_bucket }}/{{ s3_config_prefix }}/
+      when: not s3_config_synced_genesis.stat.exists
