@@ -58,6 +58,9 @@ bootnodoor_container_volumes_extra:
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 
 bootnodoor_container_command_extra_args: []
+# Upload the inventory to the bootnode so the web UI can show hostnames
+# instead of bare IPs (bootnodoor parses the ansible_host entries).
+bootnodoor_ip_names_enabled: true
 bootnodoor_container_env:
   VIRTUAL_HOST: bootnodoor-{{ server_fqdn }}
   VIRTUAL_PORT: "{{ bootnodoor_ui_port | string }}"
