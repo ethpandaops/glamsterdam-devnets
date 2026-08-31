@@ -22,75 +22,71 @@
 variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
-    # Bootnodes: 2 (not 4) — enough to keep the DNS master/slave split exercised,
-    # since dns_server_slave = bootnode group minus primary_bootnode.
-    { name = "bootnode", count = 2, cloud = "digitalocean" },
-    # Buildoor — all four CL/EL pairs kept; builder indices must stay 0..3.
+    { name = "bootnode", count = 4, cloud = "digitalocean" },
+    # Buildoor
     { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", builder_start = 0 },
     { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1 },
     { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2 },
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
 
-    # SMOKE TEST GRID — tooling shakeout before the 1000-node run.
-    # Every CL/EL combination of the mainnet-weighted grid is kept, one node each
-    # (39 combos), so every client role, image and config path is exercised. Only the
-    # per-combo multiplicity is dropped, i.e. the shape of the matrix is identical,
-    # the weights are not. 1000 validators per node, contiguous ranges in file order
-    # over [0,39000) (NUMBER_OF_VALIDATORS=39000, see group_vars/all/all.yaml) so
-    # every genesis validator is online and the chain can finalise.
-    # Restore the weighted 1000-node grid with `git checkout` on this file (and reset
-    # NUMBER_OF_VALIDATORS back to 1000000).
+    # 1000-node stress test approximating mainnet client distribution (Aug 2026).
+    # CL weights: lighthouse 43%, prysm 31%, teku 14%, nimbus 8%, lodestar 3%, grandine 1%.
+    # EL weights: geth 41%, nethermind 30%, reth 14%, besu 8%, erigon 4%,
+    #             plus small ethrex 2% / nimbusel 1% slices for coverage.
+    # Per-combo counts = CL row total split by EL weights, largest-remainder rounded
+    # so rows and columns hit the targets exactly. 1000 validators per node,
+    # contiguous ranges in file order over [0,1000000) (NUMBER_OF_VALIDATORS=1000000).
 
-    # Lighthouse (7)
-    { name = "lighthouse-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 0, validator_end = 1000 },
-    { name = "lighthouse-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 1000, validator_end = 2000 },
-    { name = "lighthouse-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 2000, validator_end = 3000 },
-    { name = "lighthouse-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 3000, validator_end = 4000 },
-    { name = "lighthouse-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 4000, validator_end = 5000 },
-    { name = "lighthouse-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 5000, validator_end = 6000 },
-    { name = "lighthouse-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 6000, validator_end = 7000 },
+    # Lighthouse (430)
+    { name = "lighthouse-geth", count = 176, cloud = "digitalocean", supernode = true, validator_start = 0, validator_end = 176000 },
+    { name = "lighthouse-nethermind", count = 129, cloud = "digitalocean", supernode = true, validator_start = 176000, validator_end = 305000 },
+    { name = "lighthouse-reth", count = 60, cloud = "digitalocean", supernode = true, validator_start = 305000, validator_end = 365000 },
+    { name = "lighthouse-besu", count = 35, cloud = "digitalocean", supernode = true, validator_start = 365000, validator_end = 400000 },
+    { name = "lighthouse-erigon", count = 17, cloud = "digitalocean", supernode = true, validator_start = 400000, validator_end = 417000 },
+    { name = "lighthouse-ethrex", count = 9, cloud = "digitalocean", supernode = true, validator_start = 417000, validator_end = 426000 },
+    { name = "lighthouse-nimbusel", count = 4, cloud = "digitalocean", supernode = true, validator_start = 426000, validator_end = 430000 },
 
-    # Prysm (7)
-    { name = "prysm-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 7000, validator_end = 8000 },
-    { name = "prysm-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 8000, validator_end = 9000 },
-    { name = "prysm-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 9000, validator_end = 10000 },
-    { name = "prysm-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 10000, validator_end = 11000 },
-    { name = "prysm-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 11000, validator_end = 12000 },
-    { name = "prysm-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 12000, validator_end = 13000 },
-    { name = "prysm-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 13000, validator_end = 14000 },
+    # Prysm (310)
+    { name = "prysm-geth", count = 127, cloud = "digitalocean", supernode = true, validator_start = 430000, validator_end = 557000 },
+    { name = "prysm-nethermind", count = 93, cloud = "digitalocean", supernode = true, validator_start = 557000, validator_end = 650000 },
+    { name = "prysm-reth", count = 44, cloud = "digitalocean", supernode = true, validator_start = 650000, validator_end = 694000 },
+    { name = "prysm-besu", count = 25, cloud = "digitalocean", supernode = true, validator_start = 694000, validator_end = 719000 },
+    { name = "prysm-erigon", count = 12, cloud = "digitalocean", supernode = true, validator_start = 719000, validator_end = 731000 },
+    { name = "prysm-ethrex", count = 6, cloud = "digitalocean", supernode = true, validator_start = 731000, validator_end = 737000 },
+    { name = "prysm-nimbusel", count = 3, cloud = "digitalocean", supernode = true, validator_start = 737000, validator_end = 740000 },
 
-    # Teku (7)
-    { name = "teku-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 14000, validator_end = 15000 },
-    { name = "teku-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 15000, validator_end = 16000 },
-    { name = "teku-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 16000, validator_end = 17000 },
-    { name = "teku-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 17000, validator_end = 18000 },
-    { name = "teku-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 18000, validator_end = 19000 },
-    { name = "teku-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 19000, validator_end = 20000 },
-    { name = "teku-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 20000, validator_end = 21000 },
+    # Teku (140)
+    { name = "teku-geth", count = 57, cloud = "digitalocean", supernode = true, validator_start = 740000, validator_end = 797000 },
+    { name = "teku-nethermind", count = 42, cloud = "digitalocean", supernode = true, validator_start = 797000, validator_end = 839000 },
+    { name = "teku-reth", count = 20, cloud = "digitalocean", supernode = true, validator_start = 839000, validator_end = 859000 },
+    { name = "teku-besu", count = 11, cloud = "digitalocean", supernode = true, validator_start = 859000, validator_end = 870000 },
+    { name = "teku-erigon", count = 6, cloud = "digitalocean", supernode = true, validator_start = 870000, validator_end = 876000 },
+    { name = "teku-ethrex", count = 2, cloud = "digitalocean", supernode = true, validator_start = 876000, validator_end = 878000 },
+    { name = "teku-nimbusel", count = 2, cloud = "digitalocean", supernode = true, validator_start = 878000, validator_end = 880000 },
 
-    # Nimbus (7)
-    { name = "nimbus-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 21000, validator_end = 22000 },
-    { name = "nimbus-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 22000, validator_end = 23000 },
-    { name = "nimbus-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 23000, validator_end = 24000 },
-    { name = "nimbus-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 24000, validator_end = 25000 },
-    { name = "nimbus-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 25000, validator_end = 26000 },
-    { name = "nimbus-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 26000, validator_end = 27000 },
-    { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 27000, validator_end = 28000 },
+    # Nimbus (80)
+    { name = "nimbus-geth", count = 33, cloud = "digitalocean", supernode = true, validator_start = 880000, validator_end = 913000 },
+    { name = "nimbus-nethermind", count = 24, cloud = "digitalocean", supernode = true, validator_start = 913000, validator_end = 937000 },
+    { name = "nimbus-reth", count = 11, cloud = "digitalocean", supernode = true, validator_start = 937000, validator_end = 948000 },
+    { name = "nimbus-besu", count = 6, cloud = "digitalocean", supernode = true, validator_start = 948000, validator_end = 954000 },
+    { name = "nimbus-erigon", count = 3, cloud = "digitalocean", supernode = true, validator_start = 954000, validator_end = 957000 },
+    { name = "nimbus-ethrex", count = 2, cloud = "digitalocean", supernode = true, validator_start = 957000, validator_end = 959000 },
+    { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", supernode = true, validator_start = 959000, validator_end = 960000 },
 
-    # Lodestar (6)
-    { name = "lodestar-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 28000, validator_end = 29000 },
-    { name = "lodestar-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 29000, validator_end = 30000 },
-    { name = "lodestar-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 30000, validator_end = 31000 },
-    { name = "lodestar-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 31000, validator_end = 32000 },
-    { name = "lodestar-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 32000, validator_end = 33000 },
-    { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 33000, validator_end = 34000 },
+    # Lodestar (30)
+    { name = "lodestar-geth", count = 13, cloud = "digitalocean", supernode = true, validator_start = 960000, validator_end = 973000 },
+    { name = "lodestar-nethermind", count = 9, cloud = "digitalocean", supernode = true, validator_start = 973000, validator_end = 982000 },
+    { name = "lodestar-reth", count = 4, cloud = "digitalocean", supernode = true, validator_start = 982000, validator_end = 986000 },
+    { name = "lodestar-besu", count = 2, cloud = "digitalocean", supernode = true, validator_start = 986000, validator_end = 988000 },
+    { name = "lodestar-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 988000, validator_end = 989000 },
+    { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 989000, validator_end = 990000 },
 
-    # Grandine (5)
-    { name = "grandine-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 34000, validator_end = 35000 },
-    { name = "grandine-nethermind", count = 1, cloud = "digitalocean", supernode = true, validator_start = 35000, validator_end = 36000 },
-    { name = "grandine-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 36000, validator_end = 37000 },
-    { name = "grandine-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 37000, validator_end = 38000 },
-    { name = "grandine-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 38000, validator_end = 39000 },
+    # Grandine (10)
+    { name = "grandine-geth", count = 4, cloud = "digitalocean", supernode = true, validator_start = 990000, validator_end = 994000 },
+    { name = "grandine-nethermind", count = 3, cloud = "digitalocean", supernode = true, validator_start = 994000, validator_end = 997000 },
+    { name = "grandine-reth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 997000, validator_end = 998000 },
+    { name = "grandine-besu", count = 1, cloud = "digitalocean", supernode = true, validator_start = 998000, validator_end = 999000 },
+    { name = "grandine-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 999000, validator_end = 1000000 },
 
   ]
 

@@ -52,7 +52,7 @@ ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=eth
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
 # Pinned genesis: 2026-08-31 15:11:21 UTC. Gloas at epoch 10 hits
 # 16:15:21 UTC the same day, the 200M gas bump at epoch 32 18:36:09 UTC.
-ethereum_genesis_timestamp: 1788189081
+ethereum_genesis_timestamp: 1788274800
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -70,16 +70,11 @@ ethereum_genesis_generator_config_files:
   # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exception: WITHDRAWAL_TYPE,
   # so all genesis validators carry compounding (0x02) credentials.
   #
-  # SMOKE TEST: 39000 validators (39 nodes x 1000) instead of 1000000, so every
-  # genesis key is actually online and the chain finalises at 45-node scale.
-  # Caveat: 39000 x 32 ETH = 1.248M ETH total stake, which is BELOW both the
-  # Electra churn floor (18.9M) and the EIP-8061 one (2.16M) — the churn /
-  # consolidation regime therefore differs from the real run. Restore 1000000
-  # together with terraform/devnet-9/nodes.tf before the big network.
+  # 1000000 genesis validators (1000 nodes x 1000 keys).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
-    export NUMBER_OF_VALIDATORS=39000
+    export NUMBER_OF_VALIDATORS=1000000
     export GENESIS_FORK_VERSION="0x10{{ ethereum_genesis_fork_version_suffix }}"
     export ALTAIR_FORK_VERSION="0x20{{ ethereum_genesis_fork_version_suffix }}"
     export BELLATRIX_FORK_VERSION="0x30{{ ethereum_genesis_fork_version_suffix }}"
@@ -88,23 +83,22 @@ ethereum_genesis_generator_config_files:
     export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
-    export GLOAS_FORK_EPOCH="10"
+    export GLOAS_FORK_EPOCH="225"
     export GAS_LIMIT_SCHEDULE='[{"epoch": 32, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
     export WITHDRAWAL_TYPE=0x02
-    # Spray 300k exited validators into the registry (reduced from 3M for this
-    # smoke test) so the ~339k-entry state still exercises SSZ hashing and
-    # registry scans without a 560MB genesis.
+    # Spray 3M exited validators into the registry so the ~4M-entry state
+    # exercises SSZ hashing and registry scans at full scale.
     # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
-    # attest and the withdrawal sweep skips them. start=1100000 keeps them far
-    # clear of the genesis key range (0-39000 here, 1M in the real run).
+    # attest and the withdrawal sweep skips them. start=1100000 keeps them
+    # clear of the genesis key range (0-1000000).
     # SHUFFLE_VALIDATORS interleaves them with the active set block-wise
     # instead of one tail block; the resulting mnemonic-index ->
     # on-chain-index mapping lands in metadata/validator_names.yaml.
-    # Genesis.ssz lands around ~50MB.
-    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1100000, "count": 300000, "wd_prefix": "0x00", "status": 2}]'
+    # Genesis.ssz lands around ~560MB.
+    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1100000, "count": 3000000, "wd_prefix": "0x00", "status": 2}]'
     export SHUFFLE_VALIDATORS=true
     export DEPLOY_EIP8282_CONTRACTS=true
 
