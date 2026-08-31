@@ -5,6 +5,8 @@ bootstrap_default_user_authorized_keys_github_team_cl: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/lighthouse?format=txt') | select | list)
      + lighthouse_extra_github_users }}
 
+ethereum_node_docker_watchtower_enabled: true
+
 # role: validator_keys
 validator_keys_sync_files:
   - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/keys/"
