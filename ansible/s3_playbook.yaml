@@ -1,0 +1,130 @@
+# Genesis config distribution via Cloudflare R2.
+#
+# The ethereum_testnet_config role rsyncs the generated network config from
+# the controller to every host. With ~500MB files and hundreds of hosts that
+# does not scale, so this playbook splits distribution in two:
+#
+#   1. Push the generated config once from the controller to the bucket:
+#        ansible-playbook s3_playbook.yaml -t upload
+#      Uses s3cmd against the R2 S3 endpoint; credentials come from the
+#      sops-encrypted secret_r2 var (see below), not from ~/.s3cfg.
+#
+#   2. Every host pulls the files anonymously from the bucket's public URL:
+#        ansible-playbook s3_playbook.yaml -t download
+#      R2 has no object ACLs: enable public access on the bucket (custom
+#      domain, or the rate-limited r2.dev URL) and put that base URL in
+#      secret_r2.public_base_url. Files land in eth_testnet_config_dir,
+#      exactly where the ethereum_testnet_config role would have put them.
+#      Keep eth_testnet_config_local_dir_enabled and
+#      eth_testnet_config_tarball_enabled false in the devnet group_vars so
+#      playbook.yaml doesn't try to distribute the config a second way.
+#
+# Required sops secret (inventories/<devnet>/group_vars/all/all.sops.yaml):
+#   secret_r2:
+#     bucket: <bucket name>
+#     account_id: <cloudflare account id>
+#     access_key_id: <R2 API token access key, Object Read & Write>
+#     secret_access_key: <R2 API token secret>
+#     public_base_url: https://<custom-domain-or-pub-xxxx.r2.dev>
+#
+# Files already present on a host are NOT re-downloaded. After a re-genesis
+# under the same devnet name, force a refresh with:
+#        ansible-playbook s3_playbook.yaml -t download -e s3_config_force_download=true
+
+- name: Upload network config to R2
+  hosts: localhost
+  gather_facts: false
+  tags: [upload]
+  vars: &s3_config_vars
+    s3_config_bucket: "{{ secret_r2.bucket }}"
+    s3_config_endpoint: "{{ secret_r2.account_id }}.r2.cloudflarestorage.com"
+    s3_config_prefix: "genesis-files/{{ ethereum_network_name }}/metadata"
+    s3_config_src: "{{ (playbook_dir, eth_testnet_config_local_dir_src) | path_join | realpath }}"
+    s3_config_base_url: "{{ secret_r2.public_base_url }}/{{ s3_config_prefix }}"
+  tasks:
+    - name: Check that the generated network config exists
+      ansible.builtin.stat:
+        path: "{{ s3_config_src }}/genesis.ssz"
+      register: s3_config_genesis
+
+    - name: Fail if the network config has not been generated
+      ansible.builtin.fail:
+        msg: >-
+          {{ s3_config_src }} has no genesis.ssz.
+          Generate it first: ansible-playbook playbook.yaml -t ethereum_genesis
+      when: not s3_config_genesis.stat.exists
+
+    # Credentials go on the command line, not env vars: s3cmd only reads
+    # AWS_* env vars when the config file (~/.s3cfg) has no access_key, and
+    # CLI flags always win. no_log keeps the secret out of ansible output;
+    # disable for debugging with -e s3_config_no_log=false.
+    - name: Upload network config to R2 bucket {{ s3_config_bucket }}
+      ansible.builtin.command:
+        argv:
+          - s3cmd
+          - sync
+          - --follow-symlinks
+          - --region=auto
+          - --host={{ s3_config_endpoint }}
+          - --host-bucket={{ s3_config_endpoint }}
+          - --access_key={{ secret_r2.access_key_id }}
+          - --secret_key={{ secret_r2.secret_access_key }}
+          - "{{ s3_config_src }}/"
+          - "s3://{{ s3_config_bucket }}/{{ s3_config_prefix }}/"
+      no_log: "{{ s3_config_no_log | default(true) }}"
+      register: s3_config_upload
+      changed_when: "'upload:' in s3_config_upload.stdout"
+
+- name: Download network config from R2
+  hosts: bootnode:ethereum_node
+  serial: "{{ batch_count | default('100%') }}"
+  become: true
+  gather_facts: false
+  tags: [download]
+  # ansible.cfg defaults to mitogen_free, under which run_once degrades to
+  # per-host execution; linear keeps the controller-side find/set_fact single.
+  strategy: mitogen_linear
+  vars: *s3_config_vars
+  tasks:
+    # The bucket is not listable anonymously, so derive the file list from the
+    # locally generated config on the controller. run_once broadcasts the
+    # registered result to every host in the batch.
+    - name: Build file list from the locally generated network config
+      ansible.builtin.find:
+        paths: "{{ s3_config_src }}"
+        recurse: true
+        file_type: file
+      delegate_to: localhost
+      become: false
+      run_once: true # noqa: run-once[task] - play pins mitogen_linear
+      register: s3_config_find
+
+    - name: Fail if the local network config is empty
+      ansible.builtin.fail:
+        msg: >-
+          {{ s3_config_src }} contains no files.
+          Generate it first: ansible-playbook playbook.yaml -t ethereum_genesis
+      when: s3_config_find.files | length == 0
+      run_once: true # noqa: run-once[task] - play pins mitogen_linear
+
+    - name: Compute file paths relative to the config root
+      ansible.builtin.set_fact:
+        s3_config_relpaths: >-
+          {{ s3_config_find.files | map(attribute='path')
+             | map('relpath', s3_config_src) | list }}
+      run_once: true # noqa: run-once[task] - play pins mitogen_linear
+
+    - name: Create network config directories
+      ansible.builtin.file:
+        path: "{{ (eth_testnet_config_dir, item) | path_join }}"
+        state: directory
+        mode: "0755"
+      loop: "{{ [''] + (s3_config_relpaths | map('dirname') | reject('eq', '') | unique | list) }}"
+
+    - name: Download network config files from {{ s3_config_base_url }}
+      ansible.builtin.get_url:
+        url: "{{ s3_config_base_url }}/{{ item }}"
+        dest: "{{ (eth_testnet_config_dir, item) | path_join }}"
+        mode: "0644"
+        force: "{{ s3_config_force_download | default(false) | bool }}"
+      loop: "{{ s3_config_relpaths }}"
