@@ -42,7 +42,8 @@ teku_container_command_extra_args : >-
 
 
 teku_container_command_extra_simple_args:
-  - --network=plataberget
+  - --network=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
   - --p2p-discovery-bootnodes={{ ethereum_cl_bootnodes | join(',') }}
   - --validators-graffiti={{ ansible_hostname }}
   - --logging=debug

@@ -50,9 +50,9 @@ ethereum_genesis_network_seed: glamsterdam-devnet-9
 ethereum_genesis_chain_id: 70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Pinned genesis: 2026-08-24 10:00:00 UTC (12:00 CEST). Gloas at epoch 16
-# hits 11:42:24 UTC the same day, the 200M gas bump at epoch 32 13:24:48 UTC.
-ethereum_genesis_timestamp: 1787565600
+# Pinned genesis: 2026-08-31 15:11:21 UTC. Gloas at epoch 10 hits
+# 16:15:21 UTC the same day, the 200M gas bump at epoch 32 18:36:09 UTC.
+ethereum_genesis_timestamp: 1788189081
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -88,22 +88,23 @@ ethereum_genesis_generator_config_files:
     export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
-    export GLOAS_FORK_EPOCH="16"
+    export GLOAS_FORK_EPOCH="10"
     export GAS_LIMIT_SCHEDULE='[{"epoch": 32, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
     export WITHDRAWAL_TYPE=0x02
-    # Spray 3M exited validators into the registry (devnet-7's exited-spray at
-    # 6x) so the 4M-entry state stresses SSZ hashing and registry scans.
+    # Spray 300k exited validators into the registry (reduced from 3M for this
+    # smoke test) so the ~339k-entry state still exercises SSZ hashing and
+    # registry scans without a 560MB genesis.
     # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
-    # attest and the withdrawal sweep skips them. start=1100000 keeps a
-    # 100k-key gap above the 1M genesis set. SHUFFLE_VALIDATORS interleaves
-    # them with the active set block-wise instead of one tail block;
-    # the resulting mnemonic-index -> on-chain-index mapping lands in
-    # metadata/validator_names.yaml. Genesis.ssz grows to ~560MB — keep it
-    # out of git (devnet-7's 73MB was already near GitHub's 100MB cap).
-    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1100000, "count": 3000000, "wd_prefix": "0x00", "status": 2}]'
+    # attest and the withdrawal sweep skips them. start=1100000 keeps them far
+    # clear of the genesis key range (0-39000 here, 1M in the real run).
+    # SHUFFLE_VALIDATORS interleaves them with the active set block-wise
+    # instead of one tail block; the resulting mnemonic-index ->
+    # on-chain-index mapping lands in metadata/validator_names.yaml.
+    # Genesis.ssz lands around ~50MB.
+    export ADDITIONAL_VALIDATOR_MNEMONICS='[{"mnemonic": "{{ ethereum_genesis_mnemonic }}", "name": "exited-spray", "start": 1100000, "count": 300000, "wd_prefix": "0x00", "status": 2}]'
     export SHUFFLE_VALIDATORS=true
     export DEPLOY_EIP8282_CONTRACTS=true
 
@@ -157,6 +158,25 @@ bootstrap_default_user_authorized_keys_github: >
     (bootstrap_default_user_authorized_keys_github_team_el | default([])) +
     (bootstrap_default_user_authorized_keys_github_team_cl | default([]))
   }}
+
+bootstrap_default_common_packages:
+  - htop
+  - tmux
+  - iftop
+  - sysstat
+  - vim
+  - jq
+  - curl
+  - wget
+  - screen
+  - bat
+  - cron
+  - nfs-common
+  - rsync
+  - tree
+  - smartmontools
+  - python3-pip
+  - s3cmd
 
 node_exporter_container_image: "{{ default_tooling_images.node_exporter }}"
 prometheus_container_image: "{{ default_tooling_images.prometheus }}"
