@@ -52,7 +52,7 @@ ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=eth
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
 # Pinned genesis: 2026-08-31 15:11:21 UTC. Gloas at epoch 10 hits
 # 16:15:21 UTC the same day, the 200M gas bump at epoch 32 18:36:09 UTC.
-ethereum_genesis_timestamp: 1788274800
+ethereum_genesis_timestamp: 1788278400
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -84,7 +84,7 @@ ethereum_genesis_generator_config_files:
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_EPOCH="225"
-    export GAS_LIMIT_SCHEDULE='[{"epoch": 32, "gas_limit": 200000000}]'
+    export GAS_LIMIT_SCHEDULE='[{"epoch": 256, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
@@ -127,6 +127,18 @@ eth_inventory_web_segments_json: >-
   {%-   set _ = segs.append({'name': hostvars[host].validator_display_name | default(host), 'start': kr.start | int, 'end': (kr.end | int) - 1}) -%}
   {%- endfor -%}
   {{ segs | to_json }}
+
+# The merge script shipped in ethereum-genesis-generator:6.2.0 passes the whole
+# validator mapping to jq through --argjson, which exceeds the Linux
+# per-argument limit (128 KiB) at devnet-9 scale (4M shuffled validators ->
+# ~2.8 MB validator_names.yaml) and fails with "jq: Argument list too long".
+# Bind-mount a patched copy of the script over the image's copy; the value is
+# spliced into the role's `docker run` command line before the image name, so
+# extra flags are legal here. Drop this override (and files/validator-mapping/)
+# once a generator image carrying the fix upstream is pinned.
+eth_inventory_web_merge_image: >-
+  -v {{ playbook_dir }}/files/validator-mapping/merge.sh:/apps/validator-mapping/merge.sh:ro
+  {{ ethereum_genesis_generator_container_image }}
 
 # role: ethpandaops.general.bootstrap
 bootstrap_default_user_authorized_keys_plain:
