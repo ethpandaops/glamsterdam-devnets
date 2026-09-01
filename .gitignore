@@ -34,4 +34,7 @@ network-configs/**/mnemonics.yaml
 
 # scripts
 scripts/*.txt
-scripts/*.jsonnetwork-configs/devnet-9/parsed/**
+scripts/*.json
+
+# derived genesis artifacts (too large for git)
+network-configs/devnet-9/parsed/**
