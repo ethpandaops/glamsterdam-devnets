@@ -1,0 +1,36 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/buildoor.yaml.j2
+
+buildoor-overview:
+  fullnameOverride: buildoor-overview
+  image:
+    repository: registry-1.docker.io/ethpandaops/buildoor
+    tag: pk910-multi-key-latest
+    pullPolicy: Always
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: buildoor.glamsterdam-devnet-9.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  hosts:
+    - https://api-buildoor-lighthouse-geth-1.srv.glamsterdam-devnet-9.ethpandaops.io
+    - https://api-buildoor-lodestar-ethrex-1.srv.glamsterdam-devnet-9.ethpandaops.io
+    - https://api-buildoor-prysm-ethrex-1.srv.glamsterdam-devnet-9.ethpandaops.io
+    - https://api-buildoor-teku-nethermind-1.srv.glamsterdam-devnet-9.ethpandaops.io

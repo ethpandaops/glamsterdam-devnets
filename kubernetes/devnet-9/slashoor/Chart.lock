@@ -1,0 +1,6 @@
+dependencies:
+- name: slashoor
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.1.0
+digest: sha256:08cfc5b4e591a157e33b34a4467646df20d9df974b823c62f9cfe94e308ec514
+generated: "2026-09-01T16:48:49.780807+02:00"
