@@ -9,10 +9,10 @@ dora:
   resources:
     requests:
       cpu: 500m
-      memory: 4Gi
+      memory: 8Gi
     limits:
       cpu: 1500m
-      memory: 8Gi
+      memory: 15Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
