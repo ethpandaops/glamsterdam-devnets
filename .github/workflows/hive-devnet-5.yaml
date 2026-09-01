@@ -126,7 +126,7 @@ jobs:
         client: ${{ fromJSON(format('[{0}]', inputs.el_client)) }}
         simulator: ${{ fromJSON(format('[{0}]', inputs.el_simulator)) }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ethpandaops/hive-github-action/helpers/self-hosted-runner-dependencies@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
         if: runner.environment != 'github-hosted'
       - uses: ethpandaops/actions/docker-login@99b48ca2b233a2eff93e6a6df76e46b718aca108
@@ -165,7 +165,7 @@ jobs:
       matrix:
         client: ${{ fromJSON(format('[{0}]', inputs.cl_client)) }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ethpandaops/hive-github-action/helpers/self-hosted-runner-dependencies@09050fc75bae8a10b1876a0826ca4114ea9ed6e8 # v0.6.3
         if: runner.environment != 'github-hosted'
       - uses: ethpandaops/actions/docker-login@99b48ca2b233a2eff93e6a6df76e46b718aca108
