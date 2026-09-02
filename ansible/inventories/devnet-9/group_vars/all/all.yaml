@@ -446,7 +446,7 @@ vector_config: |
   [transforms.throttle]
     type = "throttle"
     inputs = ["in"]
-    threshold = 3000
+    threshold = 20000
     window_secs = 60
     key_field = "{% raw %}{{ container_name }}{% endraw %}"
 
