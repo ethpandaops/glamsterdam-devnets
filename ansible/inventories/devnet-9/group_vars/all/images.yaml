@@ -2,7 +2,7 @@
 default_ethereum_client_images:
   ### Consensus layer clients
   lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
-  lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable
+  lodestar: registry-1.docker.io/ethpandaops/lodestar:glamsterdam-devnet-8
   nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
   prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
   prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
