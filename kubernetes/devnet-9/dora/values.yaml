@@ -59,6 +59,22 @@ dora:
       value: "*"
     - name: FRONTEND_ENABLE_DAS_GUARDIAN_MASS_SCAN
       value: "true"
+    - name: XATU_ENABLED
+      value: "true"
+    - name: XATU_NETWORK_NAME
+      value: "glamsterdam-devnet-9"
+    - name: XATU_RAW_CLICKHOUSE_DSN
+      value: "https://pandaops-dora:<path:/secrets/services/services.enc.yaml#clickhouse | jsonPath {.raw.chproxy.pandaops-dora}>@clickhouse.xatu.ethpandaops.io"
+    - name: XATU_RAW_CLICKHOUSE_CACHED_DSN
+      value: "https://pandaops-dora:<path:/secrets/services/services.enc.yaml#clickhouse | jsonPath {.raw.chproxy.pandaops-dora}>@clickhouse-raw-cached.xatu.ethpandaops.io"
+    - name: XATU_RAW_DATABASE
+      value: "glamsterdam-devnet-9"
+    - name: XATU_CBT_CLICKHOUSE_DSN
+      value: "https://pandaops-dora:<path:/secrets/services/services.enc.yaml#clickhouse | jsonPath {.refined.chproxy.pandaops-dora}>@clickhouse-refined.xatu.ethpandaops.io"
+    - name: XATU_CBT_CLICKHOUSE_CACHED_DSN
+      value: "https://pandaops-dora:<path:/secrets/services/services.enc.yaml#clickhouse | jsonPath {.refined.chproxy.pandaops-dora}>@clickhouse-refined-cached.xatu.ethpandaops.io"
+    - name: XATU_CBT_DATABASE
+      value: "glamsterdam-devnet-9"
   postgresql:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"

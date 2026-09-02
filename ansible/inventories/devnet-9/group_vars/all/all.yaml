@@ -257,6 +257,7 @@ gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
 # time: the builder request contracts are already in genesis
 # (DEPLOY_EIP8282_CONTRACTS=true above).
 gen_kubernetes_config_assertoor_tests: []
+gen_kubernetes_config_dora_xatu_enabled: true
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
