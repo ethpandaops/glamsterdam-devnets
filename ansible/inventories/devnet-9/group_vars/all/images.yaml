@@ -23,7 +23,7 @@ default_tooling_images:
   mev_relay: registry-1.docker.io/ethpandaops/mev-boost-relay:main
   buildoor: registry-1.docker.io/ethpandaops/buildoor:pk910-multi-key-latest
   authenticatoor: registry-1.docker.io/ethpandaops/service-authenticatoor:main-latest
-  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-7 # no devnet-8 build yet, this is the current gloas one
+  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-9
   xatu_cannon: registry-1.docker.io/ethpandaops/xatu:latest
   xatu_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
   xatu_cl_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
