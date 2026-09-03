@@ -89,6 +89,9 @@ ethereum_genesis_generator_config_files:
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
     export WITHDRAWAL_TYPE=0x02
+    # Agent-faucet vault wallets (fixed across glamsterdam devnets); without this premine the
+    # faucet hands out nothing. devnet-9 was funded post-genesis; this premine ships for devnet-10+.
+    export EL_PREMINE_ADDRS='{"0x877d64e72b7e1f5034aec55d910c877b2b7104da": {"balance": "50000000ETH"}, "0x2aa5f02f347089910eea88279c405149ec8540d5": {"balance": "50000000ETH"}}'
     # Spray 3M exited validators into the registry so the ~4M-entry state
     # exercises SSZ hashing and registry scans at full scale.
     # Exited (status 2) + BLS creds (0x00) keeps them fully inert: they never
