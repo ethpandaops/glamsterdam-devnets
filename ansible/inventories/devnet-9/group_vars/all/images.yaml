@@ -7,7 +7,7 @@ default_ethereum_client_images:
   prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
   prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
   teku: registry-1.docker.io/ethpandaops/teku:master
-  grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-8
+  grandine: registry-1.docker.io/ethpandaops/grandine:develop
   ### Execution layer clients
   besu: registry-1.docker.io/ethpandaops/besu:main
   geth: registry-1.docker.io/ethpandaops/geth:master
