@@ -24,10 +24,10 @@ variable "nodes" {
   default = [
     { name = "bootnode", count = 4, cloud = "digitalocean" },
     # Buildoor
-    { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", builder_start = 0 },
-    { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1 },
-    { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2 },
-    { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
+    { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", builder_start = 0, size = "s-8vcpu-32gb-640gb-intel" },
+    { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1, size = "s-8vcpu-32gb-640gb-intel" },
+    { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2, size = "s-8vcpu-32gb-640gb-intel" },
+    { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3, size = "s-8vcpu-32gb-640gb-intel" },
 
     # 1000-node stress test approximating mainnet client distribution (Aug 2026).
     # CL weights: lighthouse 43%, prysm 31%, teku 14%, nimbus 8%, lodestar 3%, grandine 1%.
