@@ -29,7 +29,7 @@ ethereum_node_cl: teku
 teku_container_name: beacon
 teku_container_image: "{{ default_ethereum_client_images.teku }}"
 teku_container_env:
-  JAVA_OPTS: "-Xmx12g"
+  JAVA_OPTS: "-Xmx20g" # 12g pinned the heap on a ~4M-entry registry; see PR body
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
