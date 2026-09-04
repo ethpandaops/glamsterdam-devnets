@@ -1,0 +1,56 @@
+---
+# role: ethpandaops.general.bootstrap
+teku_extra_github_users:  # handles not yet in the coredevs registry
+  - siladu
+bootstrap_default_user_authorized_keys_github_team_cl: >-
+  {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/teku?format=txt') | select | list)
+     + teku_extra_github_users }}
+
+# role: validator_keys
+validator_keys_sync_files:
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/teku-keys/"
+    dest: "{{ teku_validator_datadir }}/keys/"
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/teku-secrets/"
+    dest: "{{ teku_validator_datadir }}/secrets/"
+
+validator_bls_sync_files:
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/change_operations.json"
+    dest: "{{ teku_validator_datadir }}/change_operations.json"
+    owner: teku
+    group: teku
+# role: ethpandaops.general.ethereum_node
+# role: ethpandaops.general.validator_keys — teku runs validators in-process in
+# the beacon container (no separate VC), so reshuffles stop/start the beacon.
+validator_keys_container_name: beacon
+
+ethereum_node_cl: teku
+
+# role: ethpandaops.general.teku
+teku_container_name: beacon
+teku_container_image: "{{ default_ethereum_client_images.teku }}"
+teku_container_env:
+  JAVA_OPTS: "-Xmx15g" # 12g pinned the heap on a ~4M-entry registry; see PR body
+  VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
+  VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
+  LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
+teku_container_volumes:
+  - "{{ teku_datadir }}:/data"
+  - "{{ teku_auth_jwt_path }}:/execution-auth.jwt:ro"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+
+teku_container_command_extra_args : >-
+  {{ teku_container_command_extra_simple_args}}
+
+
+teku_container_command_extra_simple_args:
+  - --network=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --p2p-discovery-bootnodes={{ ethereum_cl_bootnodes | join(',') }}
+  - --validators-graffiti={{ ansible_hostname }}
+  - --logging=debug
+  - --Xlog-include-p2p-warnings-enabled
+  - --metrics-block-timing-tracking-enabled
+  - --rest-api-docs-enabled
+teku_validator_container_volumes:
+  - "{{ teku_validator_datadir }}:/validator-data"
+teku_validator_datadir: /data/teku-validator

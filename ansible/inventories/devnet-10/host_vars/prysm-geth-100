@@ -1,0 +1,3 @@
+---
+# Goldfish vote-ledger sample; see host_vars/README.
+goldfish_vote_ledger_enabled: true

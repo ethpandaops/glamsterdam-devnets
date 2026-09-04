@@ -1,0 +1,288 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/assertoor.yaml.j2
+
+assertoor:
+  fullnameOverride: assertoor
+
+  image:
+    repository: registry-1.docker.io/ethpandaops/assertoor
+    tag: master-latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 500m
+      memory: 500Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: assertoor.glamsterdam-devnet-10.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  persistence:
+    enabled: true
+
+  authProviderUrl: "https://auth.glamsterdam-devnet-10.ethpandaops.io"
+
+  endpoints:
+    - name:  bootnode-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  bootnode-2
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-2.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-2.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  bootnode-3
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-3.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-3.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  bootnode-4
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-4.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-4.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  buildoor-prysm-geth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  buildoor-prysm-geth-2
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-2.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-2.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  buildoor-prysm-geth-3
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-3.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-3.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  buildoor-prysm-geth-4
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-4.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-4.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-1000
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-1000.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1000.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-123
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-123.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-123.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-147
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-147.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-147.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-172
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-172.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-172.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-196
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-196.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-196.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-220
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-220.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-220.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-245
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-245.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-245.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-25
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-25.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-25.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-269
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-269.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-269.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-293
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-293.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-293.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-318
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-318.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-318.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-342
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-342.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-342.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-366
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-366.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-366.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-391
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-391.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-391.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-415
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-415.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-415.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-440
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-440.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-440.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-464
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-464.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-464.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-488
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-488.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-488.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-50
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-50.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-50.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-513
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-513.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-513.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-537
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-537.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-537.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-561
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-561.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-561.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-586
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-586.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-586.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-610
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-610.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-610.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-635
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-635.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-635.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-659
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-659.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-659.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-683
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-683.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-683.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-708
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-708.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-708.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-732
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-732.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-732.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-74
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-74.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-74.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-756
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-756.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-756.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-781
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-781.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-781.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-805
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-805.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-805.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-829
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-829.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-829.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-854
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-854.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-854.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-878
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-878.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-878.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-903
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-903.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-903.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-927
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-927.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-927.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-951
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-951.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-951.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-976
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-976.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-976.srv.glamsterdam-devnet-10.ethpandaops.io
+    - name:  prysm-geth-98
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-98.srv.glamsterdam-devnet-10.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-98.srv.glamsterdam-devnet-10.ethpandaops.io
+
+  validatorNamesInventory: https://config.glamsterdam-devnet-10.ethpandaops.io/api/v1/nodes/validator-ranges
+  globalVariables:
+    walletPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.assertoor_private_key}>"
+    clientPairNames:
+      - bootnode-1
+      - bootnode-2
+      - bootnode-3
+      - bootnode-4
+      - buildoor-prysm-geth-1
+      - buildoor-prysm-geth-2
+      - buildoor-prysm-geth-3
+      - buildoor-prysm-geth-4
+      - prysm-geth-1
+      - prysm-geth-1000
+      - prysm-geth-123
+      - prysm-geth-147
+      - prysm-geth-172
+      - prysm-geth-196
+      - prysm-geth-220
+      - prysm-geth-245
+      - prysm-geth-25
+      - prysm-geth-269
+      - prysm-geth-293
+      - prysm-geth-318
+      - prysm-geth-342
+      - prysm-geth-366
+      - prysm-geth-391
+      - prysm-geth-415
+      - prysm-geth-440
+      - prysm-geth-464
+      - prysm-geth-488
+      - prysm-geth-50
+      - prysm-geth-513
+      - prysm-geth-537
+      - prysm-geth-561
+      - prysm-geth-586
+      - prysm-geth-610
+      - prysm-geth-635
+      - prysm-geth-659
+      - prysm-geth-683
+      - prysm-geth-708
+      - prysm-geth-732
+      - prysm-geth-74
+      - prysm-geth-756
+      - prysm-geth-781
+      - prysm-geth-805
+      - prysm-geth-829
+      - prysm-geth-854
+      - prysm-geth-878
+      - prysm-geth-903
+      - prysm-geth-927
+      - prysm-geth-951
+      - prysm-geth-976
+      - prysm-geth-98
+    validatorPairNames:
+      - prysm-geth-1000
+      - prysm-geth-123
+      - prysm-geth-147
+      - prysm-geth-172
+      - prysm-geth-196
+      - prysm-geth-220
+      - prysm-geth-245
+      - prysm-geth-25
+      - prysm-geth-269
+      - prysm-geth-293
+      - prysm-geth-318
+      - prysm-geth-342
+      - prysm-geth-366
+      - prysm-geth-391
+      - prysm-geth-415
+      - prysm-geth-440
+      - prysm-geth-464
+      - prysm-geth-488
+      - prysm-geth-50
+      - prysm-geth-513
+      - prysm-geth-537
+      - prysm-geth-561
+      - prysm-geth-586
+      - prysm-geth-610
+      - prysm-geth-635
+      - prysm-geth-659
+      - prysm-geth-683
+      - prysm-geth-708
+      - prysm-geth-732
+      - prysm-geth-74
+      - prysm-geth-756
+      - prysm-geth-781
+      - prysm-geth-805
+      - prysm-geth-829
+      - prysm-geth-854
+      - prysm-geth-878
+      - prysm-geth-903
+      - prysm-geth-927
+      - prysm-geth-951
+      - prysm-geth-976
+      - prysm-geth-98
+
+  assertoorTests: []

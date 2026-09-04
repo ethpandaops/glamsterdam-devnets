@@ -1,0 +1,73 @@
+---
+default_ethereum_client_images:
+  ### Consensus layer clients
+  lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
+  lodestar: registry-1.docker.io/ethpandaops/lodestar:glamsterdam-devnet-8
+  nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
+  # Heze / goldfish build (sukunrt/prysm@decoupled-casper). Pinned to the commit
+  # suffix, not the floating branch tag: watchtower re-pulls every 900s and would
+  # otherwise swap clients underneath a running experiment.
+  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:sukunrt-decoupled-casper-a1679c9
+  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:sukunrt-decoupled-casper-a1679c9
+  teku: registry-1.docker.io/ethpandaops/teku:master
+  grandine: registry-1.docker.io/ethpandaops/grandine:develop
+  ### Execution layer clients
+  besu: registry-1.docker.io/ethpandaops/besu:main
+  geth: registry-1.docker.io/ethpandaops/geth:master
+  erigon: registry-1.docker.io/ethpandaops/erigon:main
+  nethermind: registry-1.docker.io/ethpandaops/nethermind:master
+  reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-8
+  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:glamsterdam-devnet-8
+  ethrex: registry-1.docker.io/ethpandaops/ethrex:main
+
+default_tooling_images:
+  mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop
+  mev_builder: registry-1.docker.io/ethpandaops/reth-rbuilder:develop
+  mev_relay: registry-1.docker.io/ethpandaops/mev-boost-relay:main
+  buildoor: registry-1.docker.io/ethpandaops/buildoor:pk910-multi-key-latest
+  authenticatoor: registry-1.docker.io/ethpandaops/service-authenticatoor:main-latest
+  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-9
+  xatu_cannon: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_cl_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
+  xatu_relay_monitor: registry-1.docker.io/ethpandaops/xatu:latest
+  ethereum_metrics_exporter: registry-1.docker.io/ethpandaops/ethereum-metrics-exporter:latest
+  tx_fuzz: registry-1.docker.io/ethpandaops/tx-fuzz:latest
+  forkmon: registry-1.docker.io/skylenet/nodemonitor:darkmode
+  forky: registry-1.docker.io/ethpandaops/forky:latest
+  fauceth: registry-1.docker.io/skylenet/fauceth:fix_fee_estimation
+  powfaucet: registry-1.docker.io/pk910/powfaucet:v2.5.1 # fixed client bundle + 250000 ethTxGasLimit default
+  homepage: registry-1.docker.io/ethpandaops/ethereum-testnet-homepage:latest
+  checkpointz: registry-1.docker.io/ethpandaops/checkpointz:gloas-latest
+  blockscout: registry-1.docker.io/blockscout/blockscout:latest
+  blockscout_frontend: ghcr.io/blockscout/frontend:latest
+  beacon_metrics_gazer: registry-1.docker.io/dapplion/beacon-metrics-gazer:latest
+  eth_fauceth: registry-1.docker.io/chainflag/eth-faucet:latest
+  blobscan: registry-1.docker.io/blossomlabs/blobscan:latest
+  blobscan_indexer: registry-1.docker.io/blossomlabs/blobscan-indexer:latest
+  dora: registry-1.docker.io/ethpandaops/dora:master-latest
+  dugtrio: registry-1.docker.io/ethpandaops/dugtrio:bbusa-endpoint-failover
+  # Fork carrying the decoupled-consensus knobs (sukunrt/ethereum-genesis-generator@decoupled).
+  # Its config templates are vendored under files/genesis-config/ -- see all.yaml.
+  ethereum_genesis_generator: registry-1.docker.io/ethpandaops/ethereum-genesis-generator:sukun-decoupled-consensus
+  tracoor: registry-1.docker.io/ethpandaops/tracoor:0.0.2-glamsterdam-devnet-8 # pinned: floating tag + IfNotPresent won't re-pull
+  ncli: registry-1.docker.io/status-im/nimbus-eth2:unstable
+  lcli: registry-1.docker.io/ethpandaops/lighthouse:unstable
+  zcli: gloas
+  assertoor: registry-1.docker.io/ethpandaops/assertoor:master-latest
+  erpc: ghcr.io/erpc/erpc:latest
+  prometheus: registry-1.docker.io/prom/prometheus:v2.40.7
+  node_exporter: registry-1.docker.io/prom/node-exporter:v1.5.0
+  cl_bootnode: registry-1.docker.io/protolambda/eth2-bootnode:cleanup
+  json_rpc_snooper: registry-1.docker.io/ethpandaops/rpc-snooper:latest
+  nginx_proxy: registry-1.docker.io/library/nginx:alpine
+  nginx_proxy_gen: registry-1.docker.io/nginxproxy/docker-gen
+  nginx_proxy_acme: registry-1.docker.io/nginxproxy/acme-companion
+  nginx_proxy_cert_loader: registry-1.docker.io/ethpandaops/debian-docker:latest
+  nginx_proxy_cert_linker: registry-1.docker.io/nginxproxy/docker-gen
+  vector: registry-1.docker.io/timberio/vector:0.56.0-alpine
+  spamoor: registry-1.docker.io/ethpandaops/spamoor:master-latest
+  blobber: registry-1.docker.io/ethpandaops/blobber:latest
+  syncoor_web: ghcr.io/ethpandaops/syncoor-web:master
+  syncoor_server: ghcr.io/ethpandaops/syncoor:master
+  slashoor: registry-1.docker.io/ethpandaops/slashoor:master

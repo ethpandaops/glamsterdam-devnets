@@ -1,0 +1,76 @@
+---
+# role: ethpandaops.general.bootstrap
+prysm_extra_github_users:  # handles not yet in the coredevs registry
+  - syjn99
+bootstrap_default_user_authorized_keys_github_team_cl: >-
+  {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/prysm?format=txt') | select | list)
+     + prysm_extra_github_users }}
+
+# role: validator_keys
+validator_keys_sync_files:
+  - src: "{{ inventory_dir }}/files/validator_keys/prysm_wallet_pass.txt"
+    dest: "{{ prysm_validator_datadir }}/wallet_pass.txt"
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/prysm/direct/accounts/all-accounts.keystore.json"
+    dest: "{{ prysm_validator_datadir }}/wallet/direct/accounts/all-accounts.keystore.json"
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/prysm/keymanageropts.json"
+    dest: "{{ prysm_validator_datadir }}/wallet/direct/keymanageropts.json"
+
+validator_bls_sync_files:
+  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/change_operations.json"
+    dest: "{{ prysm_validator_datadir }}/change_operations.json"
+    owner: prysm
+    group: prysm
+
+# role: ethpandaops.general.ethereum_node
+ethereum_node_cl: prysm
+prysm_container_tty: true
+prysm_pprof_enabled: true
+prysm_validator_container_tty: true
+# role: ethpandaops.general.prysm
+prysm_container_name: beacon
+prysm_validator_container_name: validator
+prysm_container_image: "{{ default_ethereum_client_images.prysm }}"
+prysm_container_env:
+  VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
+  VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
+  LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
+prysm_container_volumes:
+  - "{{ prysm_datadir }}:/data"
+  - "{{ prysm_auth_jwt_path }}:/execution-auth.jwt:ro"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+prysm_container_entrypoint:
+  - /app/cmd/beacon-chain/beacon-chain
+prysm_container_command_extra_args: >-
+  {{ prysm_container_command_extra_simple_args
+     + prysm_container_command_extra_goldfish_args
+     + prysm_container_command_extra_bootnode_args }}
+prysm_container_command_extra_simple_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --verbosity=INFO
+
+# --goldfish-vote-ledger logs a line per available-attestation head vote and per drop.
+# At 15000 attesters/slot that is far too much for the whole fleet, so it is opt-in via
+# goldfish_vote_ledger_enabled in host_vars/<host>.
+goldfish_vote_ledger_enabled: false
+prysm_container_command_extra_goldfish_args: >-
+  {{ ['--goldfish-vote-ledger'] if (goldfish_vote_ledger_enabled | bool) else [] }}
+prysm_container_command_extra_bootnode_args: >-
+  {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
+
+prysm_validator_container_image: "{{ default_ethereum_client_images.prysm_validator }}"
+prysm_validator_container_volumes:
+  - "{{ prysm_validator_datadir }}:/validator-data"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
+prysm_validator_container_entrypoint:
+  - /app/cmd/validator/validator
+prysm_validator_container_command_extra_args:
+  - --chain-config-file=/network-config/config.yaml
+  # Hosts that set validator_display_name stamp it; the rest keep the hostname.
+  # inventory_hostname, not ansible_hostname: bootstrap renames hosts without a reboot
+  # and facts are gathered before the rename, so the cached fact holds the old name.
+  - --graffiti={{ validator_display_name | default(inventory_hostname) }}
+  - --enable-builder
+prysm_validator_datadir: /data/prysm-validator
