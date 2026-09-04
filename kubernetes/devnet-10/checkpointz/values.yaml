@@ -1,0 +1,202 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/checkpointz.yaml.j2
+
+checkpointz:
+  fullnameOverride: checkpointz
+  replicas: 1
+
+  image:
+    repository: registry-1.docker.io/ethpandaops/checkpointz
+    tag: gloas-latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 64m
+      memory: 256Mi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: checkpoint-sync.glamsterdam-devnet-10.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+    tls:
+    - hosts:
+      - checkpoint-sync.glamsterdam-devnet-10.ethpandaops.io
+      secretName: glamsterdam-devnet-10-checkpoint-sync-tls
+
+  config:
+    global:
+      listenAddr: ":5555"
+      logging: "info" # panic,fatal,warm,info,debug,trace
+      metricsAddr: ":9090"
+
+    checkpointz:
+      mode: full
+      caches:
+        blocks:
+          max_items: 100
+        states:
+          max_items: 5
+      historical_epoch_count: 20
+
+    beacon:
+      upstreams:
+        - name: bootnode-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: bootnode-2
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-2.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: bootnode-3
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-3.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: bootnode-4
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-4.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-prysm-geth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-prysm-geth-2
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-2.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-prysm-geth-3
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-3.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: buildoor-prysm-geth-4
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-prysm-geth-4.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-1
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-1000
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-1000.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-123
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-123.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-147
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-147.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-172
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-172.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-196
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-196.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-220
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-220.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-245
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-245.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-25
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-25.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-269
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-269.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-293
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-293.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-318
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-318.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-342
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-342.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-366
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-366.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-391
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-391.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-415
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-415.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-440
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-440.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-464
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-464.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-488
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-488.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-50
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-50.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-513
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-513.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-537
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-537.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-561
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-561.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-586
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-586.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-610
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-610.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-635
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-635.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-659
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-659.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-683
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-683.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-708
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-708.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-732
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-732.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-74
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-74.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-756
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-756.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-781
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-781.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-805
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-805.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-829
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-829.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-854
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-854.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-878
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-878.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-903
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-903.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-927
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-927.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-951
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-951.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-976
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-976.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true
+        - name: prysm-geth-98
+          address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-geth-98.srv.glamsterdam-devnet-10.ethpandaops.io
+          dataProvider: true

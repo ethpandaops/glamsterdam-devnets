@@ -1,0 +1,44 @@
+xatu-mimicry:
+  enabled: true
+  fullnameOverride: xatu-mimicry
+  image:
+    repository: registry-1.docker.io/ethpandaops/xatu
+    tag: latest
+    pullPolicy: Always
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2000Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  config:
+    logging: "info"
+    metricsAddr: ":9090"
+    name: "glamsterdam-devnet-10-xatu-mimicry"
+    captureDelay: 3m
+    ntpServer: time.google.com
+    ethereum:
+      overrideNetworkName: "glamsterdam-devnet-10"
+    coordinator:
+      type: static
+      config:
+        retryInterval: 60s
+        nodeRecords:
+          - enode://4214830469f33baa93c19f9eebf39a8054b03389b255b7610ef81b88ca431abde4166a0cb3c21e1c09669d8f8e91c9ebf1539928e9b356c2d5a144c49666a51d@209.38.42.223:30303?discport=30303
+          - enode://cbe75c461e86ed96a0e4452535c7f8fd10877904b289f3f37aa008e2f93b5b838846f06e82bf3bccca966cfe0e345f74acf142a2d296f4bf57c9788b7fd9d0dc@168.144.78.231:30303?discport=30303
+          - enode://55298a84583dea1d20c6fd8fc62696a267232d2d01541a6e783201eb6ba6ad9444a3d18b21d5456618b7c58527317fc55d29899b49514eb1d68992b51014e56d@134.199.192.48:30303?discport=30303
+          - enode://36a00d54fbff882c8fa6079f17cc1588c915f9dab3ff2b07cc8d509d716a422ba917aacaca3f2e388b4d8336bf45f347e761b4f0e3d7b1daf34050aa647d6081@159.203.83.209:30303?discport=30303
+    outputs:
+    - name: grpc
+      type: xatu
+      config:
+        address: server.xatu-experimental.ethpandaops.io:443
+        maxQueueSize: 51200
+        tls: true
+        headers:
+          authorization: "Basic <path:/secrets/services/services.enc.yaml#xatu | jsonPath {.experimental.event_ingester_auth}>"
+        batchTimeout: 5s
+        exportTimeout: 30s
+        maxExportBatchSize: 512

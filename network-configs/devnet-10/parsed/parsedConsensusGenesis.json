@@ -1,0 +1,10 @@
+{
+  "genesis_validators_root": "0x7dc9ac7726acd12cc1d6bbdf0cba13f2c6103f977b224d028602f4260f59d919",
+  "eth1_data": {
+    "block_hash": "0x1c404a645966d82c91f5c26047639fd36c67d8a7c8f801419cbea0d0b75a3542"
+  },
+  "latest_execution_payload_header": {
+    "block_number": "0",
+    "block_hash": "0x1c404a645966d82c91f5c26047639fd36c67d8a7c8f801419cbea0d0b75a3542"
+  }
+}

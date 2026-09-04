@@ -1,0 +1,89 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/spamoor.yaml.j2
+
+spamoor:
+  fullnameOverride: spamoor
+  image:
+    repository: registry-1.docker.io/ethpandaops/spamoor
+    tag: master-latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 250m
+      memory: 500Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: spamoor.glamsterdam-devnet-10.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  customArgs:
+    - --fulu-activation=1788566400
+
+  persistence:
+    enabled: true
+
+  privateKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.spamoor_private_key}>"
+  authProviderUrl: "https://auth.glamsterdam-devnet-10.ethpandaops.io"
+  rpcEndpoints:
+  - "group(bootnode-1)name(bootnode-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(bootnode-2)name(bootnode-2)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-2.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(bootnode-3)name(bootnode-3)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-3.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(bootnode-4)name(bootnode-4)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-4.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(buildoor,prysm,geth,1,buildoor-prysm-geth-1)name(buildoor-prysm-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(buildoor,prysm,geth,2,buildoor-prysm-geth-2)name(buildoor-prysm-geth-2)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-2.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(buildoor,prysm,geth,3,buildoor-prysm-geth-3)name(buildoor-prysm-geth-3)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-3.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(buildoor,prysm,geth,4,buildoor-prysm-geth-4)name(buildoor-prysm-geth-4)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-prysm-geth-4.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-1)name(prysm-geth-1)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-1.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-1000)name(prysm-geth-1000)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-1000.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-123)name(prysm-geth-123)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-123.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-147)name(prysm-geth-147)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-147.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-172)name(prysm-geth-172)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-172.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-196)name(prysm-geth-196)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-196.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-220)name(prysm-geth-220)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-220.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-245)name(prysm-geth-245)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-245.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-25)name(prysm-geth-25)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-25.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-269)name(prysm-geth-269)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-269.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-293)name(prysm-geth-293)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-293.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-318)name(prysm-geth-318)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-318.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-342)name(prysm-geth-342)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-342.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-366)name(prysm-geth-366)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-366.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-391)name(prysm-geth-391)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-391.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-415)name(prysm-geth-415)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-415.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-440)name(prysm-geth-440)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-440.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-464)name(prysm-geth-464)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-464.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-488)name(prysm-geth-488)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-488.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-50)name(prysm-geth-50)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-50.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-513)name(prysm-geth-513)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-513.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-537)name(prysm-geth-537)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-537.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-561)name(prysm-geth-561)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-561.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-586)name(prysm-geth-586)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-586.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-610)name(prysm-geth-610)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-610.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-635)name(prysm-geth-635)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-635.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-659)name(prysm-geth-659)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-659.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-683)name(prysm-geth-683)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-683.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-708)name(prysm-geth-708)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-708.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-732)name(prysm-geth-732)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-732.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-74)name(prysm-geth-74)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-74.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-756)name(prysm-geth-756)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-756.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-781)name(prysm-geth-781)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-781.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-805)name(prysm-geth-805)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-805.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-829)name(prysm-geth-829)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-829.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-854)name(prysm-geth-854)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-854.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-878)name(prysm-geth-878)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-878.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-903)name(prysm-geth-903)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-903.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-927)name(prysm-geth-927)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-927.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-951)name(prysm-geth-951)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-951.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-976)name(prysm-geth-976)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-976.srv.glamsterdam-devnet-10.ethpandaops.io"
+  - "group(prysm-geth-98)name(prysm-geth-98)https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-geth-98.srv.glamsterdam-devnet-10.ethpandaops.io"
