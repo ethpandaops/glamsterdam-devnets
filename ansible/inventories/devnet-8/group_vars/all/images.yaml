@@ -7,15 +7,15 @@ default_ethereum_client_images:
   prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:glamsterdam-devnet-8
   prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:glamsterdam-devnet-8
   teku: registry-1.docker.io/ethpandaops/teku:master
-  grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-8
+  grandine: registry-1.docker.io/ethpandaops/grandine:develop
   ### Execution layer clients
   besu: registry-1.docker.io/ethpandaops/besu:main
   geth: registry-1.docker.io/ethpandaops/geth:master
-  erigon: registry-1.docker.io/ethpandaops/erigon:glamsterdam-devnet-8
+  erigon: registry-1.docker.io/ethpandaops/erigon:main
   nethermind: registry-1.docker.io/ethpandaops/nethermind:master
   reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-8
   nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
-  ethrex: registry-1.docker.io/ethpandaops/ethrex:glamsterdam-devnet-8
+  ethrex: registry-1.docker.io/ethpandaops/ethrex:main
 
 default_tooling_images:
   mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop

@@ -58,9 +58,6 @@ nimbus_container_command_extra_args: >-
 
 
 ethereum_node_docker_watchtower_containers_list:
-  - execution
-  - beacon
-  - validator
   - xatu-sentry
   - buildoor
 
