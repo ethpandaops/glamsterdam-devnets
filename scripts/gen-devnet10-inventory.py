@@ -8,13 +8,15 @@ manages only DNS -- so this script owns the devnet-10 topology:
     devnet-9 inventory, which is current because the droplets are untouched;
   * DigitalOcean names and terraform state keys stay at their devnet-9 values, since
     renaming there would recreate the fleet. host-mapping.txt records the mapping;
-  * hostnames become prysm-<el>-<n>: every node runs prysm, the only client
-    implementing the Heze fork that carries goldfish;
+  * hostnames become prysm-geth-<n>: every node runs prysm, the only client
+    implementing the Heze fork that carries goldfish, over geth;
   * 120000 validators = 200 supernodes x 596 + 800 home stakers x 1, so that
     SLOTS_PER_ROUND=8 with TARGET_COMMITTEE_SIZE=2500 gives 6 committees per slot.
 
-Supernodes are numbered first within each prysm-<el> group, then home stakers, each
-block ordered by devnet-9 CL then old index, so the mapping is stable across re-runs.
+Supernodes are numbered first (1..200), then home stakers (201..1000), each block
+ordered by devnet-9 EL then CL then index, so the mapping is stable across re-runs.
+Validator ranges are assigned to physical hosts independently of naming, so a host
+keeps its range no matter how the naming changes.
 
     python3 scripts/gen-devnet10-inventory.py
 """
@@ -31,6 +33,8 @@ DEST = ROOT / "ansible/inventories/devnet-10/inventory.ini"
 MAPPING = ROOT / "ansible/inventories/devnet-10/host-mapping.txt"
 
 NETWORK = "glamsterdam-devnet-10"
+# Every node runs geth; the devnet-9 EL spread survives only as ordering below.
+TARGET_EL = "geth"
 SUPER_VALIDATORS = 596
 HOME_VALIDATORS = 1
 
@@ -131,9 +135,11 @@ def rename(fleet):
         if not m or m.group(2) not in CL_ORDER:
             continue  # bootnodes keep their name
         prefix, cl, el = m.group(1) or "", m.group(2), m.group(3)
+        # Supernodes take the low indices; within each block, order by the devnet-9
+        # EL then CL then index, so the mapping is stable across re-runs.
         sort_key = (0 if h.get("val_end") and h["supernode"] else 1,
-                    CL_ORDER.index(cl), h["index"])
-        buckets[f"{prefix}prysm-{el}"].append((sort_key, host))
+                    EL_ORDER.index(el), CL_ORDER.index(cl), h["index"])
+        buckets[f"{prefix}prysm-{TARGET_EL}"].append((sort_key, host))
 
     mapping = {}
     for group, rows in buckets.items():
@@ -165,8 +171,8 @@ def emit(fleet, mapping):
     out += [
         "# Consensus client groups",
         "#",
-        "# Every node runs prysm, so every group is a child of [prysm]. Keeping prysm at",
-        "# this depth preserves group_vars precedence against the sibling EL groups.",
+        "# Every node runs prysm over geth, so every group is a child of [prysm]. Keeping",
+        "# prysm at this depth preserves group_vars precedence against the EL group.",
         "# DigitalOcean and terraform still use the devnet-9 names; see host-mapping.txt.",
         "[prysm:children]",
     ] + [g.replace("-", "_") for g in node_groups] + [""]

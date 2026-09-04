@@ -9,7 +9,7 @@ ethereum_cl_bootnodes: >-
     )
     +
     (
-      [primary_bootnode, 'prysm-geth-1', 'prysm-geth-2', 'prysm-nethermind-1', 'prysm-nethermind-2', 'prysm-reth-1', 'prysm-besu-1', 'prysm-ethrex-1', 'prysm-erigon-1']
+      [primary_bootnode, 'prysm-geth-1', 'prysm-geth-2', 'prysm-geth-3', 'prysm-geth-4', 'prysm-geth-5', 'prysm-geth-6', 'prysm-geth-7', 'prysm-geth-8']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
       | select('defined')
       | list
@@ -26,7 +26,7 @@ ethereum_el_bootnodes: >-
     )
     +
     (
-      [primary_bootnode, 'prysm-geth-1', 'prysm-geth-2', 'prysm-nethermind-1', 'prysm-nethermind-2', 'prysm-reth-1', 'prysm-besu-1', 'prysm-ethrex-1', 'prysm-erigon-1']
+      [primary_bootnode, 'prysm-geth-1', 'prysm-geth-2', 'prysm-geth-3', 'prysm-geth-4', 'prysm-geth-5', 'prysm-geth-6', 'prysm-geth-7', 'prysm-geth-8']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr'])
       | select('defined')
       | list

@@ -2,17 +2,16 @@ Goldfish vote-ledger sample
 ===========================
 
 --goldfish-vote-ledger logs a line per available-attestation head vote and per drop,
-which is far too much to ship from all 1004 nodes. It is enabled on eight: four
-supernodes and four home stakers, spread across execution clients.
+which is far too much to ship from all 1004 nodes. It is enabled on eight, spread
+across the index space so the sample spans regions:
 
   supernodes (596 validators)   home stakers (1 validator)
-    prysm-geth-1                  prysm-geth-83
-    prysm-nethermind-1            prysm-nethermind-61
-    prysm-reth-1                  prysm-erigon-9
-    prysm-besu-1                  prysm-ethrex-5
+    prysm-geth-1                  prysm-geth-201
+    prysm-geth-50                 prysm-geth-400
+    prysm-geth-100                prysm-geth-600
+    prysm-geth-150                prysm-geth-800
 
-Supernodes hold the low indices in each prysm-<el> group: geth 1..82, nethermind 1..60,
-reth 1..28, besu 1..16, erigon 1..8, ethrex 1..4, nimbusel 1..2.
+Supernodes are prysm-geth-1..200, home stakers prysm-geth-201..1000.
 
 To change the sample, add or remove host_vars/<host> containing
 `goldfish_vote_ledger_enabled: true`. The flag is wired in group_vars/prysm.yaml.

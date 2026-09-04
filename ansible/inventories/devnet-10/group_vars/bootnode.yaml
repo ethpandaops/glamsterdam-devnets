@@ -5,7 +5,7 @@
 ethereum_cl_bootnodes: >-
   {{
     (
-      ['prysm-geth-1', 'prysm-geth-2', 'prysm-nethermind-1', 'prysm-reth-1']
+      ['prysm-geth-1', 'prysm-geth-2', 'prysm-geth-3', 'prysm-geth-4']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
       | select('defined')
       | list
@@ -15,7 +15,7 @@ ethereum_cl_bootnodes: >-
 ethereum_el_bootnodes: >-
   {{
     (
-      ['prysm-geth-1', 'prysm-geth-2', 'prysm-nethermind-1', 'prysm-reth-1']
+      ['prysm-geth-1', 'prysm-geth-2', 'prysm-geth-3', 'prysm-geth-4']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr'])
       | select('defined')
       | list
