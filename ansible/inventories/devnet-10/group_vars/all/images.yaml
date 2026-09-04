@@ -45,7 +45,7 @@ default_tooling_images:
   eth_fauceth: registry-1.docker.io/chainflag/eth-faucet:latest
   blobscan: registry-1.docker.io/blossomlabs/blobscan:latest
   blobscan_indexer: registry-1.docker.io/blossomlabs/blobscan-indexer:latest
-  dora: registry-1.docker.io/ethpandaops/dora:master-latest
+  dora: registry-1.docker.io/ethpandaops/dora:sukun-decoupled-consensus
   dugtrio: registry-1.docker.io/ethpandaops/dugtrio:bbusa-endpoint-failover
   # Fork carrying the decoupled-consensus knobs (sukunrt/ethereum-genesis-generator@decoupled).
   # Its config templates are vendored under files/genesis-config/ -- see all.yaml.

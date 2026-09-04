@@ -4,7 +4,7 @@ dora:
   fullnameOverride: dora
   image:
     repository: registry-1.docker.io/ethpandaops/dora
-    tag: master-latest
+    tag: sukun-decoupled-consensus
     pullPolicy: Always
   resources:
     requests:
@@ -12,7 +12,7 @@ dora:
       memory: 1Gi
     limits:
       cpu: 1500m
-      memory: 3Gi
+      memory: 6Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
