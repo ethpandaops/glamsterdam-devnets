@@ -1,0 +1,21 @@
+Goldfish vote-ledger sample
+===========================
+
+--goldfish-vote-ledger logs a line per available-attestation head vote and per drop,
+which is far too much to ship from all 1004 nodes. It is enabled on eight: four
+supernodes and four home stakers, spread across execution clients.
+
+  supernodes (596 validators)   home stakers (1 validator)
+    prysm-geth-1                  prysm-geth-83
+    prysm-nethermind-1            prysm-nethermind-61
+    prysm-reth-1                  prysm-erigon-9
+    prysm-besu-1                  prysm-ethrex-5
+
+Supernodes hold the low indices in each prysm-<el> group: geth 1..82, nethermind 1..60,
+reth 1..28, besu 1..16, erigon 1..8, ethrex 1..4, nimbusel 1..2.
+
+To change the sample, add or remove host_vars/<host> containing
+`goldfish_vote_ledger_enabled: true`. The flag is wired in group_vars/prysm.yaml.
+
+Vector throttles shipped logs to 20000 lines/minute per container, so read the full
+ledger from the host's docker logs rather than the pipeline.

@@ -1,0 +1,4 @@
+mnemonic: ${EL_AND_CL_MNEMONIC}
+el_premine: {}
+el_premine_addrs: ${EL_PREMINE_ADDRS}
+additional_preloaded_contracts: ${ADDITIONAL_PRELOADED_CONTRACTS}
