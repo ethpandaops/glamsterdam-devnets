@@ -39,6 +39,8 @@ SUPERNODE="${4:-False}"
 GOLDFISH="${5:-False}"
 SNOOPER_AUTH="${6:-}"                # user:pass for the snooper web API
 XATU_TOKEN="${7:-}"                  # base64 of user:pass for the xatu ingest
+EL_BOOTNODES_ARG="${8:-}"            # comma-separated EL enrs
+CL_BOOTNODES_ARG="${9:-}"            # comma-separated CL enrs
 
 NETWORK=glamsterdam-devnet-10
 FQDN="${HOSTNAME_}.srv.${NETWORK}.ethpandaops.io"
@@ -47,19 +49,26 @@ CFG=/data/ethereum-network-config/metadata
 JWT=/data/execution-auth.secret
 FEE_RECIPIENT=0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134
 
-GETH_IMAGE=registry-1.docker.io/ethpandaops/geth:master
-PRYSM_IMAGE=registry-1.docker.io/ethpandaops/prysm-beacon-chain:sukunrt-decoupled-casper-a1679c9
-PRYSM_VC_IMAGE=registry-1.docker.io/ethpandaops/prysm-validator:sukunrt-decoupled-casper-a1679c9
+GETH_IMAGE=registry-1.docker.io/ethpandaops/geth:glamsterdam-devnet-8
+PRYSM_IMAGE=registry-1.docker.io/ethpandaops/prysm-beacon-chain:sukun-decoupled-consensus
+PRYSM_VC_IMAGE=registry-1.docker.io/ethpandaops/prysm-validator:sukun-decoupled-consensus
 SNOOPER_IMAGE=registry-1.docker.io/ethpandaops/rpc-snooper:latest
 XATU_IMAGE=registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-9
 METRICS_IMAGE=registry-1.docker.io/ethpandaops/ethereum-metrics-exporter:latest
 
-# Entry points: bootnode-1 and prysm-geth-1, taken from prysm-geth-2's deployed config.
-# The playbook builds this list from discovery facts, so later deploys carry more
-# entries than earlier ones; these are the freshest observed.
-EL_BOOTNODES='enr:-Iu4QGfx0TAic0NdYF5O3H2u-vD9f1PQnLfSdAE439jXk9UKEcZfOT0kpT7zylBgEe1n2eU0Im4I97BEoYhDpno9Qz2AgmlkgnY0gmlwhNEmKt-Jc2VjcDI1NmsxoQNCFIMEafM7qpPBn57r85qAVLAzibJVt2EO-BuIykMavYN0Y3CCdl-DdWRwgnZf,enr:-Iu4QFu0smn0cpVppOtspVFsw3XNo_frPiDPU500kwCOVrcQPPHhdB4AMb_1-DwCZjtEbbf2vDc4ZPJTGHgulZZgeqKAgmlkgnY0gmlwhKiQvWiJc2VjcDI1NmsxoQJywICPOkuAIHrpSXBUTx4_eew1DWg3w-ZCu4waoB4GAoN0Y3CCdl-DdWRwgnZf'
-CL_BOOTNODE_1='enr:-Nm4QJwdWWQpkkkJXuDuWf75Y4EA3Q8f5iHKjpZhzrBjOe3QE0kkknyExHgJswR3A1uPwWoveTblCBVbGnc__VE92vaGAaBubMdfh2F0dG5ldHOIPwAAAAAAAACDY2djgYCEZXRoMpDeV6UakHlTB___________gmlkgnY0gmlwhNEmKt-DbmZkhAAAAACEcXVpY4IyyIlzZWNwMjU2azGhAxDsjUvPaVYk_dkjOHiNOx2AkUm_cXuP63Pxp8Jn59BTiHN5bmNuZXRzAIN0Y3CCIyiDdWRwgiMo'
-CL_BOOTNODE_2='enr:-Nm4QK6G7FAK4lyaI1SdV7JSx2E9HsUEvjfhbXl7BNpWHoiJetq7OfXvH5Qi507LGQ6hpgfk-X-eMDTK2mNVmENfF06GAaBufcRgh2F0dG5ldHOIPwAAAAAAAACDY2djgYCEZXRoMpDeV6UakHlTB___________gmlkgnY0gmlwhKiQvWiDbmZkhAAAAACEcXVpY4IyyIlzZWNwMjU2azGhAvcWAyXHCM0Bz1fYet5K0pn_DnicN710GfgWE2Svz-0UiHN5bmNuZXRzAIN0Y3CCIyiDdWRwgiMo'
+# Bootstrap entry points MUST be passed in. The old hardcoded ENRs die with the wipe:
+# prysm's p2p key lives in the beacon datadir, so a wiped node comes back with a new
+# peer id and ENR. Collect them after the bootnodes are up, e.g.
+#   ansible bootnode-1 -b -m shell -a 'docker logs bootnodoor 2>&1 | grep -oE "enr:[A-Za-z0-9_-]+" | sort -u'
+[ -n "$EL_BOOTNODES_ARG" ] || { echo "[$HOSTNAME_] FATAL: arg 8 (EL enrs) is required" >&2; exit 1; }
+[ -n "$CL_BOOTNODES_ARG" ] || { echo "[$HOSTNAME_] FATAL: arg 9 (CL enrs) is required" >&2; exit 1; }
+EL_BOOTNODES="$EL_BOOTNODES_ARG"
+IFS=',' read -r -a CL_BOOTNODE_LIST <<< "$CL_BOOTNODES_ARG"
+CL_ARGS=()
+for e in "${CL_BOOTNODE_LIST[@]}"; do
+  if [ -n "$e" ]; then CL_ARGS+=(--bootstrap-node="$e"); fi
+done
+[ "${#CL_ARGS[@]}" -gt 0 ] || { echo "[$HOSTNAME_] FATAL: no usable CL enr" >&2; exit 1; }
 
 # Static IPv6 inside the host's /124, matching service_ipv6_offsets: execution :e,
 # snooper_engine :d, beacon :b, validator :a.
@@ -214,8 +223,7 @@ run_with_ip6 "$BEACON_IP6" beacon \
   --contract-deployment-block=0 \
   --verbosity=INFO \
   "${BEACON_EXTRA[@]}" \
-  --bootstrap-node="$CL_BOOTNODE_1" \
-  --bootstrap-node="$CL_BOOTNODE_2"
+  "${CL_ARGS[@]}"
 fi
 
 # ---- validator -----------------------------------------------------------------------
