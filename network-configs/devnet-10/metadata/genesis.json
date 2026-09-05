@@ -28,11 +28,6 @@
         "baseFeeUpdateFraction": 5007716
       },
       "bpo1": {
-        "target": 10,
-        "max": 15,
-        "baseFeeUpdateFraction": 8346193
-      },
-      "bpo2": {
         "target": 14,
         "max": 21,
         "baseFeeUpdateFraction": 11684671
@@ -42,7 +37,6 @@
     "pragueTime": 0,
     "osakaTime": 0,
     "bpo1Time": 0,
-    "bpo2Time": 0,
     "amsterdamTime": 0
   },
   "alloc": {
@@ -968,10 +962,10 @@
   "coinbase": "0x0000000000000000000000000000000000000000",
   "difficulty": "0x0",
   "extraData": "",
-  "gasLimit": "0x3938700",
+  "gasLimit": "0xbebc200",
   "nonce": "0x1234",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "timestamp": "1788566400",
+  "timestamp": "1788571800",
   "baseFeePerGas": "0x3b9aca00"
 }

@@ -50,8 +50,8 @@ ethereum_genesis_network_seed: glamsterdam-devnet-10
 ethereum_genesis_chain_id: 70{{ 99999999 | random(start=10000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# 2026-09-05 00:00:00 UTC
-ethereum_genesis_timestamp: 1788566400
+# 2026-09-05 01:30:00 UTC = 03:30 CEST
+ethereum_genesis_timestamp: 1788571800
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -90,7 +90,7 @@ ethereum_genesis_generator_config_files:
     export HEZE_FORK_EPOCH="0"
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
-    export GENESIS_GASLIMIT=60000000
+    export GENESIS_GASLIMIT=200000000
     export WITHDRAWAL_TYPE=0x02
     # Agent-faucet vault wallets (fixed across glamsterdam devnets); without this premine the
     # faucet hands out nothing. devnet-9 was funded post-genesis; this premine ships for devnet-10+.
@@ -105,13 +105,19 @@ ethereum_genesis_generator_config_files:
     export TARGET_COMMITTEE_SIZE=2500
     export TARGET_AGGREGATORS_PER_COMMITTEE=64
     export SLOT_DURATION_MS=12000
-    # Must equal the committee count per slot: one committee -> one subnet, so every
-    # node observes every raw FFG vote rather than a sample.
+    # ATTESTATION_SUBNET_COUNT is the committee count per slot (validators /
+    # SLOTS_PER_ROUND / TARGET_COMMITTEE_SIZE). SUBNETS_PER_NODE is how many of those a
+    # node subscribes to, and is independent of it.
     export ATTESTATION_SUBNET_COUNT=6
-    export SUBNETS_PER_NODE=6
+    export SUBNETS_PER_NODE=2
     # Sweep axes: in-slot vote deadline, and random padding on blocks / available
     # attestations. Changing one requires a new genesis, not a client restart.
     export AVAILABLE_ATTESTATION_DUE_BPS_HEZE=2500
+    export AGGREGATE_DUE_BPS_GLOAS=6667
+    export BPO_1_EPOCH=0
+    export BPO_1_MAX_BLOBS=21
+    export BPO_1_TARGET_BLOBS=14
+    export BPO_2_EPOCH=18446744073709551615
     export CONSENSUS_BLOCK_SCRATCH_SPACE=0
     export GOLDFISH_SCRATCH_SPACE=100
 

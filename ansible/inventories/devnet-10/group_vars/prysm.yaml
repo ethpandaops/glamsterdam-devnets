@@ -74,4 +74,5 @@ prysm_validator_container_command_extra_args:
   # and facts are gathered before the rename, so the cached fact holds the old name.
   - --graffiti={{ validator_display_name | default(inventory_hostname) }}
   - --enable-builder
+  - --decoupled-ffg-vote-at-slot-start
 prysm_validator_datadir: /data/prysm-validator
