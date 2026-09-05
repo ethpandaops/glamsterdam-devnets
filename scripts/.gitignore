@@ -1,1 +1,6 @@
 .fuzz/
+
+# ad-hoc devnet-10 operational scripts (fleet break-glass, not repo material)
+devnet10-*.sh
+run-step4.sh
+add-ssh-key-*.sh
