@@ -24,8 +24,11 @@ besu_container_command_extra_args:
   - --discovery-mode=V5
   # DEBUG removed 2026-09-06: dora (executionIndexerTracesEnabled) calls debug_traceBlockByHash,
   # which allocates one TraceFrame per opcode with no cap (besu --rpc-max-trace-steps is only
-  # enforced on the *_call paths), OOM-killing every besu node on 200M-gas blocks. See BUG-896.
-  - --rpc-http-api=ADMIN,ETH,MINER,NET,TRACE,TXPOOL,WEB3
+  # enforced on the *_call paths), OOM-killing every besu node on 200M-gas blocks.
+  # TRACE removed too 2026-09-07: erpc routes trace_block/trace_transaction to besu upstreams and
+  # those hit the same uncapped path (buildoor-lodestar-besu-1 kept OOMing via
+  # TracedJsonRpcProcessor after DEBUG alone was removed). See BUG-896.
+  - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3
   - --sync-mode=FULL
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
