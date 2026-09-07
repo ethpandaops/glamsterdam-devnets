@@ -14,20 +14,6 @@ besu_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
-  # 2026-09-07: besu OOMs during BackwardSyncContext phase 2 while replaying the ~2k block
-  # backlog of 200M-gas blocks. The session dies, restarts, and loses throughput -- import rate
-  # fell 4.86 -> 1.6 blocks/min and the gap started GROWING (nimbus-besu-1: remaining 1682 -> 1719
-  # over 18 min). This is a distinct OOM from the debug_trace one (BUG-896); no tracing is enabled
-  # any more and the spammer has stopped. JVM default is 25% of RAM = ~7.84 GB on these 31.35 GiB
-  # hosts; besu was already sitting at 8.7-10.3 GiB RSS. 12g leaves ~12 GiB headroom after the
-  # beacon (~2.4 GiB) and sidecars (~1.5 GiB). There is no swap (BUG-832) so do not go higher.
-  # buildoor-lodestar-besu-1 keeps its own 5g host_vars override (15.6 GiB host).
-  # 2026-09-07 05:55: 12g held for ~1 h (92 -> 2 OOMs/hr) then degraded back to 48/hr as the
-  # backward sync progressed. Root cause is BackwardSyncContext.BATCH_SIZE = 200, hardcoded with no
-  # CLI override, and halveBatchSize() only fires on short peer responses -- never on memory pressure
-  # (BUG-900). Heap is therefore the only lever available to us. 16g leaves >=7.7 GiB free on the
-  # tightest host (teku-besu-1: 11.9 GiB avail, 3.1 GiB beacon). Still a delay, not a fix -- the real
-  # answer is SNAP sync (plan decision D5b). No swap on these hosts (BUG-832): do not exceed 16g.
   BESU_OPTS: "-Xmx16g -XX:MaxHeapFreeRatio=30 -XX:MinHeapFreeRatio=10"
 besu_container_volumes:
   - "{{ besu_datadir }}:/data"
@@ -37,13 +23,7 @@ besu_container_command_extra_args:
   - --genesis-file=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery-mode=V5
-  # DEBUG removed 2026-09-06: dora (executionIndexerTracesEnabled) calls debug_traceBlockByHash,
-  # which allocates one TraceFrame per opcode with no cap (besu --rpc-max-trace-steps is only
-  # enforced on the *_call paths), OOM-killing every besu node on 200M-gas blocks.
-  # TRACE removed too 2026-09-07: erpc routes trace_block/trace_transaction to besu upstreams and
-  # those hit the same uncapped path (buildoor-lodestar-besu-1 kept OOMing via
-  # TracedJsonRpcProcessor after DEBUG alone was removed). See BUG-896.
-  - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3
+  - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3,DEBUG,TRACE
   - --sync-mode=FULL
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
