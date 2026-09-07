@@ -22,7 +22,13 @@ besu_container_env:
   # hosts; besu was already sitting at 8.7-10.3 GiB RSS. 12g leaves ~12 GiB headroom after the
   # beacon (~2.4 GiB) and sidecars (~1.5 GiB). There is no swap (BUG-832) so do not go higher.
   # buildoor-lodestar-besu-1 keeps its own 5g host_vars override (15.6 GiB host).
-  BESU_OPTS: "-Xmx12g -XX:MaxHeapFreeRatio=30 -XX:MinHeapFreeRatio=10"
+  # 2026-09-07 05:55: 12g held for ~1 h (92 -> 2 OOMs/hr) then degraded back to 48/hr as the
+  # backward sync progressed. Root cause is BackwardSyncContext.BATCH_SIZE = 200, hardcoded with no
+  # CLI override, and halveBatchSize() only fires on short peer responses -- never on memory pressure
+  # (BUG-900). Heap is therefore the only lever available to us. 16g leaves >=7.7 GiB free on the
+  # tightest host (teku-besu-1: 11.9 GiB avail, 3.1 GiB beacon). Still a delay, not a fix -- the real
+  # answer is SNAP sync (plan decision D5b). No swap on these hosts (BUG-832): do not exceed 16g.
+  BESU_OPTS: "-Xmx16g -XX:MaxHeapFreeRatio=30 -XX:MinHeapFreeRatio=10"
 besu_container_volumes:
   - "{{ besu_datadir }}:/data"
   - "{{ besu_auth_jwt_path }}:/execution-auth.jwt:ro"
