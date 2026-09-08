@@ -37,7 +37,8 @@ lodestar_container_volumes:
 lodestar_container_command_extra_args: >-
   {{ lodestar_container_command_extra_simple_args }}
 lodestar_container_command_extra_simple_args:
-  - --network=plataberget
+  - --paramsFile=/network-config/config.yaml
+  - --genesisStateFile=/network-config/genesis.ssz
   - --bootnodes={{ ethereum_cl_bootnodes | join(',') }}
   - --rest.namespace="*"
   - --network.connectToDiscv5Bootnodes
@@ -47,7 +48,7 @@ lodestar_validator_container_volumes:
   - "{{ lodestar_validator_datadir }}:/validator-data"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 lodestar_validator_container_command_extra_args:
-  - --network=plataberget
+  - --paramsFile=/network-config/config.yaml
   - --graffiti={{ ansible_hostname }}
 lodestar_validator_datadir: /data/lodestar-validator
 lodestar_container_pull: true
