@@ -195,10 +195,10 @@ ethereum_node_snooper_engine_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.i
   | bool) else '' }}"
 ethereum_node_skip_cleanup: true
 ethereum_node_docker_watchtower_enabled: true
+# Watchtower only owns non-critical tooling. Until the shared workflow in
+# docs/client-image-delivery.md exists, client releases are explicit staged
+# Ansible operations.
 ethereum_node_docker_watchtower_containers_list:
-  - execution
-  - beacon
-  - validator
   - xatu-sentry
 docker_watchtower_container_additional_args:
   - --interval=900
