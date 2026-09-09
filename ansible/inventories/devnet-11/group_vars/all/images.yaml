@@ -1,19 +1,21 @@
 ---
 default_ethereum_client_images:
+  # devnet-11 runs trunk images. Floor: consensus-specs v1.7.0-beta.0 and
+  # tests-glamsterdam-devnet@v8.1.4 -- an image below the floor stays out of genesis.
   ### Consensus layer clients
   lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
-  lodestar: registry-1.docker.io/ethpandaops/lodestar:glamsterdam-devnet-11
+  lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable
   nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
-  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:glamsterdam-devnet-11
-  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:glamsterdam-devnet-11
+  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
+  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
   teku: registry-1.docker.io/ethpandaops/teku:master
-  grandine: registry-1.docker.io/ethpandaops/grandine:glamsterdam-devnet-11
+  grandine: registry-1.docker.io/ethpandaops/grandine:develop
   ### Execution layer clients
   besu: registry-1.docker.io/ethpandaops/besu:main
   geth: registry-1.docker.io/ethpandaops/geth:master
   erigon: registry-1.docker.io/ethpandaops/erigon:main
   nethermind: registry-1.docker.io/ethpandaops/nethermind:master
-  reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-11
+  reth: registry-1.docker.io/ethpandaops/reth:main
   nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
   ethrex: registry-1.docker.io/ethpandaops/ethrex:main
 
@@ -23,7 +25,7 @@ default_tooling_images:
   mev_relay: registry-1.docker.io/ethpandaops/mev-boost-relay:main
   buildoor: registry-1.docker.io/ethpandaops/buildoor:main-latest
   authenticatoor: registry-1.docker.io/ethpandaops/service-authenticatoor:main-latest
-  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-7 # no devnet-11 build yet, this is the current gloas one
+  xatu_sentry: registry-1.docker.io/ethpandaops/xatu:glamsterdam-devnet-9 # latest gloas sentry build; no devnet-11 tag exists
   xatu_cannon: registry-1.docker.io/ethpandaops/xatu:latest
   xatu_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
   xatu_cl_mimicry: registry-1.docker.io/ethpandaops/xatu:latest
@@ -44,8 +46,8 @@ default_tooling_images:
   blobscan_indexer: registry-1.docker.io/blossomlabs/blobscan-indexer:latest
   dora: registry-1.docker.io/ethpandaops/dora:master-latest
   dugtrio: registry-1.docker.io/ethpandaops/dugtrio:bbusa-endpoint-failover
-  ethereum_genesis_generator: registry-1.docker.io/ethpandaops/ethereum-genesis-generator:6.2.0
-  tracoor: registry-1.docker.io/ethpandaops/tracoor:0.0.2-glamsterdam-devnet-11 # pinned: floating tag + IfNotPresent won't re-pull
+  ethereum_genesis_generator: registry-1.docker.io/ethpandaops/ethereum-genesis-generator:6.2.1
+  tracoor: registry-1.docker.io/ethpandaops/tracoor:0.0.2-glamsterdam-devnet-8 # pinned: floating tag + IfNotPresent won't re-pull
   ncli: registry-1.docker.io/status-im/nimbus-eth2:unstable
   lcli: registry-1.docker.io/ethpandaops/lighthouse:unstable
   zcli: gloas

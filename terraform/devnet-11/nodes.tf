@@ -28,15 +28,16 @@ variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
     { name = "bootnode", count = 2, cloud = "digitalocean" },
-    # Buildoor
-    { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", builder_start = 0 },
-    { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", builder_start = 1 },
-    { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", builder_start = 2 },
-    { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", builder_start = 3 },
-    { name = "buildoor-grandine-nimbusel", count = 1, cloud = "digitalocean", builder_start = 4 },
-    { name = "buildoor-lighthouse-reth", count = 1, cloud = "digitalocean", builder_start = 5 },
-    { name = "buildoor-lodestar-besu", count = 1, cloud = "digitalocean", builder_start = 6 },
-    { name = "buildoor-nimbus-erigon", count = 1, cloud = "digitalocean", builder_start = 7 },
+    # Buildoor -- 32 GB like the validator matrix: on devnet-9 every CL running
+    # --subscribe-all-subnets OOM'd at the 16 GB fullnode size.
+    { name = "buildoor-prysm-ethrex", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 0 },
+    { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 1 },
+    { name = "buildoor-lodestar-ethrex", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 2 },
+    { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 3 },
+    { name = "buildoor-grandine-nimbusel", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 4 },
+    { name = "buildoor-lighthouse-reth", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 5 },
+    { name = "buildoor-lodestar-besu", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 6 },
+    { name = "buildoor-nimbus-erigon", count = 1, cloud = "digitalocean", size = "s-8vcpu-32gb-640gb-intel", builder_start = 7 },
 
     # Validator layout: 6 CL x 7 EL = 42 combos x 2000 keys over [0,84000),
     # same ordering as devnet-7's final grid; grandine and erigon interleaved
