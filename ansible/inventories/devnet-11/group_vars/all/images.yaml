@@ -1,7 +1,5 @@
 ---
 default_ethereum_client_images:
-  # devnet-11 runs trunk images. Floor: consensus-specs v1.7.0-beta.0 and
-  # tests-glamsterdam-devnet@v8.1.4 -- an image below the floor stays out of genesis.
   ### Consensus layer clients
   lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
   lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable

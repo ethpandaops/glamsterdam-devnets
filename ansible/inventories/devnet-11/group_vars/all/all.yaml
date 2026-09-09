@@ -50,11 +50,8 @@ ethereum_genesis_network_seed: glamsterdam-devnet-11
 ethereum_genesis_chain_id: 70{{ 9999999 | random(start=1000000, seed=ethereum_genesis_network_seed) }}
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Pinned genesis: Monday 2026-09-14 12:00:00 UTC, two hours before ACDT #96 so the
-# call sees a running network. Gloas at epoch 450 hits Wednesday 2026-09-16
-# 12:00:00 UTC (48 h, Lido asked for >= 2 days pre-fork), the 200M gas bump at
-# epoch 480 15:12:00 UTC.
-ethereum_genesis_timestamp: 1789387200
+# Pinned genesis: 2026-09-09 12:00:00 UTC (14:00 CEST). 
+ethereum_genesis_timestamp: 1788948000
 ethereum_genesis_timedelay: 0
 shadowfork_height: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
@@ -85,8 +82,8 @@ ethereum_genesis_generator_config_files:
     export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
-    export GLOAS_FORK_EPOCH="450"
-    export GAS_LIMIT_SCHEDULE='[{"epoch": 480, "gas_limit": 200000000}]'
+    export GLOAS_FORK_EPOCH="1125"
+    export GAS_LIMIT_SCHEDULE='[{"epoch": 1135, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
     export GENESIS_GASLIMIT=60000000
@@ -407,8 +404,6 @@ otlp_endpoint: https://otlp.analytics.production.platform.ethpandaops.io
 otlp_deployment_env: production
 
 # role: ethpandaops.general.vector
-vector_container_memory: 1g
-vector_container_memory_swap: 1g
 vector_config: |
   # Docker container logs (clean per-container metadata straight from the Docker API)
   [sources.in]
@@ -422,20 +417,10 @@ vector_config: |
       "snooper-",
     ]
 
-  # Per-container ceiling on shipped lines. A client or sentry in a failure loop
-  # emits thousands of lines a second, and across a large fleet that alone can
-  # saturate the analytics ingress; healthy containers sit far below this.
-  [transforms.throttle]
-    type = "throttle"
-    inputs = ["in"]
-    threshold = 20000
-    window_secs = 60
-    key_field = "{% raw %}{{ container_name }}{% endraw %}"
-
-  # Shape docker_logs events into an OTLP log record plus the resource it belongs to.
+  # Shape docker_logs events into an OTLP resourceLogs envelope with full metadata.
   [transforms.otel_shape]
     type = "remap"
-    inputs = ["throttle"]
+    inputs = ["in"]
     source = '''
       ts_ns = to_string(to_unix_timestamp(now(), unit: "nanoseconds"))
       if is_timestamp(.timestamp) {
@@ -510,61 +495,46 @@ vector_config: |
       attrs = push(attrs, {"key": "ethereum_el", "value": {"stringValue": "{{ ethereum_node_el }}"}})
   {%- endif +%}
       . = {
-        "container_name": ctr,
-        "resource": {"attributes": attrs},
-        "log_record": {
-          "timeUnixNano":   ts_ns,
-          "severityNumber": sevnum,
-          "severityText":   sevtext,
-          "body": {"stringValue": msg},
-          "attributes": [{"key": "stream", "value": {"stringValue": strm}}]
+        "resource_log": {
+          "resource": {"attributes": attrs},
+          "scopeLogs": [{
+            "scope": {"name": "{{ ethereum_network_name }}-vector"},
+            "logRecords": [{
+              "timeUnixNano":   ts_ns,
+              "severityNumber": sevnum,
+              "severityText":   sevtext,
+              "body": {"stringValue": msg},
+              "attributes": [{"key": "stream", "value": {"stringValue": strm}}]
+            }]
+          }]
         }
       }
     '''
 
-  # One envelope per container per period. The resource block is carried once
-  # and the records ride under it, instead of every record repeating it.
+  # Batch many shaped log events into one OTLP envelope (reduce works on logs).
   [transforms.batch_envelope]
     type = "reduce"
     inputs = ["otel_shape"]
-    group_by = ["container_name"]
     expire_after_ms = 30000
     end_every_period_ms = 5000
     max_events = 500
-    merge_strategies.container_name = "discard"
-    merge_strategies.resource = "discard"
-    merge_strategies.log_record = "array"
+    merge_strategies.resource_log = "array"
 
   [transforms.finalize_envelope]
     type = "remap"
     inputs = ["batch_envelope"]
     source = '''
-      recs = .log_record
-      if !is_array(recs) {
-        recs = [recs]
-      }
-      . = {"resourceLogs": [{
-        "resource": .resource,
-        "scopeLogs": [{
-          "scope": {"name": "{{ ethereum_network_name }}-vector"},
-          "logRecords": recs
-        }]
-      }]}
+      . = {"resourceLogs": .resource_log}
     '''
 
   [sinks.otlp_logs]
     type = "opentelemetry"
     inputs = ["finalize_envelope"]
-    # A slow or refusing gateway must not turn into unbounded buffering here.
-    buffer.type = "memory"
-    buffer.max_events = 200
-    buffer.when_full = "drop_newest"
     [sinks.otlp_logs.protocol]
       type = "http"
       uri = "{{ otlp_endpoint }}/v1/logs"
       method = "post"
       encoding.codec = "otlp"
-      compression = "gzip"
       auth.strategy = "basic"
       auth.user = "{{ ethereum_network_name }}"
       auth.password = "{{ secret_loki.password }}"
@@ -572,4 +542,3 @@ vector_config: |
       # max_events MUST be 1 — OTLP/HTTP allows one envelope per request.
       batch.max_events = 1
       batch.timeout_secs = 5
-      request.retry_attempts = 5
