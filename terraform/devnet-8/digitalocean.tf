@@ -75,6 +75,15 @@ locals {
               (node.count > 0 ? (node.validator_end - node.validator_start) / node.count >= 128 : false)
             )
 
+            # Size: explicit > supernode-based default
+            size = (
+              node.size != null ? node.size :
+              (node.supernode != null ? node.supernode :
+                can(regex("(bootnode|mev)", node.name)) ? true :
+                (node.count > 0 ? (node.validator_end - node.validator_start) / node.count >= 128 : false)
+              ) ? var.digitalocean_supernode_size : var.digitalocean_fullnode_size
+            )
+
             region = node.region != null ? node.region : var.digitalocean_regions[
               parseint(substr(md5("${node.name}-${node.start_index + i + 1}"), 0, 8), 16) % length(var.digitalocean_regions)
             ]
@@ -107,7 +116,7 @@ locals {
         ssh_keys    = [data.digitalocean_ssh_key.main.fingerprint]
         region      = vm.region
         image       = local.digitalocean_default_image
-        size        = vm.supernode ? var.digitalocean_supernode_size : var.digitalocean_fullnode_size
+        size        = vm.size
         resize_disk = true
         monitoring  = true
         backups     = false
