@@ -24,7 +24,9 @@ besu_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery-mode=V5
   - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3,DEBUG,TRACE
-  - --sync-mode=FULL
+  # SNAP per Besu team (Sep 16): full sync replays the 166k-200k bad-tx blocks at ~10 s each
+  # and repeatedly OOMs / loses the bonsai world state.
+  - --sync-mode=SNAP
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
   - --color-enabled=false
