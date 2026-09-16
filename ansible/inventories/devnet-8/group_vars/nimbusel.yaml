@@ -25,6 +25,9 @@ nimbusel_container_command_extra_args:
   - --rpc-api=admin,eth,debug
   - --ws-api=admin,eth,debug
   - --log-level=DEBUG
+  - --debug-parallel-state-root=true
+  - --debug-bal-state-prefetch=true
+  - --debug-bal-parallel-execution=true
 
 prometheus_config: |
   global:
