@@ -13,7 +13,7 @@ default_ethereum_client_images:
   geth: registry-1.docker.io/ethpandaops/geth:master
   erigon: registry-1.docker.io/ethpandaops/erigon:main
   nethermind: registry-1.docker.io/ethpandaops/nethermind:master
-  reth: registry-1.docker.io/ethpandaops/reth:glamsterdam-devnet-8
+  reth: registry-1.docker.io/ethpandaops/reth:main
   nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
   ethrex: registry-1.docker.io/ethpandaops/ethrex:main
 
