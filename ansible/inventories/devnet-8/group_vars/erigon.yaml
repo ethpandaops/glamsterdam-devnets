@@ -30,22 +30,6 @@ erigon_container_command_extra_args:
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
-# Erigon watchtower: daily image check at 18:00 CET/CEST (TZ tracks DST).
-# lighthouse-CL pairs keep their full pre-PR coverage; other erigon hosts are
-# erigon-only. Priority 110 (inventory.ini) keeps this list ahead of buildoor's.
-erigon_watchtower_schedule: "0 0 18 * * *"
-erigon_watchtower_extra_args:
-  - "--schedule={{ erigon_watchtower_schedule }}"
-  - --stop-timeout=300s
-  - --include-restarting
-erigon_watchtower_containers_list: "{{ ['execution', 'beacon', 'validator', 'xatu-sentry'] if ethereum_node_cl == 'lighthouse' else ['execution'] }}"
-erigon_watchtower_env:
-  TZ: Europe/Paris
-ethereum_node_docker_watchtower_enabled: true
-ethereum_node_docker_watchtower_containers_list: "{{ erigon_watchtower_containers_list }}"
-docker_watchtower_container_additional_args: "{{ erigon_watchtower_extra_args }}"
-docker_watchtower_container_env: "{{ erigon_watchtower_env }}"
-
 prometheus_config: |
   global:
     scrape_interval: 30s
