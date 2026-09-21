@@ -30,16 +30,9 @@ erigon_container_command_extra_args:
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
-# role: ethpandaops.general.docker_watchtower (via ethereum_node addon)
-# Erigon auto-update: check for new images once per day at 18:00 CET/CEST (dev
-# team's preferred slot — updates run overnight CET, issues picked up in the
-# morning). The schedule is expressed in container-local time with
-# TZ=Europe/Paris so it tracks CET vs CEST automatically (17:00/16:00 UTC).
-# Only the erigon `execution` container is watched — fleet-wide watchtower
-# stays disabled in this devnet (devnet-9 lost finality to a fleet-wide
-# lighthouse restart via watchtower), so CL containers are never restarted on
-# erigon hosts. Needs the erigon group priority override in inventory.ini so
-# this list beats buildoor's.
+# Erigon watchtower: daily image check at 18:00 CET/CEST (TZ tracks DST).
+# Watches only the erigon execution container — fleet-wide CL watching stays
+# disabled in this devnet (devnet-9 finality incident).
 erigon_watchtower_schedule: "0 0 18 * * *"
 erigon_watchtower_extra_args:
   - "--schedule={{ erigon_watchtower_schedule }}"
