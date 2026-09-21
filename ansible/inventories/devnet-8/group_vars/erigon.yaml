@@ -37,15 +37,17 @@ erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.j
 # TZ=Europe/Paris so it tracks CET vs CEST automatically (17:00/16:00 UTC).
 # Only the erigon `execution` container is watched — watchtower must never
 # restart CL containers (devnet-9 lost finality to a fleet-wide lighthouse
-# restart via watchtower). Needs the erigon group priority override in
+# restart via watchtower). Exception: lighthouse-CL pairs keep their pre-PR
+# coverage (beacon/validator/xatu-sentry, from the 421d22f lighthouse watchtower
+# re-enable) on the same daily schedule — one watchtower per host, so the list
+# is conditional on the host's CL. Needs the erigon group priority override in
 # inventory.ini so this list also beats buildoor's.
 erigon_watchtower_schedule: "0 0 18 * * *"
 erigon_watchtower_extra_args:
   - "--schedule={{ erigon_watchtower_schedule }}"
   - --stop-timeout=300s
   - --include-restarting
-erigon_watchtower_containers_list:
-  - execution
+erigon_watchtower_containers_list: "{{ ['execution', 'beacon', 'validator', 'xatu-sentry'] if ethereum_node_cl == 'lighthouse' else ['execution'] }}"
 erigon_watchtower_env:
   TZ: Europe/Paris
 ethereum_node_docker_watchtower_enabled: true
