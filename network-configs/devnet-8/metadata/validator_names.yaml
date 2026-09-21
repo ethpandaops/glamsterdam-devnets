@@ -1,2 +1,7 @@
 - 0-83999: { src: "main-mnemonic", from: 0, to: 83999 }
+- 84019-84118: { src: "nflaig" }
+- 84268-84268: { src: "nflaig" }
 - 84662-85161: { src: "potuz" }
+- 85262-85266: { src: "nflaig" }
+- 85293-85302: { src: "nflaig" }
+- 85304-85337: { src: "nflaig" }
