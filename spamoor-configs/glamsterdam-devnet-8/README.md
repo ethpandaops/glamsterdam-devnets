@@ -38,8 +38,10 @@ The UI's import accepts pasted YAML. The API accepts **either YAML or a URL**
 190 KB:
 
 ```
-https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/<branch>/spamoor-configs/glamsterdam-devnet-8/jumpdest-analysis-A-direct-port.yaml
+https://raw.githubusercontent.com/ethpandaops/glamsterdam-devnets/qu0b/spamoor-jumpdest-configs/spamoor-configs/glamsterdam-devnet-8/jumpdest-analysis-A-direct-port.yaml
 ```
+
+(verified reachable: `200`. Swap the branch for `master` once this lands there.)
 
 `jumpdest-analysis-A-direct-port.yaml` is large because the 64 KiB random source travels
 as `init_code` (131 KB) and the pre-fund target list as call data (58 KB). B and C are
