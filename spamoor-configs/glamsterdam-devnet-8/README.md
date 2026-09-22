@@ -29,7 +29,7 @@ behind BUG-897, is `0x5b` — the friendliest possible input to that loop.
 |---|---|---|---|
 | `...-A-direct-port.yaml` | CREATE loop, STOP tail, the account **is** created — faithful to the PR | **1.28 GB** | self-contained (3 prep spammers) |
 | `...-B-revert-tail.yaml` | same, but the initcode tail REVERTs, so the account-creation charge is refilled | **1.28 GB** | needs A's prep 1/3 + 2/3 |
-| `...-C-random-ring.yaml` | the spamoor-108 ring over a corpus of 64 KiB random-alphabet contracts | **4.14 GB** | needs A's prep 1/3, then a ~27.3 h corpus build |
+| `...-C-random-ring.yaml` | the spamoor-108 ring over a corpus of 64 KiB random-alphabet contracts | **4.14 GB** | needs A's prep 1/3, then a ~55 h corpus build |
 
 Measured on geth's Amsterdam EVM (`evm t8n`, 1.17.6-unstable), not modelled:
 
@@ -123,7 +123,7 @@ gates.
    block short.
 5. **C** — start the corpus deployer first; it is the long pole. One max-size deploy is
    100,453,800 state gas, so two cannot share a 200M block and exactly **one lands per
-   block**: ~27.3 h for 16,384 contracts. Gate the attack on
+   block**: ~55 h for 16,384 contracts. Gate the attack on
    `monitor_corpus.py --verify 16384`, which exits non-zero until every slot exists.
 
 **For maximum load, run the corpus and an attack at the same time.** EIP-8037 meters
@@ -156,7 +156,7 @@ are fixed before anything is deployed — which is what makes step 3 possible at
 - **Starting the corpus before the blob is deployed builds it from zeros.** The corpus
   initcode EXTCODECOPYs the blob and RETURNs 65,536 bytes unconditionally, so with no blob
   every contract is 64 KiB of `0x00` — unique code hashes, correct size, full 100.45M state
-  gas each, ~27 h spent, and nothing to analyse. Indistinguishable from success without
+  gas each, ~55 h spent, and nothing to analyse. Indistinguishable from success without
   reading the deployed code. `start_corpus.sh` gates on this.
 - **Restarting the corpus spammer starts it over.** `factorydeploytx` derives each salt as
   `start_salt + <transaction index within this run>`, so a restarted spammer re-deploys

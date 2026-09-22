@@ -5,7 +5,7 @@ ordered procedure, with a cheap gate after each step so a mistake costs one tran
 rather than a day of blocks.
 
 Total wall time to a running attack: **~3 transactions, a few minutes.** Scenario C's
-attack is ~27 h behind its corpus.
+attack is ~55 h behind its corpus.
 
 ## 0. Before anything
 
@@ -68,6 +68,14 @@ One transaction. Re-run `preflight.py`; it must report the driver deployed at
 One transaction, ~176.5M gas, funds 900 targets with 1 wei each. Re-run `preflight.py`;
 it probes the first 8 targets and they must all be funded.
 
+> **This does not coexist well with a running corpus.** The transaction's `tx.gas` is 190M
+> and block validity requires `tx.gas <= state_gas_available`, so it only fits in a block
+> where little state gas has been used — while a corpus deploy consumes ~100.45M of it
+> every block. Observed on the live run: submitted at 21:43 and still unlanded minutes
+> later. Either run the pre-fund before starting the corpus, or split it into 3 smaller
+> transactions (~300 targets each, ~65M gas) so it can share a block. **Attack B needs
+> none of this** and is the one to reach for while the corpus is building.
+
 **Attack B does not need this step** — start B straight after step 3 if you want to be
 running sooner.
 
@@ -87,14 +95,14 @@ not take, and the block is doing ~1/9th of the intended work.
 
 ## 6. Scenario C
 
-**Start this as early as you can** — it is a ~27.3 h build, so every hour it is not running
+**Start this as early as you can** — it is a ~55 h build, so every hour it is not running
 is an hour added to when scenario C can attack. It does not need steps 3-5; it needs only
 the blob from step 2.
 
 > **The corpus must not start before the blob exists.** The corpus initcode EXTCODECOPYs
 > the blob and RETURNs 65,536 bytes unconditionally, so if the blob is not deployed yet
 > every contract is built from **zeros** — still unique, still 100.45M state gas each,
-> still ~27 h, and useless, because there are no random bytes to analyse. It looks exactly
+> still ~55 h, and useless, because there are no random bytes to analyse. It looks exactly
 > like success. `start_corpus.sh` refuses to proceed until the blob is confirmed on-chain,
 > and deploys it first if it is missing, which makes it safe to run as the very first
 > command:
@@ -112,8 +120,10 @@ Then:
 python3 ../../../devnets/glamsterdam-devnet-8/work/jumpdest-3631/monitor_corpus.py --interval 300
 ```
 
-One contract lands per block — two max-size deploys cannot share a 200M block — so 16,384
-contracts is **~27.3 h**. Before starting attack C:
+One contract lands per block — two max-size deploys cannot share a 200M block — and
+**devnet-8 runs 12-second slots** (`SECONDS_PER_SLOT=12`), so 16,384 contracts is
+**~54.6 h at best; ~65 h at the rate observed on the first run (~250/h)**. Milestones from
+a standing start: n=4096 after ~16 h, n=8192 after ~33 h. Before starting attack C:
 
 ```bash
 monitor_corpus.py --verify 16384     # exits non-zero until every slot exists
