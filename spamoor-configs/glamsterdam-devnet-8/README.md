@@ -133,8 +133,17 @@ every one, including the 900 pre-fund targets.
   transaction ends in out-of-gas at exactly its limit instead of reverting below it.
 - **Watch the balance reservation, not just the fee.** A pending transaction reserves
   `gas_limit × base_fee`: 2.4 ETH for a 120M-gas deploy, 3.8 ETH for the 190M-gas pre-fund
-  at the configured 20 gwei. The refill amounts here account for that. Live base fee is
-  8 wei, so 20 gwei leaves ample headroom for the rise these spammers cause.
+  at the configured 20 gwei. The refill amounts here account for that.
+- **The 20 gwei cap is about 18 minutes of runway.** A full block raises the base fee
+  12.5%, so it compounds: 5.88 full blocks per doubling and 31.2 doublings from devnet-8's
+  idle 8 wei to 20 gwei — **184 full blocks ≈ 18.4 minutes** of a sustained block-filling
+  attack before transactions stop being includable and every spammer stalls. It is
+  self-limiting rather than broken (the fee decays once blocks empty), but a long run
+  needs either a higher `base_fee`, with proportionally higher refills since the
+  reservation is `gas_limit × base_fee`, or a throughput that stays near the gas target.
+  For the corpus specifically, `throughput: 2` is a full block every block and hits the
+  cap in ~18 minutes, while `throughput: 1` (~100.5M against a 100M target) holds the base
+  fee roughly stationary and takes ~27 h instead of ~13.7 h. Pick deliberately.
 
 ## Provenance
 
