@@ -28,6 +28,19 @@ You also need:
   await window.ethpandaops.authenticatoor.getToken()
   ```
   or copy the `Authorization` header off any `/api/` request in the Network tab.
+
+  For anything unattended, 30 minutes is not enough — you can start a run with it but not
+  stop one. Two durable options:
+  - **Cloudflare Access service token** (the right one). `GET /auth/login` redirects to
+    `ethpandaops.cloudflareaccess.com`, and the Access meta JWT in that redirect reports
+    `"service_token_status": false`, i.e. the app accepts service tokens. A Zero Trust
+    admin issues a Client ID + Secret and adds it to the policy for
+    `auth.glamsterdam-devnet-8.ethpandaops.io`; then `CF-Access-Client-Id` /
+    `CF-Access-Client-Secret` work headlessly and do not expire.
+  - **The `CF_Authorization` cookie** for that auth host, replayed against
+    `/auth/login?return_to=...`, which 302s back with `#auth_token=<jwt>`. That re-mints a
+    30-minute JWT on demand until the Access session expires (24 h by default). It is a
+    full credential for everything behind that Access app — treat it accordingly.
 - **Root wallet funding.** The refills these configs request total roughly:
   blob 10 + driver 5 + pre-fund 20 + attack wallets 24×5 = 120, and for C another
   6×20 = 120. Call it **~275 ETH** of headroom if you run everything, ~155 ETH for A and B
@@ -139,6 +152,22 @@ and analyse nothing.
 and a block is full when the bottleneck dimension hits the limit, so the state-bound corpus
 and the execution-bound attacks do not compete — verified: one block carried a corpus
 deploy (100.5M state) plus 11 attack transactions (184M execution, 9,020 analyses).
+
+## Watching it unattended
+
+`work/jumpdest-3631/watch_health.py` samples the execution layer (block progression,
+reorgs, gas, base fee), the consensus layer (head slot, justification, finalisation) and
+the corpus frontier every two minutes into `logs/health.log`. With `--auto-stop <id>` it
+pauses that spammer after **two consecutive** samples carrying a serious condition —
+a stall, a reorg, or a finality lag over 4 epochs — minting a fresh JWT itself. Two
+samples rather than one so a transient does not trip it; a false positive is cheap
+because the corpus is resumable, while a false negative leaves a degraded network loaded.
+
+```bash
+python3 watch_health.py --interval 120 --auto-stop 114
+```
+
+It logs the frontier at pause time, because resuming needs `start_salt` set to it.
 
 ## What to expect on the network
 
