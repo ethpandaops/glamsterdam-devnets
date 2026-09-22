@@ -1,0 +1,109 @@
+# Name: Random-alphabet JUMPDEST ring (stop_jumpdest_push1)
+# Description: The spamoor-108 ring over a corpus of 64 KiB contracts filled with PR-3631 random bytes instead of 0x5b - cache-capacity misses stacked on predictor-hostile analysis
+#
+# BUG-897 cache-capacity misses stacked on predictor-hostile analysis.
+# 20.7 bytes/gas, ~4.1 GB per 200M block.
+# Tags: performance, max-gas, state-read, eip7954, eip8037
+# Min_Version: v1.1.5
+#
+# The corpus is the long pole: 100.5M state gas per contract, and EIP-8037 makes
+# tx.gas <= state_gas_available, so only ~2 land per 200M block (~13.7 h for 16,384).
+# Start the corpus spammer first and move the attack to a bigger ring driver as it grows.
+# Needs prep 1/3 from A-direct-port.yaml (same blob).
+- scenario: factorydeploytx
+  name: "3631-C corpus: 16384 x 64 KiB random-alphabet contracts (stop_jumpdest_push1)"
+  description: >-
+    Each contract EXTCODECOPYs the shared blob and stamps its own ADDRESS at bytes 32..63,
+    so all 16384 have distinct code hashes and no client can dedupe them.
+    Verified: 130/130 unique hashes on geth Amsterdam.
+  config:
+    seed: jd3631-corpus-stop_jumpdest_push1
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 6
+    max_pending: 6
+    refill_amount: 20000000000000000000
+    refill_balance: 10000000000000000000
+    refill_interval: 600
+    total_count: 16384
+    throughput: 2                 # ~2 x 100.5M state gas is one full 200M block
+    gas_limit: 120000000
+    well_known_factory: true
+    start_salt: 0
+    init_code: "6201000060006000733b47073bd0313c8e775e215cb80d85b7c6990e613c7f5b5b5b5b5b5b5b5b5b5b5b5b00000000000000000000000000000000000000003017602052620100006000f3"
+- scenario: factorydeploytx
+  name: "3631-C ring driver n=4096"
+  description: "Byte-exact live spamoor-108 driver, ring_count=4096. Deploys to 0x88042870b7c888fee84a73b220b4d3b733389851."
+  config:
+    seed: jd3631-ringdrv-4096
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 1
+    max_pending: 1
+    refill_amount: 5000000000000000000
+    refill_balance: 1000000000000000000
+    refill_interval: 600
+    total_count: 1
+    throughput: 1
+    gas_limit: 4000000
+    well_known_factory: true
+    start_salt: 0
+    init_code: "610087600e6000396100876000f373e883a4ac7904c5b91faaec2ceccb236d985fc32960005260ff600b536000546020527f2180a638f5d00e94907cf2273ab7774960f07bf7093f053e0a0eb8eff7d5a0636040525b600060006000600060006055600b205af1506100006200100060016020516100009003010601602052630000817b5a11630000003658035760205160005500"
+- scenario: factorydeploytx
+  name: "3631-C ring driver n=8192"
+  description: "Byte-exact live spamoor-108 driver, ring_count=8192. Deploys to 0xfedf740ca9ca22a726078bad3508db931bdddc27."
+  config:
+    seed: jd3631-ringdrv-8192
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 1
+    max_pending: 1
+    refill_amount: 5000000000000000000
+    refill_balance: 1000000000000000000
+    refill_interval: 600
+    total_count: 1
+    throughput: 1
+    gas_limit: 4000000
+    well_known_factory: true
+    start_salt: 0
+    init_code: "610087600e6000396100876000f373e883a4ac7904c5b91faaec2ceccb236d985fc32960005260ff600b536000546020527f2180a638f5d00e94907cf2273ab7774960f07bf7093f053e0a0eb8eff7d5a0636040525b600060006000600060006055600b205af1506100006200200060016020516100009003010601602052630000817b5a11630000003658035760205160005500"
+- scenario: factorydeploytx
+  name: "3631-C ring driver n=16384"
+  description: "Byte-exact live spamoor-108 driver, ring_count=16384. Deploys to 0xe8730e19b17d5312cf319f8af8a7f8eab5ba2f65."
+  config:
+    seed: jd3631-ringdrv-16384
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 1
+    max_pending: 1
+    refill_amount: 5000000000000000000
+    refill_balance: 1000000000000000000
+    refill_interval: 600
+    total_count: 1
+    throughput: 1
+    gas_limit: 4000000
+    well_known_factory: true
+    start_salt: 0
+    init_code: "610087600e6000396100876000f373e883a4ac7904c5b91faaec2ceccb236d985fc32960005260ff600b536000546020527f2180a638f5d00e94907cf2273ab7774960f07bf7093f053e0a0eb8eff7d5a0636040525b600060006000600060006055600b205af1506100006200400060016020516100009003010601602052630000817b5a11630000003658035760205160005500"
+- scenario: calltx
+  name: "3631 attack C: random-alphabet JUMPDEST ring (n=16384)"
+  description: >-
+    Zero-calldata full-block txs that walk the ring sequentially, persisting the ring index
+    across transactions so consecutive blocks touch disjoint contracts (the LRU worst case).
+    3,163 gas per 64 KiB cold code load = 20.7 bytes/gas. Point contract_address at the
+    ring driver whose n matches how much of the corpus has actually been deployed.
+  config:
+    seed: jd3631-attack-c-stop_jumpdest_push1
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 20
+    max_pending: 24
+    refill_amount: 5000000000000000000
+    refill_balance: 1000000000000000000
+    refill_interval: 600
+    contract_address: "0xe8730e19b17d5312cf319f8af8a7f8eab5ba2f65"
+    call_data: ""
+    gas_limit: 16777216
+    throughput: 12
+    amount: 0
+    rebroadcast: 120

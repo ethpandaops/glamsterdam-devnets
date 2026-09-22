@@ -1,0 +1,31 @@
+# Name: Randomized jumpdest analysis - REVERT tail (stop_jumpdest_push1)
+# Description: Same analysis volume as the direct port with no pre-funding and no state gas - the child frame reverts, so EELS refills NEW_ACCOUNT
+#
+# Mechanism: amsterdam/vm/instructions/system.py:186-189. Verified on geth Amsterdam.
+# Tags: performance, max-gas, compute, eip7954, eip8037
+# Min_Version: v1.1.5
+#
+# Needs prep 1/3 and 2/3 from A-direct-port.yaml (same blob and driver); it does NOT need
+# the pre-funding step.
+- scenario: calltx
+  name: "3631 attack B: randomized jumpdest analysis, REVERT tail (stop_jumpdest_push1)"
+  description: >-
+    Identical to attack A except the initcode tail is JUMPDEST.. PUSH0 PUSH0 REVERT, so
+    every CREATE fails after the full 128 KiB analysis has already been done. The
+    account-creation charge is refilled on child error, so no state gas is consumed and
+    nothing is written to state. Measured 20,287 gas per 131,072-byte analysis.
+  config:
+    seed: jd3631-attack-b-stop_jumpdest_push1
+    base_fee: 20
+    tip_fee: 2
+    max_wallets: 20
+    max_pending: 24
+    refill_amount: 5000000000000000000
+    refill_balance: 1000000000000000000
+    refill_interval: 600
+    contract_address: "0x100dae30856f1b5b689b1a88c8ddf18fc83bfbcf"
+    call_data: "0x0000000000000000000000003b47073bd0313c8e775e215cb80d85b7c6990e615b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5f5ffd"
+    gas_limit: 16777216
+    throughput: 12
+    amount: 0
+    rebroadcast: 120
