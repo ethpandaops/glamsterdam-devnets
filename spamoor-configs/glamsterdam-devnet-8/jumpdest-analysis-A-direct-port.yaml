@@ -70,7 +70,7 @@
 - scenario: calltx
   name: "3631 attack A: randomized jumpdest analysis, STOP tail (stop_jumpdest_push1)"
   description: >-
-    Each tx CREATEs 128 KiB of non-repeating random initcode ~823 times; the initcode
+    Each tx CREATEs 128 KiB of non-repeating random initcode ~820 times (measured); the initcode
     jumps to its last byte so the whole thing must be analysed, and the counter mixed in at
     offset 32 makes every analysis unique so no client cache can serve it. The child falls
     into an implicit STOP and the account IS created (as in the PR); the driver REVERTs at

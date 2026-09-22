@@ -10,6 +10,11 @@
 # tx.gas <= state_gas_available, so only ~2 land per 200M block (~13.7 h for 16,384).
 # Start the corpus spammer first and move the attack to a bigger ring driver as it grows.
 # Needs prep 1/3 from A-direct-port.yaml (same blob).
+#
+# RESTART HAZARD: factorydeploytx computes each salt as start_salt + <tx index in this run>,
+# so a restarted spammer re-deploys from start_salt and makes no progress at ~100M gas a
+# block. To resume, regenerate with CORPUS_START=<frontier from monitor_corpus.py> and
+# re-import, or edit start_salt/total_count on the existing spammer before restarting it.
 - scenario: factorydeploytx
   name: "3631-C corpus: 16384 x 64 KiB random-alphabet contracts (stop_jumpdest_push1)"
   description: >-
@@ -86,7 +91,7 @@
     start_salt: 0
     init_code: "610087600e6000396100876000f373e883a4ac7904c5b91faaec2ceccb236d985fc32960005260ff600b536000546020527f2180a638f5d00e94907cf2273ab7774960f07bf7093f053e0a0eb8eff7d5a0636040525b600060006000600060006055600b205af1506100006200400060016020516100009003010601602052630000817b5a11630000003658035760205160005500"
 - scenario: calltx
-  name: "3631 attack C: random-alphabet JUMPDEST ring (n=16384)"
+  name: "3631 attack C: random-alphabet JUMPDEST ring (n=4096)"
   description: >-
     Zero-calldata full-block txs that walk the ring sequentially, persisting the ring index
     across transactions so consecutive blocks touch disjoint contracts (the LRU worst case).
@@ -101,7 +106,10 @@
     refill_amount: 5000000000000000000
     refill_balance: 1000000000000000000
     refill_interval: 600
-    contract_address: "0xe8730e19b17d5312cf319f8af8a7f8eab5ba2f65"
+    # Defaults to the SMALLEST ring on purpose: a ring slot with no code costs 3,000 gas
+    # and analyses nothing, so an oversized n silently degrades the attack. Move this to
+    # the n=8192 / n=16384 driver as monitor_corpus.py reports the corpus passing them.
+    contract_address: "0x88042870b7c888fee84a73b220b4d3b733389851"
     call_data: ""
     gas_limit: 16777216
     throughput: 12
