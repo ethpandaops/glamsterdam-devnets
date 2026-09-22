@@ -29,7 +29,7 @@ behind BUG-897, is `0x5b` — the friendliest possible input to that loop.
 |---|---|---|---|
 | `...-A-direct-port.yaml` | CREATE loop, STOP tail, the account **is** created — faithful to the PR | **1.28 GB** | self-contained (3 prep spammers) |
 | `...-B-revert-tail.yaml` | same, but the initcode tail REVERTs, so the account-creation charge is refilled | **1.28 GB** | needs A's prep 1/3 + 2/3 |
-| `...-C-random-ring.yaml` | the spamoor-108 ring over a corpus of 64 KiB random-alphabet contracts | **4.14 GB** | needs A's prep 1/3, then a ~13.7 h corpus build |
+| `...-C-random-ring.yaml` | the spamoor-108 ring over a corpus of 64 KiB random-alphabet contracts | **4.14 GB** | needs A's prep 1/3, then a ~27.3 h corpus build |
 
 Measured on geth's Amsterdam EVM (`evm t8n`, 1.17.6-unstable), not modelled:
 
@@ -108,8 +108,21 @@ the pre-fund list as call data (58 KB). B and C reference the same blob by its a
    source and the tail word are call-data parameters, so this one driver serves every
    alphabet and both A and B.
 3. **A prep 3/3** — pre-funds 900 CREATE targets (one tx, ~176.5M gas measured). A only.
-4. **Attack A and/or B** — `throughput: 12` fills a 200M block.
-5. **C** — start the corpus deployer first; it is the long pole at ~2 contracts per block.
+4. **Attack A and/or B** — `throughput: 16` against the ~11.96 transactions a 200M block
+   takes, deliberately over-provisioned so a slow wallet or a missed slot never leaves a
+   block short.
+5. **C** — start the corpus deployer first; it is the long pole. One max-size deploy is
+   100,453,800 state gas, so two cannot share a 200M block and exactly **one lands per
+   block**: ~27.3 h for 16,384 contracts. Gate the attack on
+   `monitor_corpus.py --verify 16384`, which exits non-zero until every slot exists.
+
+**For maximum load, run the corpus and an attack at the same time.** EIP-8037 meters
+execution and state separately and a block is full when the *bottleneck* dimension hits
+the limit, so the state-bound corpus and the execution-bound attacks do not compete.
+Verified on geth Amsterdam: one block carried a corpus deploy (100.5M state gas) **and**
+11 attack transactions (184M execution gas, 9,020 analyses, 1.18 GB) — 284.5M of total
+work, with `block gasUsed` reporting only the 184M bottleneck. Separate them only when a
+regression has to be attributed to one of them.
 
 All addresses are CREATE2 off spamoor's well-known factory
 (`0xe883a4ac7904c5b91faaec2ceccb236d985fc329`, verified live), so they are fixed before
@@ -124,10 +137,11 @@ every one, including the 900 pre-fund targets.
   set `start_salt` to the current frontier and reduce `total_count` to match, before
   restarting.
 - **Do not point attack C at a ring larger than the corpus.** A ring slot with no code
-  costs 3,000 gas and analyses nothing. The config ships pointing at the **smallest** ring
-  (n=4096) on purpose; move it to n=8192 / n=16384 as the corpus grows, and confirm the
-  prefix is gap-free first — deployments run concurrently across wallets, so the deployed
-  set can have holes that a sampled check will miss.
+  costs 3,000 gas and analyses nothing. The config ships pointing at the **largest** ring
+  (n=16384) — 1.07 GB, the working set that defeats every client's code cache, and the
+  reason scenario C exists. That is only correct once the corpus is complete, so gate the
+  start on `monitor_corpus.py --verify 16384`. The n=4096 and n=8192 drivers are deployed
+  alongside if you want to attack earlier at a smaller working set.
 - **Do not skip prep 3/3 for attack A.** It still burns a full block, but manages ~1,089
   analyses per block instead of ~9,900 and leaves junk accounts behind. Symptom: the
   transaction ends in out-of-gas at exactly its limit instead of reverting below it.
@@ -141,9 +155,9 @@ every one, including the 900 pre-fund targets.
   self-limiting rather than broken (the fee decays once blocks empty), but a long run
   needs either a higher `base_fee`, with proportionally higher refills since the
   reservation is `gas_limit × base_fee`, or a throughput that stays near the gas target.
-  For the corpus specifically, `throughput: 2` is a full block every block and hits the
-  cap in ~18 minutes, while `throughput: 1` (~100.5M against a 100M target) holds the base
-  fee roughly stationary and takes ~27 h instead of ~13.7 h. Pick deliberately.
+  The corpus alone barely moves it — one deploy per block is ~100.5M of state gas against
+  a 100M target, almost exactly equilibrium. The attacks are what push it: ~184M against a
+  100M target is +10.5% per block, about 20 minutes from 8 wei to the cap.
 
 ## Provenance
 

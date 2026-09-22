@@ -80,14 +80,17 @@
     seed: jd3631-attack-a-stop_jumpdest_push1
     base_fee: 20
     tip_fee: 2
-    max_wallets: 20
-    max_pending: 24
+    max_wallets: 24
+    max_pending: 48
     refill_amount: 5000000000000000000
     refill_balance: 1000000000000000000
     refill_interval: 600
     contract_address: "0x100dae30856f1b5b689b1a88c8ddf18fc83bfbcf"
     call_data: "0x0000000000000000000000003b47073bd0313c8e775e215cb80d85b7c6990e615b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b"
     gas_limit: 16777216           # EIP-7825 execution cap
-    throughput: 12                # 200M / 16,777,216 = 11.9 txs per block
+    # A block takes 200M / 16.73M = 11.96 of these, so 12/slot exactly matches it and any
+    # hiccup leaves the block short. Over-provision so the builder always has a queue:
+    # the surplus simply waits, and blocks stay saturated.
+    throughput: 16
     amount: 0
     rebroadcast: 120

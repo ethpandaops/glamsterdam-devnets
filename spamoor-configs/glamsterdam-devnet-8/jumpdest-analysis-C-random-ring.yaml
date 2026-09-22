@@ -6,8 +6,12 @@
 # Tags: performance, max-gas, state-read, eip7954, eip8037
 # Min_Version: v1.1.5
 #
-# The corpus is the long pole: 100.5M state gas per contract, and EIP-8037 makes
-# tx.gas <= state_gas_available, so only ~2 land per 200M block (~13.7 h for 16,384).
+# The corpus is the long pole: 100.5M state gas per contract. Two cannot share a 200M
+# block (200.9M of state gas), and EIP-8037 additionally requires tx.gas <=
+# state_gas_available, so exactly ONE lands per block: ~27.3 h for 16,384 at 6s slots.
+# Verified on geth Amsterdam: a block carried 1 deploy (100.5M state) alongside 11 attack
+# transactions (184M execution) -- the dimensions are independent, so running the corpus
+# and an attack together costs the attack nothing.
 # Start the corpus spammer first and move the attack to a bigger ring driver as it grows.
 # Needs prep 1/3 from A-direct-port.yaml (same blob).
 #
@@ -26,12 +30,16 @@
     base_fee: 20
     tip_fee: 2
     max_wallets: 6
-    max_pending: 6
+    max_pending: 4
     refill_amount: 20000000000000000000
     refill_balance: 10000000000000000000
     refill_interval: 600
     total_count: 16384
-    throughput: 2                 # ~2 x 100.5M state gas is one full 200M block
+    # One max-size deploy is 100,453,800 state gas, so TWO need 200.9M and cannot share a
+    # 200M block -- and tx.gas must additionally fit the remaining state budget. The real
+    # rate is 1 contract per block (~27.3 h for 16,384). Submitting 2/slot just keeps a
+    # deploy queued so no block goes without one; max_pending caps the backlog.
+    throughput: 2
     gas_limit: 120000000
     well_known_factory: true
     start_salt: 0
@@ -91,7 +99,7 @@
     start_salt: 0
     init_code: "610087600e6000396100876000f373e883a4ac7904c5b91faaec2ceccb236d985fc32960005260ff600b536000546020527f2180a638f5d00e94907cf2273ab7774960f07bf7093f053e0a0eb8eff7d5a0636040525b600060006000600060006055600b205af1506100006200400060016020516100009003010601602052630000817b5a11630000003658035760205160005500"
 - scenario: calltx
-  name: "3631 attack C: random-alphabet JUMPDEST ring (n=4096)"
+  name: "3631 attack C: random-alphabet JUMPDEST ring (n=16384)"
   description: >-
     Zero-calldata full-block txs that walk the ring sequentially, persisting the ring index
     across transactions so consecutive blocks touch disjoint contracts (the LRU worst case).
@@ -101,17 +109,21 @@
     seed: jd3631-attack-c-stop_jumpdest_push1
     base_fee: 20
     tip_fee: 2
-    max_wallets: 20
-    max_pending: 24
+    max_wallets: 24
+    max_pending: 48
     refill_amount: 5000000000000000000
     refill_balance: 1000000000000000000
     refill_interval: 600
-    # Defaults to the SMALLEST ring on purpose: a ring slot with no code costs 3,000 gas
-    # and analyses nothing, so an oversized n silently degrades the attack. Move this to
-    # the n=8192 / n=16384 driver as monitor_corpus.py reports the corpus passing them.
-    contract_address: "0x88042870b7c888fee84a73b220b4d3b733389851"
+    # Points at the LARGEST ring: 16,384 x 64 KiB = 1.07 GB is the working set that
+    # defeats every client's code cache (BUG-897), and anything smaller is a weaker
+    # attack. It is only correct once the corpus is complete, and a ring slot with no
+    # code costs 3,000 gas while analysing nothing, so gate the start on
+    #     python3 monitor_corpus.py --verify 16384
+    # which exits non-zero until every slot exists. The n=4096 and n=8192 drivers are
+    # deployed alongside if you want to attack earlier at a smaller working set.
+    contract_address: "0xe8730e19b17d5312cf319f8af8a7f8eab5ba2f65"
     call_data: ""
     gas_limit: 16777216
-    throughput: 12
+    throughput: 16                # over-provisioned; see attack A
     amount: 0
     rebroadcast: 120

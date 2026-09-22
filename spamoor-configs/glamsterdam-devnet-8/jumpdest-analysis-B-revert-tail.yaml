@@ -18,8 +18,8 @@
     seed: jd3631-attack-b-stop_jumpdest_push1
     base_fee: 20
     tip_fee: 2
-    max_wallets: 20
-    max_pending: 24
+    max_wallets: 24
+    max_pending: 48
     refill_amount: 5000000000000000000
     refill_balance: 1000000000000000000
     refill_interval: 600
@@ -34,6 +34,6 @@
     # Measured: 16,728,927 used via a clean REVERT (~820 CREATEs) vs an OOG at 16,777,216
     # (~822) -- 0.29% less gas for a receipt that shows whether the loop actually ran.
     gas_limit: 17000000
-    throughput: 12
+    throughput: 16                # over-provisioned; see attack A
     amount: 0
     rebroadcast: 120
