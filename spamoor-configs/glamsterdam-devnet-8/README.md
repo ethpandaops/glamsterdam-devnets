@@ -74,9 +74,15 @@ The configs carry ~190 KB of hex, and every address in them is derived from that
 Two scripts (PyYAML only, no web3/eth-utils) let you check rather than trust:
 
 ```bash
+python3 preflight.py         # live-chain gate: factory, prep progress, base fee, next step
 python3 verify_config.py     # re-derives every address from the bytes; 911 checks
 python3 disassemble.py       # the drivers, disassembled; --blob summarises the 64 KiB source
 ```
+
+`preflight.py` is the one to run before touching anything, and again between steps — it
+confirms the factory these addresses were built against actually exists on the chain you
+are pointed at, reports how far preparation has got, and names the next step. It imports
+`verify_config.py`, so a config inconsistency aborts it too.
 
 `verify_config.py` re-derives the CREATE2 addresses from each `init_code`, confirms the
 blob address embedded in the attacks' `call_data`, confirms the pre-fund list really is
@@ -101,6 +107,10 @@ the pre-fund list as call data (58 KB). B and C reference the same blob by its a
 
 ## Run order
 
+**Going live: follow [`GO-LIVE.md`](./GO-LIVE.md)** — the ordered procedure with a
+verification gate after each step. The summary below is the same sequence without the
+gates.
+
 1. **A prep 1/3** — deploys the 64 KiB random-alphabet source blob to
    `0x3b47073bd0313c8e775e215cb80d85b7c6990e61` (one tx, 120M gas). Shared by A, B and C.
 2. **A prep 2/3** — deploys the CREATE driver to
@@ -124,10 +134,22 @@ Verified on geth Amsterdam: one block carried a corpus deploy (100.5M state gas)
 work, with `block gasUsed` reporting only the 184M bottleneck. Separate them only when a
 regression has to be attributed to one of them.
 
-All addresses are CREATE2 off spamoor's well-known factory
-(`0xe883a4ac7904c5b91faaec2ceccb236d985fc329`, verified live), so they are fixed before
-anything is deployed — which is what makes step 3 possible at all. `addresses.json` lists
-every one, including the 900 pre-fund targets.
+All addresses are CREATE2 off spamoor's "well-known" factory
+(`0xe883a4ac7904c5b91faaec2ceccb236d985fc329`, verified to have code on devnet-8), so they
+are fixed before anything is deployed — which is what makes step 3 possible at all.
+`addresses.json` lists every one, including the 900 pre-fund targets.
+
+> **These addresses are specific to this spamoor instance, not to the network.** The
+> factory's deployer is a "very well known" wallet derived as
+> `sha256(root private key || "create2-factory-deployer")`
+> (`spamoor/walletpool.go:575-599`), so it is stable across scenario runs on the same
+> spamoor deployment and different everywhere else. A different instance, or a rotated
+> root key, puts the factory somewhere else: the blob then deploys to an address the
+> driver does not reference, the driver EXTCODECOPYs an empty account, the initcode
+> becomes 128 KiB of zeros, the jump to byte 131,041 lands on a non-JUMPDEST, and every
+> child frame halts exceptionally — burning whole blocks while analysing nothing.
+> **Always run `preflight.py` first**; it fails loudly when the factory is not the
+> expected one.
 
 ## Things that silently waste blocks
 
@@ -160,6 +182,11 @@ every one, including the 900 pre-fund targets.
   100M target is +10.5% per block, about 20 minutes from 8 wei to the cap.
 
 ## Provenance
+
+**Not portable as-is.** Because the factory is derived from the spamoor instance's root
+key, these configs are not reusable on another network or another spamoor deployment
+without regenerating every address. Making them portable needs a scenario change (deriving
+the source address at runtime, e.g. via `contract_addr_path`), not a config change.
 
 Generated and verified by the toolkit in the devnet-8 knowledge base (not in this repo):
 generator, the three `evm t8n` verification suites, a corpus monitor with an exact
