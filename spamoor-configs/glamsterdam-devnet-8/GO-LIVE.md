@@ -68,13 +68,15 @@ One transaction. Re-run `preflight.py`; it must report the driver deployed at
 One transaction, ~176.5M gas, funds 900 targets with 1 wei each. Re-run `preflight.py`;
 it probes the first 8 targets and they must all be funded.
 
-> **This does not coexist well with a running corpus.** The transaction's `tx.gas` is 190M
-> and block validity requires `tx.gas <= state_gas_available`, so it only fits in a block
-> where little state gas has been used — while a corpus deploy consumes ~100.45M of it
-> every block. Observed on the live run: submitted at 21:43 and still unlanded minutes
-> later. Either run the pre-fund before starting the corpus, or split it into 3 smaller
-> transactions (~300 targets each, ~65M gas) so it can share a block. **Attack B needs
-> none of this** and is the one to reach for while the corpus is building.
+> **It competes with the corpus for the state dimension, but it does land.** The
+> transaction's `tx.gas` is 190M and block validity requires
+> `tx.gas <= state_gas_available`, so it needs a block where little state gas has been
+> used — while a corpus deploy consumes ~100.45M of it every block. In practice the
+> builder ordered it first: on the live run it was submitted at block 253,248 with the
+> corpus running and landed within about five blocks, funding all 900 targets (the funder
+> contract's balance ends at exactly 1 gwei − 900 wei). Expect a short wait rather than a
+> failure. If it ever does stick, split it into ~3 transactions of 300 targets (~65M gas
+> each) so it can share a block. **Attack B needs none of this.**
 
 **Attack B does not need this step** — start B straight after step 3 if you want to be
 running sooner.
