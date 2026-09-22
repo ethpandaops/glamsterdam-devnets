@@ -153,6 +153,11 @@ are fixed before anything is deployed — which is what makes step 3 possible at
 
 ## Things that silently waste blocks
 
+- **Starting the corpus before the blob is deployed builds it from zeros.** The corpus
+  initcode EXTCODECOPYs the blob and RETURNs 65,536 bytes unconditionally, so with no blob
+  every contract is 64 KiB of `0x00` — unique code hashes, correct size, full 100.45M state
+  gas each, ~27 h spent, and nothing to analyse. Indistinguishable from success without
+  reading the deployed code. `start_corpus.sh` gates on this.
 - **Restarting the corpus spammer starts it over.** `factorydeploytx` derives each salt as
   `start_salt + <transaction index within this run>`, so a restarted spammer re-deploys
   contracts that already exist — full blocks at ~100M gas each, zero progress. To resume,

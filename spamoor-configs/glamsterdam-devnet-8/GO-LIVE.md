@@ -87,8 +87,26 @@ not take, and the block is doing ~1/9th of the intended work.
 
 ## 6. Scenario C
 
-Start the corpus deployer and the three ring drivers (`start_corpus.sh` does exactly this
-and deliberately leaves the attack alone). Then:
+**Start this as early as you can** — it is a ~27.3 h build, so every hour it is not running
+is an hour added to when scenario C can attack. It does not need steps 3-5; it needs only
+the blob from step 2.
+
+> **The corpus must not start before the blob exists.** The corpus initcode EXTCODECOPYs
+> the blob and RETURNs 65,536 bytes unconditionally, so if the blob is not deployed yet
+> every contract is built from **zeros** — still unique, still 100.45M state gas each,
+> still ~27 h, and useless, because there are no random bytes to analyse. It looks exactly
+> like success. `start_corpus.sh` refuses to proceed until the blob is confirmed on-chain,
+> and deploys it first if it is missing, which makes it safe to run as the very first
+> command:
+>
+> ```bash
+> SPAMOOR_TOKEN=ey... ./start_corpus.sh
+> ```
+>
+> It imports A (for prep 1/3 only), starts the blob deploy, waits for it to land, then
+> imports C and starts the corpus and the three ring drivers — never the attack.
+
+Then:
 
 ```bash
 python3 ../../../devnets/glamsterdam-devnet-8/work/jumpdest-3631/monitor_corpus.py --interval 300
