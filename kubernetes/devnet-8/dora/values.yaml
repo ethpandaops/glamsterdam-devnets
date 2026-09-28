@@ -50,8 +50,6 @@ dora:
   executionIndexerDetailsEnabled: true
   executionIndexerTracesEnabled: False
   executionIndexerDetailsMaxSize: "100GB"
-  tracoorUrl: "https://tracoor.glamsterdam-devnet-8.ethpandaops.io"
-  tracoorNetwork: "glamsterdam-devnet-8"
 
   
   extraEnv:
