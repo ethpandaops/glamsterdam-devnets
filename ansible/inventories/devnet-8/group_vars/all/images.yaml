@@ -4,14 +4,14 @@ default_ethereum_client_images:
   lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
   lodestar: chainsafe/lodestar:v1.49.0
   nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
-  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
-  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
-  teku: registry-1.docker.io/ethpandaops/teku:master
+  prysm: prysmaticlabs/prysm-beacon-chain:v7.2.0
+  prysm_validator: prysmaticlabs/prysm-validator:v7.2.0
+  teku: consensys/teku:26.9.1
   grandine: registry-1.docker.io/ethpandaops/grandine:develop
   ### Execution layer clients
   besu: hyperledger/besu:26.9.0
   geth: ethereum/client-go:v1.17.6
-  erigon: registry-1.docker.io/ethpandaops/erigon:main
+  erigon: erigontech/erigon:v3.7.0
   nethermind: nethermind/nethermind:2.0.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
