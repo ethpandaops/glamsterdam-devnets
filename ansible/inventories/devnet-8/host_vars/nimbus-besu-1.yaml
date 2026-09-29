@@ -1,0 +1,5 @@
+---
+# Temporarily pinned to a specific besu commit for client testing
+# (rollout date: see git log). Remove this override once the commit is
+# merged / included in the floating tag again.
+besu_container_image: ethpandaops/besu:693b499843b16446a22d427c91ee3b7fd40bda09-693b499
