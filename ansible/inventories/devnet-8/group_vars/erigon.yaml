@@ -15,6 +15,7 @@ erigon_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
+  SAVE_HEAP_PROFILE: "true"
 erigon_container_command_extra_args:
   - --http.api=eth,erigon,engine,web3,net,txpool,admin
   - --http.vhosts=*
@@ -27,6 +28,10 @@ erigon_container_command_extra_args:
   - --log.console.verbosity=debug
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc.gascap=200000000
+  # pprof HTTP server (fetch profiles via port-forward / container IP)
+  - --pprof
+  - --pprof.addr=0.0.0.0
+  - --pprof.port=6060
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
 
