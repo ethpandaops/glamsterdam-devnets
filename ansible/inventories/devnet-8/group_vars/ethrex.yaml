@@ -27,7 +27,7 @@ ethrex_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --p2p.discv4=false
   - --p2p.discv5=true
-  - --http.api=eth,net,web3,admin,debug
+  - --http.api=eth,net,web3,admin
   - --syncmode=full
 
 prometheus_config: |
