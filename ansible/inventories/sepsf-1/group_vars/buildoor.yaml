@@ -28,6 +28,9 @@ buildoor_builder_mnemonic_index: "{{ builder_index }}"
 buildoor_container_command_extra_args:
   - --validator-ranges-url=https://config.{{ network_subdomain }}/api/v1/nodes/validator-ranges
   - --lifecycle
+  # ePBS bidding/revealing is off unless enabled (devnet-8 toggled it at runtime via the
+  # authenticated web UI and kept it in the state DB); a fresh DB never bids.
+  - --epbs-enabled
   - --slot-result-retention-epochs=1600
   - --slot-artifact-retention-epochs=1600
 buildoor_container_env:
