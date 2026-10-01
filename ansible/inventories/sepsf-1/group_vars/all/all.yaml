@@ -56,10 +56,11 @@ ethereum_genesis_chain_id: "11155111"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
 # Genesis 2026-10-01 16:00:00 UTC - set the real value at launch, once the
-# snapshots are restored (genesis is generated after that step). Gloas at epoch 20
-# (fusaka sepsf-0 also forked at epoch 20) = 18:08:00 UTC, five days before
-# sepolia's own Gloas (2026-10-06 13:53:36 UTC, epoch 353024). Leave the ethrex
-# nodes enough time to snap-sync before the fork when picking both.
+# snapshots are restored (genesis is generated after that step). Gloas at epoch 40
+# = 20:16:00 UTC, five days before sepolia's own Gloas (2026-10-06 13:53:36 UTC,
+# epoch 353024). ~4h of pre-fork runway: the ethrex nodes snap-sync (every other
+# EL resumes from its snapshot), the tooling gets funded from the withdrawal sweep
+# (scripts/fund-shadowfork.sh), builders onboard, and issues get fixed.
 ethereum_genesis_timestamp: 1790870400
 ethereum_genesis_timedelay: 0
 # Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
@@ -67,7 +68,7 @@ ethereum_genesis_timedelay: 0
 # The EL snapshots (geth/besu/nethermind/reth/erigon) are pinned to the same
 # height: snapshots.ethpandaops.io deletes old heights, so never use "latest".
 shadowfork_height: 11820000
-gloas_fork_epoch: 20
+gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
   cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml',
