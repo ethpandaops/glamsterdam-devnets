@@ -1,0 +1,65 @@
+# Point a shadowfork at its own, ungated deposit contract.
+#
+# Sepolia's deposit contract (0x7f02...295D) is also the BEPOLIA ERC-20 and burns one
+# token per deposit. A shadowfork keeps sepolia's state, nothing on it can mint or buy
+# BEPOLIA, and signing with a real-sepolia holder key risks replay on sepolia. So
+# validator deposits and pre-Gloas builder onboarding (0xB0 credentials through the
+# regular deposit contract) all revert with "ERC20: burn amount exceeds balance".
+#
+# Fix: every EL reads the EIP-6110 deposit contract from the genesis config
+# (`config.depositContractAddress`; geth --override.genesis, nethermind's geth-genesis
+# loader, reth --chain <file>, besu, erigon init, ethrex). Rewrite it - and the CL
+# config / metadata the tooling reads - to the standard mainnet deposit contract
+# deployed via the CREATE2 deployer 0x4e59b448...4956C, which every public network
+# has. The address is fixed by (deployer, salt, initcode), so it is the same for every
+# shadowfork; scripts/deploy-shadowfork-deposit-contract.sh deploys it after genesis.
+#
+# Only for a NEW network, before genesis: changing the deposit contract of a running
+# chain forks every EL that picks the new config up.
+- name: Shadowfork deposit contract
+  when: shadowfork_deposit_contract_address is defined
+  vars:
+    _sdc_dir: "{{ ethereum_genesis_generator_output_dir }}/metadata"
+    _sdc_address: "{{ shadowfork_deposit_contract_address }}"
+  block:
+    - name: Read the generated EL genesis
+      ansible.builtin.slurp:
+        src: "{{ _sdc_dir }}/genesis.json"
+      register: _sdc_genesis
+
+    - name: Refuse to change the deposit contract of a chain that already started
+      ansible.builtin.assert:
+        that: >-
+          ((_sdc_genesis.content | b64decode | from_json).config.depositContractAddress | lower == _sdc_address | lower)
+          or (ethereum_genesis_timestamp | int > now(utc=true).timestamp() | int)
+        fail_msg: >-
+          {{ _sdc_dir }}/genesis.json has depositContractAddress
+          {{ (_sdc_genesis.content | b64decode | from_json).config.depositContractAddress }}
+          and genesis ({{ ethereum_genesis_timestamp }}) is in the past - rewriting it would fork
+          the running chain. shadowfork_deposit_contract_address is for new networks only.
+
+    - name: Set depositContractAddress in the EL genesis
+      ansible.builtin.replace:
+        path: "{{ _sdc_dir }}/genesis.json"
+        regexp: '("depositContractAddress"\s*:\s*")0x[0-9a-fA-F]{40}(")'
+        replace: '\g<1>{{ _sdc_address }}\g<2>'
+
+    - name: Set DEPOSIT_CONTRACT_ADDRESS in the CL config
+      ansible.builtin.replace:
+        path: "{{ _sdc_dir }}/config.yaml"
+        regexp: '^DEPOSIT_CONTRACT_ADDRESS:.*$'
+        replace: 'DEPOSIT_CONTRACT_ADDRESS: {{ _sdc_address }}'
+
+    - name: Set deposit_contract.txt
+      ansible.builtin.copy:
+        dest: "{{ _sdc_dir }}/deposit_contract.txt"
+        content: "{{ _sdc_address }}"
+        mode: "0644"
+
+    # Deposits can only exist after the post-genesis deployment, so log scans start at
+    # the shadowfork head instead of the sepolia contract's 2022 deployment block.
+    - name: Set deposit_contract_block.txt
+      ansible.builtin.copy:
+        dest: "{{ _sdc_dir }}/deposit_contract_block.txt"
+        content: "{{ shadowfork_height }}"
+        mode: "0644"

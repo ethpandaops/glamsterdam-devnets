@@ -16,6 +16,13 @@
   roles:
     - role: ethpandaops.general.ethereum_genesis
       tags: [ethereum_genesis]
+  post_tasks:
+    - name: Shadowfork deposit contract
+      ansible.builtin.include_tasks:
+        file: tasks/shadowfork_deposit_contract.yaml
+        apply:
+          tags: [ethereum_genesis]
+      tags: [ethereum_genesis]
 
 - import_playbook: ethpandaops.general.bootstrap_server
   vars:

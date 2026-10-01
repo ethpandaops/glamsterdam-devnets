@@ -83,7 +83,14 @@ ethereum_genesis_generator_config_files:
   # here follows the egg defaults, which match sepolia's Gloas config.yaml.
   # Shadowfork specifics:
   # - SHADOW_FORK_FILE: the head the EL state and the CL genesis build on.
-  # - DEPOSIT_CONTRACT_ADDRESS must be sepolia's or the generator refuses.
+  # - DEPOSIT_CONTRACT_ADDRESS must be sepolia's or the generator refuses. Sepolia's
+  #   contract burns BEPOLIA per deposit, so no deposits are possible on sepsf-1. A NEW
+  #   sepolia shadowfork should set, before genesis,
+  #     shadowfork_deposit_contract_address: "0x8DB63Da8F9019E5427e9fFf18b8914A8BD6c679A"
+  #   (rewrites the generated configs to an ungated deposit contract, see
+  #   ansible/tasks/shadowfork_deposit_contract.yaml) and run
+  #   scripts/deploy-shadowfork-deposit-contract.sh once index 0 is funded. Never set it
+  #   on a running network.
   # - GAS_LIMIT_SCHEDULE: 200M at the Gloas epoch, exactly like sepolia.
   # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
   #   did this): shadowfork mode adds no premines, so the 9968 ETH excess per
