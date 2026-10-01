@@ -1,0 +1,61 @@
+#!/bin/sh
+# Shadowfork EL snapshot download, rendered by shadowfork.yaml for {{ inventory_hostname }}.
+# Port of ethpandaops/ethereum-package#1489: one stream from R2 through Cloudflare
+# tops out ~95 MB/s, so the archive is fetched as parallel ranged GETs and emitted in
+# order into tar (16 workers measured 382 MB/s). At most 2 x workers chunks are staged
+# in /tmp. Each chunk is retried until it holds exactly its range, so a dropped
+# connection costs one chunk, not the stream. --max-filesize refuses a Range answered
+# with 200 and the whole body -- what a cold, cache-eligible object on Cloudflare
+# returns -- before a byte lands. The emitter's progress counter is renamed into
+# place: a torn read is an arithmetic error, which silently exits sh. The EXIT trap
+# kills only the workers; `kill 0` would also take down the tar the stream feeds.
+set -eu
+apk add --no-cache curl tar zstd
+SNAPSHOT_URL="{{ snapshot_fetcher_base_url }}/{{ snapshot_fetcher_network }}/{{ snapshot_fetcher_client }}/{{ snapshot_fetcher_block }}/{{ snapshot_fetcher_filename }}"
+TOTAL=$(curl -sfIL "$SNAPSHOT_URL" | tr -d '\r' | awk 'tolower($1)=="content-length:"{n=$2} END{print n}')
+[ -n "$TOTAL" ] || { echo "cannot read the snapshot size from $SNAPSHOT_URL"; exit 1; }
+P={{ snapshot_fetcher_workers }}; C={{ snapshot_fetcher_chunk_bytes }}; N=$(( (TOTAL + C - 1) / C ))
+echo "$SNAPSHOT_URL is $TOTAL bytes: $N chunks, $P workers"
+T=$(mktemp -d); echo 0 > "$T/emitted"; PIDS=""
+trap 'kill $PIDS 2>/dev/null || true; rm -rf "$T"' EXIT
+# INT/TERM must exit (running the EXIT cleanup), not just clean up and carry on
+trap 'exit 143' INT TERM
+fetch() {
+  s=$(( $1 * C )); e=$(( s + C - 1 )); [ "$e" -lt "$TOTAL" ] || e=$(( TOTAL - 1 ))
+  want=$(( e - s + 1 )); tries=0
+  while :; do
+    curl -sfL --connect-timeout 20 --speed-limit 1024 --speed-time 120 --max-filesize "$want" \
+      -r "$s-$e" -o "$T/$1.part" "$SNAPSHOT_URL" || true
+    [ "$(wc -c 2>/dev/null < "$T/$1.part" || echo 0)" -eq "$want" ] && { mv "$T/$1.part" "$T/$1"; return; }
+    tries=$(( tries + 1 ))
+    [ "$tries" -lt {{ snapshot_fetcher_max_attempts }} ] || { echo "chunk $1 failed $tries times" >&2; touch "$T/failed"; return 1; }
+    echo "chunk $1 (byte $s) incomplete, retrying ($tries)" >&2; sleep 5
+  done
+}
+k=0
+while [ "$k" -lt "$P" ]; do
+  { ( i=$k
+    while [ "$i" -lt "$N" ]; do
+      while [ $(( i - $(cat "$T/emitted") )) -ge $(( 2 * P )) ]; do sleep 0.1; done
+      fetch "$i" || exit 1
+      i=$(( i + P ))
+    done ) || touch "$T/failed"; } &
+  PIDS="$PIDS $!"; k=$(( k + 1 ))
+done
+stream() {
+  i=0
+  while [ "$i" -lt "$N" ]; do
+    while [ ! -f "$T/$i" ]; do [ ! -f "$T/failed" ] || return 1; sleep 0.05; done
+    cat "$T/$i"; rm -f "$T/$i"; i=$(( i + 1 ))
+    echo "$i" > "$T/emitted.tmp"; mv "$T/emitted.tmp" "$T/emitted"
+    [ $(( i % 160 )) -ne 0 ] || echo "emitted $i/$N chunks" >&2
+  done
+}
+# Backgrounded + wait: sh defers traps while a foreground pipeline runs, but `wait`
+# returns as soon as a trapped signal arrives (docker stop would otherwise SIGKILL).
+stream | tar -I zstd -xf - -C /data &
+wait $!
+# sh has no pipefail: tar exits 0 if a failed stream happens to stop on a frame boundary
+[ ! -f "$T/failed" ] || { echo "download failed, datadir is incomplete" >&2; exit 1; }
+touch /fetcher/done
+echo "snapshot {{ snapshot_fetcher_block }} extracted"

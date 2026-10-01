@@ -1,0 +1,111 @@
+# Restore the pinned EL snapshot on every shadowfork node before playbook.yaml
+# starts the clients. Run after bootstrap/docker (playbook.yaml -t init-server):
+#   ansible-playbook -i inventories/<sf>/inventory.ini shadowfork.yaml
+# It only depends on shadowfork_height, not on the genesis time, so run it as soon
+# as the droplets are up and pick ethereum_genesis_timestamp once it is done.
+# The download runs detached in a `snapshot-fetcher` container (progress:
+# `docker logs -f snapshot-fetcher`); the play then waits until every node reports
+# done. `--skip-tags snapshot_wait` only starts the downloads.
+# Hosts without snapshot_fetcher_out_dir (ethrex: no snapshots exist) are skipped.
+- hosts: ethereum_node:bootnode:!localhost
+  become: true
+  vars:
+    snapshot_fetcher_base_url: https://snapshots.ethpandaops.io
+    snapshot_fetcher_filename: snapshot.tar.zst
+    snapshot_fetcher_container_image: docker.ethquokkaops.io/dh/library/alpine:3.19.1
+    snapshot_fetcher_workers: 16
+    snapshot_fetcher_chunk_bytes: "{{ 64 * 1024 * 1024 }}"
+    snapshot_fetcher_max_attempts: 500
+    snapshot_fetcher_state_dir: /data/snapshot-fetcher
+    snapshot_fetcher_wait_timeout_minutes: 360
+  tasks:
+    - name: Skip hosts without a snapshot
+      ansible.builtin.meta: end_host
+      when: snapshot_fetcher_out_dir is not defined
+      tags: always
+
+    - name: Never use a floating snapshot height
+      ansible.builtin.assert:
+        that: snapshot_fetcher_block | string == shadowfork_height | string
+        fail_msg: snapshot_fetcher_block must equal shadowfork_height (old heights get deleted, "latest" moves)
+      tags: always
+
+    - name: Check download state
+      ansible.builtin.stat:
+        path: "{{ snapshot_fetcher_state_dir }}/done"
+      register: snapshot_fetcher_done
+      tags: always
+
+    - name: Start snapshot download
+      when: not snapshot_fetcher_done.stat.exists
+      block:
+        - name: Get snapshot-fetcher container info
+          community.docker.docker_container_info:
+            name: snapshot-fetcher
+          register: snapshot_fetcher_container
+
+        - name: Find existing datadir contents
+          ansible.builtin.find:
+            paths: "{{ snapshot_fetcher_out_dir }}"
+            file_type: any
+            hidden: true
+          register: snapshot_fetcher_existing
+
+        # A previous attempt that died half way leaves a partial datadir; extracting
+        # over it (or over a client's own empty db) would mix two databases.
+        - name: Refuse to extract into a non-empty datadir
+          ansible.builtin.fail:
+            msg: >-
+              {{ snapshot_fetcher_out_dir }} is not empty and no download is running.
+              Stop the execution client, wipe the directory and
+              `docker rm snapshot-fetcher`, then re-run.
+          when:
+            - not snapshot_fetcher_container.exists
+            - snapshot_fetcher_existing.matched > 0
+
+        - name: Create directories
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: directory
+            mode: "0755"
+          loop:
+            - "{{ snapshot_fetcher_out_dir }}"
+            - "{{ snapshot_fetcher_state_dir }}"
+
+        - name: Render download script
+          ansible.builtin.template:
+            src: snapshot_download.sh.j2
+            dest: "{{ snapshot_fetcher_state_dir }}/download.sh"
+            mode: "0755"
+
+        - name: Run snapshot-fetcher container
+          community.docker.docker_container:
+            name: snapshot-fetcher
+            image: "{{ snapshot_fetcher_container_image }}"
+            entrypoint: ["/bin/sh", "/fetcher/download.sh"]
+            detach: true
+            restart_policy: "no"
+            volumes:
+              - "{{ snapshot_fetcher_out_dir }}:/data"
+              - "{{ snapshot_fetcher_state_dir }}:/fetcher"
+          when: not snapshot_fetcher_container.exists
+
+    - name: Wait for the snapshot to be extracted
+      when: not snapshot_fetcher_done.stat.exists
+      tags: snapshot_wait
+      block:
+        - name: Wait for done marker or a stopped container
+          ansible.builtin.shell: |
+            [ -f {{ snapshot_fetcher_state_dir }}/done ] && echo done && exit 0
+            [ "$(docker inspect -f '{{ '{{' }}.State.Running{{ '}}' }}' snapshot-fetcher)" = true ] && echo running && exit 0
+            echo stopped
+          register: snapshot_fetcher_state
+          until: snapshot_fetcher_state.stdout != 'running'
+          retries: "{{ snapshot_fetcher_wait_timeout_minutes }}"
+          delay: 60
+          changed_when: false
+
+        - name: Fail if the download stopped without finishing
+          ansible.builtin.fail:
+            msg: "snapshot-fetcher exited before extracting everything, see `docker logs snapshot-fetcher`"
+          when: snapshot_fetcher_state.stdout != 'done'

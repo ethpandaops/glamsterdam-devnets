@@ -28,7 +28,9 @@ ethrex_container_command_extra_args:
   - --p2p.discv4=false
   - --p2p.discv5=true
   - --http.api=eth,net,web3,admin
-  - --syncmode=full
+  # No sepolia ethrex snapshot exists: snap-sync the state from the restored
+  # geth/nethermind/besu nodes (full sync would replay 11.8M sepolia blocks).
+  - --syncmode=snap
 
 prometheus_config: |
   global:

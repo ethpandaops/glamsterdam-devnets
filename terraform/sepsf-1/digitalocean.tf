@@ -13,7 +13,7 @@ variable "digitalocean_ssh_key_name" {
 
 variable "digitalocean_supernode_size" {
   type    = string
-  default = "s-8vcpu-32gb-640gb-intel"
+  default = "so1_5-8vcpu-64gb-intel" # 1.8 TB disk for the ~1 TB sepolia EL snapshots
 }
 
 variable "digitalocean_fullnode_size" {
@@ -31,8 +31,7 @@ variable "digitalocean_regions" {
     "fra1",
     "tor1",
     "blr1",
-    "sfo3",
-    "syd1"
+    "sfo3" # syd1 dropped: no so1_5-8vcpu-64gb-intel there
   ]
 }
 

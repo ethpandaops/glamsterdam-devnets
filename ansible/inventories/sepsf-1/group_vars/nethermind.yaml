@@ -5,6 +5,9 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/nethermind?format=txt') | select | list)
      + nethermind_extra_github_users }}
 
+# role: ethpandaops.general.snapshot_fetcher (snapshot layout: sepolia/)
+snapshot_fetcher_out_dir: /data/nethermind/nethermind_db
+
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: nethermind
 # role: ethpandaops.general.nethermind
@@ -21,7 +24,15 @@ nethermind_container_volumes:
   - "{{ nethermind_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 nethermind_container_command_extra_args:
-  - --config=plataberget
+  # Restored sepolia snapshot: the built-in sepolia config with our genesis.json as
+  # the chainspec (same genesis hash, amsterdamTime moved) and the db the snapshot
+  # ships. The preset turns on fast/snap sync; pin both off so nethermind only ever
+  # resumes from the restored db (ethrex is the only snap syncer on this network).
+  - --config=sepolia
+  - --Init.ChainSpecPath=/network-config/genesis.json
+  - --Init.BaseDbPath=nethermind_db/sepolia
+  - --Sync.FastSync=false
+  - --Sync.SnapSync=false
   - --JsonRpc.EnabledModules=Eth,Subscribe,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Admin
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --Discovery.DiscoveryVersion=V5

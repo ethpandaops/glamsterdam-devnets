@@ -28,8 +28,9 @@ primary_bootnode: bootnode-1
 
 ### Checkpoint sync specific for Ansible & Kubernetes
 checkpoint_sync_node: "{{ primary_bootnode }}"
-# Enable once the network is past genesis and checkpointz is serving.
-ethereum_node_cl_checkpoint_sync_enabled: true
+# Shadowfork: every CL starts from the generated genesis.ssz (there is no older
+# finalized state to sync from), so checkpoint sync stays off.
+ethereum_node_cl_checkpoint_sync_enabled: false
 
 checkpoint_sync_url: https://checkpoint-sync.{{ ethereum_network_name }}.{{ domain }}
 # checkpoint_sync_url: https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@{{ ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
@@ -47,14 +48,29 @@ checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethe
 ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
 ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
 ethereum_genesis_network_seed: glamsterdam-sepsf-1
-ethereum_genesis_chain_id: 70{{ 9999999 | random(start=1000000, seed=ethereum_genesis_network_seed) }}
+# Sepolia's chain id switches the genesis generator into shadowfork mode: it loads
+# eth-clients/sepolia genesis.json, keeps every fork that is already active at
+# shadowfork_height (osaka, bpo1, bpo2) at its real time, overwrites sepolia's own
+# amsterdamTime with ours and adds no allocs. Chain and network id stay 11155111.
+ethereum_genesis_chain_id: "11155111"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Pinned genesis: 2026-08-13 12:00:00 UTC (14:00 CEST). Gloas at epoch 1536 hits
-# 2026-08-20 07:50:24 UTC, the 200M gas bump at epoch 1566 11:02:24 UTC.
-ethereum_genesis_timestamp: 1786622400
+# Genesis 2026-10-01 16:30:00 UTC (target ~5h after the droplets go up). The
+# snapshot restore (shadowfork.yaml) does not depend on it, so it runs first and
+# this gets finalised once the snapshots are on disk, just before playbook.yaml
+# generates the genesis. Gloas at epoch 40 = 20:46:00 UTC, five days before
+# sepolia's own Gloas (2026-10-06 13:53:36 UTC, epoch 353024). ~4h of pre-fork
+# runway: the ethrex nodes snap-sync (every other EL resumes from its snapshot),
+# the tooling gets funded from the withdrawal sweep (scripts/fund-shadowfork.sh),
+# builders onboard, and issues get fixed.
+ethereum_genesis_timestamp: 1790872200
 ethereum_genesis_timedelay: 0
-shadowfork_height: 0
+# Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
+# 0xd95349c2354b05d477a38da94a9997c27b97b07d8eba2e2998d0edfb538524f8, 60M gas.
+# The EL snapshots (geth/besu/nethermind/reth/erigon) are pinned to the same
+# height: snapshots.ethpandaops.io deletes old heights, so never use "latest".
+shadowfork_height: 11820000
+gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
   cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml',
@@ -63,18 +79,25 @@ ethereum_genesis_generator_config_files:
     split_lines=false) }}" # noqa yaml[line-length]
   el/genesis-config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/el/genesis-config.yaml',
     split_lines=false) }}" # noqa yaml[line-length]
-  # Network identity and fork schedule only — every spec parameter not listed
-  # here follows the egg defaults, which already carry the devnet-8 ePBS numbers
-  # (consensus-specs v1.7.0-alpha.13: MAX_BUILDER_DEPOSIT_REQUESTS_PER_PAYLOAD 64,
-  # MAX_BUILDER_EXIT_REQUESTS_PER_PAYLOAD 16, MAX_BUILDERS_PER_WITHDRAWALS_SWEEP
-  # 16384, MIN_BUILDER_WITHDRAWABILITY_DELAY 64). Sole exception: WITHDRAWAL_TYPE,
-  # so all genesis validators carry compounding (0x02) credentials. At 32 ETH x
-  # 84k = 2.69M total stake, consolidations only work post-Gloas: above the
-  # EIP-8061 floor (2.16M) but far below the Electra one (18.9M), ~1 per epoch.
+  # Network identity and fork schedule only - every spec parameter not listed
+  # here follows the egg defaults, which match sepolia's Gloas config.yaml.
+  # Shadowfork specifics:
+  # - SHADOW_FORK_FILE: the head the EL state and the CL genesis build on.
+  # - DEPOSIT_CONTRACT_ADDRESS must be sepolia's or the generator refuses.
+  # - GAS_LIMIT_SCHEDULE: 200M at the Gloas epoch, exactly like sepolia.
+  # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
+  #   did this): shadowfork mode adds no premines, so the 9968 ETH excess per
+  #   validator is swept to WITHDRAWAL_ADDRESS (mnemonic index 0,
+  #   0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2) and funds the tooling from there.
+  #   None of the tooling accounts holds sepolia ETH at shadowfork_height.
+  # Not set because shadowfork mode ignores them: EL premines, GENESIS_GASLIMIT,
+  # DEPLOY_EIP8282_CONTRACTS (both EIP-8282 builder contracts are already on
+  # sepolia at shadowfork_height: deposit 0x0000bff46984e3725691fa540a8c7589300d8282,
+  # exit 0x000064d678505ad48f8ccb093bc65613800e8282).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
-    export NUMBER_OF_VALIDATORS=84000
+    export NUMBER_OF_VALIDATORS=36000
     export GENESIS_FORK_VERSION="0x10{{ ethereum_genesis_fork_version_suffix }}"
     export ALTAIR_FORK_VERSION="0x20{{ ethereum_genesis_fork_version_suffix }}"
     export BELLATRIX_FORK_VERSION="0x30{{ ethereum_genesis_fork_version_suffix }}"
@@ -83,32 +106,21 @@ ethereum_genesis_generator_config_files:
     export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
     export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
     export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
-    export GLOAS_FORK_EPOCH="1536"
-    export GAS_LIMIT_SCHEDULE='[{"epoch": 1566, "gas_limit": 200000000}]'
+    export GLOAS_FORK_EPOCH="{{ gloas_fork_epoch }}"
+    export GAS_LIMIT_SCHEDULE='[{"epoch": {{ gloas_fork_epoch }}, "gas_limit": 200000000}]'
     export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
     export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
-    export GENESIS_GASLIMIT=60000000
-    export WITHDRAWAL_TYPE=0x02
-    export DEPLOY_EIP8282_CONTRACTS=false
-    export EL_PREMINE_ADDRS='{"0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467": {"balance": "100000ETH"}, "0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd": {"balance": "100000ETH"}, "0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89": {"balance": "100000ETH"}, "0x877d64e72b7e1f5034aec55d910c877b2b7104da": {"balance": "50000000ETH"}, "0x2aa5f02f347089910eea88279c405149ec8540d5": {"balance": "50000000ETH"}}'
+    export WITHDRAWAL_TYPE=0x01
+    export VALIDATOR_BALANCE=10000000000000
+    export DEPOSIT_CONTRACT_ADDRESS=0x7f02C3E3c98b133055B8B348B2Ac625669Ed295D
+    export SHADOW_FORK_FILE="https://snapshots.ethpandaops.io/{{ snapshot_fetcher_network }}/geth/{{ shadowfork_height }}/_snapshot_eth_getBlockByNumber.json"
 
-# 0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467: 100000ETH - arbitrum
-# 0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd: 100000ETH - optimism
-# 0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89: 100000ETH - lido
-# The agent faucet's two wallets. Unlike the browser faucet, whose key is one of
-# the mnemonic accounts and so is premined automatically, these are standalone
-# vault keys (faucet_agents_rest_private_key / faucet_agents_private_key) and
-# have to be funded explicitly or the faucet hands out nothing. Same addresses on
-# every glamsterdam devnet - the vault entry is per devnet family, not per devnet.
-# 0x877d64e72b7e1f5034aec55d910c877b2b7104da: 50000000ETH - faucet-agents, pays every agent claim
-# 0x2aa5f02f347089910eea88279c405149ec8540d5: 50000000ETH - faucet-agents, backs the session/status balance
-
-# DEPLOY_EIP8282_CONTRACTS=false: the builder deposit/exit contracts are NOT in
-# genesis — the deploy-eip8282-contracts assertoor playbook below puts them on
-# the live network before GLOAS_FORK_EPOCH. Bytecode is unchanged since devnet-7
-# (no sys-asm changes), so the addresses are the same:
-#   deposit (0x03): 0x0000bff46984e3725691fa540a8c7589300d8282
-#   exit    (0x04): 0x000064d678505ad48f8ccb093bc65613800e8282
+# role: ethpandaops.general.snapshot_fetcher (variable names reused by
+# ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
+# snapshot_fetcher_out_dir is set per EL in its group_vars file.
+snapshot_fetcher_network: sepolia
+snapshot_fetcher_client: "{{ ethereum_node_el }}"
+snapshot_fetcher_block: "{{ shadowfork_height }}"
 
 ethereum_genesis_validator_keys_output_dir: "{{ ansible_inventory_sources[0] | dirname }}/files/validator_keys"
 ethereum_genesis_validator_bls_change_execution_address: "{{ ethereum_node_cl_validator_fee_recipient }}"
@@ -197,7 +209,9 @@ ethereum_node_skip_cleanup: true
 # Watchtower: daily image check staggered per host across a 3-hour window
 # ending at 18:00 CET/CEST (seeded by network+hostname) so fleet-wide image
 # rolls restart nodes one by one instead of all at once (devnet-9 lesson).
-ethereum_node_docker_watchtower_enabled: true
+# Off for the shadowfork: its window (13:00-16:00 UTC) would roll clients around
+# genesis and the fork; images are pinned for the run, rolls are on request.
+ethereum_node_docker_watchtower_enabled: false
 ethereum_node_docker_watchtower_containers_list:
   - execution
   - beacon
@@ -243,15 +257,9 @@ gen_kubernetes_config_dora_xatu_enabled: true
 gen_kubernetes_config_dora_execution_indexer_traces: false
 gen_kubernetes_config_disabled_services:
   - tracoor
-# Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
-# manual pre-gloas deployment of the builder request contracts, since genesis
-# omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
-# gen_kubernetes_config_assertoor_tests hook in ansible-collection-general.
-gen_kubernetes_config_assertoor_tests:
-  - id: deploy-eip8282-contracts
-    file: https://raw.githubusercontent.com/ethpandaops/assertoor/master/playbooks/gloas-dev/deploy-eip8282-contracts.yaml
-    schedule:
-      startup: true
+# No startup assertoor tests: the deploy-eip8282-contracts playbook devnet-8 ran
+# is not needed, both builder contracts already exist on sepolia.
+gen_kubernetes_config_assertoor_tests: []
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
