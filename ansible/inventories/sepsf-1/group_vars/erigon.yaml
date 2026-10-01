@@ -28,6 +28,9 @@ erigon_container_command_extra_args:
   # Shadowfork hook: makes the erigon role re-run `init` over the restored chaindata
   # and stops erigon from swapping our genesis.json config for its built-in sepolia one.
   - --keep.stored.chain.config=true
+  # With sepolia's network id erigon starts its embedded CL (caplin): it synced real
+  # sepolia past the snapshot and answered our CL's engine calls with "caplin is enabled".
+  - --externalcl
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery.v4=false
   - --discovery.v5=true
