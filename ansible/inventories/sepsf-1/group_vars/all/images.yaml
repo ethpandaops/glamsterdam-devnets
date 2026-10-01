@@ -15,7 +15,7 @@ default_ethereum_client_images:
   nethermind: registry-1.docker.io/nethermind/nethermind:2.0.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
-  ethrex: ghcr.io/lambdaclass/ethrex:28.0.0
+  ethrex: registry-1.docker.io/ethpandaops/ethrex:v28.0.0-snap-pivot-fix-linux-amd64  # v28.0.0 + snap pivot fix (qu0b/ethrex qu0b/fix/snap-header-empty-response-v28, f593e598)
 
 default_tooling_images:
   mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop
