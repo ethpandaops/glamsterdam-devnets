@@ -1,6 +1,8 @@
 # Restore the pinned EL snapshot on every shadowfork node before playbook.yaml
 # starts the clients. Run after bootstrap/docker (playbook.yaml -t init-server):
 #   ansible-playbook -i inventories/<sf>/inventory.ini shadowfork.yaml
+# It only depends on shadowfork_height, not on the genesis time, so run it as soon
+# as the droplets are up and pick ethereum_genesis_timestamp once it is done.
 # The download runs detached in a `snapshot-fetcher` container (progress:
 # `docker logs -f snapshot-fetcher`); the play then waits until every node reports
 # done. `--skip-tags snapshot_wait` only starts the downloads.
