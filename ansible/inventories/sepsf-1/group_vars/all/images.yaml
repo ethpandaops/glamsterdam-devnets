@@ -12,7 +12,7 @@ default_ethereum_client_images:
   besu: registry-1.docker.io/hyperledger/besu:26.9.0
   geth: registry-1.docker.io/ethereum/client-go:v1.17.7
   erigon: registry-1.docker.io/erigontech/erigon:v3.7.0
-  nethermind: registry-1.docker.io/nethermind/nethermind:2.0.0
+  nethermind: registry-1.docker.io/ethpandaops/nethermind:release-2.1.0-8b90b5b@sha256:9aadc39a1fb43ac3dd6f26bd53a6a72427831658600404d616a9631441d77fab  # NethermindEth/nethermind release/2.1.0 @ 8b90b5b (EIP-8037 fix f7e5afeb5c; 2.0.0 split at the fork)
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
   ethrex: registry-1.docker.io/ethpandaops/ethrex:v28.0.0-snap-pivot-fix-linux-amd64  # v28.0.0 + snap pivot fix (qu0b/ethrex qu0b/fix/snap-header-empty-response-v28, f593e598)
