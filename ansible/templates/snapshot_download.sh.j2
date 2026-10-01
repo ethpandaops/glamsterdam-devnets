@@ -17,7 +17,9 @@ TOTAL=$(curl -sfIL "$SNAPSHOT_URL" | tr -d '\r' | awk 'tolower($1)=="content-len
 P={{ snapshot_fetcher_workers }}; C={{ snapshot_fetcher_chunk_bytes }}; N=$(( (TOTAL + C - 1) / C ))
 echo "$SNAPSHOT_URL is $TOTAL bytes: $N chunks, $P workers"
 T=$(mktemp -d); echo 0 > "$T/emitted"; PIDS=""
-trap 'kill $PIDS 2>/dev/null || true; rm -rf "$T"' EXIT INT TERM
+trap 'kill $PIDS 2>/dev/null || true; rm -rf "$T"' EXIT
+# INT/TERM must exit (running the EXIT cleanup), not just clean up and carry on
+trap 'exit 143' INT TERM
 fetch() {
   s=$(( $1 * C )); e=$(( s + C - 1 )); [ "$e" -lt "$TOTAL" ] || e=$(( TOTAL - 1 ))
   want=$(( e - s + 1 )); tries=0
@@ -49,7 +51,10 @@ stream() {
     [ $(( i % 160 )) -ne 0 ] || echo "emitted $i/$N chunks" >&2
   done
 }
-stream | tar -I zstd -xf - -C /data
+# Backgrounded + wait: sh defers traps while a foreground pipeline runs, but `wait`
+# returns as soon as a trapped signal arrives (docker stop would otherwise SIGKILL).
+stream | tar -I zstd -xf - -C /data &
+wait $!
 # sh has no pipefail: tar exits 0 if a failed stream happens to stop on a frame boundary
 [ ! -f "$T/failed" ] || { echo "download failed, datadir is incomplete" >&2; exit 1; }
 touch /fetcher/done
