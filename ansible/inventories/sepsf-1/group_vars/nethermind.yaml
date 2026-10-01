@@ -24,11 +24,15 @@ nethermind_container_volumes:
   - "{{ nethermind_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 nethermind_container_command_extra_args:
-  # Restored sepolia snapshot: sepolia.cfg defaults with our genesis.json as the
-  # chainspec (same genesis hash, amsterdamTime moved) and the db the snapshot ships.
+  # Restored sepolia snapshot: the built-in sepolia config with our genesis.json as
+  # the chainspec (same genesis hash, amsterdamTime moved) and the db the snapshot
+  # ships. The preset turns on fast/snap sync; pin both off so nethermind only ever
+  # resumes from the restored db (ethrex is the only snap syncer on this network).
   - --config=sepolia
   - --Init.ChainSpecPath=/network-config/genesis.json
   - --Init.BaseDbPath=nethermind_db/sepolia
+  - --Sync.FastSync=false
+  - --Sync.SnapSync=false
   - --JsonRpc.EnabledModules=Eth,Subscribe,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Admin
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --Discovery.DiscoveryVersion=V5
