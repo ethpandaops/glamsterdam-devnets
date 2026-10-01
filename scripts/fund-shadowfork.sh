@@ -102,7 +102,9 @@ done < "$tmp/recipients"
 if $dry_run; then echo "dry run: nothing sent"; exit 0; fi
 failed=0
 while read -r tx; do
-  status="$(cast receipt "$tx" status 2>/dev/null || echo error)"
+  # A dropped tx never gets a receipt and cast would wait forever; count it as
+  # failed so the next run re-sends from the pending nonce.
+  status="$(timeout 120 cast receipt "$tx" status 2>/dev/null || echo "no receipt after 120s")"
   case "$status" in 1|1*\(success\)*|success) ;; *) echo "  tx $tx: $status" >&2; failed=$((failed + 1)) ;; esac
 done < "$tmp/txs"
 echo "sent $sent transfer(s), $failed failed; $short recipient(s) not fully funded yet"
