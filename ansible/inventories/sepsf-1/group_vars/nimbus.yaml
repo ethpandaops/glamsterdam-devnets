@@ -51,6 +51,10 @@ nimbus_container_command_extra_simple_args:
   - --log-level=DEBUG
   - --light-client-data-serve=true
   - --graffiti={{ ansible_hostname }}
+  # Gloas: the CL sets the payload gas target (PayloadAttributesV4.targetGasLimit) and
+  # nimbus v26.9.1 ignores GAS_LIMIT_SCHEDULE (default 60M), so its blocks pulled the gas
+  # limit back toward 60M after the fork while every other CL ramps toward 200M.
+  - --suggested-gas-limit=200000000
 
 nimbus_container_command_extra_bootnode_args: >-
   {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
