@@ -5,6 +5,9 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/besu?format=txt') | select | list)
      + besu_extra_github_users }}
 
+# role: ethpandaops.general.snapshot_fetcher
+snapshot_fetcher_out_dir: /data/besu
+
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: besu
 # role: ethpandaops.general.besu
@@ -24,9 +27,14 @@ besu_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery-mode=V5
   - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3
-  # SNAP per Besu team (Sep 16): full sync replays the 166k-200k bad-tx blocks at ~10 s each
-  # and repeatedly OOMs / loses the bonsai world state.
-  - --sync-mode=SNAP
+  # Restored sepolia snapshot: nothing to sync, FULL just follows the CL from the
+  # snapshot head (fusaka shadowforks). The snapshot may come from another besu
+  # version, so skip the datadir version check.
+  - --sync-mode=FULL
+  - --version-compatibility-protection=false
+  # ethrex has no snapshot and snap-syncs from the restored nodes; besu serves snap
+  # only when asked (geth and nethermind do by default).
+  - --snapsync-server-enabled=true
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
   - --color-enabled=false

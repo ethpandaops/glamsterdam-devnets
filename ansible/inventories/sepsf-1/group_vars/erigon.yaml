@@ -5,6 +5,9 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/erigon?format=txt') | select | list)
      + erigon_extra_github_users }}
 
+# role: ethpandaops.general.snapshot_fetcher
+snapshot_fetcher_out_dir: /data/erigon
+
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
 
@@ -21,7 +24,10 @@ erigon_container_command_extra_args:
   - --http.vhosts=*
   - --ws
   - --networkid={{ ethereum_network_id }}
-  - --db.size.limit=500GB
+  - --db.size.limit=1TB  # sepolia datadir is ~985 GB
+  # Shadowfork hook: makes the erigon role re-run `init` over the restored chaindata
+  # and stops erigon from swapping our genesis.json config for its built-in sepolia one.
+  - --keep.stored.chain.config=true
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery.v4=false
   - --discovery.v5=true

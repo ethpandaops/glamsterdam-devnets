@@ -5,7 +5,7 @@
 ethereum_cl_bootnodes: >-
   {{
     (
-      ['prysm-ethrex-1', 'prysm-geth-1', 'lodestar-ethrex-1', 'lodestar-geth-1']
+      ['lighthouse-geth-1', 'teku-nethermind-1', 'nimbus-besu-1', 'prysm-reth-1']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
       | select('defined')
       | list
@@ -15,7 +15,7 @@ ethereum_cl_bootnodes: >-
 ethereum_el_bootnodes: >-
   {{
     (
-      ['prysm-ethrex-1', 'prysm-geth-1', 'lodestar-ethrex-1', 'lodestar-geth-1']
+      ['lighthouse-geth-1', 'teku-nethermind-1', 'nimbus-besu-1', 'prysm-reth-1']
       | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr'])
       | select('defined')
       | list
@@ -99,6 +99,9 @@ prysm_container_command_extra_bootnode_args: >-
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
 
+# role: ethpandaops.general.snapshot_fetcher (bootnode is not in the geth group)
+snapshot_fetcher_out_dir: /data/geth/geth
+
 # role: ethpandaops.general.geth
 geth_container_name: execution
 geth_container_image: "{{ default_ethereum_client_images.geth }}"
@@ -116,7 +119,7 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
-  - --gcmode=archive
+  # no --gcmode=archive: the restored sepolia snapshot is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics.ethdevops.io/insert/0/prometheus/api/v1/write
