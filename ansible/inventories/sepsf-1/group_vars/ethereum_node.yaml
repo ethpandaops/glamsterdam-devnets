@@ -64,7 +64,7 @@ brakebear_config: |
 
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus
-prometheus_remote_write_username: "{{ secret_prometheus_remote_write.username }}"
+prometheus_remote_write_username: "{{ ethereum_network_name }}"  # gateway tags ingress_user=<username>; the sops one is devnet-8's
 prometheus_remote_write_password: "{{ secret_prometheus_remote_write.password }}"
 prometheus_config: |
   global:
