@@ -55,15 +55,15 @@ ethereum_genesis_network_seed: glamsterdam-sepsf-1
 ethereum_genesis_chain_id: "11155111"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Genesis 2026-10-01 16:30:00 UTC (target ~5h after the droplets go up). The
-# snapshot restore (shadowfork.yaml) does not depend on it, so it runs first and
-# this gets finalised once the snapshots are on disk, just before playbook.yaml
-# generates the genesis. Gloas at epoch 40 = 20:46:00 UTC, five days before
-# sepolia's own Gloas (2026-10-06 13:53:36 UTC, epoch 353024). ~4h of pre-fork
-# runway: the ethrex nodes snap-sync (every other EL resumes from its snapshot),
-# the tooling gets funded from the withdrawal sweep (scripts/fund-shadowfork.sh),
-# builders onboard, and issues get fixed.
-ethereum_genesis_timestamp: 1790872200
+# Genesis 2026-10-01 15:00:00 UTC: ~30 min after the last snapshot finished
+# restoring (shadowfork.yaml runs first, it does not depend on the genesis time),
+# so playbook.yaml has time to provision every node. Gloas at epoch 40 =
+# 19:16:00 UTC, five days before sepolia's own Gloas (2026-10-06 13:53:36 UTC,
+# epoch 353024). ~4h of pre-fork runway: the ethrex nodes snap-sync (every
+# other EL resumes from its snapshot), the tooling gets funded from the
+# withdrawal sweep (scripts/fund-shadowfork.sh), builders onboard, and issues
+# get fixed.
+ethereum_genesis_timestamp: 1790866800
 ethereum_genesis_timedelay: 0
 # Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
 # 0xd95349c2354b05d477a38da94a9997c27b97b07d8eba2e2998d0edfb538524f8, 60M gas.
