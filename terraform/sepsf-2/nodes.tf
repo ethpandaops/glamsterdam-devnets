@@ -34,7 +34,7 @@ variable "nodes" {
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", builder_start = 1 },
 
     # Full 6 CL x 6 EL matrix, every pair once: 36 x 1000 keys over [0,36000)
-    # (NUMBER_OF_VALIDATORS=36000). No nimbus-el: no sepolia snapshot and not needed.
+    # (NUMBER_OF_VALIDATORS=36000). Nimbus-el (no validators) below the ethrex nodes.
 
     # Geth
     { name = "lighthouse-geth", count = 1, cloud = "digitalocean", supernode = true, validator_start = 0, validator_end = 1000 },
@@ -86,6 +86,11 @@ variable "nodes" {
     { name = "nimbus-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 33000, validator_end = 34000 },
     { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 34000, validator_end = 35000 },
     { name = "grandine-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 35000, validator_end = 36000 },
+
+    # Nimbus-el (added after genesis, 2026-10-02): no sepolia snapshot either; snap-syncs from
+    # the restored ELs with the experimental --debug-snap-sync. No validators (all 36000 assigned).
+    { name = "lighthouse-nimbusel", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", region = "fra1" },
+    { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", region = "lon1" },
   ]
 
   validation {

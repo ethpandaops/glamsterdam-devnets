@@ -19,9 +19,17 @@ nimbusel_container_volumes:
   - "{{ nimbusel_datadir }}:/data"
   - "{{ nimbusel_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-nimbusel_container_command_extra_args:
+# No sepolia nimbus-el snapshot: snap-sync from the restored ELs (experimental, hidden
+# --debug-snap-sync in v0.4.2). Like ethrex, peer only with our snapshot ELs: real sepolia
+# peers share our fork ID until amsterdamTime and would serve sepolia's state. Discovery off,
+# one --static-peers per enode; p2p is also firewalled (scripts/shadowfork-ethrex-firewall.sh).
+nimbusel_container_command_extra_args: >-
+  {{ nimbusel_shadowfork_args
+     + (shadowfork_el_static_enodes | map('regex_replace', '^', '--static-peers=') | list) }}
+nimbusel_shadowfork_args:
   - --network=/network-config/genesis.json
-  - --bootstrap-node={{ ethereum_el_bootnodes | join(',') }}
+  - --discv5=false
+  - --debug-snap-sync=true
   - --rpc-api=admin,eth
   - --ws-api=admin,eth
   - --log-level=DEBUG

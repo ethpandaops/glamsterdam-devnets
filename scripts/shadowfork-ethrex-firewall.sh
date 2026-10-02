@@ -6,6 +6,7 @@
 # Idempotent: re-running rebuilds the chain from the current inventory.
 #
 # Usage: scripts/shadowfork-ethrex-firewall.sh <inventory dir, e.g. sepsf-2> [--remove]
+# Hosts: FW_HOSTS (ansible pattern, default "ethrex:nimbusel" - every EL that snap-syncs).
 # Needs docker on the hosts (run after `playbook.yaml -t init-server`).
 set -euo pipefail
 
@@ -40,5 +41,5 @@ script="$(mktemp)"; trap 'rm -f "$script"' EXIT
 } > "$script"
 
 cd "$root/ansible"
-ansible -i "$inv" ethrex -b -o -m script -a "$script" 2>/dev/null \
+ansible -i "$inv" "${FW_HOSTS:-ethrex:nimbusel}" -b -o -m script -a "$script" 2>/dev/null \
   | sed -nE 's/^([^ ]+) \| [A-Z]+ .*(allowed=[0-9]+ docker-user-jumps=[0-9]+\+[0-9]+|removed).*/\1 \2/p' | sort
