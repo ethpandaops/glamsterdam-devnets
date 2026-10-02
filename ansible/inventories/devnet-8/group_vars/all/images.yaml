@@ -11,8 +11,8 @@ default_ethereum_client_images:
   ### Execution layer clients
   besu: registry-1.docker.io/hyperledger/besu:26.9.0
   geth: registry-1.docker.io/ethereum/client-go:v1.17.7
-  erigon: registry-1.docker.io/erigontech/erigon:v3.7.0
-  nethermind: registry-1.docker.io/nethermind/nethermind:2.0.0
+  erigon: registry-1.docker.io/erigontech/erigon:v3.7.1
+  nethermind: registry-1.docker.io/nethermind/nethermind:2.1.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
   ethrex: ghcr.io/lambdaclass/ethrex:28.0.0
