@@ -28,11 +28,14 @@ script="$(mktemp)"; trap 'rm -f "$script"' EXIT
     echo 'for t in iptables ip6tables; do $t -N $C; done'
     grep -oE "ansible_host=[0-9.]+" "$inv" | cut -d= -f2 | sort -u | while read -r ip; do
       echo "iptables -A \$C -s $ip -j RETURN"
+      # ethrex's own dials and discv4 pings leave the container from its bridge IP, so match the
+      # destination too: outbound to our droplets passes, to anything else on 30303 is dropped.
+      echo "iptables -A \$C -d $ip -j RETURN"
     done
     echo 'iptables -A $C -j DROP'
     echo 'ip6tables -A $C -j DROP'
     echo 'for t in iptables ip6tables; do for p in tcp udp; do $t -I DOCKER-USER 1 -p $p --dport 30303 -j $C; done; done'
-    echo 'echo "allowed=$(iptables -S $C | grep -c RETURN) docker-user-jumps=$(iptables -S DOCKER-USER | grep -c $C)+$(ip6tables -S DOCKER-USER | grep -c $C)"'
+    echo 'echo "allowed=$(iptables -S $C | grep -c -- "-s .* RETURN") docker-user-jumps=$(iptables -S DOCKER-USER | grep -c $C)+$(ip6tables -S DOCKER-USER | grep -c $C)"'
   fi
 } > "$script"
 

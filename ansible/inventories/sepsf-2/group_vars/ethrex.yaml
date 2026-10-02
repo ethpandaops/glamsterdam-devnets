@@ -28,10 +28,12 @@ ethrex_container_command_extra_args:
   # requests with sepolia's chain (ethrex then snap-syncs the wrong state). Peer only with
   # our snapshot ELs: no discovery, our enodes as bootnodes; p2p is also firewalled to our
   # droplets on the ethrex hosts (DOCKER-USER chain SEPSF1-P2P).
-  # Until the static enodes are known, discover via our bootnode ENRs (the p2p firewall on the ethrex
-  # hosts still limits peers to our droplets); once known, only those enodes, discovery off.
+  # Until the static enodes are known, discover via our bootnode ENRs (discv5); once known, those
+  # enodes via discv4. ethrex (v29.0.0-rc.1) only seeds its peer table with --bootnodes when a
+  # discovery protocol is on, so turning both off leaves it with 0 peers. The p2p firewall on the
+  # ethrex hosts (scripts/shadowfork-ethrex-firewall.sh) limits port-30303 peers to our droplets.
   - "--bootnodes={{ (shadowfork_el_static_enodes if shadowfork_el_static_enodes | length > 0 else ethereum_el_bootnodes) | join(',') }}"
-  - --p2p.discv4=false
+  - "--p2p.discv4={{ 'true' if shadowfork_el_static_enodes | length > 0 else 'false' }}"
   - "--p2p.discv5={{ 'false' if shadowfork_el_static_enodes | length > 0 else 'true' }}"
   - --http.api=eth,net,web3,admin
   # No sepolia ethrex snapshot exists: snap-sync the state from the restored
