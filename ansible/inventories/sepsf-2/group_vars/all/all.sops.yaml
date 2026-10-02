@@ -42,14 +42,15 @@ tysm_secret_access_key: ENC[AES256_GCM,data:/iXmKhlYw2bzSzirLg==,iv:MRRoJgUc6V8B
 secret_dockerhub:
     username: ENC[AES256_GCM,data:CROGDtAGPOxIBOI=,iv:kd9imvumG1WRBSUKfgjfpHIOhrUy6jHL2h6808Z0IUY=,tag:SdMBMeINeT1iouCPZWBR9g==,type:str]
     token: ENC[AES256_GCM,data:eSROwx/YdGm+LxygbpG1Zrqftilp5ogfXkVpratOBQId0D3a,iv:/1UyFsGqodzel2opDTR62ZVbRvQMB6EGCmehv9SlxZ8=,tag:0S/W4eXpZlVJ893u1eTpvg==,type:str]
+secret_buildoor_wallet_privkey_2: ENC[AES256_GCM,data:PhlAnCwX6x/8IT7LNJMHET5lcJ5CfeHjbz6eesvqTf0A4xVo5+7DLEAoukjVDtHF2uPSlVVHaYU7ASUs+Z/IzQ==,iv:97Z90S9tUfzmGRW+QI5mvJ/Ou+13BRB2+MGGNp/EILQ=,tag:G9B84vf4iU31bvCrZlUcCQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2026-10-02T09:21:03Z"
-    mac: ENC[AES256_GCM,data:J3HBH5yfGTr0NHQP2GVHfd1PoZ8yjBqTjfk5Rux1VOatncynt4Ab42wXfrmLxUxlTqGOUzT4oMVcewj6dZmjGfLCbC1hT/CEocbsIB0XhtSLCnmPxAjzYf8yo8o0dBRK9LTTkos7GmWPkHFYZ1TLPTfPMaURWgIV0T1+Wztqirk=,iv:0q7FA+IZ/GdDN1+4mMRQ2Sexoj2FPIlcdpKTa02rYI4=,tag:T7h0AkZw9XtQ0R1FsoNp2w==,type:str]
+    lastmodified: "2026-10-02T12:58:19Z"
+    mac: ENC[AES256_GCM,data:cqRYZjoiLmQ0byvKEkly5Z5juMN3JV7/swVTUt63u15Z4Cf+WVfd2BUoMSjA82oCmCqBQ4sMUUjR8tSx0eO5rjSSgY28fYl3N6/Oxqgc+JSbsMyk+jflwJxHkiBEqTeqNNx5GuqEffF6BPd2Sl0J/LCg/vyfwbg6nRoenf/ogVo=,iv:tRHU1YPQrLzFT66Ixwimc8VqDX6nnBEK2aFshuC1GCo=,tag:Fbc37AzirhVu1KJWxx3yUw==,type:str]
     pgp:
         - created_at: "2025-10-27T13:25:35Z"
           enc: |-
