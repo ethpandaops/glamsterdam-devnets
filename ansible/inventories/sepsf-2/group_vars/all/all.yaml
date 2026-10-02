@@ -63,13 +63,18 @@ ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }
 # other EL resumes from its snapshot), the tooling gets funded from the
 # withdrawal sweep (scripts/fund-shadowfork.sh), builders onboard, and issues
 # get fixed.
+# TODO(sepsf-2): pick after the snapshot restore (shadowfork.yaml), ~30 min before playbook.yaml.
 ethereum_genesis_timestamp: 1790866800
 ethereum_genesis_timedelay: 0
 # Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
 # 0xd95349c2354b05d477a38da94a9997c27b97b07d8eba2e2998d0edfb538524f8, 60M gas.
 # The EL snapshots (geth/besu/nethermind/reth/erigon) are pinned to the same
 # height: snapshots.ethpandaops.io deletes old heights, so never use "latest".
+# TODO(sepsf-2): pin a recent sepolia block with snapshots for geth/besu/nethermind/reth/erigon
+# (snapshots.ethpandaops.io/sepolia/<el>/latest), and update the header comment above.
 shadowfork_height: 11820000
+# TODO(sepsf-2): >= 256 if exits/consolidations/partial withdrawals must be queued across the fork
+# (SHARD_COMMITTEE_PERIOD; every validator activates at epoch 0), else ~40 as on sepsf-1.
 gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
@@ -558,3 +563,9 @@ vector_config: |
       # max_events MUST be 1 — OTLP/HTTP allows one envelope per request.
       batch.max_events = 1
       batch.timeout_secs = 5
+
+# EL peers for erigon (--staticpeers) and ethrex (--bootnodes, discovery off): the enodes of our
+# restored snapshot ELs (geth/nethermind/besu/reth). Real sepolia peers stay fork-id compatible until
+# amsterdamTime; erigon's engine catch-up and ethrex's snap sync need peers that have OUR chain.
+# TODO(sepsf-2): fill after terraform apply + first playbook run (admin_nodeInfo on each EL).
+shadowfork_el_static_enodes: []

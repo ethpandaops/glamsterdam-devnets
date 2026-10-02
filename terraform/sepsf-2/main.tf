@@ -65,7 +65,7 @@ variable "ethereum_network" {
 }
 
 variable "base_cidr_block" {
-  default = "10.30.0.0/16"
+  default = "10.31.0.0/16" # distinct from sepsf-1 (10.30.0.0/16): VPC ranges must not overlap per region
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
