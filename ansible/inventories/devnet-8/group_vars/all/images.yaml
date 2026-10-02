@@ -15,7 +15,7 @@ default_ethereum_client_images:
   nethermind: registry-1.docker.io/nethermind/nethermind:2.1.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
-  ethrex: ghcr.io/lambdaclass/ethrex:28.0.0
+  ethrex: ghcr.io/lambdaclass/ethrex:29.0.0-rc.2
 
 default_tooling_images:
   mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop

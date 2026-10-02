@@ -1,0 +1,5 @@
+---
+default_ethereum_client_images:
+  grandine: registry-1.docker.io/sifrai/grandine:3.0.0-rc.0
+  erigon: registry-1.docker.io/erigontech/erigon:main-latest
+
