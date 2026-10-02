@@ -55,16 +55,12 @@ ethereum_genesis_network_seed: glamsterdam-sepsf-2
 ethereum_genesis_chain_id: "11155111"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Genesis 2026-10-01 15:00:00 UTC: ~30 min after the last snapshot finished
-# restoring (shadowfork.yaml runs first, it does not depend on the genesis time),
-# so playbook.yaml has time to provision every node. Gloas at epoch 40 =
-# 19:16:00 UTC, five days before sepolia's own Gloas (2026-10-06 13:53:36 UTC,
-# epoch 353024). ~4h of pre-fork runway: the ethrex nodes snap-sync (every
-# other EL resumes from its snapshot), the tooling gets funded from the
-# withdrawal sweep (scripts/fund-shadowfork.sh), builders onboard, and issues
-# get fixed.
-# TODO(sepsf-2): pick after the snapshot restore (shadowfork.yaml), ~30 min before playbook.yaml.
-ethereum_genesis_timestamp: 1790866800
+# Genesis 2026-10-02 13:30:00 UTC: ~40 min after the last snapshot finished
+# restoring (12:48:55 UTC; shadowfork.yaml does not depend on the genesis time).
+# Gloas at epoch 40 = 17:46:00 UTC, before sepolia's own Gloas (2026-10-06
+# 13:53:36 UTC, epoch 353024). Exits/consolidations/partial withdrawals cannot be
+# queued across the fork (SHARD_COMMITTEE_PERIOD 256 > 40); EIP-8282 builder deposits can.
+ethereum_genesis_timestamp: 1790947800
 ethereum_genesis_timedelay: 0
 # Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
 # 0xd95349c2354b05d477a38da94a9997c27b97b07d8eba2e2998d0edfb538524f8, 60M gas.
@@ -73,8 +69,6 @@ ethereum_genesis_timedelay: 0
 # sepsf-2 (2026-10-02): 11820000 is still the latest sepolia snapshot height for all five ELs
 # (none newer published), so sepsf-2 forks from the same block as sepsf-1.
 shadowfork_height: 11820000
-# TODO(sepsf-2): >= 256 if exits/consolidations/partial withdrawals must be queued across the fork
-# (SHARD_COMMITTEE_PERIOD; every validator activates at epoch 0), else ~40 as on sepsf-1.
 gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
