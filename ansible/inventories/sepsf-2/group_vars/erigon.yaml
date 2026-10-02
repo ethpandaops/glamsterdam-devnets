@@ -34,7 +34,8 @@ erigon_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   # Engine-API catch-up (>96 blocks behind) needs peers that have our chain; discovery
   # mostly finds real sepolia nodes. Our snapshot ELs (geth/nethermind/besu/reth) as static peers.
-  - --staticpeers={{ shadowfork_el_static_enodes | join(\',\') }}
+  # empty until the enodes are known: fall back to a no-op (default) flag instead of an empty --staticpeers=
+  - "{{ ('--staticpeers=' ~ (shadowfork_el_static_enodes | join(','))) if shadowfork_el_static_enodes | length > 0 else '--nodiscover=false' }}"
   - --discovery.v4=false
   - --discovery.v5=true
   - --log.console.verbosity=debug
