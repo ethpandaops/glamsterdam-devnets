@@ -5,8 +5,14 @@ powfaucet:
 
   image:
     repository: ghcr.io/qu0b/powfaucet
-    tag: v2.5.0-agent.6
+    tag: v2.5.0-agent.6@sha256:0b92c3b8853d445f697979db7465c3ea33d7945a14ba003be2152b2fee34fded
     pullPolicy: IfNotPresent
+
+  # Preserve session history: recurring payout limits depend on the database.
+  # Pre-create and populate this claim before replacing the emptyDir pod.
+  persistence:
+    enabled: true
+    existingClaim: powfaucet-agents-data
 
   resources:
     requests:
