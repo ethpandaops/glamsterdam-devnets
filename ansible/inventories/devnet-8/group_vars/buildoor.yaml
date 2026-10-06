@@ -75,6 +75,6 @@ ethrex_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --p2p.discv4=false
   - --p2p.discv5=true
-  - --http.api=eth,net,web3,admin
+  - --http.api=eth,net,web3,admin,debug
   - --syncmode=snap
   - --rocksdb.block-cache-size=4294967296

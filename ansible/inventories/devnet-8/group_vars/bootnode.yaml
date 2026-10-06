@@ -112,7 +112,7 @@ geth_container_volumes:
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 geth_container_command_extra_args:
   - --override.genesis=/network-config/genesis.json
-  - --http.api=eth,net,web3,admin,txpool
+  - --http.api=eth,net,web3,debug,admin,txpool
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full

@@ -23,7 +23,7 @@ reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --disable-discv4-discovery
-  - --http.api=rpc,eth,net,web3,admin,txpool
+  - --http.api=trace,rpc,eth,net,debug,web3,admin,txpool
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/tracing can handle full-block txs
   - --rpc.gascap=200000000
 prometheus_config: |

@@ -238,11 +238,6 @@ gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubuserconten
   network_iteration }}/dora/endpoints-cl.yaml
 gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
 gen_kubernetes_config_dora_xatu_enabled: true
-# Don't let tooling call debug/trace endpoints: disable dora execution indexer
-# trace fetching (debug_traceBlockBy*) and the tracoor chart entirely.
-gen_kubernetes_config_dora_execution_indexer_traces: false
-gen_kubernetes_config_disabled_services:
-  - tracoor
 # Startup-scheduled assertoor tests. deploy-eip8282-contracts performs the
 # manual pre-gloas deployment of the builder request contracts, since genesis
 # omits them (DEPLOY_EIP8282_CONTRACTS=false). Rendering this list needs the
