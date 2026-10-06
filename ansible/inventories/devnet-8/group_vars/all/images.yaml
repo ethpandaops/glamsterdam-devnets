@@ -15,7 +15,7 @@ default_ethereum_client_images:
   nethermind: nethermind/nethermind:2.1.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: statusim/nimbus-eth1:v0.4.2
-  ethrex: ghcr.io/lambdaclass/ethrex:29.0.0-rc.2
+  ethrex: ghcr.io/lambdaclass/ethrex:29.0.1
 
 default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop
