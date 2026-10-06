@@ -2,7 +2,7 @@
 default_ethereum_client_images:
   ### Consensus layer clients
   lighthouse: sigp/lighthouse:v8.3.0-rc.0
-  lodestar: chainsafe/lodestar:v1.49.0
+  lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable
   nimbus: statusim/nimbus-eth2:multiarch-v26.10.0
   prysm: offchainlabs/prysm-beacon-chain:v7.2.0
   prysm_validator: offchainlabs/prysm-validator:v7.2.0
