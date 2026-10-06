@@ -1,21 +1,21 @@
 ---
 default_ethereum_client_images:
   ### Consensus layer clients
-  lighthouse: sigp/lighthouse:v8.3.0-rc.0
+  lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
   lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable
-  nimbus: statusim/nimbus-eth2:multiarch-v26.10.0
-  prysm: offchainlabs/prysm-beacon-chain:v7.2.0
-  prysm_validator: offchainlabs/prysm-validator:v7.2.0
-  teku: consensys/teku:26.9.1
-  grandine: sifrai/grandine:3.0.0-rc.0
+  nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
+  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
+  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
+  teku: registry-1.docker.io/ethpandaops/teku:master
+  grandine: registry-1.docker.io/ethpandaops/grandine:develop
   ### Execution layer clients
-  besu: hyperledger/besu:26.9.0
-  geth: ethereum/client-go:v1.17.7
-  erigon: erigontech/erigon:v3.7.1
-  nethermind: nethermind/nethermind:2.1.0
-  reth: ghcr.io/paradigmxyz/reth:v2.7.0
-  nimbusel: statusim/nimbus-eth1:v0.4.2
-  ethrex: ghcr.io/lambdaclass/ethrex:29.0.1
+  besu: registry-1.docker.io/ethpandaops/besu:main
+  geth: registry-1.docker.io/ethpandaops/geth:master
+  erigon: registry-1.docker.io/ethpandaops/erigon:main
+  nethermind: registry-1.docker.io/ethpandaops/nethermind:master
+  reth: registry-1.docker.io/ethpandaops/reth:main
+  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
+  ethrex: registry-1.docker.io/ethpandaops/ethrex:main
 
 default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop
