@@ -2,7 +2,7 @@
 # Pre-genesis gate for a shadowfork: run after playbook.yaml started the ELs and before the
 # CL genesis time. Exits non-zero if any check fails; every line says which host and why.
 #   genesis.json: alloc keys 0x, request contract addresses, only the expected fork keys
-#   per EL host:  head == shadowfork_height with the shadowfork_block.json hash, eth_config
+#   per EL host (except nimbusel):  head == shadowfork_height with the shadowfork_block.json hash, eth_config
 #                 next activation == amsterdamTime, unique node id, peers only fleet IPs,
 #                 /data < 85%, erigon snapshots/preverified.toml, ethrex chain-1/metadata.json
 #
@@ -49,7 +49,8 @@ pass="$(sops -d --extract '["secret_nginx_shared_basic_auth"]["password"]' "$var
 fmt="${RPC_URL_FMT:-}"
 [ -n "$fmt" ] || fmt="https://$user:$pass@rpc-{host}.srv.glamsterdam-$net.ethpandaops.io"
 fleet="$(grep -oE 'ansible_host=[0-9.]+' "$inv" | cut -d= -f2 | sort -u)"
-hosts="$(cd "$root/ansible" && ansible -i "$inv" 'ethereum_node:bootnode' --list-hosts 2>/dev/null | tail -n +2 | tr -d ' ')"
+# nimbusel has no snapshot and starts after Gloas (snap sync), so it cannot be at the head yet.
+hosts="$(cd "$root/ansible" && ansible -i "$inv" 'ethereum_node:bootnode:!nimbusel' --list-hosts 2>/dev/null | tail -n +2 | tr -d ' ')"
 rpc() { curl -sf --max-time 15 -X POST -H 'content-type: application/json' \
   --data "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"$2\",\"params\":$3}" "${fmt//\{host\}/$1}"; }
 ids="$(mktemp)"; trap 'rm -f "$ids"' EXIT
