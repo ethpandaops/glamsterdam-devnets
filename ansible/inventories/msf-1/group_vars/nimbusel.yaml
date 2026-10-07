@@ -19,6 +19,8 @@ nimbusel_container_volumes:
   - "{{ nimbusel_datadir }}:/data"
   - "{{ nimbusel_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
+# Start these only after Gloas has finalized (playbook.yaml -l '!nimbusel' before): v0.4.2
+# snap sync needs a post-Amsterdam pivot (bals_download.nim:78) and the static enodes.
 # No jochemnet nimbus-el snapshot: snap-sync from the restored ELs (experimental, hidden
 # --debug-snap-sync in v0.4.2). Peer only with our snapshot ELs: real mainnet peers share
 # our fork ID until amsterdamTime and would serve mainnet's state. Discovery off,
@@ -30,6 +32,8 @@ nimbusel_shadowfork_args:
   - --network=/network-config/genesis.json
   - --discv5=false
   - --debug-snap-sync=true
+  # keep partial state across restarts (default: moved to a ~ backup, mainnet-sized)
+  - --debug-snap-sync-resume=true
   - --rpc-api=admin,eth
   - --ws-api=admin,eth
   - --log-level=DEBUG

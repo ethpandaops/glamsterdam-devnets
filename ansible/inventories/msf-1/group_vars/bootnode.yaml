@@ -119,6 +119,8 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
+  # Without --bootnodes geth falls back to mainnet's bootnodes (empty is fine: none).
+  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   # no --gcmode=archive: the restored jochemnet snapshot is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus

@@ -7,7 +7,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.snapshot_fetcher
 snapshot_fetcher_out_dir: /data/erigon
-# Frozen up to 24401000; if one stalls at the first block (retire deadlock), --snap.stop via host_vars.
+# Frozen up to 24401000; retire starts ~300 blocks after genesis. If it stalls then (v3.7.1
+# retire deadlock), add --snap.stop via erigon_host_extra_args.
 snapshot_fetcher_filename: snapshot-pruned.tar.zst
 
 # role: ethpandaops.general.ethereum_node
@@ -39,12 +40,11 @@ erigon_shadowfork_args:
   - --keep.stored.chain.config=true
   # Otherwise caplin starts and follows the real chain (sepsf-1).
   - --externalcl
-  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  # Engine-API catch-up (>96 blocks behind) needs peers that have our chain; discovery
-  # mostly finds real mainnet nodes. Our snapshot ELs are added
-  # as --staticpeers above.
-  - --discovery.v4=false
-  - --discovery.v5=true
+  # Chain id 1 injects the mainnet DNS tree whatever --discovery.dns says; only --nodiscover
+  # stops it (exclusive with --discovery.v4/v5 and unused --bootnodes). Peers: --staticpeers.
+  - --nodiscover
+  # Never fetch or seed mainnet snapshot files: jochemnet's segments carry mainnet names.
+  - --no-downloader
   - --log.console.verbosity=debug
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc.gascap=200000000

@@ -248,6 +248,11 @@ gen_kubernetes_config_dora_xatu_enabled: true
 gen_kubernetes_config_dora_execution_indexer_traces: false
 gen_kubernetes_config_disabled_services:
   - tracoor
+  # faucet_private_key (mnemonic-4) is 7702-delegated to a sweeper in mainnet state;
+  # faucet-agents uses its own key.
+  - faucet
+  # Its "add to MetaMask" offers chain id 1: a tx signed there with a real key is valid on mainnet.
+  - homepage
 # Mainnet has no EIP-8282 contracts: deploy them pre-Gloas like devnet-7/8. Wallet is
 # mnemonic-10 (fund-shadowfork.sh); re-run from the assertoor UI if it ran unfunded.
 gen_kubernetes_config_assertoor_tests:
@@ -555,6 +560,7 @@ vector_config: |
       batch.timeout_secs = 5
 
 # Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
-# Firewall EL p2p on every host: FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-1
+# Firewall EL p2p on every host right after -t init-server (before any EL starts):
+#   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-1
 # TODO(msf-1): fill after terraform apply + first playbook run (admin_nodeInfo on each EL).
 shadowfork_el_static_enodes: []

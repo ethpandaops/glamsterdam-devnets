@@ -17,6 +17,22 @@
     - role: ethpandaops.general.ethereum_genesis
       tags: [ethereum_genesis]
 
+# Mainnet shadowforks only: egg's copy of mainnet's genesis.json does not load in
+# nethermind/besu as is (see the script).
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Normalize mainnet shadowfork genesis.json
+      ansible.builtin.command: >-
+        python3 {{ playbook_dir }}/../scripts/normalize-shadowfork-genesis.py
+        {{ ethereum_genesis_generator_output_dir }}/metadata/genesis.json
+      args:
+        chdir: "{{ playbook_dir }}"
+      register: normalize_genesis
+      changed_when: normalize_genesis.stdout == 'changed'
+      when: ethereum_genesis_chain_id | default('') | string == '1'
+      tags: [ethereum_genesis]
+
 - import_playbook: ethpandaops.general.bootstrap_server
   vars:
     target: "all:!localhost"
