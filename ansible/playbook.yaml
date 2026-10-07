@@ -26,6 +26,7 @@
       ansible.builtin.command: >-
         python3 {{ playbook_dir }}/../scripts/normalize-shadowfork-genesis.py
         {{ ethereum_genesis_generator_output_dir }}/metadata/genesis.json
+        {{ shadowfork_amsterdam_time | default('') }}
       args:
         chdir: "{{ playbook_dir }}"
       register: normalize_genesis

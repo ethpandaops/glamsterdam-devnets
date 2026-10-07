@@ -3,7 +3,7 @@
 # CL genesis time. Exits non-zero if any check fails; every line says which host and why.
 #   genesis.json: alloc keys 0x, request contract addresses, only the expected fork keys
 #   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the shadowfork_block.json hash, eth_config
-#                 next activation == amsterdamTime, unique node id, peers only fleet IPs,
+#                 next (or current) activation == amsterdamTime, unique node id, peers only fleet IPs,
 #                 /data < 85%, erigon snapshots/preverified.toml, ethrex chain-1/metadata.json
 #
 # Usage: scripts/shadowfork-pregenesis-check.sh <inventory dir, e.g. msf-1>
@@ -60,10 +60,19 @@ for h in $hosts; do
   if [ -z "$num" ]; then bad "$h: no RPC answer"; continue; fi
   [ "$(( num ))" = "$height" ] && [ "$hash" = "$want_hash" ] && ok "$h head $height" \
     || bad "$h head $(( num )) $hash"
-  next="$(rpc "$h" eth_config '[]' | jq -r '.result.next.activationTime // empty' 2>/dev/null || true)"
+  # a post-Amsterdam image (msf-2) has no next fork: amsterdam is current
+  next="$(rpc "$h" eth_config '[]' | jq -r '(.result.next // .result.current).activationTime // empty' 2>/dev/null || true)"
   if [ -z "$next" ]; then echo "warn $h: no eth_config, check amsterdamTime in its startup log"
   elif [ "$(( next ))" = "$amsterdam" ]; then ok "$h eth_config next $amsterdam"
   else bad "$h eth_config next activation $(( next )) != $amsterdam"; fi
+  # EIP-8282: every Amsterdam block is invalid without code at both addresses. A pre-Amsterdam
+  # head may still get them from the assertoor deploy; a post-Amsterdam one must already hold them.
+  for a in 0x0000bff46984e3725691fa540a8c7589300d8282 0x000064d678505ad48f8ccb093bc65613800e8282; do
+    code="$(rpc "$h" eth_getCode "[\"$a\",\"latest\"]" | jq -r '.result // empty' 2>/dev/null || true)"
+    if [ "${#code}" -gt 2 ]; then ok "$h code at $a"
+    elif [ "$(( $(jq -r '.result.timestamp' <<<"$b") ))" -ge "$amsterdam" ]; then bad "$h: no code at $a past Amsterdam"
+    else echo "warn $h: no code at $a yet (deploy before Gloas)"; fi
+  done
   rpc "$h" admin_nodeInfo '[]' | jq -r --arg h "$h" '.result.id // empty | "\(.) \($h)"' >> "$ids" 2>/dev/null || true
   # every public IPv4 in admin_peers must be ours (private/container addresses are skipped)
   foreign="$(rpc "$h" admin_peers '[]' 2>/dev/null | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -u \
