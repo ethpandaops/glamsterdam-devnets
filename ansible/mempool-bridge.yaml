@@ -20,10 +20,14 @@
     mempool_bridge_dir: /data/mempool-bridge
     # One RPC per EL client; every EL gossips the txs on through the fleet.
     mempool_bridge_target_hosts: "{{ groups['ethereum_node'] | map('extract', hostvars) | selectattr('validator_start', 'defined') | groupby('ethereum_node_el') | map('last') | map('first') | map(attribute='inventory_hostname') | list }}"
+    # A loop, not regex_replace: Jinja unescapes string literals, so a '\1' backreference arrives as U+0001.
     mempool_bridge_target_rpc: >-
-      {{ mempool_bridge_target_hosts
-         | map('regex_replace', '^(.*)$', 'https://' ~ secret_nginx_shared_basic_auth.name ~ ':' ~ secret_nginx_shared_basic_auth.password ~ '@' ~ ethereum_node_rpc_prefix ~ '\1.' ~ network_server_subdomain)
-         | list }}
+      {%- set urls = [] -%}
+      {%- for h in mempool_bridge_target_hosts -%}
+      {%-   set _ = urls.append('https://' ~ secret_nginx_shared_basic_auth.name ~ ':' ~ secret_nginx_shared_basic_auth.password
+                                ~ '@' ~ ethereum_node_rpc_prefix ~ h ~ '.' ~ network_server_subdomain) -%}
+      {%- endfor -%}
+      {{ urls }}
   tasks:
     - name: Require a source and a target
       ansible.builtin.assert:
