@@ -59,10 +59,10 @@ ethereum_genesis_timedelay: 0
 # Our benchmark images (shadowfork-images.ethpandaops.io, built by bruno/shadowfork): a canonical
 # mainnet snapshot advanced by a pre-run that geth filled once and every other client replayed, so
 # all images share one head hash. The pre-run funds 25k accounts + the buildoor wallet and deploys
-# the EIP-8282 contracts in two Osaka blocks, crosses Amsterdam, then fills 325k receivers per
-# variant at 24 KiB and at 64 KiB with their 7702 delegations (1 Ggas test_account_access). The
-# head is past Amsterdam and not on mainnet; mainnet txs replay only for senders the pre-run did
-# not touch, and only while the anchor is recent (nonces).
+# the EIP-8282 contracts in two Osaka blocks, crosses Amsterdam, then fills 100k receivers per
+# variant at 24 KiB and at 64 KiB with their 7702 delegations (as the benchmarkoor-tests CI
+# prefill: benchmarks up to ~300 Mgas). The head is past Amsterdam and not on mainnet; mainnet
+# txs replay only for senders the pre-run did not touch, and only while the anchor is recent.
 # TODO(msf-2): head of the fresh build (anchor mainnet 26139552). 0 makes the restore fail.
 shadowfork_height: 0
 # No shadowfork_head_height: nothing is imported on top of the image (msf-1 had a prestate).
