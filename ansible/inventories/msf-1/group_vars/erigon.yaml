@@ -7,6 +7,9 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.snapshot_fetcher
 snapshot_fetcher_out_dir: /data/erigon
+# Frozen up to 24401000; retire starts ~300 blocks after genesis. If it stalls then (v3.7.1
+# retire deadlock), add --snap.stop via erigon_host_extra_args.
+snapshot_fetcher_filename: snapshot-pruned.tar.zst
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
@@ -31,19 +34,17 @@ erigon_shadowfork_args:
   - --http.vhosts=*
   - --ws
   - --networkid={{ ethereum_network_id }}
-  - --db.size.limit=1TB  # sepolia datadir is ~985 GB
+  - --db.size.limit=2TB
   # Shadowfork hook: makes the erigon role re-run `init` over the restored chaindata
-  # and stops erigon from swapping our genesis.json config for its built-in sepolia one.
+  # and stops erigon from swapping our genesis.json config for its built-in mainnet one.
   - --keep.stored.chain.config=true
-  # With sepolia's network id erigon starts its embedded CL (caplin): it synced real
-  # sepolia past the snapshot and answered our CL's engine calls with "caplin is enabled".
+  # Otherwise caplin starts and follows the real chain (sepsf-1).
   - --externalcl
-  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  # Engine-API catch-up (>96 blocks behind) needs peers that have our chain; discovery
-  # mostly finds real sepolia nodes. Our snapshot ELs (geth/nethermind/besu/reth) are added
-  # as --staticpeers above.
-  - --discovery.v4=false
-  - --discovery.v5=true
+  # Chain id 1 injects the mainnet DNS tree whatever --discovery.dns says; only --nodiscover
+  # stops it (exclusive with --discovery.v4/v5 and unused --bootnodes). Peers: --staticpeers.
+  - --nodiscover
+  # Never fetch or seed mainnet snapshot files: jochemnet's segments carry mainnet names.
+  - --no-downloader
   - --log.console.verbosity=debug
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc.gascap=200000000

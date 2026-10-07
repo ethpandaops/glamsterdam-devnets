@@ -1,8 +1,0 @@
----
-# erigon v3.7.1 deadlock: block retire (freezeblocks.DumpTxs holds commitGate.RLock and its
-# kv.ReadAheadDeprecated goroutines take it again) vs the post-FCU prune
-# (Aggregator.CollateAndPrune -> commitGate.Lock). This node was still retiring the restored
-# 11.6M-11.82M blocks at genesis and stalled at 11820001. --snap.stop disables block retire.
-# Remove once erigon fixes it (the other 4 erigons finished retiring before the collision).
-erigon_host_extra_args:
-  - --snap.stop

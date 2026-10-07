@@ -39,7 +39,7 @@ export ETH_RPC_URL="${RPC_ENDPOINT:-https://$user:$pass@${rpc_prefix}bootnode-1.
 # from the real network. The block right after shadowfork_height can: on the
 # shadowfork it was built after our genesis, on the parent chain long before.
 chain_id="$(yq '.ethereum_genesis_chain_id' "$vars/all.yaml")"
-height="$(yq '.shadowfork_height' "$vars/all.yaml")"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
 genesis="$(yq '.ethereum_genesis_timestamp' "$vars/all.yaml")"
 [ "$(cast chain-id)" = "$chain_id" ] || die "RPC chain id is not $chain_id"
 ts_hex="$(cast block $((height + 1)) --json 2>/dev/null | jq -r '.timestamp // empty')" \
@@ -77,11 +77,11 @@ echo "treasury $treasury (mnemonic 0): $(cast from-wei "$(cast balance "$treasur
 nonce="$(cast nonce "$treasury" --block pending)"
 sent=0; short=0; : > "$tmp/txs"
 while read -r addr target label; do
-  # Sepolia's mnemonic-1/2 carry an EIP-7702 delegation (inherited by the shadowfork) to
-  # a sweeper that forwards every deposit away; funding them only drains the treasury.
-  # Undoing it needs a chain-id-11155111 authorization, replayable on real sepolia: skip.
-  if [ "$(cast code "$addr")" = "0xef0100334967edf519f30e7e4a76f2bb9afb8a7b388c65" ]; then
-    printf '  %-22s %s skipped: EIP-7702-delegated to a sweeper\n' "$label" "$addr"
+  # Skip EIP-7702-delegated wallets inherited from the parent chain: sepolia's mnemonic-1/2
+  # and mainnet's mnemonic-4 (faucet) delegate to sweepers that forward every deposit away.
+  code="$(cast code "$addr")"
+  if [ "${code:0:8}" = "0xef0100" ]; then
+    printf '  %-22s %s skipped: EIP-7702-delegated to 0x%s\n' "$label" "$addr" "${code:8}"
     continue
   fi
   balance="$(cast balance "$addr")"

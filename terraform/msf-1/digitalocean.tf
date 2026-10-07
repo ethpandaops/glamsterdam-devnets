@@ -13,7 +13,7 @@ variable "digitalocean_ssh_key_name" {
 
 variable "digitalocean_supernode_size" {
   type    = string
-  default = "so1_5-8vcpu-64gb-intel" # 1.8 TB disk for the ~1 TB sepolia EL snapshots
+  default = "so1_5-8vcpu-64gb-intel" # 1.8 TB disk (DO's largest) for the jochemnet snapshots
 }
 
 variable "digitalocean_fullnode_size" {

@@ -50,8 +50,10 @@ bootnodoor_p2p_port: 9010
 bootnodoor_ui_port: 8004
 bootnodoor_enr_ip: "{{ ansible_host }}"
 
-bootnodoor_el_config: /network-config/genesis.json
-bootnodoor_el_genesis_hash: /network-config/deposit_contract_block_hash.txt
+# genesis.json with timestamp 1, written by playbook.yaml: bootnodoor rejects mainnet's 0.
+bootnodoor_el_config: /data/el-genesis.json
+# Fork ids hash the real genesis; deposit_contract_block_hash.txt is the shadowfork head.
+bootnodoor_el_genesis_hash: "0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3"
 bootnodoor_cl_config: /network-config/config.yaml
 bootnodoor_cl_gvr: /network-config/genesis_validators_root.txt
 bootnodoor_container_volumes_extra:
@@ -119,7 +121,9 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
-  # no --gcmode=archive: the restored sepolia snapshot is a pruned datadir
+  # Without --bootnodes geth falls back to mainnet's bootnodes (empty is fine: none).
+  - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  # no --gcmode=archive: the restored jochemnet snapshot is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus  # victoriametrics.ethdevops.io no longer resolves

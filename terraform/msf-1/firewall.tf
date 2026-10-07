@@ -1,6 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 //                              DIGITALOCEAN FIREWALLS
 ////////////////////////////////////////////////////////////////////////////////////////
+variable "el_p2p_extra_source_addresses" {
+  description = "Extra CIDRs allowed to reach EL p2p 30303 (e.g. a local join host)"
+  type        = list(string)
+  default     = []
+}
+
 resource "digitalocean_firewall" "main" {
   count = length(local.digitalocean_vms) > 0 ? 1 : 0
   name  = "${var.ethereum_network}-nodes"
@@ -52,16 +58,19 @@ resource "digitalocean_firewall" "main" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-  // Execution layer p2p Port
+  // Execution layer p2p port: our droplets only. Chain id 1 + mainnet's fork id until
+  // amsterdamTime, so real mainnet peers would otherwise connect.
   inbound_rule {
     protocol         = "tcp"
     port_range       = "30303"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    source_tags      = ["EthNetwork:${var.ethereum_network}"]
+    source_addresses = length(var.el_p2p_extra_source_addresses) > 0 ? var.el_p2p_extra_source_addresses : null
   }
   inbound_rule {
     protocol         = "udp"
     port_range       = "30303"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    source_tags      = ["EthNetwork:${var.ethereum_network}"]
+    source_addresses = length(var.el_p2p_extra_source_addresses) > 0 ? var.el_p2p_extra_source_addresses : null
   }
   inbound_rule {
     protocol         = "tcp"
