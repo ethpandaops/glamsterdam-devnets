@@ -53,13 +53,12 @@ ethereum_genesis_network_seed: glamsterdam-msf-1
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# TODO(msf-1): pick after the restore, ~45 min before playbook.yaml (value is sepsf-2's).
-ethereum_genesis_timestamp: 1790947800
+# 2026-10-07 17:30 UTC
+ethereum_genesis_timestamp: 1791394200
 ethereum_genesis_timedelay: 0
 # jochemnet (benchmarkoor): mainnet 24350000 + 1 s bloat blocks up to 24402727, not on
 # mainnet. Gate before genesis: eth_config shows our amsterdamTime on every EL.
 shadowfork_height: 24402727
-# TODO(msf-1): >= 256 to queue exits/consolidations across the fork, else 40.
 gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
@@ -103,7 +102,7 @@ ethereum_genesis_generator_config_files:
     export VALIDATOR_BALANCE=10000000000000
     export DEPOSIT_CONTRACT_ADDRESS=0x00000000219ab540356cBB839Cbe05303d7705Fa
     export SHADOW_FORK_FILE=/config/shadowfork_block.json
-  # TODO(msf-1): commit files/shadowfork_block.json.
+  # Block 24402727 from the restored bootnode geth (eth_getBlockByNumber, full txs).
   shadowfork_block.json: "{{ lookup('ansible.builtin.file', (ansible_inventory_sources[0] | dirname) ~ '/files/shadowfork_block.json') }}"
 
 # role: ethpandaops.general.snapshot_fetcher (variable names reused by
