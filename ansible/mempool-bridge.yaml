@@ -1,0 +1,59 @@
+# Replay real mainnet transactions into a mainnet shadowfork (one way): mempool-bridge listens to
+# mainnet peers over devp2p and re-announces every tx to our ELs. Run after the static enodes are
+# known (playbook.yaml first run):
+#   ansible-playbook -i inventories/<sf>/inventory.ini mempool-bridge.yaml
+# Only txs whose sender nonce matches the shadowfork state land, so the yield falls as the
+# snapshot anchor ages. `-e mempool_bridge_state=absent` removes it.
+- hosts: bootnode
+  become: true
+  vars:
+    mempool_bridge_state: started
+    mempool_bridge_image: docker.io/ethpandaops/mempool-bridge:0.2.0
+    mempool_bridge_dir: /data/mempool-bridge
+  tasks:
+    - name: Require mainnet source peers and our target peers
+      ansible.builtin.assert:
+        that:
+          - mempool_bridge_source_enodes | default([]) | length > 0
+          - shadowfork_el_static_enodes | length > 0
+        fail_msg: set mempool_bridge_source_enodes (mainnet full nodes that accept us) and shadowfork_el_static_enodes
+      when: mempool_bridge_state != 'absent'
+
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "{{ mempool_bridge_dir }}"
+        state: directory
+        mode: "0755"
+      when: mempool_bridge_state != 'absent'
+
+    - name: Write config
+      ansible.builtin.copy:
+        dest: "{{ mempool_bridge_dir }}/config.yaml"
+        mode: "0644"
+        content: "{{ config | to_nice_yaml }}"
+      vars:
+        config:
+          logging: info
+          metricsAddr: 127.0.0.1:9095
+          mode: p2p
+          source:
+            retryInterval: 30s
+            nodeRecords: "{{ mempool_bridge_source_enodes }}"
+          target:
+            retryInterval: 30s
+            nodeRecords: "{{ shadowfork_el_static_enodes }}"
+      when: mempool_bridge_state != 'absent'
+
+    # Host network: the SF-P2P firewall (scripts/shadowfork-ethrex-firewall.sh) drops every
+    # container's traffic on port 30303 in DOCKER-USER; host processes go through OUTPUT and are
+    # not touched. Nothing from our side reaches mainnet: the bridge only sends to the target.
+    - name: Run mempool-bridge
+      community.docker.docker_container:
+        name: mempool-bridge
+        image: "{{ mempool_bridge_image }}"
+        state: "{{ mempool_bridge_state }}"
+        network_mode: host
+        restart_policy: unless-stopped
+        command: ["--config", "/config/config.yaml"]
+        volumes:
+          - "{{ mempool_bridge_dir }}:/config:ro"

@@ -8,10 +8,6 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 ethereum_node_fact_discovery_el_key_cmd:
   ethrex: xxd -p -c32 {{ ethrex_datadir | default('/data/ethrex') }}/chain-{{ ethereum_network_id | trim }}/node.key
 
-# role: ethpandaops.general.snapshot_fetcher (bare RocksDB; ethrex 29 reads <datadir>/chain-<id>,
-# hardcoded: genesis.json does not exist at restore time). The May db is migrated on start.
-snapshot_fetcher_out_dir: /data/ethrex/chain-1
-
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: ethrex
 # role: ethpandaops.general.ethrex
@@ -37,8 +33,9 @@ ethrex_container_command_extra_args:
   - "--p2p.discv4={{ 'true' if shadowfork_el_static_enodes | length > 0 else 'false' }}"
   - "--p2p.discv5={{ 'false' if shadowfork_el_static_enodes | length > 0 else 'true' }}"
   - --http.api=eth,net,web3,admin
-  # Restored: follow the CL (default is snap).
-  - --syncmode=full
+  # No ethrex image (no mainnet ethrex snapshot to replay onto): snap-sync the state from the
+  # restored ELs, as on sepsf-2. Its validators are offline until that finishes.
+  - --syncmode=snap
 
 prometheus_config: |
   global:

@@ -7,8 +7,6 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.snapshot_fetcher
 snapshot_fetcher_out_dir: /data/reth
-# v2 storage (snapshot.tar.zst is the old v1 format)
-snapshot_fetcher_filename: snapshot-v2.tar.zst
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: reth

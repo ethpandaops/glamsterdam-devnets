@@ -5,8 +5,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/geth?format=txt') | select | list)
      + geth_extra_github_users }}
 
-# role: ethpandaops.general.snapshot_fetcher (snapshot layout: chaindata/ at the top)
-snapshot_fetcher_out_dir: /data/geth/geth
+# role: ethpandaops.general.snapshot_fetcher (our images keep the geth/ prefix: triedb/merkle.journal)
+snapshot_fetcher_out_dir: /data/geth
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth

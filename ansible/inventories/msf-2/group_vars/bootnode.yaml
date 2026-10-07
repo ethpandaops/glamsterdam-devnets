@@ -102,7 +102,7 @@ prysm_container_command_extra_bootnode_args: >-
 ethereum_node_el: geth
 
 # role: ethpandaops.general.snapshot_fetcher (bootnode is not in the geth group)
-snapshot_fetcher_out_dir: /data/geth/geth
+snapshot_fetcher_out_dir: /data/geth
 
 # role: ethpandaops.general.geth
 geth_container_name: execution
@@ -123,7 +123,7 @@ geth_container_command_extra_args:
   - --syncmode=full
   # Without --bootnodes geth falls back to mainnet's bootnodes (empty is fine: none).
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  # no --gcmode=archive: the restored jochemnet snapshot is a pruned datadir
+  # no --gcmode=archive: the restored image is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus  # victoriametrics.ethdevops.io no longer resolves

@@ -27,7 +27,7 @@
 variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
-    # Every EL except nimbus-el restores a jochemnet snapshot (up to ~1.5 TB on disk),
+    # Every EL except nimbus-el except ethrex restores an image (nethermind ~1.5 TiB on disk),
     # so every node with an EL gets the 1.8 TB storage-optimized size.
     { name = "bootnode", count = 1, cloud = "digitalocean" },
     { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", builder_start = 0 },

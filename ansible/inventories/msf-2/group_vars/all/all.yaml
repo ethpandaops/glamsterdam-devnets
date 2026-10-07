@@ -53,18 +53,18 @@ ethereum_genesis_network_seed: glamsterdam-msf-2
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# 2026-10-07 19:00 UTC
-ethereum_genesis_timestamp: 1791399600
+# TODO(msf-2): ~45 min after every EL is restored
+ethereum_genesis_timestamp: 0
 ethereum_genesis_timedelay: 0
-# jochemnet (benchmarkoor): mainnet 24350000 + 1 s bloat blocks up to 24402727, not on
-# mainnet. Gate before genesis: eth_config shows our amsterdamTime on every EL.
-# shadowfork_height is the snapshot; the head is 2 blocks later, built on a restored geth and
-# imported into every EL over the engine API (scripts/shadowfork-prestate/):
-#   24402728: benchmarkoor's funding (15001 withdrawals of 2^64-1 gwei, funding.txt of
-#             gas-benchmarks amsterdam-repricings-v5.2.0) + 1 ETH for a throwaway deployer
-#   24402729: the two EIP-8282 contracts via the 0x4e59 CREATE2 factory
-shadowfork_height: 24402727
-shadowfork_head_height: 24402729
+# Our benchmark images (shadowfork-images.ethpandaops.io, built by bruno/shadowfork): a canonical
+# mainnet snapshot advanced by a pre-run that geth filled once and every other client replayed, so
+# all images share one head hash. The pre-run adds, all pre-Gloas: EIP-8282 contracts, 25k funded
+# accounts + the buildoor wallet, 370k receivers per variant and their 7702 delegations (1 Ggas
+# test_account_access). The head is not on mainnet; mainnet txs replay only for senders the
+# pre-run did not touch, and only while the anchor is recent (nonces).
+# TODO(msf-2): head of the fresh build (anchor mainnet 26139552 or newer). 0 makes the restore fail.
+shadowfork_height: 0
+# No shadowfork_head_height: nothing is imported on top of the image (msf-1 had a prestate).
 gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
@@ -77,8 +77,8 @@ ethereum_genesis_generator_config_files:
   # Network identity and fork schedule only - every spec parameter not listed
   # here follows the egg defaults, which match sepolia's Gloas config.yaml.
   # Shadowfork specifics:
-  # - SHADOW_FORK_FILE: eth_getBlockByNumber("0x1745b29", true) after the prestate import (full
-  #   txs; jochemnet publishes none, the one in the erigon tarball is block 24350000).
+  # - SHADOW_FORK_FILE: the image's _snapshot_eth_getBlockByNumber.json (full txs), published
+  #   next to every image.
   # - DEPOSIT_CONTRACT_ADDRESS must be mainnet's or the generator refuses.
   # - GAS_LIMIT_SCHEDULE: 200M at the Gloas epoch, like sepolia.
   # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
@@ -87,7 +87,7 @@ ethereum_genesis_generator_config_files:
   #   0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2) and funds the tooling from there.
   #   Index 0 is empty on real mainnet.
   # Not set because shadowfork mode ignores them: EL premines, GENESIS_GASLIMIT,
-  # DEPLOY_EIP8282_CONTRACTS (deployed in block 24402729, see shadowfork_head_height).
+  # DEPLOY_EIP8282_CONTRACTS (deployed by the image pre-run).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
@@ -108,13 +108,14 @@ ethereum_genesis_generator_config_files:
     export VALIDATOR_BALANCE=10000000000000
     export DEPOSIT_CONTRACT_ADDRESS=0x00000000219ab540356cBB839Cbe05303d7705Fa
     export SHADOW_FORK_FILE=/config/shadowfork_block.json
-  # Block 24402729 from the bootnode geth (eth_getBlockByNumber, full txs).
+  # <base>/mainnet/geth/<shadowfork_height>/_snapshot_eth_getBlockByNumber.json
   shadowfork_block.json: "{{ lookup('ansible.builtin.file', (ansible_inventory_sources[0] | dirname) ~ '/files/shadowfork_block.json') }}"
 
 # role: ethpandaops.general.snapshot_fetcher (variable names reused by
 # ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
 # snapshot_fetcher_out_dir/_filename are set per EL in its group_vars file.
-snapshot_fetcher_network: jochemnet
+snapshot_fetcher_network: mainnet
+shadowfork_snapshot_base_url: https://shadowfork-images.ethpandaops.io
 snapshot_fetcher_client: "{{ ethereum_node_el }}"
 snapshot_fetcher_block: "{{ shadowfork_height }}"
 
@@ -258,7 +259,7 @@ gen_kubernetes_config_disabled_services:
   - faucet
   # Its "add to MetaMask" offers chain id 1: a tx signed there with a real key is valid on mainnet.
   - homepage
-# The EIP-8282 contracts are in block 24402729, so this only checks them (it skips the deploy
+# The EIP-8282 contracts are in the image, so this only checks them (it skips the deploy
 # when the deposit contract has code).
 gen_kubernetes_config_assertoor_tests:
   - id: deploy-eip8282-contracts
@@ -567,32 +568,5 @@ vector_config: |
 # Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
 # Firewall EL p2p on every host right after -t init-server (before any EL starts):
 #   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-2
-# The 27 geth/besu/reth/nethermind ELs, from the first playbook run's ethereum_node_fact_discovery_el_enode facts (2026-10-07).
-shadowfork_el_static_enodes:
-  - enode://182aa43c0045e4dc6a59c55e08bf15b08d72646b8c96cf6de63b63e2ece6074eea440eb65340552a71db93c501028f4996dea8695ba02d52877236fde34e2220@165.22.214.79:30303  # bootnode-1
-  - enode://4d4cd5e3a249e0e68277da4512307cd948fd56465546f466e92dcf03d9d1dc7dec837cc4882e36a61a63eedf6db0f0f9ab9bc1e784121a7a0643b04b0024be11@134.122.118.11:30303  # buildoor-lighthouse-geth-1
-  - enode://0b66e95f8c543a4b4e4e16351ffdf9370b91ac36908e20c6cfe5d2457dbdc5314efada923bdb0f276885e1efb06ebbcbcf836fa9198b3ba07d1809086293a453@165.232.143.60:30303  # buildoor-teku-nethermind-1
-  - enode://543215cc00c4705e26e32c684cd441984755611ff8d782d20595d2498d9d5d3bc51486f513fdf811f8bf47a294a3b72f21f4263f044a78366ff158598386b25e@162.243.160.238:30303  # grandine-besu-1
-  - enode://861731a9793525326d38fae0fd2406b61383f025a7f035ff309de431785c3d0b7bdbc0e325c5e807ce0c6cad3dd5bda94608dce2a0f5f1dc5796a2267710f3ab@139.59.142.22:30303  # grandine-geth-1
-  - enode://5d4dd99be4f0450a6dca4d5d5600a6ab8d3b6df3ff099b183a94b7117e3de25c4c04293dad52f9d088b94c5c85511ff56584069f00baed3b1e09a9b00821d159@137.184.152.222:30303  # grandine-nethermind-1
-  - enode://1555805631467b69f511a1e6ab34701c3a367644878cbb8375fa22ae5640405f64c22885a5c2a629ce9b3ea87f92369d365a355a6969b769492799a8e2087ccb@165.232.180.28:30303  # grandine-reth-1
-  - enode://2929d39acab48742bbffe21691f605aea7fcd6f47e7a2eb381857f35a6ddcc3f81ba9c17e150eda54d34eab8f1aad9a04d0c53f12b426bb8b1f7ebd3feb02dcc@146.190.143.108:30303  # lighthouse-besu-1
-  - enode://1f7c633d559b09361b418885270946def404976d18cf31bfe6ec2a80d01c544c95697384e6da2879d98c4076ef882c3fa7ef365e88ee288c9e2a6637e8eb4ea3@134.209.177.39:30303  # lighthouse-geth-1
-  - enode://d10489d056d158ad3387e025f6b61f220991dd79fe16a54c5362267b2e4975da78e723f4b9b6d44c3d74c5bcd2287c34318a95fb6baf02aa6226f07793eaf621@138.197.134.58:30303  # lighthouse-nethermind-1
-  - enode://b4f270b1c07ee9568d0762741dd3b058fa22983da1a94195c99cc72ce5c1c0f5aaead0739fe08146801696d3913b69e85c91914b8149d297ed012c575f3335bb@165.22.42.44:30303  # lighthouse-reth-1
-  - enode://62ce527ef2ec32df22ac6d884f0990bce7df26d602df610156dbe04fc0cb7a29b0063630e29185a65379924a42f9308490dbc69c25b9cd78e262a50a981b223f@201.79.6.41:30303  # lodestar-besu-1
-  - enode://dd70c7191fdeae64c38f4b2bf6797575d2a9db9f244917af3e8f292a72ab323cdb06be7a46ebeffb7fb01d13fb8d31be7bce4214b8d8719ee5329b1bd617c3d8@188.166.82.109:30303  # lodestar-geth-1
-  - enode://989de4d1d045e6e948246207ae98592a05f4c6e03f2b2a6a66f0ab891488205cdaafe6635e1e78cf3702b2252a9f8c60c04f049f8b11e73b3efa7eaa41e2cd1c@143.198.193.222:30303  # lodestar-nethermind-1
-  - enode://767876e92d10f00f8a056ed3f77f8c46630005bd886066afd23659b710dde1d6d5f133469a8325a7849cfad860caa60a23e38f510ec1d291ac3493f94dfaf69c@159.65.186.218:30303  # lodestar-reth-1
-  - enode://630ca24e819f30fb7f2fc748a942b03b0e242b4c9f485c685cceccbbdc84720d0589064270874de8e328a91f9a05b3b83264d1bbce0d04eb9275230cd6169ce9@159.223.78.111:30303  # nimbus-besu-1
-  - enode://f42a3a4d5428c62dcc77bae868a630e0e167a6c93f13bb9ec77f7740edbcd0636896a6cdb112401fd6d95776d0eed9ac68a5a13c33fcbeaf0d911f2bd555fbbb@168.144.149.58:30303  # nimbus-geth-1
-  - enode://c6338a35aa889787464156f80b4f966afeb383c12b8b0e96fe69d193d3fbfbdd31c73aba109624b9d26202c0401391e21fe0c37dc207bfa517450f6644165ff1@147.182.149.145:30303  # nimbus-nethermind-1
-  - enode://c2bc8f2f5a84a43de9a4fd118f2fbf85e800ffbd2f09ba70d2cb1e3c655a961fb9e5c8c35a30bcfc6e098d7e0b7ba42c74cafd340b1284d9c78bd330929f33c5@159.203.86.74:30303  # nimbus-reth-1
-  - enode://1a28067a6124ebd021bd36e112e5f7c3d29813972be7c8b40a9ae1a957c83c56e69502130620e701a68fff8d7b370ca012da7ef058f3738324d1a5b094bc1555@178.62.223.33:30303  # prysm-besu-1
-  - enode://3b8a724028715338fd5813bbc0ca252391f93ae7899f9f5544234d667662e77cf662a85feda767bfd72e4e10764022767c67971417200cb8f12a646e746dc5db@139.59.12.219:30303  # prysm-geth-1
-  - enode://c85042645cdf1e4e068d6ff0bce83555302c3e6b0d084d2bfafc82dbda43e64f29201a08642870cfcc91a03bd1cae70c07aa7c64e143a39d92433a3ad465a2e9@159.65.115.85:30303  # prysm-nethermind-1
-  - enode://1daa8dd39ef039d4522c0ca3b83115bdad6062610485358b3d731610d6bd3b0d6fc82eb758445caa7ec6d2b16eb38a4ad7270f7fbc05dcdb88f9cc97be7709e2@143.110.218.78:30303  # prysm-reth-1
-  - enode://ba7d05b484905ae4ccebcc96adde5111fcf5d88f2490f453190b2ea123dbb08370beb5639a30ee3dc12382134545efa2db3738d67dc884e4bd84d29a3a426594@138.197.121.104:30303  # teku-besu-1
-  - enode://1095ea3a6f63612d1f32d403de348bb51c5867780485256b49cca69d6623495db8a87f0795b2fb69e217a2153077e468db1d2c1d3ca75e1fcfb9568b67a238e2@24.199.107.252:30303  # teku-geth-1
-  - enode://9ac088d35ebd5908c665d9ff567e411747bad6124bfaa7a081e80f345be23e3cf94acfac44e110b2723ae728986b312bdf0b2083c1d46280c04c6d9cfc50d8aa@46.101.101.144:30303  # teku-nethermind-1
-  - enode://6b9487acea9aa05c38adaa0fa61a0866564fc96797a754cf8b3d27fbbcad9d516484729812789b14d538303fe26377ec7c5c4d57c2bdba988d8c58caf665d6d7@178.128.203.221:30303  # teku-reth-1
+# TODO(msf-2): the ELs' ethereum_node_fact_discovery_el_enode facts after the first playbook run.
+shadowfork_el_static_enodes: []
