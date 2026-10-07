@@ -38,3 +38,4 @@ scripts/*.json
 
 # derived genesis artifacts (too large for git)
 network-configs/devnet-9/parsed/**
+__pycache__/
