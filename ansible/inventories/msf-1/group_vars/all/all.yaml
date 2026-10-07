@@ -1,0 +1,592 @@
+---
+#  ░██████╗░██╗░░░░░░█████╗░██████╗░░█████╗░██╗░░░░░  ██╗░░░██╗░█████╗░██████╗░░██████╗
+#  ██╔════╝░██║░░░░░██╔══██╗██╔══██╗██╔══██╗██║░░░░░  ██║░░░██║██╔══██╗██╔══██╗██╔════╝
+#  ██║░░██╗░██║░░░░░██║░░██║██████╦╝███████║██║░░░░░  ╚██╗░██╔╝███████║██████╔╝╚█████╗░
+#  ██║░░╚██╗██║░░░░░██║░░██║██╔══██╗██╔══██║██║░░░░░  ░╚████╔╝░██╔══██║██╔══██╗░╚═══██╗
+#  ╚██████╔╝███████╗╚█████╔╝██████╦╝██║░░██║███████╗  ░░╚██╔╝░░██║░░██║██║░░██║██████╔╝
+#  ░╚═════╝░╚══════╝░╚════╝░╚═════╝░╚═╝░░╚═╝╚══════╝  ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░
+
+domain: ethpandaops.io
+network_subdomain: "{{ ethereum_network_name }}.{{ domain }}"
+network_server_subdomain: srv.{{ network_subdomain }}
+server_fqdn: "{{ inventory_hostname }}.{{ network_server_subdomain }}"
+network_iteration: "{{ ethereum_network_name.split('-')[1:] | join('-') }}"
+
+ethereum_network_id: >-
+  {{ (lookup('file', eth_testnet_config_local_dir_src + '/genesis.json') | from_json).config.chainId }}
+ethereum_network_deposit_contract: >-
+  {{ lookup('file', eth_testnet_config_local_dir_src + '/deposit_contract.txt') }}
+ethereum_network_deposit_contract_block: >-
+  {{ lookup('file', eth_testnet_config_local_dir_src + '/deposit_contract_block.txt') }}
+
+ethereum_node_rpc_prefix: rpc- # prefix for rpc URLs
+ethereum_node_beacon_prefix: bn- # prefix for beacon URLs
+ethereum_node_rcp_hostname: "{{ ethereum_node_rpc_prefix }}{{ server_fqdn }}"
+ethereum_node_beacon_hostname: "{{ ethereum_node_beacon_prefix }}{{ server_fqdn }}"
+
+primary_bootnode: bootnode-1
+
+### Checkpoint sync specific for Ansible & Kubernetes
+checkpoint_sync_node: "{{ primary_bootnode }}"
+# Shadowfork: every CL starts from the generated genesis.ssz (there is no older
+# finalized state to sync from), so checkpoint sync stays off.
+ethereum_node_cl_checkpoint_sync_enabled: false
+
+checkpoint_sync_url: https://checkpoint-sync.{{ ethereum_network_name }}.{{ domain }}
+# checkpoint_sync_url: https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@{{ ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
+checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@{{
+  ethereum_node_beacon_prefix }}{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
+
+#  ██████╗░░█████╗░██╗░░░░░███████╗  ██╗░░░██╗░█████╗░██████╗░░██████╗
+#  ██╔══██╗██╔══██╗██║░░░░░██╔════╝  ██║░░░██║██╔══██╗██╔══██╗██╔════╝
+#  ██████╔╝██║░░██║██║░░░░░█████╗░░  ╚██╗░██╔╝███████║██████╔╝╚█████╗░
+#  ██╔══██╗██║░░██║██║░░░░░██╔══╝░░  ░╚████╔╝░██╔══██║██╔══██╗░╚═══██╗
+#  ██║░░██║╚█████╔╝███████╗███████╗  ░░╚██╔╝░░██║░░██║██║░░██║██████╔╝
+#  ╚═╝░░╚═╝░╚════╝░╚══════╝╚══════╝  ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░
+
+# role: ethpandaops.general.ethereum_genesis
+ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
+ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
+ethereum_genesis_network_seed: glamsterdam-msf-1
+# Sepolia's chain id switches the genesis generator into shadowfork mode: it loads
+# eth-clients/sepolia genesis.json, keeps every fork that is already active at
+# shadowfork_height (osaka, bpo1, bpo2) at its real time, overwrites sepolia's own
+# amsterdamTime with ours and adds no allocs. Chain and network id stay 11155111.
+ethereum_genesis_chain_id: "11155111"
+ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
+ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
+# Genesis 2026-10-02 13:30:00 UTC: ~40 min after the last snapshot finished
+# restoring (12:48:55 UTC; shadowfork.yaml does not depend on the genesis time).
+# Gloas at epoch 40 = 17:46:00 UTC, before sepolia's own Gloas (2026-10-06
+# 13:53:36 UTC, epoch 353024). Exits/consolidations/partial withdrawals cannot be
+# queued across the fork (SHARD_COMMITTEE_PERIOD 256 > 40); EIP-8282 builder deposits can.
+ethereum_genesis_timestamp: 1790947800
+ethereum_genesis_timedelay: 0
+# Sepolia block the shadowfork builds on: 2026-10-01 06:23:00 UTC, hash
+# 0xd95349c2354b05d477a38da94a9997c27b97b07d8eba2e2998d0edfb538524f8, 60M gas.
+# The EL snapshots (geth/besu/nethermind/reth/erigon) are pinned to the same
+# height: snapshots.ethpandaops.io deletes old heights, so never use "latest".
+# sepsf-2 (2026-10-02): 11820000 is still the latest sepolia snapshot height for all five ELs
+# (none newer published), so sepsf-2 forks from the same block as sepsf-1.
+shadowfork_height: 11820000
+gloas_fork_epoch: 40
+ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
+ethereum_genesis_generator_config_files:
+  cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
+  cl/mnemonics.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/mnemonics.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
+  el/genesis-config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/el/genesis-config.yaml',
+    split_lines=false) }}" # noqa yaml[line-length]
+  # Network identity and fork schedule only - every spec parameter not listed
+  # here follows the egg defaults, which match sepolia's Gloas config.yaml.
+  # Shadowfork specifics:
+  # - SHADOW_FORK_FILE: the head the EL state and the CL genesis build on.
+  # - DEPOSIT_CONTRACT_ADDRESS must be sepolia's or the generator refuses.
+  # - GAS_LIMIT_SCHEDULE: 200M at the Gloas epoch, exactly like sepolia.
+  # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
+  #   did this): shadowfork mode adds no premines, so the 9968 ETH excess per
+  #   validator is swept to WITHDRAWAL_ADDRESS (mnemonic index 0,
+  #   0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2) and funds the tooling from there.
+  #   None of the tooling accounts holds sepolia ETH at shadowfork_height.
+  # Not set because shadowfork mode ignores them: EL premines, GENESIS_GASLIMIT,
+  # DEPLOY_EIP8282_CONTRACTS (both EIP-8282 builder contracts are already on
+  # sepolia at shadowfork_height: deposit 0x0000bff46984e3725691fa540a8c7589300d8282,
+  # exit 0x000064d678505ad48f8ccb093bc65613800e8282).
+  values.env: |-
+    export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
+    export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
+    export NUMBER_OF_VALIDATORS=36000
+    export GENESIS_FORK_VERSION="0x10{{ ethereum_genesis_fork_version_suffix }}"
+    export ALTAIR_FORK_VERSION="0x20{{ ethereum_genesis_fork_version_suffix }}"
+    export BELLATRIX_FORK_VERSION="0x30{{ ethereum_genesis_fork_version_suffix }}"
+    export CAPELLA_FORK_VERSION="0x40{{ ethereum_genesis_fork_version_suffix }}"
+    export DENEB_FORK_VERSION="0x50{{ ethereum_genesis_fork_version_suffix }}"
+    export ELECTRA_FORK_VERSION="0x60{{ ethereum_genesis_fork_version_suffix }}"
+    export FULU_FORK_VERSION="0x70{{ ethereum_genesis_fork_version_suffix }}"
+    export GLOAS_FORK_VERSION="0x80{{ ethereum_genesis_fork_version_suffix }}"
+    export GLOAS_FORK_EPOCH="{{ gloas_fork_epoch }}"
+    export GAS_LIMIT_SCHEDULE='[{"epoch": {{ gloas_fork_epoch }}, "gas_limit": 200000000}]'
+    export GENESIS_TIMESTAMP={{ ethereum_genesis_timestamp }}
+    export GENESIS_DELAY={{ ethereum_genesis_timedelay }}
+    export WITHDRAWAL_TYPE=0x01
+    export VALIDATOR_BALANCE=10000000000000
+    export DEPOSIT_CONTRACT_ADDRESS=0x7f02C3E3c98b133055B8B348B2Ac625669Ed295D
+    export SHADOW_FORK_FILE="https://snapshots.ethpandaops.io/{{ snapshot_fetcher_network }}/geth/{{ shadowfork_height }}/_snapshot_eth_getBlockByNumber.json"
+
+# role: ethpandaops.general.snapshot_fetcher (variable names reused by
+# ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
+# snapshot_fetcher_out_dir is set per EL in its group_vars file.
+snapshot_fetcher_network: sepolia
+snapshot_fetcher_client: "{{ ethereum_node_el }}"
+snapshot_fetcher_block: "{{ shadowfork_height }}"
+
+ethereum_genesis_validator_keys_output_dir: "{{ ansible_inventory_sources[0] | dirname }}/files/validator_keys"
+ethereum_genesis_validator_bls_change_execution_address: "{{ ethereum_node_cl_validator_fee_recipient }}"
+ethereum_genesis_validator_keyranges: >-
+  {%- set ns = namespace() -%}
+  {%- set ns.ethereum_genesis_validator_keyranges = {} -%}
+  {%- for host in groups['all'] -%}
+  {%-   if hostvars[host].validator_start is defined and hostvars[host].validator_end is defined -%}
+  {%-      set v = {'start':hostvars[host].validator_start, 'end': hostvars[host].validator_end } -%}
+  {%-     set _ = ns.ethereum_genesis_validator_keyranges.update({host: v}) -%}
+  {%-   endif -%}
+  {%- endfor -%}
+  {{ ns.ethereum_genesis_validator_keyranges }}
+
+# Validator display names for the /meta/api/v1/validator-ranges.json endpoint
+# (consumed by dora, assertoor and beacon-metrics-gazer). A host may set
+# validator_display_name to be shown instead of its inventory hostname (used for
+# experimental-build hosts). Only the displayed segment name changes:
+# key generation and syncing still key by hostname through
+# ethereum_genesis_validator_keyranges above.
+eth_inventory_web_segments_json: >-
+  {%- set segs = [] -%}
+  {%- for host, kr in (ethereum_genesis_validator_keyranges | default({})).items() -%}
+  {%-   set _ = segs.append({'name': hostvars[host].validator_display_name | default(host), 'start': kr.start | int, 'end': (kr.end | int) - 1}) -%}
+  {%- endfor -%}
+  {{ segs | to_json }}
+
+# role: ethpandaops.general.bootstrap
+bootstrap_default_user_authorized_keys_plain:
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbboxOo0jyL3DNxqZ6UTEnZPEzPDPnujEYaClqNWSLWkphczHKAnJPkrwbAWB4JbJKjsAJ5kn53f10KPnUyZvJ5Jn8Rpf7RM7+56MYaBg84gVoA2KeIYxUa7h8neY7J61Galp0c6cOK+hp1lPsoiBSdCW/Rtbv6ALCcVe+4+uCW5FRoJcNRJfGRLRnjh1pw57HQw9O55mf319s4rVUq4umznQ0CciEx3rVMtXf4xjIZDZAhNpGaBh8AtHauaMZCOGociAIquYYqoSQnnmnOBiduRa5OkvGZomgybNQivlYboDeF6sQ71KVzRXSI+mxCYbSp246lqSdQtQsjFA54NYl/qWgAql0uqCqsZidW+XBjquyItRl2Rfzzy5Fk/gMOAJXHQYp4POfgFbqtxjWpfnuOKqW/1IGWcIt2g016effUqGgj/oePX0g+duFdszSKK773rJBySgafFF6XWNqagrLmE4LUGC+6P3oxzYTSFGeUVA21OayL+K40XPpJti5zns=
+    # devops-eth2-shared"
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWh9NW66VD4BPKETNyZeZrGN1f7G6dkihW3eAc7cbJPFQGIpnWc2tGq5o13vWW+SoCh16nkYM2oak+PJQxXYTiQnrMJSmSFd7E0DmdcoKadGJEnfosrH++aOZf/eVLe5q3E9NQFVSdOPo1MCRRTuZxPkuMxS6QikW3otWrA3F2vFgmYyki3Cy8huQzHKUZGicividYcUSFTydR2L0oWUNve3FyqMQQQPnfaJ1RvrkeGtdhRSAxa6L0jzgRK7fjpUyhKOofr7kCKARGELRRiB9QikRAoHU2/D/2jtJjKlTCJxArzXyDF2IcQCco+5Oe9x4c7Xch32dbscJSmjaAvsxRnu7GEFCS7b6kKGvwcoq5vJzvp3RBBR7Mosxv6pcM/q7Z4RhXOFVFFiPVl1dqkqSPkUrHwg8LtWOxC+GAl36vxhHLdDEV/RhbSAzO6SfYEWYGH1w7u4oiy2XAT2cNCO0j0tSHS5chX+d7TzwAbBE2HuPL84GVGHZG875hmiE+Dok=
+    # github-actions-ci"
+# Per-client team SSH rosters are fetched at runtime from the coredevs registry
+# (see each client group_vars file). https://github.com/ethpandaops/coredevs
+coredevs_api_url: https://coredevs.analytics.production.platform.ethpandaops.io
+
+# ethpandaops core team, sourced from the coredevs ethpandaops team. Handles not
+# in the coredevs team go in the extra list.
+github_all_extra_users:
+  - bharath-123
+bootstrap_default_user_authorized_keys_github_all: >-
+  {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/ethpandaops?format=txt') | select | list)
+     + github_all_extra_users }}
+
+bootstrap_default_user_authorized_keys_github: >
+  {{
+    (bootstrap_default_user_authorized_keys_github_all | default([])) +
+    (bootstrap_default_user_authorized_keys_github_team_el | default([])) +
+    (bootstrap_default_user_authorized_keys_github_team_cl | default([]))
+  }}
+
+node_exporter_container_image: "{{ default_tooling_images.node_exporter }}"
+prometheus_container_image: "{{ default_tooling_images.prometheus }}"
+vector_container_image: "{{ default_tooling_images.vector }}"
+json_rpc_snooper_container_image: "{{ default_tooling_images.json_rpc_snooper }}"
+
+# role: ethpandaops.general.ethereum_node
+ethereum_node_images_always_pull: true
+ethereum_node_metrics_exporter_enabled: true
+ethereum_node_xatu_sentry_enabled: true
+ethereum_node_cl_validator_enabled: "{{ validator_start is defined and validator_end is defined }}"
+ethereum_node_cl_validator_fee_recipient: "0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134"
+ethereum_node_cl_ports_p2p_tcp: 9000
+ethereum_node_cl_ports_p2p_udp: 9000
+ethereum_node_cl_ports_http_beacon: 5052
+ethereum_node_cl_ports_metrics: 5054
+ethereum_node_el_ports_p2p_tcp: 30303
+ethereum_node_el_ports_p2p_udp: 30303
+ethereum_node_el_ports_http_rpc: 8545
+ethereum_node_el_ports_ws_rpc: 8546
+ethereum_node_el_ports_engine: 8551
+ethereum_node_el_ports_metrics: 6060
+ethereum_node_ipv6_enabled: true
+ethereum_node_el_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.execution) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_cl_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.beacon) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_validator_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.validator) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_snooper_rpc_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_rpc) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_snooper_engine_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.snooper_engine) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+ethereum_node_skip_cleanup: true
+# Watchtower: daily image check staggered per host across a 3-hour window
+# ending at 18:00 CET/CEST (seeded by network+hostname) so fleet-wide image
+# rolls restart nodes one by one instead of all at once (devnet-9 lesson).
+# Off for the shadowfork: its window (13:00-16:00 UTC) would roll clients around
+# genesis and the fork; images are pinned for the run, rolls are on request.
+ethereum_node_docker_watchtower_enabled: false
+ethereum_node_docker_watchtower_containers_list:
+  - execution
+  - beacon
+  - validator
+  - xatu-sentry
+docker_watchtower_container_additional_args:
+  - "--schedule=0 {{ 60 | random(seed=ethereum_network_name ~ inventory_hostname ~ 'min') }} {{ 15 + (3 | random(seed=ethereum_network_name ~ inventory_hostname ~ 'hour')) }} * * *"
+  - --stop-timeout=300s
+  - --include-restarting
+docker_watchtower_container_env:
+  TZ: Europe/Paris
+ethereum_node_json_rpc_snooper_engine_enabled: true
+ethereum_node_json_rpc_snooper_engine_name: snooper-engine
+ethereum_node_json_rpc_snooper_engine_port: 8561
+ethereum_node_json_rpc_snooper_engine_public_port: 8961
+ethereum_node_json_rpc_snooper_engine_container_env:
+  SNOOPER_API_PORT: "{{ ethereum_node_json_rpc_snooper_engine_public_port | quote }}"
+  SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
+  SNOOPER_XATU_ENABLED: "true"
+  SNOOPER_XATU_NAME: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+  SNOOPER_XATU_NETWORK_NAME: "{{ ethereum_network_name }}"
+  SNOOPER_XATU_NETWORK_ID: "{{ ethereum_network_id }}"
+  SNOOPER_XATU_OUTPUTS: "xatu:{{ xatu_sentry_config_server_address }}"
+  SNOOPER_XATU_TLS: "true"
+  SNOOPER_XATU_HEADERS: "authorization=Basic {{ (xatu_sentry_config_server_auth_user + ':' + xatu_sentry_config_server_auth_password) | b64encode }}"
+  SNOOPER_JWT_SECRET: /execution-auth.jwt
+json_rpc_snooper_container_volumes:
+  - /data/execution-auth.secret:/execution-auth.jwt:ro
+
+# role: ethpandaops.general.generate_kubernetes_config
+# Nickname for this devnet, used for faucet titles and dora/forkmon labels.
+gen_kubernetes_config_network_display_name: glamsterdam-msf-1
+gen_kubernetes_config_dora_execution_snooper_port: 8961
+gen_kubernetes_config_dora_frontend_rainbowkit_id: 15fe4ab4d5c0bcb6f0dc7c398301ff0e
+gen_kubernetes_config_dora_execution_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
+  network_iteration }}/dora/endpoints-el.yaml
+gen_kubernetes_config_dora_consensus_endpoints_url: https://raw.githubusercontent.com/ethpandaops/{{ devnet_name }}-devnets/refs/heads/master/kubernetes/{{
+  network_iteration }}/dora/endpoints-cl.yaml
+gen_kubernetes_config_dora_api_secret: "{{ secret_dora_api_key }}"
+gen_kubernetes_config_dora_xatu_enabled: true
+# Don't let tooling call debug/trace endpoints: disable dora execution indexer
+# trace fetching (debug_traceBlockBy*) and the tracoor chart entirely.
+gen_kubernetes_config_dora_execution_indexer_traces: false
+gen_kubernetes_config_disabled_services:
+  - tracoor
+# No startup assertoor tests: the deploy-eip8282-contracts playbook devnet-8 ran
+# is not needed, both builder contracts already exist on sepolia.
+gen_kubernetes_config_assertoor_tests: []
+
+# role: ethpandaops.general.xatu_sentry
+xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
+xatu_sentry_config_name: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+# Per-devnet xatu pipeline (mca-xatu-devnets in platform): the ingest host is
+# derived from the network name so new devnets need no wiring here.
+xatu_sentry_config_server_address: "{{ ethereum_network_name }}-ingest.xatu.ethpandaops.io:443"
+xatu_sentry_config_server_auth_user: "{{ secret_xatu_sentry.user }}"
+xatu_sentry_config_server_auth_password: "{{ secret_xatu_sentry.password }}"
+xatu_sentry_config_network_name_override: "{{ ethereum_network_name }}"
+
+# Full config override: adds the Gloas SSE topics, which the sentry's default
+# subscription set deliberately excludes.
+xatu_sentry_config: |
+  logging: "info"
+  metricsAddr: ":9090"
+  name: "{{ xatu_sentry_config_name }}"
+  ntpServer: time.google.com
+  ethereum:
+    beaconNodeAddress: {{ xatu_sentry_config_beacon_uri }}
+    overrideNetworkName: {{ xatu_sentry_config_network_name_override }}
+    beaconSubscriptions:
+      - attestation
+      - single_attestation
+      - block
+      - block_gossip
+      - chain_reorg
+      - finalized_checkpoint
+      - head
+      - head_v2
+      - voluntary_exit
+      - contribution_and_proof
+      - blob_sidecar
+      - data_column_sidecar
+      - execution_payload
+      - execution_payload_gossip
+      - execution_payload_available
+      - execution_payload_bid
+      - payload_attestation_message
+      - proposer_preferences
+  outputs:
+  - name: grpc
+    type: xatu
+    config:
+      address: {{ xatu_sentry_config_server_address }}
+      tls: {{ xatu_sentry_config_server_tls_enabled }}
+      maxQueueSize: 100000
+      workers: 5
+      headers:
+        authorization: "Basic {{ (xatu_sentry_config_server_auth_user + ":" + xatu_sentry_config_server_auth_password) | b64encode }}"
+
+# role: ethpandaops.general.ethereum_metrics_exporter
+ethereum_metrics_exporter_container_image: "{{ default_tooling_images.ethereum_metrics_exporter }}"
+ethereum_metrics_exporter_container_user: root
+ethereum_metrics_exporter_container_volumes:
+  - "{{ ethereum_metrics_exporter_dir_config }}:/config:ro"
+  - /var/run/docker.sock:/var/run/docker.sock:ro
+  - /data:/data:ro
+ethereum_metrics_exporter_config: |
+  consensus:
+    enabled: true
+    url: "{{ ethereum_metrics_exporter_cl_endpoint }}"
+    name: "consensus-client"
+  execution:
+    enabled: true
+    url: "{{ ethereum_metrics_exporter_el_endpoint }}"
+    name: "execution-client"
+    modules:
+      - "eth"
+      - "net"
+      - "web3"
+      - "txpool"
+  docker:
+    enabled: true
+    endpoint: "unix:///var/run/docker.sock"
+    interval: "10s"
+    containers:
+      - name: "execution"
+        type: "execution"
+        filesystem:
+          enabled: true
+        volumes:
+          - name: "*"
+            monitor: true
+          - path: "/execution-auth.jwt"
+            monitor: false
+          - path: "/network-config"
+            monitor: false
+      - name: "beacon"
+        type: "consensus"
+        filesystem:
+          enabled: true
+        volumes:
+          - name: "*"
+            monitor: true
+          - path: "/execution-auth.jwt"
+            monitor: false
+          - path: "/network-config"
+            monitor: false
+
+# role: eth_testnet_config
+eth_testnet_config_dir: /data/ethereum-network-config/metadata
+eth_testnet_config_local_dir_enabled: true
+eth_testnet_config_local_dir_src: "{{ ethereum_genesis_generator_output_dir }}/metadata/"
+
+# role: gen_basic_auth_nginx
+gen_basic_auth_nginx_name: "{{ secret_nginx_shared_basic_auth.name }}"
+gen_basic_auth_nginx_password: "{{ secret_nginx_shared_basic_auth.password }}"
+docker_nginx_proxy_container_image: "{{ default_tooling_images.nginx_proxy }}"
+docker_nginx_proxy_docker_gen_container_image: "{{ default_tooling_images.nginx_proxy_gen }}"
+docker_nginx_proxy_acme_companion_container_image: "{{ default_tooling_images.nginx_proxy_acme }}"
+
+# role: ethpandaops.general.docker_nginx_proxy
+docker_nginx_proxy_public_ipv6: "{{ host_ipv6_prefix | ansible.utils.ipaddr(service_ipv6_offsets.nginx_proxy) | ansible.utils.ipaddr('address') if (docker_network_enable_ipv6
+  | bool) else '' }}"
+docker_nginx_proxy_container_name: nginx-proxy
+docker_nginx_proxy_default_email: certs@{{ domain }}
+docker_nginx_proxy_docker_gen_container_name: nginx-proxy-gen
+docker_nginx_proxy_docker_gen_container_env:
+  RESOLVERS: 1.1.1.1
+  ENABLE_IPV6: "true"
+docker_nginx_proxy_acme_companion_enabled: false
+docker_nginx_proxy_acme_companion_container_name: nginx-proxy-acme
+docker_nginx_proxy_acme_companion_container_env:
+  DEFAULT_EMAIL: "{{ docker_nginx_proxy_default_email }}"
+  NGINX_PROXY_CONTAINER: "{{ docker_nginx_proxy_container_name }}"
+  NGINX_DOCKER_GEN_CONTAINER: "{{ docker_nginx_proxy_docker_gen_container_name }}"
+  ACME_CA_URI: https://acme.zerossl.com/v2/DV90
+  ACME_EAB_KID: "{{ secret_zerossl.ACME_EAB_KID }}"
+  ACME_EAB_HMAC_KEY: "{{ secret_zerossl.ACME_EAB_HMAC_KEY }}"
+docker_nginx_proxy_container_networks: >-
+  {{ [{'name': 'shared'} | combine({'ipv6_address': docker_nginx_proxy_public_ipv6} if (docker_nginx_proxy_public_ipv6 | default('') | length > 0) else {})] }}
+docker_nginx_proxy_docker_gen_container_networks: []
+docker_nginx_proxy_acme_companion_container_networks: "{{ docker_networks_shared }}"
+docker_nginx_proxy_acme_monitor_container_networks: "{{ docker_networks_shared }}"
+docker_nginx_proxy_acme_monitor_enabled: false
+docker_nginx_proxy_datadir: /opt/nginx-proxy
+docker_nginx_proxy_container_volumes:
+  - "{{ docker_nginx_proxy_datadir }}/conf:/etc/nginx/conf.d"
+  - "{{ docker_nginx_proxy_datadir }}/vhost:/etc/nginx/vhost.d"
+  - "{{ docker_nginx_proxy_datadir }}/certs:/etc/nginx/certs:ro"
+  - html:/usr/share/nginx/html
+  - "{{ docker_nginx_proxy_datadir }}/htpasswd:/etc/nginx/htpasswd:ro"
+docker_nginx_proxy_cert_loader_container_image: "{{ default_tooling_images.nginx_proxy_cert_loader }}"
+docker_nginx_proxy_cert_linker_container_image: "{{ default_tooling_images.nginx_proxy_cert_linker }}"
+docker_nginx_proxy_cert_loader_container_networks: []
+docker_nginx_proxy_cert_linker_container_networks: []
+docker_nginx_proxy_wildcard_cert: "{{ network_server_subdomain }}"
+docker_nginx_proxy_wildcard_cert_url: http://cert.{{ network_server_subdomain }}/{{ network_server_subdomain }}-latest.tar.enc
+docker_nginx_proxy_wildcard_cert_psk: "{{ secret_cert_encryption_psk }}"
+
+# OTLP egress to the prod analytics gateway (Vector ships container logs here).
+# Ingress identity (auth username + ingress_user tag) is the current devnet name
+# rather than secret_loki.username: the sops username drifts stale between devnet
+# iterations, while the gateway only validates the (constant) password — so using
+# the network name keeps log attribution correct no matter what sops holds.
+otlp_endpoint: https://otlp.analytics.production.platform.ethpandaops.io
+otlp_deployment_env: production
+
+# role: ethpandaops.general.vector
+vector_config: |
+  # Docker container logs (clean per-container metadata straight from the Docker API)
+  [sources.in]
+    type = "docker_logs"
+    exclude_containers = [
+      "{{ vector_container_name }}",
+      "ethereum-metrics-exporter",
+      "nginx-proxy",
+      "node_exporter",
+      "prometheus",
+      "snooper-",
+    ]
+
+  # Shape docker_logs events into an OTLP resourceLogs envelope with full metadata.
+  [transforms.otel_shape]
+    type = "remap"
+    inputs = ["in"]
+    source = '''
+      ts_ns = to_string(to_unix_timestamp(now(), unit: "nanoseconds"))
+      if is_timestamp(.timestamp) {
+        ts_ns = to_string(to_unix_timestamp!(.timestamp, unit: "nanoseconds"))
+      }
+      msg  = string(.message)        ?? ""
+      ctr  = string(.container_name) ?? "unknown"
+      img  = string(.image)          ?? ""
+      strm = string(.stream)         ?? "stdout"
+
+      # Extract the source log level: JSON-structured lines (.level / .severity)
+      # first, then logfmt (level=xxx), then a level token near the start of a
+      # plain-text line. Client formats vary (lighthouse truncates to 4 chars:
+      # DEBG/ERRO/CRIT), so the text matcher allows a union of forms. SeverityText
+      # keeps the source's exact text; only SeverityNumber is normalised to the
+      # OTel scale (https://opentelemetry.io/docs/specs/otel/logs/data-model/#field-severitynumber).
+      # Unrecognised lines are left unset rather than guessed.
+      sevtext = ""
+      if starts_with(msg, "{") {
+        j = parse_json(msg) ?? {}
+        if is_string(j.level) {
+          sevtext = string!(j.level)
+        } else if is_string(j.severity) {
+          sevtext = string!(j.severity)
+        }
+      }
+      if sevtext == "" {
+        lm = parse_regex(msg, r'(?i)\b(?:level|lvl|severity)="?(?P<l>[a-z]+)') ?? {}
+        if is_string(lm.l) {
+          sevtext = string!(lm.l)
+        } else {
+          hm = parse_regex(truncate(msg, 48), r'(?i)\b(?P<l>TRACE|DEBUG|DEBG|DBUG|NOTICE|INFO|WARNING|WARN|ERROR|ERRO|CRITICAL|CRIT|FATAL|PANIC)\b') ?? {}
+          if is_string(hm.l) {
+            sevtext = string!(hm.l)
+          }
+        }
+      }
+      lvl = upcase(sevtext)
+      sevnum = 0
+      if lvl == "TRACE" {
+        sevnum = 1
+      } else if lvl == "DEBUG" || lvl == "DEBG" || lvl == "DBUG" {
+        sevnum = 5
+      } else if lvl == "INFO" || lvl == "INFOR" || lvl == "NOTICE" {
+        sevnum = 9
+      } else if lvl == "WARN" || lvl == "WARNING" {
+        sevnum = 13
+      } else if lvl == "ERROR" || lvl == "ERRO" {
+        sevnum = 17
+      } else if lvl == "CRIT" || lvl == "CRITICAL" {
+        sevnum = 18
+      } else if lvl == "FATAL" || lvl == "PANIC" {
+        sevnum = 21
+      }
+
+      attrs = [
+        {"key": "service.name",           "value": {"stringValue": ctr}},
+        {"key": "container.name",         "value": {"stringValue": ctr}},
+        {"key": "container.image.name",   "value": {"stringValue": img}},
+        {"key": "deployment.environment", "value": {"stringValue": "{{ otlp_deployment_env }}"}},
+        {"key": "forwarder",              "value": {"stringValue": "vector"}},
+        {"key": "ingress_user",           "value": {"stringValue": "{{ ethereum_network_name }}"}},
+        {"key": "network",                "value": {"stringValue": "{{ ethereum_network_name }}"}},
+        {"key": "testnet",                "value": {"stringValue": "{{ ethereum_network_name }}"}},
+        {"key": "instance",               "value": {"stringValue": "{{ inventory_hostname }}"}},
+        {"key": "host.name",              "value": {"stringValue": "{{ inventory_hostname }}"}}
+      ]
+  {%- if ethereum_node_cl is defined +%}
+      attrs = push(attrs, {"key": "ethereum_cl", "value": {"stringValue": "{{ ethereum_node_cl }}"}})
+  {%- endif +%}
+  {%- if ethereum_node_el is defined +%}
+      attrs = push(attrs, {"key": "ethereum_el", "value": {"stringValue": "{{ ethereum_node_el }}"}})
+  {%- endif +%}
+      . = {
+        "resource_log": {
+          "resource": {"attributes": attrs},
+          "scopeLogs": [{
+            "scope": {"name": "{{ ethereum_network_name }}-vector"},
+            "logRecords": [{
+              "timeUnixNano":   ts_ns,
+              "severityNumber": sevnum,
+              "severityText":   sevtext,
+              "body": {"stringValue": msg},
+              "attributes": [{"key": "stream", "value": {"stringValue": strm}}]
+            }]
+          }]
+        }
+      }
+    '''
+
+  # Batch many shaped log events into one OTLP envelope (reduce works on logs).
+  [transforms.batch_envelope]
+    type = "reduce"
+    inputs = ["otel_shape"]
+    expire_after_ms = 30000
+    end_every_period_ms = 5000
+    max_events = 500
+    merge_strategies.resource_log = "array"
+
+  [transforms.finalize_envelope]
+    type = "remap"
+    inputs = ["batch_envelope"]
+    source = '''
+      . = {"resourceLogs": .resource_log}
+    '''
+
+  [sinks.otlp_logs]
+    type = "opentelemetry"
+    inputs = ["finalize_envelope"]
+    [sinks.otlp_logs.protocol]
+      type = "http"
+      uri = "{{ otlp_endpoint }}/v1/logs"
+      method = "post"
+      encoding.codec = "otlp"
+      auth.strategy = "basic"
+      auth.user = "{{ ethereum_network_name }}"
+      auth.password = "{{ secret_loki.password }}"
+      # One event here is already a full OTLP envelope (built by the reduce above).
+      # max_events MUST be 1 — OTLP/HTTP allows one envelope per request.
+      batch.max_events = 1
+      batch.timeout_secs = 5
+
+# EL peers for erigon (--staticpeers) and ethrex (--bootnodes, discovery off): the enodes of our
+# restored snapshot ELs (geth/nethermind/besu/reth). Real sepolia peers stay fork-id compatible until
+# amsterdamTime; erigon's engine catch-up and ethrex's snap sync need peers that have OUR chain.
+# From the first playbook run's ethereum_node_fact_discovery_el_enode facts (2026-10-02).
+shadowfork_el_static_enodes:
+  - enode://4dfdd89d5514d11576eb6de28164e27bbf17b75b7011a1d2b223f322edd97d2be6eb8b70d2c8650badbc741ba555edc76555ba1d9ffe8e0e8d7ba359d7185700@143.110.240.17:30303  # bootnode-1
+  - enode://45aef9797d4855096c3821947ed71c3a4265b8e18a31e26702fd8d5a32bb65e271bed11a57eb8b9e9299bbfc4c93e256563c4b161570a27ed8db30fcac22108f@159.223.140.43:30303  # buildoor-lighthouse-geth-1
+  - enode://b9440d5575d4333a39b5c4df393c2bf57b7b359a923b64772a8f5a185deed37171fc1dd436b03cc298b9f5aae0292bb39f0f134926efccf68f068a2dbbbfdf41@209.38.143.50:30303  # buildoor-teku-nethermind-1
+  - enode://9075479af06d6bccbbd0437b2832ac0d9f4cb60c0561a75f83b300f754355bcc73c2cadc06d7acd9c9c65433449cfc11a13cf8f72530067351aad65bcf2288ae@137.184.147.28:30303  # grandine-besu-1
+  - enode://7f6f13690c3432aac504cb7cdd04be47597200623769fe9692d8c4cd485b30a1cac951d782a6fc76dab432152656b5f5fc5ab78bf328e42142c067d9f0815441@142.93.163.23:30303  # grandine-geth-1
+  - enode://b0bbd34939869259b8e949eabe13fb747db723dbcaf595fc7c5d5f63892d3f3e0c9626a5533cb86d946cf9b4b8983cc396f5662036b103d1be423a72851167fb@137.184.24.21:30303  # grandine-nethermind-1
+  - enode://4161c4b13bacb6979bd0915eb64d51da4122ab45da950b4dc7020dfff8624d8163d494c8dfa4be5242ea8fcac400d9ab98e3758f72c1624cbf7be383b0bbec48@167.71.230.212:30303  # grandine-reth-1
+  - enode://6f8a40c393324006ba63cf979e4d2695ead5f4f6a3a5cd320f969ab20b33d68ba61c11d4d7ae09abc3c59e86b740166fabc92bba78825a85190498093cd76df1@143.198.224.33:30303  # lighthouse-besu-1
+  - enode://230ad2f244b51111aca879c037b760e5ae318718b5fd6190e355ffe920eac0674b836f3d96a371b79c2aa72072df5a968b0f26f1cc32b6d88e99ae7c82fddf23@144.126.237.129:30303  # lighthouse-geth-1
+  - enode://6d01b53fcff5c107a0c90e4bbc30e80999793910cfd6882dd3e0a37ba87453f802fe10949d20379a246312314020657945fb6fcc35d7a13981dbf9c06a24c456@167.99.188.63:30303  # lighthouse-nethermind-1
+  - enode://5fc3893410069b7a670c292a508a525075ff56eaa4d6b63df2a709db53116794f86268109da2a2ed02d7d5acad59dc15ba65eefa39120f8f0fa1e3e3173c39e0@165.227.180.202:30303  # lighthouse-reth-1
+  - enode://af162c33eb6c05da021b26a2eb6bb59476beff2ab481b6a07b5c1189f5e822ae668ecd54715f47d27b39c78dd4e9cf7092ecd35142dd4a4012b4a1463eb633b0@164.90.186.111:30303  # lodestar-besu-1
+  - enode://d94a70fda27e910554024f1a12b5be8bf195edc61305a6f4849c5ba15529ee325146413555ed0363dc65cd78914201f4edd71f3cfb66a21fd7543d3ec20d3bb2@167.99.37.160:30303  # lodestar-geth-1
+  - enode://453741f108ccb3d72e9f75f39764e71b54faee89fb02a900ab3ede5b08288b7f650de653b9742154a4ebd8d8ca8c4394342649a6d67f5990762a14ed7b380faa@178.128.51.21:30303  # lodestar-nethermind-1
+  - enode://18b0ed1fd9a553ab1d0c9c19494b962a2bf55049ae268c54e6f792e9c604bfd1d41c65586772196391ff6deac7a4df4f27bac62afbb21d92b7e5b4785f13f559@159.203.89.71:30303  # lodestar-reth-1
+  - enode://3306ea8d0f60a98697bd187c310e922aa8569aa9d98fd2b4e42a1007962f0b96b48e766095829966dd3c52aca074efca06c06416d7a7bdfea432f0f206748681@157.245.157.106:30303  # nimbus-besu-1
+  - enode://f859c199e8c30bf62c9599f4fb277c84ae757a996eb6e955568b5348be66764d196fc2fdeac48e4bc324db0b62049c1dd26c45a1bc650d856b272ceac32dbd9e@206.189.128.12:30303  # nimbus-geth-1
+  - enode://9cc1c0adf5fc4c028da6e4b3e315955bfe16f0045a023ab4185b08e5f9bbeb8c60b5642d3e411a13a6323f3c8cb4522908ee9e091d9c580ff94d496d850df45a@143.198.33.48:30303  # nimbus-nethermind-1
+  - enode://31744152ca9a8a8f9c68476578346341984bb3f2814e2c42c4a7cc0611c9f5bbfe033fa2420d0e20ab1b6a25a28c1e38a4c692d0ae26b10c67628a68ea8761a9@165.227.215.200:30303  # nimbus-reth-1
+  - enode://f6a9cf5896145a9dbb783c8618c54b3f80d9e0e10676586992c15de81f55b7ff339ea2ec783e038c2d3f1446a88f3f25845c6b773045fbb967c766247e011ce1@167.99.218.192:30303  # prysm-besu-1
+  - enode://76e626edabc8fa58f72bf0d8e961eca857c48d99490134eac4439ec381ef5d746b52129af94bc0282ecbcc4f12cd950247e6bd08fa628e7e4da7daf5f38a1953@168.144.120.103:30303  # prysm-geth-1
+  - enode://d4d7844201ad6c888186bd3f39f793dd7b34bb22ada00671ad163ebec6203a0354b781db2d9db2786de2a9130f2bc3371a13cefa306a5e68662edc9b15748b4b@207.154.255.192:30303  # prysm-nethermind-1
+  - enode://72c5e1d37931a1a69720b13e44a247e334dba5f77712c1625fc86f3206b4d6e0c0c8f3f73b7e36f53e9f2b45f4811cef04de5c88e50391f9cc862503bfbee0f2@159.89.115.69:30303  # prysm-reth-1
+  - enode://c964999d7fa8178f7bde8271b3c2416408f347eff916c2ad524dbc8b50585f847e633c5d11f287c7b1875d50d296e58ed710491bcc9999c18f40ca09c1d25876@157.245.115.42:30303  # teku-besu-1
+  - enode://6194310dfe3670c59a8dff2b5c6b7b89459e1aafdc809d8f4cb12af6a6d5d613704190a3a5a6c76793eef5734a4f72d1985ab1f3427c2f356586732a24f4b4fd@64.23.157.240:30303  # teku-geth-1
+  - enode://d7b252beac308ae32fde4489bb98223daaa477bbef26ce07e2727569149549cf99885afec9873af4c1bbe867b4e290f2b93c7e75571578e7aeb65d4d5289c110@138.68.100.121:30303  # teku-nethermind-1
+  - enode://98ae90b1ebd4ae4b90e57b229623728c1ea2a34a69c9eb4236381cec16a1bcd375b374b7b58a0a531d8ef6ffa80949f0839e6f804875a00b22c6d69277d490bd@134.122.70.127:30303  # teku-reth-1
