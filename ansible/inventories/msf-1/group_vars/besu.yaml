@@ -27,12 +27,12 @@ besu_container_command_extra_args:
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery-mode=V5
   - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3
-  # Restored sepolia snapshot: nothing to sync, FULL just follows the CL from the
+  # Restored jochemnet snapshot: nothing to sync, FULL just follows the CL from the
   # snapshot head (fusaka shadowforks). The snapshot may come from another besu
   # version, so skip the datadir version check.
   - --sync-mode=FULL
   - --version-compatibility-protection=false
-  # ethrex has no snapshot and snap-syncs from the restored nodes; besu serves snap
+  # nimbus-el has no snapshot and snap-syncs from the restored nodes; besu serves snap
   # only when asked (geth and nethermind do by default).
   - --snapsync-server-enabled=true
   - --data-storage-format=BONSAI

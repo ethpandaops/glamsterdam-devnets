@@ -7,6 +7,11 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 
 # role: ethpandaops.general.snapshot_fetcher
 snapshot_fetcher_out_dir: /data/erigon
+# Pruned datadir (770 GB compressed, 2026-08-13; benchmarkoor uses it). Its block segments are
+# frozen up to 24401000, so only ~1.7k blocks are left to retire (the sepsf-2 erigons had
+# 220k and deadlocked: if one stalls at the first post-genesis block, add --snap.stop to its
+# erigon_host_extra_args).
+snapshot_fetcher_filename: snapshot-pruned.tar.zst
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
@@ -31,16 +36,16 @@ erigon_shadowfork_args:
   - --http.vhosts=*
   - --ws
   - --networkid={{ ethereum_network_id }}
-  - --db.size.limit=1TB  # sepolia datadir is ~985 GB
+  - --db.size.limit=2TB  # MDBX map size cap only; the droplet disk is 1.8 TB
   # Shadowfork hook: makes the erigon role re-run `init` over the restored chaindata
-  # and stops erigon from swapping our genesis.json config for its built-in sepolia one.
+  # and stops erigon from swapping our genesis.json config for its built-in mainnet one.
   - --keep.stored.chain.config=true
-  # With sepolia's network id erigon starts its embedded CL (caplin): it synced real
-  # sepolia past the snapshot and answered our CL's engine calls with "caplin is enabled".
+  # With the parent network's id erigon starts its embedded CL (caplin): on sepsf-1 it synced
+  # real sepolia past the snapshot and answered our CL's engine calls with "caplin is enabled".
   - --externalcl
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   # Engine-API catch-up (>96 blocks behind) needs peers that have our chain; discovery
-  # mostly finds real sepolia nodes. Our snapshot ELs (geth/nethermind/besu/reth) are added
+  # mostly finds real mainnet nodes. Our snapshot ELs are added
   # as --staticpeers above.
   - --discovery.v4=false
   - --discovery.v5=true

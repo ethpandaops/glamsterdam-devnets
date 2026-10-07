@@ -3,9 +3,9 @@ default_ethereum_client_images:
   ### Consensus layer clients
   lighthouse: registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0
   lodestar: registry-1.docker.io/chainsafe/lodestar:v1.49.0
-  nimbus: registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.9.1
-  prysm: registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.0
-  prysm_validator: registry-1.docker.io/offchainlabs/prysm-validator:v7.2.0
+  nimbus: registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0
+  prysm: registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1
+  prysm_validator: registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1
   teku: registry-1.docker.io/consensys/teku:26.9.1
   grandine: registry-1.docker.io/sifrai/grandine:3.0.0-rc.0
   ### Execution layer clients
@@ -15,7 +15,7 @@ default_ethereum_client_images:
   nethermind: registry-1.docker.io/nethermind/nethermind:2.1.0
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
-  ethrex: ghcr.io/lambdaclass/ethrex:29.0.0-rc.1  # first release with the snap pivot fix (lambdaclass/ethrex#7364); move to 29.0.0 once final
+  ethrex: ghcr.io/lambdaclass/ethrex:29.0.1
 
 default_tooling_images:
   mev_boost: registry-1.docker.io/ethpandaops/mev-boost:develop

@@ -119,7 +119,7 @@ geth_container_command_extra_args:
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
   - --syncmode=full
-  # no --gcmode=archive: the restored sepolia snapshot is a pruned datadir
+  # no --gcmode=archive: the restored jochemnet snapshot is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus  # victoriametrics.ethdevops.io no longer resolves
