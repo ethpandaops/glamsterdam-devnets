@@ -3,7 +3,7 @@
 assertoor:
   fullnameOverride: assertoor
   # Hand-set (no generator hook): the gloas-dev pre-fork playbooks must run concurrently.
-  assertoorMaxConcurrentTests: 6
+  assertoorMaxConcurrentTests: 14
 
   image:
     repository: registry-1.docker.io/ethpandaops/assertoor
