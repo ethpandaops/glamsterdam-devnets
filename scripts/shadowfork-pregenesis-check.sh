@@ -2,7 +2,7 @@
 # Pre-genesis gate for a shadowfork: run after playbook.yaml started the ELs and before the
 # CL genesis time. Exits non-zero if any check fails; every line says which host and why.
 #   genesis.json: alloc keys 0x, request contract addresses, only the expected fork keys
-#   per EL host (except nimbusel):  head == shadowfork_height with the shadowfork_block.json hash, eth_config
+#   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the shadowfork_block.json hash, eth_config
 #                 next activation == amsterdamTime, unique node id, peers only fleet IPs,
 #                 /data < 85%, erigon snapshots/preverified.toml, ethrex chain-1/metadata.json
 #
@@ -22,7 +22,7 @@ fail=0
 bad() { echo "FAIL $*"; fail=1; }
 ok() { echo "ok   $*"; }
 
-height="$(yq '.shadowfork_height' "$vars/all.yaml")"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
 want_hash="$(jq -r '.result.hash' "$block_json")"
 amsterdam="$(jq -r '.config.amsterdamTime' "$meta/genesis.json")"
 printf 'expect head %s %s, amsterdamTime %s\n' "$height" "$want_hash" "$amsterdam"

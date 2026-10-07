@@ -39,7 +39,7 @@ export ETH_RPC_URL="${RPC_ENDPOINT:-https://$user:$pass@${rpc_prefix}bootnode-1.
 # from the real network. The block right after shadowfork_height can: on the
 # shadowfork it was built after our genesis, on the parent chain long before.
 chain_id="$(yq '.ethereum_genesis_chain_id' "$vars/all.yaml")"
-height="$(yq '.shadowfork_height' "$vars/all.yaml")"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
 genesis="$(yq '.ethereum_genesis_timestamp' "$vars/all.yaml")"
 [ "$(cast chain-id)" = "$chain_id" ] || die "RPC chain id is not $chain_id"
 ts_hex="$(cast block $((height + 1)) --json 2>/dev/null | jq -r '.timestamp // empty')" \
