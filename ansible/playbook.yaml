@@ -79,6 +79,23 @@
 
 - hosts: bootnode
   become: true
+  pre_tasks:
+    # bootnodoor rejects genesis timestamp 0 (mainnet's). It only uses it for fork ids,
+    # which are the same for any genesis time below the first time-based fork.
+    - name: bootnodoor EL genesis with timestamp 1 (mainnet shadowforks)
+      when: ethereum_genesis_chain_id | default('') | string == '1'
+      tags: [bootnodoor]
+      block:
+        - name: Create bootnodoor data dir
+          ansible.builtin.file:
+            path: /data/bootnodoor
+            state: directory
+            mode: "0755"
+        - name: Write bootnodoor el-genesis.json
+          ansible.builtin.copy:
+            dest: /data/bootnodoor/el-genesis.json
+            content: "{{ lookup('file', eth_testnet_config_local_dir_src + '/genesis.json') | from_json | combine({'timestamp': '0x1'}) | to_json }}"
+            mode: "0644"
   roles:
     - role: ethpandaops.general.ethereum_testnet_config
       tags: [ethereum, eth_testnet_config, ethereum_testnet_config]
