@@ -8,12 +8,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
 ethereum_node_fact_discovery_el_key_cmd:
   ethrex: xxd -p -c32 {{ ethrex_datadir | default('/data/ethrex') }}/chain-{{ ethereum_network_id | trim }}/node.key
 
-# role: ethpandaops.general.snapshot_fetcher (snapshot layout: a bare RocksDB, 2026-05-29)
-# ethrex 29 keeps a custom-genesis chain's db in <datadir>/chain-<chain id>
-# (Network::datadir_suffix), so extract straight there; chain id 1 is hardcoded because
-# ethereum_network_id reads genesis.json, which does not exist yet at restore time.
-# The db predates 29.0.1: ethrex migrates its schema on first start (STORE_SCHEMA_VERSION
-# 4, crates/storage/migrations.rs). If it refuses, wipe it and fall back to --syncmode=snap.
+# role: ethpandaops.general.snapshot_fetcher (bare RocksDB; ethrex 29 reads <datadir>/chain-<id>,
+# hardcoded: genesis.json does not exist at restore time). The May db is migrated on start.
 snapshot_fetcher_out_dir: /data/ethrex/chain-1
 
 # role: ethpandaops.general.ethereum_node
@@ -32,9 +28,7 @@ ethrex_container_volumes:
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 ethrex_container_command_extra_args:
   - --network=/network-config/genesis.json
-  # Real mainnet peers stay fork-id compatible until amsterdamTime but have none of
-  # jochemnet's blocks. Peer only with our snapshot ELs: our enodes as bootnodes; p2p is
-  # also firewalled to our droplets (DOCKER-USER chain SF-P2P).
+  # Peer only with our ELs (mainnet peers have none of our blocks); p2p firewalled (SF-P2P).
   # Until the static enodes are known, discover via our bootnode ENRs (discv5); once known, those
   # enodes via discv4. ethrex (v29.0.0-rc.1) only seeds its peer table with --bootnodes when a
   # discovery protocol is on, so turning both off leaves it with 0 peers. The p2p firewall on the
@@ -43,8 +37,7 @@ ethrex_container_command_extra_args:
   - "--p2p.discv4={{ 'true' if shadowfork_el_static_enodes | length > 0 else 'false' }}"
   - "--p2p.discv5={{ 'false' if shadowfork_el_static_enodes | length > 0 else 'true' }}"
   - --http.api=eth,net,web3,admin
-  # Restored from the jochemnet snapshot: nothing to sync, follow the CL from its head
-  # (the default is snap).
+  # Restored: follow the CL (default is snap).
   - --syncmode=full
 
 prometheus_config: |

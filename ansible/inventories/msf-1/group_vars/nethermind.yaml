@@ -5,7 +5,7 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/nethermind?format=txt') | select | list)
      + nethermind_extra_github_users }}
 
-# role: ethpandaops.general.snapshot_fetcher (snapshot layout: mainnet/ with a FlatDb flat/)
+# role: ethpandaops.general.snapshot_fetcher (snapshot layout: mainnet/, FlatDb)
 snapshot_fetcher_out_dir: /data/nethermind/nethermind_db
 
 # role: ethpandaops.general.ethereum_node
@@ -31,7 +31,6 @@ nethermind_container_command_extra_args:
   - --config=mainnet
   - --Init.ChainSpecPath=/network-config/genesis.json
   - --Init.BaseDbPath=nethermind_db/mainnet
-  # The snapshot is a FlatDb state layout: the 2.1.0 default, explicit like benchmarkoor.
   - --FlatDb.Enabled=true
   - --Sync.FastSync=false
   - --Sync.SnapSync=false

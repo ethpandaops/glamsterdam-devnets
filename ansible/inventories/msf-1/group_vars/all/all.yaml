@@ -48,28 +48,18 @@ checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethe
 ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
 ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
 ethereum_genesis_network_seed: glamsterdam-msf-1
-# Mainnet's chain id switches the genesis generator into shadowfork mode: it loads
-# mainnet's genesis.json, keeps every fork that is already active at shadowfork_height
-# (osaka, bpo1, bpo2) at its real time, adds our amsterdamTime and no allocs (egg 6.2.0
-# dry run, 2026-10-07). Chain and network id stay 1.
+# Chain id 1 = egg mainnet shadowfork mode: keeps osaka/bpo1/bpo2 at their real times,
+# adds our amsterdamTime, no allocs.
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# TODO(msf-1): pick after the snapshot restore (shadowfork.yaml) and the head checks,
-# ~45 min before playbook.yaml. The value below is sepsf-2's (in the past).
+# TODO(msf-1): pick after the restore, ~45 min before playbook.yaml (value is sepsf-2's).
 ethereum_genesis_timestamp: 1790947800
 ethereum_genesis_timedelay: 0
-# The EL datadirs are benchmarkoor's jochemnet snapshots, not canonical mainnet ones:
-# jochemnet started from the mainnet 24350000 snapshot and ran 1 s blocks of bloat state
-# to 24402727 (head ts 1769856766 = 2026-01-31 10:52:46 UTC; mainnet's 24402727 is a
-# week later). The erigon tarball still carries that mainnet snapshot's
-# _snapshot_eth_getBlockByNumber.json (block 24350000): never use it as SHADOW_FORK_FILE.
-# benchmarkoor ran them with amsterdamTime 1769856767 (head + 1); any stored chain config
-# must give way to ours (erigon: --keep.stored.chain.config). Gate: eth_config agrees on all ELs.
-# Pinned height: snapshots.ethpandaops.io/jochemnet has no "latest".
+# jochemnet (benchmarkoor): mainnet 24350000 + 1 s bloat blocks up to 24402727, not on
+# mainnet. Gate before genesis: eth_config shows our amsterdamTime on every EL.
 shadowfork_height: 24402727
-# TODO(msf-1): >= 256 if exits/consolidations/partial withdrawals must be queued across the fork
-# (SHARD_COMMITTEE_PERIOD; every validator activates at epoch 0), else ~40 as on sepsf-1/2.
+# TODO(msf-1): >= 256 to queue exits/consolidations across the fork, else 40.
 gloas_fork_epoch: 40
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
@@ -82,21 +72,17 @@ ethereum_genesis_generator_config_files:
   # Network identity and fork schedule only - every spec parameter not listed
   # here follows the egg defaults, which match sepolia's Gloas config.yaml.
   # Shadowfork specifics:
-  # - SHADOW_FORK_FILE: the head the EL state and the CL genesis build on. jochemnet
-  #   publishes no _snapshot_eth_getBlockByNumber.json, so files/shadowfork_block.json
-  #   is the eth_getBlockByNumber("0x1745b27", true) response of a restored EL (full
-  #   tx objects: with hashes only, eth2-testnet-genesis fails to parse the block).
+  # - SHADOW_FORK_FILE: eth_getBlockByNumber("0x1745b27", true) from a restored EL (full
+  #   txs; jochemnet publishes none, the one in the erigon tarball is block 24350000).
   # - DEPOSIT_CONTRACT_ADDRESS must be mainnet's or the generator refuses.
   # - GAS_LIMIT_SCHEDULE: 200M at the Gloas epoch, like sepolia.
   # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
   #   did this): shadowfork mode adds no premines, so the 9968 ETH excess per
   #   validator is swept to WITHDRAWAL_ADDRESS (mnemonic index 0,
   #   0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2) and funds the tooling from there.
-  #   Mnemonic index 0 holds 0 ETH at nonce 0 on real mainnet (checked 2026-10-07).
+  #   Index 0 is empty on real mainnet.
   # Not set because shadowfork mode ignores them: EL premines, GENESIS_GASLIMIT,
-  # DEPLOY_EIP8282_CONTRACTS. Mainnet (and so jochemnet) has no EIP-8282 builder
-  # contracts; the deploy-eip8282-contracts assertoor startup test deploys them
-  # through the 0x4e59 CREATE2 factory, which mainnet has, before the fork.
+  # DEPLOY_EIP8282_CONTRACTS (assertoor deploys them, see below).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
@@ -117,13 +103,12 @@ ethereum_genesis_generator_config_files:
     export VALIDATOR_BALANCE=10000000000000
     export DEPOSIT_CONTRACT_ADDRESS=0x00000000219ab540356cBB839Cbe05303d7705Fa
     export SHADOW_FORK_FILE=/config/shadowfork_block.json
-  # TODO(msf-1): commit files/shadowfork_block.json before playbook.yaml (see above).
+  # TODO(msf-1): commit files/shadowfork_block.json.
   shadowfork_block.json: "{{ lookup('ansible.builtin.file', (ansible_inventory_sources[0] | dirname) ~ '/files/shadowfork_block.json') }}"
 
 # role: ethpandaops.general.snapshot_fetcher (variable names reused by
 # ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
-# snapshot_fetcher_out_dir (and snapshot_fetcher_filename where it is not
-# snapshot.tar.zst) is set per EL in its group_vars file.
+# snapshot_fetcher_out_dir/_filename are set per EL in its group_vars file.
 snapshot_fetcher_network: jochemnet
 snapshot_fetcher_client: "{{ ethereum_node_el }}"
 snapshot_fetcher_block: "{{ shadowfork_height }}"
@@ -263,12 +248,8 @@ gen_kubernetes_config_dora_xatu_enabled: true
 gen_kubernetes_config_dora_execution_indexer_traces: false
 gen_kubernetes_config_disabled_services:
   - tracoor
-# Mainnet has no EIP-8282 builder contracts and shadowfork genesis adds no allocs, so
-# deploy them pre-Gloas like devnet-7/8: same factory calldata as the sepolia deployment
-# txs (0x735806be..., 0xaeed86ed...); idempotent, refuses to run once Gloas is active.
-# Its wallet (mnemonic-10) is funded by scripts/fund-shadowfork.sh: if the startup run
-# fails before that, re-run it from the assertoor UI. Gate before the fork: eth_getCode
-# of both contracts non-empty on every EL.
+# Mainnet has no EIP-8282 contracts: deploy them pre-Gloas like devnet-7/8. Wallet is
+# mnemonic-10 (fund-shadowfork.sh); re-run from the assertoor UI if it ran unfunded.
 gen_kubernetes_config_assertoor_tests:
   - id: deploy-eip8282-contracts
     file: https://raw.githubusercontent.com/ethpandaops/assertoor/master/playbooks/gloas-dev/deploy-eip8282-contracts.yaml
@@ -573,12 +554,7 @@ vector_config: |
       batch.max_events = 1
       batch.timeout_secs = 5
 
-# EL peers for erigon (--staticpeers), ethrex (--bootnodes) and nimbus-el (--static-peers): the
-# enodes of our restored snapshot ELs. Real mainnet peers stay fork-id compatible until
-# amsterdamTime but have none of jochemnet's blocks; erigon's engine catch-up and nimbus-el's
-# snap sync need peers that have OUR chain. Mainnet peers are useless here (8 months of nonces
-# ahead, none of our blocks) and would carry our chain-id-1 txs to mainnet, so
-# firewall EL p2p on every host, not only the snap syncers:
-#   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-1
+# Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
+# Firewall EL p2p on every host: FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-1
 # TODO(msf-1): fill after terraform apply + first playbook run (admin_nodeInfo on each EL).
 shadowfork_el_static_enodes: []

@@ -5,10 +5,9 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/reth?format=txt') | select | list)
      + reth_extra_github_users }}
 
-# role: ethpandaops.general.snapshot_fetcher (snapshot layout: the datadir itself, rocksdb/ first)
+# role: ethpandaops.general.snapshot_fetcher
 snapshot_fetcher_out_dir: /data/reth
-# reth v2 storage, re-uploaded 2026-08-13 (benchmarkoor switched to it); the 2026-04 v1
-# snapshot.tar.zst is the old format.
+# v2 storage (snapshot.tar.zst is the old v1 format)
 snapshot_fetcher_filename: snapshot-v2.tar.zst
 
 # role: ethpandaops.general.ethereum_node

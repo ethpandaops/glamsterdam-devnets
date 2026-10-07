@@ -27,9 +27,8 @@
 variable "nodes" {
   description = "List of node definitions for the devnet"
   default = [
-    # Every EL node except nimbus-el restores a jochemnet snapshot (24402727; compressed
-    # 0.3 TB ethrex to 1.26 TB nethermind, ~1.2x that on disk), so every node with an EL -
-    # bootnode and buildoors included - gets the 1.8 TB storage-optimized size.
+    # Every EL except nimbus-el restores a jochemnet snapshot (up to ~1.5 TB on disk),
+    # so every node with an EL gets the 1.8 TB storage-optimized size.
     { name = "bootnode", count = 1, cloud = "digitalocean" },
     { name = "buildoor-lighthouse-geth", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", builder_start = 0 },
     { name = "buildoor-teku-nethermind", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", builder_start = 1 },
@@ -78,7 +77,6 @@ variable "nodes" {
     { name = "grandine-erigon", count = 1, cloud = "digitalocean", supernode = true, validator_start = 29000, validator_end = 30000 },
 
     # Ethrex
-    # ethrex: restored from the jochemnet ethrex snapshot (2026-05-29 db, migrated on start).
     { name = "lighthouse-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 30000, validator_end = 31000 },
     { name = "prysm-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 31000, validator_end = 32000 },
     { name = "teku-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 32000, validator_end = 33000 },
@@ -86,8 +84,7 @@ variable "nodes" {
     { name = "lodestar-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 34000, validator_end = 35000 },
     { name = "grandine-ethrex", count = 1, cloud = "digitalocean", supernode = true, validator_start = 35000, validator_end = 36000 },
 
-    # Nimbus-el: no jochemnet snapshot; snap-syncs from the restored ELs with the experimental
-    # --debug-snap-sync. No validators (all 36000 assigned).
+    # Nimbus-el: no snapshot, snap-syncs from our ELs. No validators.
     { name = "lighthouse-nimbusel", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", region = "fra1" },
     { name = "nimbus-nimbusel", count = 1, cloud = "digitalocean", size = "so1_5-8vcpu-64gb-intel", region = "lon1" },
   ]

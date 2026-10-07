@@ -7,8 +7,7 @@
 # `docker logs -f snapshot-fetcher`); the play then waits until every node reports
 # done. `--skip-tags snapshot_wait` only starts the downloads.
 # Hosts without snapshot_fetcher_out_dir (ELs without a snapshot) are skipped.
-# snapshot_fetcher_filename defaults to snapshot.tar.zst in the download template, so an
-# inventory can set it per EL (a play var here would override the group_vars).
+# snapshot_fetcher_filename is a template default, so group_vars can set it per EL.
 - hosts: ethereum_node:bootnode:!localhost
   become: true
   vars:
