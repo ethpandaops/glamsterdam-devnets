@@ -56,21 +56,21 @@ ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }
 # TODO(msf-2): ~45 min after every EL is restored
 ethereum_genesis_timestamp: 0
 ethereum_genesis_timedelay: 0
-# Our benchmark images (shadowfork-images.ethpandaops.io, built by bruno/shadowfork): a canonical
-# mainnet snapshot advanced by a pre-run that geth filled once and every other client replayed, so
-# all images share one head hash. The pre-run funds 25k accounts + the buildoor wallet and deploys
-# the EIP-8282 contracts in two Osaka blocks, crosses Amsterdam, then fills 100k receivers per
-# variant at 24 KiB and at 64 KiB with their 7702 delegations (as the benchmarkoor-tests CI
-# prefill: benchmarks up to ~300 Mgas). The head is past Amsterdam and not on mainnet; mainnet
-# txs replay only for senders the pre-run did not touch, and only while the anchor is recent.
-# TODO(msf-2): head of the fresh build (anchor mainnet 26139552). 0 makes the restore fail.
+# The jochemnet release (benchmarkoor): mainnet 24350000 + bloat blocks to 24402727, then the
+# release pre-run to 24443820 (crosses Amsterdam at 1769856769), ramped down to 200M, cleaned and
+# re-exported per client to shadowfork-images.ethpandaops.io/jochemnet/<client>/<head>/. Not on
+# mainnet, so no mainnet txs replay.
+# TODO(msf-2): the release head, once every client is published. 0 makes the restore fail.
 shadowfork_height: 0
-# No shadowfork_head_height: nothing is imported on top of the image (msf-1 had a prestate).
-# The image is already on Amsterdam, so the CL starts on Gloas (no live transition, builders
-# from genesis) and genesis.json carries the image's own amsterdamTime: egg would put it at
-# genesis, after the image's Amsterdam blocks, and every EL would rewind them.
-# TODO(msf-2): the build's AMSTERDAM_ACTIVATION_TS (its anchor.env AMS_TS, in _snapshot_metadata.json).
-shadowfork_amsterdam_time: 0
+# No shadowfork_head_height: nothing is imported on top of the snapshot (msf-1 had a prestate).
+# The snapshot is already on Amsterdam, so the CL starts on Gloas (no live transition, builders
+# from genesis) and genesis.json carries the release's own amsterdamTime: egg would put it at
+# genesis, after the release's Amsterdam blocks, and every EL would rewind them.
+shadowfork_snapshot_root: "{{ shadowfork_snapshot_base_url }}/{{ snapshot_fetcher_network }}/geth/{{ shadowfork_height }}"
+# 1769856769 for the jochemnet release.
+shadowfork_amsterdam_time: >-
+  {{ (lookup('ansible.builtin.url', shadowfork_snapshot_root ~ '/_snapshot_metadata.json', split_lines=false)
+      | from_json).shadowfork.amsterdam_time }}
 gloas_fork_epoch: 0
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
@@ -83,8 +83,8 @@ ethereum_genesis_generator_config_files:
   # Network identity and fork schedule only - every spec parameter not listed
   # here follows the egg defaults, which match sepolia's Gloas config.yaml.
   # Shadowfork specifics:
-  # - SHADOW_FORK_FILE: the image's _snapshot_eth_getBlockByNumber.json (full txs), published
-  #   next to every image.
+  # - SHADOW_FORK_FILE: the release head's _snapshot_eth_getBlockByNumber.json (full txs),
+  #   published next to every snapshot.
   # - DEPOSIT_CONTRACT_ADDRESS must be mainnet's or the generator refuses.
   # - GAS_LIMIT_SCHEDULE: 200M from genesis (the Gloas epoch).
   # - WITHDRAWAL_TYPE=0x01 + VALIDATOR_BALANCE=10000 ETH (every fusaka shadowfork
@@ -93,7 +93,7 @@ ethereum_genesis_generator_config_files:
   #   0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2) and funds the tooling from there.
   #   Index 0 is empty on real mainnet.
   # Not set because shadowfork mode ignores them: EL premines, GENESIS_GASLIMIT,
-  # DEPLOY_EIP8282_CONTRACTS (deployed by the image pre-run).
+  # DEPLOY_EIP8282_CONTRACTS (deployed by the release pre-run).
   values.env: |-
     export CHAIN_ID="{{ ethereum_genesis_chain_id }}"
     export EL_AND_CL_MNEMONIC="{{ ethereum_genesis_mnemonic }}"
@@ -114,13 +114,12 @@ ethereum_genesis_generator_config_files:
     export VALIDATOR_BALANCE=10000000000000
     export DEPOSIT_CONTRACT_ADDRESS=0x00000000219ab540356cBB839Cbe05303d7705Fa
     export SHADOW_FORK_FILE=/config/shadowfork_block.json
-  # <base>/mainnet/geth/<shadowfork_height>/_snapshot_eth_getBlockByNumber.json
-  shadowfork_block.json: "{{ lookup('ansible.builtin.file', (ansible_inventory_sources[0] | dirname) ~ '/files/shadowfork_block.json') }}"
+  shadowfork_block.json: "{{ lookup('ansible.builtin.url', shadowfork_snapshot_root ~ '/_snapshot_eth_getBlockByNumber.json', split_lines=false) }}"  # noqa yaml[line-length]
 
 # role: ethpandaops.general.snapshot_fetcher (variable names reused by
 # ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
 # snapshot_fetcher_out_dir/_filename are set per EL in its group_vars file.
-snapshot_fetcher_network: mainnet
+snapshot_fetcher_network: jochemnet
 shadowfork_snapshot_base_url: https://shadowfork-images.ethpandaops.io
 snapshot_fetcher_client: "{{ ethereum_node_el }}"
 snapshot_fetcher_block: "{{ shadowfork_height }}"
@@ -265,8 +264,8 @@ gen_kubernetes_config_disabled_services:
   - faucet
   # Its "add to MetaMask" offers chain id 1: a tx signed there with a real key is valid on mainnet.
   - homepage
-# No deploy-eip8282-contracts startup test: it refuses after Gloas, which is genesis here, and the
-# image already holds both contracts (scripts/shadowfork-pregenesis-check.sh checks the code).
+# No deploy-eip8282-contracts startup test: it refuses after Gloas, which is genesis here. The
+# release snapshot must hold both contracts (scripts/shadowfork-pregenesis-check.sh checks the code).
 gen_kubernetes_config_assertoor_tests: []
 
 # role: ethpandaops.general.xatu_sentry

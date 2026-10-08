@@ -2,7 +2,7 @@
 # Pre-genesis gate for a shadowfork: run after playbook.yaml started the ELs and before the
 # CL genesis time. Exits non-zero if any check fails; every line says which host and why.
 #   genesis.json: alloc keys 0x, request contract addresses, only the expected fork keys
-#   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the shadowfork_block.json hash, eth_config
+#   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the SHADOW_FORK_FILE hash, eth_config
 #                 next (or current) activation == amsterdamTime, unique node id, peers only fleet IPs,
 #                 /data < 85%, erigon snapshots/preverified.toml, ethrex chain-1/metadata.json
 #
@@ -16,13 +16,19 @@ inv="$root/ansible/inventories/$net/inventory.ini"
 vars="$root/ansible/inventories/$net/group_vars/all"
 block_json="$root/ansible/inventories/$net/files/shadowfork_block.json"
 meta="$root/network-configs/$net/metadata"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
+if [ ! -f "$block_json" ]; then
+  # msf-2 reads SHADOW_FORK_FILE from the snapshot bucket, not the inventory
+  url="$(yq '.shadowfork_snapshot_base_url + "/" + .snapshot_fetcher_network' "$vars/all.yaml")/geth/$height/_snapshot_eth_getBlockByNumber.json"
+  block_json="$(mktemp)"; trap 'rm -f "$block_json"' EXIT
+  curl -fsS "$url" -o "$block_json" || { echo "error: $url not found" >&2; exit 2; }
+fi
 for f in "$inv" "$block_json" "$meta/genesis.json"; do [ -f "$f" ] || { echo "error: $f not found" >&2; exit 2; }; done
 
 fail=0
 bad() { echo "FAIL $*"; fail=1; }
 ok() { echo "ok   $*"; }
 
-height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
 want_hash="$(jq -r '.result.hash' "$block_json")"
 amsterdam="$(jq -r '.config.amsterdamTime' "$meta/genesis.json")"
 printf 'expect head %s %s, amsterdamTime %s\n' "$height" "$want_hash" "$amsterdam"
@@ -60,7 +66,7 @@ for h in $hosts; do
   if [ -z "$num" ]; then bad "$h: no RPC answer"; continue; fi
   [ "$(( num ))" = "$height" ] && [ "$hash" = "$want_hash" ] && ok "$h head $height" \
     || bad "$h head $(( num )) $hash"
-  # a post-Amsterdam image (msf-2) has no next fork: amsterdam is current
+  # a post-Amsterdam snapshot (msf-2) has no next fork: amsterdam is current
   next="$(rpc "$h" eth_config '[]' | jq -r '(.result.next // .result.current).activationTime // empty' 2>/dev/null || true)"
   if [ -z "$next" ]; then echo "warn $h: no eth_config, check amsterdamTime in its startup log"
   elif [ "$(( next ))" = "$amsterdam" ]; then ok "$h eth_config next $amsterdam"
