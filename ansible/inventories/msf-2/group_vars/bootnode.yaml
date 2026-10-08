@@ -101,8 +101,8 @@ prysm_container_command_extra_bootnode_args: >-
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
 
-# role: ethpandaops.general.snapshot_fetcher (bootnode is not in the geth group)
-snapshot_fetcher_out_dir: /data/geth
+# role: ethpandaops.general.snapshot_fetcher (bootnode is not in the geth group; see geth.yaml)
+snapshot_fetcher_out_dir: /data/geth/geth
 
 # role: ethpandaops.general.geth
 geth_container_name: execution

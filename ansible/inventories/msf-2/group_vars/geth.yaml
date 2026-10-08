@@ -5,8 +5,10 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/geth?format=txt') | select | list)
      + geth_extra_github_users }}
 
-# role: ethpandaops.general.snapshot_fetcher (the release export packs the geth/ prefix, as geth writes it)
-snapshot_fetcher_out_dir: /data/geth
+# role: ethpandaops.general.snapshot_fetcher: a geth archive is geth's instance dir, unprefixed
+# (snapshots.ethpandaops.io and benchmarkoor snapshot export alike), so it goes under <datadir>/geth.
+# Extracted flat, geth opens chaindata/ but misses triedb/merkle.journal and rewinds its head.
+snapshot_fetcher_out_dir: /data/geth/geth
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
