@@ -58,19 +58,18 @@ resource "digitalocean_firewall" "main" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-  // Execution layer p2p port: our droplets only. Chain id 1 + mainnet's fork id until
-  // amsterdamTime, so real mainnet peers would otherwise connect.
+  // Execution layer p2p port. Was restricted to our droplets until amsterdamTime (chain id 1 +
+  // mainnet's fork id let real mainnet peers connect); opened 2026-10-08 after Amsterdam
+  // activated (2026-10-07 23:16 UTC) — mainnet peers now fail the EIP-2124 fork-id check.
   inbound_rule {
     protocol         = "tcp"
     port_range       = "30303"
-    source_tags      = ["EthNetwork:${var.ethereum_network}"]
-    source_addresses = length(var.el_p2p_extra_source_addresses) > 0 ? var.el_p2p_extra_source_addresses : null
+    source_addresses = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
     protocol         = "udp"
     port_range       = "30303"
-    source_tags      = ["EthNetwork:${var.ethereum_network}"]
-    source_addresses = length(var.el_p2p_extra_source_addresses) > 0 ? var.el_p2p_extra_source_addresses : null
+    source_addresses = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
     protocol         = "tcp"
