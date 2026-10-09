@@ -11,7 +11,7 @@ default_ethereum_client_images:
   ### Execution layer clients
   besu: ethpandaops/besu:main
   geth: ethpandaops/geth:master
-  erigon: ethpandaops/erigon:chfast-selfdestructed-nonce-revert
+  erigon: ethpandaops/erigon:main
   nethermind: ethpandaops/nethermind:master
   reth: ethpandaops/reth:main
   nimbusel: ethpandaops/nimbus-eth1:master
