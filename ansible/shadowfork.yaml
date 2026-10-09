@@ -11,7 +11,8 @@
 - hosts: ethereum_node:bootnode:!localhost
   become: true
   vars:
-    snapshot_fetcher_base_url: https://snapshots.ethpandaops.io
+    # play vars beat group_vars, so an inventory picks the host with shadowfork_snapshot_base_url
+    snapshot_fetcher_base_url: "{{ shadowfork_snapshot_base_url | default('https://snapshots.ethpandaops.io') }}"
     snapshot_fetcher_container_image: docker.ethquokkaops.io/dh/library/alpine:3.19.1
     snapshot_fetcher_workers: 16
     snapshot_fetcher_chunk_bytes: "{{ 64 * 1024 * 1024 }}"

@@ -2,8 +2,8 @@
 # Pre-genesis gate for a shadowfork: run after playbook.yaml started the ELs and before the
 # CL genesis time. Exits non-zero if any check fails; every line says which host and why.
 #   genesis.json: alloc keys 0x, request contract addresses, only the expected fork keys
-#   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the shadowfork_block.json hash, eth_config
-#                 next activation == amsterdamTime, unique node id, peers only fleet IPs,
+#   per EL host (except nimbusel):  head == shadowfork_head_height (else shadowfork_height) with the SHADOW_FORK_FILE hash, eth_config
+#                 next (or current) activation == amsterdamTime, unique node id, peers only fleet IPs,
 #                 /data < 85%, erigon snapshots/preverified.toml, ethrex chain-1/metadata.json
 #
 # Usage: scripts/shadowfork-pregenesis-check.sh <inventory dir, e.g. msf-1>
@@ -16,13 +16,19 @@ inv="$root/ansible/inventories/$net/inventory.ini"
 vars="$root/ansible/inventories/$net/group_vars/all"
 block_json="$root/ansible/inventories/$net/files/shadowfork_block.json"
 meta="$root/network-configs/$net/metadata"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
+if [ ! -f "$block_json" ]; then
+  # msf-2 reads SHADOW_FORK_FILE from the snapshot bucket, not the inventory
+  url="$(yq '.shadowfork_snapshot_base_url + "/" + .snapshot_fetcher_network' "$vars/all.yaml")/geth/$height/_snapshot_eth_getBlockByNumber.json"
+  block_json="$(mktemp)"; trap 'rm -f "$block_json"' EXIT
+  curl -fsS "$url" -o "$block_json" || { echo "error: $url not found" >&2; exit 2; }
+fi
 for f in "$inv" "$block_json" "$meta/genesis.json"; do [ -f "$f" ] || { echo "error: $f not found" >&2; exit 2; }; done
 
 fail=0
 bad() { echo "FAIL $*"; fail=1; }
 ok() { echo "ok   $*"; }
 
-height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
 want_hash="$(jq -r '.result.hash' "$block_json")"
 amsterdam="$(jq -r '.config.amsterdamTime' "$meta/genesis.json")"
 printf 'expect head %s %s, amsterdamTime %s\n' "$height" "$want_hash" "$amsterdam"
@@ -60,10 +66,19 @@ for h in $hosts; do
   if [ -z "$num" ]; then bad "$h: no RPC answer"; continue; fi
   [ "$(( num ))" = "$height" ] && [ "$hash" = "$want_hash" ] && ok "$h head $height" \
     || bad "$h head $(( num )) $hash"
-  next="$(rpc "$h" eth_config '[]' | jq -r '.result.next.activationTime // empty' 2>/dev/null || true)"
+  # a post-Amsterdam snapshot (msf-2) has no next fork: amsterdam is current
+  next="$(rpc "$h" eth_config '[]' | jq -r '(.result.next // .result.current).activationTime // empty' 2>/dev/null || true)"
   if [ -z "$next" ]; then echo "warn $h: no eth_config, check amsterdamTime in its startup log"
   elif [ "$(( next ))" = "$amsterdam" ]; then ok "$h eth_config next $amsterdam"
   else bad "$h eth_config next activation $(( next )) != $amsterdam"; fi
+  # EIP-8282: every Amsterdam block is invalid without code at both addresses. A pre-Amsterdam
+  # head may still get them from the assertoor deploy; a post-Amsterdam one must already hold them.
+  for a in 0x0000bff46984e3725691fa540a8c7589300d8282 0x000064d678505ad48f8ccb093bc65613800e8282; do
+    code="$(rpc "$h" eth_getCode "[\"$a\",\"latest\"]" | jq -r '.result // empty' 2>/dev/null || true)"
+    if [ "${#code}" -gt 2 ]; then ok "$h code at $a"
+    elif [ "$(( $(jq -r '.result.timestamp' <<<"$b") ))" -ge "$amsterdam" ]; then bad "$h: no code at $a past Amsterdam"
+    else echo "warn $h: no code at $a yet (deploy before Gloas)"; fi
+  done
   rpc "$h" admin_nodeInfo '[]' | jq -r --arg h "$h" '.result.id // empty | "\(.) \($h)"' >> "$ids" 2>/dev/null || true
   # every public IPv4 in admin_peers must be ours (private/container addresses are skipped)
   foreign="$(rpc "$h" admin_peers '[]' 2>/dev/null | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -u \

@@ -27,6 +27,7 @@ WIP | [devnet-8](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-8)| 
  🔴 | sepsf-1 (sepolia shadowfork)| [Network config](network-configs/sepsf-1)    | [🔗](ansible/inventories/sepsf-1) | [🔗](terraform/sepsf-1) | [🔗](kubernetes-archive/sepsf-1)
  On | [sepsf-2](https://dora.glamsterdam-sepsf-2.ethpandaops.io) (sepolia shadowfork)| [Network config](network-configs/sepsf-2)    | [🔗](ansible/inventories/sepsf-2) | [🔗](terraform/sepsf-2) | [🔗](kubernetes/sepsf-2)
 WIP | msf-1 (mainnet shadowfork)| -    | [🔗](ansible/inventories/msf-1) | [🔗](terraform/msf-1) | -
+WIP | msf-2 (mainnet shadowfork, jochemnet release, benchmarking)| -    | [🔗](ansible/inventories/msf-2) | [🔗](terraform/msf-2) | -
 # Development
 ## Version management for tools
 
