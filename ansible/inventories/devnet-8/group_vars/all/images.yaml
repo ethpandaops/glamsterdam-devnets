@@ -1,21 +1,21 @@
 ---
 default_ethereum_client_images:
   ### Consensus layer clients
-  lighthouse: registry-1.docker.io/ethpandaops/lighthouse:unstable
-  lodestar: registry-1.docker.io/ethpandaops/lodestar:unstable
-  nimbus: registry-1.docker.io/ethpandaops/nimbus-eth2:unstable
-  prysm: registry-1.docker.io/ethpandaops/prysm-beacon-chain:develop
-  prysm_validator: registry-1.docker.io/ethpandaops/prysm-validator:develop
-  teku: registry-1.docker.io/ethpandaops/teku:master
-  grandine: registry-1.docker.io/ethpandaops/grandine:develop
+  lighthouse: ethpandaops/lighthouse:unstable
+  lodestar: ethpandaops/lodestar:unstable
+  nimbus: ethpandaops/nimbus-eth2:unstable
+  prysm: ethpandaops/prysm-beacon-chain:develop
+  prysm_validator: ethpandaops/prysm-validator:develop
+  teku: ethpandaops/teku:master
+  grandine: ethpandaops/grandine:develop
   ### Execution layer clients
-  besu: registry-1.docker.io/ethpandaops/besu:main
-  geth: registry-1.docker.io/ethpandaops/geth:master
-  erigon: registry-1.docker.io/ethpandaops/erigon:main
-  nethermind: registry-1.docker.io/ethpandaops/nethermind:master
-  reth: registry-1.docker.io/ethpandaops/reth:main
-  nimbusel: registry-1.docker.io/ethpandaops/nimbus-eth1:master
-  ethrex: registry-1.docker.io/ethpandaops/ethrex:main
+  besu: ethpandaops/besu:main
+  geth: ethpandaops/geth:master
+  erigon: ethpandaops/erigon:chfast-selfdestructed-nonce-revert
+  nethermind: ethpandaops/nethermind:master
+  reth: ethpandaops/reth:main
+  nimbusel: ethpandaops/nimbus-eth1:master
+  ethrex: ethpandaops/ethrex:main
 
 default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop
