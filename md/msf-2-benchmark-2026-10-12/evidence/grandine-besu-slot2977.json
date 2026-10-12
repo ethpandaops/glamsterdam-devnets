@@ -1,0 +1,673 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='grandine-besu-1' AND ResourceAttributes['container.name'] IN ('beacon','validator','execution') AND Timestamp >= toDateTime('2026-10-12 22:58:15') AND Timestamp < toDateTime('2026-10-12 22:58:40') AND (ResourceAttributes['container.name']!='execution' OR Body LIKE '%WARN%' OR Body LIKE '%Start building proposals%' OR Body LIKE '%Generated%' OR Body LIKE '%EngineNewPayload%') AND Body NOT LIKE '%http_api_utils::logging%' AND Body NOT LIKE '%p2p::block_sync_service%' ORDER BY Timestamp ASC LIMIT 220"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:58:15.007047021",
+        "beacon",
+        "[2026-10-12T22:58:15.006Z]  INFO validator::validator:1762: validators [17379, 17481, 17558, 17759, 17987] participating in sync subcommittee 0 in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:15.007071697",
+        "beacon",
+        "[2026-10-12T22:58:15.006Z]  INFO validator::validator:1762: validators [17203, 17218, 17574, 17760, 17976] participating in sync subcommittee 1 in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:15.007074808",
+        "beacon",
+        "[2026-10-12T22:58:15.006Z]  INFO validator::validator:1762: validators [17852] participating in sync subcommittee 2 in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:15.007077098",
+        "beacon",
+        "[2026-10-12T22:58:15.006Z]  INFO validator::validator:1762: validators [17368, 17513, 17797] participating in sync subcommittee 3 in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:15.015189650",
+        "beacon",
+        "[2026-10-12T22:58:15.015Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x69c8dac663b7c2d9) for head 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.255130478",
+        "beacon",
+        "[2026-10-12T22:58:17.254Z] DEBUG fork_choice_control::mutator:5288: pruning old data column sidecars from storage up to slot 0\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.255191025",
+        "beacon",
+        "[2026-10-12T22:58:17.255Z] DEBUG fork_choice_control::mutator:5292: pruned old data column sidecars from storage up to slot 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.255208634",
+        "beacon",
+        "[2026-10-12T22:58:17.255Z] DEBUG fork_choice_control::mutator:5315: pruning old execution payload envelopes from storage up to slot 0\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.255227139",
+        "beacon",
+        "[2026-10-12T22:58:17.255Z] DEBUG fork_choice_control::mutator:5319: pruned old execution payload envelopes from storage up to slot 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.255229727",
+        "beacon",
+        "[2026-10-12T22:58:17.255Z] DEBUG fork_choice_control::mutator:5328: pruning old blocks and states from storage up to slot 0\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.256508708",
+        "beacon",
+        "[2026-10-12T22:58:17.256Z] DEBUG fork_choice_control::mutator:5332: pruned old blocks and states from storage up to slot 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.256522114",
+        "beacon",
+        "[2026-10-12T22:58:17.256Z] DEBUG fork_choice_control::mutator:5341: pruning old state roots from storage up to slot 0\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.257577134",
+        "beacon",
+        "[2026-10-12T22:58:17.257Z] DEBUG fork_choice_control::mutator:5345: pruned old state roots from storage up to slot 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.358915549",
+        "beacon",
+        "[2026-10-12T22:58:17.355Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, slot: 2976, seen before deadline: true ) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:17.358982221",
+        "beacon",
+        "[2026-10-12T22:58:17.355Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 2976: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 (block hash: 0xb549ea97a69b4e2daa292fe0547a39af50d2f83d631f5c5d9322f1099c80ec70, payload status: Full, payload verified: true, payload timely: true) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.001821707",
+        "beacon",
+        "[2026-10-12T22:58:18.000Z] DEBUG fork_choice_control::mutator:5177: archiving finalized blocks and anchor state\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.001859041",
+        "beacon",
+        "[2026-10-12T22:58:18.001Z] DEBUG fork_choice_control::mutator:5194: saving finalized blocks and anchor state\u2026 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.056123172",
+        "beacon",
+        "[2026-10-12T22:58:18.055Z] DEBUG fork_choice_control::storage:331: saving store head slot: 2912 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.056189917",
+        "beacon",
+        "[2026-10-12T22:58:18.056Z]  INFO fork_choice_control::storage:369: saving checkpoint block & state in slot 2912 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.119384165",
+        "beacon",
+        "[2026-10-12T22:58:18.119Z] DEBUG fork_choice_control::mutator:5213: preloading state_at_slot_cache with chain_link: slot: 2880, epoch: 90, is_first_block: true, is_last_block: false peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.119851951",
+        "beacon",
+        "[2026-10-12T22:58:18.119Z] DEBUG fork_choice_control::mutator:5213: preloading state_at_slot_cache with chain_link: slot: 2911, epoch: 90, is_first_block: false, is_last_block: true peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.122611247",
+        "beacon",
+        "[2026-10-12T22:58:18.121Z] DEBUG fork_choice_control::mutator:5237: finalized blocks and anchor state saved (appended block slots: AppendedBlockSlots { finalized: [2912, 2911, 2910, 2909, 2908, 2907, 2906, 2905, 2904, 2903, 2902, 2901, 2900, 2899, 2898, 2897, 2896, 2894, 2893, 2892, 2891, 2890, 2889, 2888, 2886, 2884, 2883, 2882, 2881], unfinalized: [2880] }) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.122626807",
+        "beacon",
+        "[2026-10-12T22:58:18.121Z] DEBUG fork_choice_control::mutator:5245: removing unfinalized blocks peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:18.122629526",
+        "beacon",
+        "[2026-10-12T22:58:18.122Z] DEBUG fork_choice_control::mutator:5250: unfinalized block pruning complete: pruned slots: [2880] peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.254697103",
+        "beacon",
+        "[2026-10-12T22:58:20.254Z]  INFO operation_pools::attestation_agg_pool::tasks:447: attestation packer getting target state for Checkpoint { epoch: 93, root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 } peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.254739203",
+        "beacon",
+        "[2026-10-12T22:58:20.254Z]  INFO operation_pools::attestation_agg_pool::tasks:455: attestation packer got target state for Checkpoint { epoch: 93, root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 } peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.254742705",
+        "beacon",
+        "[2026-10-12T22:58:20.254Z]  INFO operation_pools::attestation_agg_pool::tasks:447: attestation packer getting target state for Checkpoint { epoch: 92, root: 0xb42c6b9aaa5e2a4e86de6621438ac028329d2e17a7fdcf72a3c6c08f01a49593 } peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.254745128",
+        "beacon",
+        "[2026-10-12T22:58:20.254Z]  INFO operation_pools::attestation_agg_pool::tasks:455: attestation packer got target state for Checkpoint { epoch: 92, root: 0xb42c6b9aaa5e2a4e86de6621438ac028329d2e17a7fdcf72a3c6c08f01a49593 } peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.254764620",
+        "beacon",
+        "[2026-10-12T22:58:20.254Z]  INFO operation_pools::attestation_agg_pool::attestation_packer:91: attestation packer start packing attestations greedily peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.259390111",
+        "beacon",
+        "[2026-10-12T22:58:20.259Z]  INFO operation_pools::attestation_agg_pool::attestation_packer:125: attestation packer candidates count: 8 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.259725125",
+        "beacon",
+        "[2026-10-12T22:58:20.259Z]  INFO operation_pools::attestation_agg_pool::attestation_packer:142: attestation packer sorted candidates peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.259744419",
+        "beacon",
+        "[2026-10-12T22:58:20.259Z]  INFO operation_pools::attestation_agg_pool::attestation_packer:158: attestation packer finished packing greedily peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:20.260033960",
+        "beacon",
+        "[2026-10-12T22:58:20.259Z]  INFO operation_pools::attestation_agg_pool::tasks:161: pack outcome for slot: 2977, attestations: 8, deadline_reached: false, elapsed: 8 ms peers=[26/200] feature=DebugAttestationPacker"
+      ],
+      [
+        "2026-10-12 22:58:20.556105776",
+        "execution",
+        "2026-10-12 22:58:20.555+0000 | EthScheduler-BlockCreation-212-24455425 | WARN  | BlockTransactionSelector | Interrupting the internal selection of transactions for block inclusion as it exceeds the allowed max duration of 4999ms"
+      ],
+      [
+        "2026-10-12 22:58:20.739308243",
+        "execution",
+        "2026-10-12 22:58:20.739+0000 | EthScheduler-BlockCreation-213-24455425 | WARN  | BlockTransactionSelector | Transaction 0xaea0efa25eeba88b4c683897791c22ede6415cb1e2ef3dac06d0317a6ebd2952 is too late for inclusion, with result BLOCK_SELECTION_TIMEOUT, evaluated in 5.116 s that is over the max limit of 5000ms, penalizing it in the pool"
+      ],
+      [
+        "2026-10-12 22:58:24.011002396",
+        "beacon",
+        "[2026-10-12T22:58:24.010Z] DEBUG fork_choice_control::mutator:632: retrying objects delayed until slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:24.011059439",
+        "beacon",
+        "[2026-10-12T22:58:24.011Z] DEBUG p2p::network:1148: unsubscribing from attestation subnet 3 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:24.011064115",
+        "beacon",
+        "[2026-10-12T22:58:24.011Z] DEBUG p2p::network:1148: unsubscribing from attestation subnet 6 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:24.011066700",
+        "beacon",
+        "[2026-10-12T22:58:24.011Z] DEBUG p2p::network:1148: unsubscribing from attestation subnet 7 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:24.011069074",
+        "beacon",
+        "[2026-10-12T22:58:24.011Z] DEBUG p2p::network:1137: subscribing to attestation subnet (subnet_id: 22) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:25.363437388",
+        "beacon",
+        "[2026-10-12T22:58:25.363Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:25.363477857",
+        "beacon",
+        "[2026-10-12T22:58:25.363Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.189789340",
+        "beacon",
+        "[2026-10-12T22:58:26.189Z] DEBUG p2p::network:2649: sending Status request (app_request_id: Application(5683), peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, status: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 })) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.412495990",
+        "beacon",
+        "[2026-10-12T22:58:26.412Z] DEBUG p2p::network:1489: received Status request (peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, inbound_request_id: InboundRequestId { connection_id: ConnectionId(104), substream_id: SubstreamId(154) }, remote: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 })) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.412536020",
+        "beacon",
+        "[2026-10-12T22:58:26.412Z] DEBUG p2p::network:1496: sending Status response (inbound_request_id: InboundRequestId { connection_id: ConnectionId(104), substream_id: SubstreamId(154) }, peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, local: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 })) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.412540161",
+        "beacon",
+        "[2026-10-12T22:58:26.412Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 26/26] add peer (peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, status: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 }))"
+      ],
+      [
+        "2026-10-12 22:58:26.412560270",
+        "beacon",
+        "[2026-10-12T22:58:26.412Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 25/26] peer custody columns (peer: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, columns: {42, 120, 4, 108, 11, 36, 88, 31, 114, 113, 79, 103, 14, 63, 82, 115, 17, 87, 95, 66, 70, 97, 0, 102, 59, 67, 43, 62, 8, 30, 56, 89, 116, 20, 73, 81, 92, 58, 84, 72, 123, 51, 91, 61, 23, 53, 86, 10, 104, 121, 125, 107, 83, 9, 60, 26, 27, 101, 106, 24, 35, 85, 12, 15, 16, 18, 25, 44, 111, 80, 21, 57, 33, 47, 55, 71, 76, 34, 69, 38, 48, 122, 110, 74, 52, 78, 19, 119, 5, 127, 90, 98, 40, 99, 94, 117, 32, 50, 75, 3, 37, 93, 65, 126, 6, 1, 105, 22, 46, 100, 77, 54, 109, 68, 124, 112, 7, 13, 41, 2, 28, 45, 118, 29, 49, 39, 64, 96})"
+      ],
+      [
+        "2026-10-12 22:58:26.600430833",
+        "beacon",
+        "[2026-10-12T22:58:26.600Z] DEBUG p2p::network:2132: received Status response (peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, remote: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 })) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.600464036",
+        "beacon",
+        "[2026-10-12T22:58:26.600Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 25/26] add peer (peer_id: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, status: V2(StatusMessageV2 { fork_digest: 0x5ca8f8c9, finalized_root: 0x48e1cf2a6d9e9e0fd50844d1aaaa311fc4494591548b15f0f5cf466ab103170b, finalized_epoch: 91, head_root: 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066, head_slot: 2976, earliest_available_slot: 0 }))"
+      ],
+      [
+        "2026-10-12 22:58:26.600468584",
+        "beacon",
+        "[2026-10-12T22:58:26.600Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 25/26] peer custody columns (peer: 16Uiu2HAm1AdBvLHG8sDMB7SqQTGApsQKSuKaLhYP6bhkrEAGo1zv, columns: {15, 29, 14, 113, 27, 23, 93, 50, 112, 67, 66, 76, 109, 123, 53, 97, 36, 96, 106, 89, 52, 8, 71, 124, 2, 19, 41, 30, 59, 63, 120, 37, 70, 1, 98, 45, 3, 121, 24, 72, 108, 60, 84, 39, 111, 118, 104, 103, 114, 77, 7, 73, 49, 87, 61, 28, 92, 65, 48, 54, 82, 13, 79, 95, 16, 110, 0, 20, 21, 31, 78, 68, 44, 91, 57, 47, 125, 88, 83, 75, 40, 99, 100, 127, 101, 34, 6, 122, 55, 107, 38, 116, 12, 32, 81, 119, 85, 43, 25, 51, 80, 105, 18, 117, 9, 22, 56, 42, 102, 126, 35, 74, 4, 5, 33, 58, 69, 11, 94, 26, 46, 115, 62, 86, 64, 17, 10, 90})"
+      ],
+      [
+        "2026-10-12 22:58:26.607133476",
+        "execution",
+        "2026-10-12 22:58:26.607+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,425  (a4e6c.....af51d)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     27 wei bfee|  83,881,805 ( 41.9%) gas used| 6.007s exec|  13.96 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-12 22:58:26.616425199",
+        "execution",
+        "2026-10-12 22:58:26.616+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24455426 identified by 0x76a0dad96fc43eb0"
+      ],
+      [
+        "2026-10-12 22:58:26.617845626",
+        "beacon",
+        "[2026-10-12T22:58:26.617Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x76a0dad96fc43eb0) for head 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.624451757",
+        "beacon",
+        "[2026-10-12T22:58:26.624Z]  INFO validator::validator:1709: validators [17353, 17927, 17067] aggregating in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.627917158",
+        "beacon",
+        "[2026-10-12T22:58:26.627Z]  INFO validator::validator:1830: validators [17759, 17760] aggregating in sync committee in slot 2976 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.632006302",
+        "beacon",
+        "[2026-10-12T22:58:26.631Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x76a0dad96fc43eb0) for head 0x5223b80408b1f5b2ae78fbbb61c41570f35ae65511d7b11ac899b1d1ab7d8066 at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.632491297",
+        "beacon",
+        "[2026-10-12T22:58:26.632Z]  INFO validator::validator:986: starting block proposal task for validator 17999 at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.632952490",
+        "beacon",
+        "[2026-10-12T22:58:26.632Z]  INFO validator::validator:1041: block producer starting block production task at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.633280800",
+        "beacon",
+        "[2026-10-12T22:58:26.633Z]  INFO block_producer::block_producer:935: block producer starting build beacon block without state root task peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.633287014",
+        "beacon",
+        "[2026-10-12T22:58:26.633Z]  INFO block_producer::block_producer:946: block producer prepared proposer slashings peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.633328142",
+        "beacon",
+        "[2026-10-12T22:58:26.633Z]  INFO block_producer::block_producer:950: block producer prepared voluntary exits peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.633736599",
+        "beacon",
+        "[2026-10-12T22:58:26.633Z]  INFO operation_pools::attestation_agg_pool::tasks:66: optimal attestations present for slot: 2977 peers=[26/200] feature=DebugAttestationPacker"
+      ],
+      [
+        "2026-10-12 22:58:26.633751427",
+        "beacon",
+        "[2026-10-12T22:58:26.633Z]  INFO block_producer::block_producer:954: block producer prepared attestations peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.634130032",
+        "beacon",
+        "[2026-10-12T22:58:26.634Z]  INFO block_producer::block_producer:958: block producer prepared sync aggregate peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.634248510",
+        "beacon",
+        "[2026-10-12T22:58:26.634Z]  INFO block_producer::block_producer:962: block producer prepared bls to execution changes peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.634260738",
+        "beacon",
+        "[2026-10-12T22:58:26.634Z]  INFO block_producer::block_producer:1105: block producer converted attestations peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.634262728",
+        "beacon",
+        "[2026-10-12T22:58:26.634Z]  INFO block_producer::block_producer:1120: block producer computed on chain aggregates peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.635975314",
+        "beacon",
+        "[2026-10-12T22:58:26.635Z]  INFO slashing_protection:765: pruning slashing protection db, current epoch: 93 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667725621",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:1181: block producer prepared payload attestations peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667751446",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:1197: block producer prepared parent execution requests peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667754258",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:1231: block producer finishing build beacon block without state root task peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667759216",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:852: block producer built beacon block without state root peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667798641",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:857: block producer starting to build local option peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:26.667841026",
+        "beacon",
+        "[2026-10-12T22:58:26.667Z]  INFO block_producer::block_producer:870: block producer starting to build blinded option peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.149552527",
+        "beacon",
+        "[2026-10-12T22:58:27.149Z]  INFO block_producer::block_producer:883: block producer finished building local option peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.149592330",
+        "beacon",
+        "[2026-10-12T22:58:27.149Z]  INFO block_producer::block_producer:887: block producer finished building blinded option peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.149595568",
+        "beacon",
+        "[2026-10-12T22:58:27.149Z]  INFO validator::validator:1079: block producer finished block production task at slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.154539080",
+        "beacon",
+        "[2026-10-12T22:58:27.154Z]  INFO validator::validator:1147: validator 17999 proposing beacon block with root 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 in slot 2977 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.154641380",
+        "beacon",
+        "[2026-10-12T22:58:27.154Z] DEBUG p2p::network:836: publishing beacon block slot: 2977, root: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.178049587",
+        "beacon",
+        "[2026-10-12T22:58:27.177Z]  INFO on_own_block:BlockTask::run:validate_block: fork_choice_store::store:2164: block 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 state transition performed in 20 ms peers=[26/200] feature=LogBlockProcessingTime slot=2977 origin=Own slot=2977"
+      ],
+      [
+        "2026-10-12 22:58:27.179679279",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z] DEBUG on_own_block:BlockTask::run:validate_block: fork_choice_control::block_processor:227: return=Ok(accept) slot=2977 origin=Own slot=2977"
+      ],
+      [
+        "2026-10-12 22:58:27.179720941",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z]  INFO on_own_block:BlockTask::run: fork_choice_control::tasks:178: block 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 validated in 24 ms peers=[26/200] feature=LogBlockProcessingTime slot=2977 origin=Own slot=2977"
+      ],
+      [
+        "2026-10-12 22:58:27.179817587",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z] DEBUG on_own_block:handle_block:accept_block: fork_choice_control::mutator:3259: block accepted (block_root: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621, origin: Own) peers=[26/200] slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.179914150",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z]  INFO on_own_block:handle_block:accept_block: fork_choice_store::store:4576: imported beacon block with 0 blobs (slot: 2977, 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 peers=[26/200] slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.179969465",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z]  INFO on_own_block:handle_block:accept_block: fork_choice_control::mutator:3365: block 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 inserted in 25.465436ms, processed in 25.465436ms peers=[26/200] feature=LogBlockProcessingTime slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.179973777",
+        "beacon",
+        "[2026-10-12T22:58:27.179Z]  INFO on_own_block:handle_block:accept_block: fork_choice_control::events:246: send block event (slot: 2977, block_root: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621, optimistic: false) peers=[26/200] feature=LogBlockProcessingTime slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.180298467",
+        "beacon",
+        "[2026-10-12T22:58:27.180Z] DEBUG on_own_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 2977: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 (block hash: 0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d, payload status: Empty, payload verified: false, payload timely: false) peers=[26/200] slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.180339391",
+        "beacon",
+        "[2026-10-12T22:58:27.180Z]  INFO on_own_block:handle_block:accept_block: fork_choice_control::mutator:3577: block 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 post-processed in 345.607\u00b5s peers=[26/200] feature=LogBlockProcessingTime slot=2977 block_root=0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621"
+      ],
+      [
+        "2026-10-12 22:58:27.189473352",
+        "beacon",
+        "[2026-10-12T22:58:27.188Z]  INFO validator::validator:1473: validators [17233, 17064, 17073, 17207, 17180, 17111, 17573, 17074, 17942, 17212, 17563, 17928, 17639, 17405, 17218, 17609, 17759, 17761, 17725, 17270, 17865, 17916, 17803, 17732, 17403, 17790, 17051, 17322, 17711, 17669, 17729, 17730, 17201, 17776] attesting in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.190883621",
+        "beacon",
+        "[2026-10-12T22:58:27.190Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAkyDWmzBefa6isVxpfa1FhNXtLXabu4BqAueozffApkMbT, inbound_request_id: InboundRequestId { connection_id: ConnectionId(30), substream_id: SubstreamId(2946) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621] }) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.196536064",
+        "beacon",
+        "[2026-10-12T22:58:27.196Z]  INFO validator::validator:1762: validators [17379, 17481, 17558, 17759, 17987] participating in sync subcommittee 0 in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.196570486",
+        "beacon",
+        "[2026-10-12T22:58:27.196Z]  INFO validator::validator:1762: validators [17203, 17218, 17574, 17760, 17976] participating in sync subcommittee 1 in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.196574064",
+        "beacon",
+        "[2026-10-12T22:58:27.196Z]  INFO validator::validator:1762: validators [17852] participating in sync subcommittee 2 in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.196576610",
+        "beacon",
+        "[2026-10-12T22:58:27.196Z]  INFO validator::validator:1762: validators [17368, 17513, 17797] participating in sync subcommittee 3 in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.232785339",
+        "beacon",
+        "[2026-10-12T22:58:27.232Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:29.355358727",
+        "beacon",
+        "[2026-10-12T22:58:29.355Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621, slot: 2977, seen before deadline: true ) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:29.355509973",
+        "beacon",
+        "[2026-10-12T22:58:29.355Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 2977: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 (block hash: 0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d, payload status: Full, payload verified: true, payload timely: true) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:30.002789617",
+        "beacon",
+        "[2026-10-12T22:58:30.002Z]  INFO validator::validator:1709: validators [17573, 17776] aggregating in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:30.009049333",
+        "beacon",
+        "[2026-10-12T22:58:30.008Z]  INFO validator::validator:1830: validators [17759, 17574] aggregating in sync committee in slot 2977 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:32.685199381",
+        "execution",
+        "2026-10-12 22:58:32.685+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,426  (36fce.....cbd61)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|     27 wei bfee|  65,787,880 ( 32.9%) gas used| 1.350s exec|  48.73 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-12 22:58:36.004448386",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG fork_choice_control::mutator:632: retrying objects delayed until slot 2978 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.004491229",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG p2p::network:1148: unsubscribing from attestation subnet 9 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.004496078",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG p2p::network:1148: unsubscribing from attestation subnet 15 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.004498011",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG p2p::network:1137: subscribing to attestation subnet (subnet_id: 25) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.004499886",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG p2p::network:1137: subscribing to attestation subnet (subnet_id: 26) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.004502074",
+        "beacon",
+        "[2026-10-12T22:58:36.003Z] DEBUG p2p::network:1137: subscribing to attestation subnet (subnet_id: 28) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.064121165",
+        "beacon",
+        "[2026-10-12T22:58:36.063Z]  INFO on_gossip_block:BlockTask::run:validate_block: fork_choice_store::store:2164: block 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 state transition performed in 5 ms peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 origin=Gossip(GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) }) slot=2978"
+      ],
+      [
+        "2026-10-12 22:58:36.064983324",
+        "beacon",
+        "[2026-10-12T22:58:36.064Z] DEBUG on_gossip_block:BlockTask::run:validate_block: fork_choice_control::block_processor:227: return=Ok(accept) gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 origin=Gossip(GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) }) slot=2978"
+      ],
+      [
+        "2026-10-12 22:58:36.065005206",
+        "beacon",
+        "[2026-10-12T22:58:36.064Z]  INFO on_gossip_block:BlockTask::run: fork_choice_control::tasks:178: block 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 validated in 7 ms peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 origin=Gossip(GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) }) slot=2978"
+      ],
+      [
+        "2026-10-12 22:58:36.065489597",
+        "beacon",
+        "[2026-10-12T22:58:36.064Z]  INFO on_gossip_block:handle_block: fork_choice_control::events:257: send block gossip event (slot: 2978, block_root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563) peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065499878",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z] DEBUG on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3259: block accepted (block_root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563, origin: Gossip(GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) })) peers=[26/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065503018",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z]  INFO on_gossip_block:handle_block:accept_block: fork_choice_store::store:4576: imported beacon block with 0 blobs (slot: 2978, 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 peers=[26/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065505416",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z]  INFO on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3365: block 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 inserted in 7.931507ms, processed in 7.931507ms peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065507540",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z]  INFO on_gossip_block:handle_block:accept_block: fork_choice_control::events:246: send block event (slot: 2978, block_root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563, optimistic: false) peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065509565",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z]  INFO on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3818: chain reorganized (old head: 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621, new head: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563), cause: Block peers=[26/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065511685",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z] DEBUG on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 2978: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 (block hash: 0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d, payload status: Empty, payload verified: false, payload timely: false) peers=[26/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065522078",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z]  INFO on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3577: block 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 post-processed in 98.642\u00b5s peers=[26/200] feature=LogBlockProcessingTime gossip_id=GossipId { source: PeerId(\"16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP\"), message_id: MessageId(063aedc9fc9dbbe686f617076fb9e9a5b93aa958) } slot=2978 block_root=0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563"
+      ],
+      [
+        "2026-10-12 22:58:36.065865643",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 25/26] add execution payload envelope request by root (block_root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563, peer_id: 16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP)"
+      ],
+      [
+        "2026-10-12 22:58:36.065871547",
+        "beacon",
+        "[2026-10-12T22:58:36.065Z] DEBUG p2p::network:2859: sending ExecutionPayloadEnvelopesByRoot request (app_request_id: Application(5684), peer_id: 16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563] }) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.079693907",
+        "beacon",
+        "[2026-10-12T22:58:36.079Z]  INFO validator::validator:1473: validators [17737, 17880, 17757, 17417, 17494, 17166, 17193, 17586, 17128, 17648, 17797, 17175, 17570, 17537, 17231, 17955, 17949, 17015, 17101, 17962, 17217, 17549, 17317, 17506, 17516, 17625, 17333, 17611, 17151, 17700, 17223, 17635, 17679, 17137, 17438, 17169, 17997, 17271, 17462] attesting in slot 2978 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.088868795",
+        "beacon",
+        "[2026-10-12T22:58:36.088Z] DEBUG p2p::network:2336: peer 16Uiu2HAm3xEJ97cgyWMr5VjDNDPQdEEvsKZk3FLc7HmUdWyyrtcP terminated ExecutionPayloadEnvelopesByRoot response stream (app_request_id: Application(5684)) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.089659978",
+        "beacon",
+        "[2026-10-12T22:58:36.089Z] DEBUG p2p::network:1985: received BeaconBlocksByRoot request (peer_id: 16Uiu2HAkzCmZo6ykGqKwstS8xFU78h9W21bjP9VLbtFysqqgkwuf, inbound_request_id: InboundRequestId { connection_id: ConnectionId(3), substream_id: SubstreamId(2875) }, block_roots: [0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563]) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.090237799",
+        "beacon",
+        "[2026-10-12T22:58:36.090Z] DEBUG p2p::network:2002: sending BeaconBlocksByRoot response chunk (inbound_request_id: InboundRequestId { connection_id: ConnectionId(3), substream_id: SubstreamId(2875) }, peer_id: 16Uiu2HAkzCmZo6ykGqKwstS8xFU78h9W21bjP9VLbtFysqqgkwuf, slot: 2978, root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.090248915",
+        "beacon",
+        "[2026-10-12T22:58:36.090Z] DEBUG p2p::network:2018: terminating BeaconBlocksByRoot response stream peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.380524787",
+        "beacon",
+        "[2026-10-12T22:58:36.380Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563, slot: 2978, seen before deadline: true ) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:36.380560786",
+        "beacon",
+        "[2026-10-12T22:58:36.380Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 2978: 0xefec17a5f705bddc80e290a18c7a161c43e814b68c316ca56bfd243e05840563 (block hash: 0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d, payload status: Full, payload verified: true, payload timely: true) peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:37.881023044",
+        "execution",
+        "2026-10-12 22:58:37.880+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,426  (bd061.....18954)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|     27 wei bfee|  65,787,904 ( 32.9%) gas used| 1.466s exec|  44.87 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-12 22:58:39.002867650",
+        "beacon",
+        "[2026-10-12T22:58:39.002Z]  INFO validator::validator:1762: validators [17379, 17481, 17558, 17759, 17987] participating in sync subcommittee 0 in slot 2978 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:39.002905250",
+        "beacon",
+        "[2026-10-12T22:58:39.002Z]  INFO validator::validator:1762: validators [17203, 17218, 17574, 17760, 17976] participating in sync subcommittee 1 in slot 2978 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:39.002908984",
+        "beacon",
+        "[2026-10-12T22:58:39.002Z]  INFO validator::validator:1762: validators [17852] participating in sync subcommittee 2 in slot 2978 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:39.002911529",
+        "beacon",
+        "[2026-10-12T22:58:39.002Z]  INFO validator::validator:1762: validators [17368, 17513, 17797] participating in sync subcommittee 3 in slot 2978 peers=[26/200]"
+      ]
+    ]
+  }
+}

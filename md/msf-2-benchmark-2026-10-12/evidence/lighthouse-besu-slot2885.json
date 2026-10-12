@@ -1,0 +1,248 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='lighthouse-besu-1' AND Timestamp >= toDateTime('2026-10-12 22:39:55') AND Timestamp < toDateTime('2026-10-12 22:40:35') AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND (Body LIKE '%WARN%' OR Body LIKE '%ERROR%' OR Body LIKE '% CRIT %' OR Body LIKE '%building proposals%' OR Body LIKE '%Prepared beacon proposer%' OR Body LIKE '%propose%' OR Body LIKE '%Propos%' OR Body LIKE '%payload build%') ORDER BY Timestamp ASC LIMIT 100"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:39:56.001422082",
+        "beacon",
+        "Oct 12 22:39:56.001 DEBUG Proposer prepare routine firing             "
+      ],
+      [
+        "2026-10-12 22:39:56.001855622",
+        "beacon",
+        "Oct 12 22:39:56.001 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791844800, prev_randao: 0x34a111a4fa355c6558300db88fb587cb4f9fae0b86d38e6c22019d0ab24a625d, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 44752, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 44753, validator_index: 6092, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924415 }, Withdrawal { index: 44754, validator_index: 6093, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913278 }, Withdrawal { index: 44755, validator_index: 6094, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926476 }, Withdrawal { index: 44756, validator_index: 6095, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3914548 }, Withdrawal { index: 44757, validator_index: 6096, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924863 }, Withdrawal { index: 44758, validator_index: 6097, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913466 }, Withdrawal { index: 44759, validator_index: 6098, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926279 }, Withdrawal { index: 44760, validator_index: 6099, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44761, validator_index: 6100, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925173 }, Withdrawal { index: 44762, validator_index: 6101, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3902690 }, Withdrawal { index: 44763, validator_index: 6102, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3915304 }, Withdrawal { index: 44764, validator_index: 6103, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925652 }, Withdrawal { index: 44765, validator_index: 6104, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44766, validator_index: 6105, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924450 }, Withdrawal { index: 44767, validator_index: 6106, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }], parent_beacon_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot_number: 2885, target_gas_limit: 200000000 }), head_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot: 2885, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:39:56.001891871",
+        "beacon",
+        "Oct 12 22:39:56.001 DEBUG Sending forkchoiceUpdate for proposer prep    till_prepare_slot: 3.998511217s, prepare_slot: 2885"
+      ],
+      [
+        "2026-10-12 22:39:56.001897933",
+        "beacon",
+        "Oct 12 22:39:56.001 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791844800, prev_randao: 0x34a111a4fa355c6558300db88fb587cb4f9fae0b86d38e6c22019d0ab24a625d, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 44752, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 44753, validator_index: 6092, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924415 }, Withdrawal { index: 44754, validator_index: 6093, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913278 }, Withdrawal { index: 44755, validator_index: 6094, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926476 }, Withdrawal { index: 44756, validator_index: 6095, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3914548 }, Withdrawal { index: 44757, validator_index: 6096, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924863 }, Withdrawal { index: 44758, validator_index: 6097, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913466 }, Withdrawal { index: 44759, validator_index: 6098, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926279 }, Withdrawal { index: 44760, validator_index: 6099, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44761, validator_index: 6100, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925173 }, Withdrawal { index: 44762, validator_index: 6101, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3902690 }, Withdrawal { index: 44763, validator_index: 6102, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3915304 }, Withdrawal { index: 44764, validator_index: 6103, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925652 }, Withdrawal { index: 44765, validator_index: 6104, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44766, validator_index: 6105, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924450 }, Withdrawal { index: 44767, validator_index: 6106, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }], parent_beacon_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot_number: 2885, target_gas_limit: 200000000 }), head_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot: 2885, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:39:59.737094809",
+        "beacon",
+        "Oct 12 22:39:59.736 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:39:59.737124325",
+        "beacon",
+        "Oct 12 22:39:59.736 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:39:59.737137625",
+        "beacon",
+        "Oct 12 22:39:59.737 WARN  Execution payload envelope rejected           reason: \"EnvelopeError(ExecutionPayloadError(RequestFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))))\", block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, envelope_source: gossip"
+      ],
+      [
+        "2026-10-12 22:40:00.007677155",
+        "beacon",
+        "Oct 12 22:40:00.005 DEBUG Received proposer preparation data            count: 1000"
+      ],
+      [
+        "2026-10-12 22:40:00.007700686",
+        "beacon",
+        "Oct 12 22:40:00.006 DEBUG Processed HTTP API request                    elapsed_ms: 3.837, status: 200 OK, path: /eth/v1/validator/prepare_beacon_proposer, method: POST"
+      ],
+      [
+        "2026-10-12 22:40:00.007702952",
+        "beacon",
+        "Oct 12 22:40:00.007 DEBUG Processed HTTP API request                    elapsed_ms: 4.698, status: 200 OK, path: /eth/v2/validator/duties/proposer/90, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:00.011646189",
+        "beacon",
+        "Oct 12 22:40:00.010 DEBUG Processed HTTP API request                    elapsed_ms: 0.377, status: 200 OK, path: /eth/v2/validator/duties/proposer/91, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:00.738158505",
+        "beacon",
+        "Oct 12 22:40:00.737 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:04.003868492",
+        "beacon",
+        "Oct 12 22:40:04.003 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:04.003898248",
+        "beacon",
+        "Oct 12 22:40:04.003 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:40:04.003901273",
+        "beacon",
+        "Oct 12 22:40:04.003 ERROR Proposer prepare routine failed               error: ExecutionForkChoiceUpdateFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))"
+      ],
+      [
+        "2026-10-12 22:40:04.003930162",
+        "beacon",
+        "Oct 12 22:40:04.003 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791844800, prev_randao: 0x34a111a4fa355c6558300db88fb587cb4f9fae0b86d38e6c22019d0ab24a625d, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 44752, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 44753, validator_index: 6092, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924415 }, Withdrawal { index: 44754, validator_index: 6093, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913278 }, Withdrawal { index: 44755, validator_index: 6094, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926476 }, Withdrawal { index: 44756, validator_index: 6095, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3914548 }, Withdrawal { index: 44757, validator_index: 6096, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924863 }, Withdrawal { index: 44758, validator_index: 6097, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913466 }, Withdrawal { index: 44759, validator_index: 6098, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926279 }, Withdrawal { index: 44760, validator_index: 6099, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44761, validator_index: 6100, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925173 }, Withdrawal { index: 44762, validator_index: 6101, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3902690 }, Withdrawal { index: 44763, validator_index: 6102, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3915304 }, Withdrawal { index: 44764, validator_index: 6103, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925652 }, Withdrawal { index: 44765, validator_index: 6104, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44766, validator_index: 6105, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924450 }, Withdrawal { index: 44767, validator_index: 6106, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }], parent_beacon_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot_number: 2885, target_gas_limit: 200000000 }), head_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot: 2885, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:40:05.005017320",
+        "beacon",
+        "Oct 12 22:40:05.004 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:05.557484914",
+        "execution",
+        "2026-10-12 22:40:05.557+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24455337 identified by 0x1301a7c1e9365ee8"
+      ],
+      [
+        "2026-10-12 22:40:05.562160652",
+        "beacon",
+        "Oct 12 22:40:05.561 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791844800, prev_randao: 0x34a111a4fa355c6558300db88fb587cb4f9fae0b86d38e6c22019d0ab24a625d, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 44752, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 44753, validator_index: 6092, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924415 }, Withdrawal { index: 44754, validator_index: 6093, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913278 }, Withdrawal { index: 44755, validator_index: 6094, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926476 }, Withdrawal { index: 44756, validator_index: 6095, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3914548 }, Withdrawal { index: 44757, validator_index: 6096, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924863 }, Withdrawal { index: 44758, validator_index: 6097, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913466 }, Withdrawal { index: 44759, validator_index: 6098, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926279 }, Withdrawal { index: 44760, validator_index: 6099, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44761, validator_index: 6100, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925173 }, Withdrawal { index: 44762, validator_index: 6101, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3902690 }, Withdrawal { index: 44763, validator_index: 6102, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3915304 }, Withdrawal { index: 44764, validator_index: 6103, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925652 }, Withdrawal { index: 44765, validator_index: 6104, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44766, validator_index: 6105, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924450 }, Withdrawal { index: 44767, validator_index: 6106, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }], parent_beacon_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot_number: 2885, target_gas_limit: 200000000 }), head_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot: 2885, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:40:05.562168249",
+        "beacon",
+        "Oct 12 22:40:05.562 WARN  Delayed proposer preparation                  prepare_slot: 2885, validator: 12497"
+      ],
+      [
+        "2026-10-12 22:40:05.563446647",
+        "beacon",
+        "Oct 12 22:40:05.563 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791844800, prev_randao: 0x34a111a4fa355c6558300db88fb587cb4f9fae0b86d38e6c22019d0ab24a625d, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 44752, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 44753, validator_index: 6092, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924415 }, Withdrawal { index: 44754, validator_index: 6093, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913278 }, Withdrawal { index: 44755, validator_index: 6094, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926476 }, Withdrawal { index: 44756, validator_index: 6095, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3914548 }, Withdrawal { index: 44757, validator_index: 6096, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924863 }, Withdrawal { index: 44758, validator_index: 6097, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3913466 }, Withdrawal { index: 44759, validator_index: 6098, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3926279 }, Withdrawal { index: 44760, validator_index: 6099, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44761, validator_index: 6100, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925173 }, Withdrawal { index: 44762, validator_index: 6101, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3902690 }, Withdrawal { index: 44763, validator_index: 6102, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3915304 }, Withdrawal { index: 44764, validator_index: 6103, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3925652 }, Withdrawal { index: 44765, validator_index: 6104, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }, Withdrawal { index: 44766, validator_index: 6105, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3924450 }, Withdrawal { index: 44767, validator_index: 6106, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3937197 }], parent_beacon_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot_number: 2885, target_gas_limit: 200000000 }), head_block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, slot: 2885, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:40:05.563471994",
+        "beacon",
+        "Oct 12 22:40:05.563 WARN  Delayed proposer preparation                  prepare_slot: 2885, validator: 12497"
+      ],
+      [
+        "2026-10-12 22:40:06.001791784",
+        "validator",
+        "Oct 12 22:40:06.001 INFO  All validators active                         current_epoch_proposers: 4, current_epoch_ptc: 380, active_validators: 1000, total_validators: 1000, epoch: 90, slot: 2885"
+      ],
+      [
+        "2026-10-12 22:40:06.087223505",
+        "beacon",
+        "Oct 12 22:40:06.086 INFO  Valid block from HTTP API                     block_delay: 6.075533318s, root: 0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8, proposer_index: 12497, slot: 2885, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:40:06.088737534",
+        "beacon",
+        "Oct 12 22:40:06.088 DEBUG Delayed head block                            block_root: 0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8, proposer_index: 12497, slot: 2885, total_delay_ms: 6088, observed_delay_ms: \"6076\", blob_delay_ms: \"unknown\", consensus_time_ms: \"8\", execution_time_ms: \"0\", available_delay_ms: \"6085\", attestable_delay_ms: \"6085\", imported_time_ms: \"1\", set_as_head_time_ms: \"2\""
+      ],
+      [
+        "2026-10-12 22:40:06.092288128",
+        "beacon",
+        "Oct 12 22:40:06.092 ERROR Block was broadcast too late                  msg: \"system may be overloaded, block likely to be orphaned\", provenance: \"local\", delay_ms: 6075, slot: 2885, root: 0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:40:06.093861526",
+        "beacon",
+        "Oct 12 22:40:06.093 WARN  Error processing HTTP API request             elapsed_ms: 0.540, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:06.104291740",
+        "validator",
+        "Oct 12 22:40:06.104 WARN  Early attempt failed, retrying at deadline    error: Failed to attest based on payload available event: RequestFailed(\"Node 0 does not report payload present for block 0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8\"), attestation_slot: 2885"
+      ],
+      [
+        "2026-10-12 22:40:07.008339619",
+        "beacon",
+        "Oct 12 22:40:07.008 DEBUG Processing Lookup block                       block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, proposer: 12685, slot: 2884, commitments_formatted: \"[]\", process_type: SingleBlock { id: 595 }"
+      ],
+      [
+        "2026-10-12 22:40:08.001059369",
+        "beacon",
+        "Oct 12 22:40:08.000 DEBUG Proposer prepare routine firing             "
+      ],
+      [
+        "2026-10-12 22:40:08.057816335",
+        "beacon",
+        "Oct 12 22:40:08.057 DEBUG On-time head block                            block_root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, proposer_index: 12685, slot: 2884, total_delay_ms: 20057, observed_delay_ms: \"2044\", blob_delay_ms: \"unknown\", consensus_time_ms: \"15\", execution_time_ms: \"0\", available_delay_ms: \"2060\", attestable_delay_ms: \"2060\", imported_time_ms: \"3\", set_as_head_time_ms: \"2\""
+      ],
+      [
+        "2026-10-12 22:40:10.344616361",
+        "beacon",
+        "Oct 12 22:40:10.344 WARN  Error processing HTTP API request             elapsed_ms: 0.287, status: 404 Not Found, path: /eth/v2/beacon/blocks/2885/attestations, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:12.003087500",
+        "beacon",
+        "Oct 12 22:40:12.002 DEBUG Processed HTTP API request                    elapsed_ms: 0.408, status: 200 OK, path: /eth/v2/validator/duties/proposer/90, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:12.006631099",
+        "beacon",
+        "Oct 12 22:40:12.006 DEBUG Received proposer preparation data            count: 1000"
+      ],
+      [
+        "2026-10-12 22:40:12.006640868",
+        "beacon",
+        "Oct 12 22:40:12.006 DEBUG Processed HTTP API request                    elapsed_ms: 3.010, status: 200 OK, path: /eth/v2/validator/duties/proposer/91, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:12.007962523",
+        "beacon",
+        "Oct 12 22:40:12.006 DEBUG Processed HTTP API request                    elapsed_ms: 4.314, status: 200 OK, path: /eth/v1/validator/prepare_beacon_proposer, method: POST"
+      ],
+      [
+        "2026-10-12 22:40:12.272712277",
+        "beacon",
+        "Oct 12 22:40:12.268 DEBUG On-time head block                            block_root: 0xd5c8fe8d129e6d627848d64de14d7a991ece9f6027e4322da8ceea0d26f16814, proposer_index: 23916, slot: 2886, total_delay_ms: 268, observed_delay_ms: \"248\", blob_delay_ms: \"unknown\", consensus_time_ms: \"13\", execution_time_ms: \"0\", available_delay_ms: \"262\", attestable_delay_ms: \"262\", imported_time_ms: \"1\", set_as_head_time_ms: \"4\""
+      ],
+      [
+        "2026-10-12 22:40:12.590299105",
+        "beacon",
+        "Oct 12 22:40:12.589 DEBUG Processing Lookup block                       block_root: 0xd5c8fe8d129e6d627848d64de14d7a991ece9f6027e4322da8ceea0d26f16814, proposer: 23916, slot: 2886, commitments_formatted: \"[]\", process_type: SingleBlock { id: 598 }"
+      ],
+      [
+        "2026-10-12 22:40:18.001817585",
+        "validator",
+        "Oct 12 22:40:18.001 INFO  All validators active                         current_epoch_proposers: 4, current_epoch_ptc: 380, active_validators: 1000, total_validators: 1000, epoch: 90, slot: 2886"
+      ],
+      [
+        "2026-10-12 22:40:20.001200108",
+        "beacon",
+        "Oct 12 22:40:20.001 DEBUG Proposer prepare routine firing             "
+      ],
+      [
+        "2026-10-12 22:40:24.004672863",
+        "beacon",
+        "Oct 12 22:40:24.004 DEBUG Processed HTTP API request                    elapsed_ms: 0.431, status: 200 OK, path: /eth/v2/validator/duties/proposer/90, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:24.008128723",
+        "beacon",
+        "Oct 12 22:40:24.006 DEBUG Received proposer preparation data            count: 1000"
+      ],
+      [
+        "2026-10-12 22:40:24.008131654",
+        "beacon",
+        "Oct 12 22:40:24.006 DEBUG Processed HTTP API request                    elapsed_ms: 1.832, status: 200 OK, path: /eth/v2/validator/duties/proposer/91, method: GET"
+      ],
+      [
+        "2026-10-12 22:40:24.008148023",
+        "beacon",
+        "Oct 12 22:40:24.006 DEBUG Processed HTTP API request                    elapsed_ms: 2.363, status: 200 OK, path: /eth/v1/validator/prepare_beacon_proposer, method: POST"
+      ],
+      [
+        "2026-10-12 22:40:30.003183674",
+        "validator",
+        "Oct 12 22:40:30.003 INFO  All validators active                         current_epoch_proposers: 4, current_epoch_ptc: 380, active_validators: 1000, total_validators: 1000, epoch: 90, slot: 2887"
+      ],
+      [
+        "2026-10-12 22:40:32.000777194",
+        "beacon",
+        "Oct 12 22:40:32.000 DEBUG Proposer prepare routine firing"
+      ]
+    ]
+  }
+}

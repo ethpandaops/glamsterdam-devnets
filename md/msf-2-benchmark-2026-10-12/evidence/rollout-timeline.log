@@ -1,0 +1,199 @@
+21:10:17 UTC START 1/21 geth:lighthouse-geth-1
+21:10:21 UTC ANSIBLE geth:lighthouse-geth-1 running 0s
+21:10:51 UTC ANSIBLE PASS geth:lighthouse-geth-1
+21:10:55 UTC HEALTH lighthouse-geth-1 slot=2439 finalized=74 stable=0s
+21:11:42 UTC HEALTH lighthouse-geth-1 slot=2443 finalized=74 stable=47s
+21:12:30 UTC HEALTH lighthouse-geth-1 slot=2447 finalized=74 stable=95s
+21:13:03 UTC PASS geth lighthouse-geth-1 slot=2449 finalized=74
+21:13:03 UTC START 2/21 teku:teku-nethermind-1
+21:13:06 UTC ANSIBLE teku:teku-nethermind-1 running 0s
+21:13:36 UTC ANSIBLE PASS teku:teku-nethermind-1
+21:13:39 UTC WAIT teku-nethermind-1 [Errno 104] Connection reset by peer
+21:13:53 UTC WAIT teku-nethermind-1 head behind reference
+21:14:08 UTC HEALTH teku-nethermind-1 slot=2455 finalized=74 stable=0s
+21:14:56 UTC HEALTH teku-nethermind-1 slot=2459 finalized=74 stable=47s
+21:15:44 UTC HEALTH teku-nethermind-1 slot=2462 finalized=74 stable=95s
+21:16:16 UTC PASS teku teku-nethermind-1 slot=2466 finalized=75
+21:16:16 UTC START 3/21 lodestar:lodestar-geth-1
+21:16:20 UTC ANSIBLE lodestar:lodestar-geth-1 running 0s
+21:16:50 UTC ANSIBLE PASS lodestar:lodestar-geth-1
+21:16:54 UTC HEALTH lodestar-geth-1 slot=2469 finalized=75 stable=0s
+21:17:42 UTC HEALTH lodestar-geth-1 slot=2473 finalized=75 stable=47s
+21:18:30 UTC HEALTH lodestar-geth-1 slot=2477 finalized=75 stable=95s
+21:19:01 UTC PASS lodestar lodestar-geth-1 slot=2479 finalized=75
+21:19:01 UTC START 4/21 geth:bootnode-1
+21:19:08 UTC ANSIBLE geth:bootnode-1 running 0s
+21:19:38 UTC ANSIBLE PASS geth:bootnode-1
+21:19:44 UTC HEALTH bootnode-1 slot=2482 finalized=75 stable=0s
+21:20:39 UTC HEALTH bootnode-1 slot=2487 finalized=75 stable=54s
+21:20:57 UTC PASS geth bootnode-1 slot=2489 finalized=75
+21:20:57 UTC START 5/21 geth:buildoor-lighthouse-geth-1
+21:21:02 UTC ANSIBLE geth:buildoor-lighthouse-geth-1 running 0s
+21:21:32 UTC ANSIBLE PASS geth:buildoor-lighthouse-geth-1
+21:21:37 UTC HEALTH buildoor-lighthouse-geth-1 slot=2492 finalized=75 stable=0s
+21:22:27 UTC HEALTH buildoor-lighthouse-geth-1 slot=2496 finalized=76 stable=50s
+21:22:43 UTC PASS geth buildoor-lighthouse-geth-1 slot=2498 finalized=76
+21:22:43 UTC START 6/21 geth:grandine-geth-1
+21:22:47 UTC ANSIBLE geth:grandine-geth-1 running 0s
+21:23:17 UTC ANSIBLE PASS geth:grandine-geth-1
+21:23:21 UTC HEALTH grandine-geth-1 slot=2501 finalized=76 stable=0s
+21:24:08 UTC HEALTH grandine-geth-1 slot=2505 finalized=76 stable=47s
+21:24:24 UTC PASS geth grandine-geth-1 slot=2506 finalized=76
+21:24:24 UTC START 7/21 geth:lodestar-geth-1
+21:24:28 UTC ANSIBLE geth:lodestar-geth-1 running 0s
+21:24:58 UTC ANSIBLE PASS geth:lodestar-geth-1
+21:25:02 UTC HEALTH lodestar-geth-1 slot=2509 finalized=76 stable=0s
+21:25:49 UTC HEALTH lodestar-geth-1 slot=2512 finalized=76 stable=47s
+21:26:05 UTC PASS geth lodestar-geth-1 slot=2515 finalized=76
+21:26:05 UTC START 8/21 geth:nimbus-geth-1
+21:26:11 UTC ANSIBLE geth:nimbus-geth-1 running 0s
+21:26:41 UTC ANSIBLE PASS geth:nimbus-geth-1
+21:26:48 UTC HEALTH nimbus-geth-1 slot=2517 finalized=76 stable=0s
+21:27:43 UTC HEALTH nimbus-geth-1 slot=2523 finalized=76 stable=54s
+21:28:01 UTC PASS geth nimbus-geth-1 slot=2524 finalized=76
+21:28:01 UTC START 9/21 geth:prysm-geth-1
+21:28:07 UTC ANSIBLE geth:prysm-geth-1 running 0s
+21:28:37 UTC ANSIBLE PASS geth:prysm-geth-1
+21:28:44 UTC HEALTH prysm-geth-1 slot=2528 finalized=77 stable=0s
+21:29:39 UTC HEALTH prysm-geth-1 slot=2532 finalized=77 stable=54s
+21:29:57 UTC PASS geth prysm-geth-1 slot=2534 finalized=77
+21:29:57 UTC START 10/21 geth:teku-geth-1
+21:30:02 UTC ANSIBLE geth:teku-geth-1 running 0s
+21:30:32 UTC ANSIBLE PASS geth:teku-geth-1
+21:30:38 UTC HEALTH teku-geth-1 slot=2537 finalized=77 stable=0s
+21:31:30 UTC HEALTH teku-geth-1 slot=2542 finalized=77 stable=52s
+21:31:48 UTC PASS geth teku-geth-1 slot=2543 finalized=77
+21:31:48 UTC START 11/21 teku:buildoor-teku-nethermind-1
+21:31:53 UTC ANSIBLE teku:buildoor-teku-nethermind-1 running 0s
+21:32:23 UTC ANSIBLE PASS teku:buildoor-teku-nethermind-1
+21:32:27 UTC WAIT buildoor-teku-nethermind-1 [Errno 104] Connection reset by peer
+21:32:43 UTC WAIT buildoor-teku-nethermind-1 execution optimistic/offline
+21:33:00 UTC HEALTH buildoor-teku-nethermind-1 slot=2549 finalized=77 stable=0s
+21:33:53 UTC HEALTH buildoor-teku-nethermind-1 slot=2554 finalized=77 stable=52s
+21:34:11 UTC PASS teku buildoor-teku-nethermind-1 slot=2555 finalized=77
+21:34:11 UTC START 12/21 teku:teku-besu-1
+21:34:16 UTC ANSIBLE teku:teku-besu-1 running 0s
+21:34:46 UTC ANSIBLE PASS teku:teku-besu-1
+21:34:49 UTC WAIT teku-besu-1 Remote end closed connection without response
+21:35:04 UTC WAIT teku-besu-1 head behind reference
+21:35:21 UTC HEALTH teku-besu-1 slot=2561 finalized=78 stable=0s
+21:36:11 UTC HEALTH teku-besu-1 slot=2565 finalized=78 stable=50s
+21:36:27 UTC PASS teku teku-besu-1 slot=2567 finalized=78
+21:36:27 UTC START 13/21 teku:teku-erigon-1
+21:36:32 UTC ANSIBLE teku:teku-erigon-1 running 0s
+21:37:02 UTC ANSIBLE PASS teku:teku-erigon-1
+21:37:05 UTC WAIT teku-erigon-1 [Errno 104] Connection reset by peer
+21:37:20 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:37:35 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:37:51 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:38:06 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:38:21 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:38:36 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:38:51 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:39:06 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:39:22 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:39:37 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:39:52 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:40:07 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:40:22 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:40:37 UTC WAIT teku-erigon-1 [Errno 104] Connection reset by peer
+21:40:52 UTC WAIT teku-erigon-1 [Errno 104] Connection reset by peer
+21:41:07 UTC WAIT teku-erigon-1 <urlopen error [Errno 111] Connection refused>
+21:41:23 UTC WAIT teku-erigon-1 <urlopen error [Errno 111] Connection refused>
+21:41:38 UTC WAIT teku-erigon-1 [Errno 104] Connection reset by peer
+21:41:53 UTC WAIT teku-erigon-1 <urlopen error [Errno 111] Connection refused>
+21:42:08 UTC WAIT teku-erigon-1 <urlopen error [Errno 111] Connection refused>
+21:51:35 UTC START 13/21 teku:teku-erigon-1
+21:51:40 UTC ANSIBLE teku:teku-erigon-1 running 0s
+21:52:10 UTC ANSIBLE PASS teku:teku-erigon-1
+21:52:13 UTC WAIT teku-erigon-1 [Errno 104] Connection reset by peer
+21:52:29 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:52:44 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:52:59 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:53:15 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:53:30 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:53:45 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:54:00 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:54:16 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:54:31 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:54:46 UTC WAIT teku-erigon-1 execution optimistic/offline
+21:55:03 UTC HEALTH teku-erigon-1 slot=2659 finalized=81 stable=0s
+21:55:53 UTC HEALTH teku-erigon-1 slot=2664 finalized=81 stable=50s
+21:56:10 UTC PASS teku teku-erigon-1 slot=2665 finalized=81
+21:56:10 UTC START 14/21 teku:teku-ethrex-1
+21:56:14 UTC ANSIBLE teku:teku-ethrex-1 running 0s
+21:56:44 UTC ANSIBLE PASS teku:teku-ethrex-1
+21:56:48 UTC WAIT teku-ethrex-1 [Errno 104] Connection reset by peer
+21:57:03 UTC WAIT teku-ethrex-1 execution optimistic/offline
+21:57:20 UTC HEALTH teku-ethrex-1 slot=2667 finalized=81 stable=0s
+21:58:11 UTC HEALTH teku-ethrex-1 slot=2675 finalized=81 stable=50s
+21:58:28 UTC PASS teku teku-ethrex-1 slot=2677 finalized=81
+21:58:28 UTC START 15/21 teku:teku-geth-1
+21:58:33 UTC ANSIBLE teku:teku-geth-1 running 0s
+21:59:03 UTC ANSIBLE PASS teku:teku-geth-1
+21:59:07 UTC WAIT teku-geth-1 [Errno 104] Connection reset by peer
+21:59:23 UTC WAIT teku-geth-1 execution optimistic/offline
+21:59:39 UTC WAIT teku-geth-1 execution optimistic/offline
+21:59:54 UTC WAIT teku-geth-1 execution optimistic/offline
+22:00:10 UTC WAIT teku-geth-1 execution optimistic/offline
+22:00:27 UTC WAIT teku-geth-1 execution optimistic/offline
+22:00:43 UTC WAIT teku-geth-1 execution optimistic/offline
+22:00:58 UTC WAIT teku-geth-1 execution optimistic/offline
+22:01:15 UTC WAIT teku-geth-1 execution optimistic/offline
+22:01:30 UTC WAIT teku-geth-1 execution optimistic/offline
+22:01:46 UTC WAIT teku-geth-1 execution optimistic/offline
+22:02:03 UTC WAIT teku-geth-1 execution optimistic/offline
+22:02:18 UTC WAIT teku-geth-1 execution optimistic/offline
+22:02:34 UTC WAIT teku-geth-1 execution optimistic/offline
+22:02:50 UTC WAIT teku-geth-1 execution optimistic/offline
+22:03:08 UTC HEALTH teku-geth-1 slot=2700 finalized=82 stable=0s
+22:03:23 UTC WAIT teku-geth-1 execution still syncing/no peers
+22:04:16 UTC HEALTH teku-geth-1 slot=2706 finalized=82 stable=35s
+22:04:51 UTC PASS teku teku-geth-1 slot=2708 finalized=82
+22:04:51 UTC START 16/21 teku:teku-reth-1
+22:04:55 UTC ANSIBLE teku:teku-reth-1 running 0s
+22:05:25 UTC ANSIBLE PASS teku:teku-reth-1
+22:05:27 UTC WAIT teku-reth-1 [Errno 104] Connection reset by peer
+22:05:41 UTC WAIT teku-reth-1 head behind reference
+22:05:57 UTC HEALTH teku-reth-1 slot=2714 finalized=82 stable=0s
+22:06:45 UTC HEALTH teku-reth-1 slot=2718 finalized=82 stable=47s
+22:07:01 UTC PASS teku teku-reth-1 slot=2718 finalized=82
+22:07:01 UTC START 17/21 lodestar:lodestar-besu-1
+22:07:05 UTC ANSIBLE lodestar:lodestar-besu-1 running 0s
+22:07:35 UTC ANSIBLE PASS lodestar:lodestar-besu-1
+22:07:37 UTC WAIT lodestar-besu-1 head behind reference
+22:07:53 UTC HEALTH lodestar-besu-1 slot=2724 finalized=83 stable=0s
+22:08:45 UTC HEALTH lodestar-besu-1 slot=2728 finalized=83 stable=51s
+22:09:01 UTC PASS lodestar lodestar-besu-1 slot=2729 finalized=83
+22:09:01 UTC START 18/21 lodestar:lodestar-erigon-1
+22:09:06 UTC ANSIBLE lodestar:lodestar-erigon-1 running 0s
+22:09:36 UTC ANSIBLE PASS lodestar:lodestar-erigon-1
+22:09:39 UTC WAIT lodestar-erigon-1 consensus still syncing
+22:09:54 UTC WAIT lodestar-erigon-1 consensus still syncing
+22:10:09 UTC WAIT lodestar-erigon-1 head behind reference
+22:10:25 UTC WAIT lodestar-erigon-1 head behind reference
+22:10:40 UTC WAIT lodestar-erigon-1 head behind reference
+22:10:57 UTC HEALTH lodestar-erigon-1 slot=2739 finalized=83 stable=0s
+22:11:47 UTC HEALTH lodestar-erigon-1 slot=2743 finalized=83 stable=50s
+22:12:04 UTC PASS lodestar lodestar-erigon-1 slot=2745 finalized=83
+22:12:04 UTC START 19/21 lodestar:lodestar-ethrex-1
+22:12:11 UTC ANSIBLE lodestar:lodestar-ethrex-1 running 0s
+22:12:41 UTC ANSIBLE lodestar:lodestar-ethrex-1 running 30s
+22:13:11 UTC ANSIBLE PASS lodestar:lodestar-ethrex-1
+22:13:17 UTC HEALTH lodestar-ethrex-1 slot=2751 finalized=83 stable=0s
+22:14:12 UTC HEALTH lodestar-ethrex-1 slot=2755 finalized=84 stable=55s
+22:14:30 UTC PASS lodestar lodestar-ethrex-1 slot=2757 finalized=84
+22:14:30 UTC START 20/21 lodestar:lodestar-nethermind-1
+22:14:36 UTC ANSIBLE lodestar:lodestar-nethermind-1 running 0s
+22:15:06 UTC ANSIBLE lodestar:lodestar-nethermind-1 running 30s
+22:15:36 UTC ANSIBLE PASS lodestar:lodestar-nethermind-1
+22:15:41 UTC HEALTH lodestar-nethermind-1 slot=2763 finalized=84 stable=0s
+22:16:34 UTC HEALTH lodestar-nethermind-1 slot=2767 finalized=84 stable=52s
+22:16:51 UTC PASS lodestar lodestar-nethermind-1 slot=2768 finalized=84
+22:16:51 UTC START 21/21 lodestar:lodestar-reth-1
+22:16:56 UTC ANSIBLE lodestar:lodestar-reth-1 running 0s
+22:17:26 UTC ANSIBLE PASS lodestar:lodestar-reth-1
+22:17:31 UTC HEALTH lodestar-reth-1 slot=2772 finalized=84 stable=0s
+22:18:21 UTC HEALTH lodestar-reth-1 slot=2776 finalized=84 stable=50s
+22:18:37 UTC PASS lodestar lodestar-reth-1 slot=2777 finalized=84
+22:18:37 UTC ROLLOUT COMPLETE 21/21

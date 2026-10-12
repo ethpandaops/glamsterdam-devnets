@@ -1,0 +1,1104 @@
+2026-10-12 20:18:28.080+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,683  (8d857.....4df6b)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  49.61 mwei bfee| 199,997,736 (100.0%) gas used| 9.433s exec|  21.20 Mgas/s| 25 peers
+2026-10-12 20:18:28.381+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 64311 accounts + 19 storage slots in batches of 8
+2026-10-12 20:18:29.465+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 37769 accounts + 19 storage slots in batches of 8
+2026-10-12 20:18:29.568+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,683  (f7077.....42311)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  49.61 mwei bfee| 117,508,786 ( 58.8%) gas used| 1.451s exec|  81.00 Mgas/s| 25 peers
+2026-10-12 20:18:29.604+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f7077.....42311 | safe: 09cc6.....64ae4 | finalized: ec94e.....255b0
+2026-10-12 20:18:43.923+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,684  (d727d.....60851)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  50.70 mwei bfee| 199,997,736 (100.0%) gas used| 5.691s exec|  35.14 Mgas/s| 25 peers
+2026-10-12 20:18:43.990+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: d727d.....60851 | safe: 09cc6.....64ae4 | finalized: ec94e.....255b0
+2026-10-12 20:18:44.169+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 64311 accounts + 19 storage slots in batches of 8
+2026-10-12 20:18:53.860+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:18:53.932+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,685  (4bd1b.....45b4a)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  57.04 mwei bfee|  99,336,852 ( 49.7%) gas used| 4.744s exec|  20.94 Mgas/s| 25 peers
+2026-10-12 20:18:53.965+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 4bd1b.....45b4a | safe: f7077.....42311 | finalized: ec94e.....255b0
+2026-10-12 20:19:20.333+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,686  (b5fd4.....83678)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  56.99 mwei bfee| 183,220,946 ( 91.6%) gas used| 5.693s exec|  32.18 Mgas/s| 25 peers
+2026-10-12 20:19:20.345+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:19:20.374+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b5fd4.....83678 | safe: d727d.....60851 | finalized: ec94e.....255b0
+2026-10-12 20:19:29.020+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 21592 accounts + 19 storage slots in batches of 8
+2026-10-12 20:19:29.160+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,687  (14891.....3a9a9)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  62.92 mwei bfee|  67,190,871 ( 33.6%) gas used| 814.9ms exec|  82.45 Mgas/s| 25 peers
+2026-10-12 20:19:29.180+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 14891.....3a9a9 | safe: d727d.....60851 | finalized: ec94e.....255b0
+2026-10-12 20:19:42.930+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:19:43.248+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,688  (800a4.....c1caf)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  60.34 mwei bfee| 148,343,310 ( 74.2%) gas used| 5.257s exec|  28.22 Mgas/s| 25 peers
+2026-10-12 20:19:43.279+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 800a4.....c1caf | safe: b5fd4.....83678 | finalized: ec94e.....255b0
+2026-10-12 20:19:50.533+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:19:50.700+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,689  (9cc3b.....71043)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  63.98 mwei bfee| 100,660,860 ( 50.3%) gas used| 988.3ms exec| 101.85 Mgas/s| 25 peers
+2026-10-12 20:19:50.780+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 9cc3b.....71043 | safe: 14891.....3a9a9 | finalized: ec94e.....255b0
+2026-10-12 20:20:05.657+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:20:05.823+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,690  (10c96.....c7d74)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  64.04 mwei bfee| 116,113,666 ( 58.1%) gas used| 1.366s exec|  84.98 Mgas/s| 25 peers
+2026-10-12 20:20:05.856+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 10c96.....c7d74 | safe: 800a4.....c1caf | finalized: ec94e.....255b0
+2026-10-12 20:20:15.694+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 26984 accounts + 19 storage slots in batches of 8
+2026-10-12 20:20:15.810+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,691  (f8736.....7afcf)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  65.33 mwei bfee|  83,942,667 ( 42.0%) gas used| 838.5ms exec| 100.11 Mgas/s| 25 peers
+2026-10-12 20:20:15.837+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f8736.....7afcf | safe: 9cc3b.....71043 | finalized: ec94e.....255b0
+2026-10-12 20:20:29.418+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:20:29.647+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,692  (a3d40.....79667)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  64.01 mwei bfee|  65,783,224 ( 32.9%) gas used| 4.447s exec|  14.79 Mgas/s| 25 peers
+2026-10-12 20:20:29.665+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: a3d40.....79667 | safe: 10c96.....c7d74 | finalized: ec94e.....255b0
+2026-10-12 20:20:42.013+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:20:42.129+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,693  (f4d71.....2bdd4)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  61.28 mwei bfee|  83,884,070 ( 41.9%) gas used| 4.660s exec|  18.00 Mgas/s| 25 peers
+2026-10-12 20:20:42.153+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f4d71.....2bdd4 | safe: f8736.....7afcf | finalized: ec94e.....255b0
+2026-10-12 20:20:53.373+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:20:53.543+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,694  (db859.....2b17c)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  60.04 mwei bfee|  65,783,248 ( 32.9%) gas used| 4.340s exec|  15.16 Mgas/s| 25 peers
+2026-10-12 20:20:53.567+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: db859.....2b17c | safe: a3d40.....79667 | finalized: ec94e.....255b0
+2026-10-12 20:21:01.896+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:02.273+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,695  (e8a66.....dbe3e)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  57.47 mwei bfee|  50,330,418 ( 25.2%) gas used| 776.1ms exec|  64.85 Mgas/s| 25 peers
+2026-10-12 20:21:02.291+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e8a66.....dbe3e | safe: f4d71.....2bdd4 | finalized: ec94e.....255b0
+2026-10-12 20:21:13.090+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 10797 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:13.508+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,696  (01b6e.....c5fba)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  53.91 mwei bfee|  33,553,628 ( 16.8%) gas used| 695.9ms exec|  48.22 Mgas/s| 25 peers
+2026-10-12 20:21:13.527+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 01b6e.....c5fba | safe: db859.....2b17c | finalized: ec94e.....255b0
+2026-10-12 20:21:25.141+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 10797 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:25.509+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,697  (80faa.....e16ec)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  49.43 mwei bfee|  33,553,628 ( 16.8%) gas used| 553.9ms exec|  60.58 Mgas/s| 25 peers
+2026-10-12 20:21:25.525+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 80faa.....e16ec | safe: e8a66.....dbe3e | finalized: ec94e.....255b0
+2026-10-12 20:21:34.544+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:34.546+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454698 identified by 0x2465e4666ca300a7
+2026-10-12 20:21:34.547+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 80faa.....e16ec | safe: e8a66.....dbe3e | finalized: ec94e.....255b0
+2026-10-12 20:21:39.253+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:39.667+0000 | EthScheduler-BlockCreation-95-24454698 | INFO  | PostMergeContext | New proposal for payloadId 0x2465e4666ca300a7 block 24454698 (0x0a8b31fd09a3a1607f470c6b19ce5cf3cba98f5a4e90c01b3252e9913e2b9e12) gas used 33553628 transactions 2 reward 3.36 finney is better than the previous one by 3.36 finney
+2026-10-12 20:21:39.768+0000 | vert.x-worker-thread-7 | INFO  | EngineGetPayloadV6 | Produced #24,454,698  (0a8b3.....b9e12)|    2 tx | 16 ws | 33,553,628 (16.8%) gas in 5.220s | Timing(started at 2026-10-12T20:21:34.547977290Z, duplicateWorldState=0ms, preTxsSelection=0ms, txsSelection=4449ms, selectedTxsEvaluation=746ms, blockAssembled=128ms, awaitingRetrieval=641ms) | PayloadId 0x2465e4666ca300a7
+2026-10-12 20:21:39.772+0000 | vert.x-worker-thread-7 | ERROR | JsonRpcExecutorHandler | engine_getPayloadV6 - Error streaming JSON-RPC response
+java.io.IOException: io.vertx.core.VertxException: Connection was closed
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.stopOnFailureOrClosed(JsonResponseStreamer.java:92)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.write(JsonResponseStreamer.java:57)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2293)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegments(UTF8JsonGenerator.java:1353)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.writeString(UTF8JsonGenerator.java:522)
+	at org.hyperledger.besu.ethereum.core.json.BlockAccessListJson$Serializer.serialize(BlockAccessListJson.java:48)
+	at org.hyperledger.besu.ethereum.core.json.BlockAccessListJson$Serializer.serialize(BlockAccessListJson.java:36)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:503)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:342)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1587)
+	at com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1289)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1098)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.handleJsonObjectResponse(JsonRpcObjectExecutor.java:143)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.execute(JsonRpcObjectExecutor.java:65)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$2(JsonRpcExecutorHandler.java:71)
+	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$0(JsonRpcExecutorHandler.java:68)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.lambda$handle$0(BlockingHandlerDecorator.java:48)
+	at io.vertx.core.impl.ExecuteBlocking$1.execute(ExecuteBlocking.java:36)
+	at io.vertx.core.impl.WorkerTask.run(WorkerTask.java:57)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: io.vertx.core.VertxException: Connection was closed
+2026-10-12 20:21:49.146+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:21:49.552+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,698  (e3224.....b6fa0)|    1 tx (100.0% parallel)| 16 ws|  0 blobs|  45.32 mwei bfee|  16,776,814 (  8.4%) gas used| 534.8ms exec|  31.37 Mgas/s| 25 peers
+2026-10-12 20:21:49.567+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e3224.....b6fa0 | safe: 01b6e.....c5fba | finalized: ec94e.....255b0
+2026-10-12 20:22:01.169+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 10371 accounts + 19 storage slots in batches of 8
+2026-10-12 20:22:05.128+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,699  (ac1e0.....b6ca1)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  40.61 mwei bfee|  82,560,062 ( 41.3%) gas used| 4.267s exec|  19.35 Mgas/s| 25 peers
+2026-10-12 20:22:05.145+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: ac1e0.....b6ca1 | safe: 01b6e.....c5fba | finalized: ec94e.....255b0
+2026-10-12 20:22:17.985+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:22:18.132+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,700  (b9172.....312fe)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  39.72 mwei bfee|  67,107,232 ( 33.6%) gas used| 4.477s exec|  14.99 Mgas/s| 25 peers
+2026-10-12 20:22:18.152+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b9172.....312fe | safe: e3224.....b6fa0 | finalized: ec94e.....255b0
+2026-10-12 20:22:26.060+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:22:29.961+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,701  (f550b.....1b9db)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  38.09 mwei bfee|  67,107,256 ( 33.6%) gas used| 4.558s exec|  14.72 Mgas/s| 25 peers
+2026-10-12 20:22:29.981+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f550b.....1b9db | safe: ac1e0.....b6ca1 | finalized: ec94e.....255b0
+2026-10-12 20:22:37.303+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 15765 accounts + 19 storage slots in batches of 8
+2026-10-12 20:22:37.711+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,702  (045a8.....0cf3f)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  36.52 mwei bfee|  49,006,410 ( 24.5%) gas used| 712.7ms exec|  68.76 Mgas/s| 25 peers
+2026-10-12 20:22:37.739+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 045a8.....0cf3f | safe: b9172.....312fe | finalized: ec94e.....255b0
+2026-10-12 20:22:54.367+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:22:54.715+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,703  (e9d48.....56cd0)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  34.20 mwei bfee|  50,330,442 ( 25.2%) gas used| 4.451s exec|  11.31 Mgas/s| 25 peers
+2026-10-12 20:22:54.732+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e9d48.....56cd0 | safe: f550b.....1b9db | finalized: ec94e.....255b0
+2026-10-12 20:23:01.112+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 10797 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:01.588+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,704  (e1daa.....7d120)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  32.07 mwei bfee|  33,553,628 ( 16.8%) gas used| 672.7ms exec|  49.88 Mgas/s| 25 peers
+2026-10-12 20:23:01.609+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e1daa.....7d120 | safe: 045a8.....0cf3f | finalized: ec94e.....255b0
+2026-10-12 20:23:16.853+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:17.111+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,705  (e6168.....3baf2)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  29.41 mwei bfee| 117,437,698 ( 58.7%) gas used| 831.1ms exec| 141.30 Mgas/s| 25 peers
+2026-10-12 20:23:17.136+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e6168.....3baf2 | safe: e9d48.....56cd0 | finalized: ec94e.....255b0
+2026-10-12 20:23:30.796+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:30.971+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,706  (f2ad8.....aeb26)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  30.05 mwei bfee| 116,113,666 ( 58.1%) gas used| 4.988s exec|  23.28 Mgas/s| 25 peers
+2026-10-12 20:23:30.998+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f2ad8.....aeb26 | safe: e1daa.....7d120 | finalized: ec94e.....255b0
+2026-10-12 20:23:44.126+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:44.185+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,707  (e1e09.....eb07f)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  30.65 mwei bfee| 100,660,884 ( 50.3%) gas used| 4.535s exec|  22.20 Mgas/s| 25 peers
+2026-10-12 20:23:44.210+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e1e09.....eb07f | safe: e6168.....3baf2 | finalized: ec94e.....255b0
+2026-10-12 20:23:46.537+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:46.539+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454708 identified by 0x13e7c577ccdadeb3
+2026-10-12 20:23:46.539+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e1e09.....eb07f | safe: e6168.....3baf2 | finalized: ec94e.....255b0
+2026-10-12 20:23:48.441+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 10371 accounts + 19 storage slots in batches of 8
+2026-10-12 20:23:52.124+0000 | vert.x-worker-thread-1 | INFO  | EngineGetPayloadV6 | Produced #24,454,708  (386b1.....0d99a)|    0 tx | 16 ws | 0 (0.0%) gas in 0.000s | Timing(started at 2026-10-12T13:04:58.527563822Z, empty-block-created=0ms, awaitingRetrieval=0ms) | PayloadId 0x13e7c577ccdadeb3
+2026-10-12 20:23:52.444+0000 | EthScheduler-BlockCreation-97-24454708 | INFO  | PostMergeContext | New proposal for payloadId 0x13e7c577ccdadeb3 block 24454708 (0x03674dca0964f80e37a51092419cc369d865ba1c140272702e2ee86b830a9c0a) gas used 49006434 transactions 3 reward 4.90 finney is better than the previous one by 4.90 finney
+2026-10-12 20:24:05.754+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,708  (8e6cf.....3261e)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  30.68 mwei bfee|  82,560,038 ( 41.3%) gas used| 4.384s exec|  18.83 Mgas/s| 25 peers
+2026-10-12 20:24:05.821+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 8e6cf.....3261e | safe: f2ad8.....aeb26 | finalized: ec94e.....255b0
+2026-10-12 20:24:05.844+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 26553 accounts + 19 storage slots in batches of 8
+2026-10-12 20:24:17.898+0000 | vert.x-worker-thread-4 | ERROR | JsonRpcExecutorHandler | eth_blockNumber - Error streaming JSON-RPC response
+java.io.IOException: io.vertx.core.http.HttpClosedException: Connection was closed
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.stopOnFailureOrClosed(JsonResponseStreamer.java:92)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.write(JsonResponseStreamer.java:57)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2293)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.close(UTF8JsonGenerator.java:1232)
+	at com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1294)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1098)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.handleJsonObjectResponse(JsonRpcObjectExecutor.java:143)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.execute(JsonRpcObjectExecutor.java:65)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$2(JsonRpcExecutorHandler.java:71)
+	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$0(JsonRpcExecutorHandler.java:68)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.lambda$handle$0(BlockingHandlerDecorator.java:48)
+	at io.vertx.core.impl.ExecuteBlocking$1.execute(ExecuteBlocking.java:36)
+	at io.vertx.core.impl.WorkerTask.run(WorkerTask.java:57)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: io.vertx.core.http.HttpClosedException: Connection was closed
+2026-10-12 20:24:18.028+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 26983 accounts + 19 storage slots in batches of 8
+2026-10-12 20:24:18.346+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,709  (0383e.....06b40)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  30.01 mwei bfee|  83,942,679 ( 42.0%) gas used| 4.738s exec|  17.72 Mgas/s| 25 peers
+2026-10-12 20:24:18.367+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0383e.....06b40 | safe: f2ad8.....aeb26 | finalized: ec94e.....255b0
+2026-10-12 20:24:29.813+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 26553 accounts + 19 storage slots in batches of 8
+2026-10-12 20:24:29.945+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,710  (0ac23.....da8bd)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  29.41 mwei bfee|  82,560,038 ( 41.3%) gas used| 4.500s exec|  18.35 Mgas/s| 25 peers
+2026-10-12 20:24:29.966+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0ac23.....da8bd | safe: 8e6cf.....3261e | finalized: ec94e.....255b0
+2026-10-12 20:24:45.842+0000 | vert.x-worker-thread-10 | ERROR | JsonRpcExecutorHandler | debug_getBadBlocks - Error streaming JSON-RPC response
+java.io.IOException: io.vertx.core.http.HttpClosedException: Connection was closed
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.stopOnFailureOrClosed(JsonResponseStreamer.java:92)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.write(JsonResponseStreamer.java:57)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2293)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.close(UTF8JsonGenerator.java:1232)
+	at com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1294)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1098)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.handleJsonObjectResponse(JsonRpcObjectExecutor.java:143)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.execute(JsonRpcObjectExecutor.java:65)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$2(JsonRpcExecutorHandler.java:71)
+	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$0(JsonRpcExecutorHandler.java:68)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.lambda$handle$0(BlockingHandlerDecorator.java:48)
+	at io.vertx.core.impl.ExecuteBlocking$1.execute(ExecuteBlocking.java:36)
+	at io.vertx.core.impl.WorkerTask.run(WorkerTask.java:57)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: io.vertx.core.http.HttpClosedException: Connection was closed
+2026-10-12 20:24:46.055+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:24:46.182+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,711  (5455b.....c77bb)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  28.77 mwei bfee|  67,107,256 ( 33.6%) gas used| 4.456s exec|  15.06 Mgas/s| 25 peers
+2026-10-12 20:24:46.203+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 5455b.....c77bb | safe: 0383e.....06b40 | finalized: 06485.....94d89
+2026-10-12 20:24:49.625+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:24:49.897+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,712  (b885f.....75512)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  27.59 mwei bfee|  50,330,442 ( 25.2%) gas used| 669.8ms exec|  75.14 Mgas/s| 25 peers
+2026-10-12 20:24:49.913+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b885f.....75512 | safe: 0ac23.....da8bd | finalized: 06485.....94d89
+2026-10-12 20:25:03.336+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 21164 accounts + 19 storage slots in batches of 8
+2026-10-12 20:25:03.524+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,713  (d1a98.....7d607)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  25.87 mwei bfee|  65,841,821 ( 32.9%) gas used| 747.5ms exec|  88.08 Mgas/s| 25 peers
+2026-10-12 20:25:03.544+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: d1a98.....7d607 | safe: 5455b.....c77bb | finalized: 06485.....94d89
+2026-10-12 20:25:13.705+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:25:13.929+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,714  (958b5.....2187d)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  24.77 mwei bfee|  50,330,442 ( 25.2%) gas used| 734.5ms exec|  68.52 Mgas/s| 25 peers
+2026-10-12 20:25:13.951+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 958b5.....2187d | safe: b885f.....75512 | finalized: 06485.....94d89
+2026-10-12 20:25:25.426+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:25:29.353+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,715  (884d4.....e3f4b)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  23.23 mwei bfee|  50,330,442 ( 25.2%) gas used| 4.358s exec|  11.55 Mgas/s| 25 peers
+2026-10-12 20:25:29.373+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 884d4.....e3f4b | safe: d1a98.....7d607 | finalized: 06485.....94d89
+2026-10-12 20:25:38.317+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:25:42.520+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,716  (ef69d.....97337)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  21.79 mwei bfee| 199,997,736 (100.0%) gas used| 5.007s exec|  39.95 Mgas/s| 25 peers
+2026-10-12 20:25:42.541+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: ef69d.....97337 | safe: 958b5.....2187d | finalized: 06485.....94d89
+2026-10-12 20:25:59.357+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 53952 accounts + 19 storage slots in batches of 8
+2026-10-12 20:25:59.399+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,717  (1593c.....4dfaa)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  24.51 mwei bfee| 167,826,749 ( 83.9%) gas used| 8.862s exec|  18.94 Mgas/s| 25 peers
+2026-10-12 20:26:11.486+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:26:11.497+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,718  (a2f2f.....9c90c)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  26.59 mwei bfee| 183,220,922 ( 91.6%) gas used| 9.008s exec|  20.34 Mgas/s| 25 peers
+2026-10-12 20:26:14.585+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:26:14.801+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,719  (ee3de.....da784)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  29.36 mwei bfee|  99,336,852 ( 49.7%) gas used| 1.225s exec|  81.07 Mgas/s| 25 peers
+2026-10-12 20:26:14.836+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: ee3de.....da784 | safe: ef69d.....97337 | finalized: 06485.....94d89
+2026-10-12 20:26:31.464+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 53527 accounts + 19 storage slots in batches of 8
+2026-10-12 20:26:31.836+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,720  (cb1b2.....9c3f4)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  29.33 mwei bfee| 166,490,202 ( 83.2%) gas used| 5.729s exec|  29.06 Mgas/s| 25 peers
+2026-10-12 20:26:31.869+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: cb1b2.....9c3f4 | safe: a2f2f.....9c90c | finalized: 06485.....94d89
+2026-10-12 20:26:38.497+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:26:38.777+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,721  (03975.....86854)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  31.77 mwei bfee| 100,660,884 ( 50.3%) gas used| 1.290s exec|  78.01 Mgas/s| 25 peers
+2026-10-12 20:26:38.813+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 03975.....86854 | safe: ee3de.....da784 | finalized: 06485.....94d89
+2026-10-12 20:26:55.320+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:26:55.611+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,722  (51919.....0e8b7)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  31.79 mwei bfee| 149,667,294 ( 74.8%) gas used| 5.393s exec|  27.75 Mgas/s| 25 peers
+2026-10-12 20:26:55.638+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 51919.....0e8b7 | safe: cb1b2.....9c3f4 | finalized: 06485.....94d89
+2026-10-12 20:27:03.075+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 26553 accounts + 19 storage slots in batches of 8
+2026-10-12 20:27:06.836+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,723  (1be8e.....b3598)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  33.77 mwei bfee|  82,560,038 ( 41.3%) gas used| 4.620s exec|  17.87 Mgas/s| 25 peers
+2026-10-12 20:27:06.857+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 1be8e.....b3598 | safe: 03975.....86854 | finalized: 06485.....94d89
+2026-10-12 20:27:18.623+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 37770 accounts + 19 storage slots in batches of 8
+2026-10-12 20:27:18.723+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,724  (3bcac.....9af15)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  33.03 mwei bfee| 117,471,265 ( 58.7%) gas used| 4.945s exec|  23.76 Mgas/s| 25 peers
+2026-10-12 20:27:18.751+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3bcac.....9af15 | safe: 51919.....0e8b7 | finalized: 06485.....94d89
+2026-10-12 20:27:29.953+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:27:30.160+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,725  (d7214.....b1e11)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  33.75 mwei bfee|  65,783,224 ( 32.9%) gas used| 4.523s exec|  14.54 Mgas/s| 25 peers
+2026-10-12 20:27:30.180+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: d7214.....b1e11 | safe: 1be8e.....b3598 | finalized: 06485.....94d89
+2026-10-12 20:27:43.283+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:27:43.495+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,726  (32888.....b9e9a)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  32.31 mwei bfee| 100,660,884 ( 50.3%) gas used| 4.827s exec|  20.85 Mgas/s| 25 peers
+2026-10-12 20:27:43.518+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 32888.....b9e9a | safe: 3bcac.....9af15 | finalized: 06485.....94d89
+2026-10-12 20:27:55.224+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 15765 accounts + 19 storage slots in batches of 8
+2026-10-12 20:27:55.513+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,727  (73e4b.....efd2e)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  32.34 mwei bfee|  49,006,410 ( 24.5%) gas used| 4.414s exec|  11.10 Mgas/s| 25 peers
+2026-10-12 20:27:55.531+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 73e4b.....efd2e | safe: d7214.....b1e11 | finalized: 06485.....94d89
+2026-10-12 20:28:02.073+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:28:05.936+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,728  (f8aa8.....6cb1d)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  30.28 mwei bfee|  67,107,256 ( 33.6%) gas used| 4.609s exec|  14.56 Mgas/s| 25 peers
+2026-10-12 20:28:05.957+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f8aa8.....6cb1d | safe: 32888.....b9e9a | finalized: 06485.....94d89
+2026-10-12 20:28:13.913+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:28:14.122+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,729  (b6c36.....f3bcc)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  29.03 mwei bfee|  67,107,256 ( 33.6%) gas used| 839.0ms exec|  79.98 Mgas/s| 25 peers
+2026-10-12 20:28:14.150+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b6c36.....f3bcc | safe: 73e4b.....efd2e | finalized: 06485.....94d89
+2026-10-12 20:28:26.405+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:28:30.600+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,730  (2399f.....32f35)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  27.84 mwei bfee| 149,667,294 ( 74.8%) gas used| 4.939s exec|  30.31 Mgas/s| 25 peers
+2026-10-12 20:28:30.620+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 2399f.....32f35 | safe: f8aa8.....6cb1d | finalized: 06485.....94d89
+2026-10-12 20:28:46.484+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,731  (59a62.....0fd73)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  29.57 mwei bfee| 134,214,512 ( 67.1%) gas used| 8.789s exec|  15.27 Mgas/s| 25 peers
+2026-10-12 20:28:46.499+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 43161 accounts + 19 storage slots in batches of 8
+2026-10-12 20:28:46.543+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 59a62.....0fd73 | safe: b6c36.....f3bcc | finalized: 06485.....94d89
+2026-10-12 20:28:54.248+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 26553 accounts + 19 storage slots in batches of 8
+2026-10-12 20:28:54.485+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,732  (458d1.....3cf74)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  30.83 mwei bfee|  82,560,038 ( 41.3%) gas used| 4.714s exec|  17.52 Mgas/s| 25 peers
+2026-10-12 20:28:54.506+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 458d1.....3cf74 | safe: 2399f.....32f35 | finalized: 06485.....94d89
+2026-10-12 20:29:06.460+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:29:06.577+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,733  (13b94.....6ee8e)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  30.16 mwei bfee| 116,113,690 ( 58.1%) gas used| 4.955s exec|  23.43 Mgas/s| 25 peers
+2026-10-12 20:29:06.602+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 13b94.....6ee8e | safe: 59a62.....0fd73 | finalized: 06485.....94d89
+2026-10-12 20:29:15.588+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:29:15.810+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,734  (3cd48.....cb45d)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  30.77 mwei bfee|  50,330,418 ( 25.2%) gas used| 665.5ms exec|  75.62 Mgas/s| 25 peers
+2026-10-12 20:29:15.826+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3cd48.....cb45d | safe: 458d1.....3cf74 | finalized: 06485.....94d89
+2026-10-12 20:29:30.232+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:29:30.409+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,735  (651da.....12c4f)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  28.86 mwei bfee| 100,660,884 ( 50.3%) gas used| 4.835s exec|  20.82 Mgas/s| 25 peers
+2026-10-12 20:29:30.434+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 651da.....12c4f | safe: 13b94.....6ee8e | finalized: 06485.....94d89
+2026-10-12 20:29:41.973+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:29:42.112+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,736  (f7a23.....5a4ea)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  28.88 mwei bfee|  99,336,852 ( 49.7%) gas used| 4.728s exec|  21.01 Mgas/s| 25 peers
+2026-10-12 20:29:42.139+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f7a23.....5a4ea | safe: 3cd48.....cb45d | finalized: 06485.....94d89
+2026-10-12 20:29:53.628+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:29:53.926+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,737  (96ee6.....e43be)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  28.86 mwei bfee|  83,884,070 ( 41.9%) gas used| 4.603s exec|  18.22 Mgas/s| 25 peers
+2026-10-12 20:29:53.949+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 96ee6.....e43be | safe: 651da.....12c4f | finalized: 06485.....94d89
+2026-10-12 20:30:06.213+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 26558 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:06.837+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,738  (6649e.....19087)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  28.27 mwei bfee| 183,292,034 ( 91.6%) gas used| 5.212s exec|  35.17 Mgas/s| 25 peers
+2026-10-12 20:30:06.862+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6649e.....19087 | safe: f7a23.....5a4ea | finalized: 06485.....94d89
+2026-10-12 20:30:14.813+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:14.900+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,739  (5fdc9.....580e9)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  31.22 mwei bfee| 117,437,698 ( 58.7%) gas used| 1.338s exec|  87.77 Mgas/s| 25 peers
+2026-10-12 20:30:14.939+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 5fdc9.....580e9 | safe: 96ee6.....e43be | finalized: 06485.....94d89
+2026-10-12 20:30:32.004+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:32.215+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,740  (c9c3e.....a6c51)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  31.90 mwei bfee| 183,220,922 ( 91.6%) gas used| 5.958s exec|  30.75 Mgas/s| 25 peers
+2026-10-12 20:30:32.253+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: c9c3e.....a6c51 | safe: 6649e.....19087 | finalized: 06485.....94d89
+2026-10-12 20:30:43.920+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:47.638+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,741  (23e29.....21eb2)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  35.22 mwei bfee| 166,444,108 ( 83.2%) gas used| 9.229s exec|  18.03 Mgas/s| 25 peers
+2026-10-12 20:30:50.744+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 37344 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:54.594+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,742  (581a1.....8dcff)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  38.14 mwei bfee| 116,159,760 ( 58.1%) gas used| 4.980s exec|  23.32 Mgas/s| 25 peers
+2026-10-12 20:30:54.623+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 581a1.....8dcff | safe: c9c3e.....a6c51 | finalized: 06485.....94d89
+2026-10-12 20:30:58.812+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:30:58.815+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454743 identified by 0x22e996379f673e7f
+2026-10-12 20:30:58.815+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 581a1.....8dcff | safe: c9c3e.....a6c51 | finalized: 06485.....94d89
+2026-10-12 20:31:00.565+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 10371 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:00.879+0000 | EthScheduler-BlockCreation-99-24454743 | INFO  | PostMergeContext | New proposal for payloadId 0x22e996379f673e7f block 24454743 (0x740164dd1bd8d373bd9b6bd7146f720f4d697d7225a5c608658cb1d99aee9d1d) gas used 49006434 transactions 3 reward 4.90 finney is better than the previous one by 4.90 finney
+2026-10-12 20:31:00.888+0000 | vert.x-worker-thread-14 | INFO  | EngineGetPayloadV6 | Produced #24,454,743  (74016.....e9d1d)|    3 tx | 16 ws | 49,006,434 (24.5%) gas in 2.072s | Timing(started at 2026-10-12T20:30:58.815780177Z, duplicateWorldState=0ms, preTxsSelection=0ms, txsSelection=1289ms, selectedTxsEvaluation=1281ms, blockAssembled=180ms, awaitingRetrieval=602ms) | PayloadId 0x22e996379f673e7f
+2026-10-12 20:31:15.375+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,743  (2e603.....53304)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  38.91 mwei bfee| 132,890,480 ( 66.4%) gas used| 9.093s exec|  14.61 Mgas/s| 25 peers
+2026-10-12 20:31:15.432+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:15.525+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:15.819+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,744  (1aa7b.....3a3a3)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  40.51 mwei bfee|  33,553,628 ( 16.8%) gas used| 426.4ms exec|  78.68 Mgas/s| 25 peers
+2026-10-12 20:31:15.831+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 1aa7b.....3a3a3 | safe: 581a1.....8dcff | finalized: 09cc6.....64ae4
+2026-10-12 20:31:30.533+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:30.850+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,745  (66d31.....cb7a1)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  37.15 mwei bfee| 117,437,698 ( 58.7%) gas used| 5.361s exec|  21.91 Mgas/s| 25 peers
+2026-10-12 20:31:30.876+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 66d31.....cb7a1 | safe: 2e603.....53304 | finalized: 09cc6.....64ae4
+2026-10-12 20:31:41.625+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 21592 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:41.767+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,746  (db646.....7d44f)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  37.96 mwei bfee|  67,203,374 ( 33.6%) gas used| 4.663s exec|  14.41 Mgas/s| 25 peers
+2026-10-12 20:31:41.785+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: db646.....7d44f | safe: 1aa7b.....3a3a3 | finalized: 09cc6.....64ae4
+2026-10-12 20:31:50.016+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:31:50.321+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,747  (7f405.....1bec4)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  36.40 mwei bfee|  50,330,442 ( 25.2%) gas used| 787.8ms exec|  63.89 Mgas/s| 25 peers
+2026-10-12 20:31:50.345+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 7f405.....1bec4 | safe: 66d31.....cb7a1 | finalized: 09cc6.....64ae4
+2026-10-12 20:32:01.713+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:32:02.059+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,748  (2c1ae.....6cb57)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  34.14 mwei bfee|  67,107,232 ( 33.6%) gas used| 925.7ms exec|  72.49 Mgas/s| 25 peers
+2026-10-12 20:32:02.087+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 2c1ae.....6cb57 | safe: db646.....7d44f | finalized: 09cc6.....64ae4
+2026-10-12 20:32:13.476+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:32:17.378+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,749  (13e53.....8c48f)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  32.74 mwei bfee|  50,330,442 ( 25.2%) gas used| 4.317s exec|  11.66 Mgas/s| 25 peers
+2026-10-12 20:32:17.395+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 13e53.....8c48f | safe: 7f405.....1bec4 | finalized: 09cc6.....64ae4
+2026-10-12 20:32:25.493+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:32:25.868+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,750  (ca25a.....1fad7)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  30.70 mwei bfee|  50,330,442 ( 25.2%) gas used| 787.9ms exec|  63.88 Mgas/s| 25 peers
+2026-10-12 20:32:25.885+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: ca25a.....1fad7 | safe: 2c1ae.....6cb57 | finalized: 09cc6.....64ae4
+2026-10-12 20:32:37.370+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:32:37.730+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,751  (2f01f.....5e4bf)|    1 tx (100.0% parallel)| 16 ws|  0 blobs|  28.80 mwei bfee|  16,776,814 (  8.4%) gas used| 431.5ms exec|  38.88 Mgas/s| 25 peers
+2026-10-12 20:32:37.753+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 2f01f.....5e4bf | safe: 13e53.....8c48f | finalized: 09cc6.....64ae4
+2026-10-12 20:32:48.546+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:32:48.547+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,752  (4fb15.....227db)|    0 tx| 16 ws|  0 blobs|  25.80 mwei bfee|           0 (  0.0%) gas used| 2.1ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:32:48.555+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 4fb15.....227db | safe: ca25a.....1fad7 | finalized: 09cc6.....64ae4
+2026-10-12 20:33:00.565+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:33:00.568+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,753  (08bad.....b022b)|    0 tx| 16 ws|  0 blobs|  22.58 mwei bfee|           0 (  0.0%) gas used| 6.6ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:33:00.584+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 08bad.....b022b | safe: 2f01f.....5e4bf | finalized: 09cc6.....64ae4
+2026-10-12 20:33:14.589+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:33:14.591+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,754  (00b1c.....709e4)|    0 tx| 16 ws|  0 blobs|  19.75 mwei bfee|           0 (  0.0%) gas used| 5.2ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:33:14.622+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 00b1c.....709e4 | safe: 4fb15.....227db | finalized: 09cc6.....64ae4
+2026-10-12 20:33:24.901+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:33:25.350+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,755  (70ded.....4c095)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  17.29 mwei bfee|  50,330,442 ( 25.2%) gas used| 541.0ms exec|  93.03 Mgas/s| 25 peers
+2026-10-12 20:33:25.371+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 70ded.....4c095 | safe: 08bad.....b022b | finalized: 09cc6.....64ae4
+2026-10-12 20:33:37.817+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 15765 accounts + 19 storage slots in batches of 8
+2026-10-12 20:33:38.192+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,756  (667bf.....43d44)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  16.21 mwei bfee|  79,912,022 ( 40.0%) gas used| 975.9ms exec|  81.88 Mgas/s| 25 peers
+2026-10-12 20:33:38.211+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 667bf.....43d44 | safe: 00b1c.....709e4 | finalized: 09cc6.....64ae4
+2026-10-12 20:33:54.318+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:33:54.486+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,757  (1e0a9.....942fe)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  15.81 mwei bfee|  83,884,070 ( 41.9%) gas used| 4.537s exec|  18.49 Mgas/s| 25 peers
+2026-10-12 20:33:54.511+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 1e0a9.....942fe | safe: 70ded.....4c095 | finalized: 09cc6.....64ae4
+2026-10-12 20:34:06.405+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:34:06.612+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,758  (9cf7f.....ec3a8)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  15.49 mwei bfee|  65,783,224 ( 32.9%) gas used| 4.382s exec|  15.01 Mgas/s| 25 peers
+2026-10-12 20:34:06.634+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 9cf7f.....ec3a8 | safe: 667bf.....43d44 | finalized: 09cc6.....64ae4
+2026-10-12 20:34:13.667+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:34:17.542+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,759  (fbe32.....b328b)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  14.82 mwei bfee|  50,330,442 ( 25.2%) gas used| 4.372s exec|  11.51 Mgas/s| 25 peers
+2026-10-12 20:34:17.559+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: fbe32.....b328b | safe: 1e0a9.....942fe | finalized: 09cc6.....64ae4
+2026-10-12 20:34:26.475+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:34:26.657+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,760  (895fa.....e908e)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  13.90 mwei bfee| 134,214,512 ( 67.1%) gas used| 1.167s exec| 115.00 Mgas/s| 25 peers
+2026-10-12 20:34:26.676+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 895fa.....e908e | safe: 9cf7f.....ec3a8 | finalized: 09cc6.....64ae4
+2026-10-12 20:34:39.444+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:34:39.738+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,761  (7077f.....71e73)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  14.50 mwei bfee|  99,336,852 ( 49.7%) gas used| 1.370s exec|  72.50 Mgas/s| 25 peers
+2026-10-12 20:34:39.767+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 7077f.....71e73 | safe: fbe32.....b328b | finalized: 09cc6.....64ae4
+2026-10-12 20:34:50.969+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:34:51.063+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,762  (53ef2.....8c397)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  14.49 mwei bfee| 100,660,884 ( 50.3%) gas used| 1.228s exec|  81.98 Mgas/s| 25 peers
+2026-10-12 20:34:51.093+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 53ef2.....8c397 | safe: 895fa.....e908e | finalized: 09cc6.....64ae4
+2026-10-12 20:35:03.101+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:35:03.305+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,763  (18aa1.....539ef)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  14.50 mwei bfee|  99,336,852 ( 49.7%) gas used| 1.300s exec|  76.41 Mgas/s| 25 peers
+2026-10-12 20:35:03.332+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 18aa1.....539ef | safe: 7077f.....71e73 | finalized: 09cc6.....64ae4
+2026-10-12 20:35:14.868+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:35:15.022+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,764  (edd08.....8ceab)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  14.49 mwei bfee|  83,884,070 ( 41.9%) gas used| 1.026s exec|  81.75 Mgas/s| 25 peers
+2026-10-12 20:35:15.045+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: edd08.....8ceab | safe: 53ef2.....8c397 | finalized: 09cc6.....64ae4
+2026-10-12 20:35:29.044+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 26553 accounts + 19 storage slots in batches of 8
+2026-10-12 20:35:29.194+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,765  (0be1d.....5ddaf)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  14.19 mwei bfee|  82,560,038 ( 41.3%) gas used| 934.6ms exec|  88.34 Mgas/s| 25 peers
+2026-10-12 20:35:29.222+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0be1d.....5ddaf | safe: 18aa1.....539ef | finalized: 09cc6.....64ae4
+2026-10-12 20:35:42.642+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 26979 accounts + 19 storage slots in batches of 8
+2026-10-12 20:35:43.011+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,766  (3a1b9.....68110)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  13.89 mwei bfee|  83,884,070 ( 41.9%) gas used| 4.773s exec|  17.57 Mgas/s| 25 peers
+2026-10-12 20:35:43.033+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3a1b9.....68110 | safe: edd08.....8ceab | finalized: 09cc6.....64ae4
+2026-10-12 20:35:53.358+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:35:53.532+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,767  (4e7c9.....1dfee)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  13.61 mwei bfee|  65,783,224 ( 32.9%) gas used| 4.418s exec|  14.89 Mgas/s| 25 peers
+2026-10-12 20:35:53.550+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 4e7c9.....1dfee | safe: 0be1d.....5ddaf | finalized: 09cc6.....64ae4
+2026-10-12 20:36:02.041+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:36:02.193+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,768  (c0ddd.....11990)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  13.02 mwei bfee|  67,107,256 ( 33.6%) gas used| 857.9ms exec|  78.22 Mgas/s| 25 peers
+2026-10-12 20:36:02.294+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: c0ddd.....11990 | safe: 3a1b9.....68110 | finalized: 09cc6.....64ae4
+2026-10-12 20:36:13.985+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:36:14.270+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,769  (87df6.....13df6)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  12.49 mwei bfee|  67,107,256 ( 33.6%) gas used| 931.5ms exec|  72.04 Mgas/s| 25 peers
+2026-10-12 20:36:14.366+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 87df6.....13df6 | safe: 4e7c9.....1dfee | finalized: 09cc6.....64ae4
+2026-10-12 20:36:31.393+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 15765 accounts + 19 storage slots in batches of 8
+2026-10-12 20:36:31.631+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,770  (872b1.....54a5c)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  11.97 mwei bfee|  49,006,410 ( 24.5%) gas used| 4.431s exec|  11.06 Mgas/s| 25 peers
+2026-10-12 20:36:31.647+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 872b1.....54a5c | safe: c0ddd.....11990 | finalized: 09cc6.....64ae4
+2026-10-12 20:36:41.473+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 16195 accounts + 19 storage slots in batches of 8
+2026-10-12 20:36:42.182+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,771  (1a3c4.....edb0b)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  11.21 mwei bfee| 184,591,048 ( 92.3%) gas used| 5.023s exec|  36.75 Mgas/s| 25 peers
+2026-10-12 20:36:42.202+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 1a3c4.....edb0b | safe: 87df6.....13df6 | finalized: 09cc6.....64ae4
+2026-10-12 20:36:55.211+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,772  (4948f.....609d2)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  12.40 mwei bfee| 134,214,512 ( 67.1%) gas used| 5.085s exec|  26.39 Mgas/s| 25 peers
+2026-10-12 20:36:55.258+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 4948f.....609d2 | safe: 872b1.....54a5c | finalized: 09cc6.....64ae4
+2026-10-12 20:36:55.416+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 43161 accounts + 19 storage slots in batches of 8
+2026-10-12 20:37:15.409+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,773  (bf02e.....39639)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  12.93 mwei bfee| 199,997,736 (100.0%) gas used| 13.047s exec|  15.33 Mgas/s| 25 peers
+2026-10-12 20:37:15.768+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 64311 accounts + 19 storage slots in batches of 8
+2026-10-12 20:37:20.237+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:37:20.303+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,774  (ab805.....3b16c)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  14.54 mwei bfee|  99,336,852 ( 49.7%) gas used| 4.876s exec|  20.37 Mgas/s| 25 peers
+2026-10-12 20:37:20.329+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: ab805.....3b16c | safe: 4948f.....609d2 | finalized: 09cc6.....64ae4
+2026-10-12 20:37:40.165+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 53527 accounts + 19 storage slots in batches of 8
+2026-10-12 20:37:40.297+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,775  (108fe.....be32e)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  14.53 mwei bfee| 166,502,705 ( 83.3%) gas used| 9.438s exec|  17.64 Mgas/s| 25 peers
+2026-10-12 20:37:45.808+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 53527 accounts + 19 storage slots in batches of 8
+2026-10-12 20:37:45.871+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,775  (be4da.....34ab0)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  14.53 mwei bfee| 166,502,705 ( 83.3%) gas used| 5.542s exec|  30.05 Mgas/s| 25 peers
+2026-10-12 20:37:45.917+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: be4da.....34ab0 | safe: ab805.....3b16c | finalized: 0ac23.....da8bd
+2026-10-12 20:37:59.392+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,776  (e181b.....fa268)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  15.74 mwei bfee| 132,890,480 ( 66.4%) gas used| 8.598s exec|  15.46 Mgas/s| 25 peers
+2026-10-12 20:37:59.468+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:38:02.133+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:38:02.479+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,777  (eeac9.....a5829)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  16.39 mwei bfee| 100,660,884 ( 50.3%) gas used| 1.079s exec|  93.27 Mgas/s| 25 peers
+2026-10-12 20:38:02.514+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: eeac9.....a5829 | safe: be4da.....34ab0 | finalized: 0ac23.....da8bd
+2026-10-12 20:38:20.184+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 58920 accounts + 19 storage slots in batches of 8
+2026-10-12 20:38:20.335+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,778  (70066.....001fa)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  16.40 mwei bfee| 183,292,046 ( 91.6%) gas used| 5.799s exec|  31.61 Mgas/s| 25 peers
+2026-10-12 20:38:20.369+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 70066.....001fa | safe: e181b.....fa268 | finalized: 0ac23.....da8bd
+2026-10-12 20:38:35.333+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 48130 accounts + 25 storage slots in batches of 8
+2026-10-12 20:38:35.453+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,779  (51b80.....99e70)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  18.11 mwei bfee| 149,792,622 ( 74.9%) gas used| 9.046s exec|  16.56 Mgas/s| 25 peers
+2026-10-12 20:38:58.838+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 48132 accounts + 19 storage slots in batches of 8
+2026-10-12 20:38:59.084+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,780  (9c88f.....26dcb)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  19.23 mwei bfee| 166,490,202 ( 83.2%) gas used| 9.267s exec|  17.97 Mgas/s| 25 peers
+2026-10-12 20:39:10.927+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 48555 accounts + 19 storage slots in batches of 8
+2026-10-12 20:39:11.253+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,781  (42de1.....d5f4d)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  20.83 mwei bfee| 167,768,140 ( 83.9%) gas used| 9.400s exec|  17.85 Mgas/s| 25 peers
+2026-10-12 20:39:22.012+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:39:22.073+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,782  (b77d2.....a07b0)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  22.60 mwei bfee| 116,113,666 ( 58.1%) gas used| 4.787s exec|  24.26 Mgas/s| 25 peers
+2026-10-12 20:39:22.105+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b77d2.....a07b0 | safe: 70066.....001fa | finalized: 0ac23.....da8bd
+2026-10-12 20:39:39.657+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 58920 accounts + 19 storage slots in batches of 8
+2026-10-12 20:39:39.700+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,783  (cc244.....7a857)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  23.05 mwei bfee| 183,254,489 ( 91.6%) gas used| 13.627s exec|  13.45 Mgas/s| 25 peers
+2026-10-12 20:39:52.764+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:39:52.865+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,784  (a13c7.....c7479)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  25.45 mwei bfee| 166,444,108 ( 83.2%) gas used| 13.132s exec|  12.67 Mgas/s| 25 peers
+2026-10-12 20:40:15.812+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:40:16.034+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,785  (16577.....77ca3)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  27.56 mwei bfee| 183,220,922 ( 91.6%) gas used| 13.624s exec|  13.45 Mgas/s| 25 peers
+2026-10-12 20:40:28.907+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 43161 accounts + 19 storage slots in batches of 8
+2026-10-12 20:40:29.055+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,786  (5c5f8.....d5602)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  30.43 mwei bfee| 150,991,326 ( 75.5%) gas used| 12.990s exec|  11.62 Mgas/s| 25 peers
+2026-10-12 20:40:37.895+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:40:37.992+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,787  (28c92.....58f26)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  32.37 mwei bfee| 132,890,480 ( 66.4%) gas used| 8.910s exec|  14.91 Mgas/s| 25 peers
+2026-10-12 20:40:47.429+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:40:51.779+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,788  (86635.....36670)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  33.70 mwei bfee| 166,444,108 ( 83.2%) gas used| 13.455s exec|  12.37 Mgas/s| 25 peers
+2026-10-12 20:41:00.980+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:41:01.155+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,789  (1018e.....fbc04)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  36.50 mwei bfee| 183,220,922 ( 91.6%) gas used| 9.333s exec|  19.63 Mgas/s| 25 peers
+2026-10-12 20:41:24.024+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,790  (c3667.....269c3)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  40.30 mwei bfee| 199,997,736 (100.0%) gas used| 9.783s exec|  20.44 Mgas/s| 25 peers
+2026-10-12 20:41:24.103+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 64311 accounts + 19 storage slots in batches of 8
+2026-10-12 20:41:30.467+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 32377 accounts + 19 storage slots in batches of 8
+2026-10-12 20:41:30.663+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,791  (0550d.....9c9a3)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  45.34 mwei bfee| 100,731,996 ( 50.4%) gas used| 5.089s exec|  19.79 Mgas/s| 25 peers
+2026-10-12 20:41:30.698+0000 | engine-ordered-execution-0 | WARN  | DefaultBlockchain | Chain Reorganization +9 new / -0 old
+       Old - hash: 0xb77d28a05be00c62e2f970ab8d87ea1415ed88d1f2afaab2206a4a8e355a07b0, height: 24454782
+       New - hash: 0x0550dad58e32cb1326f7f63c7d2061d971ad93a49e948573dab8d983ab29c9a3, height: 24454791
+  Ancestor - hash: 0xb77d28a05be00c62e2f970ab8d87ea1415ed88d1f2afaab2206a4a8e355a07b0, height: 24454782
+2026-10-12 20:41:30.699+0000 | engine-ordered-execution-0 | INFO  | TransactionPoolFactory | Node out of sync, disabling transaction handling
+2026-10-12 20:41:30.702+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0550d.....9c9a3 | safe: b77d2.....a07b0 | finalized: 0ac23.....da8bd
+2026-10-12 20:41:52.039+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:41:52.084+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,792  (55fd1.....f22d1)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  45.38 mwei bfee| 199,997,736 (100.0%) gas used| 13.526s exec|  14.79 Mgas/s| 25 peers
+2026-10-12 20:41:56.762+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:41:57.022+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,793  (f0caf.....09ddc)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  51.05 mwei bfee|  99,336,852 ( 49.7%) gas used| 4.919s exec|  20.19 Mgas/s| 25 peers
+2026-10-12 20:41:57.046+0000 | engine-ordered-execution-0 | INFO  | TransactionPoolFactory | Node is in sync, enabling transaction handling
+2026-10-12 20:41:57.047+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f0caf.....09ddc | safe: 0550d.....9c9a3 | finalized: 0ac23.....da8bd
+2026-10-12 20:42:15.565+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,794  (5a566.....30b69)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  51.01 mwei bfee| 183,220,922 ( 91.6%) gas used| 9.432s exec|  19.42 Mgas/s| 25 peers
+2026-10-12 20:42:16.005+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:42:20.220+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 26985 accounts + 19 storage slots in batches of 8
+2026-10-12 20:42:20.357+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,795  (34bd4.....7a5b9)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  56.31 mwei bfee|  83,955,194 ( 42.0%) gas used| 4.777s exec|  17.58 Mgas/s| 25 peers
+2026-10-12 20:42:20.385+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 34bd4.....7a5b9 | safe: f0caf.....09ddc | finalized: 0ac23.....da8bd
+2026-10-12 20:42:39.756+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:42:39.974+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,796  (9b10f.....f708e)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  55.18 mwei bfee| 183,220,922 ( 91.6%) gas used| 13.630s exec|  13.44 Mgas/s| 25 peers
+2026-10-12 20:42:48.863+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:42:48.989+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,797  (9e463.....44da9)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  60.93 mwei bfee| 132,890,504 ( 66.4%) gas used| 8.977s exec|  14.80 Mgas/s| 25 peers
+2026-10-12 20:43:03.234+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 48129 accounts + 19 storage slots in batches of 8
+2026-10-12 20:43:03.371+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,798  (98d88.....87c68)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  63.43 mwei bfee| 149,667,294 ( 74.8%) gas used| 13.235s exec|  11.31 Mgas/s| 25 peers
+2026-10-12 20:43:08.113+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,799  (05c70.....e95b0)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  67.37 mwei bfee| 100,731,972 ( 50.4%) gas used| 4.719s exec|  21.34 Mgas/s| 25 peers
+2026-10-12 20:43:08.183+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 05c70.....e95b0 | safe: 34bd4.....7a5b9 | finalized: 0ac23.....da8bd
+2026-10-12 20:43:08.192+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 32379 accounts + 19 storage slots in batches of 8
+2026-10-12 20:43:18.505+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:43:18.642+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,800  (22e31.....b610a)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  67.43 mwei bfee| 116,113,666 ( 58.1%) gas used| 4.991s exec|  23.26 Mgas/s| 25 peers
+2026-10-12 20:43:18.675+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 22e31.....b610a | safe: 98d88.....87c68 | finalized: 0ac23.....da8bd
+2026-10-12 20:43:34.707+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:43:34.770+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,801  (f786e.....4b0b9)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  68.79 mwei bfee| 134,214,512 ( 67.1%) gas used| 8.929s exec|  15.03 Mgas/s| 25 peers
+2026-10-12 20:43:34.798+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: f786e.....4b0b9 | safe: 05c70.....e95b0 | finalized: 0ac23.....da8bd
+2026-10-12 20:43:47.278+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 48129 accounts + 19 storage slots in batches of 8
+2026-10-12 20:43:47.549+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,802  (9ac65.....e50e3)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  71.73 mwei bfee| 149,667,294 ( 74.8%) gas used| 9.404s exec|  15.92 Mgas/s| 25 peers
+2026-10-12 20:44:03.588+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:03.692+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,803  (421e3.....a9fbe)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  76.18 mwei bfee| 132,890,480 ( 66.4%) gas used| 9.356s exec|  14.20 Mgas/s| 25 peers
+2026-10-12 20:44:12.308+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:12.405+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,804  (805cc.....b5835)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  79.32 mwei bfee| 117,437,698 ( 58.7%) gas used| 8.690s exec|  13.51 Mgas/s| 25 peers
+2026-10-12 20:44:22.201+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,805  (878f0.....067bf)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  81.04 mwei bfee| 116,113,666 ( 58.1%) gas used| 8.722s exec|  13.31 Mgas/s| 25 peers
+2026-10-12 20:44:22.204+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:22.238+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 878f0.....067bf | safe: f786e.....4b0b9 | finalized: 581a1.....8dcff
+2026-10-12 20:44:30.568+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:30.749+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,806  (12ce5.....e5539)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  82.68 mwei bfee|  99,336,852 ( 49.7%) gas used| 5.118s exec|  19.41 Mgas/s| 25 peers
+2026-10-12 20:44:30.773+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 12ce5.....e5539 | safe: 805cc.....b5835 | finalized: 581a1.....8dcff
+2026-10-12 20:44:38.636+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 32373 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:38.740+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,807  (39976.....3fb97)|    6 tx (100.0% parallel)| 16 ws|  0 blobs|  82.61 mwei bfee| 100,660,884 ( 50.3%) gas used| 1.159s exec|  86.89 Mgas/s| 25 peers
+2026-10-12 20:44:38.767+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 39976.....3fb97 | safe: 878f0.....067bf | finalized: 581a1.....8dcff
+2026-10-12 20:44:49.912+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:44:50.117+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,808  (8b00f.....18ed7)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  82.68 mwei bfee|  65,783,248 ( 32.9%) gas used| 855.2ms exec|  76.92 Mgas/s| 25 peers
+2026-10-12 20:44:50.143+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 8b00f.....18ed7 | safe: 12ce5.....e5539 | finalized: 581a1.....8dcff
+2026-10-12 20:45:01.125+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 10804 accounts + 19 storage slots in batches of 8
+2026-10-12 20:45:01.574+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,809  (d3927.....6543d)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  79.14 mwei bfee|  33,637,255 ( 16.8%) gas used| 629.7ms exec|  53.41 Mgas/s| 25 peers
+2026-10-12 20:45:01.592+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: d3927.....6543d | safe: 39976.....3fb97 | finalized: 581a1.....8dcff
+2026-10-12 20:45:13.629+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 10797 accounts + 19 storage slots in batches of 8
+2026-10-12 20:45:13.999+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,810  (0f016.....82c5c)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  72.58 mwei bfee|  33,553,628 ( 16.8%) gas used| 674.6ms exec|  49.74 Mgas/s| 25 peers
+2026-10-12 20:45:14.016+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0f016.....82c5c | safe: 8b00f.....18ed7 | finalized: 581a1.....8dcff
+2026-10-12 20:45:25.201+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 10797 accounts + 19 storage slots in batches of 8
+2026-10-12 20:45:25.588+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,811  (4c356.....6e21c)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  66.55 mwei bfee|  33,553,628 ( 16.8%) gas used| 650.1ms exec|  51.62 Mgas/s| 25 peers
+2026-10-12 20:45:25.602+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 4c356.....6e21c | safe: d3927.....6543d | finalized: 581a1.....8dcff
+2026-10-12 20:45:37.144+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 10371 accounts + 19 storage slots in batches of 8
+2026-10-12 20:45:37.551+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,812  (e4e95.....d1acc)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  61.02 mwei bfee|  32,229,620 ( 16.1%) gas used| 595.0ms exec|  54.17 Mgas/s| 25 peers
+2026-10-12 20:45:37.567+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e4e95.....d1acc | safe: 0f016.....82c5c | finalized: 581a1.....8dcff
+2026-10-12 20:45:49.913+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 5407 accounts + 19 storage slots in batches of 8
+2026-10-12 20:45:50.267+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,813  (8b633.....e82a5)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  55.85 mwei bfee|  16,822,908 (  8.4%) gas used| 441.4ms exec|  38.11 Mgas/s| 25 peers
+2026-10-12 20:45:50.280+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 8b633.....e82a5 | safe: 4c356.....6e21c | finalized: 581a1.....8dcff
+2026-10-12 20:46:00.739+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:46:00.743+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,814  (e1992.....b621d)|    0 tx| 16 ws|  0 blobs|  50.04 mwei bfee|           0 (  0.0%) gas used| 5.2ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:46:00.779+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e1992.....b621d | safe: e4e95.....d1acc | finalized: 581a1.....8dcff
+2026-10-12 20:46:12.662+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:46:12.664+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,815  (3726d.....1a6f9)|    0 tx| 16 ws|  0 blobs|  43.79 mwei bfee|           0 (  0.0%) gas used| 3.6ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:46:12.673+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3726d.....1a6f9 | safe: 8b633.....e82a5 | finalized: 581a1.....8dcff
+2026-10-12 20:46:24.628+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:46:24.631+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,816  (b4337.....b0093)|    0 tx| 16 ws|  0 blobs|  38.32 mwei bfee|           0 (  0.0%) gas used| 5.0ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:46:24.642+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b4337.....b0093 | safe: e1992.....b621d | finalized: 581a1.....8dcff
+2026-10-12 20:46:36.745+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 11 accounts + 19 storage slots in batches of 8
+2026-10-12 20:46:36.748+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,817  (c5918.....46f90)|    1 tx (100.0% parallel)| 16 ws|  0 blobs|  33.53 mwei bfee|      33,579 (  0.0%) gas used| 5.3ms exec|   6.34 Mgas/s| 25 peers
+2026-10-12 20:46:36.761+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: c5918.....46f90 | safe: 3726d.....1a6f9 | finalized: 581a1.....8dcff
+2026-10-12 20:46:48.990+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:46:49.305+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,818  (272dc.....47123)|    2 tx (100.0% parallel)| 16 ws|  0 blobs|  29.34 mwei bfee|  33,553,580 ( 16.8%) gas used| 435.5ms exec|  77.05 Mgas/s| 25 peers
+2026-10-12 20:46:49.318+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 272dc.....47123 | safe: b4337.....b0093 | finalized: 581a1.....8dcff
+2026-10-12 20:47:01.883+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:47:05.859+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,819  (a0b02.....ee813)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  26.90 mwei bfee|  67,107,256 ( 33.6%) gas used| 4.603s exec|  14.58 Mgas/s| 25 peers
+2026-10-12 20:47:05.876+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: a0b02.....ee813 | safe: c5918.....46f90 | finalized: 581a1.....8dcff
+2026-10-12 20:47:30.125+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 21585 accounts + 19 storage slots in batches of 8
+2026-10-12 20:47:30.377+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,820  (667e5.....f1317)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  25.79 mwei bfee|  67,107,256 ( 33.6%) gas used| 4.647s exec|  14.44 Mgas/s| 25 peers
+2026-10-12 20:47:30.399+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 667e5.....f1317 | safe: 272dc.....47123 | finalized: 581a1.....8dcff
+2026-10-12 20:47:41.672+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 21159 accounts + 19 storage slots in batches of 8
+2026-10-12 20:47:41.833+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,821  (6ad67.....e83a3)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  24.73 mwei bfee|  65,783,224 ( 32.9%) gas used| 4.580s exec|  14.36 Mgas/s| 25 peers
+2026-10-12 20:47:41.851+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6ad67.....e83a3 | safe: 272dc.....47123 | finalized: 581a1.....8dcff
+2026-10-12 20:47:53.840+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:47:54.036+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,822  (26b2b.....1f1da)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  23.68 mwei bfee|  50,330,442 ( 25.2%) gas used| 4.452s exec|  11.31 Mgas/s| 25 peers
+2026-10-12 20:47:54.053+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 26b2b.....1f1da | safe: 667e5.....f1317 | finalized: 581a1.....8dcff
+2026-10-12 20:47:58.525+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:47:58.526+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454823 identified by 0x3e7d7863ac422e3d
+2026-10-12 20:47:58.527+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 26b2b.....1f1da | safe: 667e5.....f1317 | finalized: 581a1.....8dcff
+2026-10-12 20:48:00.312+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 5403 accounts + 19 storage slots in batches of 8
+2026-10-12 20:48:00.656+0000 | EthScheduler-BlockCreation-101-24454823 | INFO  | PostMergeContext | New proposal for payloadId 0x3e7d7863ac422e3d block 24454823 (0xef4d9b05cdbfad41f01640a00f6482699768fb1e27984efa9a87b87e52ab029a) gas used 33553628 transactions 2 reward 3.36 finney is better than the previous one by 3.36 finney
+2026-10-12 20:48:00.757+0000 | vert.x-worker-thread-0 | INFO  | EngineGetPayloadV6 | Produced #24,454,823  (ef4d9.....b029a)|    2 tx | 16 ws | 33,553,628 (16.8%) gas in 2.229s | Timing(started at 2026-10-12T20:47:58.527481081Z, duplicateWorldState=0ms, preTxsSelection=0ms, txsSelection=1553ms, selectedTxsEvaluation=917ms, blockAssembled=130ms, awaitingRetrieval=545ms) | PayloadId 0x3e7d7863ac422e3d
+2026-10-12 20:48:05.308+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:48:05.543+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,823  (726dc.....b35c5)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  22.21 mwei bfee|  50,330,442 ( 25.2%) gas used| 641.6ms exec|  78.45 Mgas/s| 25 peers
+2026-10-12 20:48:05.559+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 726dc.....b35c5 | safe: 6ad67.....e83a3 | finalized: 581a1.....8dcff
+2026-10-12 20:48:14.145+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:48:18.778+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,824  (426ad.....06c63)|   11 tx (100.0% parallel)| 16 ws|  0 blobs|  20.83 mwei bfee| 184,544,954 ( 92.3%) gas used| 5.173s exec|  35.67 Mgas/s| 25 peers
+2026-10-12 20:48:18.799+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 426ad.....06c63 | safe: 26b2b.....1f1da | finalized: 581a1.....8dcff
+2026-10-12 20:48:35.169+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 37344 accounts + 19 storage slots in batches of 8
+2026-10-12 20:48:35.226+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,825  (93591.....5a0b7)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  23.03 mwei bfee| 116,147,245 ( 58.1%) gas used| 8.784s exec|  13.22 Mgas/s| 25 peers
+2026-10-12 20:48:47.843+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 53523 accounts + 19 storage slots in batches of 8
+2026-10-12 20:48:48.027+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,826  (ef1a8.....823a4)|   10 tx (100.0% parallel)| 16 ws|  0 blobs|  23.49 mwei bfee| 166,444,108 ( 83.2%) gas used| 9.526s exec|  17.47 Mgas/s| 25 peers
+2026-10-12 20:48:59.645+0000 | besu-block-io-6 | INFO  | BalPrefetcher | Prefetch completed: 48129 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:00.003+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,827  (b998a.....9e279)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  25.44 mwei bfee| 149,667,318 ( 74.8%) gas used| 9.288s exec|  16.11 Mgas/s| 25 peers
+2026-10-12 20:49:07.445+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:07.652+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,828  (6423d.....7c78c)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  27.02 mwei bfee| 117,437,674 ( 58.7%) gas used| 5.148s exec|  22.81 Mgas/s| 25 peers
+2026-10-12 20:49:07.682+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6423d.....7c78c | safe: 426ad.....06c63 | finalized: 581a1.....8dcff
+2026-10-12 20:49:20.044+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 42738 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:20.093+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,829  (7420e.....0abfb)|    9 tx (100.0% parallel)| 16 ws|  0 blobs|  27.61 mwei bfee| 132,936,562 ( 66.5%) gas used| 5.281s exec|  25.17 Mgas/s| 25 peers
+2026-10-12 20:49:20.152+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 7420e.....0abfb | safe: ef1a8.....823a4 | finalized: 581a1.....8dcff
+2026-10-12 20:49:34.660+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,830  (96c85.....85a65)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  28.75 mwei bfee| 117,437,674 ( 58.7%) gas used| 8.844s exec|  13.28 Mgas/s| 25 peers
+2026-10-12 20:49:34.713+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 96c85.....85a65 | safe: 6423d.....7c78c | finalized: 581a1.....8dcff
+2026-10-12 20:49:34.778+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:39.628+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:43.475+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,831  (eea7b.....9bfca)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  29.38 mwei bfee| 117,437,698 ( 58.7%) gas used| 5.231s exec|  22.45 Mgas/s| 25 peers
+2026-10-12 20:49:43.501+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: eea7b.....9bfca | safe: 7420e.....0abfb | finalized: 581a1.....8dcff
+2026-10-12 20:49:54.834+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 31947 accounts + 19 storage slots in batches of 8
+2026-10-12 20:49:54.879+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,832  (87d73.....0e7b7)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  30.02 mwei bfee| 131,566,472 ( 65.8%) gas used| 5.041s exec|  26.10 Mgas/s| 25 peers
+2026-10-12 20:49:54.902+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 87d73.....0e7b7 | safe: 96c85.....85a65 | finalized: 581a1.....8dcff
+2026-10-12 20:50:07.374+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,833  (abd87.....3a57d)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  31.20 mwei bfee| 134,214,512 ( 67.1%) gas used| 5.216s exec|  25.73 Mgas/s| 25 peers
+2026-10-12 20:50:07.421+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 43161 accounts + 19 storage slots in batches of 8
+2026-10-12 20:50:07.427+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: abd87.....3a57d | safe: eea7b.....9bfca | finalized: 581a1.....8dcff
+2026-10-12 20:50:23.289+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,834  (c7b18.....588a3)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  32.53 mwei bfee| 116,113,666 ( 58.1%) gas used| 4.921s exec|  23.59 Mgas/s| 25 peers
+2026-10-12 20:50:23.406+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 37341 accounts + 19 storage slots in batches of 8
+2026-10-12 20:50:33.934+0000 | vert.x-worker-thread-8 | ERROR | JsonRpcExecutorHandler | eth_getBlockByNumber - Error streaming JSON-RPC response
+java.io.IOException: io.vertx.core.http.HttpClosedException: Connection was closed
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.stopOnFailureOrClosed(JsonResponseStreamer.java:92)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.JsonResponseStreamer.write(JsonResponseStreamer.java:57)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2293)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.close(UTF8JsonGenerator.java:1232)
+	at com.fasterxml.jackson.databind.ObjectWriter._writeValueAndClose(ObjectWriter.java:1294)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1098)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.handleJsonObjectResponse(JsonRpcObjectExecutor.java:143)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcObjectExecutor.execute(JsonRpcObjectExecutor.java:65)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$2(JsonRpcExecutorHandler.java:71)
+	at java.base/java.util.Optional.ifPresentOrElse(Optional.java:196)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcExecutorHandler.lambda$handler$0(JsonRpcExecutorHandler.java:68)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.lambda$handle$0(BlockingHandlerDecorator.java:48)
+	at io.vertx.core.impl.ExecuteBlocking$1.execute(ExecuteBlocking.java:36)
+	at io.vertx.core.impl.WorkerTask.run(WorkerTask.java:57)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: io.vertx.core.http.HttpClosedException: Connection was closed
+2026-10-12 20:50:38.668+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,834  (bc2fc.....41b96)|   12 tx (100.0% parallel)| 16 ws|  0 blobs|  32.53 mwei bfee| 198,673,728 ( 99.3%) gas used| 13.407s exec|  14.82 Mgas/s| 25 peers
+2026-10-12 20:50:38.913+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 58917 accounts + 19 storage slots in batches of 8
+2026-10-12 20:50:39.277+0000 | besu-block-io-1 | INFO  | BalPrefetcher | Prefetch completed: 16191 accounts + 19 storage slots in batches of 8
+2026-10-12 20:50:39.576+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,835  (97380.....9e2d3)|    3 tx (100.0% parallel)| 16 ws|  0 blobs|  36.55 mwei bfee|  50,330,418 ( 25.2%) gas used| 897.5ms exec|  56.08 Mgas/s| 25 peers
+2026-10-12 20:50:39.600+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 97380.....9e2d3 | safe: abd87.....3a57d | finalized: ab805.....3b16c
+2026-10-12 20:50:59.693+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,836  (7cdd6.....020c2)|    8 tx (100.0% parallel)| 16 ws|  0 blobs|  34.28 mwei bfee| 132,890,504 ( 66.4%) gas used| 8.827s exec|  15.05 Mgas/s| 25 peers
+2026-10-12 20:50:59.772+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 42735 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:06.789+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,837  (af40d.....e1950)|    7 tx (100.0% parallel)| 16 ws|  0 blobs|  35.69 mwei bfee| 117,437,674 ( 58.7%) gas used| 5.169s exec|  22.72 Mgas/s| 25 peers
+2026-10-12 20:51:06.813+0000 | besu-block-io-5 | INFO  | BalPrefetcher | Prefetch completed: 37767 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:06.826+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: af40d.....e1950 | safe: 97380.....9e2d3 | finalized: ab805.....3b16c
+2026-10-12 20:51:15.046+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 10805 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:15.495+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,838  (764b1.....bd0b1)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  36.47 mwei bfee|  33,657,316 ( 16.8%) gas used| 667.6ms exec|  50.42 Mgas/s| 25 peers
+2026-10-12 20:51:15.519+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 764b1.....bd0b1 | safe: 7cdd6.....020c2 | finalized: ab805.....3b16c
+2026-10-12 20:51:26.228+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 21387 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:31.118+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,839  (0cbc2.....a84e1)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  33.44 mwei bfee|  83,882,234 ( 41.9%) gas used| 5.526s exec|  15.18 Mgas/s| 25 peers
+2026-10-12 20:51:31.137+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 0cbc2.....a84e1 | safe: af40d.....e1950 | finalized: ab805.....3b16c
+2026-10-12 20:51:53.045+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21385 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:54.043+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,840  (b8da4.....f9b21)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  32.77 mwei bfee|  67,105,444 ( 33.6%) gas used| 1.507s exec|  44.53 Mgas/s| 25 peers
+2026-10-12 20:51:54.063+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: b8da4.....f9b21 | safe: 764b1.....bd0b1 | finalized: ab805.....3b16c
+2026-10-12 20:51:54.283+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:51:54.284+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,836  (256ff.....a9090)|    0 tx| 16 ws|  0 blobs|  34.28 mwei bfee|           0 (  0.0%) gas used| 2.8ms exec|   0.00 Mgas/s| 25 peers
+2026-10-12 20:52:06.594+0000 | besu-block-io-4 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:52:07.529+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,841  (3d1f2.....8fe5b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  31.42 mwei bfee|  82,564,241 ( 41.3%) gas used| 5.574s exec|  14.81 Mgas/s| 25 peers
+2026-10-12 20:52:07.550+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3d1f2.....8fe5b | safe: 764b1.....bd0b1 | finalized: ab805.....3b16c
+2026-10-12 20:52:18.240+0000 | besu-block-io-13 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:52:19.208+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,842  (90e33.....1229e)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  30.74 mwei bfee|  83,881,805 ( 41.9%) gas used| 5.616s exec|  14.94 Mgas/s| 25 peers
+2026-10-12 20:52:19.236+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 90e33.....1229e | safe: b8da4.....f9b21 | finalized: ab805.....3b16c
+2026-10-12 20:52:30.539+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:52:31.445+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,843  (46526.....d32d3)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  30.12 mwei bfee|  83,881,805 ( 41.9%) gas used| 5.661s exec|  14.82 Mgas/s| 25 peers
+2026-10-12 20:52:31.472+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 46526.....d32d3 | safe: 3d1f2.....8fe5b | finalized: ab805.....3b16c
+2026-10-12 20:52:40.980+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:52:41.780+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,844  (e65c6.....db054)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  29.51 mwei bfee|  82,564,241 ( 41.3%) gas used| 1.591s exec|  51.90 Mgas/s| 25 peers
+2026-10-12 20:52:41.808+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: e65c6.....db054 | safe: 90e33.....1229e | finalized: ab805.....3b16c
+2026-10-12 20:52:53.318+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:52:54.241+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,845  (6034d.....35335)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  28.87 mwei bfee|  83,881,805 ( 41.9%) gas used| 1.690s exec|  49.64 Mgas/s| 25 peers
+2026-10-12 20:52:54.273+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6034d.....35335 | safe: 46526.....d32d3 | finalized: ab805.....3b16c
+2026-10-12 20:53:05.273+0000 | besu-block-io-12 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:53:06.251+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,846  (a28b6.....90d72)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  28.29 mwei bfee|  82,564,241 ( 41.3%) gas used| 1.731s exec|  47.70 Mgas/s| 25 peers
+2026-10-12 20:53:06.276+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: a28b6.....90d72 | safe: e65c6.....db054 | finalized: ab805.....3b16c
+2026-10-12 20:53:17.328+0000 | besu-block-io-2 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:53:18.301+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,847  (2fee7.....bae84)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  27.67 mwei bfee|  83,881,805 ( 41.9%) gas used| 1.681s exec|  49.91 Mgas/s| 25 peers
+2026-10-12 20:53:18.331+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 2fee7.....bae84 | safe: 6034d.....35335 | finalized: ab805.....3b16c
+2026-10-12 20:53:29.416+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:53:30.426+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,848  (3ce9c.....3908b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  27.11 mwei bfee|  82,564,265 ( 41.3%) gas used| 1.667s exec|  49.54 Mgas/s| 25 peers
+2026-10-12 20:53:30.453+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3ce9c.....3908b | safe: a28b6.....90d72 | finalized: ab805.....3b16c
+2026-10-12 20:53:37.845+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:53:37.846+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454849 identified by 0x1a8d3e003bd1cc19
+2026-10-12 20:53:37.847+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3ce9c.....3908b | safe: a28b6.....90d72 | finalized: ab805.....3b16c
+2026-10-12 20:53:37.847+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 3ce9c.....3908b | safe: 2fee7.....bae84 | finalized: ab805.....3b16c
+2026-10-12 20:53:42.886+0000 | EthScheduler-BlockCreation-103-24454849 | WARN  | BlockTransactionSelector | Interrupting the internal selection of transactions for block inclusion as it exceeds the allowed max duration of 4998ms
+2026-10-12 20:53:42.888+0000 | EthScheduler-BlockCreation-103-24454849 | INFO  | BlockTransactionSelector | No time remains to wait for the cancellation of the Internal selection to complete normally, the completion of the block creation continues in a best effort mode, and could fail due to concurrency issues
+2026-10-12 20:53:47.217+0000 | EthScheduler-BlockCreation-104-24454849 | WARN  | BlockTransactionSelector | Transaction 0xc57c413bdd6ee68ac905690b9e18ea9bd94f6e25badcc31d8cfa929338905219 is too late for inclusion, with result INVALID_PENALIZED(EXECUTION_INTERRUPTED), evaluated in 5.105 s that is over the max limit of 5000ms, penalizing it in the pool
+2026-10-12 20:53:51.848+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21016 accounts + 19 storage slots in batches of 8
+2026-10-12 20:54:15.547+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 4034 ms, time limit is 2000 ms
+2026-10-12 20:54:19.288+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 3724 ms, time limit is 2000 ms
+2026-10-12 20:54:22.946+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 7382 ms, time limit is 2000 ms
+io.vertx.core.VertxException: Thread blocked
+	at java.base/jdk.internal.misc.Unsafe.park(Native Method)
+	at java.base/java.util.concurrent.locks.LockSupport.park(LockSupport.java:223)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:790)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1030)
+	at java.base/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:154)
+	at java.base/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:323)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.signalNotEmpty(LinkedBlockingQueue.java:175)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.offer(LinkedBlockingQueue.java:423)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1320)
+	at io.vertx.core.impl.ExecuteBlocking.executeBlocking(ExecuteBlocking.java:58)
+	at io.vertx.core.impl.DuplicatedContext.executeBlocking(DuplicatedContext.java:129)
+	at io.vertx.core.Vertx.executeBlocking(Vertx.java:821)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:47)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:33)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.processHandler(TimeoutHandler.java:74)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.lambda$handler$0(TimeoutHandler.java:32)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcParserHandler.lambda$handler$0(JsonRpcParserHandler.java:100)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.AuthenticationHandler.lambda$handler$0(AuthenticationHandler.java:46)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:221)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.doEnd(BodyHandlerImpl.java:365)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.end(BodyHandlerImpl.java:342)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:257)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:239)
+	at io.vertx.core.http.impl.HttpEventHandler.handleEnd(HttpEventHandler.java:76)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.onEnd(Http1ServerRequest.java:562)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest$1.handleMessage(Http1ServerRequest.java:106)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.test(InboundMessageQueue.java:86)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:228)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:210)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drainInternal(InboundMessageQueue.java:168)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drain(InboundMessageQueue.java:145)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:170)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:161)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onEnd(Http1ServerConnection.java:260)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onContent(Http1ServerConnection.java:251)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleOther(Http1ServerConnection.java:236)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleMessage(Http1ServerConnection.java:229)
+	at io.vertx.core.net.impl.VertxConnection.read(VertxConnection.java:309)
+	at io.vertx.core.net.impl.VertxHandler.channelRead(VertxHandler.java:170)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.channel.ChannelInboundHandlerAdapter.channelRead(ChannelInboundHandlerAdapter.java:93)
+	at io.netty.handler.codec.http.websocketx.extensions.WebSocketServerExtensionHandler.channelRead(WebSocketServerExtensionHandler.java:84)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:361)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:325)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:804)
+	at io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.handle(AbstractEpollChannel.java:487)
+	at io.netty.channel.epoll.EpollIoHandler$DefaultEpollIoRegistration.handle(EpollIoHandler.java:349)
+	at io.netty.channel.epoll.EpollIoHandler.processReady(EpollIoHandler.java:548)
+	at io.netty.channel.epoll.EpollIoHandler.run(EpollIoHandler.java:491)
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:26.793+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 11229 ms, time limit is 2000 ms
+io.vertx.core.VertxException: Thread blocked
+	at java.base/jdk.internal.misc.Unsafe.park(Native Method)
+	at java.base/java.util.concurrent.locks.LockSupport.park(LockSupport.java:223)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:790)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1030)
+	at java.base/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:154)
+	at java.base/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:323)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.signalNotEmpty(LinkedBlockingQueue.java:175)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.offer(LinkedBlockingQueue.java:423)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1320)
+	at io.vertx.core.impl.ExecuteBlocking.executeBlocking(ExecuteBlocking.java:58)
+	at io.vertx.core.impl.DuplicatedContext.executeBlocking(DuplicatedContext.java:129)
+	at io.vertx.core.Vertx.executeBlocking(Vertx.java:821)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:47)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:33)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.processHandler(TimeoutHandler.java:74)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.lambda$handler$0(TimeoutHandler.java:32)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcParserHandler.lambda$handler$0(JsonRpcParserHandler.java:100)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.AuthenticationHandler.lambda$handler$0(AuthenticationHandler.java:46)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:221)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.doEnd(BodyHandlerImpl.java:365)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.end(BodyHandlerImpl.java:342)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:257)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:239)
+	at io.vertx.core.http.impl.HttpEventHandler.handleEnd(HttpEventHandler.java:76)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.onEnd(Http1ServerRequest.java:562)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest$1.handleMessage(Http1ServerRequest.java:106)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.test(InboundMessageQueue.java:86)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:228)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:210)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drainInternal(InboundMessageQueue.java:168)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drain(InboundMessageQueue.java:145)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:170)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:161)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onEnd(Http1ServerConnection.java:260)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onContent(Http1ServerConnection.java:251)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleOther(Http1ServerConnection.java:236)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleMessage(Http1ServerConnection.java:229)
+	at io.vertx.core.net.impl.VertxConnection.read(VertxConnection.java:309)
+	at io.vertx.core.net.impl.VertxHandler.channelRead(VertxHandler.java:170)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.channel.ChannelInboundHandlerAdapter.channelRead(ChannelInboundHandlerAdapter.java:93)
+	at io.netty.handler.codec.http.websocketx.extensions.WebSocketServerExtensionHandler.channelRead(WebSocketServerExtensionHandler.java:84)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:361)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:325)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:804)
+	at io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.handle(AbstractEpollChannel.java:487)
+	at io.netty.channel.epoll.EpollIoHandler$DefaultEpollIoRegistration.handle(EpollIoHandler.java:349)
+	at io.netty.channel.epoll.EpollIoHandler.processReady(EpollIoHandler.java:548)
+	at io.netty.channel.epoll.EpollIoHandler.run(EpollIoHandler.java:491)
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:36.755+0000 | vert.x-eventloop-thread-1 | ERROR | RoutingContext | Unhandled exception in router
+2026-10-12 20:54:36.745+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 21182 ms, time limit is 2000 ms
+io.vertx.core.VertxException: Thread blocked
+	at java.base/jdk.internal.misc.Unsafe.park(Native Method)
+	at java.base/java.util.concurrent.locks.LockSupport.park(LockSupport.java:223)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:790)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1030)
+	at java.base/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:154)
+	at java.base/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:323)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.signalNotEmpty(LinkedBlockingQueue.java:175)
+	at java.base/java.util.concurrent.LinkedBlockingQueue.offer(LinkedBlockingQueue.java:423)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1320)
+	at io.vertx.core.impl.ExecuteBlocking.executeBlocking(ExecuteBlocking.java:58)
+	at io.vertx.core.impl.DuplicatedContext.executeBlocking(DuplicatedContext.java:129)
+	at io.vertx.core.Vertx.executeBlocking(Vertx.java:821)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:47)
+	at io.vertx.ext.web.impl.BlockingHandlerDecorator.handle(BlockingHandlerDecorator.java:33)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.processHandler(TimeoutHandler.java:74)
+	at org.hyperledger.besu.ethereum.api.handlers.TimeoutHandler.lambda$handler$0(TimeoutHandler.java:32)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.JsonRpcParserHandler.lambda$handler$0(JsonRpcParserHandler.java:100)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:171)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at org.hyperledger.besu.ethereum.api.handlers.AuthenticationHandler.lambda$handler$0(AuthenticationHandler.java:46)
+	at io.vertx.ext.web.impl.RouteState.dispatch(RouteState.java:1349)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1364)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:221)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:150)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.doEnd(BodyHandlerImpl.java:365)
+	at io.vertx.ext.web.handler.impl.BodyHandlerImpl$BHandler.end(BodyHandlerImpl.java:342)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:257)
+	at io.vertx.core.internal.ContextInternal.dispatch(ContextInternal.java:239)
+	at io.vertx.core.http.impl.HttpEventHandler.handleEnd(HttpEventHandler.java:76)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.onEnd(Http1ServerRequest.java:562)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest$1.handleMessage(Http1ServerRequest.java:106)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.test(InboundMessageQueue.java:86)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:228)
+	at io.vertx.core.streams.impl.MessagePassingQueue.drain(MessagePassingQueue.java:210)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drainInternal(InboundMessageQueue.java:168)
+	at io.vertx.core.internal.concurrent.InboundMessageQueue.drain(InboundMessageQueue.java:145)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:170)
+	at io.vertx.core.http.impl.http1.Http1ServerRequest.handleEnd(Http1ServerRequest.java:161)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onEnd(Http1ServerConnection.java:260)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.onContent(Http1ServerConnection.java:251)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleOther(Http1ServerConnection.java:236)
+	at io.vertx.core.http.impl.http1.Http1ServerConnection.handleMessage(Http1ServerConnection.java:229)
+	at io.vertx.core.net.impl.VertxConnection.read(VertxConnection.java:309)
+	at io.vertx.core.net.impl.VertxHandler.channelRead(VertxHandler.java:170)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.channel.ChannelInboundHandlerAdapter.channelRead(ChannelInboundHandlerAdapter.java:93)
+	at io.netty.handler.codec.http.websocketx.extensions.WebSocketServerExtensionHandler.channelRead(WebSocketServerExtensionHandler.java:84)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:355)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:361)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:325)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1429)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:804)
+	at io.netty.channel.epoll.AbstractEpollChannel$AbstractEpollUnsafe.handle(AbstractEpollChannel.java:487)
+	at io.netty.channel.epoll.EpollIoHandler$DefaultEpollIoRegistration.handle(EpollIoHandler.java:349)
+	at io.netty.channel.epoll.EpollIoHandler.processReady(EpollIoHandler.java:548)
+	at io.netty.channel.epoll.EpollIoHandler.run(EpollIoHandler.java:491)
+	at io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:36.780+0000 | besu-block-io-10 | INFO  | BalPrefetcher | Prefetch completed: 21385 accounts + 19 storage slots in batches of 8
+2026-10-12 20:54:36.805+0000 | prometheus-http-1-1 | ERROR | HttpExchangeAdapter | The Prometheus metrics HTTPServer caught an Exception while trying to send the metrics response.
+java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:65)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:617)
+	at jdk.httpserver/sun.net.httpserver.Request$WriteStream.write(Request.java:421)
+	at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:123)
+	at java.base/java.io.BufferedOutputStream.write(BufferedOutputStream.java:188)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.writeChunk(ChunkedOutputStream.java:127)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.write(ChunkedOutputStream.java:106)
+	at jdk.httpserver/sun.net.httpserver.PlaceholderOutputStream.write(ExchangeImpl.java:476)
+	at java.base/java.util.zip.GZIPOutputStream.finish(GZIPOutputStream.java:176)
+	at java.base/java.util.zip.DeflaterOutputStream.close(DeflaterOutputStream.java:311)
+	at io.prometheus.metrics.exporter.common.PrometheusScrapeHandler.handleRequest(PrometheusScrapeHandler.java:76)
+	at io.prometheus.metrics.exporter.httpserver.MetricsHandler.handle(MetricsHandler.java:33)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:65)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:915)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:891)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:36.809+0000 | vert.x-eventloop-thread-1 | WARN  | JsonRpcExecutorHandler | Timeout (30000 ms) occurred in JSON-RPC executor for method {"jsonrpc":"2.0","id":39698,"method":"eth_getLogs","params":[{"address":["0x0000bff46984e3725691fa540a8c7589300d8282"],"fromBlock":"0x1370684","toBlock":"0x1370a6c","topics":[]}]}
+2026-10-12 20:54:36.813+0000 | prometheus-http-1-2 | ERROR | HttpExchangeAdapter | The Prometheus metrics HTTPServer caught an Exception while trying to send the metrics response.
+java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:65)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:617)
+	at jdk.httpserver/sun.net.httpserver.Request$WriteStream.write(Request.java:421)
+	at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:123)
+	at java.base/java.io.BufferedOutputStream.write(BufferedOutputStream.java:188)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.writeChunk(ChunkedOutputStream.java:127)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.write(ChunkedOutputStream.java:106)
+	at jdk.httpserver/sun.net.httpserver.PlaceholderOutputStream.write(ExchangeImpl.java:476)
+	at java.base/java.util.zip.GZIPOutputStream.finish(GZIPOutputStream.java:176)
+	at java.base/java.util.zip.DeflaterOutputStream.close(DeflaterOutputStream.java:311)
+	at io.prometheus.metrics.exporter.common.PrometheusScrapeHandler.handleRequest(PrometheusScrapeHandler.java:76)
+	at io.prometheus.metrics.exporter.httpserver.MetricsHandler.handle(MetricsHandler.java:33)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:65)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:915)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:891)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:51.857+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread engine-ordered-execution-0 has been blocked for 60070 ms, time limit is 60000 ms
+io.vertx.core.VertxException: Thread blocked
+	at java.base/jdk.internal.misc.Unsafe.park(Native Method)
+	at java.base/java.util.concurrent.locks.LockSupport.park(LockSupport.java:223)
+	at java.base/java.util.concurrent.CompletableFuture$Signaller.block(CompletableFuture.java:1885)
+	at java.base/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:4364)
+	at java.base/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:4310)
+	at java.base/java.util.concurrent.CompletableFuture.waitingGet(CompletableFuture.java:1919)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2093)
+	at org.hyperledger.besu.ethereum.mainnet.parallelization.BalConcurrentTransactionProcessor.getProcessingResult(BalConcurrentTransactionProcessor.java:216)
+	at org.hyperledger.besu.ethereum.mainnet.parallelization.MainnetParallelBlockProcessor.lambda$getTransactionProcessingResult$0(MainnetParallelBlockProcessor.java:107)
+	at java.base/java.util.Optional.flatMap(Optional.java:289)
+	at org.hyperledger.besu.ethereum.mainnet.parallelization.MainnetParallelBlockProcessor.getTransactionProcessingResult(MainnetParallelBlockProcessor.java:104)
+	at org.hyperledger.besu.ethereum.mainnet.AbstractBlockProcessor.processBlock(AbstractBlockProcessor.java:319)
+	at org.hyperledger.besu.ethereum.mainnet.parallelization.MainnetParallelBlockProcessor.processBlock(MainnetParallelBlockProcessor.java:145)
+	at org.hyperledger.besu.ethereum.MainnetBlockValidator.processBlock(MainnetBlockValidator.java:355)
+	at org.hyperledger.besu.ethereum.MainnetBlockValidator.validateAndProcessBlock(MainnetBlockValidator.java:222)
+	at org.hyperledger.besu.ethereum.MainnetBlockValidator.validateAndProcessBlock(MainnetBlockValidator.java:122)
+	at org.hyperledger.besu.consensus.merge.blockcreation.MergeCoordinator.validateBlock(MergeCoordinator.java:648)
+	at org.hyperledger.besu.consensus.merge.blockcreation.MergeCoordinator.rememberBlock(MergeCoordinator.java:687)
+	at org.hyperledger.besu.consensus.merge.blockcreation.TransitionCoordinator.rememberBlock(TransitionCoordinator.java:143)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.internal.methods.engine.EngineNewPayloadV5.rememberBlock(EngineNewPayloadV5.java:97)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.internal.methods.engine.EngineNewPayloadV5.rememberBlock(EngineNewPayloadV5.java:38)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.internal.methods.engine.EngineNewPayloadV1.syncResponse(EngineNewPayloadV1.java:275)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.internal.methods.ExecutionEngineJsonRpcMethod.computeResponseSafely(ExecutionEngineJsonRpcMethod.java:128)
+	at org.hyperledger.besu.ethereum.api.jsonrpc.internal.methods.OrderedExecutionJsonRpcMethod.lambda$response$0(OrderedExecutionJsonRpcMethod.java:66)
+	at io.vertx.core.impl.ExecuteBlocking$1.execute(ExecuteBlocking.java:36)
+	at io.vertx.core.impl.WorkerTask.run(WorkerTask.java:57)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-10-12 20:54:51.858+0000 | prometheus-http-1-1 | ERROR | HttpExchangeAdapter | The Prometheus metrics HTTPServer caught an Exception while trying to send the metrics response.
+java.io.IOException: Broken pipe
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:65)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58)
+	at java.base/sun.nio.ch.SocketChannelImpl.implWrite(SocketChannelImpl.java:562)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:617)
+	at jdk.httpserver/sun.net.httpserver.Request$WriteStream.write(Request.java:421)
+	at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:123)
+	at java.base/java.io.BufferedOutputStream.write(BufferedOutputStream.java:188)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.writeChunk(ChunkedOutputStream.java:127)
+	at jdk.httpserver/sun.net.httpserver.ChunkedOutputStream.write(ChunkedOutputStream.java:106)
+	at jdk.httpserver/sun.net.httpserver.PlaceholderOutputStream.write(ExchangeImpl.java:476)
+	at java.base/java.util.zip.GZIPOutputStream.finish(GZIPOutputStream.java:176)
+	at java.base/java.util.zip.DeflaterOutputStream.close(DeflaterOutputStream.java:311)
+	at io.prometheus.metrics.exporter.common.PrometheusScrapeHandler.handleRequest(PrometheusScrapeHandler.java:76)
+	at io.prometheus.metrics.exporter.httpserver.MetricsHandler.handle(MetricsHandler.java:33)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:65)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:915)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:891)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Terminating due to java.lang.OutOfMemoryError: Java heap space
+2026-10-12 20:55:04.186+0000 | main | INFO  | Besu | Starting Besu
+2026-10-12 20:55:04.593+0000 | main | WARN  | Besu | --rpc-ws-host has been ignored because --rpc-ws-enabled was not defined on the command line.
+2026-10-12 20:55:04.596+0000 | main | WARN  | Besu | --graphql-http-host has been ignored because --graphql-http-enabled was not defined on the command line.
+2026-10-12 20:55:05.147+0000 | main | INFO  | Besu | RPC HTTP JSON-RPC config: JsonRpcConfiguration{enabled=true, port=8545, host=0.0.0.0, corsAllowedDomains=[*], hostsAllowlist=[*], rpcApis=[ADMIN, ETH, MINER, NET, TXPOOL, WEB3], authenticationEnabled=false, authenticationCredentialsFile=null, authenticationPublicKeyFile=null, tlsConfiguration=Optional.empty, httpTimeoutSec=30, maxActiveConnections=1000, maxBatchSize=1024}
+2026-10-12 20:55:05.151+0000 | main | INFO  | Besu | Engine JSON-RPC config: JsonRpcConfiguration{enabled=true, port=8551, host=0.0.0.0, corsAllowedDomains=[*], hostsAllowlist=[*], rpcApis=[ENGINE, ETH], authenticationEnabled=true, authenticationCredentialsFile=null, authenticationPublicKeyFile=/execution-auth.jwt, tlsConfiguration=Optional.empty, httpTimeoutSec=30, maxActiveConnections=1000, maxBatchSize=1024}
+2026-10-12 20:55:05.162+0000 | main | INFO  | Besu | Connecting to 0 static nodes.
+2026-10-12 20:55:05.284+0000 | main | INFO  | Besu | 
+####################################################################################################
+#                                                                                                  #
+# Besu version 26.9.0                                                                              #
+#                                                                                                  #
+# Configuration:                                                                                   #
+# Network: Custom genesis file                                                                     #
+# /network-config/genesis.json                                                                     #
+# Network Id: 1                                                                                    #
+# Data storage: Bonsai                                                                             #
+# RocksDB max open files: 10310 (derived from available resources)                                 #
+# Sync mode: Full                                                                                  #
+# Sync min peers: 5                                                                                #
+# RPC HTTP APIs: ADMIN,ETH,MINER,NET,TXPOOL,WEB3                                                   #
+# RPC HTTP port: 8545                                                                              #
+# Engine APIs: ENGINE,ETH                                                                          #
+# Engine port: 8551                                                                                #
+# Engine JWT: /execution-auth.jwt                                                                  #
+# Using LAYERED transaction pool implementation                                                    #
+# Using STACKED worldstate update mode                                                             #
+# Opcode optimizations enabled                                                                     #
+# Parallel transaction processing enabled                                                          #
+# BAL pruning enabled (retained BALs: 113056)                                                      #
+# Target Gas Limit: 60M                                                                            #
+#                                                                                                  #
+# Host:                                                                                            #
+# Java: openjdk-java-25                                                                            #
+# Maximum heap size: 16.00 GB                                                                      #
+# OS: linux-x86_64                                                                                 #
+# glibc: 2.39                                                                                      #
+# jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c                                      #
+# Total memory: 62.80 GB                                                                           #
+# CPU cores: 8                                                                                     #
+#                                                                                                  #
+# Plugin Registration Summary:                                                                     #
+# No plugins have been registered.                                                                 #
+# TOTAL = 0 of 0 plugins successfully registered.                                                  #
+#                                                                                                  #
+####################################################################################################
+2026-10-12 20:55:05.285+0000 | main | INFO  | Besu | Security Module: localfile
+2026-10-12 20:55:05.286+0000 | main | INFO  | VersionMetadata | Lookup version metadata file in data directory: /data
+2026-10-12 20:55:05.313+0000 | main | INFO  | VersionMetadata | Existing version data detected. Besu version 26.9.0
+2026-10-12 20:55:05.335+0000 | main | INFO  | Besu | Using the native implementation of alt bn128
+2026-10-12 20:55:05.336+0000 | main | INFO  | Besu | Using the Java implementation of modexp
+2026-10-12 20:55:05.337+0000 | main | INFO  | Besu | Using the native implementation of the signature algorithm
+2026-10-12 20:55:05.339+0000 | main | INFO  | Besu | Using the native implementation of the blake2bf algorithm
+2026-10-12 20:55:05.450+0000 | main | INFO  | Besu | Using the native BoringSSL implementation of p256verify
+2026-10-12 20:55:05.457+0000 | main | INFO  | KZGPointEvalPrecompiledContract | Loading network trusted setup from classpath resource /kzg-trusted-setups/mainnet.txt
+2026-10-12 20:55:07.526+0000 | main | INFO  | KeyPairUtil | Attempting to load public key from /data/key
+2026-10-12 20:55:07.538+0000 | main | INFO  | KeyPairUtil | Loaded public key 0xb44165839d6f7e7ff4208f20322f704f02c5fac983381797a072f2b6557f6d2fbd5fd6a4e25e2983d37771e3e1942fe09f373d0372d273e44b721dedc6ff4815 from /data/key
+2026-10-12 20:55:07.706+0000 | main | INFO  | ProtocolScheduleBuilder | Protocol schedule created with milestones: [Frontier:0, Homestead:1150000, DAO Recovery Init:1920000, DAO Recovery Transition:1920001, Homestead:1920010, Tangerine Whistle:2463000, Spurious Dragon:2675000, Byzantium:4370000, Petersburg:7280000, Istanbul:9069000, Muir Glacier:9200000, Berlin:12244000, London:12965000, Arrow Glacier:13773000, Gray Glacier:15050000, Shanghai:1681338455, Cancun:1710338135, Prague:1746612311, Osaka:1764798551, BPO1:1765290071, BPO2:1767747671, Amsterdam:1769856769]
+2026-10-12 20:55:07.723+0000 | main | INFO  | ProtocolScheduleBuilder | Protocol schedule created with milestones: [Paris:0, Paris:1150000, Paris:1920000, Paris:1920001, Paris:1920010, Paris:2463000, Paris:2675000, Paris:4370000, Paris:7280000, Paris:9069000, Paris:9200000, Paris:12244000, Paris:12965000, Paris:13773000, Paris:15050000, Shanghai:1681338455, Cancun:1710338135, Prague:1746612311, Osaka:1764798551, BPO1:1765290071, BPO2:1767747671, Amsterdam:1769856769]
+2026-10-12 20:55:07.726+0000 | main | INFO  | DatabaseMetadata | Lookup database metadata file in data directory: /data
+2026-10-12 20:55:07.754+0000 | main | INFO  | RocksDBKeyValueStorageFactory | Existing database at /data. Metadata versionedStorageFormat=BaseVersionedStorageFormat{format=BONSAI, version=3}. Processing WAL...
+2026-10-12 20:55:10.072+0000 | main | INFO  | FlatDbStrategyProvider | Flat db mode found FULL
+2026-10-12 20:55:10.078+0000 | main | INFO  | FlatDbStrategyProvider | DB mode with code stored using code hash enabled = true
+2026-10-12 20:55:10.108+0000 | main | INFO  | FlatDbStrategyProvider | Flat db mode found FULL
+2026-10-12 20:55:10.109+0000 | main | INFO  | FlatDbStrategyProvider | DB mode with code stored using code hash enabled = true
+2026-10-12 20:55:10.703+0000 | main | INFO  | BesuControllerBuilder | Adding ChainDataPruner to observe block added events
+2026-10-12 20:55:10.707+0000 | main | INFO  | BesuControllerBuilder | BAL pruning enabled | BALs retained: 113056 | Frequency: 256
+2026-10-12 20:55:10.743+0000 | main | INFO  | TransactionPoolFactory | Enabling transaction pool
+2026-10-12 20:55:10.761+0000 | main | INFO  | EthPeers | Updating the default best peer comparator
+2026-10-12 20:55:10.775+0000 | main | INFO  | BesuControllerBuilder | TTD difficulty is present, creating initial sync for PoS
+2026-10-12 20:55:10.787+0000 | main | INFO  | TransitionBesuControllerBuilder | TTD present, creating DefaultSynchronizer that stops propagating after finalization
+2026-10-12 20:55:10.810+0000 | main | INFO  | RunnerBuilder | Resolved 2 bootnodes.
+2026-10-12 20:55:10.821+0000 | main | INFO  | RunnerBuilder | Detecting NAT service.
+2026-10-12 20:55:10.848+0000 | main | INFO  | CompositePeerDiscoveryAgentFactory | Peer discovery mode: V5 (requested=V5, V4=false, V5=true)
+2026-10-12 20:55:11.052+0000 | main | INFO  | Runner | Starting external services ... 
+2026-10-12 20:55:11.053+0000 | main | INFO  | MetricsHttpService | Starting metrics http service on 0.0.0.0:6060
+2026-10-12 20:55:11.069+0000 | main | INFO  | JsonRpcHttpService | Starting JSON-RPC service on 0.0.0.0:8545
+2026-10-12 20:55:11.151+0000 | vert.x-eventloop-thread-1 | INFO  | JsonRpcHttpService | JSON-RPC service started and listening on 0.0.0.0:8545
+2026-10-12 20:55:11.151+0000 | main | INFO  | EngineJsonRpcService | Starting JSON-RPC service on 0.0.0.0:8551
+2026-10-12 20:55:11.155+0000 | vert.x-eventloop-thread-1 | INFO  | EngineJsonRpcService | JSON-RPC service started and listening on 0.0.0.0:8551
+2026-10-12 20:55:11.157+0000 | main | INFO  | AutoTransactionLogBloomCachingService | Starting auto transaction log bloom caching service.
+2026-10-12 20:55:11.158+0000 | main | INFO  | LogBloomCacheMetadata | Lookup cache metadata file in data directory: /data/caches
+2026-10-12 20:55:11.165+0000 | main | INFO  | Runner | Starting Ethereum main loop ... 
+2026-10-12 20:55:11.166+0000 | main | INFO  | NatService | No NAT environment detected so no service could be started
+2026-10-12 20:55:11.166+0000 | main | INFO  | NetworkRunner | Starting Network.
+2026-10-12 20:55:11.172+0000 | nioEventLoopGroup-2-1 | INFO  | RlpxAgent | P2P RLPx agent started and listening on /[0:0:0:0:0:0:0:0]:30303.
+2026-10-12 20:55:11.173+0000 | main | INFO  | CompositePeerDiscoveryAgent | Starting discovery on shared UDP socket (V5 only)
+2026-10-12 20:55:11.191+0000 | disc-shared-eventloop | INFO  | PeerDiscoveryAgentV5 | Starting DiscV5 peer discovery agent ...
+2026-10-12 20:55:11.272+0000 | disc-shared-eventloop | INFO  | NettyDiscoveryClientImpl | UDP discovery client started
+2026-10-12 20:55:11.305+0000 | disc-shared-eventloop | INFO  | PeerDiscoveryAgentV5 | P2P DiscV5 peer discovery agent started and listening on 30303
+2026-10-12 20:55:11.307+0000 | main | INFO  | DefaultP2PNetwork | Enode URL enode://b44165839d6f7e7ff4208f20322f704f02c5fac983381797a072f2b6557f6d2fbd5fd6a4e25e2983d37771e3e1942fe09f373d0372d273e44b721dedc6ff4815@168.144.244.100:30303
+2026-10-12 20:55:11.309+0000 | main | INFO  | DefaultP2PNetwork | ENR URL enr:-Ji4QDQ0Y_KbYfNclOd5S8FzxfjLRg2YAUngeGuExdbyvNZBKq2kda4iLBGtp0-V9ghdNU-AyzDRz_cRcKiJ_uIMPQ-BmoNldGjHxoRBYtbugIJpZIJ2NIJpcISokPRkiXNlY3AyNTZrMaEDtEFlg51vfn_0II8gMi9wTwLF-smDOBeXoHLytlV_bS-DdGNwgnZfg3VkcIJ2Xw
+2026-10-12 20:55:11.310+0000 | main | INFO  | DefaultP2PNetwork | Node address 0x79c96ab99b49c701b981a1da657ef83b67ea8d26
+2026-10-12 20:55:11.317+0000 | main | INFO  | NetworkRunner | Supported capabilities: [eth/68, eth/69, eth/70, eth/71], [snap/1]
+2026-10-12 20:55:11.317+0000 | main | INFO  | DefaultSynchronizer | Starting synchronizer.
+2026-10-12 20:55:11.321+0000 | main | INFO  | TransactionPoolFactory | Enabling transaction handling following initial sync
+2026-10-12 20:55:11.322+0000 | main | INFO  | SnapServer | Starting SnapServer with Bonsai full flat db
+2026-10-12 20:55:11.333+0000 | main | INFO  | DefaultSynchronizer | Stopping block propagation.
+2026-10-12 20:55:11.335+0000 | main | INFO  | DefaultSynchronizer | Stopping the pruner.
+2026-10-12 20:55:11.336+0000 | main | INFO  | Runner | Ethereum main loop is up.
+2026-10-12 20:55:13.728+0000 | engine-ordered-execution-0 | INFO  | BackwardSyncContext | Starting a new backward sync session
+2026-10-12 20:55:19.620+0000 | EthScheduler-Services-0 | INFO  | TransactionPoolFactory | Node out of sync, disabling transaction handling
+2026-10-12 20:55:19.808+0000 | EthScheduler-Services-0 | INFO  | BackwardSyncStep | Backward sync phase 1 of 2 completed, downloaded a total of 200 headers. Peers: 1
+2026-10-12 20:55:19.928+0000 | EthScheduler-Services-0 | ERROR | EvmSpecVersion | ****** Not for Production Network Use ******
+Executing code from EVM Spec Version AMSTERDAM, which has not been finalized.
+****** Not for Production Network Use ******
+2026-10-12 20:55:25.268+0000 | EthScheduler-Services-0 | INFO  | BackwardSyncContext | Backward sync phase 2 of 2, 14.29% completed, imported 1 blocks of at least 7 (current head 24454849, target head 24454855). Peers: 3
+2026-10-12 20:55:33.444+0000 | EthScheduler-Services-0 | INFO  | TransactionPoolFactory | Node is in sync, enabling transaction handling
+2026-10-12 20:55:37.120+0000 | EthScheduler-Services-0 | INFO  | BackwardSyncContext | Backward sync phase 2 of 2, 50.00% completed, imported 4 blocks of at least 8 (current head 24454852, target head 24454856). Peers: 20
+2026-10-12 20:55:50.047+0000 | ForkJoinPool.commonPool-worker-3 | INFO  | BackwardSyncContext | Backward sync phase 2 of 2, 80.00% completed, imported 8 blocks of at least 10 (current head 24454856, target head 24454858). Peers: 20
+2026-10-12 20:55:57.616+0000 | ForkJoinPool.commonPool-worker-3 | INFO  | BackwardSyncContext | Backward sync phase 2 of 2 completed, imported a total of 10 blocks. Peers: 20
+2026-10-12 20:55:57.616+0000 | ForkJoinPool.commonPool-worker-3 | INFO  | BackwardSyncAlgorithm | Current backward sync session is done
+2026-10-12 20:56:13.996+0000 | besu-block-io-3 | INFO  | BalPrefetcher | Prefetch completed: 21385 accounts + 19 storage slots in batches of 8
+2026-10-12 20:56:14.559+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,859  (adfa4.....26d2f)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  22.81 mwei bfee|  67,105,444 ( 33.6%) gas used| 1.142s exec|  58.78 Mgas/s| 20 peers
+2026-10-12 20:56:14.587+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: adfa4.....26d2f | safe: 3ce9c.....3908b | finalized: ab805.....3b16c
+2026-10-12 20:56:22.588+0000 | besu-block-io-7 | INFO  | BalPrefetcher | Prefetch completed: 8 accounts + 19 storage slots in batches of 8
+2026-10-12 20:56:22.590+0000 | engine-ordered-execution-0 | INFO  | MergeCoordinator | Start building proposals for block 24454860 identified by 0x51324997a72972a0
+2026-10-12 20:56:22.592+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: adfa4.....26d2f | safe: 3ce9c.....3908b | finalized: ab805.....3b16c
+2026-10-12 20:56:24.388+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 10277 accounts + 19 storage slots in batches of 8
+2026-10-12 20:56:24.871+0000 | vert.x-worker-thread-4 | INFO  | EngineGetPayloadV6 | Produced #24,454,860  (0cf78.....335ae)|    0 tx | 16 ws | 0 (0.0%) gas in 0.000s | Timing(started at 2026-10-12T20:56:22.566701636Z, empty-block-created=0ms, awaitingRetrieval=0ms) | PayloadId 0x51324997a72972a0
+2026-10-12 20:56:25.134+0000 | EthScheduler-BlockCreation-0-24454860 | INFO  | PostMergeContext | New proposal for payloadId 0x51324997a72972a0 block 24454860 (0x91c1f10774af5674203d65c71b1f48d6366244e3e5e8ff30404854abe5ac2f25) gas used 32235182 transactions 2 reward 32.24 szabo is better than the previous one by 32.24 szabo
+2026-10-12 20:56:28.796+0000 | besu-block-io-0 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:56:29.358+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,860  (55e5e.....7439c)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  21.87 mwei bfee|  83,881,805 ( 41.9%) gas used| 1.358s exec|  61.78 Mgas/s| 20 peers
+2026-10-12 20:56:29.384+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 55e5e.....7439c | safe: ba2be.....316f4 | finalized: ab805.....3b16c
+2026-10-12 20:56:54.340+0000 | besu-block-io-15 | INFO  | BalPrefetcher | Prefetch completed: 20965 accounts + 19 storage slots in batches of 8
+2026-10-12 20:56:54.934+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,861  (6dd2e.....27afd)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  21.43 mwei bfee|  65,787,880 ( 32.9%) gas used| 1.184s exec|  55.56 Mgas/s| 20 peers
+2026-10-12 20:56:54.956+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6dd2e.....27afd | safe: adfa4.....26d2f | finalized: 9ac65.....e50e3
+2026-10-12 20:57:02.072+0000 | besu-block-io-11 | INFO  | BalPrefetcher | Prefetch completed: 21385 accounts + 19 storage slots in batches of 8
+2026-10-12 20:57:02.783+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,862  (5885d.....6e15d)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|  20.52 mwei bfee|  67,105,444 ( 33.6%) gas used| 1.157s exec|  57.98 Mgas/s| 20 peers
+2026-10-12 20:57:02.810+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 5885d.....6e15d | safe: adfa4.....26d2f | finalized: 9ac65.....e50e3
+2026-10-12 20:57:14.396+0000 | besu-block-io-9 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:57:15.225+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,863  (279fd.....8d223)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  19.67 mwei bfee|  82,564,265 ( 41.3%) gas used| 1.627s exec|  50.76 Mgas/s| 20 peers
+2026-10-12 20:57:15.254+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 279fd.....8d223 | safe: adfa4.....26d2f | finalized: 9ac65.....e50e3
+2026-10-12 20:57:39.812+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:57:40.383+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,864  (6b3bb.....35c3b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  19.24 mwei bfee|  83,881,781 ( 41.9%) gas used| 1.187s exec|  70.66 Mgas/s| 20 peers
+2026-10-12 20:57:40.405+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 6b3bb.....35c3b | safe: 5885d.....6e15d | finalized: 9ac65.....e50e3
+2026-10-12 20:57:50.160+0000 | besu-block-io-8 | INFO  | BalPrefetcher | Prefetch completed: 26729 accounts + 19 storage slots in batches of 8
+2026-10-12 20:57:50.697+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,865  (04f2e.....83706)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  18.86 mwei bfee|  83,881,805 ( 41.9%) gas used| 1.209s exec|  69.36 Mgas/s| 21 peers
+2026-10-12 20:57:50.721+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: 04f2e.....83706 | safe: 5885d.....6e15d | finalized: 9ac65.....e50e3
+2026-10-12 20:58:02.648+0000 | besu-block-io-14 | INFO  | BalPrefetcher | Prefetch completed: 26309 accounts + 19 storage slots in batches of 8
+2026-10-12 20:58:03.247+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,454,866  (fac99.....3666a)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|  18.48 mwei bfee|  82,564,241 ( 41.3%) gas used| 1.195s exec|  69.10 Mgas/s| 21 peers
+2026-10-12 20:58:03.291+0000 | engine-ordered-execution-0 | INFO  | EngineForkchoiceUpdatedV4 | FCU(VALID) | head: fac99.....3666a | safe: 6b3bb.....35c3b | finalized: 9ac65.....e50e3

@@ -1,0 +1,25 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name']='execution' AND Timestamp >= toDateTime('2026-10-12 22:27:06') AND Timestamp < toDateTime('2026-10-12 22:27:22') ORDER BY Timestamp ASC LIMIT 100"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:27:10.524300087",
+        "\u001b[2m2026-10-12T22:27:10.524206Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x3f6d2b859c146bc8 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x7fd66e8dd6487bb7a37c72c3e9e9f1f5c02827b0e48f5473c2dd88eb64da9b15"
+      ],
+      [
+        "2026-10-12 22:27:20.651358199",
+        "\u001b[2m2026-10-12T22:27:20.651162Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth::cli\u001b[0m\u001b[2m:\u001b[0m Status \u001b[3mconnected_peers\u001b[0m\u001b[2m=\u001b[0m30 \u001b[3mlatest_block\u001b[0m\u001b[2m=\u001b[0m24455279"
+      ]
+    ]
+  }
+}

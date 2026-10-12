@@ -1,0 +1,598 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['host.name'] AS host, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name'] IN ('teku-erigon-1','lodestar-erigon-1') AND ResourceAttributes['container.name']='execution' AND Timestamp >= toDateTime('2026-10-12 22:58:35') AND Timestamp < toDateTime('2026-10-12 22:58:39') ORDER BY Timestamp ASC LIMIT 160"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:58:35.695510314",
+        "teku-erigon-1",
+        "[WARN] [10-12|22:58:35.695] [rpc] served                             conn=172.18.0.3:46194 method=debug_getBadBlocks reqid=1668 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 22:58:36.088200706",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.086] [ForkChoiceUpdated] processing new request head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.088240126",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.086] [ForkChoiceUpdated] calling HandleForkChoice head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.088243307",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.086] [ForkChoiceUpdated] Handling fork choice headerHash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.088245359",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.086] [execmodule] updating fork choice        number=24455425 hash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.088247782",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.086] UnwindTo                                 block=24455424 err=nil stack=\"[sync.go:167 executor.go:105 forkchoice.go:293 forkchoice.go:516 forkchoice.go:127]\""
+      ],
+      [
+        "2026-10-12 22:58:36.088249965",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:36.086] [4/6 Execution] Unwind Execution         from=24455426 to=24455424"
+      ],
+      [
+        "2026-10-12 22:58:36.088251749",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.087] [1/6 OtterSync] DONE                     in=3.57\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.088254372",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.087] [2/6 BlockHashes] DONE                   in=996ns"
+      ],
+      [
+        "2026-10-12 22:58:36.088256204",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.087] [3/6 Senders] Recovery done              from=24455425 to=24455425 blocks=1 took=87.914\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.088258127",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.087] [3/6 Senders] DONE                       in=124.684\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.088259921",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.087] [4/6 Execution] exec blocks exit "
+      ],
+      [
+        "2026-10-12 22:58:36.106439909",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.106] [ForkChoiceUpdated] processing new request head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.106587174",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.106] [ForkChoiceUpdated] calling HandleForkChoice head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.106601513",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.106] [ForkChoiceUpdated] Handling fork choice headerHash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.106741935",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.106] [execmodule] updating fork choice        number=24455425 hash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.106835946",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.106] UnwindTo                                 block=24455424 err=nil stack=\"[sync.go:167 executor.go:105 forkchoice.go:293 forkchoice.go:516 forkchoice.go:127]\""
+      ],
+      [
+        "2026-10-12 22:58:36.107191401",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:36.107] [4/6 Execution] Unwind Execution         from=24455426 to=24455424"
+      ],
+      [
+        "2026-10-12 22:58:36.107611888",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.107] [1/6 OtterSync] DONE                     in=4.256\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.107624989",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.107] [2/6 BlockHashes] DONE                   in=2.273\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.107690099",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.107] [3/6 Senders] Recovery done              from=24455425 to=24455425 blocks=1 took=58.053\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.107701339",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.107] [3/6 Senders] DONE                       in=75\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.108271593",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.108] [4/6 Execution] exec blocks exit "
+      ],
+      [
+        "2026-10-12 22:58:36.585782894",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.585] [NewPayload] processing new request      blockNum=24455426 blockHash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 parentHash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.774192018",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.774] [4/6 Execution] exec loop exit "
+      ],
+      [
+        "2026-10-12 22:58:36.774913896",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.774] [commitment] processed                   block=24455425 txNum=3281449550 keys=12 keys/s=21.62k mode=hex-parallel-patricia-hashed bufmode=parallel spent=554.955\u00b5s rootHash=e1803b377dbe32d4995a314524b280fed0496e8c2f85f1d282f7c2035d1ab3c5"
+      ],
+      [
+        "2026-10-12 22:58:36.810017591",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.809] [4/6 Execution] rw exit "
+      ],
+      [
+        "2026-10-12 22:58:36.810685645",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:36.810] [4/6 Execution] parallel executed        blk=24455425 blks=1 blk/s=1 txs=6 tx/s=8 gas/s=116.05M exec=7 repeat%=14.29 abort=0 invalid=0 tgas/s=0 tcpus=0.0 tdur=0s exec=0s(0.00%) read=\"0s(0.00%),a=0s,s=0s,c=0s\" rd=\"133.66k,a=0,s=0,c=0\" wrt=25 rd/s=184.93k wrt/s=34 buf=2.5KB/512.0MB bdur=332ms ucgas=83.88M alloc=9.6GB sys=24.5GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.810704526",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.810] Account cache stats                      mode=evict hits=26729 misses=1 hit_rate=99.996 inserts=1 evictions=0 dropped=0 stale_evicted=1 epoch=9 entries=63720 size_mb=4 capacity_mb=150 slots_pct=48.615 reserved_mb=37"
+      ],
+      [
+        "2026-10-12 22:58:36.810707770",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.810] Storage cache stats                      mode=evict hits=14 misses=2 hit_rate=87.500 inserts=2 evictions=0 dropped=0 stale_evicted=2 epoch=9 entries=1121 size_mb=0 capacity_mb=1024 slots_pct=54.736 reserved_mb=0"
+      ],
+      [
+        "2026-10-12 22:58:36.810764670",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.810] CodeCache stats                          addr_hits=26656 addr_misses=0 addr_hit_rate=100.000 code_hits=258 code_misses=26398 code_hit_rate=0.968 addr_entries=63703 code_entries=2049 addr_size_mb=8 addr_usage_pct=27.338 code_size_mb=127 code_usage_pct=99.977 codehash_size_mb=127 codehash_usage_pct=99.975"
+      ],
+      [
+        "2026-10-12 22:58:36.810923150",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:36.810] [4/6 Execution] parallel committed       blk=24455425 blks=0 blk/s=0 txs=6 tx/s=8 gas/s=115.99M bdur=0s progress=0/0 buf=1.2KB chit=0 cmiss=0 stepsInDB=0.86 step=1050063.9 alloc=9.6GB sys=24.5GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.810981718",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:36.810] [4/6 Execution] parallel done            in=723.386274ms buf=1.2KB/512.0MB blk=24455425 blks=1 blk/s=1 txs=6 tx/s=8 gas/s=115.95M stepsInDB=0.86 step=1050063.9 alloc=9.6GB sys=24.5GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.811141634",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [4/6 Execution] DONE                     in=723.63924ms"
+      ],
+      [
+        "2026-10-12 22:58:36.811511555",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [5/6 TxLookup] DONE                      in=413.634\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.811523563",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [6/6 Finish] DONE                        in=8.513\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.811733440",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:36.811] head updated                             hash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d number=24455425 txnum=3281449550 age=24s execution=703ms mgas/s=119.30 avg mgas/s=134.02 alloc=9.6GB sys=24.5GB"
+      ],
+      [
+        "2026-10-12 22:58:36.811744809",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [updateForkChoice] dispatching notifications head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.811773124",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [dispatchNotifications] publishing SD "
+      ],
+      [
+        "2026-10-12 22:58:36.811783062",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [dispatcher] PublishOverlay: publishing  sdNil=false"
+      ],
+      [
+        "2026-10-12 22:58:36.811970425",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.811] [dispatchNotifications] dispatching      finishBefore=24455426 finishAfter=24455425"
+      ],
+      [
+        "2026-10-12 22:58:36.813052430",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.812] hash prune res                           name=accounts txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551604 keys=11 vals=22 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.813074999",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.812] hash prune res                           name=storage txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551613 keys=2 vals=6 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.813077943",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=code txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.813427787",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=commitment txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.813471477",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] [txpool] New block                       block=24455425 unwound=4 mined=5 blockBaseFee=27 pending-pre=11 pending=15 baseFee=0 queued=1 err=nil"
+      ],
+      [
+        "2026-10-12 22:58:36.814034199",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=receipt txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551606 keys=9 vals=9 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.814057609",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=rcache txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.814060532",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=logaddrs txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.814062727",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=logtopics txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.814064836",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:36.813] hash prune res                           name=tracesfrom txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551606 keys=9 vals=18 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.848578378",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.848] [4/6 Execution] exec loop exit "
+      ],
+      [
+        "2026-10-12 22:58:36.851261690",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.851] [commitment] processed                   block=24455425 txNum=3281449550 keys=12 keys/s=4.92k mode=hex-parallel-patricia-hashed bufmode=parallel spent=2.436843ms rootHash=e1803b377dbe32d4995a314524b280fed0496e8c2f85f1d282f7c2035d1ab3c5"
+      ],
+      [
+        "2026-10-12 22:58:36.885553307",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.885] [4/6 Execution] rw exit "
+      ],
+      [
+        "2026-10-12 22:58:36.886095790",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:36.885] [4/6 Execution] parallel executed        blk=24455425 blks=1 blk/s=1 txs=6 tx/s=7 gas/s=107.84M exec=7 repeat%=14.29 abort=0 invalid=0 tgas/s=0 tcpus=0.0 tdur=0s exec=0s(0.00%) read=\"0s(0.00%),a=0s,s=0s,c=0s\" rd=\"133.66k,a=0,s=0,c=0\" wrt=25 rd/s=171.85k wrt/s=32 buf=2.5KB/512.0MB bdur=276ms ucgas=83.88M alloc=8.2GB sys=18.4GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.886141732",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] Account cache stats                      mode=evict hits=26734 misses=2 hit_rate=99.993 inserts=2 evictions=0 dropped=0 stale_evicted=2 epoch=67 entries=132052 size_mb=10 capacity_mb=150 slots_pct=34.885 reserved_mb=111"
+      ],
+      [
+        "2026-10-12 22:58:36.886155066",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] Storage cache stats                      mode=evict hits=14 misses=2 hit_rate=87.500 inserts=2 evictions=0 dropped=0 stale_evicted=2 epoch=67 entries=22894 size_mb=2 capacity_mb=1024 slots_pct=69.867 reserved_mb=9"
+      ],
+      [
+        "2026-10-12 22:58:36.886199538",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] CodeCache stats                          addr_hits=26374 addr_misses=1 addr_hit_rate=99.996 code_hits=638 code_misses=25736 code_hit_rate=2.419 addr_entries=127698 code_entries=2044 addr_size_mb=17 addr_usage_pct=55.287 code_size_mb=127 code_usage_pct=99.976 codehash_size_mb=127 codehash_usage_pct=99.977"
+      ],
+      [
+        "2026-10-12 22:58:36.886267583",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:36.886] [4/6 Execution] parallel committed       blk=24455425 blks=0 blk/s=0 txs=6 tx/s=7 gas/s=107.78M bdur=0s progress=0/0 buf=1.2KB chit=0 cmiss=0 stepsInDB=0.86 step=1050063.9 alloc=8.2GB sys=18.4GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.886765854",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:36.886] [4/6 Execution] parallel done            in=778.361158ms buf=1.2KB/512.0MB blk=24455425 blks=1 blk/s=1 txs=6 tx/s=7 gas/s=107.76M stepsInDB=0.86 step=1050063.9 alloc=8.2GB sys=18.4GB isForkValidation=false isApplyingBlocks=true"
+      ],
+      [
+        "2026-10-12 22:58:36.886776782",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] [4/6 Execution] DONE                     in=778.767496ms"
+      ],
+      [
+        "2026-10-12 22:58:36.886873384",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] [5/6 TxLookup] DONE                      in=302.907\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.886876253",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.886] [6/6 Finish] DONE                        in=10.571\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:36.887081476",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:36.887] head updated                             hash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d number=24455425 txnum=3281449550 age=24s execution=523ms mgas/s=160.25 avg mgas/s=138.83 alloc=8.2GB sys=18.4GB"
+      ],
+      [
+        "2026-10-12 22:58:36.887109502",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.887] [updateForkChoice] dispatching notifications head=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:36.887146967",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.887] [dispatchNotifications] publishing SD "
+      ],
+      [
+        "2026-10-12 22:58:36.887156716",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.887] [dispatcher] PublishOverlay: publishing  sdNil=false"
+      ],
+      [
+        "2026-10-12 22:58:36.887168323",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.887] [dispatchNotifications] dispatching      finishBefore=24455426 finishAfter=24455425"
+      ],
+      [
+        "2026-10-12 22:58:36.888632974",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=accounts txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551604 keys=11 vals=22 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888653616",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=storage txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551613 keys=2 vals=6 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888655943",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=code txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888657623",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] [txpool] New block                       block=24455425 unwound=4 mined=5 blockBaseFee=27 pending-pre=11 pending=15 baseFee=1 queued=0 err=nil"
+      ],
+      [
+        "2026-10-12 22:58:36.888659152",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=commitment txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888735735",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=receipt txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551606 keys=9 vals=9 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888773809",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=rcache txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888787909",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=logaddrs txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888840462",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=logtopics txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551615 keys=0 vals=0 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:36.888993357",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:36.888] hash prune res                           name=tracesfrom txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551606 keys=9 vals=18 spent ms=0"
+      ],
+      [
+        "2026-10-12 22:58:37.087834601",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.087] treating forkChoiceUpdated as asynchronous as it is taking too long "
+      ],
+      [
+        "2026-10-12 22:58:37.087887787",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.087] [ForkChoiceUpdated] HandleForkChoice done elapsed=1.00110071s"
+      ],
+      [
+        "2026-10-12 22:58:37.087890010",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.087] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.101120695",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.100] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:37.105934360",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.105] [ForkChoiceUpdated] processing new request head=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954"
+      ],
+      [
+        "2026-10-12 22:58:37.107771258",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.107] treating forkChoiceUpdated as asynchronous as it is taking too long "
+      ],
+      [
+        "2026-10-12 22:58:37.107801339",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.107] [ForkChoiceUpdated] HandleForkChoice done elapsed=1.001124052s"
+      ],
+      [
+        "2026-10-12 22:58:37.107803461",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.107] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.121072862",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.120] [NewPayload] processing new request      blockNum=24455426 blockHash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 parentHash=0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d"
+      ],
+      [
+        "2026-10-12 22:58:37.137603607",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.137] hash prune res                           name=tracesto txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551604 keys=11 vals=47678 spent ms=323"
+      ],
+      [
+        "2026-10-12 22:58:37.217631427",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.217] hash prune res                           name=tracesto txFrom=3281449544 txTo=18446744073709551615 limit=18446744073709551604 keys=11 vals=47678 spent ms=328"
+      ],
+      [
+        "2026-10-12 22:58:37.428510309",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.428] [txpool] Commit                          written_kb=608 in=16.016325ms"
+      ],
+      [
+        "2026-10-12 22:58:37.606683954",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:37.606] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.628815201",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.628] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:37.632720898",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:37.631] [ForkChoiceUpdated] processing new request head=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954"
+      ],
+      [
+        "2026-10-12 22:58:38.133229105",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.132] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:38.153975492",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.153] [dispatcher] PublishOverlay: publishing  sdNil=true"
+      ],
+      [
+        "2026-10-12 22:58:38.154138556",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:38.154] Timings: Forkchoice                      flush+commit=1s alloc=9.6GB sys=24.5GB"
+      ],
+      [
+        "2026-10-12 22:58:38.154177110",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [6/6 Finish] prune done                  in=5.007\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.154215621",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [5/6 TxLookup] prune done                in=20.719\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.154250447",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [4/6 Execution Prune] history file retirement cutoffs=\"default=1032885 commitment=0 rcache=1032885\""
+      ],
+      [
+        "2026-10-12 22:58:38.154660415",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [4/6 Execution] prune done               in=180.807\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.154666892",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [3/6 Senders] prune done                 in=1.27\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.154668549",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [2/6 BlockHashes] prune done             in=1.503\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.154670117",
+        "teku-erigon-1",
+        "[DBUG] [10-12|22:58:38.154] [1/6 OtterSync] prune done               in=21.234\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.155230743",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:38.155] Timings: Post-Forkchoice                 prune=948\u00b5s initialCycle=false alloc=9.6GB sys=24.5GB"
+      ],
+      [
+        "2026-10-12 22:58:38.155769399",
+        "teku-erigon-1",
+        "[INFO] [10-12|22:58:38.155] BuildFilesInBackground                   step=1050063 lastInDB=1050063 targetStep=1050064 reorgSafeBlock=24455329 reorgSafeStep=1050063.65 reorgSafeOK=true"
+      ],
+      [
+        "2026-10-12 22:58:38.431856122",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.431] [dispatcher] PublishOverlay: publishing  sdNil=true"
+      ],
+      [
+        "2026-10-12 22:58:38.432023363",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:38.431] Timings: Forkchoice                      flush+commit=2s alloc=8.2GB sys=18.4GB"
+      ],
+      [
+        "2026-10-12 22:58:38.432089351",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [6/6 Finish] prune done                  in=6.706\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.432109869",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [5/6 TxLookup] prune done                in=28.177\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.432201021",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [4/6 Execution Prune] history file retirement cutoffs=\"default=1032885 commitment=0 rcache=1032885\""
+      ],
+      [
+        "2026-10-12 22:58:38.432400413",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [4/6 Execution] prune done               in=244.664\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.432405178",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [3/6 Senders] prune done                 in=2.161\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.432406960",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [2/6 BlockHashes] prune done             in=1.576\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.432674453",
+        "lodestar-erigon-1",
+        "[DBUG] [10-12|22:58:38.432] [1/6 OtterSync] prune done               in=35.042\u00b5s"
+      ],
+      [
+        "2026-10-12 22:58:38.433897416",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:38.433] Timings: Post-Forkchoice                 prune=2ms initialCycle=false alloc=8.2GB sys=18.4GB"
+      ],
+      [
+        "2026-10-12 22:58:38.433905233",
+        "lodestar-erigon-1",
+        "[INFO] [10-12|22:58:38.433] BuildFilesInBackground                   step=1050063 lastInDB=1050063 targetStep=1050064 reorgSafeBlock=24455329 reorgSafeStep=1050063.65 reorgSafeOK=true"
+      ]
+    ]
+  }
+}

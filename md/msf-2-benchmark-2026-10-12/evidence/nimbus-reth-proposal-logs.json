@@ -1,0 +1,269 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name']='beacon' AND Timestamp >= toDateTime('2026-10-12 22:24:13') AND Timestamp < toDateTime('2026-10-12 23:24:13') AND (Body LIKE '%Requesting engine payload%' OR Body LIKE '%Timeout while getting execution payload%' OR Body LIKE '%engine_getPayload%' OR Body LIKE '%Block proposed%' OR Body LIKE '%Block sent%' OR Body LIKE '%Using builder bid%' OR (Body LIKE '%topics=\"bidpool\"%' AND match(Body,'bid_slot=(2821|2823|2844|2846|2859|2879|2887|2895|2922|2981|2992|3051)')) OR (Body LIKE '%Execution payload bid validated%' AND match(Body,'bidSlot=(2821|2823|2844|2846|2859|2879|2887|2895|2922|2981|2992|3051)'))) ORDER BY Timestamp ASC LIMIT 250"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:24:36.050489346",
+        "INF 2026-10-12 22:24:36.048+00:00 Requesting engine payload                  topics=\"beacval\" slot=2808 beaconHead=2e3c2903:2807 executionHead=c2c8e025 latestSafe=3a8cbe46 latestFinalized=de46f876 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:24:36.051055985",
+        "DBG 2026-10-12 22:24:36.048+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5792 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:24:37.552314072",
+        "WRN 2026-10-12 22:24:37.548+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:27:11.611740520",
+        "DBG 2026-10-12 22:27:11.607+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2821 builder_index=0 blockRoot=e356d585"
+      ],
+      [
+        "2026-10-12 22:27:11.611796907",
+        "DBG 2026-10-12 22:27:11.607+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2821 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:27:12.048108193",
+        "INF 2026-10-12 22:27:12.043+00:00 Requesting engine payload                  topics=\"beacval\" slot=2821 beaconHead=e356d585:2820 executionHead=7fd66e8d latestSafe=7c741a2f latestFinalized=842db1c2 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:27:12.048228309",
+        "DBG 2026-10-12 22:27:12.043+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5818 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:27:13.548677317",
+        "WRN 2026-10-12 22:27:13.543+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:27:35.612373384",
+        "DBG 2026-10-12 22:27:35.608+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2823 builder_index=0 blockRoot=4bec7708"
+      ],
+      [
+        "2026-10-12 22:27:35.612417143",
+        "DBG 2026-10-12 22:27:35.608+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2823 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:27:36.059713263",
+        "INF 2026-10-12 22:27:36.056+00:00 Requesting engine payload                  topics=\"beacval\" slot=2823 beaconHead=4bec7708:2822 executionHead=128d4ad8 latestSafe=7c741a2f latestFinalized=842db1c2 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:27:36.059731376",
+        "DBG 2026-10-12 22:27:36.056+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5822 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:27:37.560219021",
+        "WRN 2026-10-12 22:27:37.556+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:31:47.608543609",
+        "DBG 2026-10-12 22:31:47.605+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2844 builder_index=0 blockRoot=59c289ee"
+      ],
+      [
+        "2026-10-12 22:31:47.608575207",
+        "DBG 2026-10-12 22:31:47.605+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2844 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:31:48.049135200",
+        "INF 2026-10-12 22:31:48.045+00:00 Requesting engine payload                  topics=\"beacval\" slot=2844 beaconHead=59c289ee:2843 executionHead=a57627b7 latestSafe=00b598f8 latestFinalized=842db1c2 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:31:48.049163602",
+        "DBG 2026-10-12 22:31:48.045+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5864 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:31:49.550199860",
+        "WRN 2026-10-12 22:31:49.549+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:32:11.608235755",
+        "DBG 2026-10-12 22:32:11.605+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2846 builder_index=0 blockRoot=f75617a3"
+      ],
+      [
+        "2026-10-12 22:32:11.608266836",
+        "DBG 2026-10-12 22:32:11.605+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2846 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:32:12.049892658",
+        "INF 2026-10-12 22:32:12.045+00:00 Requesting engine payload                  topics=\"beacval\" slot=2846 beaconHead=f75617a3:2845 executionHead=0a69e867 latestSafe=00b598f8 latestFinalized=842db1c2 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:32:12.049916302",
+        "DBG 2026-10-12 22:32:12.045+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5868 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:32:13.550230774",
+        "WRN 2026-10-12 22:32:13.549+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:34:47.608276969",
+        "DBG 2026-10-12 22:34:47.605+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2859 builder_index=0 blockRoot=9e359138"
+      ],
+      [
+        "2026-10-12 22:34:47.608311129",
+        "DBG 2026-10-12 22:34:47.605+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2859 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:34:48.051242686",
+        "INF 2026-10-12 22:34:48.049+00:00 Requesting engine payload                  topics=\"beacval\" slot=2859 beaconHead=9e359138:2858 executionHead=27c7fc84 latestSafe=adaa4f48 latestFinalized=984ff95a feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:34:48.051284825",
+        "DBG 2026-10-12 22:34:48.049+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5894 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:34:49.551681907",
+        "WRN 2026-10-12 22:34:49.549+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:38:47.610286531",
+        "DBG 2026-10-12 22:38:47.606+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2879 builder_index=0 blockRoot=3a704368"
+      ],
+      [
+        "2026-10-12 22:38:47.610324468",
+        "DBG 2026-10-12 22:38:47.606+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2879 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:38:48.051364067",
+        "INF 2026-10-12 22:38:48.046+00:00 Requesting engine payload                  topics=\"beacval\" slot=2879 beaconHead=3a704368:2878 executionHead=003cd0df latestSafe=672d3f8b latestFinalized=984ff95a feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:38:48.051382212",
+        "DBG 2026-10-12 22:38:48.046+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5934 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:38:49.552538481",
+        "WRN 2026-10-12 22:38:49.546+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:40:23.609932241",
+        "DBG 2026-10-12 22:40:23.604+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2887 builder_index=0 blockRoot=d5c8fe8d"
+      ],
+      [
+        "2026-10-12 22:40:23.609977501",
+        "DBG 2026-10-12 22:40:23.604+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2887 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:40:24.050700927",
+        "INF 2026-10-12 22:40:24.048+00:00 Requesting engine payload                  topics=\"beacval\" slot=2887 beaconHead=d5c8fe8d:2886 executionHead=f9186345 latestSafe=2d88201f latestFinalized=3b5a6ef3 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:40:24.050724645",
+        "DBG 2026-10-12 22:40:24.048+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5950 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:40:25.551722635",
+        "WRN 2026-10-12 22:40:25.548+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:41:59.611610376",
+        "DBG 2026-10-12 22:41:59.606+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2895 builder_index=0 blockRoot=06287ff2"
+      ],
+      [
+        "2026-10-12 22:41:59.611643359",
+        "DBG 2026-10-12 22:41:59.606+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2895 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:42:00.050671450",
+        "INF 2026-10-12 22:42:00.046+00:00 Requesting engine payload                  topics=\"beacval\" slot=2895 beaconHead=06287ff2:2894 executionHead=a5230900 latestSafe=b54559f1 latestFinalized=3b5a6ef3 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:42:00.050802117",
+        "DBG 2026-10-12 22:42:00.046+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5966 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:42:01.551799874",
+        "WRN 2026-10-12 22:42:01.546+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:47:23.610149615",
+        "DBG 2026-10-12 22:47:23.605+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2922 builder_index=0 blockRoot=1bb43cc6"
+      ],
+      [
+        "2026-10-12 22:47:23.610186770",
+        "DBG 2026-10-12 22:47:23.605+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2922 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:47:24.049237373",
+        "INF 2026-10-12 22:47:24.045+00:00 Requesting engine payload                  topics=\"beacval\" slot=2922 beaconHead=1bb43cc6:2921 executionHead=db5f9da9 latestSafe=3e380abf latestFinalized=a7abd72d feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:47:24.049272275",
+        "DBG 2026-10-12 22:47:24.045+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=6020 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:47:25.550924884",
+        "WRN 2026-10-12 22:47:25.549+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:59:11.609938302",
+        "DBG 2026-10-12 22:59:11.604+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2981 builder_index=0 blockRoot=86fa2e45"
+      ],
+      [
+        "2026-10-12 22:59:11.610018074",
+        "DBG 2026-10-12 22:59:11.604+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2981 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:59:12.047889100",
+        "INF 2026-10-12 22:59:12.044+00:00 Requesting engine payload                  topics=\"beacval\" slot=2981 beaconHead=86fa2e45:2980 executionHead=5f0dad4b latestSafe=1ddd5e31 latestFinalized=bc434839 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:59:12.047920053",
+        "DBG 2026-10-12 22:59:12.044+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=6138 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:59:13.548238236",
+        "WRN 2026-10-12 22:59:13.544+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 23:01:23.612926576",
+        "DBG 2026-10-12 23:01:23.607+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2992 builder_index=0 blockRoot=7dd6ab78"
+      ],
+      [
+        "2026-10-12 23:01:23.612960205",
+        "DBG 2026-10-12 23:01:23.607+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2992 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 23:01:24.050792511",
+        "INF 2026-10-12 23:01:24.047+00:00 Requesting engine payload                  topics=\"beacval\" slot=2992 beaconHead=7dd6ab78:2991 executionHead=542a48bb latestSafe=bc4c2cc7 latestFinalized=bc434839 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 23:01:24.050821295",
+        "DBG 2026-10-12 23:01:24.047+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=6158 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 23:01:25.551465934",
+        "WRN 2026-10-12 23:01:25.547+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 23:13:11.614735365",
+        "DBG 2026-10-12 23:13:11.610+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=3051 builder_index=0 blockRoot=6479ccb1"
+      ],
+      [
+        "2026-10-12 23:13:11.614789260",
+        "DBG 2026-10-12 23:13:11.610+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=3051 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 23:13:12.051382206",
+        "INF 2026-10-12 23:13:12.046+00:00 Requesting engine payload                  topics=\"beacval\" slot=3051 beaconHead=6479ccb1:3050 executionHead=912c8b43 latestSafe=6e5087c7 latestFinalized=b549ea97 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 23:13:12.051414518",
+        "DBG 2026-10-12 23:13:12.046+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=6274 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 23:13:13.551989016",
+        "WRN 2026-10-12 23:13:13.546+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ]
+    ]
+  }
+}

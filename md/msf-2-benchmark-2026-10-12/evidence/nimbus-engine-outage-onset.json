@@ -1,0 +1,147 @@
+{
+  "query": "SELECT Timestamp,ResourceAttributes['host.name'] AS host,substring(Body,1,2000) AS body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp>=toDateTime('2026-10-12 15:35:00') AND Timestamp<toDateTime('2026-10-12 15:39:00') AND ResourceAttributes['host.name']='nimbus-nimbusel-1' AND ResourceAttributes['container.name']='execution' AND (Body LIKE '%engine_%' OR Body LIKE '%IncompleteSend%' OR Body LIKE '%Connection%' OR Body LIKE '%error%') ORDER BY Timestamp DESC LIMIT 35",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 15:35:50.703211146",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:50.697+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1615) methodName=engine_forkchoiceUpdatedV4 len=101"
+      ],
+      [
+        "2026-10-12 15:35:50.703196395",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 15:35:50.697+00:00 Forkchoice requested sync to new head      topics=\"beacon engine\" number=24453294 hash=e0a355f0f2be head=0 distance=24453294 base=0 finHash=dc238d123968 safe=8c1f8dcf2873 pendingFCU=000000000000 resolvedFinNum=24453204 resolvedFinHash=dc238d123968"
+      ],
+      [
+        "2026-10-12 15:35:50.703159380",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:50.697+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1615) methodName=engine_forkchoiceUpdatedV4"
+      ],
+      [
+        "2026-10-12 15:35:50.635828083",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:50.633+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1614) methodName=engine_newPayloadV5 len=66"
+      ],
+      [
+        "2026-10-12 15:35:50.552062385",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:50.549+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1614) methodName=engine_newPayloadV5"
+      ],
+      [
+        "2026-10-12 15:35:38.708563840",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:38.705+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1613) methodName=engine_forkchoiceUpdatedV4 len=101"
+      ],
+      [
+        "2026-10-12 15:35:38.708561177",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 15:35:38.705+00:00 Forkchoice requested sync to new head      topics=\"beacon engine\" number=24453293 hash=7d5a4f04ea72 head=0 distance=24453293 base=0 finHash=dc238d123968 safe=8c1f8dcf2873 pendingFCU=000000000000 resolvedFinNum=24453204 resolvedFinHash=dc238d123968"
+      ],
+      [
+        "2026-10-12 15:35:38.708492434",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:38.705+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1613) methodName=engine_forkchoiceUpdatedV4"
+      ],
+      [
+        "2026-10-12 15:35:38.680478634",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:38.677+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1612) methodName=engine_newPayloadV5 len=66"
+      ],
+      [
+        "2026-10-12 15:35:38.623024825",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:38.617+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1612) methodName=engine_newPayloadV5"
+      ],
+      [
+        "2026-10-12 15:35:26.640363993",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:26.637+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1611) methodName=engine_forkchoiceUpdatedV4 len=101"
+      ],
+      [
+        "2026-10-12 15:35:26.640340032",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 15:35:26.637+00:00 Forkchoice requested sync to new head      topics=\"beacon engine\" number=24453292 hash=b2b228c15ac1 head=0 distance=24453292 base=0 finHash=dc238d123968 safe=8c1f8dcf2873 pendingFCU=000000000000 resolvedFinNum=24453204 resolvedFinHash=dc238d123968"
+      ],
+      [
+        "2026-10-12 15:35:26.639631865",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:26.637+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1611) methodName=engine_forkchoiceUpdatedV4"
+      ],
+      [
+        "2026-10-12 15:35:26.601233497",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:26.597+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1610) methodName=engine_newPayloadV5 len=66"
+      ],
+      [
+        "2026-10-12 15:35:26.524914943",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:26.521+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1610) methodName=engine_newPayloadV5"
+      ],
+      [
+        "2026-10-12 15:35:14.322948463",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:14.316+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1609) methodName=engine_forkchoiceUpdatedV4 len=101"
+      ],
+      [
+        "2026-10-12 15:35:14.322919522",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 15:35:14.316+00:00 Forkchoice requested sync to new head      topics=\"beacon engine\" number=24453291 hash=450ff165ad13 head=0 distance=24453291 base=0 finHash=dc238d123968 safe=8c1f8dcf2873 pendingFCU=000000000000 resolvedFinNum=24453204 resolvedFinHash=dc238d123968"
+      ],
+      [
+        "2026-10-12 15:35:14.322837616",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:14.316+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1609) methodName=engine_forkchoiceUpdatedV4"
+      ],
+      [
+        "2026-10-12 15:35:14.277632296",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:14.272+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1608) methodName=engine_newPayloadV5 len=66"
+      ],
+      [
+        "2026-10-12 15:35:14.217934036",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:14.212+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1608) methodName=engine_newPayloadV5"
+      ],
+      [
+        "2026-10-12 15:35:08.432298632",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:08.428+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1) methodName=engine_getClientVersionV1 len=71"
+      ],
+      [
+        "2026-10-12 15:35:08.432267568",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:08.428+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1) methodName=engine_getClientVersionV1"
+      ],
+      [
+        "2026-10-12 15:35:02.571382646",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:02.564+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1607) methodName=engine_forkchoiceUpdatedV4 len=101"
+      ],
+      [
+        "2026-10-12 15:35:02.571379690",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 15:35:02.564+00:00 Forkchoice requested sync to new head      topics=\"beacon engine\" number=24453290 hash=16fa26252e0d head=0 distance=24453290 base=0 finHash=dc238d123968 safe=8c1f8dcf2873 pendingFCU=000000000000 resolvedFinNum=24453204 resolvedFinHash=dc238d123968"
+      ],
+      [
+        "2026-10-12 15:35:02.571338937",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:02.564+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1607) methodName=engine_forkchoiceUpdatedV4"
+      ],
+      [
+        "2026-10-12 15:35:02.537660204",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:02.532+00:00 Processed JSON-RPC request                 topics=\"jsonrpc router\" id=ok(1606) methodName=engine_newPayloadV5 len=66"
+      ],
+      [
+        "2026-10-12 15:35:02.482660038",
+        "nimbus-nimbusel-1",
+        "DBG 2026-10-12 15:35:02.476+00:00 Processing JSON-RPC request                topics=\"jsonrpc router\" id=ok(1606) methodName=engine_newPayloadV5"
+      ]
+    ]
+  }
+}

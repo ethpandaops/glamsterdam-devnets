@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-10-12T23:14:05.259608+00:00",
+  "beacon_version": {
+    "data": {
+      "version": "Lodestar/v1.50.0/003bd66"
+    }
+  },
+  "execution_version": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": "erigon/3.7.1/linux-amd64/go1.27.1"
+  },
+  "execution_command": [
+    "--datadir=/data",
+    "--nat=extip:165.227.189.59",
+    "--port=30303",
+    "--http",
+    "--http.addr=0.0.0.0",
+    "--http.port=8545",
+    "--torrent.port=42069",
+    "--authrpc.jwtsecret=/execution-auth.jwt",
+    "--authrpc.addr=0.0.0.0",
+    "--authrpc.port=8551",
+    "--authrpc.vhosts=*",
+    "--metrics",
+    "--metrics.addr=0.0.0.0",
+    "--metrics.port=6060",
+    "--nat=extip:2604:a880:800:14:0:3:a9eb:300e",
+    "--http.api=eth,erigon,engine,web3,net,txpool,admin",
+    "--http.vhosts=*",
+    "--ws",
+    "--networkid=1",
+    "--db.size.limit=2TB",
+    "--keep.stored.chain.config=true",
+    "--externalcl",
+    "--nodiscover",
+    "--no-downloader",
+    "--log.console.verbosity=debug",
+    "--rpc.gascap=200000000",
+    "--pprof",
+    "--pprof.addr=0.0.0.0",
+    "--pprof.port=6060",
+    "--staticpeers=enode://1521610424ba20404cce5959bb4dd0e63af6d3da47d2281acb7ecc07f0b991ce91e9e128b251945bfe7994a281408443d4511c4f8be76926646cd62e796679c9@139.59.24.87:30303,enode://bd88e0d7e6cd3f8094d8d93a499bd25ad1e82c5a5138febd65f39638bf8506088a601c51efbe3896be60a3853c5d96662bbf2b4df4a5416e15006ec21c0efac9@165.227.94.57:30303,enode://93fe6a83d98ce8608e0aa03767d035e88790f1c58882eac233ee3ad9444778dfa3945e6796dc93d1d1775fcb63b83e0723edb9d2a01f1f718d704f5af90763bb@159.65.76.207:30303"
+  ]
+}

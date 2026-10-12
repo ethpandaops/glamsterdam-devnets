@@ -1,0 +1,123 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='lodestar-erigon-1' AND ResourceAttributes['container.name'] IN ('beacon','validator') AND Timestamp >= toDateTime('2026-10-12 23:00:30') AND Timestamp < toDateTime('2026-10-12 23:00:55') ORDER BY Timestamp ASC LIMIT 130"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 23:00:30.001423564",
+        "beacon",
+        "Oct-12 23:00:30.001[]                 \u001b[32minfo\u001b[39m: Synced - slot: 2987 - head: 0x1a9b\u2026af9c - exec-block: syncing(24455433 0x5265\u2026) - finalized: 0x48e1\u2026170b:91 - peers: 40"
+      ],
+      [
+        "2026-10-12 23:00:30.039548960",
+        "validator",
+        "Oct-12 23:00:30.038[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2987, index=4, participants=141, count=2"
+      ],
+      [
+        "2026-10-12 23:00:30.039586235",
+        "validator",
+        "Oct-12 23:00:30.038[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2987, index=7, participants=141, count=1"
+      ],
+      [
+        "2026-10-12 23:00:30.039602750",
+        "validator",
+        "Oct-12 23:00:30.039[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2987, index=2, participants=140, count=1"
+      ],
+      [
+        "2026-10-12 23:00:32.014895276",
+        "beacon",
+        "Oct-12 23:00:32.008[chain]           \u001b[31merror\u001b[39m: Failed to run prepareForNextSlot nextEpoch=94, isEpochTransition=false, prepareSlot=2988 - Execution Layer Syncing"
+      ],
+      [
+        "2026-10-12 23:00:32.014921050",
+        "beacon",
+        "Error: Execution Layer Syncing"
+      ],
+      [
+        "2026-10-12 23:00:32.014923714",
+        "beacon",
+        "    at ExecutionEngineHttp.notifyForkchoiceUpdate (file:///usr/app/packages/beacon-node/src/execution/engine/http.ts:359:17)"
+      ],
+      [
+        "2026-10-12 23:00:32.014926878",
+        "beacon",
+        "    at processTicksAndRejections (node:internal/process/task_queues:104:5)"
+      ],
+      [
+        "2026-10-12 23:00:32.014929845",
+        "beacon",
+        "    at prepareExecutionPayload (file:///usr/app/packages/beacon-node/src/chain/produceBlock/produceBlockBody.ts:795:17)"
+      ],
+      [
+        "2026-10-12 23:00:32.014932609",
+        "beacon",
+        "    at Clock.prepareForNextSlot (file:///usr/app/packages/beacon-node/src/chain/prepareNextSlot.ts:291:11)"
+      ],
+      [
+        "2026-10-12 23:00:36.008197513",
+        "validator",
+        "Oct-12 23:00:36.007[]                 \u001b[33mwarn\u001b[39m: Node is syncing - produceBlockV4 failed with status 503: Node is syncing - Parent block\\'s execution payload not yet validated, executionPayloadBlockHash=0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be"
+      ],
+      [
+        "2026-10-12 23:00:39.063242521",
+        "validator",
+        "Oct-12 23:00:39.062[]                 \u001b[32minfo\u001b[39m: Published attestations slot=2988, head=0x1a9b\u2026af9c, count=28"
+      ],
+      [
+        "2026-10-12 23:00:42.000784960",
+        "beacon",
+        "Oct-12 23:00:42.000[]                 \u001b[32minfo\u001b[39m: Synced - slot: 2988 - head: (slot -1) 0x1a9b\u2026af9c - exec-block: syncing(24455434 0xea79\u2026) - finalized: 0x48e1\u2026170b:91 - peers: 40"
+      ],
+      [
+        "2026-10-12 23:00:42.041599193",
+        "validator",
+        "Oct-12 23:00:42.041[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2988, index=1, participants=141, count=2"
+      ],
+      [
+        "2026-10-12 23:00:42.042427237",
+        "validator",
+        "Oct-12 23:00:42.041[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2988, index=0, participants=137, count=1"
+      ],
+      [
+        "2026-10-12 23:00:48.152381717",
+        "beacon",
+        "Oct-12 23:00:48.152[execution]        \u001b[32minfo\u001b[39m: Execution client is synced oldState=SYNCING, newState=SYNCED"
+      ],
+      [
+        "2026-10-12 23:00:48.261515630",
+        "validator",
+        "Oct-12 23:00:48.261[]                 \u001b[32minfo\u001b[39m: Published attestations slot=2989, head=0xab7c\u20266eef, count=34"
+      ],
+      [
+        "2026-10-12 23:00:48.706259151",
+        "validator",
+        "Oct-12 23:00:48.705[]                 \u001b[32minfo\u001b[39m: Published payload attestation messages slot=2989, beaconBlockRoot=0xab7c\u20266eef, payloadPresent=true, blobDataAvailable=true, count=14"
+      ],
+      [
+        "2026-10-12 23:00:54.006146698",
+        "beacon",
+        "Oct-12 23:00:54.003[]                 \u001b[32minfo\u001b[39m: Synced - slot: 2989 - head: 0xab7c\u20266eef - exec-block: valid(24455434 0xea79\u2026) - finalized: 0x48e1\u2026170b:91 - peers: 40"
+      ],
+      [
+        "2026-10-12 23:00:54.025024925",
+        "validator",
+        "Oct-12 23:00:54.024[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2989, index=3, participants=141, count=1"
+      ],
+      [
+        "2026-10-12 23:00:54.025291603",
+        "validator",
+        "Oct-12 23:00:54.025[]                 \u001b[32minfo\u001b[39m: Published aggregateAndProofs slot=2989, index=6, participants=141, count=1"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "network": "glamsterdam-msf-2",
+  "observed_date_utc": "2026-10-12",
+  "purpose": "Reviewable client investigation tasks; not posted upstream",
+  "tasks": [
+    {
+      "id": "besu-heap-and-engine-responsiveness",
+      "clients": [
+        "besu:26.9.0"
+      ],
+      "priority": "high",
+      "report": "01-besu-heap-exhaustion.md",
+      "observation_confidence": "high",
+      "mechanism_confidence": "medium",
+      "reproduction_status": "Four released-runtime OOM occurrences; no fresh isolated reproduction",
+      "evidence": [
+        "evidence/besu-oom-occurrences.json",
+        "evidence/besu-heap-failure.log",
+        "evidence/besu-heap-history.json.gz",
+        "evidence/besu-gc-history.json.gz",
+        "evidence/lighthouse-besu-slow-imports.json",
+        "evidence/besu-runtime-config.json",
+        "workload.md"
+      ],
+      "hypothesis": "Allocation or retention during BAL execution and concurrent proposal selection overwhelms the configured 16 GiB heap; the retained objects are not identified",
+      "next_action": "Profile the matching snapshot/workload privately with the current heap cap, then vary heap size and import/proposal concurrency",
+      "acceptance": "Sustained Engine request completion without OOM, progressive heap retention, or GC saturation under the reproduction workload"
+    },
+    {
+      "id": "teku-hot-store-envelope-restart",
+      "clients": [
+        "teku:26.10.0"
+      ],
+      "priority": "high",
+      "report": "02-teku-persisted-envelope.md",
+      "observation_confidence": "high",
+      "mechanism_confidence": "medium",
+      "reproduction_status": "Repeated startup failure on the live stored database; creation path and fresh reproduction not isolated",
+      "evidence": [
+        "evidence/teku-startup-failure.log",
+        "evidence/teku-slot2559-block.json",
+        "evidence/teku-slot2559-envelope.json",
+        "evidence/rollout-timeline.log"
+      ],
+      "preserved_state": "teku-erigon-1:/data/teku/beacon.before-release-recovery-20261012",
+      "hypothesis": "Envelope writing, placeholder handling, serialization, or conversion supplies a zero parent header during hot-store reconstruction",
+      "next_action": "Inspect a private copy of the saved beacon database with validators disabled; compare slot-2559 metadata to the canonical envelope and add a restart regression",
+      "acceptance": "Restart reconstructs or repairs valid metadata without accepting mismatched execution commitments"
+    },
+    {
+      "id": "nimbus-el-engine-acceptance-outage",
+      "clients": [
+        "nimbus-el:0.4.2@705f4d9a"
+      ],
+      "priority": "high",
+      "report": "03-nimbus-engine-listener.md",
+      "observation_confidence": "high",
+      "mechanism_confidence": "medium",
+      "reproduction_status": "Persistent live Engine listener outage; precise accept-loop completion cause not introspected",
+      "evidence": [
+        "evidence/nimbus-engine-outage-onset.json",
+        "evidence/nimbus-el-degradation.json",
+        "evidence/nimbus-engine-capabilities.json",
+        "evidence/nimbus-engine-sockets.txt",
+        "evidence/nimbus-engine-accept-queue.txt"
+      ],
+      "duplicate_handling": "Additional occurrence and single-listener variant of the devnet-8 RPC accept-loop investigation; do not claim a distinct proven root cause",
+      "hypothesis": "The listener's acceptance loop ended or ceased making progress while its socket and the process remained alive",
+      "next_action": "Instrument and supervise accept-loop completion; privately inject failed accepted-transport identification and verify a subsequent request succeeds",
+      "acceptance": "An individual connection failure cannot terminate future acceptance; independent health checks cover both Engine and ordinary RPC request completion"
+    },
+    {
+      "id": "teku-restart-optimistic-recovery",
+      "clients": [
+        "teku:26.10.0",
+        "geth:1.17.8",
+        "erigon:3.7.1",
+        "lodestar:1.50.0"
+      ],
+      "priority": "medium",
+      "report": "04-teku-optimistic-recovery.md",
+      "observation_confidence": "high",
+      "mechanism_confidence": "medium",
+      "reproduction_status": "Historical rollout symptoms with confounded recovery; unprompted Teku/Lodestar\u2013Erigon recurrence during read-only monitoring recovered unaided",
+      "evidence": [
+        "evidence/rollout-timeline.log",
+        "evidence/teku-optimistic-startup.log",
+        "evidence/erigon-optimistic-recurrence.json",
+        "evidence/lodestar-erigon-slot2988.json",
+        "evidence/erigon-initial-syncing-transition.json",
+        "evidence/erigon-recurrence-chain-context.json"
+      ],
+      "hypothesis": "Pending optimistic envelopes or parent synchronization/retry handling delays validation after CL restart under load",
+      "next_action": "Privately trace FCU/newPayload order, readiness and retry behavior around a fork-choice unwind overlapping a replacement payload; cover uninterrupted workload and CL restart, both ELs and Lodestar\u2013Erigon, then compare quiescent operation",
+      "acceptance": "The pairing returns to validated canonical heads and validator duties within an explained bounded recovery interval"
+    },
+    {
+      "id": "nimbus-cl-remote-only-proposal",
+      "clients": [
+        "nimbus-cl:26.10.0@657beb",
+        "reth:2.7.0"
+      ],
+      "priority": "high",
+      "report": "05-nimbus-remote-bid-fallback.md",
+      "observation_confidence": "high",
+      "mechanism_confidence": "high for the CL local-candidate dependency; medium for Reth construction latency",
+      "reproduction_status": "12 of 12 assigned duties missed across completed epochs 88\u201396; current release source ordering verified; no fresh controlled binary reproduction",
+      "evidence": [
+        "evidence/slots-epochs88-90.json",
+        "evidence/missed-slot-details-epochs88-90.json",
+        "evidence/nimbus-reth-proposal-logs.json",
+        "evidence/nimbus-proposal-counters-history.json.gz",
+        "evidence/reth-getpayload-history.json.gz"
+      ],
+      "duplicate_handling": "Current runtime follow-up to the existing Nimbus remote-bid fallback investigation",
+      "hypothesis": "A missing local candidate triggers the deployed early return before eligible remote bids can be selected",
+      "next_action": "Privately supply an eligible external bid and force local getPayload failure; implement the complete remote-only proposal path and separately trace Reth build finalization",
+      "acceptance": "Exactly one valid proposal is signed and published using the eligible remote bid when the local candidate is absent; parent-request and signing safety remain enforced"
+    }
+  ]
+}

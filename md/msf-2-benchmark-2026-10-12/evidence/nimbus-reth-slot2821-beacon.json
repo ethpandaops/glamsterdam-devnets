@@ -1,0 +1,37 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name']='beacon' AND Timestamp >= toDateTime('2026-10-12 22:27:10') AND Timestamp < toDateTime('2026-10-12 22:27:17') AND (Body LIKE '%topics=\"beacval\"%' OR Body LIKE '%engine_getPayload%' OR Body LIKE '%topics=\"bidpool\"%' OR Body LIKE '%Execution payload bid validated%') AND Body NOT LIKE '%attestation%' AND Body NOT LIKE '%Attestation%' AND Body NOT LIKE '%LC update%' ORDER BY Timestamp ASC LIMIT 100"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:27:11.611740520",
+        "DBG 2026-10-12 22:27:11.607+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=2821 builder_index=0 blockRoot=e356d585"
+      ],
+      [
+        "2026-10-12 22:27:11.611796907",
+        "DBG 2026-10-12 22:27:11.607+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=2821 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-12 22:27:12.048108193",
+        "INF 2026-10-12 22:27:12.043+00:00 Requesting engine payload                  topics=\"beacval\" slot=2821 beaconHead=e356d585:2820 executionHead=7fd66e8d latestSafe=7c741a2f latestFinalized=842db1c2 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-12 22:27:12.048228309",
+        "DBG 2026-10-12 22:27:12.043+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=90 id=5818 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-12 22:27:13.548677317",
+        "WRN 2026-10-12 22:27:13.543+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ]
+    ]
+  }
+}

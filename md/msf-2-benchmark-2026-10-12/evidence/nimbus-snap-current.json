@@ -1,0 +1,172 @@
+{
+  "query": "SELECT Timestamp,ResourceAttributes['host.name'] AS host,substring(Body,1,1400) AS body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp >= now()-INTERVAL 15 MINUTE AND ResourceAttributes['host.name'] IN ('lighthouse-nimbusel-1','nimbus-nimbusel-1') AND ResourceAttributes['container.name']='execution' AND (Body LIKE '%Execution chain status%' OR Body LIKE '%BreachOfProtocol%' OR Body LIKE '%Peer connected%') ORDER BY Timestamp DESC LIMIT 45",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:30:14.907693660",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:30:14.900+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h54m"
+      ],
+      [
+        "2026-10-12 22:30:10.104200163",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:30:10.098+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455214 base=0 target=24455292 distance=24455292 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=8s"
+      ],
+      [
+        "2026-10-12 22:29:14.899503159",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:29:14.895+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h53m"
+      ],
+      [
+        "2026-10-12 22:29:10.097965280",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:29:10.093+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455214 base=0 target=24455287 distance=24455287 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=7s"
+      ],
+      [
+        "2026-10-12 22:28:14.890591323",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:28:14.887+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h52m"
+      ],
+      [
+        "2026-10-12 22:28:10.089410145",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:28:10.087+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455214 base=0 target=24455282 distance=24455282 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=9s"
+      ],
+      [
+        "2026-10-12 22:27:14.881489419",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:27:14.878+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h51m"
+      ],
+      [
+        "2026-10-12 22:27:10.081030574",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:27:10.074+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455214 base=0 target=24455279 distance=24455279 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=9s"
+      ],
+      [
+        "2026-10-12 22:26:14.875357356",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:26:14.869+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h50m"
+      ],
+      [
+        "2026-10-12 22:26:10.072782760",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:26:10.065+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455274 distance=24455274 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=7s"
+      ],
+      [
+        "2026-10-12 22:25:14.866629252",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:25:14.860+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h49m"
+      ],
+      [
+        "2026-10-12 22:25:10.065614556",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:25:10.064+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455269 distance=24455269 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=7s"
+      ],
+      [
+        "2026-10-12 22:24:14.859046794",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:24:14.852+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h48m"
+      ],
+      [
+        "2026-10-12 22:24:10.058457212",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:24:10.055+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455265 distance=24455265 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=8s"
+      ],
+      [
+        "2026-10-12 22:23:14.850318774",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:23:14.847+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h47m"
+      ],
+      [
+        "2026-10-12 22:23:10.052508288",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:23:10.046+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455260 distance=24455260 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=33s"
+      ],
+      [
+        "2026-10-12 22:22:43.491784352",
+        "lighthouse-nimbusel-1",
+        "DBG 2026-10-12 22:22:43.485+00:00 Peer disconnected                          topics=\"p2p rlpx\" remote=Node[159.65.76.207:30303] clientId=Nethermind/v2.1.0+b3e7e84c-f/linux-x64/dotnet10.0.12 reason=BreachOfProtocol"
+      ],
+      [
+        "2026-10-12 22:22:43.177256332",
+        "lighthouse-nimbusel-1",
+        "DBG 2026-10-12 22:22:43.173+00:00 Peer connected                             topics=\"p2p rlpx\" capabilities=\"[eth/68, snap/1, snap/2, eth/69, eth/70, eth/71, eth/72]\" peer=Nethermind/v2.1.0+b3e7e84c-f/linux-x64/dotnet10.0.12 remote=Node[159.65.76.207:30303] clientId=Nethermind/v2.1.0+b3e7e84c-f/linux-x64/dotnet10.0.12"
+      ],
+      [
+        "2026-10-12 22:22:14.844080553",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:22:14.842+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h46m"
+      ],
+      [
+        "2026-10-12 22:22:10.045422839",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:22:10.045+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455257 distance=24455257 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=9s"
+      ],
+      [
+        "2026-10-12 22:21:14.838492749",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:21:14.833+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h45m"
+      ],
+      [
+        "2026-10-12 22:21:10.036046210",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:21:10.031+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455252 distance=24455252 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=8s"
+      ],
+      [
+        "2026-10-12 22:20:14.832021588",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:20:14.829+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h44m"
+      ],
+      [
+        "2026-10-12 22:20:10.027934873",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:20:10.022+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455185 base=0 target=24455247 distance=24455247 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=9s"
+      ],
+      [
+        "2026-10-12 22:19:14.826065410",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:19:14.820+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h43m"
+      ],
+      [
+        "2026-10-12 22:19:10.002324706",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:19:09.997+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455156 base=0 target=24455242 distance=24455242 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=7s"
+      ],
+      [
+        "2026-10-12 22:18:14.818084295",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:18:14.815+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h42m"
+      ],
+      [
+        "2026-10-12 22:18:09.995591834",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:18:09.992+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455156 base=0 target=24455237 distance=24455237 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=6s"
+      ],
+      [
+        "2026-10-12 22:17:14.811683133",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:17:14.810+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h41m"
+      ],
+      [
+        "2026-10-12 22:17:09.987973283",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:17:09.983+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455156 base=0 target=24455233 distance=24455233 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=8s"
+      ],
+      [
+        "2026-10-12 22:16:14.806055640",
+        "nimbus-nimbusel-1",
+        "INF 2026-10-12 22:16:14.802+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24453204 base=0 target=24453294 distance=24453294 syncState=idle eta=80w6d nSyncPeers=2 nPeers=3 lastFcu=6h40m"
+      ],
+      [
+        "2026-10-12 22:16:09.980274424",
+        "lighthouse-nimbusel-1",
+        "INF 2026-10-12 22:16:09.974+00:00 Execution chain status                     topics=\"ticker\" head=0 headHash=d4e56740f876 finalized=24455156 base=0 target=24455228 distance=24455228 syncState=headers eta=13w3d nSyncPeers=0 nPeers=2 lastFcu=6s"
+      ]
+    ]
+  }
+}

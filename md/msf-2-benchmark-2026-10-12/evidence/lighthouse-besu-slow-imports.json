@@ -1,0 +1,348 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='lighthouse-besu-1' AND Timestamp >= toDateTime('2026-10-12 22:42:00') AND Timestamp < toDateTime('2026-10-12 22:48:00') AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND (Body LIKE '%OutOfMemoryError%' OR Body LIKE '%blocked for%' OR Body LIKE '%Starting Besu%' OR Body LIKE '%EngineNewPayload%' OR Body LIKE '%WARN%' OR Body LIKE '%ERROR%' OR Body LIKE '% CRIT %') ORDER BY Timestamp ASC LIMIT 200"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:42:18.890392437",
+        "execution",
+        "2026-10-12 22:42:18.890+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,346  (2a94c.....f08f1)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     48 wei bfee|  83,881,805 ( 41.9%) gas used| 5.602s exec|  14.97 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:42:31.144544772",
+        "execution",
+        "2026-10-12 22:42:31.144+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,347  (8dc2f.....5e04b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     48 wei bfee|  82,564,241 ( 41.3%) gas used| 5.539s exec|  14.91 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:42:44.462291780",
+        "execution",
+        "2026-10-12 22:42:44.462+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,348  (931ea.....ce46b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     47 wei bfee|  83,881,805 ( 41.9%) gas used| 5.612s exec|  14.95 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:42:55.298405735",
+        "execution",
+        "2026-10-12 22:42:55.298+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,349  (4fed6.....921f7)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     47 wei bfee|  83,881,805 ( 41.9%) gas used| 5.563s exec|  15.08 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:43:07.168536563",
+        "execution",
+        "2026-10-12 22:43:07.168+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,350  (f82d6.....2a1a8)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     47 wei bfee|  82,564,241 ( 41.3%) gas used| 5.574s exec|  14.81 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:43:18.618342531",
+        "execution",
+        "2026-10-12 22:43:18.618+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,351  (6a4f7.....3cb89)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     46 wei bfee|  83,881,805 ( 41.9%) gas used| 5.507s exec|  15.23 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:43:32.531751013",
+        "execution",
+        "2026-10-12 22:43:32.531+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,352  (ed324.....6305a)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     46 wei bfee|  82,564,241 ( 41.3%) gas used| 5.403s exec|  15.28 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:43:43.337992544",
+        "execution",
+        "2026-10-12 22:43:43.337+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,353  (95ed4.....9fb1e)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  83,881,805 ( 41.9%) gas used| 5.630s exec|  14.90 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:43:54.767131127",
+        "execution",
+        "2026-10-12 22:43:54.766+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,354  (9d92d.....dbc01)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  82,564,265 ( 41.3%) gas used| 5.517s exec|  14.97 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:44:07.871061306",
+        "execution",
+        "2026-10-12 22:44:07.870+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,355  (49d51.....c1a53)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  83,881,781 ( 41.9%) gas used| 5.565s exec|  15.07 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:44:14.019700319",
+        "beacon",
+        "Oct 12 22:44:14.019 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:14.019933435",
+        "beacon",
+        "Oct 12 22:44:14.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2906"
+      ],
+      [
+        "2026-10-12 22:44:14.454686466",
+        "beacon",
+        "Oct 12 22:44:14.454 WARN  Error processing HTTP API request             elapsed_ms: 2.088, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, method: GET"
+      ],
+      [
+        "2026-10-12 22:44:15.021018279",
+        "beacon",
+        "Oct 12 22:44:15.020 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:15.696307331",
+        "execution",
+        "2026-10-12 22:44:15.695+0000 | EthScheduler-BlockCreation-174-24455356 | WARN  | BlockTransactionSelector | Interrupting the internal selection of transactions for block inclusion as it exceeds the allowed max duration of 4999ms"
+      ],
+      [
+        "2026-10-12 22:44:15.703896129",
+        "beacon",
+        "Oct 12 22:44:15.703 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2044, slot: 2906, root: 0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:44:23.710467058",
+        "beacon",
+        "Oct 12 22:44:23.709 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:23.710514835",
+        "beacon",
+        "Oct 12 22:44:23.709 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:44:23.710521315",
+        "beacon",
+        "Oct 12 22:44:23.709 WARN  Execution payload envelope rejected           reason: \"EnvelopeError(ExecutionPayloadError(RequestFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))))\", block_root: 0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, envelope_source: gossip"
+      ],
+      [
+        "2026-10-12 22:44:24.710625516",
+        "beacon",
+        "Oct 12 22:44:24.710 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:31.502990639",
+        "beacon",
+        "Oct 12 22:44:31.502 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:31.503210646",
+        "beacon",
+        "Oct 12 22:44:31.502 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:44:31.503440606",
+        "beacon",
+        "Oct 12 22:44:31.503 CRIT  Failed to update execution head               error: ExecutionForkChoiceUpdateFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))"
+      ],
+      [
+        "2026-10-12 22:44:32.486036539",
+        "beacon",
+        "Oct 12 22:44:32.485 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:32.486075345",
+        "beacon",
+        "Oct 12 22:44:32.485 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:44:32.486094350",
+        "beacon",
+        "Oct 12 22:44:32.485 WARN  Execution payload envelope rejected           reason: \"EnvelopeError(ExecutionPayloadError(RequestFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))))\", block_root: 0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, envelope_source: lookup"
+      ],
+      [
+        "2026-10-12 22:44:32.505283420",
+        "beacon",
+        "Oct 12 22:44:32.505 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:54.592304509",
+        "execution",
+        "2026-10-12 22:44:54.591+0000 | prometheus-http-1-1 | ERROR | HttpExchangeAdapter | The Prometheus metrics HTTPServer caught an Exception while trying to send the metrics response."
+      ],
+      [
+        "2026-10-12 22:44:56.207151601",
+        "beacon",
+        "Oct 12 22:44:56.206 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:56.207205246",
+        "beacon",
+        "Oct 12 22:44:56.206 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:44:56.207352946",
+        "beacon",
+        "Oct 12 22:44:56.207 WARN  Execution payload envelope rejected           reason: \"EnvelopeError(ExecutionPayloadError(RequestFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))))\", block_root: 0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, envelope_source: lookup"
+      ],
+      [
+        "2026-10-12 22:44:57.209093518",
+        "beacon",
+        "Oct 12 22:44:57.208 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:45:02.417983015",
+        "execution",
+        "2026-10-12 22:45:02.417+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 3909 ms, time limit is 2000 ms"
+      ],
+      [
+        "2026-10-12 22:45:02.707113214",
+        "execution",
+        "2026-10-12 22:45:02.706+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,356  (28153.....3b12b)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  83,881,805 ( 41.9%) gas used| 46.962s exec|   1.79 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:12.120703862",
+        "execution",
+        "2026-10-12 22:45:12.120+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,357  (d9fbb.....9a1c5)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  82,564,241 ( 41.3%) gas used| 5.519s exec|  14.96 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:17.779875939",
+        "execution",
+        "2026-10-12 22:45:17.779+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,358  (81ac1.....c7dc8)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  83,881,805 ( 41.9%) gas used| 5.586s exec|  15.02 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:23.220791107",
+        "execution",
+        "2026-10-12 22:45:23.220+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,359  (3cf1b.....60ede)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  82,564,241 ( 41.3%) gas used| 5.362s exec|  15.40 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:30.858965708",
+        "execution",
+        "2026-10-12 22:45:30.858+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,360  (6f381.....727e0)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  83,881,805 ( 41.9%) gas used| 5.786s exec|  14.50 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:36.005313986",
+        "beacon",
+        "Oct 12 22:45:36.005 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12760"
+      ],
+      [
+        "2026-10-12 22:45:36.005321755",
+        "beacon",
+        "Oct 12 22:45:36.005 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:45:36.006376704",
+        "beacon",
+        "Oct 12 22:45:36.006 WARN  Error processing HTTP API request             elapsed_ms: 1.502, status: 400 Bad Request, path: /eth/v1/validator/proposer_preferences, method: POST"
+      ],
+      [
+        "2026-10-12 22:45:36.009994112",
+        "beacon",
+        "Oct 12 22:45:36.009 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12760"
+      ],
+      [
+        "2026-10-12 22:45:36.009998439",
+        "beacon",
+        "Oct 12 22:45:36.009 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:45:36.010060586",
+        "beacon",
+        "Oct 12 22:45:36.009 WARN  Error processing HTTP API request             elapsed_ms: 1.480, status: 400 Bad Request, path: /eth/v1/validator/proposer_preferences, method: POST"
+      ],
+      [
+        "2026-10-12 22:45:36.011276252",
+        "beacon",
+        "Oct 12 22:45:36.011 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12760"
+      ],
+      [
+        "2026-10-12 22:45:36.011362487",
+        "beacon",
+        "Oct 12 22:45:36.011 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:45:36.011412538",
+        "beacon",
+        "Oct 12 22:45:36.011 WARN  Error processing HTTP API request             elapsed_ms: 0.898, status: 400 Bad Request, path: /eth/v1/validator/proposer_preferences, method: POST"
+      ],
+      [
+        "2026-10-12 22:45:36.012238286",
+        "beacon",
+        "Oct 12 22:45:36.012 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12760"
+      ],
+      [
+        "2026-10-12 22:45:36.012246433",
+        "beacon",
+        "Oct 12 22:45:36.012 ERROR Failure verifying proposer preferences for gossip  error: InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }, validator_index: 12497"
+      ],
+      [
+        "2026-10-12 22:45:36.012411800",
+        "beacon",
+        "Oct 12 22:45:36.012 WARN  Error processing HTTP API request             elapsed_ms: 0.439, status: 400 Bad Request, path: /eth/v1/validator/proposer_preferences, method: POST"
+      ],
+      [
+        "2026-10-12 22:45:36.012667846",
+        "validator",
+        "Oct 12 22:45:36.012 ERROR Failed to publish proposer preferences        error: Some endpoints failed, num_failed: 2 http://beacon:5052/ => RequestFailed(\"Failed to publish proposer preferences (JSON): ServerIndexedMessage(IndexedErrorMessage { code: 400, message: \\\\\"BAD_REQUEST: error processing proposer preferences\\\\\", failures: [Failure { index: 0, message: \\\\\"InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }\\\\\" }, Failure { index: 1, message: \\\\\"InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }\\\\\" }] })\"), http://beacon:5052/ => RequestFailed(\"Failed to publish proposer preferences (JSON): ServerIndexedMessage(IndexedErrorMessage { code: 400, message: \\\\\"BAD_REQUEST: error processing proposer preferences\\\\\", failures: [Failure { index: 0, message: \\\\\"InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }\\\\\" }, Failure { index: 1, message: \\\\\"InvalidDependentRoot { dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec }\\\\\" }] })\"), epoch: 92"
+      ],
+      [
+        "2026-10-12 22:45:36.032631652",
+        "validator",
+        "Oct 12 22:45:36.031 WARN  Attester duties re-org                        prior_dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec, dependent_root: 0xa6fcfe2dc7a0f41cc7cf52a9abec21665c35004f3caf5fc0f7ba536783186813, note: \"this may happen from time to time\""
+      ],
+      [
+        "2026-10-12 22:45:37.125045648",
+        "validator",
+        "Oct 12 22:45:37.124 WARN  Proposer duties re-org                        prior_dependent_root: 0x1459726ca4d03150f58c2392f38f88847fda986adf596162c3b07a8ed03af5ec, dependent_root: 0xa6fcfe2dc7a0f41cc7cf52a9abec21665c35004f3caf5fc0f7ba536783186813, epoch: 92, msg: \"this may happen from time to time\""
+      ],
+      [
+        "2026-10-12 22:45:37.788447630",
+        "execution",
+        "2026-10-12 22:45:37.788+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,361  (bc434.....2b4f0)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|     45 wei bfee|  67,105,444 ( 33.6%) gas used| 5.606s exec|  11.97 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:43.539134574",
+        "execution",
+        "2026-10-12 22:45:43.538+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,362  (f9bbf.....3e85c)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     44 wei bfee|  82,564,241 ( 41.3%) gas used| 5.577s exec|  14.80 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:49.260500616",
+        "execution",
+        "2026-10-12 22:45:49.260+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,363  (6812e.....7719d)|    4 tx (100.0% parallel)| 16 ws|  0 blobs|     44 wei bfee|  67,105,444 ( 33.6%) gas used| 5.629s exec|  11.92 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:45:51.379018798",
+        "execution",
+        "2026-10-12 22:45:51.378+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,364  (ebd6b.....be717)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     43 wei bfee|  82,564,265 ( 41.3%) gas used| 1.965s exec|  42.02 Mgas/s| 24 peers"
+      ],
+      [
+        "2026-10-12 22:46:07.096328792",
+        "execution",
+        "2026-10-12 22:46:07.096+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,455,365  (e852b.....c5dcc)|    5 tx (100.0% parallel)| 16 ws|  0 blobs|     43 wei bfee|  83,881,781 ( 41.9%) gas used| 5.626s exec|  14.91 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-12 22:46:14.025113466",
+        "beacon",
+        "Oct 12 22:46:14.024 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:14.025382745",
+        "beacon",
+        "Oct 12 22:46:14.025 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2916"
+      ],
+      [
+        "2026-10-12 22:46:14.756386068",
+        "beacon",
+        "Oct 12 22:46:14.756 WARN  Error processing HTTP API request             elapsed_ms: 3.640, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0x985702a9404cc13fae1b32e21456a399d7e566208804a0e4ae58f1d0c91507dd, method: GET"
+      ],
+      [
+        "2026-10-12 22:46:15.026871569",
+        "beacon",
+        "Oct 12 22:46:15.026 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:16.146605767",
+        "beacon",
+        "Oct 12 22:46:16.146 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:16.146643595",
+        "beacon",
+        "Oct 12 22:46:16.146 WARN  Error whilst processing payload status        error: Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }"
+      ],
+      [
+        "2026-10-12 22:46:16.146647400",
+        "beacon",
+        "Oct 12 22:46:16.146 WARN  Execution payload envelope rejected           reason: \"EnvelopeError(ExecutionPayloadError(RequestFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) }))))\", block_root: 0x985702a9404cc13fae1b32e21456a399d7e566208804a0e4ae58f1d0c91507dd, envelope_source: gossip"
+      ],
+      [
+        "2026-10-12 22:46:16.660460652",
+        "beacon",
+        "Oct 12 22:46:16.660 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2050, slot: 2916, root: 0x985702a9404cc13fae1b32e21456a399d7e566208804a0e4ae58f1d0c91507dd, validation_level: Gossip"
+      ]
+    ]
+  }
+}

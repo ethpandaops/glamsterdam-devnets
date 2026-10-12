@@ -1,0 +1,18 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-12 22:24:13') AND Timestamp < toDateTime('2026-10-12 23:24:13') AND match(Body,'OutOfMemoryError|Terminating due|FATAL|panic:|state root mismatch|INVALID_PAYLOAD') ORDER BY Timestamp ASC LIMIT 100"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": []
+  }
+}

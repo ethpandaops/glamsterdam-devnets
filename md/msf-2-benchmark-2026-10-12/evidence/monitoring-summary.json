@@ -1,0 +1,247 @@
+{
+  "window": {
+    "start": "2026-10-12T22:24:13.139636+00:00",
+    "end": "2026-10-12T23:24:13.139636+00:00",
+    "interval_seconds": 60,
+    "mode": "read-only",
+    "hosts": [
+      "bootnode-1",
+      "buildoor-lighthouse-geth-1",
+      "buildoor-teku-nethermind-1",
+      "grandine-besu-1",
+      "grandine-erigon-1",
+      "grandine-ethrex-1",
+      "grandine-geth-1",
+      "grandine-nethermind-1",
+      "grandine-reth-1",
+      "lighthouse-besu-1",
+      "lighthouse-erigon-1",
+      "lighthouse-ethrex-1",
+      "lighthouse-geth-1",
+      "lighthouse-nethermind-1",
+      "lighthouse-nimbusel-1",
+      "lighthouse-reth-1",
+      "lodestar-besu-1",
+      "lodestar-erigon-1",
+      "lodestar-ethrex-1",
+      "lodestar-geth-1",
+      "lodestar-nethermind-1",
+      "lodestar-reth-1",
+      "nimbus-besu-1",
+      "nimbus-erigon-1",
+      "nimbus-ethrex-1",
+      "nimbus-geth-1",
+      "nimbus-nethermind-1",
+      "nimbus-nimbusel-1",
+      "nimbus-reth-1",
+      "prysm-besu-1",
+      "prysm-erigon-1",
+      "prysm-ethrex-1",
+      "prysm-geth-1",
+      "prysm-nethermind-1",
+      "prysm-reth-1",
+      "teku-besu-1",
+      "teku-erigon-1",
+      "teku-ethrex-1",
+      "teku-geth-1",
+      "teku-nethermind-1",
+      "teku-reth-1"
+    ],
+    "collection_closed_at": "2026-10-12T23:25:00.061234+00:00"
+  },
+  "first_cycle_start": "2026-10-12T22:24:13.139819+00:00",
+  "last_cycle_start": "2026-10-12T23:24:05.812075+00:00",
+  "capture_records": 62,
+  "node_checks": 2542,
+  "max_interval_seconds": 60.00054,
+  "api_error_counts": {},
+  "metric_errors": [],
+  "sync_or_optimism_or_offline_sample_counts": {
+    "lighthouse-nimbusel-1": 62,
+    "nimbus-nimbusel-1": 62,
+    "lighthouse-erigon-1": 1,
+    "lodestar-erigon-1": 2,
+    "lighthouse-besu-1": 1
+  },
+  "failed_scrape_sample_counts": [
+    {
+      "instance": "glamsterdam-msf-2-lighthouse-besu-1",
+      "job": "execution",
+      "count": 1
+    }
+  ],
+  "container_lifecycle_changes": [],
+  "same_slot_validated_root_disagreements": [],
+  "validator_head_gap_max_slots": 5,
+  "validator_head_gap_over_three_slots": [
+    {
+      "at": "2026-10-12T22:45:04.109452+00:00",
+      "maximum": 5,
+      "nodes_over_three_slots": {
+        "lighthouse-besu-1": 5
+      }
+    }
+  ],
+  "validator_finality_lag_epochs_min_max": [
+    2,
+    2
+  ],
+  "first_reference_finalized_epoch": 85,
+  "last_reference_finalized_epoch": 95,
+  "last_validator_host_count": 36,
+  "last_validator_sync_status_clear": true,
+  "duty_census_completed_epochs": [
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96
+  ],
+  "duty_census_missed_by_host": {
+    "nimbus-reth-1": 12,
+    "lighthouse-besu-1": 1,
+    "grandine-besu-1": 2,
+    "lodestar-erigon-1": 1
+  },
+  "duty_census_assigned_by_host": {
+    "prysm-ethrex-1": 7,
+    "teku-reth-1": 5,
+    "grandine-reth-1": 5,
+    "grandine-geth-1": 13,
+    "nimbus-reth-1": 12,
+    "nimbus-ethrex-1": 5,
+    "grandine-nethermind-1": 12,
+    "prysm-nethermind-1": 3,
+    "lighthouse-reth-1": 8,
+    "lodestar-ethrex-1": 12,
+    "lodestar-geth-1": 10,
+    "nimbus-geth-1": 7,
+    "lighthouse-geth-1": 14,
+    "teku-geth-1": 8,
+    "prysm-erigon-1": 10,
+    "teku-ethrex-1": 10,
+    "teku-besu-1": 7,
+    "teku-nethermind-1": 2,
+    "lodestar-nethermind-1": 7,
+    "prysm-geth-1": 8,
+    "grandine-erigon-1": 10,
+    "lodestar-reth-1": 7,
+    "nimbus-besu-1": 8,
+    "prysm-reth-1": 4,
+    "grandine-ethrex-1": 7,
+    "nimbus-nethermind-1": 4,
+    "lodestar-besu-1": 9,
+    "lighthouse-erigon-1": 7,
+    "teku-erigon-1": 10,
+    "prysm-besu-1": 15,
+    "lighthouse-ethrex-1": 5,
+    "grandine-besu-1": 9,
+    "lighthouse-besu-1": 11,
+    "lodestar-erigon-1": 9,
+    "nimbus-erigon-1": 7,
+    "lighthouse-nethermind-1": 1
+  },
+  "duty_census_missed_slots": [
+    {
+      "epoch": 88,
+      "slot": 2821,
+      "proposer": 21061,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 88,
+      "slot": 2823,
+      "proposer": 21837,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 88,
+      "slot": 2844,
+      "proposer": 21365,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 88,
+      "slot": 2846,
+      "proposer": 21889,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 89,
+      "slot": 2859,
+      "proposer": 21766,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 89,
+      "slot": 2879,
+      "proposer": 21009,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 90,
+      "slot": 2885,
+      "proposer": 12497,
+      "host": "lighthouse-besu-1"
+    },
+    {
+      "epoch": 90,
+      "slot": 2887,
+      "proposer": 21734,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 90,
+      "slot": 2895,
+      "proposer": 21772,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 91,
+      "slot": 2922,
+      "proposer": 21011,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 93,
+      "slot": 2977,
+      "proposer": 17999,
+      "host": "grandine-besu-1"
+    },
+    {
+      "epoch": 93,
+      "slot": 2981,
+      "proposer": 21131,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 93,
+      "slot": 2988,
+      "proposer": 28504,
+      "host": "lodestar-erigon-1"
+    },
+    {
+      "epoch": 93,
+      "slot": 2992,
+      "proposer": 21339,
+      "host": "nimbus-reth-1"
+    },
+    {
+      "epoch": 94,
+      "slot": 3009,
+      "proposer": 17867,
+      "host": "grandine-besu-1"
+    },
+    {
+      "epoch": 95,
+      "slot": 3051,
+      "proposer": 21010,
+      "host": "nimbus-reth-1"
+    }
+  ],
+  "limits": "Capture includes a brief collector reload overlap; node reads are not simultaneous. The duty census covers completed epochs only, excluding partial epochs at window boundaries. Log filters are selective; absence between samples is not established."
+}

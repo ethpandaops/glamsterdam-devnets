@@ -1,0 +1,349 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name'] IN ('lighthouse-besu-1','grandine-besu-1') AND ResourceAttributes['container.name'] IN ('beacon','validator','execution') AND Timestamp >= toDateTime('2026-10-12 22:24:13') AND Timestamp < toDateTime('2026-10-12 23:24:13') AND (Body LIKE '%Execution engine call failed%' OR Body LIKE '%Local execution payload build failed%' OR Body LIKE '%Error during execution engine upcheck%' OR Body LIKE '%Block broadcast was delayed%' OR Body LIKE '%Block was broadcast too late%' OR Body LIKE '%blocked for%' OR Body LIKE '%engine_newPayload call failed%' OR Body LIKE '%proposing beacon block with root%') ORDER BY Timestamp ASC LIMIT 250"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:37:22.871769417",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T22:37:22.871Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:37:25.497009436",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T22:37:25.496Z]  INFO validator::validator:1147: validator 17011 proposing beacon block with root 0xf209962544e8d9b53b6ba76f05152d1cabb85d1c1c473c137f25e812e4b214b2 in slot 2872 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:39:50.019381838",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:39:50.019 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:39:50.019923857",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:39:50.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2884"
+      ],
+      [
+        "2026-10-12 22:39:51.020406785",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:39:51.020 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:39:51.738543451",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:39:51.736 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2042, slot: 2884, root: 0x37f31be8b31012ee74ed1662522ca21bc9212aef20c4c4d48f44e115250b5a42, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:39:59.737094809",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:39:59.736 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:00.738158505",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:40:00.737 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:04.003868492",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:40:04.003 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:05.005017320",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:40:05.004 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:40:06.092288128",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:40:06.092 ERROR Block was broadcast too late                  msg: \"system may be overloaded, block likely to be orphaned\", provenance: \"local\", delay_ms: 6075, slot: 2885, root: 0x50601e885d177b55633f7402376f3eb968d9156fcb0d9035de88441746b6c6e8, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:44:14.019700319",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:14.019 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:14.019933435",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:14.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2906"
+      ],
+      [
+        "2026-10-12 22:44:15.021018279",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:15.020 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:15.703896129",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:15.703 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2044, slot: 2906, root: 0xc9aee55d8c515bbe69699b3b3bb6297f6234269f832b37e720b4d2d32fdb0262, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:44:23.710467058",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:23.709 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:24.710625516",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:24.710 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:31.502990639",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:31.502 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:32.486036539",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:32.485 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:32.505283420",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:32.505 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:56.207151601",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:56.206 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:44:57.209093518",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:44:57.208 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:45:02.417983015",
+        "lighthouse-besu-1",
+        "execution",
+        "2026-10-12 22:45:02.417+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 3909 ms, time limit is 2000 ms"
+      ],
+      [
+        "2026-10-12 22:46:14.025113466",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:46:14.024 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:14.025382745",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:46:14.025 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2916"
+      ],
+      [
+        "2026-10-12 22:46:15.026871569",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:46:15.026 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:16.146605767",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:46:16.146 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:46:16.660460652",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:46:16.660 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2050, slot: 2916, root: 0x985702a9404cc13fae1b32e21456a399d7e566208804a0e4ae58f1d0c91507dd, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:49:38.023111060",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:49:38.022 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:49:38.023318461",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:49:38.023 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 2933"
+      ],
+      [
+        "2026-10-12 22:49:39.025550637",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:49:39.025 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:49:40.212763277",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:49:40.212 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 22:49:40.476766921",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 22:49:40.476 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2050, slot: 2933, root: 0xf35b9d69e922b73b60918b9c9db5697d0ec8fde24ede5c73702b511d71164eec, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 22:50:50.218037109",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T22:50:50.217Z]  INFO validator::validator:1147: validator 17884 proposing beacon block with root 0xd052f59f1eeb27c35f866e5dfd1798108b1e13865f64d551ffde04ce44b5055e in slot 2939 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:25.363477857",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T22:58:25.363Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 22:58:27.154539080",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T22:58:27.154Z]  INFO validator::validator:1147: validator 17999 proposing beacon block with root 0x32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 in slot 2977 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:03:49.936887079",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:03:49.936Z]  INFO validator::validator:1147: validator 17921 proposing beacon block with root 0xed7960033fbb58da9cc4e6467bc3ab5a7c6fef703755bee0df2f9278bcb20b1a in slot 3004 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:04:49.487751297",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:04:49.487Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:05:12.187124742",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:05:12.186Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:10:02.024842770",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:10:02.024 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:10:02.024874664",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:10:02.024 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 3035"
+      ],
+      [
+        "2026-10-12 23:10:03.028893376",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:10:03.025 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:10:04.379227193",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:10:04.379 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:10:04.624460804",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:10:04.624 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2053, slot: 3035, root: 0xb9bbf08194b260044b7b9bc2c936425262c2dd2b03143d6887a2401c964f56af, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 23:12:14.020811898",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:12:14.020 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:12:14.020838801",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:12:14.020 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 3046"
+      ],
+      [
+        "2026-10-12 23:12:15.021542938",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:12:15.021 ERROR Error during execution engine upcheck         error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:12:16.239532043",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:12:16.238 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-12 23:12:16.771511678",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 12 23:12:16.771 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2054, slot: 3046, root: 0xeb4e1662e68baeb5bee68dc423a2827f9c4232539462621592fb771e6a229a2c, validation_level: Gossip"
+      ],
+      [
+        "2026-10-12 23:12:27.724217593",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:12:27.724Z]  INFO validator::validator:1147: validator 17900 proposing beacon block with root 0x64b4b9cbd305f25635b37691bc213b6a7fcb4385ff3a53b628aa314473e812bb in slot 3047 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:13:49.897393093",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:13:49.897Z]  INFO validator::validator:1147: validator 17674 proposing beacon block with root 0x7b416ac8fc3d5ffc609475a537ee8b0da44689f02d2599803665f4efff724b06 in slot 3054 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:15:22.650307279",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:15:22.650Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:15:25.642746056",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:15:25.642Z]  INFO validator::validator:1147: validator 17402 proposing beacon block with root 0x3d5031bdd6d2100e36ac496cc48d1ad2be973a6a48628682463cd4a6d54360c6 in slot 3062 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:21:37.176873482",
+        "grandine-besu-1",
+        "beacon",
+        "[2026-10-12T23:21:37.176Z]  INFO validator::validator:1147: validator 17550 proposing beacon block with root 0x7f8747a0d39f8dad7e760c781d914201378a76f5546ee0f3607d1295ac19592d in slot 3093 using builder 0 peers=[26/200]"
+      ],
+      [
+        "2026-10-12 23:22:29.974071451",
+        "lighthouse-besu-1",
+        "execution",
+        "2026-10-12 23:22:29.973+0000 | vertx-blocked-thread-checker | WARN  | BlockedThreadChecker | Thread vert.x-eventloop-thread-1 has been blocked for 3841 ms, time limit is 2000 ms"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,234 @@
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:36:54.462 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:36:54.715 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:36:54.716 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:36:54.831 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:36:54.831 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:36:54.831 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:36:54.832 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:36:55.144 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:36:55.144 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:36:55.147 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:36:55.263 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:36:55.271 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:36:55.280 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:36:55.281 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:36:55.305 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:36:55.318 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:36:55.381 INFO  - BLS: loaded BLST library
+2026-10-12 21:36:55.827 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:36:55.840 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:36:55.899 INFO  - Initializing storage
+2026-10-12 21:36:56.018 INFO  - Loading 1000 validator keys...
+2026-10-12 21:36:56.066 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:36:56.068 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:36:56.069 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:36:56.070 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:36:56.072 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:36:56.073 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:36:56.075 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:36:56.076 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:36:56.077 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:36:56.078 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:36:56.080 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:36:56.081 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:36:56.083 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:36:56.084 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:36:56.085 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:36:56.086 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:36:56.087 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:36:56.088 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:36:56.089 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:36:56.090 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:36:56.091 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:36:56.092 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:36:56.093 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:36:56.094 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:36:56.095 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:36:56.096 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:36:56.097 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:36:56.098 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:36:56.099 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:36:56.101 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:36:56.101 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:36:56.102 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:36:56.103 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:36:56.104 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:36:56.105 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:36:56.106 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:36:56.107 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:36:56.108 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:36:56.109 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:36:56.110 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:36:56.111 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:36:56.112 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:36:56.113 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:36:56.113 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:36:56.114 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:36:56.115 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:36:56.116 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:36:56.117 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:36:56.118 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:36:56.119 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:36:56.120 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:36:56.121 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:36:56.121 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:36:56.122 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:36:56.123 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:36:56.124 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:36:56.125 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:36:56.126 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:36:56.126 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:36:56.142 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:36:56.143 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:36:56.144 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:36:56.145 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:36:56.146 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:36:56.147 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:36:56.147 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:36:56.148 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:36:56.149 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:36:56.150 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:36:56.150 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:36:56.151 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:36:56.152 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:36:56.153 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:36:56.154 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:36:56.154 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:36:56.155 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:36:56.156 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:36:56.157 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:36:56.158 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:36:56.158 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:36:56.159 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:36:56.160 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:36:56.160 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:36:56.161 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:36:56.162 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:36:56.162 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:36:56.164 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:36:56.164 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:36:56.165 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:36:56.166 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:36:56.166 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:36:56.167 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:36:56.168 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:36:56.169 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:36:56.170 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:36:56.171 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:36:56.171 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:36:56.172 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:36:56.173 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:36:56.174 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:36:56.181 INFO  - Loaded 1000 validators
+2026-10-12 21:36:56.183 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:36:56.203 INFO  - Storage initialization complete
+2026-10-12 21:36:56.204 WARN  - [33mIgnoring weak subjectivity period check (--ignore-weak-subjectivity-period-enabled). Syncing from outside of the weak subjectivity period is considered UNSAFE.[0m
+2026-10-12 21:36:56.228 INFO  - Loaded C-KZG-4844 library
+2026-10-12 21:36:59.657 INFO  - Activated DAS Sampler Manager for Fulu
+2026-10-12 21:37:01.914 INFO  - Completed regeneration of state for block 0xd4de6773e210dcdbe9344e995a1b0fd1e45a446e6611d7b918b7921642225723 at slot 2528 by replaying 30 blocks. Took 2036ms
+2026-10-12 21:37:02.290 INFO  - Loading generated p2p private key from: generated-node-key
+2026-10-12 21:37:02.741 INFO  - PreGenesis Local ENR: enr:-Km4QIxfl0nNGPc8f1nQwXxJbIfxKCOlHEw-fzOEiW3yB4WkCf4-XMHWRkzGrRssIZ5nLGOil3gw13DcLIvmLOKtmHAMhGV0aDKQPDhcKxA1YCX__________4JpZIJ2NIJpcIRogwcihHF1aWOCIymJc2VjcDI1NmsxoQK4ua7JCHMrWb0hfn3QpZAOpT2Rzh6aOLh8gyutEBAPtIN0Y3CCIyiDdWRwgiMo
+2026-10-12 21:37:02.758 INFO  - Using custody group count 128 from store
+2026-10-12 21:37:02.764 INFO  - Activating DAS Custody for Fulu
+2026-10-12 21:37:02.768 INFO  - Updating custody group count 128
+2026-10-12 21:37:02.803 INFO  - DAS Basic Sampler initialized with 128 groups to sample
+2026-10-12 21:37:02.812 INFO  - Using multipeer sync
+2026-10-12 21:37:02.896 INFO  - Using 8 threads for handling validator API channel
+2026-10-12 21:37:02.924 INFO  - Execution Client version: erigon 3.7.1-8c1e3893
+2026-10-12 21:37:02.926 INFO  - Using graffiti watermark: "EG8c1eTKa46f". This will be appended to any user-defined graffiti or used if none is defined. Refer to validator graffiti options to customize.
+2026-10-12 21:37:03.121 INFO  - [32mExecution Client is online[0m
+2026-10-12 21:37:03.249 INFO  - Completed regeneration of state for block 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549 at slot 2559 by replaying 28 blocks. Took 1301ms
+2026-10-12 21:37:16.819 INFO  - Static file handler added: StaticFileConfig(hostedPath=/webjars/swagger-ui/5.33.1, directory=/tmp/teku-swagger-ui-2976843590752739866, location=EXTERNAL, precompressMaxSize=-1, aliasCheck=null, headers={Cache-Control=max-age=0}, skipFileFunction=tech.pegasys.teku.infrastructure.restapi.SwaggerUIBuilder$$Lambda/0x00000000ae9fa650@1e0f309a, mimeTypes={}, roles=[]). File system location: 'file:///tmp/teku-swagger-ui-2976843590752739866/'
+2026-10-12 21:37:16.924 INFO  - Starting libp2p network...
+2026-10-12 21:37:17.225 INFO  - Starting discovery server listening on /0.0.0.0:9000
+2026-10-12 21:37:17.225 INFO  - Quic server listening on /ip4/0.0.0.0/udp/9001/quic-v1
+2026-10-12 21:37:17.226 INFO  - Listening for connections on: /ip4/104.131.7.34/tcp/9000/p2p/16Uiu2HAm7rmDS3mue7yS6DqSeyRSGFYiU7teSXSZaxUGdP4FqqPy,/ip4/104.131.7.34/udp/9001/quic-v1/p2p/16Uiu2HAm7rmDS3mue7yS6DqSeyRSGFYiU7teSXSZaxUGdP4FqqPy
+2026-10-12 21:37:17.237 INFO  - UDP discovery client started
+2026-10-12 21:37:17.273 INFO  - Local ENR: enr:-Li4QA9zANPX9Jd2MyXD5OLFXoD1hs9ePU2UBYp6zYr-9DV5YFeRBEi9kJRkcsgQ328I2NFxy5W6Ghtyd0Nnk039LfUPg2NnY4GAhGV0aDKQXKj4yYA1YCX__________4JpZIJ2NIJpcIRogwcig25mZIQAAAAAhHF1aWOCIymJc2VjcDI1NmsxoQK4ua7JCHMrWb0hfn3QpZAOpT2Rzh6aOLh8gyutEBAPtIN0Y3CCIyiDdWRwgiMo
+2026-10-12 21:37:17.276 INFO  - Starting eth2 gossip
+2026-10-12 21:37:17.314 INFO  - Starting Javalin ...
+2026-10-12 21:37:17.317 INFO  - jetty-12.1.11; built: 2026-07-02T20:57:42.640Z; git: 6c1ced3f077bc633716c54758a743b09b21328e8; jvm 26.0.2.1+1
+2026-10-12 21:37:17.352 INFO  - Session workerName=node0
+2026-10-12 21:37:17.357 INFO  - Started oeje10s.ServletContextHandler@7569b6b7{ROOT,/,b=null,a=AVAILABLE,h=oeje10s.SessionHandler@6333354a{STARTED}}
+2026-10-12 21:37:17.361 INFO  - Started oeje10s.ServletContextHandler@7569b6b7{ROOT,/,b=null,a=AVAILABLE,h=oeje10s.SessionHandler@6333354a{STARTED}}
+2026-10-12 21:37:17.367 INFO  - Started oejs.ServerConnector@266edf2d{HTTP/1.1, (http/1.1)}{0.0.0.0:5052}
+2026-10-12 21:37:17.368 INFO  - Started oejs.Server@60d40fe7{STARTING}[12.1.11,sto=0] @53ms
+2026-10-12 21:37:17.368 INFO  - Javalin started in 131ms \o/
+2026-10-12 21:37:17.370 INFO  - Listening on http://0.0.0.0:5052/
+2026-10-12 21:37:17.371 INFO  - You are running Javalin 7.2.3 (released August 11, 2026).
+2026-10-12 21:37:17.371 INFO  - Listening on port 5052
+2026-10-12 21:37:17.506 INFO  - [37mSyncing     *** Slot: 2571, Head slot: 2559, Waiting for execution layer sync, Connected peers: 0[0m
+2026-10-12 21:37:24.003 INFO  - [37mSyncing     *** Slot: 2572, Head slot: 2559, Waiting for execution layer sync, Connected peers: 14[0m
+2026-10-12 21:37:24.097 INFO  - [32mValidator   *** Slashing protection loaded for validators: 858b812, a4e6dcf, 883b619, 985fe6a, 95f54fd, 97aab9a, 8da4a67, 8b346ef, a01f633, a6fdd16, a18154d, 97da83f, b4b87e8, 991f618, a5c3840, b793f40, b8f840f, b1cdccb, b62b5b3, 874cbbd… (1000 total)[0m
+2026-10-12 21:37:24.995 INFO  - Completed regeneration of state for block 0x54b3b7e2814fa2da96f929fc941e958caebba4418c0b29bcd2e6b584b373c55a at slot 2567 by replaying 7 blocks. Took 490ms
+2026-10-12 21:37:36.030 INFO  - [32mSyncing completed[0m
+2026-10-12 21:37:36.037 INFO  - [37mSyncing     *** Slot: 2573, Head slot: 2570, Waiting for execution layer sync, Connected peers: 31[0m
+2026-10-12 21:37:36.070 INFO  - Scheduling 1000 attestation duties for epoch 81, batched across 32 slot(s) with a 1000 ms delay every 1 slot(s)
+2026-10-12 21:37:36.070 INFO  - Scheduling 1000 attestation duties for epoch 80, batched across 32 slot(s) with a 500 ms delay every 4 slot(s)
+2026-10-12 21:37:36.144 WARN  - [33mValidator   *** Skipped aggregation at slot 2572 because there was nothing to aggregate[0m
+2026-10-12 21:37:36.147 WARN  - [33mValidator   *** Skipped aggregation at slot 2572 because there was nothing to aggregate[0m
+2026-10-12 21:37:36.147 WARN  - [33mValidator   *** Skipped aggregation at slot 2572 because there was nothing to aggregate[0m
+2026-10-12 21:37:36.179 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2572, Root: adbfb64a4e58bca132b9efe45acd57f5f39fe89d3327886afed3e8addc76604d[0m
+2026-10-12 21:37:37.423 INFO  - 1000 validators are in active_ongoing state.
+2026-10-12 21:37:38.943 WARN  - [33mUnable to execute the current chain head block payload because the Execution Client is syncing. Activating optimistic sync of the beacon chain node[0m
+2026-10-12 21:37:39.026 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2573, Root: 4505f58b228e8b4b10ac0962465620cce1d12c0d84445c9572d84d629ffa772b[0m
+2026-10-12 21:37:39.620 ERROR - Failed to publish execution_payload(s) for slot 2573
+java.lang.IllegalStateException: Gossip channel not available
+at tech.pegasys.teku.networking.eth2.gossip.AbstractGossipManager.publishMessageWithFeedback(AbstractGossipManager.java:100)
+at tech.pegasys.teku.networking.eth2.gossip.ExecutionPayloadGossipManager.publish(ExecutionPayloadGossipManager.java:66)
+at tech.pegasys.teku.networking.eth2.gossip.forks.versions.GossipForkSubscriptionsGloas.publishExecutionPayload(GossipForkSubscriptionsGloas.java:199)
+at tech.pegasys.teku.networking.eth2.gossip.forks.GossipForkManager.publishMessageWithFeedback(GossipForkManager.java:323)
+at tech.pegasys.teku.networking.eth2.gossip.forks.GossipForkManager.publishExecutionPayload(GossipForkManager.java:208)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+at tech.pegasys.teku.infrastructure.events.DirectEventDeliverer.executeMethod(DirectEventDeliverer.java:74)
+at tech.pegasys.teku.infrastructure.events.DirectEventDeliverer.deliverToWithResponse(DirectEventDeliverer.java:67)
+at tech.pegasys.teku.infrastructure.events.AsyncEventDeliverer.lambda$deliverToWithResponse$0(AsyncEventDeliverer.java:83)
+at tech.pegasys.teku.infrastructure.events.AsyncEventDeliverer$QueueReader.deliverNextEvent(AsyncEventDeliverer.java:140)
+at tech.pegasys.teku.infrastructure.events.AsyncEventDeliverer$QueueReader.run(AsyncEventDeliverer.java:131)
+at java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(Unknown Source)
+at java.base/java.lang.VirtualThread.run(Unknown Source)
+2026-10-12 21:37:39.897 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 35, Slot: 2572[0m
+2026-10-12 21:37:39.898 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 6, Slot: 2572[0m
+2026-10-12 21:37:39.899 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 34, Slot: 2573[0m
+2026-10-12 21:37:42.005 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 5, Slot: 2573[0m
+2026-10-12 21:37:42.005 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 3, Slot: 2573[0m
+2026-10-12 21:37:45.002 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 16, Slot: 2573[0m
+2026-10-12 21:37:48.041 INFO  - [37mSyncing     *** Slot: 2574, Head slot: 2573, Waiting for execution layer sync, Connected peers: 36[0m
+2026-10-12 21:37:51.008 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 24, Slot: 2574[0m
+2026-10-12 21:37:51.026 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2574, Root: 056ec4be2dd5a6d37240899eec0ffbaa283fa34a697ecb5a7ffdc5f8b156c136[0m
+2026-10-12 21:37:54.002 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 4, Slot: 2574[0m
+2026-10-12 21:37:54.003 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 1, Slot: 2574[0m
+2026-10-12 21:37:57.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 11, Slot: 2574[0m
+2026-10-12 21:38:00.004 INFO  - [37mSyncing     *** Slot: 2575, Head slot: 2574, Waiting for execution layer sync, Connected peers: 36[0m
+2026-10-12 21:38:03.003 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 31, Slot: 2575[0m
+2026-10-12 21:38:03.020 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2575, Root: 029f822ccbf16ec5a7983a5c2c5b191f83549b68a3f7a88fa2e479302250d1a8[0m
+2026-10-12 21:38:06.001 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 3, Slot: 2575[0m
+2026-10-12 21:38:06.003 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 4, Slot: 2575[0m
+2026-10-12 21:38:09.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 14, Slot: 2575[0m
+2026-10-12 21:38:12.004 INFO  - [37mSyncing     *** Slot: 2576, Head slot: 2575, Waiting for execution layer sync, Connected peers: 39[0m
+2026-10-12 21:38:15.002 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 34, Slot: 2576[0m
+2026-10-12 21:38:15.017 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2576, Root: 63ba32f1b785590264b45b6d33ef501995d990ad9e21bc1df5361a9c07e7fb41[0m
+2026-10-12 21:38:18.002 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 2, Slot: 2576[0m
+2026-10-12 21:38:18.004 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 1, Slot: 2576[0m
+2026-10-12 21:38:21.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 14, Slot: 2576[0m
+2026-10-12 21:38:24.005 INFO  - [37mSyncing     *** Slot: 2577, Head slot: 2576, Waiting for execution layer sync, Connected peers: 38[0m
+2026-10-12 21:38:27.004 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 20, Slot: 2577[0m
+2026-10-12 21:38:27.021 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2577, Root: 4a3e47d9d7e026855ea6ba34505e12ca3369aa4710179b443c0a7c0c378ef1fa[0m
+2026-10-12 21:38:30.001 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 1, Slot: 2577[0m
+2026-10-12 21:38:30.004 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 4, Slot: 2577[0m
+2026-10-12 21:38:33.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 8, Slot: 2577[0m
+2026-10-12 21:38:36.004 INFO  - [37mSyncing     *** Slot: 2578, Head slot: 2577, Waiting for execution layer sync, Connected peers: 35[0m
+2026-10-12 21:38:39.002 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 37, Slot: 2578[0m
+2026-10-12 21:38:39.022 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2578, Root: 5f6b5927587220b774c5e68424dcee91183a2851fc3a844a157d5d31ea215411[0m
+2026-10-12 21:38:42.002 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 6, Slot: 2578[0m
+2026-10-12 21:38:42.003 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 3, Slot: 2578[0m
+2026-10-12 21:38:45.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 14, Slot: 2578[0m
+2026-10-12 21:38:48.003 INFO  - [37mSyncing     *** Slot: 2579, Head slot: 2578, Waiting for execution layer sync, Connected peers: 35[0m
+2026-10-12 21:38:51.001 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 26, Slot: 2579[0m
+2026-10-12 21:38:51.024 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2579, Root: be822b43ce940a6647f7f35c1c605bf2704585b32233c4de3f0e5b14630fa96d[0m
+2026-10-12 21:38:54.002 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 2, Slot: 2579[0m
+2026-10-12 21:38:54.004 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 2, Slot: 2579[0m

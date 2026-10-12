@@ -1,0 +1,15 @@
+{
+  "query": "SELECT Timestamp,substring(Body,1,1800) AS body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp >= toDateTime('2026-10-12 15:30:00') AND Timestamp < toDateTime('2026-10-12 16:00:00') AND ResourceAttributes['host.name']='nimbus-nimbusel-1' AND ResourceAttributes['container.name']='beacon' AND (Body LIKE '%Connection to EL%' OR Body LIKE '%EL node%' OR Body LIKE '%execution client%' OR Body LIKE '%execution payload%' OR Body LIKE '%Request timed out%') AND match(Body,'^(WRN|ERR|FAT)') ORDER BY Timestamp ASC LIMIT 35",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 15:39:11.000713332",
+        "WRN 2026-10-12 15:39:10.995+00:00 Connection to EL node degraded             topics=\"elman\" url=http://snooper-engine:8561 failedRequest=newPayload statusCode=0 err=\"Request timed out\""
+      ]
+    ]
+  }
+}

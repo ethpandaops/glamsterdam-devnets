@@ -1,0 +1,37 @@
+{
+  "command": [
+    "panda",
+    "dora",
+    "epoch",
+    "glamsterdam-msf-2",
+    "90"
+  ],
+  "result": {
+    "status": "OK",
+    "data": {
+      "epoch": 90,
+      "ts": 1791844740,
+      "attestationscount": 41,
+      "attesterslashingscount": 0,
+      "averagevalidatorbalance": 32002322667,
+      "blockscount": 29,
+      "depositscount": 0,
+      "eligibleether": 1152000000000000,
+      "finalized": false,
+      "globalparticipationrate": 100,
+      "missedblocks": 3,
+      "orphanedblocks": 0,
+      "proposedblocks": 29,
+      "proposedpayloads": 29,
+      "missedpayloads": 0,
+      "proposerslashingscount": 0,
+      "scheduledblocks": 0,
+      "totalvalidatorbalance": 1152083616031425,
+      "validatorscount": 36000,
+      "voluntaryexitscount": 0,
+      "votedether": 1152000000000000,
+      "rewards_exported": 4809613980,
+      "withdrawalcount": 464
+    }
+  }
+}

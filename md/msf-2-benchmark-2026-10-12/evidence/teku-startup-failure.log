@@ -1,0 +1,1670 @@
+state={"Status":"running","Running":true,"Paused":false,"Restarting":false,"OOMKilled":false,"Dead":false,"Pid":266509,"ExitCode":0,"Error":"","StartedAt":"2026-10-12T21:41:33.266572121Z","FinishedAt":"2026-10-12T21:41:20.418200744Z"} restarts=8
+2026-10-12 21:40:21.001 WARN  - [33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 10, Slot: 2586[0m
+2026-10-12 21:40:24.004 INFO  - [37mSyncing     *** Slot: 2587, Head slot: 2586, Waiting for execution layer sync, Connected peers: 35[0m
+2026-10-12 21:40:27.003 WARN  - [33mValidator   *** Skipped producing attestation while node is syncing  Count: 32, Slot: 2587[0m
+2026-10-12 21:40:27.020 INFO  - [34mValidator   *** Published sync_signature       Count: 19, Slot: 2587, Root: b9e5a5031e9395283cbdcb2babaafde1ff9399939b7d3bd192fdc1deb98f30a9[0m
+2026-10-12 21:40:30.001 WARN  - [33mValidator   *** Skipped producing aggregate while node is syncing  Count: 2, Slot: 2587[0m
+2026-10-12 21:40:30.004 WARN  - [33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 3, Slot: 2587[0m
+Teku is shutting down
+2026-10-12 21:40:31.933 INFO  - Stopping Javalin ...
+2026-10-12 21:40:31.933 INFO  - Stopped oejs.Server@60d40fe7{STOPPING}[12.1.11,sto=0]
+2026-10-12 21:40:31.949 INFO  - Stopped oejs.ServerConnector@266edf2d{HTTP/1.1, (http/1.1)}{0.0.0.0:5052}
+2026-10-12 21:40:31.951 INFO  - Stopped oeje10s.ServletContextHandler@7569b6b7{ROOT,/,b=null,a=AVAILABLE,h=oeje10s.SessionHandler@6333354a{STOPPED}}
+2026-10-12 21:40:31.960 INFO  - Javalin has stopped
+2026-10-12 21:40:31.961 WARN  - Stopping eth2 gossip while node is syncing
+2026-10-12 21:40:32.459 INFO  - Stopping discovery server listening on /0.0.0.0:9000
+2026-10-12 21:40:32.460 INFO  - Shutting down discovery server listening on /0.0.0.0:9000
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:40:38.828 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:40:39.076 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:40:39.077 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:40:39.196 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:40:39.197 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:40:39.197 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:40:39.197 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:40:39.516 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:40:39.516 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:40:39.518 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:40:39.627 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:40:39.634 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:40:39.643 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:40:39.643 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:40:39.666 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:40:39.670 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:40:39.742 INFO  - BLS: loaded BLST library
+2026-10-12 21:40:40.052 INFO  - Loading 1000 validator keys...
+2026-10-12 21:40:40.109 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:40:40.110 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:40:40.112 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:40:40.113 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:40:40.115 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:40:40.116 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:40:40.118 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:40:40.119 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:40:40.120 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:40:40.122 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:40:40.122 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:40:40.123 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:40:40.124 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:40:40.125 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:40:40.126 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:40:40.127 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:40:40.127 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:40:40.128 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:40:40.129 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:40:40.130 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:40:40.131 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:40:40.132 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:40:40.133 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:40:40.134 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:40:40.135 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:40:40.136 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:40:40.137 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:40:40.138 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:40:40.139 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:40:40.140 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:40:40.141 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:40:40.142 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:40:40.142 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:40:40.143 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:40:40.144 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:40:40.145 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:40:40.146 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:40:40.147 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:40:40.148 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:40:40.149 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:40:40.150 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:40:40.151 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:40:40.151 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:40:40.153 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:40:40.154 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:40:40.155 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:40:40.156 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:40:40.157 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:40:40.158 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:40:40.159 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:40:40.160 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:40:40.161 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:40:40.161 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:40:40.162 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:40:40.163 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:40:40.164 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:40:40.165 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:40:40.166 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:40:40.166 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:40:40.167 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:40:40.168 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:40:40.170 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:40:40.171 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:40:40.172 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:40:40.173 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:40:40.174 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:40:40.175 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:40:40.176 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:40:40.177 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:40:40.177 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:40:40.178 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:40:40.179 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:40:40.179 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:40:40.180 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:40:40.181 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:40:40.182 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:40:40.183 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:40:40.184 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:40:40.185 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:40:40.186 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:40:40.187 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:40:40.188 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:40:40.189 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:40:40.190 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:40:40.190 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:40:40.191 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:40:40.192 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:40:40.193 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:40:40.194 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:40:40.195 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:40:40.195 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:40:40.196 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:40:40.198 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:40:40.198 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:40:40.199 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:40:40.200 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:40:40.201 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:40:40.202 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:40:40.202 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:40:40.203 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:40:40.204 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:40:40.212 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:40:40.217 INFO  - Initializing storage
+2026-10-12 21:40:40.218 INFO  - Loaded 1000 validators
+2026-10-12 21:40:40.222 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:40:40.353 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:40:40.358 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+teku [COMMAND] --help
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:40:43.010 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:40:43.254 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:40:43.255 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:40:43.393 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:40:43.393 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:40:43.393 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:40:43.393 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:40:43.748 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:40:43.749 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:40:43.750 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:40:43.867 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:40:43.875 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:40:43.884 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:40:43.885 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:40:43.913 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:40:43.917 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:40:43.992 INFO  - BLS: loaded BLST library
+2026-10-12 21:40:44.238 INFO  - Loading 1000 validator keys...
+2026-10-12 21:40:44.293 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:40:44.294 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:40:44.296 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:40:44.297 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:40:44.299 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:40:44.300 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:40:44.301 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:40:44.302 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:40:44.303 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:40:44.305 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:40:44.306 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:40:44.307 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:40:44.308 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:40:44.309 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:40:44.310 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:40:44.311 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:40:44.312 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:40:44.313 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:40:44.314 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:40:44.315 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:40:44.316 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:40:44.317 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:40:44.318 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:40:44.318 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:40:44.319 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:40:44.320 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:40:44.321 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:40:44.322 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:40:44.323 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:40:44.324 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:40:44.325 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:40:44.326 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:40:44.327 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:40:44.328 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:40:44.329 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:40:44.329 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:40:44.330 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:40:44.331 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:40:44.332 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:40:44.333 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:40:44.334 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:40:44.335 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:40:44.336 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:40:44.336 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:40:44.337 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:40:44.338 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:40:44.339 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:40:44.340 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:40:44.340 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:40:44.341 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:40:44.342 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:40:44.343 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:40:44.344 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:40:44.345 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:40:44.345 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:40:44.346 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:40:44.347 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:40:44.348 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:40:44.349 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:40:44.350 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:40:44.350 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:40:44.351 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:40:44.352 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:40:44.353 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:40:44.353 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:40:44.354 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:40:44.355 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:40:44.356 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:40:44.356 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:40:44.357 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:40:44.358 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:40:44.358 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:40:44.358 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:40:44.359 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:40:44.360 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:40:44.361 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:40:44.361 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:40:44.362 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:40:44.363 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:40:44.364 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:40:44.365 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:40:44.366 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:40:44.366 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:40:44.367 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:40:44.368 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:40:44.369 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:40:44.369 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:40:44.370 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:40:44.371 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:40:44.372 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:40:44.373 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:40:44.373 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:40:44.374 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:40:44.375 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:40:44.376 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:40:44.376 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:40:44.377 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:40:44.378 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:40:44.378 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:40:44.379 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:40:44.380 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:40:44.385 INFO  - Loaded 1000 validators
+2026-10-12 21:40:44.387 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:40:44.390 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:40:44.454 INFO  - Initializing storage
+2026-10-12 21:40:44.591 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:40:44.594 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:40:47.398 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:40:47.670 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:40:47.671 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:40:47.803 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:40:47.804 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:40:47.804 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:40:47.804 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:40:48.144 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:40:48.144 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:40:48.145 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:40:48.258 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:40:48.266 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:40:48.276 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:40:48.276 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:40:48.307 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:40:48.311 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:40:48.385 INFO  - BLS: loaded BLST library
+2026-10-12 21:40:48.666 INFO  - Loading 1000 validator keys...
+2026-10-12 21:40:48.722 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:40:48.723 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:40:48.725 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:40:48.727 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:40:48.728 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:40:48.729 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:40:48.731 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:40:48.733 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:40:48.735 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:40:48.735 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:40:48.736 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:40:48.738 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:40:48.739 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:40:48.741 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:40:48.742 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:40:48.744 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:40:48.745 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:40:48.746 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:40:48.747 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:40:48.748 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:40:48.749 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:40:48.750 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:40:48.751 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:40:48.752 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:40:48.753 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:40:48.755 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:40:48.756 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:40:48.757 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:40:48.758 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:40:48.760 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:40:48.761 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:40:48.764 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:40:48.764 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:40:48.765 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:40:48.766 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:40:48.769 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:40:48.767 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:40:48.770 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:40:48.772 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:40:48.773 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:40:48.774 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:40:48.776 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:40:48.777 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:40:48.778 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:40:48.779 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:40:48.782 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:40:48.781 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:40:48.783 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:40:48.784 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:40:48.785 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:40:48.786 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:40:48.788 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:40:48.789 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:40:48.791 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:40:48.792 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:40:48.793 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:40:48.794 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:40:48.795 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:40:48.796 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:40:48.797 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:40:48.798 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:40:48.799 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:40:48.800 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:40:48.801 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:40:48.803 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:40:48.804 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:40:48.806 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:40:48.807 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:40:48.808 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:40:48.809 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:40:48.810 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:40:48.812 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:40:48.813 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:40:48.814 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:40:48.815 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:40:48.816 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:40:48.817 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:40:48.818 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:40:48.819 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:40:48.821 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:40:48.821 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:40:48.822 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:40:48.823 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:40:48.824 INFO  - Initializing storage
+2026-10-12 21:40:48.825 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:40:48.826 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:40:48.827 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:40:48.828 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:40:48.829 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:40:48.829 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:40:48.830 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:40:48.831 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:40:48.832 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:40:48.833 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:40:48.834 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:40:48.835 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:40:48.836 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:40:48.837 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:40:48.838 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:40:48.839 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:40:48.840 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:40:48.841 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:40:48.842 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:40:48.848 INFO  - Loaded 1000 validators
+2026-10-12 21:40:48.850 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:40:48.974 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:40:48.976 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+teku [COMMAND] --help
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:40:51.730 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:40:51.986 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:40:51.987 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:40:52.122 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:40:52.122 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:40:52.122 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:40:52.122 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:40:52.478 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:40:52.478 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:40:52.479 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:40:52.593 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:40:52.600 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:40:52.609 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:40:52.610 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:40:52.635 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:40:52.642 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:40:52.723 INFO  - BLS: loaded BLST library
+2026-10-12 21:40:52.944 INFO  - Loading 1000 validator keys...
+2026-10-12 21:40:52.990 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:40:52.992 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:40:52.994 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:40:52.995 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:40:52.996 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:40:52.998 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:40:52.999 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:40:53.002 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:40:53.004 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:40:53.005 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:40:53.006 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:40:53.007 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:40:53.008 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:40:53.010 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:40:53.010 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:40:53.012 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:40:53.013 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:40:53.014 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:40:53.015 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:40:53.016 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:40:53.017 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:40:53.019 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:40:53.020 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:40:53.021 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:40:53.022 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:40:53.023 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:40:53.024 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:40:53.025 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:40:53.026 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:40:53.027 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:40:53.027 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:40:53.028 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:40:53.029 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:40:53.030 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:40:53.031 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:40:53.032 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:40:53.032 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:40:53.033 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:40:53.034 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:40:53.035 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:40:53.036 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:40:53.036 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:40:53.037 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:40:53.038 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:40:53.039 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:40:53.040 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:40:53.040 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:40:53.041 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:40:53.042 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:40:53.043 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:40:53.044 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:40:53.045 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:40:53.045 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:40:53.046 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:40:53.047 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:40:53.048 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:40:53.049 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:40:53.049 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:40:53.050 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:40:53.051 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:40:53.052 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:40:53.052 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:40:53.053 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:40:53.054 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:40:53.055 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:40:53.056 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:40:53.057 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:40:53.058 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:40:53.059 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:40:53.060 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:40:53.061 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:40:53.061 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:40:53.062 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:40:53.063 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:40:53.064 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:40:53.064 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:40:53.065 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:40:53.066 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:40:53.067 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:40:53.067 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:40:53.068 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:40:53.069 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:40:53.069 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:40:53.070 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:40:53.071 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:40:53.071 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:40:53.072 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:40:53.073 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:40:53.074 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:40:53.075 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:40:53.076 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:40:53.077 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:40:53.078 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:40:53.079 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:40:53.080 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:40:53.081 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:40:53.081 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:40:53.082 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:40:53.082 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:40:53.083 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:40:53.094 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:40:53.095 INFO  - Loaded 1000 validators
+2026-10-12 21:40:53.099 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:40:53.109 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:40:53.168 INFO  - Initializing storage
+2026-10-12 21:40:53.325 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:40:53.327 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:40:56.215 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:40:56.454 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:40:56.455 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:40:56.576 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:40:56.576 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:40:56.576 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:40:56.576 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:40:56.885 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:40:56.885 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:40:56.887 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:40:57.001 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:40:57.009 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:40:57.017 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:40:57.017 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:40:57.042 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:40:57.048 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:40:57.125 INFO  - BLS: loaded BLST library
+2026-10-12 21:40:57.358 INFO  - Loading 1000 validator keys...
+2026-10-12 21:40:57.411 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:40:57.412 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:40:57.413 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:40:57.414 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:40:57.415 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:40:57.416 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:40:57.418 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:40:57.419 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:40:57.420 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:40:57.422 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:40:57.423 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:40:57.424 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:40:57.426 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:40:57.427 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:40:57.428 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:40:57.429 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:40:57.430 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:40:57.431 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:40:57.432 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:40:57.433 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:40:57.434 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:40:57.435 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:40:57.436 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:40:57.437 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:40:57.438 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:40:57.439 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:40:57.440 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:40:57.441 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:40:57.442 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:40:57.443 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:40:57.444 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:40:57.444 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:40:57.445 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:40:57.446 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:40:57.447 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:40:57.448 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:40:57.449 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:40:57.450 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:40:57.451 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:40:57.452 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:40:57.453 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:40:57.454 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:40:57.455 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:40:57.455 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:40:57.456 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:40:57.457 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:40:57.458 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:40:57.458 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:40:57.459 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:40:57.460 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:40:57.461 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:40:57.462 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:40:57.463 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:40:57.464 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:40:57.465 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:40:57.466 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:40:57.467 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:40:57.467 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:40:57.468 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:40:57.469 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:40:57.470 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:40:57.471 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:40:57.472 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:40:57.472 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:40:57.473 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:40:57.474 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:40:57.475 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:40:57.476 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:40:57.476 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:40:57.477 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:40:57.477 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:40:57.478 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:40:57.479 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:40:57.480 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:40:57.481 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:40:57.481 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:40:57.482 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:40:57.483 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:40:57.484 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:40:57.485 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:40:57.486 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:40:57.487 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:40:57.488 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:40:57.489 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:40:57.490 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:40:57.491 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:40:57.491 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:40:57.491 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:40:57.492 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:40:57.493 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:40:57.494 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:40:57.495 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:40:57.495 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:40:57.496 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:40:57.497 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:40:57.498 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:40:57.498 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:40:57.499 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:40:57.500 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:40:57.501 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:40:57.502 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:40:57.502 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:40:57.507 INFO  - Loaded 1000 validators
+2026-10-12 21:40:57.509 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:40:57.547 INFO  - Initializing storage
+2026-10-12 21:40:57.657 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:40:57.659 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:41:01.559 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:41:01.844 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:41:01.846 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:41:01.980 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:41:01.981 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:41:01.981 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:41:01.981 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:41:02.315 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:41:02.315 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:41:02.316 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:41:02.429 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:41:02.438 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:41:02.447 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:41:02.448 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:41:02.480 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:41:02.484 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:41:02.552 INFO  - BLS: loaded BLST library
+2026-10-12 21:41:02.798 INFO  - Loading 1000 validator keys...
+2026-10-12 21:41:02.849 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:41:02.850 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:41:02.852 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:41:02.854 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:41:02.855 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:41:02.856 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:41:02.857 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:41:02.859 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:41:02.860 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:41:02.861 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:41:02.862 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:41:02.863 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:41:02.865 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:41:02.866 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:41:02.867 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:41:02.868 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:41:02.870 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:41:02.871 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:41:02.873 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:41:02.874 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:41:02.875 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:41:02.876 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:41:02.877 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:41:02.878 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:41:02.879 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:41:02.880 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:41:02.882 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:41:02.883 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:41:02.884 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:41:02.885 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:41:02.886 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:41:02.887 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:41:02.888 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:41:02.889 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:41:02.890 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:41:02.891 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:41:02.892 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:41:02.893 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:41:02.894 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:41:02.895 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:41:02.896 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:41:02.897 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:41:02.898 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:41:02.899 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:41:02.900 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:41:02.901 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:41:02.902 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:41:02.903 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:41:02.904 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:41:02.905 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:41:02.905 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:41:02.907 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:41:02.908 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:41:02.909 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:41:02.910 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:41:02.910 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:41:02.911 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:41:02.912 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:41:02.913 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:41:02.913 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:41:02.914 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:41:02.915 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:41:02.916 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:41:02.917 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:41:02.918 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:41:02.918 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:41:02.919 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:41:02.920 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:41:02.921 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:41:02.922 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:41:02.922 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:41:02.923 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:41:02.924 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:41:02.925 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:41:02.925 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:41:02.926 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:41:02.927 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:41:02.928 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:41:02.928 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:41:02.929 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:41:02.930 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:41:02.931 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:41:02.931 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:41:02.932 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:41:02.933 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:41:02.934 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:41:02.934 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:41:02.935 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:41:02.936 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:41:02.936 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:41:02.937 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:41:02.938 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:41:02.938 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:41:02.939 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:41:02.940 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:41:02.941 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:41:02.942 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:41:02.942 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:41:02.943 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:41:02.944 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:41:02.944 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:41:02.952 INFO  - Loaded 1000 validators
+2026-10-12 21:41:02.953 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:41:02.955 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:41:03.008 INFO  - Initializing storage
+2026-10-12 21:41:03.120 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:41:03.122 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:41:08.492 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:41:08.729 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:41:08.730 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:41:08.849 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:41:08.850 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:41:08.850 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:41:08.850 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:41:09.237 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:41:09.237 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:41:09.239 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:41:09.373 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:41:09.380 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:41:09.388 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:41:09.389 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:41:09.416 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:41:09.420 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:41:09.482 INFO  - BLS: loaded BLST library
+2026-10-12 21:41:09.760 INFO  - Loading 1000 validator keys...
+2026-10-12 21:41:09.812 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:41:09.815 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:41:09.816 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:41:09.817 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:41:09.818 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:41:09.820 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:41:09.821 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:41:09.822 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:41:09.823 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:41:09.824 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:41:09.825 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:41:09.826 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:41:09.827 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:41:09.829 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:41:09.830 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:41:09.831 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:41:09.832 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:41:09.833 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:41:09.834 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:41:09.835 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:41:09.835 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:41:09.836 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:41:09.839 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:41:09.840 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:41:09.841 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:41:09.842 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:41:09.843 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:41:09.844 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:41:09.845 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:41:09.846 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:41:09.847 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:41:09.848 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:41:09.849 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:41:09.850 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:41:09.851 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:41:09.851 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:41:09.852 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:41:09.853 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:41:09.854 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:41:09.855 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:41:09.856 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:41:09.857 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:41:09.857 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:41:09.858 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:41:09.859 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:41:09.860 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:41:09.861 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:41:09.862 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:41:09.863 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:41:09.864 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:41:09.865 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:41:09.865 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:41:09.866 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:41:09.868 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:41:09.868 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:41:09.869 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:41:09.870 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:41:09.871 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:41:09.872 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:41:09.873 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:41:09.873 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:41:09.874 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:41:09.875 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:41:09.876 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:41:09.877 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:41:09.878 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:41:09.878 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:41:09.879 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:41:09.880 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:41:09.881 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:41:09.882 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:41:09.883 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:41:09.884 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:41:09.885 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:41:09.886 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:41:09.887 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:41:09.888 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:41:09.889 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:41:09.892 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:41:09.893 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:41:09.894 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:41:09.894 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:41:09.895 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:41:09.896 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:41:09.897 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:41:09.898 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:41:09.899 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:41:09.900 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:41:09.901 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:41:09.902 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:41:09.903 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:41:09.904 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:41:09.905 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:41:09.906 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:41:09.906 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:41:09.907 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:41:09.909 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:41:09.910 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:41:09.910 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:41:09.911 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:41:09.912 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:41:09.913 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:41:09.920 INFO  - Loaded 1000 validators
+2026-10-12 21:41:09.921 INFO  - Initializing storage
+2026-10-12 21:41:09.924 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:41:10.030 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:41:10.032 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:41:18.502 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:41:18.750 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:41:18.750 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:41:18.881 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:41:18.881 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:41:18.881 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:41:18.881 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:41:19.232 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:41:19.232 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:41:19.234 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:41:19.363 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:41:19.370 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:41:19.386 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:41:19.387 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:41:19.415 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:41:19.418 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:41:19.481 INFO  - BLS: loaded BLST library
+2026-10-12 21:41:19.700 INFO  - Loading 1000 validator keys...
+2026-10-12 21:41:19.749 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:41:19.752 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:41:19.754 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:41:19.757 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:41:19.759 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:41:19.761 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:41:19.763 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:41:19.765 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:41:19.766 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:41:19.767 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:41:19.769 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:41:19.770 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:41:19.771 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:41:19.773 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:41:19.774 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:41:19.775 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:41:19.776 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:41:19.778 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:41:19.779 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:41:19.780 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:41:19.782 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:41:19.783 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:41:19.784 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:41:19.785 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:41:19.786 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:41:19.787 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:41:19.788 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:41:19.790 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:41:19.791 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:41:19.793 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:41:19.794 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:41:19.795 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:41:19.796 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:41:19.797 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:41:19.799 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:41:19.800 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:41:19.801 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:41:19.802 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:41:19.803 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:41:19.804 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:41:19.805 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:41:19.806 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:41:19.807 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:41:19.808 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:41:19.809 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:41:19.810 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:41:19.811 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:41:19.811 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:41:19.812 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:41:19.813 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:41:19.814 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:41:19.815 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:41:19.816 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:41:19.817 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:41:19.818 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:41:19.819 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:41:19.819 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:41:19.820 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:41:19.821 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:41:19.822 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:41:19.823 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:41:19.824 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:41:19.825 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:41:19.825 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:41:19.826 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:41:19.827 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:41:19.828 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:41:19.829 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:41:19.829 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:41:19.830 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:41:19.831 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:41:19.832 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:41:19.833 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:41:19.833 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:41:19.834 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:41:19.835 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:41:19.836 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:41:19.837 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:41:19.837 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:41:19.838 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:41:19.839 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:41:19.840 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:41:19.841 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:41:19.841 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:41:19.842 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:41:19.843 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:41:19.844 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:41:19.845 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:41:19.846 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:41:19.847 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:41:19.848 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:41:19.848 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:41:19.849 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:41:19.850 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:41:19.851 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:41:19.852 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:41:19.853 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:41:19.853 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:41:19.854 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:41:19.855 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:41:19.864 INFO  - Loaded 1000 validators
+2026-10-12 21:41:19.868 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:41:19.906 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:41:19.918 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:41:19.973 INFO  - Initializing storage
+2026-10-12 21:41:20.088 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-12 21:41:20.090 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:125)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:908)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:346)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:339)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:852)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:830)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:107)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:123)
+... 5 more
+WARNING: Final field natMethod in class tech.pegasys.teku.cli.options.NatOptions has been mutated reflectively by class picocli.CommandLine$Model$FieldBinding in unnamed module @3514a4c0 (file:/opt/teku/lib/picocli-4.7.7.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+2026-10-12 21:41:35.064 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-12 21:41:35.325 INFO  - Teku version: teku/v26.10.0/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-26
+2026-10-12 21:41:35.326 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-12 21:41:35.453 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-12 21:41:35.453 INFO  - Host Configuration | Maximum Heap Size: 15.70 GB, Total Memory: 62.80 GB, CPU Cores: 8
+2026-10-12 21:41:35.453 INFO  - Rest Api Configuration | Enabled: true, Listen Address: 0.0.0.0, Port: 5052, Allow: [*]
+2026-10-12 21:41:35.453 INFO  - Validator Api Configuration | Enabled: false
+2026-10-12 21:41:35.840 INFO  - Using execution engine at http://snooper-engine:8561
+2026-10-12 21:41:35.840 INFO  - Enabling Builder Circuit Breaker
+2026-10-12 21:41:35.842 INFO  - JWT secret loaded from /execution-auth.jwt
+2026-10-12 21:41:35.968 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-12 21:41:35.976 INFO  - Storing beacon chain data in: /data/beacon
+2026-10-12 21:41:35.983 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-12 21:41:35.984 INFO  - Starting metrics http service on 0.0.0.0:5054
+2026-10-12 21:41:36.010 INFO  - Beacon data directory set to: /data/beacon
+2026-10-12 21:41:36.017 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-12 21:41:36.095 INFO  - BLS: loaded BLST library
+2026-10-12 21:41:36.343 INFO  - Loading 1000 validator keys...
+2026-10-12 21:41:36.393 INFO  - Loaded validator key 10 of 1000.
+2026-10-12 21:41:36.395 INFO  - Loaded validator key 20 of 1000.
+2026-10-12 21:41:36.397 INFO  - Loaded validator key 30 of 1000.
+2026-10-12 21:41:36.399 INFO  - Loaded validator key 40 of 1000.
+2026-10-12 21:41:36.400 INFO  - Loaded validator key 50 of 1000.
+2026-10-12 21:41:36.402 INFO  - Loaded validator key 60 of 1000.
+2026-10-12 21:41:36.403 INFO  - Loaded validator key 70 of 1000.
+2026-10-12 21:41:36.405 INFO  - Loaded validator key 80 of 1000.
+2026-10-12 21:41:36.407 INFO  - Loaded validator key 90 of 1000.
+2026-10-12 21:41:36.409 INFO  - Loaded validator key 100 of 1000.
+2026-10-12 21:41:36.410 INFO  - Loaded validator key 110 of 1000.
+2026-10-12 21:41:36.412 INFO  - Loaded validator key 120 of 1000.
+2026-10-12 21:41:36.413 INFO  - Loaded validator key 130 of 1000.
+2026-10-12 21:41:36.415 INFO  - Loaded validator key 140 of 1000.
+2026-10-12 21:41:36.416 INFO  - Loaded validator key 150 of 1000.
+2026-10-12 21:41:36.417 INFO  - Loaded validator key 160 of 1000.
+2026-10-12 21:41:36.418 INFO  - Loaded validator key 170 of 1000.
+2026-10-12 21:41:36.419 INFO  - Loaded validator key 180 of 1000.
+2026-10-12 21:41:36.422 INFO  - Loaded validator key 200 of 1000.
+2026-10-12 21:41:36.422 INFO  - Loaded validator key 190 of 1000.
+2026-10-12 21:41:36.423 INFO  - Loaded validator key 210 of 1000.
+2026-10-12 21:41:36.425 INFO  - Loaded validator key 220 of 1000.
+2026-10-12 21:41:36.426 INFO  - Loaded validator key 230 of 1000.
+2026-10-12 21:41:36.427 INFO  - Loaded validator key 240 of 1000.
+2026-10-12 21:41:36.427 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /data/beacon/db
+2026-10-12 21:41:36.428 INFO  - Loaded validator key 250 of 1000.
+2026-10-12 21:41:36.430 INFO  - Loaded validator key 260 of 1000.
+2026-10-12 21:41:36.431 INFO  - Loaded validator key 270 of 1000.
+2026-10-12 21:41:36.432 INFO  - Loaded validator key 280 of 1000.
+2026-10-12 21:41:36.433 INFO  - Loaded validator key 290 of 1000.
+2026-10-12 21:41:36.434 INFO  - Loaded validator key 300 of 1000.
+2026-10-12 21:41:36.435 INFO  - Loaded validator key 310 of 1000.
+2026-10-12 21:41:36.436 INFO  - Loaded validator key 320 of 1000.
+2026-10-12 21:41:36.437 INFO  - Loaded validator key 330 of 1000.
+2026-10-12 21:41:36.438 INFO  - Loaded validator key 340 of 1000.
+2026-10-12 21:41:36.440 INFO  - Loaded validator key 350 of 1000.
+2026-10-12 21:41:36.441 INFO  - Loaded validator key 360 of 1000.
+2026-10-12 21:41:36.442 INFO  - Loaded validator key 370 of 1000.
+2026-10-12 21:41:36.443 INFO  - Loaded validator key 380 of 1000.
+2026-10-12 21:41:36.444 INFO  - Loaded validator key 390 of 1000.
+2026-10-12 21:41:36.444 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-12 21:41:36.445 INFO  - Loaded validator key 400 of 1000.
+2026-10-12 21:41:36.446 INFO  - Loaded validator key 410 of 1000.
+2026-10-12 21:41:36.447 INFO  - Loaded validator key 420 of 1000.
+2026-10-12 21:41:36.448 INFO  - Loaded validator key 430 of 1000.
+2026-10-12 21:41:36.449 INFO  - Loaded validator key 440 of 1000.
+2026-10-12 21:41:36.450 INFO  - Loaded validator key 450 of 1000.
+2026-10-12 21:41:36.451 INFO  - Loaded validator key 460 of 1000.
+2026-10-12 21:41:36.452 INFO  - Loaded validator key 470 of 1000.
+2026-10-12 21:41:36.454 INFO  - Loaded validator key 480 of 1000.
+2026-10-12 21:41:36.455 INFO  - Loaded validator key 490 of 1000.
+2026-10-12 21:41:36.456 INFO  - Loaded validator key 500 of 1000.
+2026-10-12 21:41:36.457 INFO  - Loaded validator key 510 of 1000.
+2026-10-12 21:41:36.459 INFO  - Loaded validator key 520 of 1000.
+2026-10-12 21:41:36.460 INFO  - Loaded validator key 530 of 1000.
+2026-10-12 21:41:36.461 INFO  - Loaded validator key 540 of 1000.
+2026-10-12 21:41:36.463 INFO  - Loaded validator key 550 of 1000.
+2026-10-12 21:41:36.463 INFO  - Loaded validator key 560 of 1000.
+2026-10-12 21:41:36.464 INFO  - Loaded validator key 570 of 1000.
+2026-10-12 21:41:36.465 INFO  - Loaded validator key 580 of 1000.
+2026-10-12 21:41:36.466 INFO  - Loaded validator key 590 of 1000.
+2026-10-12 21:41:36.467 INFO  - Loaded validator key 600 of 1000.
+2026-10-12 21:41:36.469 INFO  - Loaded validator key 620 of 1000.
+2026-10-12 21:41:36.470 INFO  - Loaded validator key 630 of 1000.
+2026-10-12 21:41:36.470 INFO  - Loaded validator key 610 of 1000.
+2026-10-12 21:41:36.471 INFO  - Loaded validator key 640 of 1000.
+2026-10-12 21:41:36.472 INFO  - Loaded validator key 650 of 1000.
+2026-10-12 21:41:36.473 INFO  - Loaded validator key 660 of 1000.
+2026-10-12 21:41:36.474 INFO  - Loaded validator key 670 of 1000.
+2026-10-12 21:41:36.475 INFO  - Loaded validator key 680 of 1000.
+2026-10-12 21:41:36.476 INFO  - Loaded validator key 690 of 1000.
+2026-10-12 21:41:36.477 INFO  - Loaded validator key 700 of 1000.
+2026-10-12 21:41:36.478 INFO  - Loaded validator key 710 of 1000.
+2026-10-12 21:41:36.479 INFO  - Loaded validator key 720 of 1000.
+2026-10-12 21:41:36.480 INFO  - Loaded validator key 730 of 1000.
+2026-10-12 21:41:36.481 INFO  - Loaded validator key 740 of 1000.
+2026-10-12 21:41:36.482 INFO  - Loaded validator key 750 of 1000.
+2026-10-12 21:41:36.483 INFO  - Loaded validator key 760 of 1000.
+2026-10-12 21:41:36.483 INFO  - Loaded validator key 770 of 1000.
+2026-10-12 21:41:36.485 INFO  - Loaded validator key 780 of 1000.
+2026-10-12 21:41:36.485 INFO  - Loaded validator key 790 of 1000.
+2026-10-12 21:41:36.486 INFO  - Loaded validator key 800 of 1000.
+2026-10-12 21:41:36.487 INFO  - Loaded validator key 810 of 1000.
+2026-10-12 21:41:36.488 INFO  - Loaded validator key 820 of 1000.
+2026-10-12 21:41:36.489 INFO  - Loaded validator key 830 of 1000.
+2026-10-12 21:41:36.489 INFO  - Loaded validator key 840 of 1000.
+2026-10-12 21:41:36.490 INFO  - Loaded validator key 850 of 1000.
+2026-10-12 21:41:36.491 INFO  - Loaded validator key 860 of 1000.
+2026-10-12 21:41:36.492 INFO  - Loaded validator key 870 of 1000.
+2026-10-12 21:41:36.493 INFO  - Loaded validator key 880 of 1000.
+2026-10-12 21:41:36.494 INFO  - Loaded validator key 890 of 1000.
+2026-10-12 21:41:36.495 INFO  - Loaded validator key 900 of 1000.
+2026-10-12 21:41:36.496 INFO  - Loaded validator key 910 of 1000.
+2026-10-12 21:41:36.497 INFO  - Loaded validator key 920 of 1000.
+2026-10-12 21:41:36.498 INFO  - Loaded validator key 930 of 1000.
+2026-10-12 21:41:36.498 INFO  - Loaded validator key 940 of 1000.
+2026-10-12 21:41:36.499 INFO  - Loaded validator key 950 of 1000.
+2026-10-12 21:41:36.500 INFO  - Loaded validator key 960 of 1000.
+2026-10-12 21:41:36.501 INFO  - Loaded validator key 970 of 1000.
+2026-10-12 21:41:36.502 INFO  - Loaded validator key 980 of 1000.
+2026-10-12 21:41:36.502 INFO  - Loaded validator key 990 of 1000.
+2026-10-12 21:41:36.503 INFO  - Loaded validator key 1000 of 1000.
+2026-10-12 21:41:36.510 INFO  - Loaded 1000 validators
+2026-10-12 21:41:36.514 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-12 21:41:36.522 INFO  - Initializing storage

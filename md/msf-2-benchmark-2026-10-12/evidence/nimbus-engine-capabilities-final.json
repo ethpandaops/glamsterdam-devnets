@@ -1,0 +1,22 @@
+[
+  {
+    "host": "nimbus-nimbusel-1",
+    "latency_seconds": 10.01071459800005,
+    "error": "timed out",
+    "probe_started_at_utc": "2026-10-12T23:22:13.244593+00:00",
+    "probe_completed_at_utc": "2026-10-12T23:22:23.828787+00:00",
+    "timing_note": "Probe timestamps bound the SSH invocation; latency_seconds measures the remote HTTP request."
+  },
+  {
+    "host": "lighthouse-nimbusel-1",
+    "latency_seconds": 0.009510559000773355,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": [],
+      "id": 1
+    },
+    "probe_started_at_utc": "2026-10-12T23:22:13.244974+00:00",
+    "probe_completed_at_utc": "2026-10-12T23:22:13.639514+00:00",
+    "timing_note": "Probe timestamps bound the SSH invocation; latency_seconds measures the remote HTTP request."
+  }
+]

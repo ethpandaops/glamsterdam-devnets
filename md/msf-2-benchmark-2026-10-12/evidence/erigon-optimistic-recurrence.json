@@ -1,0 +1,1171 @@
+{
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name'] IN ('teku-erigon-1','lodestar-erigon-1') AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-12 22:58:00') AND Timestamp < toDateTime('2026-10-12 23:02:00') AND (Body LIKE '%SYNCING%' OR Body LIKE '%WARN%' OR Body LIKE '%error%' OR Body LIKE '%Error%' OR Body LIKE '%Waiting for execution%' OR Body LIKE '%optimistic%' OR Body LIKE '%Optimistic%' OR Body LIKE '%\"status\":\"syncing\"%' OR Body LIKE '%BlockDownloader%' OR Body LIKE '%downloaded%' OR Body LIKE '%need to download%' OR Body LIKE '%status=VALID%') AND Body NOT LIKE '%request to trusted-setup.ethpandaops.io%' ORDER BY Timestamp ASC LIMIT 300"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 22:58:00.950193797",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:00.949] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:01.044259786",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:01.044] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:02.247465318",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:02.247] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xb549ea97a69b4e2daa292fe0547a39af50d2f83d631f5c5d9322f1099c80ec70 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:02.253788245",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:02.253] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:02.327165546",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:02.327] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xb549ea97a69b4e2daa292fe0547a39af50d2f83d631f5c5d9322f1099c80ec70 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:02.333489595",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:02.333] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:12.880666715",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:12.880] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:12.948797118",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:12.948] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:14.498525941",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:58:14.498] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1739 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193280\""
+      ],
+      [
+        "2026-10-12 22:58:17.897979528",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:17.897] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:17.902010737",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:17.901] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:18.048030104",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:18.047] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xa4e6ce1d03bd98eac6690f01254a48282b2b594bfa80c3c428a321d34b5af51d CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:18.052913665",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:18.052] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:27.270239429",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:27.270 WARN  - \u001b[33mLate Block Import *** Block: 32cec853d40774f22a573dcd20a02bdfdd80c713974bd2d4e6ad1a7f41fea621 (2977) Proposer: 17999 Result: success Timings: arrival 3163ms, gossip_validation +2ms, pre-state_retrieved +2ms, processed +76ms, data_availability_checked +0ms, execution_payload_result_received +0ms, begin_importing +0ms, transaction_prepared +1ms, transaction_committed +0ms, completed +25ms\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:27.282744559",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:27.282] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:28.718346894",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:58:28.718] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1667 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193281\""
+      ],
+      [
+        "2026-10-12 22:58:29.902209048",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:29.902] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x36fce83804bdcdbf0f920c1d36982261e62d91cb66ebe81471ef3ea20d6cbd61 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:29.908366598",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:29.908] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:29.931167174",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:29.931] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x36fce83804bdcdbf0f920c1d36982261e62d91cb66ebe81471ef3ea20d6cbd61 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:29.936394317",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:29.936] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:33.014149740",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:58:33.014] [rpc] served                             conn=172.18.0.3:41432 method=debug_getBadBlocks reqid=1740 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 22:58:35.695510314",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:58:35.695] [rpc] served                             conn=172.18.0.3:46194 method=debug_getBadBlocks reqid=1668 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 22:58:37.087890010",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:37.087] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.101120695",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:37.100] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:37.103041434",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:37.102 WARN  - \u001b[33mUnable to execute the current chain head block payload because the Execution Client is syncing. Activating optimistic sync of the beacon chain node\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:37.107803461",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:37.107] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.108947850",
+        "lodestar-erigon-1",
+        "beacon",
+        "Oct-12 22:58:37.108[execution]        \u001b[33mwarn\u001b[39m: Execution client is syncing oldState=SYNCED, newState=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.501201720",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:37.500 INFO  - \u001b[37mSyncing     *** Slot: 2978, Head slot: 2978, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:37.606683954",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:37.606] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:37.628815201",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:37.628] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:38.133229105",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:38.132] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:42.003706900",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:42.003 WARN  - \u001b[33mValidator   *** Skipped producing aggregate while node is syncing  Count: 4, Slot: 2978\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:42.003906420",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:42.003 WARN  - \u001b[33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 2, Slot: 2978\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:45.001544477",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:45.001 WARN  - \u001b[33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 18, Slot: 2978\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:48.007351563",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:58:48.007 INFO  - \u001b[37mSyncing     *** Slot: 2979, Head slot: 2978, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:58:48.009074973",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:48.008] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 22:58:48.970472406",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:48.970] [ForkChoiceUpdated] Fork choice: need to download header with hash bd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 "
+      ],
+      [
+        "2026-10-12 22:58:48.970507598",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:48.970] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:48.970548020",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:48.970] [EngineBlockDownloader] processing backward download of blocks hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:58:49.870702185",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:49.870] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:49.913624906",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:49.913] [NewPayload] New payload: need to download parent height=24455427 hash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 parentHash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954"
+      ],
+      [
+        "2026-10-12 22:58:49.913632275",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:49.913] [EngineBlockDownloader] processing backward download of blocks hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=NewPayloadTrigger chainTipNum=24455427 chainTipHash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71"
+      ],
+      [
+        "2026-10-12 22:58:49.924979915",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:49.924] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:58:51.257971688",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:51.257] [EngineBlockDownloader] executing final downloaded batch to=24455426 toHash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 blocks=2"
+      ],
+      [
+        "2026-10-12 22:58:51.660667240",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:51.660] [EngineBlockDownloader] backward download of blocks finished successfully hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:58:51.660733974",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:51.660] [EngineBlockDownloader] backward download request successfully processed hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:58:51.886166907",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:51.885] [EngineBlockDownloader] backward download of blocks finished successfully hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=NewPayloadTrigger chainTipNum=24455427 chainTipHash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71"
+      ],
+      [
+        "2026-10-12 22:58:52.995676145",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:52.995] [EngineBlockDownloader] blocks verification successful "
+      ],
+      [
+        "2026-10-12 22:58:52.995712174",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:58:52.995] [EngineBlockDownloader] backward download request successfully processed hash=0xbd0610bd473b200aa2126362d3f5a310cde6aef72b7b5f3322c19d43fc518954 trigger=NewPayloadTrigger chainTipNum=24455427 chainTipHash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71"
+      ],
+      [
+        "2026-10-12 22:58:53.005434831",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:58:53.005] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:58:54.737713505",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:58:54.737] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1748 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193282\""
+      ],
+      [
+        "2026-10-12 22:59:00.757523076",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:00.757] [ForkChoiceUpdated] Fork choice: need to download header with hash 1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 "
+      ],
+      [
+        "2026-10-12 22:59:00.757589634",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:00.757] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:00.757646714",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:00.757] [EngineBlockDownloader] processing backward download of blocks hash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:01.578454803",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:01.578] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:01.633584072",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:01.633] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:01.788399632",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:01.788] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:02.151677996",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:02.151] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:02.153424319",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:02.153 WARN  - \u001b[33mUnable to execute the current chain head block payload because the Execution Client is syncing. Activating optimistic sync of the beacon chain node\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:02.500976631",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:02.500 INFO  - \u001b[37mSyncing     *** Slot: 2980, Head slot: 2980, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:02.658025010",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:02.657] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:03.056139698",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:03.055] [EngineBlockDownloader] executing final downloaded batch to=24455427 toHash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 blocks=2"
+      ],
+      [
+        "2026-10-12 22:59:03.595497610",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:03.595] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:03.595635394",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:03.595] [EngineBlockDownloader] backward download request successfully processed hash=0x1ddd5e3139d138830f98e58e92ac17ab6d21186efd95da784464f25ee7363e71 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:06.002919125",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:06.002 WARN  - \u001b[33mValidator   *** Skipped producing aggregate while node is syncing  Count: 4, Slot: 2980\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:06.003146949",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:06.003 WARN  - \u001b[33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 4, Slot: 2980\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:09.001847623",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:09.001 WARN  - \u001b[33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 14, Slot: 2980\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:12.008212257",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:12.007 INFO  - \u001b[37mSyncing     *** Slot: 2981, Head slot: 2980, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:12.010655044",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:12.010] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 22:59:13.785083162",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:59:13.784] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1676 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193283\""
+      ],
+      [
+        "2026-10-12 22:59:24.121424522",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:24.121 WARN  - \u001b[33mUnable to execute the current chain head block payload because the Execution Client is syncing. Activating optimistic sync of the beacon chain node\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:24.124724669",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:24.124 WARN  - \u001b[33mValidator   *** Skipped producing attestation while node is syncing  Count: 31, Slot: 2982\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:24.130519372",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:24.130] [ForkChoiceUpdated] Fork choice: need to download header with hash 5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 "
+      ],
+      [
+        "2026-10-12 22:59:24.130534843",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:24.130] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:24.130633826",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:24.130] [EngineBlockDownloader] processing backward download of blocks hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:24.135442900",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:24.134] [ForkChoiceUpdated] Fork choice: need to download header with hash 5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 "
+      ],
+      [
+        "2026-10-12 22:59:24.135465137",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:24.134] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:24.135468280",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:24.134] [EngineBlockDownloader] processing backward download of blocks hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:24.503220496",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:24.503 INFO  - \u001b[37mSyncing     *** Slot: 2982, Head slot: 2982, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:26.476382096",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:26.476] [EngineBlockDownloader] executing final downloaded batch to=24455428 toHash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 blocks=2"
+      ],
+      [
+        "2026-10-12 22:59:26.669338849",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:26.669] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:26.724306397",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:26.724] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:26.818581674",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:26.818] [EngineBlockDownloader] executing final downloaded batch to=24455428 toHash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 blocks=2"
+      ],
+      [
+        "2026-10-12 22:59:27.127126306",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:27.126] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:27.127132856",
+        "teku-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:27.127] [EngineBlockDownloader] backward download request successfully processed hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:27.500710758",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:27.500] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:27.500824130",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:27.500] [EngineBlockDownloader] backward download request successfully processed hash=0x5f0dad4b5a06bb6148ce167f9790efd90cf8f93351fcbff5a96161c22a449e44 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:27.683103778",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:59:27.682] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1751 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193284\""
+      ],
+      [
+        "2026-10-12 22:59:30.001547773",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:30.001 WARN  - \u001b[33mValidator   *** Skipped producing aggregate while node is syncing  Count: 3, Slot: 2982\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:30.004584873",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:30.004 WARN  - \u001b[33mValidator   *** Skipped producing sync_contribution while node is syncing  Count: 1, Slot: 2982\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:33.001250103",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:33.001 WARN  - \u001b[33mValidator   *** Skipped producing payload_attestation while node is syncing  Count: 11, Slot: 2982\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:36.003291757",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 22:59:36.003 INFO  - \u001b[37mSyncing     *** Slot: 2983, Head slot: 2982, Waiting for execution layer sync, Connected peers: 38\u001b[0m"
+      ],
+      [
+        "2026-10-12 22:59:36.154981285",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:36.154] [ForkChoiceUpdated] Fork choice: need to download header with hash 4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 "
+      ],
+      [
+        "2026-10-12 22:59:36.155036511",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:36.154] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:36.155101424",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:36.155] [EngineBlockDownloader] processing backward download of blocks hash=0x4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:37.075172668",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:37.075] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:37.083662471",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:37.083] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:59:38.138286973",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|22:59:38.138] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1752 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193284\""
+      ],
+      [
+        "2026-10-12 22:59:38.732316478",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:38.732] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:38.788084229",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:38.787] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:39.250416986",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:39.250] [EngineBlockDownloader] executing final downloaded batch to=24455429 toHash=0x4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 blocks=2"
+      ],
+      [
+        "2026-10-12 22:59:39.381741710",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:39.381] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:39.386176727",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:39.386] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:59:39.787426415",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:39.787] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:39.787431623",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:39.787] [EngineBlockDownloader] backward download request successfully processed hash=0x4c356acb23342f5090e922b618e7dcb980c8228814a57400396a8df362e87894 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:48.242136208",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:48.242] [ForkChoiceUpdated] Fork choice: need to download header with hash 2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 "
+      ],
+      [
+        "2026-10-12 22:59:48.242176208",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:48.242] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:48.242651999",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:48.242] [EngineBlockDownloader] processing backward download of blocks hash=0x2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:48.267286534",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:48.267] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 22:59:50.751846426",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:50.751] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:50.806523361",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:50.806] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 22:59:51.158232011",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:51.158] [EngineBlockDownloader] executing final downloaded batch to=24455430 toHash=0x2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 blocks=2"
+      ],
+      [
+        "2026-10-12 22:59:51.300558797",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:51.300] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xe48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 22:59:51.306302120",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|22:59:51.306] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 22:59:51.722323273",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:51.722] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 22:59:51.722345304",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|22:59:51.722] [EngineBlockDownloader] backward download request successfully processed hash=0x2d6f2c56120b5aab5342308bbea42a8c5ab9d53c46cd735516f31294b1a35318 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:00.678964043",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:00.678] [ForkChoiceUpdated] Fork choice: need to download header with hash e48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 "
+      ],
+      [
+        "2026-10-12 23:00:00.678970810",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:00.678] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:00.678983949",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:00.678] [EngineBlockDownloader] processing backward download of blocks hash=0xe48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:00.717890120",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:00.717] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:00.720453854",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:00.720] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:01.615519892",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:01.615] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:01.670876500",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:01.670] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:01.722785718",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:01.722] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1679 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193287\""
+      ],
+      [
+        "2026-10-12 23:00:02.118127748",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:02.118] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:02.125050565",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:02.125] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:03.385067990",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:03.384] [EngineBlockDownloader] executing final downloaded batch to=24455431 toHash=0xe48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 blocks=2"
+      ],
+      [
+        "2026-10-12 23:00:03.942251364",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:03.942] [EngineBlockDownloader] backward download of blocks finished successfully hash=0xe48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:03.942258384",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:03.942] [EngineBlockDownloader] backward download request successfully processed hash=0xe48ec60b58cbcb00fcf7be76907783db99d058c9461696207666ed1265f2e2c9 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:08.360156730",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:08.359] [rpc] served                             conn=172.18.0.3:41432 method=debug_getBadBlocks reqid=1753 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 23:00:11.096884194",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:11.096] [rpc] served                             conn=172.18.0.3:46194 method=debug_getBadBlocks reqid=1680 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 23:00:12.279873592",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:12.279] [ForkChoiceUpdated] Fork choice: need to download header with hash 97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 "
+      ],
+      [
+        "2026-10-12 23:00:12.279891846",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:12.279] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:12.279894652",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:12.279] [EngineBlockDownloader] processing backward download of blocks hash=0x97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:13.241286548",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:13.241] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:13.297330411",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:13.297] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:13.983387301",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:13.982] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:13.987496363",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:13.987] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:14.865031938",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:14.864] [EngineBlockDownloader] executing final downloaded batch to=24455432 toHash=0x97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 blocks=2"
+      ],
+      [
+        "2026-10-12 23:00:15.436145525",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:15.436] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:15.436158227",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:15.436] [EngineBlockDownloader] backward download request successfully processed hash=0x97d4948a7b810ec72d8850fc8dd32f1d7e58140dea1368220ef95d83349df6d4 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:16.000649924",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:16.000] Stopping block builder due to max build time exceeded "
+      ],
+      [
+        "2026-10-12 23:00:24.147490709",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:24.147] [ForkChoiceUpdated] Fork choice: need to download header with hash 52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 "
+      ],
+      [
+        "2026-10-12 23:00:24.147506533",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:24.147] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:24.148181346",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:24.147] [EngineBlockDownloader] processing backward download of blocks hash=0x52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:24.189842621",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:24.189] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:24.914096640",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:24.913] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1756 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193288\""
+      ],
+      [
+        "2026-10-12 23:00:26.733268741",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:26.732] [NewPayload] got quick payload status    payloadStatus=\"&{Status:SYNCING ValidationError:<nil> LatestValidHash:<nil> CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:26.787960411",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:26.787] [ForkChoiceUpdated] got quick payload status status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:27.157181198",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:27.157] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:27.166244258",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:27.165] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:27.241879695",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:27.240] [EngineBlockDownloader] executing final downloaded batch to=24455433 toHash=0x52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 blocks=2"
+      ],
+      [
+        "2026-10-12 23:00:27.749166731",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:27.749] [EngineBlockDownloader] backward download of blocks finished successfully hash=0x52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:27.749274021",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:27.749] [EngineBlockDownloader] backward download request successfully processed hash=0x52657e0eb7eb7a083e0b53df041edd028cd571e55d8faf4c6912a63bf2f50704 trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:29.764569555",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:29.764] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1683 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193290\""
+      ],
+      [
+        "2026-10-12 23:00:32.006931274",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:32.006] [ForkChoiceUpdated] Fork choice: need to download header with hash ea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be "
+      ],
+      [
+        "2026-10-12 23:00:32.006936842",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:32.006] [ForkChoiceUpdated] HandleForkChoice done status=SYNCING"
+      ],
+      [
+        "2026-10-12 23:00:32.007029146",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:32.006] [EngineBlockDownloader] processing backward download of blocks hash=0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:32.014895276",
+        "lodestar-erigon-1",
+        "beacon",
+        "Oct-12 23:00:32.008[chain]           \u001b[31merror\u001b[39m: Failed to run prepareForNextSlot nextEpoch=94, isEpochTransition=false, prepareSlot=2988 - Execution Layer Syncing"
+      ],
+      [
+        "2026-10-12 23:00:32.014921050",
+        "lodestar-erigon-1",
+        "beacon",
+        "Error: Execution Layer Syncing"
+      ],
+      [
+        "2026-10-12 23:00:34.896245989",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:34.896] [EngineBlockDownloader] executing final downloaded batch to=24455434 toHash=0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be blocks=2"
+      ],
+      [
+        "2026-10-12 23:00:35.364978822",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:35.364] [EngineBlockDownloader] backward download of blocks finished successfully hash=0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:35.364983639",
+        "lodestar-erigon-1",
+        "execution",
+        "[INFO] [10-12|23:00:35.364] [EngineBlockDownloader] backward download request successfully processed hash=0xea79b793a0e0b9bfb8566414897832e0ce9e8cab1960337a97a5161529e948be trigger=FcuTrigger"
+      ],
+      [
+        "2026-10-12 23:00:42.846308832",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:42.846] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1760 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193290\""
+      ],
+      [
+        "2026-10-12 23:00:44.133441183",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:44.133] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1688 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193290\""
+      ],
+      [
+        "2026-10-12 23:00:48.144545792",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.144] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:48.150399891",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.150] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:48.152381717",
+        "lodestar-erigon-1",
+        "beacon",
+        "Oct-12 23:00:48.152[execution]        \u001b[32minfo\u001b[39m: Execution client is synced oldState=SYNCING, newState=SYNCED"
+      ],
+      [
+        "2026-10-12 23:00:48.938947013",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.938] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x2d24093c17d1a199d355eace920f7b84d62ff25f0aba31fd7818ee111752ef0d CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:48.943009796",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.942] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:48.956369410",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.956] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x2d24093c17d1a199d355eace920f7b84d62ff25f0aba31fd7818ee111752ef0d CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:00:48.963295782",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:00:48.963] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:00:57.162414352",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:57.162] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1766 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193291\""
+      ],
+      [
+        "2026-10-12 23:00:59.155511062",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:00:59.155] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1693 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193291\""
+      ],
+      [
+        "2026-10-12 23:01:01.088376266",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.088] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:01.209762580",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.209] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:01.856175937",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.855] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xbc4c2cc7d5a056e343b709916c164e285cdc0cf4c5e5089fe081d68137cc2ee7 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:01:01.860558760",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.860] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:01.867056724",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.866] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0xbc4c2cc7d5a056e343b709916c164e285cdc0cf4c5e5089fe081d68137cc2ee7 CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:01:01.872347144",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:01.872] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:12.001655698",
+        "teku-erigon-1",
+        "beacon",
+        "2026-10-12 23:01:12.001 WARN  - \u001b[33mValidator   *** Information about 2 prepared beacon proposer(s) expired at slot 2991\u001b[0m"
+      ],
+      [
+        "2026-10-12 23:01:12.589353376",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:12.589] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:12.660233541",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:12.659] [ForkChoiceUpdated] got quick payload status status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:12.823113522",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:01:12.822] [rpc] served                             conn=172.18.0.3:41432 method=eth_getBlockByNumber reqid=1772 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193292\""
+      ],
+      [
+        "2026-10-12 23:01:14.116519463",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:01:14.116] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1700 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193292\""
+      ],
+      [
+        "2026-10-12 23:01:14.118027831",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:14.117] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x542a48bb2a04345cd9ac65ba59653727afcd4a41446adbd48b5fb95ad8bfd5bf CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:01:14.122988058",
+        "teku-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:14.122] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:14.200306693",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:14.200] [NewPayload] got reply                   payloadStatus=\"&{Status:VALID ValidationError:<nil> LatestValidHash:0x542a48bb2a04345cd9ac65ba59653727afcd4a41446adbd48b5fb95ad8bfd5bf CriticalError:<nil>}\""
+      ],
+      [
+        "2026-10-12 23:01:14.206504283",
+        "lodestar-erigon-1",
+        "execution",
+        "[DBUG] [10-12|23:01:14.206] [ForkChoiceUpdated] HandleForkChoice done status=VALID"
+      ],
+      [
+        "2026-10-12 23:01:19.386339475",
+        "lodestar-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:01:19.386] [rpc] served                             conn=172.18.0.3:41432 method=debug_getBadBlocks reqid=1773 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 23:01:22.065977874",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:01:22.065] [rpc] served                             conn=172.18.0.3:46194 method=debug_getBadBlocks reqid=1701 err=\"the method debug_getBadBlocks does not exist/is not available\""
+      ],
+      [
+        "2026-10-12 23:01:37.183999925",
+        "teku-erigon-1",
+        "execution",
+        "[WARN] [10-12|23:01:37.183] [rpc] served                             conn=172.18.0.3:46194 method=eth_getBlockByNumber reqid=1708 err=\"old data not available due to pruning: requested block 0, blocks are available from block 24193293\""
+      ]
+    ]
+  }
+}

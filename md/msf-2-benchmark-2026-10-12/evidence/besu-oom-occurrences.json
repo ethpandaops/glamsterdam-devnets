@@ -1,0 +1,72 @@
+{
+  "query": "SELECT Timestamp,ResourceAttributes['host.name'] AS host,substring(Body,1,1400) AS body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp >= toDateTime('2026-10-12 13:03:00') AND Timestamp < toDateTime('2026-10-12 22:30:00') AND ResourceAttributes['container.name']='execution' AND (Body LIKE '%OutOfMemoryError%' OR Body LIKE '%Starting Besu%') ORDER BY Timestamp ASC LIMIT 40",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "body"
+    ],
+    "rows": [
+      [
+        "2026-10-12 20:41:21.476444522",
+        "prysm-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:41:21.476444522",
+        "prysm-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:41:24.415220947",
+        "prysm-besu-1",
+        "2026-10-12 20:41:24.413+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-12 20:50:04.067471393",
+        "teku-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:50:04.067471393",
+        "teku-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:50:07.674654750",
+        "teku-besu-1",
+        "2026-10-12 20:50:07.672+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-12 20:55:01.161859375",
+        "nimbus-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:55:01.161859375",
+        "nimbus-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 20:55:04.188494829",
+        "nimbus-besu-1",
+        "2026-10-12 20:55:04.186+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-12 22:12:22.080926093",
+        "lodestar-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 22:12:22.080926093",
+        "lodestar-besu-1",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-12 22:12:25.280986938",
+        "lodestar-besu-1",
+        "2026-10-12 22:12:25.279+0000 | main | INFO  | Besu | Starting Besu"
+      ]
+    ]
+  }
+}

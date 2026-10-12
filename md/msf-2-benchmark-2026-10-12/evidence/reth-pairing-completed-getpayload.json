@@ -1,0 +1,84 @@
+{
+  "command": [
+    "panda",
+    "-o",
+    "json",
+    "prometheus",
+    "query",
+    "devnets",
+    "rate(reth_engine_rpc_get_payload_v6_sum{network=\"glamsterdam-msf-2\"}[10m]) / rate(reth_engine_rpc_get_payload_v6_count{network=\"glamsterdam-msf-2\"}[10m])"
+  ],
+  "result": {
+    "status": "success",
+    "isPartial": false,
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "consensus_client": "lighthouse",
+            "execution_client": "reth",
+            "ingress_user": "glamsterdam-msf-2",
+            "instance": "glamsterdam-msf-2-lighthouse-reth-1",
+            "ip_address": "167.71.87.15",
+            "job": "execution",
+            "network": "glamsterdam-msf-2",
+            "supernode": "True",
+            "tenant_tier": "external",
+            "testnet": "glamsterdam-msf-2",
+            "vm_account_id": "1",
+            "vm_project_id": "0"
+          },
+          "value": [
+            1791846025,
+            "0.0003294229999999953"
+          ]
+        },
+        {
+          "metric": {
+            "consensus_client": "lodestar",
+            "execution_client": "reth",
+            "ingress_user": "glamsterdam-msf-2",
+            "instance": "glamsterdam-msf-2-lodestar-reth-1",
+            "ip_address": "167.71.247.223",
+            "job": "execution",
+            "network": "glamsterdam-msf-2",
+            "supernode": "True",
+            "tenant_tier": "external",
+            "testnet": "glamsterdam-msf-2",
+            "vm_account_id": "1",
+            "vm_project_id": "0"
+          },
+          "value": [
+            1791846025,
+            "0.00018607700000000668"
+          ]
+        },
+        {
+          "metric": {
+            "consensus_client": "teku",
+            "execution_client": "reth",
+            "ingress_user": "glamsterdam-msf-2",
+            "instance": "glamsterdam-msf-2-teku-reth-1",
+            "ip_address": "209.38.253.155",
+            "job": "execution",
+            "network": "glamsterdam-msf-2",
+            "supernode": "True",
+            "tenant_tier": "external",
+            "testnet": "glamsterdam-msf-2",
+            "vm_account_id": "1",
+            "vm_project_id": "0"
+          },
+          "value": [
+            1791846025,
+            "0.00035307600000000766"
+          ]
+        }
+      ]
+    },
+    "stats": {
+      "seriesFetched": "12",
+      "executionTimeMsec": 66
+    }
+  }
+}
