@@ -115,5 +115,8 @@ powfaucet:
   faucetPowDifficulty: 8
 
   extraEnv:
+    # Intercontinental IPv4 connections need longer than Node.js default 250ms.
+    - name: NODE_OPTIONS
+      value: "--network-family-autoselection-attempt-timeout=2000"
     - name: FAUCET_ETH_REST_WALLET_KEY
       value: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.faucet_agents_rest_private_key}>"
