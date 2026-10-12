@@ -46,7 +46,9 @@ teku_container_command_extra_simple_args:
   - --genesis-state=/network-config/genesis.ssz
   - --ignore-weak-subjectivity-period-enabled
   - --p2p-discovery-bootnodes={{ ethereum_cl_bootnodes | join(',') }}
-  - --validators-graffiti={{ ansible_hostname }}
+  # inventory_hostname, not ansible_hostname: the machine is named <network>-<node> (35 bytes for
+  # teku-nethermind-1) and teku rejects graffiti over 32 bytes, so the container restart-loops.
+  - --validators-graffiti={{ inventory_hostname }}
   - --logging=info
   - --Xlog-include-p2p-warnings-enabled
   - --metrics-block-timing-tracking-enabled

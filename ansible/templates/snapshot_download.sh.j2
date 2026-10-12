@@ -61,10 +61,11 @@ wait $!
 [ ! -f "$T/failed" ] || { echo "download failed, datadir is incomplete" >&2; exit 1; }
 # Snapshots come from nodes that ran: drop their p2p identity and saved peers so every
 # host gets its own node id and nothing dials the parent network. geth/erigon nodekey +
-# nodes/, reth discovery-secret + known-peers.json, besu key, ethrex node.key +
-# node_config.json, nethermind <network>/peers + discoveryNodes.
+# nodes/ (geth/ too: an archive packed with the geth/ prefix), reth discovery-secret +
+# known-peers.json, besu key, ethrex node.key + node_config.json, nethermind
+# <network>/peers + discoveryNodes.
 cd /data
-for p in nodekey nodes discovery-secret known-peers.json key node.key node_config.json */peers */discoveryNodes; do
+for p in nodekey nodes geth/nodekey geth/nodes discovery-secret known-peers.json key node.key node_config.json */peers */discoveryNodes; do
   [ ! -e "$p" ] || { rm -rf "$p"; echo "removed $p"; }
 done
 touch /fetcher/done

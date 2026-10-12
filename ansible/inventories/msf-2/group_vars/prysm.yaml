@@ -60,6 +60,6 @@ prysm_validator_container_entrypoint:
 prysm_validator_container_command_extra_args:
   - --chain-config-file=/network-config/config.yaml
   # Hosts that set validator_display_name stamp it; the rest keep the hostname.
-  - --graffiti={{ validator_display_name | default(ansible_hostname) }}
+  - --graffiti={{ validator_display_name | default(inventory_hostname) }}
   - --enable-builder
 prysm_validator_datadir: /data/prysm-validator

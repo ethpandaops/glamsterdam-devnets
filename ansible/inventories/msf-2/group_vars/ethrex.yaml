@@ -9,7 +9,7 @@ ethereum_node_fact_discovery_el_key_cmd:
   ethrex: xxd -p -c32 {{ ethrex_datadir | default('/data/ethrex') }}/chain-{{ ethereum_network_id | trim }}/node.key
 
 # role: ethpandaops.general.snapshot_fetcher (bare RocksDB; ethrex 29 reads <datadir>/chain-<id>,
-# hardcoded: genesis.json does not exist at restore time). The May db is migrated on start.
+# hardcoded: genesis.json does not exist at restore time).
 snapshot_fetcher_out_dir: /data/ethrex/chain-1
 
 # role: ethpandaops.general.ethereum_node

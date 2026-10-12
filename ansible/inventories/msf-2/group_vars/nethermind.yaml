@@ -32,6 +32,9 @@ nethermind_container_command_extra_args:
   - --Init.ChainSpecPath=/network-config/genesis.json
   - --Init.BaseDbPath=nethermind_db/mainnet
   - --FlatDb.Enabled=true
+  # The replay uses TTD 0; stored synthetic headers can have TD below mainnet TTD.
+  # Keep them post-merge during startup re-execution as well as Engine API import.
+  - --Merge.TerminalTotalDifficulty=0
   - --Sync.FastSync=false
   - --Sync.SnapSync=false
   - --JsonRpc.EnabledModules=Eth,Subscribe,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Admin

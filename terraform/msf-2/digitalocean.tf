@@ -31,7 +31,7 @@ variable "digitalocean_regions" {
     "fra1",
     "tor1",
     "blr1",
-    "sfo3" # syd1 dropped: no so1_5-8vcpu-64gb-intel there
+    "sfo2" # so1_5-8vcpu-64gb-intel is unavailable in sfo3 (2026-10-12)
   ]
 }
 
