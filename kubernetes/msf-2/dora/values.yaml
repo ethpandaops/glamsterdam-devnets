@@ -49,6 +49,13 @@ dora:
 
 
   extraEnv:
+    # Shadowfork contract history starts at the restored anchor; older EL history is pruned.
+    - name: EXECUTIONAPI_DEPOSIT_DEPLOY_BLOCK
+      value: "24452538"
+    - name: EXECUTIONAPI_ELECTRA_DEPLOY_BLOCK
+      value: "24452538"
+    - name: EXECUTIONAPI_GLOAS_DEPLOY_BLOCK
+      value: "24452538"
     - name: FRONTEND_PPROF
       value: "true"
     - name: FRONTEND_SHOW_SENSITIVE_PEER_INFOS
