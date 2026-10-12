@@ -582,5 +582,11 @@ vector_config: |
 # Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
 # Firewall EL p2p on every host right after -t init-server (before any EL starts):
 #   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh msf-2
-# TODO(msf-2): the ELs' ethereum_node_fact_discovery_el_enode facts after the first playbook run.
-shadowfork_el_static_enodes: []
+# Live fleet seeds collected from admin_nodeInfo after deployment.
+shadowfork_el_static_enodes:
+  # bootnode-1
+  - enode://1521610424ba20404cce5959bb4dd0e63af6d3da47d2281acb7ecc07f0b991ce91e9e128b251945bfe7994a281408443d4511c4f8be76926646cd62e796679c9@139.59.24.87:30303
+  # buildoor-lighthouse-geth-1
+  - enode://bd88e0d7e6cd3f8094d8d93a499bd25ad1e82c5a5138febd65f39638bf8506088a601c51efbe3896be60a3853c5d96662bbf2b4df4a5416e15006ec21c0efac9@165.227.94.57:30303
+  # buildoor-teku-nethermind-1
+  - enode://93fe6a83d98ce8608e0aa03767d035e88790f1c58882eac233ee3ad9444778dfa3945e6796dc93d1d1775fcb63b83e0723edb9d2a01f1f718d704f5af90763bb@159.65.76.207:30303
