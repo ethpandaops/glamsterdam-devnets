@@ -263,6 +263,11 @@ gen_kubernetes_config_dora_xatu_enabled: true
 gen_kubernetes_config_dora_execution_indexer_traces: false
 gen_kubernetes_config_disabled_services:
   - tracoor
+  # These legacy experimental charts do not match the current Xatu image/config:
+  # Cannon uses the old beaconNodeAddress schema; cl-mimicry is no longer a command.
+  # Node sentries/snoopers use the per-devnet platform ingest pipeline below.
+  - xatu-cannon
+  - xatu-cl-mimicry
   # faucet_private_key (mnemonic-4) is 7702-delegated to a sweeper in mainnet state;
   # faucet-agents uses its own key.
   - faucet
