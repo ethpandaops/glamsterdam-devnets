@@ -53,8 +53,8 @@ ethereum_genesis_network_seed: glamsterdam-msf-2
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# TODO(msf-2): ~45 min after every EL is restored
-ethereum_genesis_timestamp: 0
+# Genesis: 2026-10-12 13:03 UTC (15:03 Europe/Vienna).
+ethereum_genesis_timestamp: 1791810180
 ethereum_genesis_timedelay: 0
 # The jochemnet release (benchmarkoor): mainnet 24350000 + bloat blocks to 24402727, then the
 # release pre-run to 24443820 (crosses Amsterdam at 1769856769), ramped down to 200M, cleaned and
