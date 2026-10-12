@@ -88,6 +88,13 @@ for h in $hosts; do
     else echo "warn $h: no code at $a yet (deploy before Gloas)"; fi
   done
   rpc "$h" admin_nodeInfo '[]' | jq -r --arg h "$h" '.result.id // empty | "\(.) \($h)"' >> "$ids" 2>/dev/null || true
+  # An empty peer set is isolated, even though it contains no foreign addresses.
+  peer_count="$(rpc "$h" net_peerCount '[]' | jq -r '.result // empty' 2>/dev/null || true)"
+  if [[ "$peer_count" =~ ^0x[[:xdigit:]]+$ ]] && (( peer_count > 0 )); then
+    ok "$h EL peers $(( peer_count ))"
+  else
+    bad "$h: no connected EL peers or net_peerCount unavailable"
+  fi
   # every public IPv4 in admin_peers must be ours (private/container addresses are skipped)
   foreign="$(rpc "$h" admin_peers '[]' 2>/dev/null | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | sort -u \
     | grep -vE '^(10|127)\.|^172\.(1[6-9]|2[0-9]|3[01])\.|^192\.168\.' | grep -vxF "$fleet" || true)"
