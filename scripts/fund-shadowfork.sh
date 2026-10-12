@@ -53,16 +53,16 @@ treasury="$(cast wallet address "${wallet[@]}")"
 
 # address target_eth label, in funding order: while the sweep is still paying out,
 # the wallets devnet-8's tooling actually sends from come first - 12 and 21 buildoor wallets
-# (builders must deposit and finalize before the fork), 9 goomy/spamoor, 4 faucet,
+# (builders must deposit and finalize), 1 tx-fuzz transactions, 9 goomy/spamoor, 4 faucet,
 # 10 assertoor, 3 mev-flood user, 7 manual deposits, 20 - then the agent faucet,
 # then the remaining premine accounts.
 {
-  for i in 12 21 9 4 10 3 7 20; do
+  for i in 12 21 1 9 4 10 3 7 20; do
     echo "$(cast wallet address --mnemonic "$tmp/mnemonic" --mnemonic-index "$i") $each_eth mnemonic-$i"
   done
   echo "0x877d64e72b7e1f5034aec55d910c877b2b7104da $agents_eth faucet-agents-claims"
   echo "0x2aa5f02f347089910eea88279c405149ec8540d5 $agents_eth faucet-agents-status"
-  for i in 1 2 5 6 8 11 13 14 15 16 17 18 19; do
+  for i in 2 5 6 8 11 13 14 15 16 17 18 19; do
     echo "$(cast wallet address --mnemonic "$tmp/mnemonic" --mnemonic-index "$i") $each_eth mnemonic-$i"
   done
   echo "0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467 $static_eth arbitrum"

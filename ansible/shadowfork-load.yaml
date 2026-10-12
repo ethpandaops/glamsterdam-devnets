@@ -1,0 +1,22 @@
+# Start explicitly after the shadowfork is healthy and tooling wallets are funded.
+- name: Run shadowfork transaction load
+  hosts: bootnode
+  become: true
+  vars_files:
+    - "{{ inventory_dir }}/group_vars/tx_fuzz_txs.yaml"
+  roles:
+    - role: ethpandaops.general.tx_fuzz
+      tags: [tx_fuzz, tx_fuzz_txs]
+
+- name: Run shadowfork blob load
+  hosts: bootnode
+  become: true
+  vars_files:
+    - "{{ inventory_dir }}/group_vars/tx_fuzz_blobs.yaml"
+  roles:
+    - role: ethpandaops.general.tx_fuzz
+      vars:
+        tx_fuzz_container_name: "{{ tx_fuzz_blobs_container_name }}"
+        tx_fuzz_container_image: "{{ tx_fuzz_blobs_container_image }}"
+        tx_fuzz_container_command: "{{ tx_fuzz_blobs_container_command }}"
+      tags: [tx_fuzz, tx_fuzz_blobs]
