@@ -1,0 +1,10 @@
+[
+  {
+    "client": "nimbus-eth1",
+    "path": "execution_chain/rpc/rpc_server.nim",
+    "runtime_commit": "705f4d9aced29de0049d7ad5f686b0e585f3f38d",
+    "upstream_commit": "831663a27c9fa845197ee13a0a9f289cf2fee940",
+    "identical_file": true,
+    "diff": ""
+  }
+]

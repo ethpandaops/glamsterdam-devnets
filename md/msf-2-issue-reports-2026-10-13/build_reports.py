@@ -68,10 +68,23 @@ def main():
         files = {"report.md": md_path, "network/config.yaml": REPO / "network-configs/msf-2/metadata/config.yaml"}
         files.update({"original-evidence/" + n: OLD / "evidence" / n for n in PRIOR[i]})
         files.update({"follow-up-evidence/" + n: ROOT / "evidence" / n for n in NEW[i]})
-        for n in ["current-network.json", "source-revisions.json", "source-comparison.json"]:
+        for n in ["current-network.json", "source-revisions.json"]:
             files["follow-up-evidence/" + n] = ROOT / "evidence" / n
+        clients = [{"besu"}, {"teku"}, {"nimbus-eth1"}, {"erigon", "teku"}, {"nimbus-eth2", "reth"}][i]
+        scoped = ROOT / "evidence" / ("source-comparison-" + str(i+1) + ".json")
+        scoped.write_text(json.dumps([r for r in json.loads((ROOT / "evidence/source-comparison.json").read_text()) if r["client"] in clients], indent=2))
+        files["follow-up-evidence/source-comparison.json"] = scoped
+        figures = re.findall(r"\]\(\.\./figures/([^)]+)\)", text)
+        for figure in figures:
+            files["figures/" + figure] = ROOT / "figures" / figure
         if i == 0:
-            files["besu-memory-and-gc.png"] = OLD / "besu-memory-and-gc.png"
+            files["profiling/operations.md"] = ROOT / "besu-profiling.md"
+            for name in ["besu-allocation-sample.json", "besu-profiling-pipeline-test.json", "besu-profiling-rollout.json"]:
+                if (ROOT / "evidence" / name).exists():
+                    files["follow-up-evidence/" + name] = ROOT / "evidence" / name
+            for name in ["besu-profiling-entrypoint.sh", "besu-profiling-checkpoint.py"]:
+                files["profiling/" + name] = REPO / "ansible/files" / name
+        if i == 0:
             files["workload.md"] = OLD / "workload.md"
         if i == 1:
             for n in ["CheckStoredRecord.java", "InspectEnvelope.java", "teku_reproduce.sh"]:
@@ -99,7 +112,7 @@ def main():
                 path, sha = OLD / target, OLD_SHA
             else:
                 path, sha = (md_path.parent / target).resolve(), source_sha
-            kind = "raw" if path.suffix == ".png" else "blob"
+            kind = "raw" if path.suffix in [".png", ".svg"] else "blob"
             return "](" + f"https://github.com/ethpandaops/glamsterdam-devnets/{kind}/{sha}/" + str(path.relative_to(REPO)) + ")"
 
         issue_text = re.sub(r"\]\(([^)]+)\)", issue_link, text)
@@ -115,7 +128,9 @@ def main():
                 path, sha = (md_path.parent / target).resolve(), source_sha
             if not path.exists():
                 raise ValueError(f"Unresolved report link: {target}")
-            if attr == "src" and path.suffix == ".png":
+            if attr == "src" and path.suffix == ".svg":
+                target = "data:image/svg+xml;base64," + base64.b64encode(path.read_bytes()).decode()
+            elif attr == "src" and path.suffix == ".png":
                 image_buffer = BytesIO()
                 Image.open(path).save(image_buffer, format="WEBP", lossless=True, method=6)
                 target = "data:image/webp;base64," + base64.b64encode(image_buffer.getvalue()).decode()

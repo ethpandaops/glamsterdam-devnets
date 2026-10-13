@@ -1,0 +1,58 @@
+---
+- name: Check profiling filesystem free space
+  ansible.builtin.command: df -PB1 /data
+  check_mode: false
+  register: besu_profiling_disk
+  changed_when: false
+
+- name: Require space for a heap dump and retained recordings
+  ansible.builtin.assert:
+    that:
+      - besu_profiling_disk.stdout_lines[-1].split()[3] | int >= besu_profiling_minimum_free_bytes | int
+    fail_msg: Not enough free space for Besu OOM profiling
+
+- name: Ensure Besu account exists
+  ansible.builtin.user:
+    name: "{{ besu_user | default('besu') }}"
+
+- name: Create private profiling directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ besu_user | default('besu') }}"
+    group: "{{ besu_user | default('besu') }}"
+    mode: "0700"
+  loop:
+    - "{{ besu_profiling_host_dir }}"
+    - "{{ besu_profiling_host_dir }}/runs"
+
+- name: Install profiling entrypoint
+  ansible.builtin.copy:
+    src: besu-profiling-entrypoint.sh
+    dest: "{{ besu_profiling_host_dir }}/entrypoint.sh"
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Install checkpoint collector
+  ansible.builtin.copy:
+    src: besu-profiling-checkpoint.py
+    dest: /usr/local/sbin/besu-profiling-checkpoint
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: Install checkpoint systemd units
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/etc/systemd/system/{{ item }}"
+    mode: "0644"
+  loop:
+    - besu-profiling.service
+    - besu-profiling.timer
+  register: besu_profiling_units
+
+- name: Reload checkpoint unit files
+  when: not ansible_check_mode
+  ansible.builtin.systemd_service:
+    daemon_reload: "{{ besu_profiling_units.changed }}"

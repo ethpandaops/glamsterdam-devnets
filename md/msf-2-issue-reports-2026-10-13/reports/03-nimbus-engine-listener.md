@@ -3,6 +3,16 @@
 `nimbus-nimbusel-1` has a persistent outage of its Engine API listener while ordinary execution RPC, peer activity and the process remain live. The engine listener's internal accept queue is full. This adds runtime evidence to the Nimbus HTTP accept-loop failure class investigated on devnet-8. The private experiment below confirms the reset/identification mechanism; the initiating live event remains untraced.
 
 
+## Why this warrants Nimbus EL engineering time
+
+The private test reproduces the availability failure **without Gloas traffic, peers or payload construction**. A queued TCP reset permanently ends acceptance on one HTTP listener while the process and the other listener keep working. That makes this a general RPC transport-resilience problem, not only an artifact of an unusually heavy execution workload.
+
+The live msf-2 occurrence disables the **Engine** listener rather than ordinary RPC: the internal accept queue stays full and authenticated requests time out for hours. These nodes are unstaked observers, so this report does not claim lost validator duties. For a validator-backed deployment, however, losing Engine communication removes the paired CL's ability to validate execution. A process-up or ordinary-RPC-only health check cannot detect this failure mode.
+
+![Controlled disconnect comparison and live paired Engine probe](../figures/03-nimbus-listener-controls.png)
+
+For the existing **#4923** discussion, the report adds an Engine-only occurrence, a same-image reset/FIN control and the exact failing syscall. The bounded repair target is the accepted-transport identification failure: close that connection and keep accepting clients. The regression should verify subsequent authenticated Engine requests, ordinary RPC and process health separately. The initiating live reset was not captured; the private experiment establishes the mechanism independently.
+
 ## Further investigation: confirmed private failure mechanism, known upstream issue
 
 **Issue type:** occurrence follow-up to open [Nimbus EL #4923](https://github.com/status-im/nimbus-eth1/issues/4923). **Owner:** Nimbus EL RPC / transport. **Reproduction mode:** live read-only verification plus fresh minimal listener fault injection on the same released image. **Network impact:** this pairing is an observer with no validators.
@@ -41,8 +51,6 @@ docker network create --internal msf2-investigation
 docker run -d --name msf2-nimbus-rst-repro --network msf2-investigation   --cpus 2 --memory 2g statusim/nimbus-eth1:v0.4.2 executionClient   --data-dir=/tmp/case --discv5=false --rpc --http-address=0.0.0.0   --engine-api --engine-api-address=0.0.0.0 --log-level=DEBUG --log-format=nocolors
 python3 tests/nimbus_listener.py
 ```
-
-## Original occurrence and runtime evidence
 
 ## Environment and scope
 

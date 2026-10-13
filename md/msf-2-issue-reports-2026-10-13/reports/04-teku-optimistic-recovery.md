@@ -3,6 +3,16 @@
 During the release rollout, Teku 26.10.0 on the Geth and Erigon pairings followed the beacon head but remained optimistic for several minutes and skipped validator attestations. The ELs continued importing canonical execution blocks while Engine interactions returned SYNCING. During later read-only monitoring, both Teku–Erigon and Lodestar–Erigon temporarily returned to optimism without a restart. This is worth a focused synchronization and recovery test with the consensus and execution-client teams; the current evidence does not identify a single faulty component.
 
 
+## Why this warrants Erigon and CL interoperability time
+
+The initial recurrence affects **two independent external consensus clients sharing Erigon 3.7.1**, without an operator restart. It spans an execution unwind, repeated SYNCING replies, skipped Teku duties and a Lodestar assigned proposal rejected with HTTP 503. Both pairings have 1,000 validators. A protocol-valid SYNCING response can still have a substantial validator-performance cost when recovery extends across proposal deadlines.
+
+The overnight follow-up supplies **22 further Teku optimistic activation warnings** after rollout. This makes startup-only explanations insufficient and gives the team repeated timestamps to trace. The warning count is not a count of measured outage durations, and the later query does not show every episode affecting Lodestar as well.
+
+![Erigon unwind and duty disruption events with later activation warnings](../figures/04-erigon-recovery-timeline.png)
+
+This is worth a bounded **recovery latency investigation**, rather than a claim that Erigon violates Engine semantics. The report provides the parent/replacement hashes and arrival order; both initial quick newPayload replies take approximately the released 500 ms readiness budget. Instrument that branch and replay the overlap privately to distinguish execution readiness, retry scheduling and parent redownload over the three-static-peer topology. A useful outcome is convergence once the required inputs are present and readiness before the next assigned duty. The separate Teku–Geth rollout history is not attributed to this Erigon path.
+
 ## Further investigation: recurring Erigon recovery delays, not an isolated rollout event
 
 **Issue type:** synchronization / performance investigation. **Owners:** Erigon Engine/execution, with Teku and Lodestar interoperability input. **Suggested priority:** medium pending controlled isolation. **Reproduction mode:** live recurrence plus source/timing trace; no fresh controlled reorg replay.
@@ -40,8 +50,6 @@ The [canonical chain context](evidence/erigon-recurrence-chain-context.json) has
 **Smallest client-team replay:** save the pre-unwind state and replay FCU(24455425), overlapping newPayload(replacement 24455426), subsequent FCUs and retries at recorded timings. Log quick-status branch, readiness owner, request queue, downloaded parent hashes and validation completion. A useful regression should check bounded convergence after inputs become available and successful proposal at the next assigned duty. No claim is made that an isolated fixture already reproduces the entire two-minute delay.
 
 The Teku–Geth rollout interval below remains a **separate historical comparison** with multiple operator interventions. It is not attributed to this Erigon readiness path. A bounded upstream search found no exact report for this msf-2 sequence; broad Caplin issues are not evidence of a duplicate in an external-CL setup.
-
-## Original occurrence and runtime evidence
 
 ## Environment and impact
 

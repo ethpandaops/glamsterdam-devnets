@@ -1,0 +1,87 @@
+---
+- name: Roll out Besu profiling one node at a time
+  hosts: besu
+  serial: 1
+  strategy: linear
+  any_errors_fatal: true
+  become: true
+  pre_tasks:
+    - name: Require the intended profiling deployment
+      ansible.builtin.assert:
+        that:
+          - ethereum_network_name == 'glamsterdam-msf-2'
+          - ethereum_node_el == 'besu'
+          - besu_profiling_enabled | bool
+    - name: Read the live execution peer configuration
+      ansible.builtin.command:
+        argv:
+          - docker
+          - inspect
+          - "{{ besu_container_name }}"
+          - --format
+          - "{{ '{{json .Config.Cmd}}' }}"
+      register: besu_profiling_execution_command
+      changed_when: false
+      check_mode: false
+      no_log: true
+    - name: Extract the live bootstrap argument
+      ansible.builtin.set_fact:
+        besu_profiling_live_bootnodes: >-
+          {{ besu_profiling_execution_command.stdout | from_json |
+          select('match', '^--bootnodes=') | list }}
+    - name: Require one explicit bootstrap argument
+      ansible.builtin.assert:
+        that:
+          - besu_profiling_live_bootnodes | length == 1
+        fail_msg: Refusing to replace the live peer topology with an unresolved inventory default
+    - name: Preserve live peer seeds during profiling rollout
+      ansible.builtin.set_fact:
+        ethereum_el_bootnodes: "{{ besu_profiling_live_bootnodes[0][12:].split(',') | reject('equalto', '') | list }}"
+    - name: Prepare profiling directories and collector
+      ansible.builtin.import_tasks: tasks/besu-profiling.yaml
+  tasks:
+    - name: Configure execution through the standard node role
+      ansible.builtin.import_role:
+        name: ethpandaops.general.ethereum_node
+        tasks_from: setup_el.yaml
+    - name: Wait for an execution-valid consensus head
+      when: not ansible_check_mode
+      ansible.builtin.uri:
+        url: http://127.0.0.1:5052/eth/v1/node/syncing
+        return_content: true
+      register: besu_profiling_health
+      until:
+        - besu_profiling_health.status == 200
+        - not besu_profiling_health.json.data.is_syncing
+        - not besu_profiling_health.json.data.is_optimistic
+        - not besu_profiling_health.json.data.el_offline
+        - besu_profiling_health.json.data.sync_distance | int <= 2
+      retries: 60
+      delay: 12
+    - name: Enable checkpoint timer after execution starts
+      when: not ansible_check_mode
+      ansible.builtin.systemd_service:
+        name: besu-profiling.timer
+        enabled: true
+        state: started
+    - name: Verify a real JFR checkpoint
+      when: not ansible_check_mode
+      ansible.builtin.systemd_service:
+        name: besu-profiling.service
+        state: started
+    - name: Observe the healthy node before progressing
+      when: not ansible_check_mode
+      ansible.builtin.pause:
+        seconds: "{{ besu_profiling_soak_seconds | default(60) }}"
+    - name: Require execution to remain healthy after observation
+      when: not ansible_check_mode
+      ansible.builtin.uri:
+        url: http://127.0.0.1:5052/eth/v1/node/syncing
+        return_content: true
+      register: besu_profiling_after_soak
+      failed_when: >-
+        besu_profiling_after_soak.status != 200 or
+        besu_profiling_after_soak.json.data.is_syncing or
+        besu_profiling_after_soak.json.data.is_optimistic or
+        besu_profiling_after_soak.json.data.el_offline or
+        besu_profiling_after_soak.json.data.sync_distance | int > 2

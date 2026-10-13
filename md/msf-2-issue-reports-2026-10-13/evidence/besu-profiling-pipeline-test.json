@@ -1,0 +1,17 @@
+{
+  "mode": "private JVM OOM fixture on exact Besu image; substituted launcher, not an Ethereum workload reproduction",
+  "checkpoint_passed": true,
+  "distinct_restart_directories": true,
+  "runs": [
+    {
+      "run": "20261013T094248Z-f7a30c71-db24-4f11-a839-370d24538648",
+      "heap_bytes": 34096081,
+      "heap_mode": "0o600"
+    },
+    {
+      "run": "20261013T094304Z-0f24dd49-a995-4a7e-a382-a9bcd7480c48",
+      "heap_bytes": 34801577,
+      "heap_mode": "0o600"
+    }
+  ]
+}

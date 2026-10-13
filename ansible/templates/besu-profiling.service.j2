@@ -1,0 +1,13 @@
+[Unit]
+Description=Save Besu allocation and runtime profiling checkpoint
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/besu-profiling-checkpoint --root {{ besu_profiling_host_dir }} --container {{ besu_container_name }} --keep {{ besu_profiling_checkpoint_keep }} --minimum-free {{ besu_profiling_minimum_free_bytes }}
+UMask=0077
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=100

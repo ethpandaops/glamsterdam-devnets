@@ -160,11 +160,29 @@
 
 - hosts: ethereum_node
   become: true
+  pre_tasks:
+    - name: Prepare Besu profiling before execution starts
+      ansible.builtin.import_tasks: tasks/besu-profiling.yaml
+      when:
+        - ethereum_node_el == 'besu'
+        - besu_profiling_enabled | default(false) | bool
+      tags: [ethereum, ethereum_node, besu_profiling]
   roles:
     - role: ethpandaops.general.ethereum_node
       tags: [ethereum, ethereum_node]
     - role: ethpandaops.general.brakebear
       tags: [brakebear]
+  post_tasks:
+    - name: Enable Besu profiling checkpoint timer
+      ansible.builtin.systemd_service:
+        name: besu-profiling.timer
+        enabled: true
+        state: started
+      when:
+        - ethereum_node_el == 'besu'
+        - besu_profiling_enabled | default(false) | bool
+        - not ansible_check_mode
+      tags: [ethereum, ethereum_node, besu_profiling]
 
 - hosts: bootnode
   become: true

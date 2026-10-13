@@ -1,0 +1,133 @@
+{
+  "captured_at": "2026-10-13T09:52:55.877120+00:00",
+  "host": "nimbus-besu-1",
+  "checkpoint_at": "2026-10-13T09:49:23.120838+00:00",
+  "checkpoint_bytes": 11731607,
+  "mode": "default JFR ObjectAllocationSample; sampled allocation weights, not retained heap or an OOM reproducer",
+  "sample_count": 27249,
+  "total_sampled_weight_bytes": 72517214664,
+  "classes": [
+    [
+      "[Ljava/lang/Object;",
+      22556903968
+    ],
+    [
+      "[B",
+      18122788560
+    ],
+    [
+      "[J",
+      3597407056
+    ],
+    [
+      "[I",
+      2213210208
+    ],
+    [
+      "org.hyperledger.besu.ethereum.rlp.BytesValueRLPInput$$Lambda/0x000000009a8a1c00",
+      1177460504
+    ],
+    [
+      "java/util/ArrayList$Itr",
+      1133605600
+    ],
+    [
+      "org/apache/tuweni/bytes/ArrayWrappingBytes",
+      1063334032
+    ],
+    [
+      "java/util/stream/ReferencePipeline$Head",
+      1049438768
+    ],
+    [
+      "java/lang/String",
+      983521536
+    ],
+    [
+      "io/vertx/ext/web/impl/RoutingContextDecorator",
+      891791000
+    ],
+    [
+      "java/math/BigInteger",
+      675939208
+    ],
+    [
+      "java/util/ArrayList",
+      631404792
+    ],
+    [
+      "org.hyperledger.besu.ethereum.api.jsonrpc.internal.QosTimer$$Lambda/0x000000009aa25000",
+      595797120
+    ],
+    [
+      "[C",
+      565131016
+    ],
+    [
+      "org/bouncycastle/crypto/digests/KeccakDigest",
+      486862968
+    ]
+  ],
+  "first_besu_frames": [
+    [
+      "org.hyperledger.besu.ethereum.eth.transactions.NewPooledTransactionHashesMessageSender.sendTransactionAnnouncementsToPeer",
+      21095958296
+    ],
+    [
+      "no Besu frame",
+      14095603200
+    ],
+    [
+      "org.hyperledger.besu.plugin.services.storage.rocksdb.segmented.RocksDBSnapshot.get",
+      7159215840
+    ],
+    [
+      "org.hyperledger.besu.ethereum.p2p.rlpx.handshake.HandshakeSecrets.snapshot",
+      4855232176
+    ],
+    [
+      "org.hyperledger.besu.crypto.Hash.digestUsingAlgorithm",
+      1351731912
+    ],
+    [
+      "org.hyperledger.besu.ethereum.rlp.BytesValueRLPInput.prepareCurrentItem",
+      1177460504
+    ],
+    [
+      "org.hyperledger.besu.ethereum.eth.manager.EthPeer.outstandingRequests",
+      777011392
+    ],
+    [
+      "org.hyperledger.besu.ethereum.trie.patricia.StoredNodeFactory.decodeBranch",
+      681364256
+    ],
+    [
+      "org.hyperledger.besu.evm.Code.calculateJumpDestBitMask",
+      646051776
+    ],
+    [
+      "org.hyperledger.besu.ethereum.api.jsonrpc.internal.QosTimer.timerHandler",
+      595797120
+    ],
+    [
+      "org.hyperledger.besu.ethereum.eth.manager.EthPeer.lambda$outstandingRequests$0",
+      566144464
+    ],
+    [
+      "org.hyperledger.besu.ethereum.rlp.BytesValueRLPOutput.<init>",
+      561616056
+    ],
+    [
+      "org.hyperledger.besu.ethereum.rlp.BytesValueRLPOutput.encoded",
+      537008384
+    ],
+    [
+      "org.hyperledger.besu.ethereum.p2p.rlpx.framing.Framer.processFrame",
+      518081624
+    ],
+    [
+      "org.hyperledger.besu.ethereum.p2p.rlpx.framing.Framer.frameMessage",
+      483738920
+    ]
+  ]
+}

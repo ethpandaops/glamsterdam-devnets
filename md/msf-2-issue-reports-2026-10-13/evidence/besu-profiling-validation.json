@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-13T10:16:16.797226+00:00",
+  "ansible_syntax_main": "passed",
+  "ansible_lint": "passed, production profile; isolated Python 3.12 environment with existing tool versions (24.6.0/core 2.17.14)",
+  "standalone_canary_check_mode": "passed; changed=0, failed=0; no supplied peer overrides",
+  "private_pipeline": "OOM dump + unique restart directories + valid JFR checkpoint passed",
+  "live_nodes": 6,
+  "live_health_gates": "canonical head, finality, EL/CL sync clear, EL peers and zero unexpected EL restarts; CL/validator container identities preserved",
+  "raw_live_profiling_artifacts_published": false
+}

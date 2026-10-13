@@ -5,6 +5,18 @@ Nimbus consensus v26.10.0 on `nimbus-reth-1` missed **all 12 assigned proposer d
 This is additional runtime evidence for the previously investigated Nimbus remote-only proposal gap. It is worth Nimbus consensus attention; Reth's local construction latency should be investigated separately rather than assumed to have the same root cause.
 
 
+## Why this warrants Nimbus CL engineering time
+
+Nimbus–Reth lost **all 12 assigned canonical proposals** in the nine completed epochs examined, despite receiving and validating a remote bid before each duty. Those 12 slots account for **75% of the network's 16 canonical misses** in that census. The node otherwise stayed synced and execution-valid, so normal head/finality checks hide this proposer-liveness problem. These figures describe this pairing and this window, not every Nimbus pairing or an overall client ranking.
+
+The coupling matters specifically for Gloas: an external builder should give the proposer a candidate even when local construction misses its deadline, provided all eligibility, availability and parent-request rules are met. The released integrated-proposer guard exits on a missing local candidate before external selection, and that prerequisite still appears in the inspected unstable source. A working remote-only path would prevent local EL construction failures from automatically becoming lost proposer opportunities.
+
+![Canonical proposal impact and released local-candidate prerequisite](../figures/05-nimbus-proposal-impact.png)
+
+The client-team regression is small and specific compared with rerunning the entire network: supply an eligible external bid, make local getPayload time out/error/return no candidate, and assert one valid block is signed and published with the correct parent execution requests. Cover the integrated and REST callers separately. Removing one guard is insufficient because later code consumes local payload data.
+
+Reth deserves a separate timing trace for the supplied payload job, but the CL liveness gap can be tested independently of the EL's exact delay cause. The later **75 timeout events and six publications** show intermittent progress; they do not establish a permanent deadlock or a second canonical-duty census.
+
 ## Further investigation: local-candidate prerequisite persists on release and upstream
 
 **Issue type:** Gloas proposal fallback / client liveness. **Primary owner:** Nimbus CL. **Secondary investigation:** Reth local payload completion. **Priority:** high for preventable missed proposals. **Reproduction mode:** repeated live duties plus exact-source reachability; no fresh isolated full proposal-path test.
@@ -35,8 +47,6 @@ Reth release commit `3d592ece6de8c4559987416a544fc215fd6d6921` resolves payload 
 This is a new released-runtime occurrence of the existing internal remote-bid-fallback investigation, not a newly invented source failure class. A bounded upstream issue search did not locate an exact open fallback issue; no issue has been filed by this task.
 
 **Client-team regression request:** provide an eligible external bid before slot start; force the local EL to return no candidate, error and timeout in separate cases; verify exactly one valid beacon block is signed/published using the external bid with the correct parent execution requests and availability checks. Also test no-eligible-bid behavior and both integrated and REST callers. For Reth, trace the supplied job ID across finalization and cancellation under the same workload and record response latency against Nimbus's 1.5-second budget.
-
-## Original occurrence and runtime evidence
 
 ## Environment and impact
 

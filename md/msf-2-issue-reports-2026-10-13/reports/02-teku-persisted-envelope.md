@@ -1,7 +1,17 @@
 # Teku rejects a persisted payload envelope during restart
 
-Teku 26.10.0 repeatedly failed to initialize storage on `teku-erigon-1` because reconstruction of a stored blinded envelope yielded a zero parent execution hash. The corresponding canonical beacon block and independently retrieved payload both contain the same nonzero parent hash. A finalized checkpoint restore recovered the node while preserving its validator keys and slashing protection.
+Teku 26.9.1 and 26.10.0 both fail to restart from a saved msf-2 beacon database containing an inconsistent blinded payload envelope. The same stored block passes metadata reconstruction with its independently fetched canonical envelope. A portable fixture reproduces the reader failure; the original record-creation path remains unresolved.
 
+
+## Why this warrants Teku engineering time
+
+This is a **restart availability failure for a node with 1,000 validators**, not merely an optimistic status warning. Both released readers reject the same persisted record before the node can resume normal operation. Recovery required a fresh beacon database and checkpoint restoration; validator keys and slashing protection were preserved, but ordinary restart could not recover the node.
+
+The positive control is the main reason this is efficient to triage: **the same stored beacon block succeeds with the canonical envelope and fails with the saved envelope**. The small SSZ fixture and supplied runner reproduce consumption of the bad record without validator keys, the original 147 MiB database, peers, an EL or the benchmarking infrastructure. Both older and newer released readers fail on the saved database, so an upgrade-only theory should not divert the investigation.
+
+![Teku offline restore and extracted-record control outcomes](../figures/02-teku-record-controls.png)
+
+The remaining work is narrow: find the writer or incomplete-payload path that persisted the default-looking header, and prevent an inconsistent record from making subsequent startup unrecoverable. Keep the commitment validation; add a fixture-based storage-restart regression and a writer-path test once creation is isolated. This is high priority for local node availability, with no evidence here of a network-wide finality failure or a signing/slashing failure.
 
 ## Further investigation: isolated restore and portable record reproduction
 
@@ -55,8 +65,6 @@ The release [storage writer](https://github.com/Consensys-Incorporated/teku/blob
 [Upstream #11153](https://github.com/Consensys-Incorporated/teku/issues/11153) concerns zero-hash Gloas fork-choice status; [#11246](https://github.com/Consensys-Incorporated/teku/issues/11246) concerns envelope-range selection. Neither title establishes a duplicate of this exact record/startup failure. A bounded upstream search found no exact matching report; it is not an exhaustive guarantee.
 
 **Client-team request:** trace creation and persistence of incomplete/default payload headers; add a storage restart regression using these fixtures and a writer-path regression once isolated. Keep the mismatch validation. A recovery strategy should repair/refetch inconsistent metadata without silently accepting mismatching execution commitments.
-
-## Original occurrence and runtime evidence
 
 ## Environment and impact
 

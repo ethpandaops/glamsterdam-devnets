@@ -1,0 +1,11 @@
+[Unit]
+Description=Save Besu JFR checkpoint every five minutes
+
+[Timer]
+OnActiveSec=1min
+OnUnitActiveSec=5min
+AccuracySec=15s
+Unit=besu-profiling.service
+
+[Install]
+WantedBy=timers.target

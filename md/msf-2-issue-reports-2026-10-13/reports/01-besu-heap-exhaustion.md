@@ -3,6 +3,32 @@
 Besu 26.9.0 exhausted its Java heap on four client pairings during the msf-2 benchmark. The failures interrupt execution validation even though Docker restarts the process. This deserves Besu memory and garbage collection profiling under the benchmark workload.
 
 
+## Why this warrants Besu engineering time
+
+Four CL pairings independently exhausted an explicit **16 GiB Java heap** on the same released EL. This makes a single consensus-client integration or an undersized default heap an incomplete explanation. Automatic restart restored progress, but it also interrupted execution validation; the same observation window contains Engine timeouts and late Besu-backed proposals. Network-wide finality continuing does not remove this per-node availability cost.
+
+The benchmark is useful because it separates the **200M gas ceiling** from the concrete load: five transactions walking thousands of distinct addresses, with large code present in the sampled state. This is a memory-scaling and response-latency case for Gloas/BAL execution, not a claim that every 200M-gas block fails. A larger heap may change the threshold without identifying an allocation or retention problem.
+
+The follow-up for **#11248** now supplies an explicit heap budget, four release-image occurrences, GC/heap history and current allocation evidence. That narrows the next task: correlate a future OOM's retained objects with import/proposal allocation stacks, rather than start from an unexplained process exit. The first current canary recording already identifies concrete allocation sites to investigate; it does not identify the objects retained during the historical OOM.
+
+![Current Besu allocation samples grouped by first Besu frame](../figures/01-besu-allocation-samples.svg)
+
+The chart uses **27,249 samples** from a checkpoint ending at 09:49:23 UTC. Transaction announcements account for about 29.1% of its sampled allocation weight, with RocksDB reads another visible contributor. These are estimates of current allocation traffic, not retained heap, and the later txpool/workload conditions differ from the original OOM interval. [Sanitized allocation summary](../evidence/besu-allocation-sample.json).
+
+A useful client-team outcome is bounded memory and timely Engine responses during sustained import plus proposal work. Use the captured workload and new profiles to compare allocation/retention across parallel execution and prefetch in an isolated run, changing one variable at a time.
+
+## Profiling deployed on all six Besu pairings
+
+OOM dump capture, rotating GC/safepoint logs and a named **default-settings JFR recording** are active on all six msf-2 Besu nodes. The rollout preserved Besu 26.9.0, the 16 GiB heap, live peer seeds and each beacon/validator container. Each node passed a canonical-head/finality health gate and produced a nonempty, parseable checkpoint with allocation samples. [Deployment evidence](../evidence/besu-profiling-rollout.json).
+
+Every JVM start creates a unique timestamp/UUID directory under `/data/besu-profiling/runs`. JFR retains a rolling 30-minute / 256 MiB window; checkpoints capture up to five minutes / 64 MiB every five minutes. The collector normally retains 24 checkpoints and preserves runs containing an OOM heap dump. GC logs rotate at ten 50 MiB files per run. A 40 GiB free-space reserve is checked. Incident directories still need private archival and disk monitoring; heap dumps are not automatically deleted.
+
+The private smoke test on the exact Java image generated an OOM dump before exit and a second dump in a distinct directory after restart. Live checkpoints validate recording capture; **they do not reproduce the historical Besu OOM or supply its retained-object graph**. [Pipeline test](../evidence/besu-profiling-pipeline-test.json). The JFR exit-file test showed why periodic checkpoints are needed instead of relying on `dumponexit` alone.
+
+Raw HPROF/JFR artifacts remain private on the nodes because JVM memory can contain authentication material. This public report contains sanitized sample aggregates, figures and configuration. See the [profiling operations guide](../besu-profiling.md).
+
+Lighthouse–Besu remained EL-offline briefly after its execution restart: Engine service was listening at 09:59:48, while Lighthouse logged Engine online at 10:03:44. The rollout held until it caught up and passed the health gate at 10:06:08. It recovered without a CL or proxy restart. This induced restart interval is not counted as another spontaneous heap failure or attributed to profiling overhead.
+
 ## Further investigation: released-runtime repeat of Besu issue 11248
 
 **Issue type:** follow-up / release and workload variant of [Besu #11248](https://github.com/besu-eth/besu/issues/11248), which is open as checked on October 13. **Reproduction mode:** repeated live occurrences; no fresh controlled OOM reproduction. **Owner:** Besu. **Priority:** high for heap exhaustion under sustained load.
@@ -31,8 +57,6 @@ The observed Engine stack reaches the release's [parallel transaction result wai
 | Parallel execution deadlock causes the OOM | A waiting future is observed; no wait-cycle or allocation profile establishes this causal chain. |
 
 **Smallest remaining client-team experiment:** preserve the pre-failure state and exact Engine payload/build inputs, run repeated import and proposal work privately with the same heap/CPU budget, and capture allocation plus post-GC retained memory. Compare sequential/parallel execution and prefetch with one variable changed at a time. Do not select block 24454848 as the crashing payload merely because it was the last completed import.
-
-## Original occurrence and runtime evidence
 
 ## Environment
 
@@ -71,7 +95,7 @@ An earlier [slot-2885 capture](https://github.com/ethpandaops/glamsterdam-devnet
 
 At slot **2977**, Grandine–Besu also published a builder-backed beacon block late, at **22:58:27.154** (approximately 3.154 seconds into the slot), following a local Engine request error and proposal restart. [The focused capture](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/grandine-besu-slot2977.json) includes Besu's five-second selection interruption and Grandine's eventual block publication. The completed epoch-93 census classifies the canonical slot as missing. That timing is correlated with local execution delay; the capture does not isolate all propagation or fork-choice causes of the absent canonical block.
 
-![Besu heap and garbage collection histories](besu-memory-and-gc.png)
+![Besu heap and garbage collection histories](../figures/besu-memory-and-gc.png)
 
 The [captured workload](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/workload.md) contains five transactions walking thousands of deterministic contract addresses; one sampled callee has 64 KiB of code. Use that concrete code/state context for allocation profiling, while recovering the exact stalled payload independently.
 
