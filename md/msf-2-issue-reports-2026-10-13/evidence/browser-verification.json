@@ -1,0 +1,56 @@
+{
+  "mode": "headless local Chromium; 390px mobile viewport; desktop and mobile screenshots visually inspected for Teku; copy fallback tested",
+  "checks": [
+    {
+      "title": "Besu heap exhaustion during block processing \u00b7 msf-2",
+      "viewport": 390,
+      "overflow": false,
+      "downloadLinks": [
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/5ef401/01-besu-heap-exhaustion-evidence.zip"
+      ],
+      "relativeIssueLinks": false,
+      "hasDownload": true
+    },
+    {
+      "title": "Teku rejects a persisted payload envelope during restart \u00b7 msf-2",
+      "viewport": 390,
+      "overflow": false,
+      "downloadLinks": [
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/a204ef/02-teku-persisted-envelope-evidence.zip",
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/05f0f2/02-teku-persisted-envelope-canonical-json.zip"
+      ],
+      "relativeIssueLinks": false,
+      "hasDownload": true
+    },
+    {
+      "title": "Nimbus execution Engine API listener stops serving requests \u00b7 msf-2",
+      "viewport": 390,
+      "overflow": false,
+      "downloadLinks": [
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/7161cf/03-nimbus-engine-listener-evidence.zip"
+      ],
+      "relativeIssueLinks": false,
+      "hasDownload": true
+    },
+    {
+      "title": "Optimistic recovery delays during rollout and live operation \u00b7 msf-2",
+      "viewport": 390,
+      "overflow": false,
+      "downloadLinks": [
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/ca7d48/04-teku-optimistic-recovery-evidence.zip"
+      ],
+      "relativeIssueLinks": false,
+      "hasDownload": true
+    },
+    {
+      "title": "Nimbus drops proposer duties when the local payload times out \u00b7 msf-2",
+      "viewport": 390,
+      "overflow": false,
+      "downloadLinks": [
+        "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/3374d4/05-nimbus-remote-bid-fallback-evidence.zip"
+      ],
+      "relativeIssueLinks": false,
+      "hasDownload": true
+    }
+  ]
+}

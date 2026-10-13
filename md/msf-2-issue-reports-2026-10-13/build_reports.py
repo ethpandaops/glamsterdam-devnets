@@ -10,9 +10,11 @@ import json
 import re
 import sys
 import zipfile
+from io import BytesIO
 from pathlib import Path
 
 import markdown
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent.parent
@@ -28,7 +30,7 @@ PRIOR = [
      "grandine-besu-slot2977.json", "workload-sample.json", "workload-callee-code.json",
      "workload-disassembly.txt"],
     ["teku-startup-failure.log", "teku-optimistic-startup.log", "rollout-timeline.log",
-     "teku-slot2559-block.json", "teku-slot2559-envelope.json"],
+     "teku-slot2559-block.json"],
     ["nimbus-engine-outage-onset.json", "nimbus-el-degradation.json", "nimbus-snap-onset.json",
      "nimbus-snap-current.json", "nimbus-engine-accept-queue.txt",
      "nimbus-engine-capabilities-final.json"],
@@ -84,6 +86,11 @@ def main():
                 info.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(info, p.read_bytes())
             z.writestr("sha256-manifest.json", json.dumps(manifest, indent=2))
+        if i == 1:
+            extra = OLD / "evidence/teku-slot2559-envelope.json"
+            with zipfile.ZipFile(artifacts / (slug + "-canonical-json.zip"), "w", compression=zipfile.ZIP_DEFLATED) as z:
+                z.write(extra, "teku-slot2559-envelope.json")
+                z.writestr("sha256-manifest.json", json.dumps({extra.name: {"sha256": hashlib.sha256(extra.read_bytes()).hexdigest(), "bytes": extra.stat().st_size}}, indent=2))
         def issue_link(match):
             target = match.group(1)
             if target.startswith(("https:", "http:", "#")):
@@ -109,7 +116,9 @@ def main():
             if not path.exists():
                 raise ValueError(f"Unresolved report link: {target}")
             if attr == "src" and path.suffix == ".png":
-                target = "data:image/png;base64," + base64.b64encode(path.read_bytes()).decode()
+                image_buffer = BytesIO()
+                Image.open(path).save(image_buffer, format="WEBP", lossless=True, method=6)
+                target = "data:image/webp;base64," + base64.b64encode(image_buffer.getvalue()).decode()
             else:
                 target = f"https://github.com/ethpandaops/glamsterdam-devnets/blob/{sha}/" + str(path.relative_to(REPO))
             return f'{attr}="{html.escape(target, quote=True)}"'
@@ -118,6 +127,9 @@ def main():
         title = text.splitlines()[0].lstrip("# ")
         bundle = uploads.get(slug, {}).get("evidence_url")
         bundle_link = f'<a class="button" href="{html.escape(bundle)}">Download evidence ZIP</a>' if bundle else '<span>Evidence archive is being prepared</span>'
+        extra_url = uploads.get(slug, {}).get("canonical_json_url")
+        if extra_url:
+            bundle_link += f'<a class="button" href="{html.escape(extra_url)}">Canonical envelope JSON</a>'
         page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{html.escape(title)} · msf-2</title>
 <style> :root{{color-scheme:light;--ink:#172531;--muted:#556878;--accent:#17685c}} *{{box-sizing:border-box}} body{{margin:0;background:#f1f5f4;color:var(--ink);font:16px/1.65 system-ui,sans-serif}} main{{max-width:1050px;margin:32px auto;background:white;padding:clamp(20px,5vw,58px);border:1px solid #d6e1de;border-radius:16px}} header{{border-bottom:1px solid #d6e1de;margin-bottom:30px;padding-bottom:22px}} .eyebrow{{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}} .actions{{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}} .button,button{{background:var(--accent);border:0;border-radius:7px;color:white;padding:10px 15px;text-decoration:none;font:600 14px system-ui;cursor:pointer}} h1{{font-size:clamp(27px,4vw,40px);line-height:1.2;margin:20px 0}} h2{{font-size:23px;margin-top:42px;line-height:1.3}} h3{{font-size:19px;margin-top:30px}} a{{color:#126959;overflow-wrap:anywhere}} p,li{{overflow-wrap:anywhere}} code{{font-size:.86em;background:#edf2f2;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}} pre{{overflow:auto;background:#12272a;color:#ebf6ef;padding:20px;border-radius:8px;max-height:460px}} pre code{{background:none;padding:0;color:inherit;white-space:pre;overflow-wrap:normal}} table{{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow:auto}} th,td{{padding:10px 12px;border:1px solid #dce5e2;vertical-align:top;min-width:110px}} th{{background:#edf4f1;text-align:left}} img{{max-width:100%;height:auto}} .notice{{padding:15px;background:#eaf4ef;border-left:4px solid var(--accent);border-radius:4px}} footer{{margin-top:45px;border-top:1px solid #dce5e2;padding-top:15px;color:var(--muted);font-size:13px}} details{{margin:25px 0}} textarea{{width:100%;height:350px;font:13px/1.5 monospace}} @media print{{body{{background:white}}main{{border:0;margin:0;padding:0}}.actions,details{{display:none}}pre{{max-height:none;white-space:pre-wrap}}table{{display:table}}}}</style></head><body><main>
 <header><div class="eyebrow">Ethereum client investigation · glamsterdam-msf-2 · 13 October 2026</div><div class="actions">{bundle_link}<button id="copy">Copy issue Markdown</button><button id="download">Download Markdown</button></div><div class="notice">Public report prepared for later issue filing. Reproduction status and remaining causal gaps are stated below. No upstream issue or comment was submitted.</div><div id="status" role="status" aria-live="polite"></div></header>

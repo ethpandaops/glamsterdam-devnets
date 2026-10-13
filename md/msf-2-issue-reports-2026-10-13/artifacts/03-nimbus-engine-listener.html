@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Nimbus execution Engine API listener stops serving requests · msf-2</title>
+<style> :root{color-scheme:light;--ink:#172531;--muted:#556878;--accent:#17685c} *{box-sizing:border-box} body{margin:0;background:#f1f5f4;color:var(--ink);font:16px/1.65 system-ui,sans-serif} main{max-width:1050px;margin:32px auto;background:white;padding:clamp(20px,5vw,58px);border:1px solid #d6e1de;border-radius:16px} header{border-bottom:1px solid #d6e1de;margin-bottom:30px;padding-bottom:22px} .eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700} .actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0} .button,button{background:var(--accent);border:0;border-radius:7px;color:white;padding:10px 15px;text-decoration:none;font:600 14px system-ui;cursor:pointer} h1{font-size:clamp(27px,4vw,40px);line-height:1.2;margin:20px 0} h2{font-size:23px;margin-top:42px;line-height:1.3} h3{font-size:19px;margin-top:30px} a{color:#126959;overflow-wrap:anywhere} p,li{overflow-wrap:anywhere} code{font-size:.86em;background:#edf2f2;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere} pre{overflow:auto;background:#12272a;color:#ebf6ef;padding:20px;border-radius:8px;max-height:460px} pre code{background:none;padding:0;color:inherit;white-space:pre;overflow-wrap:normal} table{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow:auto} th,td{padding:10px 12px;border:1px solid #dce5e2;vertical-align:top;min-width:110px} th{background:#edf4f1;text-align:left} img{max-width:100%;height:auto} .notice{padding:15px;background:#eaf4ef;border-left:4px solid var(--accent);border-radius:4px} footer{margin-top:45px;border-top:1px solid #dce5e2;padding-top:15px;color:var(--muted);font-size:13px} details{margin:25px 0} textarea{width:100%;height:350px;font:13px/1.5 monospace} @media print{body{background:white}main{border:0;margin:0;padding:0}.actions,details{display:none}pre{max-height:none;white-space:pre-wrap}table{display:table}}</style></head><body><main>
+<header><div class="eyebrow">Ethereum client investigation · glamsterdam-msf-2 · 13 October 2026</div><div class="actions"><a class="button" href="https://panda-uploads-production.devops-539.workers.dev/panda/uploads/7161cf/03-nimbus-engine-listener-evidence.zip">Download evidence ZIP</a><button id="copy">Copy issue Markdown</button><button id="download">Download Markdown</button></div><div class="notice">Public report prepared for later issue filing. Reproduction status and remaining causal gaps are stated below. No upstream issue or comment was submitted.</div><div id="status" role="status" aria-live="polite"></div></header>
+<h1 id="nimbus-execution-engine-api-listener-stops-serving-requests">Nimbus execution Engine API listener stops serving requests</h1>
+<p><code>nimbus-nimbusel-1</code> has a persistent outage of its Engine API listener while ordinary execution RPC, peer activity and the process remain live. The engine listener's internal accept queue is full. This adds runtime evidence to the Nimbus HTTP accept-loop failure class investigated on devnet-8. The private experiment below confirms the reset/identification mechanism; the initiating live event remains untraced.</p>
+<h2 id="further-investigation-confirmed-private-failure-mechanism-known-upstream-issue">Further investigation: confirmed private failure mechanism, known upstream issue</h2>
+<p><strong>Issue type:</strong> occurrence follow-up to open <a href="https://github.com/status-im/nimbus-eth1/issues/4923">Nimbus EL #4923</a>. <strong>Owner:</strong> Nimbus EL RPC / transport. <strong>Reproduction mode:</strong> live read-only verification plus fresh minimal listener fault injection on the same released image. <strong>Network impact:</strong> this pairing is an observer with no validators.</p>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-engine-morning-probe.json">October 13 paired probe</a> again tests authenticated <code>engine_exchangeCapabilities</code>. The affected Engine listener times out after about ten seconds, while the Lighthouse–Nimbus EL observer answers quickly. The affected listener's internal queue remains <strong>101/100</strong>, with ordinary RPC's queue <strong>0/100</strong>. The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/current-network.json">08:18 network snapshot</a> still reports this observer's EL offline, with no execution restart. No live restart or FCU/build/getPayload injection was performed.</p>
+<h3 id="fresh-private-reproduction-with-a-disconnect-control">Fresh private reproduction with a disconnect control</h3>
+<p><a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/tests/nimbus_listener.py">The test</a> used <code>statusim/nimbus-eth1:v0.4.2</code>, image ID <code>sha256:5af7d6b22e8de087c74f342db41ea1325e74a9b299d3a5358b0b83bec465b53e</code>, on a disposable Docker <strong>internal</strong> network. It had no peers, validators or benchmarking traffic. It uses mainnet genesis: this is a transport resilience test, not a Gloas-workload reproduction.</p>
+<p>A short pause lets a client disconnect while its connection is queued for acceptance. Pause/unpause was applied <strong>only to the disposable local container</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Ordinary RPC 8545</th>
+<th>Engine 8551</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Before injection</td>
+<td>answers</td>
+<td>answers in 5.4 ms</td>
+</tr>
+<tr>
+<td>Queued FIN disconnect</td>
+<td>answers</td>
+<td>answers in 2.0 ms</td>
+</tr>
+<tr>
+<td>Queued TCP reset</td>
+<td>answers in 3.9 ms</td>
+<td>times out at 2.0 s</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-private-listener-test.json">Recorded results</a> include timestamps and assert the process stays running. <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-private-accept.trace">The syscall trace</a> shows acceptance on Engine FD 17, followed by <code>getpeername</code> returning <code>ENOTCONN</code>; subsequent acceptance on ordinary RPC FD 16 continues, with no later acceptance on FD 17 during the trace window.</p>
+<p>The exact release <a href="https://github.com/status-im/nimbus-eth1/blob/705f4d9aced29de0049d7ad5f686b0e585f3f38d/execution_chain/rpc/rpc_server.nim#L274">accept loop</a> stops after identification fails. The <strong>entire file is unchanged</strong> on fetched master <code>831663a27c9fa845197ee13a0a9f289cf2fee940</code>, as recorded in <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/source-comparison.json">the source comparison</a>. No fixed trunk binary was tested.</p>
+<table>
+<thead>
+<tr>
+<th>Hypothesis</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Engine JWT / method / fork mismatch</td>
+<td>The same authenticated method works before injection and on the live control observer. The reset-induced private failure is acceptance failure, before method handling.</td>
+</tr>
+<tr>
+<td>Whole process or every HTTP listener is dead</td>
+<td>Rejected by ordinary RPC and the running process.</td>
+</tr>
+<tr>
+<td>A short payload-build stall alone explains the persistent outage</td>
+<td>Not established for this unstaked observer; the private test reproduces the failure without building anything.</td>
+</tr>
+<tr>
+<td>A reset accepted before peer identification ends this listener's loop</td>
+<td>Confirmed in the private experiment; consistent with live queue and split-listener symptoms. The historical live reset itself was not traced.</td>
+</tr>
+</tbody>
+</table>
+<p>Treat this report as another occurrence of #4923 rather than a new root-cause issue. The new variant is a long-lived <strong>Engine-only</strong> outage on msf-2. A fix should close only the failed transport and continue accepting other clients. Repeat the supplied FIN/RST control and separately check authenticated Engine completion, ordinary RPC completion and process health.</p>
+<p>To rerun, create only the named disposable container shown below, then execute the attached test. It leaves the failed container for inspection; stop/remove only this container afterwards.</p>
+<pre><code class="language-bash">docker network create --internal msf2-investigation
+docker run -d --name msf2-nimbus-rst-repro --network msf2-investigation   --cpus 2 --memory 2g statusim/nimbus-eth1:v0.4.2 executionClient   --data-dir=/tmp/case --discv5=false --rpc --http-address=0.0.0.0   --engine-api --engine-api-address=0.0.0.0 --log-level=DEBUG --log-format=nocolors
+python3 tests/nimbus_listener.py
+</code></pre>
+<h2 id="original-occurrence-and-runtime-evidence">Original occurrence and runtime evidence</h2>
+<h2 id="environment-and-scope">Environment and scope</h2>
+<p>The execution client is Nimbus v0.4.2, build <code>705f4d9a</code>, paired with Nimbus consensus v26.10.0 on <code>glamsterdam-msf-2</code>. The container started at 12:53:22 UTC on October 12 and had zero recorded restarts during the initial checks. Both Nimbus execution observers are deliberately configured for experimental snap sync from an empty database, with static shadowfork peers and discovery disabled. They hold no validator allocation. See <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2/group_vars/nimbusel.yaml">Nimbus execution configuration</a> and <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2/inventory.ini">inventory</a>.</p>
+<p>Execution height zero during that sync is insufficient by itself to establish a defect. The distinguishing evidence is that independent lightweight Engine requests cannot be served, while the other RPC listener answers.</p>
+<h2 id="runtime-evidence">Runtime evidence</h2>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-outage-onset.json">onset query</a> finds the last completed engine requests in its 15:35–15:39 UTC window:</p>
+<pre><code class="language-text">DBG 2026-10-12 15:35:50.633+00:00 Processed JSON-RPC request                 topics=&quot;jsonrpc router&quot; id=ok(1614) methodName=engine_newPayloadV5 len=66
+DBG 2026-10-12 15:35:50.697+00:00 Processed JSON-RPC request                 topics=&quot;jsonrpc router&quot; id=ok(1615) methodName=engine_forkchoiceUpdatedV4 len=101
+</code></pre>
+<p>At 15:39:10.995, the CL logged <code>Connection to EL node degraded</code>, <code>failedRequest=newPayload</code>, and <code>Request timed out</code>. Later <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-snap-current.json">execution status samples</a> still reported <code>syncState=idle</code>, target 24453294, and a last-FCU age exceeding six hours.</p>
+<p>An authenticated loopback <code>engine_exchangeCapabilities</code> request timed out after <strong>10.018 seconds</strong>. On the other observer, <code>lighthouse-nimbusel-1</code>, the same read-only method returned in <strong>0.009 seconds</strong>. <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-capabilities.json">Probe results</a> retain the response and timing; the probe's approximate capture time is explicitly identified in that file. No build or fork-choice request was injected during these checks.</p>
+<p>A <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-capabilities-final.json">repeat probe at 23:22 UTC</a> again timed out on <code>nimbus-nimbusel-1</code> after <strong>10.011 seconds</strong>, while the other observer responded in <strong>0.010 seconds</strong>. Regular execution RPC and the process remained responsive in the monitoring samples.</p>
+<p><a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-sockets.txt">Socket evidence</a> is from <strong>inside</strong> the execution container, not only Docker's host-side proxy. Its <code>/proc/net/tcp</code> listener on hexadecimal port <code>2167</code> (8551) has <code>rx_queue=00000065</code> (101), while port <code>2161</code> (8545) has a zero queue. A <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-accept-queue.txt">network-namespace check at 22:40:34 UTC</a> independently reports <code>LISTEN 101 100</code> for 8551 and <code>LISTEN 0 100</code> for 8545. Host-side Docker proxy queues remained empty and would have hidden this distinction.</p>
+<p>The regular execution RPC responds to block-number and peer-count reads. The CL continues following the beacon chain optimistically and reports <code>el_offline=true</code>. This is an execution-validation outage on an unstaked observer; it does not explain network-wide finality loss.</p>
+<h2 id="assessment-and-duplicate-handling">Assessment and duplicate handling</h2>
+<p><strong>Suggested priority: high for listener supervision and service health. Confidence: high in the persistent engine-listener outage; medium in the precise internal exit cause.</strong> The full queue, timed-out independent request, stale engine activity and responsive other listener narrow the failure below the external proxy. They do not introspect the listener's accept future.</p>
+<p><a href="https://github.com/status-im/nimbus-eth1/blob/705f4d9aced29de0049d7ad5f686b0e585f3f38d/execution_chain/rpc/rpc_server.nim">The deployed release source</a> contains an accept-loop exit on an accepted transport identification error. That source path is a candidate mechanism, not a demonstrated trigger in this run. The prior devnet-8 investigation found both RPC listeners affected on the same release; this occurrence supplies a variant with only the Engine listener visibly blocked.</p>
+<p>Capture accept-loop completion reasons and verify that an individual connection failure cannot permanently stop later acceptance. Use the supplied private regression, then repeat it against a proposed fix. Service health should test request completion separately for execution RPC and Engine RPC.</p>
+<p><a href="https://github.com/status-im/nimbus-eth1/issues/4881">Issue 4881</a> concerns slow synchronous payload construction. This observer has no validator or builder duties, and the captured engine silence lasts hours. A short build stall has not been established as the cause of this listener outage.</p>
+<h2 id="rechecking-the-evidence">Rechecking the evidence</h2>
+<pre><code class="language-bash">ssh glamsterdam-msf-2-nimbus-nimbusel-1 'docker exec execution cat /proc/net/tcp'
+ssh glamsterdam-msf-2-nimbus-nimbusel-1 'curl -fsS http://127.0.0.1:5052/eth/v1/node/syncing'
+panda clickhouse query-raw clickhouse-raw &quot;SELECT Timestamp, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-nimbusel-1' AND ResourceAttributes['container.name']='execution' AND Timestamp &gt;= toDateTime('2026-10-12 15:35:00') AND Timestamp &lt; toDateTime('2026-10-12 15:39:00') AND Body LIKE '%engine_%' ORDER BY Timestamp DESC LIMIT 30&quot;
+</code></pre>
+<p>The observation window is read-only. The node was not restarted or reconfigured to prove a recovery or re-induce the failure.</p>
+<details><summary>Issue-ready Markdown</summary><textarea id="issue" aria-label="Issue-ready Markdown" readonly># Nimbus execution Engine API listener stops serving requests
+
+`nimbus-nimbusel-1` has a persistent outage of its Engine API listener while ordinary execution RPC, peer activity and the process remain live. The engine listener&#x27;s internal accept queue is full. This adds runtime evidence to the Nimbus HTTP accept-loop failure class investigated on devnet-8. The private experiment below confirms the reset/identification mechanism; the initiating live event remains untraced.
+
+
+## Further investigation: confirmed private failure mechanism, known upstream issue
+
+**Issue type:** occurrence follow-up to open [Nimbus EL #4923](https://github.com/status-im/nimbus-eth1/issues/4923). **Owner:** Nimbus EL RPC / transport. **Reproduction mode:** live read-only verification plus fresh minimal listener fault injection on the same released image. **Network impact:** this pairing is an observer with no validators.
+
+The [October 13 paired probe](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-engine-morning-probe.json) again tests authenticated `engine_exchangeCapabilities`. The affected Engine listener times out after about ten seconds, while the Lighthouse–Nimbus EL observer answers quickly. The affected listener&#x27;s internal queue remains **101/100**, with ordinary RPC&#x27;s queue **0/100**. The [08:18 network snapshot](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/current-network.json) still reports this observer&#x27;s EL offline, with no execution restart. No live restart or FCU/build/getPayload injection was performed.
+
+### Fresh private reproduction with a disconnect control
+
+[The test](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/tests/nimbus_listener.py) used `statusim/nimbus-eth1:v0.4.2`, image ID `sha256:5af7d6b22e8de087c74f342db41ea1325e74a9b299d3a5358b0b83bec465b53e`, on a disposable Docker **internal** network. It had no peers, validators or benchmarking traffic. It uses mainnet genesis: this is a transport resilience test, not a Gloas-workload reproduction.
+
+A short pause lets a client disconnect while its connection is queued for acceptance. Pause/unpause was applied **only to the disposable local container**.
+
+| Stage | Ordinary RPC 8545 | Engine 8551 |
+|---|---|---|
+| Before injection | answers | answers in 5.4 ms |
+| Queued FIN disconnect | answers | answers in 2.0 ms |
+| Queued TCP reset | answers in 3.9 ms | times out at 2.0 s |
+
+[Recorded results](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-private-listener-test.json) include timestamps and assert the process stays running. [The syscall trace](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/nimbus-private-accept.trace) shows acceptance on Engine FD 17, followed by `getpeername` returning `ENOTCONN`; subsequent acceptance on ordinary RPC FD 16 continues, with no later acceptance on FD 17 during the trace window.
+
+The exact release [accept loop](https://github.com/status-im/nimbus-eth1/blob/705f4d9aced29de0049d7ad5f686b0e585f3f38d/execution_chain/rpc/rpc_server.nim#L274) stops after identification fails. The **entire file is unchanged** on fetched master `831663a27c9fa845197ee13a0a9f289cf2fee940`, as recorded in [the source comparison](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/source-comparison.json). No fixed trunk binary was tested.
+
+| Hypothesis | Result |
+|---|---|
+| Engine JWT / method / fork mismatch | The same authenticated method works before injection and on the live control observer. The reset-induced private failure is acceptance failure, before method handling. |
+| Whole process or every HTTP listener is dead | Rejected by ordinary RPC and the running process. |
+| A short payload-build stall alone explains the persistent outage | Not established for this unstaked observer; the private test reproduces the failure without building anything. |
+| A reset accepted before peer identification ends this listener&#x27;s loop | Confirmed in the private experiment; consistent with live queue and split-listener symptoms. The historical live reset itself was not traced. |
+
+Treat this report as another occurrence of #4923 rather than a new root-cause issue. The new variant is a long-lived **Engine-only** outage on msf-2. A fix should close only the failed transport and continue accepting other clients. Repeat the supplied FIN/RST control and separately check authenticated Engine completion, ordinary RPC completion and process health.
+
+To rerun, create only the named disposable container shown below, then execute the attached test. It leaves the failed container for inspection; stop/remove only this container afterwards.
+
+```bash
+docker network create --internal msf2-investigation
+docker run -d --name msf2-nimbus-rst-repro --network msf2-investigation   --cpus 2 --memory 2g statusim/nimbus-eth1:v0.4.2 executionClient   --data-dir=/tmp/case --discv5=false --rpc --http-address=0.0.0.0   --engine-api --engine-api-address=0.0.0.0 --log-level=DEBUG --log-format=nocolors
+python3 tests/nimbus_listener.py
+```
+
+## Original occurrence and runtime evidence
+
+## Environment and scope
+
+The execution client is Nimbus v0.4.2, build `705f4d9a`, paired with Nimbus consensus v26.10.0 on `glamsterdam-msf-2`. The container started at 12:53:22 UTC on October 12 and had zero recorded restarts during the initial checks. Both Nimbus execution observers are deliberately configured for experimental snap sync from an empty database, with static shadowfork peers and discovery disabled. They hold no validator allocation. See [Nimbus execution configuration](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2/group_vars/nimbusel.yaml) and [inventory](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2/inventory.ini).
+
+Execution height zero during that sync is insufficient by itself to establish a defect. The distinguishing evidence is that independent lightweight Engine requests cannot be served, while the other RPC listener answers.
+
+## Runtime evidence
+
+The [onset query](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-outage-onset.json) finds the last completed engine requests in its 15:35–15:39 UTC window:
+
+```text
+DBG 2026-10-12 15:35:50.633+00:00 Processed JSON-RPC request                 topics=&quot;jsonrpc router&quot; id=ok(1614) methodName=engine_newPayloadV5 len=66
+DBG 2026-10-12 15:35:50.697+00:00 Processed JSON-RPC request                 topics=&quot;jsonrpc router&quot; id=ok(1615) methodName=engine_forkchoiceUpdatedV4 len=101
+```
+
+At 15:39:10.995, the CL logged `Connection to EL node degraded`, `failedRequest=newPayload`, and `Request timed out`. Later [execution status samples](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-snap-current.json) still reported `syncState=idle`, target 24453294, and a last-FCU age exceeding six hours.
+
+An authenticated loopback `engine_exchangeCapabilities` request timed out after **10.018 seconds**. On the other observer, `lighthouse-nimbusel-1`, the same read-only method returned in **0.009 seconds**. [Probe results](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-capabilities.json) retain the response and timing; the probe&#x27;s approximate capture time is explicitly identified in that file. No build or fork-choice request was injected during these checks.
+
+A [repeat probe at 23:22 UTC](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-capabilities-final.json) again timed out on `nimbus-nimbusel-1` after **10.011 seconds**, while the other observer responded in **0.010 seconds**. Regular execution RPC and the process remained responsive in the monitoring samples.
+
+[Socket evidence](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-sockets.txt) is from **inside** the execution container, not only Docker&#x27;s host-side proxy. Its `/proc/net/tcp` listener on hexadecimal port `2167` (8551) has `rx_queue=00000065` (101), while port `2161` (8545) has a zero queue. A [network-namespace check at 22:40:34 UTC](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-engine-accept-queue.txt) independently reports `LISTEN 101 100` for 8551 and `LISTEN 0 100` for 8545. Host-side Docker proxy queues remained empty and would have hidden this distinction.
+
+The regular execution RPC responds to block-number and peer-count reads. The CL continues following the beacon chain optimistically and reports `el_offline=true`. This is an execution-validation outage on an unstaked observer; it does not explain network-wide finality loss.
+
+## Assessment and duplicate handling
+
+**Suggested priority: high for listener supervision and service health. Confidence: high in the persistent engine-listener outage; medium in the precise internal exit cause.** The full queue, timed-out independent request, stale engine activity and responsive other listener narrow the failure below the external proxy. They do not introspect the listener&#x27;s accept future.
+
+[The deployed release source](https://github.com/status-im/nimbus-eth1/blob/705f4d9aced29de0049d7ad5f686b0e585f3f38d/execution_chain/rpc/rpc_server.nim) contains an accept-loop exit on an accepted transport identification error. That source path is a candidate mechanism, not a demonstrated trigger in this run. The prior devnet-8 investigation found both RPC listeners affected on the same release; this occurrence supplies a variant with only the Engine listener visibly blocked.
+
+Capture accept-loop completion reasons and verify that an individual connection failure cannot permanently stop later acceptance. Use the supplied private regression, then repeat it against a proposed fix. Service health should test request completion separately for execution RPC and Engine RPC.
+
+[Issue 4881](https://github.com/status-im/nimbus-eth1/issues/4881) concerns slow synchronous payload construction. This observer has no validator or builder duties, and the captured engine silence lasts hours. A short build stall has not been established as the cause of this listener outage.
+
+## Rechecking the evidence
+
+```bash
+ssh glamsterdam-msf-2-nimbus-nimbusel-1 &#x27;docker exec execution cat /proc/net/tcp&#x27;
+ssh glamsterdam-msf-2-nimbus-nimbusel-1 &#x27;curl -fsS http://127.0.0.1:5052/eth/v1/node/syncing&#x27;
+panda clickhouse query-raw clickhouse-raw &quot;SELECT Timestamp, Body FROM external.otel_logs WHERE ResourceAttributes[&#x27;network&#x27;]=&#x27;glamsterdam-msf-2&#x27; AND ResourceAttributes[&#x27;host.name&#x27;]=&#x27;nimbus-nimbusel-1&#x27; AND ResourceAttributes[&#x27;container.name&#x27;]=&#x27;execution&#x27; AND Timestamp &gt;= toDateTime(&#x27;2026-10-12 15:35:00&#x27;) AND Timestamp &lt; toDateTime(&#x27;2026-10-12 15:39:00&#x27;) AND Body LIKE &#x27;%engine_%&#x27; ORDER BY Timestamp DESC LIMIT 30&quot;
+```
+
+The observation window is read-only. The node was not restarted or reconfigured to prove a recovery or re-induce the failure.
+</textarea></details><footer>Evidence source commit: <a href="https://github.com/ethpandaops/glamsterdam-devnets/commit/146667c5881c1d1a764fc32c5083d8c451a9404c">146667c5881c</a>. All timestamps UTC. Public chain data and diagnostic evidence only; validator keys, authentication tokens and the full saved database are excluded.</footer></main>
+<script>const issue=document.getElementById('issue');document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(issue.value);document.getElementById('status').textContent='Issue Markdown copied.'}catch(e){issue.closest('details').open=true;issue.select();document.getElementById('status').textContent='Select and copy the Markdown below.'}};document.getElementById('download').onclick=()=>{const u=URL.createObjectURL(new Blob([issue.value],{type:'text/markdown'}));const a=document.createElement('a');a.href=u;a.download='03-nimbus-engine-listener.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};</script></body></html>

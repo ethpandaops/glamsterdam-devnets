@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Nimbus drops proposer duties when the local payload times out · msf-2</title>
+<style> :root{color-scheme:light;--ink:#172531;--muted:#556878;--accent:#17685c} *{box-sizing:border-box} body{margin:0;background:#f1f5f4;color:var(--ink);font:16px/1.65 system-ui,sans-serif} main{max-width:1050px;margin:32px auto;background:white;padding:clamp(20px,5vw,58px);border:1px solid #d6e1de;border-radius:16px} header{border-bottom:1px solid #d6e1de;margin-bottom:30px;padding-bottom:22px} .eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700} .actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0} .button,button{background:var(--accent);border:0;border-radius:7px;color:white;padding:10px 15px;text-decoration:none;font:600 14px system-ui;cursor:pointer} h1{font-size:clamp(27px,4vw,40px);line-height:1.2;margin:20px 0} h2{font-size:23px;margin-top:42px;line-height:1.3} h3{font-size:19px;margin-top:30px} a{color:#126959;overflow-wrap:anywhere} p,li{overflow-wrap:anywhere} code{font-size:.86em;background:#edf2f2;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere} pre{overflow:auto;background:#12272a;color:#ebf6ef;padding:20px;border-radius:8px;max-height:460px} pre code{background:none;padding:0;color:inherit;white-space:pre;overflow-wrap:normal} table{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow:auto} th,td{padding:10px 12px;border:1px solid #dce5e2;vertical-align:top;min-width:110px} th{background:#edf4f1;text-align:left} img{max-width:100%;height:auto} .notice{padding:15px;background:#eaf4ef;border-left:4px solid var(--accent);border-radius:4px} footer{margin-top:45px;border-top:1px solid #dce5e2;padding-top:15px;color:var(--muted);font-size:13px} details{margin:25px 0} textarea{width:100%;height:350px;font:13px/1.5 monospace} @media print{body{background:white}main{border:0;margin:0;padding:0}.actions,details{display:none}pre{max-height:none;white-space:pre-wrap}table{display:table}}</style></head><body><main>
+<header><div class="eyebrow">Ethereum client investigation · glamsterdam-msf-2 · 13 October 2026</div><div class="actions"><a class="button" href="https://panda-uploads-production.devops-539.workers.dev/panda/uploads/3374d4/05-nimbus-remote-bid-fallback-evidence.zip">Download evidence ZIP</a><button id="copy">Copy issue Markdown</button><button id="download">Download Markdown</button></div><div class="notice">Public report prepared for later issue filing. Reproduction status and remaining causal gaps are stated below. No upstream issue or comment was submitted.</div><div id="status" role="status" aria-live="polite"></div></header>
+<h1 id="nimbus-drops-proposer-duties-when-the-local-payload-times-out">Nimbus drops proposer duties when the local payload times out</h1>
+<p>Nimbus consensus v26.10.0 on <code>nimbus-reth-1</code> missed <strong>all 12 assigned proposer duties in completed epochs 88–96</strong>, even though an external builder bid was received and validated before every affected slot. Each duty attempted a local <code>engine_getPayloadV6</code> and timed out after approximately 1.5 seconds. The deployed release's proposal path returns on an absent local candidate before selecting the pooled builder bid.</p>
+<p>This is additional runtime evidence for the previously investigated Nimbus remote-only proposal gap. It is worth Nimbus consensus attention; Reth's local construction latency should be investigated separately rather than assumed to have the same root cause.</p>
+<h2 id="further-investigation-local-candidate-prerequisite-persists-on-release-and-upstream">Further investigation: local-candidate prerequisite persists on release and upstream</h2>
+<p><strong>Issue type:</strong> Gloas proposal fallback / client liveness. <strong>Primary owner:</strong> Nimbus CL. <strong>Secondary investigation:</strong> Reth local payload completion. <strong>Priority:</strong> high for preventable missed proposals. <strong>Reproduction mode:</strong> repeated live duties plus exact-source reachability; no fresh isolated full proposal-path test.</p>
+<p>The original completed-epoch census is still <strong>12 canonical misses out of 12 assigned Nimbus–Reth proposals</strong>, with a pre-slot validated remote bid for every duty. That claim applies only to completed epochs 88–96, not the entire overnight run.</p>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/overnight-nimbus-proposals.json">overnight grouped query</a>, 23:24:13–08:30 UTC, records <strong>75 distinct local payload timeout events and six successful Block proposed events</strong>. <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/overnight-nimbus-events.json">Individual timestamps</a> preserve those observations. These log counts are not a new canonical-duty census; successful publication alone also does not prove canonical inclusion. They refute an interpretation that the local payload service or proposer is permanently incapable of progress.</p>
+<h3 id="released-and-current-source-reachability">Released and current-source reachability</h3>
+<p>The deployed integrated-validator path is release commit <code>657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8</code>, not a separately connected validator client. A missing local <code>engineBid</code> returns from <code>proposeBlockAux</code> <strong>before</strong> Gloas pooled/remote selection. That path is reachable on the observed local timeout; the captured proposer log, Engine method and production-error progression connect the runtime input to the relevant guard.</p>
+<p>The guard also remains in fetched unstable commit <code>46628d9532fb848c108b5c59dc4c0f1524537fcc</code>, <a href="https://github.com/status-im/nimbus-eth2/blob/46628d9532fb848c108b5c59dc4c0f1524537fcc/beacon_chain/validators/beacon_validators.nim#L617">before the Gloas bid selection</a>. <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/source-comparison.json">The source comparison</a> records changes elsewhere in the file; this is a source inspection, not a test of the latest binary.</p>
+<p>The release's <a href="https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/validators/block_payloads.nim">REST proposal helper</a> has a similar prerequisite. It is a code-review target, not the observed caller for this integrated-validator incident. Keep those paths separate in regression coverage.</p>
+<p>The <a href="https://github.com/ethereum/consensus-specs/blob/v1.6.1/specs/gloas/validator.md#constructing-signed_execution_payload_bid">Gloas proposer rules</a> specify selecting an eligible signed bid with valid signature, sufficient builder balance and matching slot/parents. That description does not make a successfully retrieved local payload a prerequisite for selecting an external bid. Additional parent execution-request and availability rules still matter. This finding concerns a missing remote-only liveness path, not proof that any arbitrary pooled bid must always be used.</p>
+<table>
+<thead>
+<tr>
+<th>Hypothesis</th>
+<th>Evidence and disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No external candidate reached the proposer</td>
+<td>Rejected for the 12 original duties by pre-slot validation/pool logs, slot, parent and value. Eligibility at the exact selection state still belongs in the regression.</td>
+</tr>
+<tr>
+<td>A failed local fetch prevents external selection</td>
+<td>Confirmed by exact released control flow and matching runtime timeouts.</td>
+</tr>
+<tr>
+<td>Reth is permanently deadlocked</td>
+<td>Rejected as a blanket description by six later successful proposals. The cause of individual deadline misses remains open.</td>
+</tr>
+<tr>
+<td>Increase the timeout or remove one guard as a complete repair</td>
+<td>Untested and incomplete: later code consumes local payload data, value and execution requests. A complete remote-only path is required.</td>
+</tr>
+</tbody>
+</table>
+<p>Reth release commit <code>3d592ece6de8c4559987416a544fc215fd6d6921</code> resolves payload jobs through <a href="https://github.com/paradigmxyz/reth/blob/3d592ece6de8c4559987416a544fc215fd6d6921/crates/payload/basic/src/lib.rs">the basic payload builder</a>. A matching job starts for the focused original slot, but no trace here identifies whether execution, finalization, queueing or cancellation consumes the local deadline. Flat completed-response metrics alone do not establish a server deadlock. No operator getPayload was injected into live jobs.</p>
+<p>This is a new released-runtime occurrence of the existing internal remote-bid-fallback investigation, not a newly invented source failure class. A bounded upstream issue search did not locate an exact open fallback issue; no issue has been filed by this task.</p>
+<p><strong>Client-team regression request:</strong> provide an eligible external bid before slot start; force the local EL to return no candidate, error and timeout in separate cases; verify exactly one valid beacon block is signed/published using the external bid with the correct parent execution requests and availability checks. Also test no-eligible-bid behavior and both integrated and REST callers. For Reth, trace the supplied job ID across finalization and cancellation under the same workload and record response latency against Nimbus's 1.5-second budget.</p>
+<h2 id="original-occurrence-and-runtime-evidence">Original occurrence and runtime evidence</h2>
+<h2 id="environment-and-impact">Environment and impact</h2>
+<p>The live version endpoint identifies <strong>Nimbus/v26.10.0-657beb-stateofus</strong>, matching release commit <code>657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8</code>. Execution is Reth v2.7.0. The node has validator indices <strong>21000–21999</strong> and uses integrated beacon validators. It stays synced, execution-valid and near the canonical head; process/head health therefore does not reveal its proposer failures. The network continues finalizing.</p>
+<p>The workload and network conditions are recorded in the <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/workload.md">benchmark workload sample</a> and <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2">inventory</a>. No restart or client configuration change was induced during this observation window.</p>
+<h2 id="duty-census">Duty census</h2>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/slots-epochs88-90.json">initial reference headers and duties</a>, <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/missed-slot-details-epochs88-90.json">Dora missed-slot records</a>, and later per-epoch captures establish the schedule and absent blocks. The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/monitoring-summary.json">derived summary</a> combines all nine completed epochs. All 12 Nimbus–Reth assignments were missing:</p>
+<table>
+<thead>
+<tr>
+<th>Epoch</th>
+<th>Missed slots</th>
+<th>Proposer indices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>88</td>
+<td>2821, 2823, 2844, 2846</td>
+<td>21061, 21837, 21365, 21889</td>
+</tr>
+<tr>
+<td>89</td>
+<td>2859, 2879</td>
+<td>21766, 21009</td>
+</tr>
+<tr>
+<td>90</td>
+<td>2887, 2895</td>
+<td>21734, 21772</td>
+</tr>
+<tr>
+<td>91</td>
+<td>2922</td>
+<td>21011</td>
+</tr>
+<tr>
+<td>93</td>
+<td>2981, 2992</td>
+<td>21131, 21339</td>
+</tr>
+<tr>
+<td>95</td>
+<td>3051</td>
+<td>21010</td>
+</tr>
+</tbody>
+</table>
+<p>There were 16 total missing canonical slots among those 288 network slots; the other four were assigned to Grandine–Besu, Lighthouse–Besu and Lodestar–Erigon. The 12-of-12 figure is limited to these nine completed epochs, not the whole benchmark or all Nimbus pairings. Epochs 92, 94 and 96 had no assigned Nimbus–Reth proposer duties.</p>
+<h2 id="proposal-timeline-and-source-mechanism">Proposal timeline and source mechanism</h2>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-proposal-logs.json">proposal log query</a> captures each affected duty's validated external bid and local timeout. For slot 2821:</p>
+<table>
+<thead>
+<tr>
+<th>Time, UTC October 12</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22:27:10.524</td>
+<td>Reth creates local payload job <code>0x3f6d2b859c146bc8</code></td>
+</tr>
+<tr>
+<td>22:27:11.607</td>
+<td>Nimbus validates builder-index-0 bid for slot 2821 and places it in the bid pool; value 101000000</td>
+</tr>
+<tr>
+<td>22:27:12.043</td>
+<td>Nimbus requests the local engine payload and sends <code>engine_getPayloadV6</code></td>
+</tr>
+<tr>
+<td>22:27:13.543</td>
+<td>Nimbus logs <code>Timeout while getting execution payload</code></td>
+</tr>
+<tr>
+<td>Completed-epoch check</td>
+<td>Canonical slot 2821 has no beacon block</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-slot2821-beacon.json">focused beacon capture</a> and <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-slot2821-execution.json">execution capture</a> preserve this sequence. Across 22:24–23:24, the <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-proposal-counters-history.json.gz">production error counter</a> increased from 21 to 34 while the proposed-block counter stayed at 69. The log query records 13 local fetches and 13 timeouts, including slot 2808 in the partially observed boundary epoch, which is excluded from the completed-epoch census.</p>
+<p>In <a href="https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/validators/beacon_validators.nim#L616">the deployed proposal source</a>, <code>proposeBlockAux</code> returns when <code>engineBid.isNone()</code>. The Gloas pooled/external bid selection follows that guard. <a href="https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/el/el_manager.nim#L531">The EL manager</a> uses a one-second payload timeout plus 500 ms processing overhead, consistent with the observed timing. This source ordering explains why an otherwise usable remote candidate cannot rescue a failed local fetch.</p>
+<h2 id="assessment-and-next-client-work">Assessment and next client work</h2>
+<p><strong>Suggested priority: high. Confidence: high in missed duties, pre-slot validated bids, and the deployed local-candidate prerequisite; medium in the specific cause of Reth's delayed local result.</strong> This is repeated released-runtime evidence, not a new controlled reproduction or a claim that current trunk was exercised.</p>
+<p>Implement and test a complete remote-only Gloas proposal path when the local EL produces no candidate. Preserve bid eligibility, payload-availability/failsafe rules, parent execution requests and signing safety. Removing the early guard alone is insufficient: later code also dereferences the local bid. A private regression should provide an eligible external bid before the slot, force local getPayload to fail or time out, and assert a valid beacon block is signed and published once.</p>
+<p>For Reth, trace a matching local payload job's finalization and response timing under the captured workload. The saved <a href="https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/reth-getpayload-history.json.gz">getPayload metrics</a> show no new completed V6 responses in the captured interval, but do not identify why those jobs failed to answer before the CL deadline. An operator-injected getPayload was deliberately avoided because resolving an active payload job could affect the live proposal path.</p>
+<p>Treat this as a follow-up to the existing fallback investigation, with current-build runtime evidence attached, rather than claiming a distinct new source defect. No upstream issue has been filed.</p>
+<details><summary>Issue-ready Markdown</summary><textarea id="issue" aria-label="Issue-ready Markdown" readonly># Nimbus drops proposer duties when the local payload times out
+
+Nimbus consensus v26.10.0 on `nimbus-reth-1` missed **all 12 assigned proposer duties in completed epochs 88–96**, even though an external builder bid was received and validated before every affected slot. Each duty attempted a local `engine_getPayloadV6` and timed out after approximately 1.5 seconds. The deployed release&#x27;s proposal path returns on an absent local candidate before selecting the pooled builder bid.
+
+This is additional runtime evidence for the previously investigated Nimbus remote-only proposal gap. It is worth Nimbus consensus attention; Reth&#x27;s local construction latency should be investigated separately rather than assumed to have the same root cause.
+
+
+## Further investigation: local-candidate prerequisite persists on release and upstream
+
+**Issue type:** Gloas proposal fallback / client liveness. **Primary owner:** Nimbus CL. **Secondary investigation:** Reth local payload completion. **Priority:** high for preventable missed proposals. **Reproduction mode:** repeated live duties plus exact-source reachability; no fresh isolated full proposal-path test.
+
+The original completed-epoch census is still **12 canonical misses out of 12 assigned Nimbus–Reth proposals**, with a pre-slot validated remote bid for every duty. That claim applies only to completed epochs 88–96, not the entire overnight run.
+
+The [overnight grouped query](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/overnight-nimbus-proposals.json), 23:24:13–08:30 UTC, records **75 distinct local payload timeout events and six successful Block proposed events**. [Individual timestamps](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/overnight-nimbus-events.json) preserve those observations. These log counts are not a new canonical-duty census; successful publication alone also does not prove canonical inclusion. They refute an interpretation that the local payload service or proposer is permanently incapable of progress.
+
+### Released and current-source reachability
+
+The deployed integrated-validator path is release commit `657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8`, not a separately connected validator client. A missing local `engineBid` returns from `proposeBlockAux` **before** Gloas pooled/remote selection. That path is reachable on the observed local timeout; the captured proposer log, Engine method and production-error progression connect the runtime input to the relevant guard.
+
+The guard also remains in fetched unstable commit `46628d9532fb848c108b5c59dc4c0f1524537fcc`, [before the Gloas bid selection](https://github.com/status-im/nimbus-eth2/blob/46628d9532fb848c108b5c59dc4c0f1524537fcc/beacon_chain/validators/beacon_validators.nim#L617). [The source comparison](https://github.com/ethpandaops/glamsterdam-devnets/blob/146667c5881c1d1a764fc32c5083d8c451a9404c/md/msf-2-issue-reports-2026-10-13/evidence/source-comparison.json) records changes elsewhere in the file; this is a source inspection, not a test of the latest binary.
+
+The release&#x27;s [REST proposal helper](https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/validators/block_payloads.nim) has a similar prerequisite. It is a code-review target, not the observed caller for this integrated-validator incident. Keep those paths separate in regression coverage.
+
+The [Gloas proposer rules](https://github.com/ethereum/consensus-specs/blob/v1.6.1/specs/gloas/validator.md#constructing-signed_execution_payload_bid) specify selecting an eligible signed bid with valid signature, sufficient builder balance and matching slot/parents. That description does not make a successfully retrieved local payload a prerequisite for selecting an external bid. Additional parent execution-request and availability rules still matter. This finding concerns a missing remote-only liveness path, not proof that any arbitrary pooled bid must always be used.
+
+| Hypothesis | Evidence and disposition |
+|---|---|
+| No external candidate reached the proposer | Rejected for the 12 original duties by pre-slot validation/pool logs, slot, parent and value. Eligibility at the exact selection state still belongs in the regression. |
+| A failed local fetch prevents external selection | Confirmed by exact released control flow and matching runtime timeouts. |
+| Reth is permanently deadlocked | Rejected as a blanket description by six later successful proposals. The cause of individual deadline misses remains open. |
+| Increase the timeout or remove one guard as a complete repair | Untested and incomplete: later code consumes local payload data, value and execution requests. A complete remote-only path is required. |
+
+Reth release commit `3d592ece6de8c4559987416a544fc215fd6d6921` resolves payload jobs through [the basic payload builder](https://github.com/paradigmxyz/reth/blob/3d592ece6de8c4559987416a544fc215fd6d6921/crates/payload/basic/src/lib.rs). A matching job starts for the focused original slot, but no trace here identifies whether execution, finalization, queueing or cancellation consumes the local deadline. Flat completed-response metrics alone do not establish a server deadlock. No operator getPayload was injected into live jobs.
+
+This is a new released-runtime occurrence of the existing internal remote-bid-fallback investigation, not a newly invented source failure class. A bounded upstream issue search did not locate an exact open fallback issue; no issue has been filed by this task.
+
+**Client-team regression request:** provide an eligible external bid before slot start; force the local EL to return no candidate, error and timeout in separate cases; verify exactly one valid beacon block is signed/published using the external bid with the correct parent execution requests and availability checks. Also test no-eligible-bid behavior and both integrated and REST callers. For Reth, trace the supplied job ID across finalization and cancellation under the same workload and record response latency against Nimbus&#x27;s 1.5-second budget.
+
+## Original occurrence and runtime evidence
+
+## Environment and impact
+
+The live version endpoint identifies **Nimbus/v26.10.0-657beb-stateofus**, matching release commit `657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8`. Execution is Reth v2.7.0. The node has validator indices **21000–21999** and uses integrated beacon validators. It stays synced, execution-valid and near the canonical head; process/head health therefore does not reveal its proposer failures. The network continues finalizing.
+
+The workload and network conditions are recorded in the [benchmark workload sample](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/workload.md) and [inventory](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/ansible/inventories/msf-2). No restart or client configuration change was induced during this observation window.
+
+## Duty census
+
+The [initial reference headers and duties](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/slots-epochs88-90.json), [Dora missed-slot records](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/missed-slot-details-epochs88-90.json), and later per-epoch captures establish the schedule and absent blocks. The [derived summary](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/monitoring-summary.json) combines all nine completed epochs. All 12 Nimbus–Reth assignments were missing:
+
+| Epoch | Missed slots | Proposer indices |
+|---|---|---|
+| 88 | 2821, 2823, 2844, 2846 | 21061, 21837, 21365, 21889 |
+| 89 | 2859, 2879 | 21766, 21009 |
+| 90 | 2887, 2895 | 21734, 21772 |
+| 91 | 2922 | 21011 |
+| 93 | 2981, 2992 | 21131, 21339 |
+| 95 | 3051 | 21010 |
+
+There were 16 total missing canonical slots among those 288 network slots; the other four were assigned to Grandine–Besu, Lighthouse–Besu and Lodestar–Erigon. The 12-of-12 figure is limited to these nine completed epochs, not the whole benchmark or all Nimbus pairings. Epochs 92, 94 and 96 had no assigned Nimbus–Reth proposer duties.
+
+## Proposal timeline and source mechanism
+
+The [proposal log query](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-proposal-logs.json) captures each affected duty&#x27;s validated external bid and local timeout. For slot 2821:
+
+| Time, UTC October 12 | Event |
+|---|---|
+| 22:27:10.524 | Reth creates local payload job `0x3f6d2b859c146bc8` |
+| 22:27:11.607 | Nimbus validates builder-index-0 bid for slot 2821 and places it in the bid pool; value 101000000 |
+| 22:27:12.043 | Nimbus requests the local engine payload and sends `engine_getPayloadV6` |
+| 22:27:13.543 | Nimbus logs `Timeout while getting execution payload` |
+| Completed-epoch check | Canonical slot 2821 has no beacon block |
+
+The [focused beacon capture](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-slot2821-beacon.json) and [execution capture](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-reth-slot2821-execution.json) preserve this sequence. Across 22:24–23:24, the [production error counter](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/nimbus-proposal-counters-history.json.gz) increased from 21 to 34 while the proposed-block counter stayed at 69. The log query records 13 local fetches and 13 timeouts, including slot 2808 in the partially observed boundary epoch, which is excluded from the completed-epoch census.
+
+In [the deployed proposal source](https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/validators/beacon_validators.nim#L616), `proposeBlockAux` returns when `engineBid.isNone()`. The Gloas pooled/external bid selection follows that guard. [The EL manager](https://github.com/status-im/nimbus-eth2/blob/657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8/beacon_chain/el/el_manager.nim#L531) uses a one-second payload timeout plus 500 ms processing overhead, consistent with the observed timing. This source ordering explains why an otherwise usable remote candidate cannot rescue a failed local fetch.
+
+## Assessment and next client work
+
+**Suggested priority: high. Confidence: high in missed duties, pre-slot validated bids, and the deployed local-candidate prerequisite; medium in the specific cause of Reth&#x27;s delayed local result.** This is repeated released-runtime evidence, not a new controlled reproduction or a claim that current trunk was exercised.
+
+Implement and test a complete remote-only Gloas proposal path when the local EL produces no candidate. Preserve bid eligibility, payload-availability/failsafe rules, parent execution requests and signing safety. Removing the early guard alone is insufficient: later code also dereferences the local bid. A private regression should provide an eligible external bid before the slot, force local getPayload to fail or time out, and assert a valid beacon block is signed and published once.
+
+For Reth, trace a matching local payload job&#x27;s finalization and response timing under the captured workload. The saved [getPayload metrics](https://github.com/ethpandaops/glamsterdam-devnets/blob/60a8cf5a3d76dc9a508c01e3a9412881d4c1440c/md/msf-2-benchmark-2026-10-12/evidence/reth-getpayload-history.json.gz) show no new completed V6 responses in the captured interval, but do not identify why those jobs failed to answer before the CL deadline. An operator-injected getPayload was deliberately avoided because resolving an active payload job could affect the live proposal path.
+
+Treat this as a follow-up to the existing fallback investigation, with current-build runtime evidence attached, rather than claiming a distinct new source defect. No upstream issue has been filed.
+</textarea></details><footer>Evidence source commit: <a href="https://github.com/ethpandaops/glamsterdam-devnets/commit/146667c5881c1d1a764fc32c5083d8c451a9404c">146667c5881c</a>. All timestamps UTC. Public chain data and diagnostic evidence only; validator keys, authentication tokens and the full saved database are excluded.</footer></main>
+<script>const issue=document.getElementById('issue');document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(issue.value);document.getElementById('status').textContent='Issue Markdown copied.'}catch(e){issue.closest('details').open=true;issue.select();document.getElementById('status').textContent='Select and copy the Markdown below.'}};document.getElementById('download').onclick=()=>{const u=URL.createObjectURL(new Blob([issue.value],{type:'text/markdown'}));const a=document.createElement('a');a.href=u;a.download='05-nimbus-remote-bid-fallback.md';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};</script></body></html>

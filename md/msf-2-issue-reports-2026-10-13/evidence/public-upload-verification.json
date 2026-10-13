@@ -1,0 +1,132 @@
+{
+  "method": "curl -q without cookies or Authorization headers. Archive entries and SHA-256 manifests verified. HTML matches the original prefix, with the expected static Panda publication/expiry footer.",
+  "checks": [
+    {
+      "slug": "03-nimbus-engine-listener",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/7161cf/03-nimbus-engine-listener-evidence.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 54347,
+      "sha256": "7161cf000d3bc796977a60b15744bb7d9b36c47790a0160ae5270060f606d2ba",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "03-nimbus-engine-listener",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/3d9931/03-nimbus-engine-listener.html",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 29841,
+      "sha256": "72ce2bec4656c15e9b3dd7878e16b8c039197bfe56dd0a5ca45436e1167a5a7d",
+      "error": null,
+      "comparison": "entire uploaded HTML matches; Panda appends a static publication/expiry footer",
+      "hosting_suffix_bytes": 404
+    },
+    {
+      "slug": "01-besu-heap-exhaustion",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/5ef401/01-besu-heap-exhaustion-evidence.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 777109,
+      "sha256": "5ef40103f44eec6979f6ea290563b7b9979cac89288ea4ba1f49e382fa228608",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "01-besu-heap-exhaustion",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/9434dc/01-besu-heap-exhaustion.html",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 366987,
+      "sha256": "24bdf57ce571c0365c7fba867c19d50a75fac866898c88b754e12aa614a5d495",
+      "error": null,
+      "comparison": "entire uploaded HTML matches; Panda appends a static publication/expiry footer",
+      "hosting_suffix_bytes": 402
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/a204ef/02-teku-persisted-envelope-evidence.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 645650,
+      "sha256": "a204ef2c426d225410ef03e5955f3368f96ebd65e65151e172adf2f0787e2040",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "canonical_json_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/05f0f2/02-teku-persisted-envelope-canonical-json.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 646005,
+      "sha256": "05f0f200cce0e744ff6797f6a372c35bfcda8a8d99c22103c64474f1c00ff62d",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/066deb/02-teku-persisted-envelope.html",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 33454,
+      "sha256": "897c563420f5e7f84fbfbccf947ea0ba6c2242ae6d92ee251661bd3c6800242b",
+      "error": null,
+      "comparison": "entire uploaded HTML matches; Panda appends a static publication/expiry footer",
+      "hosting_suffix_bytes": 405
+    },
+    {
+      "slug": "04-teku-optimistic-recovery",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/ca7d48/04-teku-optimistic-recovery-evidence.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 63974,
+      "sha256": "ca7d485ee7db010fcc069b3c9549081d5aacc76e49112b9e748fd952b5ec3ed9",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "04-teku-optimistic-recovery",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/137ede/04-teku-optimistic-recovery.html",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 37819,
+      "sha256": "447e8b404fd25415cabb0f2d776a78c662182cf416abac9551f89851bd8da37d",
+      "error": null,
+      "comparison": "entire uploaded HTML matches; Panda appends a static publication/expiry footer",
+      "hosting_suffix_bytes": 406
+    },
+    {
+      "slug": "05-nimbus-remote-bid-fallback",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/3374d4/05-nimbus-remote-bid-fallback-evidence.zip",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 94408,
+      "sha256": "3374d418a17feb42323185e8785d7566badebfa5b068e36789e8e1c6b4db743f",
+      "error": null,
+      "comparison": "all archive entries and manifest hashes match; ZIP timestamp metadata may differ"
+    },
+    {
+      "slug": "05-nimbus-remote-bid-fallback",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/01ae74/05-nimbus-remote-bid-fallback.html",
+      "http_status": "200",
+      "passed": true,
+      "bytes": 31026,
+      "sha256": "fac4bf391e25376f341d7923b0409e4e93ea26e9d98cb50f23d2e386b0774e47",
+      "error": null,
+      "comparison": "entire uploaded HTML matches; Panda appends a static publication/expiry footer",
+      "hosting_suffix_bytes": 408
+    }
+  ],
+  "panda_retention": "60 days after publication; copies committed to repository for later sharing"
+}

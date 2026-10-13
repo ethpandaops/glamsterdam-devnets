@@ -1,0 +1,45 @@
+{
+  "captured_at": "2026-10-13T09:02:35.121636+00:00",
+  "node": "lighthouse-nethermind-1",
+  "snapshot": {
+    "sync": {
+      "is_syncing": false,
+      "is_optimistic": false,
+      "el_offline": false,
+      "head_slot": "5997",
+      "sync_distance": "0"
+    },
+    "slot": 5997,
+    "root": "0x510b7036d2677ccb3284f950db92e992fe0bd91616a10ba78af8a1bbc4155db1",
+    "finalized": 185,
+    "el_syncing": false,
+    "el_block": 24458325,
+    "el_peers": 16,
+    "containers": [
+      {
+        "name": "execution",
+        "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+        "id": "0e9ec04f58bc998b7d9635513936e9fcecaa3c3d25164940e65468c8ad240839",
+        "running": true,
+        "restarts": 0,
+        "started": "2026-10-13T08:58:30.000201485Z"
+      },
+      {
+        "name": "beacon",
+        "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+        "id": "b71ed81b716a61773739382ed0be64f6577da740502b53c2a109acfbb711ef4f",
+        "running": true,
+        "restarts": 0,
+        "started": "2026-10-12T11:45:19.170670117Z"
+      },
+      {
+        "name": "validator",
+        "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+        "id": "120d0946119ee5b2bb7494f5041f7015ecddd8ffbe0d608d593dabcb6bac42a7",
+        "running": true,
+        "restarts": 0,
+        "started": "2026-10-12T11:45:21.610128821Z"
+      }
+    ]
+  }
+}
