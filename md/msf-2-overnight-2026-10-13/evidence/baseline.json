@@ -1,0 +1,1506 @@
+{
+  "at": "2026-10-13T21:48:30.019525+00:00",
+  "nodes": {
+    "bootnode-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 40,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "33b71dc5a439290dde3050d6d417c0e3ede0f878ed6673637f279b5320ce0e96",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:21.882075842Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "b12e721a24be2036316f06e0eddc50b7aa5c87869e4c7de626d935a9a1262f00",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:37:14.587720167Z"
+        }
+      ]
+    },
+    "buildoor-lighthouse-geth-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 40,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "dfc8eb8440ce9ff5bdbe51b7b4b6622a0d035cba4558c83641a8b375f09e706e",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:22.601918853Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "9d47ace586776a8c26090df14ca1bb8fcf523d2bf121aa40d30f075e75880e6a",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:21.744244612Z"
+        }
+      ]
+    },
+    "buildoor-teku-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 34,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "f3bcc177263c498bf63d3859d69891ffb9eaf8ea542a44a3d79c39c780fc05b4",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:54.389277293Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "4d032b863c503b57d305b9cc3425aac16fed1123eaaebcc626935b1704ba09ff",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:32:16.76216918Z"
+        }
+      ]
+    },
+    "grandine-besu-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462040,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "7638372bc10969c853564eba3ce8910692ce31245d14934612b710b1abdba2bd",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T16:44:18.476052128Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "b93bf83fd21d834987d9f360b8b44ed456733b337e517cfa69c495f53e394814",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:27.284479517Z"
+        }
+      ]
+    },
+    "grandine-erigon-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462040,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "3ba6f790d3b9f043c03b907f7e45d8b94a916be2374588aaf2754a743f3e7cef",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:32:17.088609518Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "98450344397ac5d762f158b95d7c4b8f517c50f7911043afdbb11a14caeeefd5",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T12:57:29.428649657Z"
+        }
+      ]
+    },
+    "grandine-ethrex-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462040,
+      "el_peers": 28,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "d34fadc028e0b09b8442e4020085aab2cc0dd30c670fa5eaf4fc10794b5a237b",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:45:48.598727765Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "8bfaaf125e15902f3c1b9d71ea913a0fccf9360277700f5df5244a420f3f3808",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:28.395178148Z"
+        }
+      ]
+    },
+    "grandine-geth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462040,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "b136143e2013a85077df74cd873c6d27467f554c53677c50aff3d645acf59dc4",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:49:57.461007086Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "4ef2d4dc3b0a0589562cb1d8aec316f16ea8f645c17438f4d27ee92daef4754b",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:46:02.693718889Z"
+        }
+      ]
+    },
+    "grandine-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "e56ca7314383b7657f3c0d5ef004b19620c105e908a636f7abdfa477534d3933",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:51.876410398Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "3b2cdc644dacded1042a1843001ac36d7f39ccf2fa48a0c4316db890f3c29955",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:20.418945783Z"
+        }
+      ]
+    },
+    "grandine-reth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462040,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "a64f31da68abd7c1fdfd949b38490260c8a564df76ed951ea96ce091192ed313",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:13:33.896926708Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sifrai/grandine:3.0.0-rc.0",
+          "id": "4ad24fa9a59b3c8221f7555eda3a153cd9d8a76b06b8dd6652c6b0b91c2eda62",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:46:49.037720848Z"
+        }
+      ]
+    },
+    "lighthouse-besu-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "28834cd7a6277386b6bb407f6fcbdd8326a107e65f4931447d0be42a224adc34",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T17:00:53.343419583Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "0df27eae03be9da4cf820bce5350c2251ddeab1754a5f76dc1404353f2b46944",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:24.81914976Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "187663bd1160a388b60f84f5ba75cb6271af258b090c646d7b3733d11b71c789",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:28.021323698Z"
+        }
+      ]
+    },
+    "lighthouse-erigon-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "f507a5b305688817f043fc68766f0d98a0d79aa7ac123434f721e62674a0627d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:20:08.010571867Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "f1b45ea8c8556ada997705e9ddb637fadf07fdab0b164e64ff580b4cb053d02c",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:27:57.37144105Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "c397db2878cc5eec5f0d32dddf50ef9e4ebba36f46be25c9cdc84db20ecbcb04",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:38.614992294Z"
+        }
+      ]
+    },
+    "lighthouse-ethrex-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "bd9325fbfe6933706b2e2a766a4e3432676cc18bcce263ff2bd19a4fbe18bac2",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:41:42.066807614Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "03fc577f284a9a4bbcfefacf1e162a13194f60161754b44963b9528dfb9ed7bc",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:32.503874085Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "57eedcac4f03c1fc5d13442fe66e65d588cd5aff88d0a4a5e3f676e349c15057",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:38.150240717Z"
+        }
+      ]
+    },
+    "lighthouse-geth-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "1e05fa4e682cff57351cc6a4805743cdab8a2148eb84015405862d1d4f12945d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:48:41.269507964Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "140dca7813eabb79730b3b738d0032d23e3aeb61cf72fe1ff3960765776022cb",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:20.358463686Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "94decb1f3901019bcf01c83dc80613934cc55c751667c58a5aea0df0761e1c9a",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:23.943613475Z"
+        }
+      ]
+    },
+    "lighthouse-nethermind-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 30,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "0e9ec04f58bc998b7d9635513936e9fcecaa3c3d25164940e65468c8ad240839",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:58:30.000201485Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "b71ed81b716a61773739382ed0be64f6577da740502b53c2a109acfbb711ef4f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:19.170670117Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "120d0946119ee5b2bb7494f5041f7015ecddd8ffbe0d608d593dabcb6bac42a7",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:21.610128821Z"
+        }
+      ]
+    },
+    "lighthouse-nimbusel-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": true,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": {
+        "startingBlock": "0x0",
+        "currentBlock": "0x0",
+        "highestBlock": "0x17542d8"
+      },
+      "el_block": 0,
+      "el_peers": 2,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/statusim/nimbus-eth1:v0.4.2",
+          "id": "6ce0f063240042fa2c678d6d54ed8efc5cbdfaf623b7593c94462d75038a048f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T12:53:17.242343938Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "dd0c9b96caffbbdb02829333114b7cf106fc8034cdc1f19c729086d7a489bfc2",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:18.704192205Z"
+        }
+      ]
+    },
+    "lighthouse-reth-1": {
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "9827",
+        "sync_distance": "0"
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 30,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "cbaed551487eb198dcec30439e268c57a2c67af00994537bf7837da32da633a6",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:11:42.30710147Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "409d22fdcac0b54e8d793aef4042526721ab0941380df54c0e3fe923e75f174c",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:47.416268824Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "id": "11330d24cdab2f1bcde3ffc8f877351a1e9a755d967cd3fd5bb28f7eb33b7289",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:51.738143205Z"
+        }
+      ]
+    },
+    "lodestar-besu-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "04d2ff69d54fa12b6748d43d04f794ae234c91fec6e003fb4b78827fc376660c",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T20:23:28.076197254Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "f49d1a0c70ef8feaed26b878603aa7a3e5fa79f51d619d6faec66400903a0f4b",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:07:22.758385271Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "8c4a70bb25cdcf83da10d1875b92341b420ef395bc5cebf64f830dcccd6068ad",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:07:27.350952872Z"
+        }
+      ]
+    },
+    "lodestar-erigon-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "a83d318eebae85b85b3fd552af4689100a69b74c27cac1fadf435c27799bc38f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:32:15.755471911Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "d2342b4046bb13ae0ea39c3ae58c41824f77ed9a7024eae41489f576c7e4f0ca",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:09:24.124835641Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "c7fb0ea03be718d3f9ea56cd1a385518b2f25643850660487e7f950610d7683d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:09:29.568016395Z"
+        }
+      ]
+    },
+    "lodestar-ethrex-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "62cc706b912556d2b4c9c77b0838a25e907c82fb6b858853886077af082d7516",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:46:00.845150257Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "93bf49ccdc7c105939f11f08287c7ae56f22500608866271078dcf26e706c9b4",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:12:38.553764338Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "748a857741f01185d9a961f2039d67282efc48c79c0547113592ba93b1f0130f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:12:48.245253011Z"
+        }
+      ]
+    },
+    "lodestar-geth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "77f559138374afc70ca30d532d692b5994985a1a8d8593947ffc503bd319b1dd",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:22.681999409Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "b7e80f281d6f2c286bf59417f60a8c31027a9976b58eeaee01ba42297e3549ff",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:16:33.396768877Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "675c2f75edfd3e31431602f38987895692cdbbafc87f96e8053924225ee8cd84",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:16:37.730625721Z"
+        }
+      ]
+    },
+    "lodestar-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "a00064ff6ffcecf00463b6b4ddb6eb1a8092e7ba8a5899c320fb4b31ec9400f4",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:55.748279111Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "4dd60199024d32f7bf5c00863f47d45bfa0ea5fefa27a26482795820f3f35911",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:15:02.870024719Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "2be7d52116dbf4cae6290a9d4ad58fca8feefe989ae5bbbf95c362df9665564d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:15:10.534580443Z"
+        }
+      ]
+    },
+    "lodestar-reth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "e3a388efe6d0732ff0c0129350bd67395a0d9a6b6060b73ad54427e94620ab98",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:13:23.244095433Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "958d466f92e4276bda7be17250b79ab7623235b13bdaeab79adac019067ae8c1",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:17:12.779924898Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/chainsafe/lodestar:v1.50.0",
+          "id": "af51a47da8221891cd30025d47ae0f4fd86a220831590fd701c53ee363750f02",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:17:19.178344091Z"
+        }
+      ]
+    },
+    "nimbus-besu-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "41d34d8be117d19cbf23c477f7db1121476931e4adc4ba5b35184ab3917f6c4c",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T16:29:57.941422457Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "640f4f0fdcff4f22f946d2b6860fe05f24cf917dd73bbdf6e61aa6bdfcd36747",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:33.858700885Z"
+        }
+      ]
+    },
+    "nimbus-erigon-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "fa30cd621c336cbcd404b61ba2e393fab49f7971e44ccbaae26d594369f25a1a",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:37:10.326282761Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "ef16da7f8ef19dd1c67e98ea113eb52e87867371dcd216a0be99f9a099359c0b",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:52.365612501Z"
+        }
+      ]
+    },
+    "nimbus-ethrex-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "98a210b27cb99682372564bfe5f0b489bcdeb5ed872bd53114cab296f318af98",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:45:59.862304861Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "1cf22bca226e788516720e3f51a69a65c8c4cc993f785807eb12f852dda66e74",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:38.829751282Z"
+        }
+      ]
+    },
+    "nimbus-geth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "3be95075062a183b69919329d34c6ccc755df096926d16e4c360dd161997bb9a",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:18.225818079Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "8403f5ef461fd3f22cdf1f3aefd07aeff4b6cce8bd12ab4a0a6d0fef37f33453",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:46:22.667362028Z"
+        }
+      ]
+    },
+    "nimbus-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 28,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "39ecb2bdc3c0a83b94bc6b5ce39b1176c9ce5dfdc32a2a990cb54fa0199c3819",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:53.601625349Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "6d297aad33a5a98bd49f5b19e8f794d9360992863ab5575fac36f4742d296c11",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:26.696555925Z"
+        }
+      ]
+    },
+    "nimbus-nimbusel-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": true,
+        "el_offline": true
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 0,
+      "el_peers": 2,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/statusim/nimbus-eth1:v0.4.2",
+          "id": "1e5f1cd2aab2c93aa249bd5e2af29967c226912e17cd02e1a3716428ff3f22c6",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T12:53:22.231250099Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "d0b6c4c307c1ecd0be6f95a24f13bd0326573d331b7d12fdd2afa820047d1f70",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:22.694232882Z"
+        }
+      ]
+    },
+    "nimbus-reth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "e580a2739673300b217ad7ac623a054ed0f830e8a2635667cab4d1761063f13e",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:13:22.217992511Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "id": "7df4ed6527076005ccd6b3dd66b682a1280cc28f8d634e696b0d1c565b16aeb6",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:46:06.578301114Z"
+        }
+      ]
+    },
+    "prysm-besu-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "d280b25ec1877562b5f1310b480a270469fe906b19a4825b3dbbace4fe83edfb",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T19:03:25.308809401Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "626f535fefc150e74b5514831b1d965d0cc243434bb88269454df82e926eed20",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:18.125685759Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "4fe6d85ee61ec7767232b36adfdae5a294caeec49d84548571dbb149ed71f470",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:22.191439915Z"
+        }
+      ]
+    },
+    "prysm-erigon-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "530337f926b29eebcb463e25b3a5becebf59b3c97c765909faffedad9df07214",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:37:03.646398783Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "d90365dfd5c962d4f9fe4469cae3bcc81a0257d89218ed206fa194365e00d48c",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:42.661759476Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "2555b134c4ed59b3bfba355bf7fd3759018cef71ca390e2c1e8a98dd8139ac75",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:47.84390728Z"
+        }
+      ]
+    },
+    "prysm-ethrex-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462042,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "b697f025dc2aad0e605ba02b41c1e2c54a5dcc79bd7255dfefbcf8f1a19f0d8c",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:46:00.466927928Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "64e6312d0053ab889939f961d6d0e7a5f065bbe337ca9123f5575304e38cea62",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:41.926605554Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "4678a1291be8c0799534026439434d76be5ad9099094271b25bebcbcee252925",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:48.97558185Z"
+        }
+      ]
+    },
+    "prysm-geth-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462042,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "f993922869d5900a6af520dd63dbfa56830f86e1d2e32b8022789d08e4d543a2",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:24.594931626Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "e77da89ba66e9dd41b44d27c6c6b8155d78c79c8b67e92501d7ecfb2a61027c9",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:36.813518693Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "eb4d8711cd40ee5e27921d99402acc2db58879fefd91ca70d198aba13b6f04da",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:43.786743029Z"
+        }
+      ]
+    },
+    "prysm-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 26,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "f922bcc14c0fd5d96d5e465170d00839978912b5295f3c6cb98d3973419ba716",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:53.542450673Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "cda32be30eae31c13d5836f8664a21a6172419f79620eadb23f7a06d3c851adf",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:28.529966482Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "1f1a9c3110c858f4d358fca8b716037e85a6427219d12e42156a4eb80bb3df07",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:32.655078172Z"
+        }
+      ]
+    },
+    "prysm-reth-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "045c6465af6cb6eec13d641340f6ea34c328a32340baeb754573342d323a33d7",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:13:23.779675858Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/offchainlabs/prysm-beacon-chain:v7.2.1",
+          "id": "f742c09f33d5fc2862729703ea6a924df6385ed13bc63f463746f2d5f5eecd2f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:55.760277041Z"
+        },
+        {
+          "name": "validator",
+          "image": "registry-1.docker.io/offchainlabs/prysm-validator:v7.2.1",
+          "id": "55a5843b528524d104103103e49eb09eae9349495ac770506dd3c7ab2117305f",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:46:02.674598818Z"
+        }
+      ]
+    },
+    "teku-besu-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 25,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/hyperledger/besu:26.9.0",
+          "id": "5b204d8f55cc1afe474e3e554869da8997bd6ba4cf5f450f8fef7ad405285191",
+          "running": true,
+          "restarts": 1,
+          "started": "2026-10-13T16:35:47.370921553Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "b6235a22405390f75e727c7074ac288fc80cc36bc0eb2a6998d662d8422c6af0",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:34:36.784447747Z"
+        }
+      ]
+    },
+    "teku-erigon-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 3,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/erigontech/erigon:v3.7.1",
+          "id": "f1ee51a695cdc2180e3e02d8a2b4ea11fad4d57d3cb3b2d57ebc587829063c77",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:37:02.970668122Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "dedb17a0c0bafdcbbc1eaf6fb0b333a55f930e07b2f92891d58dee134707bab7",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:51:54.645488055Z"
+        }
+      ]
+    },
+    "teku-ethrex-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462042,
+      "el_peers": 24,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/lambdaclass/ethrex:29.0.1",
+          "id": "0f47ccfc325d3ddeefdfae0cdfa14f6054ef58dd9aa685de7a20b18a610f82cc",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:45:49.024535301Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "09f0fcc9bd46a92088aa9ff29aec2a12b542d681f75697fd301f84e347221475",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:56:35.862447434Z"
+        }
+      ]
+    },
+    "teku-geth-1": {
+      "sync": {
+        "head_slot": "9828",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9828,
+      "root": "0xd9148830555c860b3c844a84b119357d4c1b4624b5f8bd1922ad245ec2c55abe",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462042,
+      "el_peers": 32,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "id": "f1fe0b25fc9b796e35e7bc17d67e61ef5c3793606b84518fc8289977fc602063",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:50:23.298688163Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "6e543701dc298d30a1cae8266ca81b959dfce2b0994ad9240aae99523c98818c",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:58:56.134504305Z"
+        }
+      ]
+    },
+    "teku-nethermind-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 27,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "id": "3ec7c2bdd49f2b72785ab311cb1a780acf2e1f1c71e3c18f23baaee485ab7baf",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:52.267563574Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "652f58e4626c1f2e9b6250e63432f8b0f88b221ca59910cf4073e6587b55e5ad",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:13:22.592445724Z"
+        }
+      ]
+    },
+    "teku-reth-1": {
+      "sync": {
+        "head_slot": "9827",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "slot": 9827,
+      "root": "0xc274786a26676be136414033c567401f4c29ec4c3f607f62b625542ae49ea150",
+      "finalized": 305,
+      "el_syncing": false,
+      "el_block": 24462041,
+      "el_peers": 31,
+      "containers": [
+        {
+          "name": "execution",
+          "image": "ghcr.io/paradigmxyz/reth:v2.7.0",
+          "id": "7ccbdff914b24fb68a2e46a56c3884f3f056500a47e9f507a0e21d832bf0675d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:13:22.361687383Z"
+        },
+        {
+          "name": "beacon",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "id": "01623e45b1f89b71ce42879905bcf5486c30eee27a741f5817aa55dabad0f331",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T22:05:11.342937398Z"
+        }
+      ]
+    }
+  }
+}
