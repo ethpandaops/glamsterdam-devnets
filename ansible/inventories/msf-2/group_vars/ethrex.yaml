@@ -37,6 +37,8 @@ ethrex_container_command_extra_args:
   - "--p2p.discv4={{ 'true' if shadowfork_el_static_enodes | length > 0 else 'false' }}"
   - "--p2p.discv5={{ 'false' if shadowfork_el_static_enodes | length > 0 else 'true' }}"
   - --http.api=eth,net,web3,admin
+  # ~20k pending txs (default 10000)
+  - --mempool.maxsize=20000
   # Restored: follow the CL (default is snap).
   - --syncmode=full
 

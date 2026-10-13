@@ -123,6 +123,9 @@ geth_container_command_extra_args:
   - --syncmode=full
   # Without --bootnodes geth falls back to mainnet's bootnodes (empty is fine: none).
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  # ~20k pending txs (default 4096+1024 slots of 32 KiB, 1024 queued)
+  - --txpool.globalslots=20000
+  - --txpool.globalqueue=5000
   # no --gcmode=archive: the restored jochemnet snapshot is a pruned datadir
 geth_container_pull: true
 # role: ethpandaops.general.prometheus

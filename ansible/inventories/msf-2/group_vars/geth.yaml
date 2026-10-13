@@ -35,6 +35,9 @@ geth_container_command_extra_args:
   - --discovery.v5=true
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_estimateGas/eth_call can simulate full-block txs
   - --rpc.gascap=200000000
+  # ~20k pending txs (default 4096+1024 slots of 32 KiB, 1024 queued)
+  - --txpool.globalslots=20000
+  - --txpool.globalqueue=5000
 geth_container_pull: true
 
 prometheus_config: |

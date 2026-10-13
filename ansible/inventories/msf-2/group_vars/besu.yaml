@@ -42,6 +42,8 @@ besu_container_command_extra_args:
   - --rpc-http-max-active-connections=1000
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc-gas-cap=200000000
+  # ~20k pending txs: layered pool sorts 10000 by default; the byte-capped layers (75 MB) hold the rest
+  - --tx-pool-max-prioritized=20000
 besu_container_pull: true
 
 prometheus_config: |

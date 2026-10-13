@@ -48,6 +48,8 @@ erigon_shadowfork_args:
   - --log.console.verbosity=debug
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc.gascap=200000000
+  # ~20k pending txs (default 10000; basefee/queued subpools already 30000)
+  - --txpool.globalslots=20000
   # pprof HTTP server (fetch profiles via port-forward / container IP)
   - --pprof
   - --pprof.addr=0.0.0.0

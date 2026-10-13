@@ -33,6 +33,9 @@ reth_container_command_extra_args:
   - --http.api=rpc,eth,net,web3,admin,txpool
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/tracing can handle full-block txs
   - --rpc.gascap=200000000
+  # ~20k pending txs (default 10000 txs / 20 MB per subpool)
+  - --txpool.pending-max-count=20000
+  - --txpool.pending-max-size=100
 prometheus_config: |
   global:
     scrape_interval: 30s

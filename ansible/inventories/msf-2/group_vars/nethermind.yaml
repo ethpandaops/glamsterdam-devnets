@@ -44,6 +44,8 @@ nethermind_container_command_extra_args:
   - --Network.EnableEnrDiscovery=false
   - --Discovery.UseDefaultDiscv5Bootnodes=false
   - --Pruning.Mode=None
+  # ~20k pending txs (default 2048; the mainnet preset does not set it)
+  - --TxPool.Size=20000
   - --log=INFO
   - --Seq.MinLevel=Info
   - --Seq.ServerUrl={{ nethermind_seq_server }}
