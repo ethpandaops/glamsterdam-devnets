@@ -1,0 +1,14 @@
+3228182 accept4(16, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 18
+3228182 getpeername(18, {sa_family=AF_INET, sin_port=htons(45496), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0
+3228182 accept4(17, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 19
+3228182 getpeername(19, {sa_family=AF_INET, sin_port=htons(33328), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0
+3228182 accept4(17, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 18
+3228182 getpeername(18, {sa_family=AF_INET, sin_port=htons(33332), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0
+3228182 accept4(16, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 18
+3228182 getpeername(18, {sa_family=AF_INET, sin_port=htons(46144), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0
+3228182 accept4(17, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 19
+3228182 getpeername(19, {sa_family=AF_INET, sin_port=htons(37970), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0
+3228182 accept4(17, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 18
+3228182 getpeername(18, 0x7ffebda5cbb0, [128]) = -1 ENOTCONN (Transport endpoint is not connected)
+3228182 accept4(16, 0x7ffebda5d010, [0 => 16], SOCK_CLOEXEC|SOCK_NONBLOCK) = 18
+3228182 getpeername(18, {sa_family=AF_INET, sin_port=htons(46146), sin_addr=inet_addr("172.22.0.1")}, [128 => 16]) = 0

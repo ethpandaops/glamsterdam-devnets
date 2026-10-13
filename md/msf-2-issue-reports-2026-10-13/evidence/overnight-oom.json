@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-10-13T08:35:32.511813+00:00",
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT Timestamp, ResourceAttributes['host.name'] AS host, Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp >= toDateTime('2026-10-12 23:24:13') AND Timestamp < toDateTime('2026-10-13 08:30:00') AND Body LIKE '%OutOfMemoryError%' ORDER BY Timestamp LIMIT 40"
+  ],
+  "exit_code": 0,
+  "output": "{\n  \"columns\": [\n    \"Timestamp\",\n    \"host\",\n    \"Body\"\n  ],\n  \"rows\": []\n}\n"
+}

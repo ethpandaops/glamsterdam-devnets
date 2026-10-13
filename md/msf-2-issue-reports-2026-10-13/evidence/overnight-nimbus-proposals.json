@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-10-13T08:35:32.864396+00:00",
+  "command": [
+    "panda",
+    "clickhouse",
+    "query-raw",
+    "clickhouse-raw",
+    "SELECT ResourceAttributes['host.name'] AS host, if(Body LIKE '%Timeout while getting execution payload%', 'timeout','proposed') AS kind, count() AS raw_log_rows, count(DISTINCT (Timestamp,Body)) AS unique_events FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND Timestamp >= toDateTime('2026-10-12 23:24:13') AND Timestamp < toDateTime('2026-10-13 08:30:00') AND ResourceAttributes['host.name']='nimbus-reth-1' AND (Body LIKE '%Timeout while getting execution payload%' OR Body LIKE '%Block proposed%') GROUP BY host, if(Body LIKE '%Timeout while getting execution payload%', 'timeout','proposed') ORDER BY raw_log_rows DESC LIMIT 10"
+  ],
+  "exit_code": 0,
+  "output": "{\n  \"columns\": [\n    \"host\",\n    \"kind\",\n    \"raw_log_rows\",\n    \"unique_events\"\n  ],\n  \"rows\": [\n    [\n      \"nimbus-reth-1\",\n      \"timeout\",\n      \"75\",\n      \"75\"\n    ],\n    [\n      \"nimbus-reth-1\",\n      \"proposed\",\n      \"6\",\n      \"6\"\n    ]\n  ]\n}\n"
+}

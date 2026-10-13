@@ -1,0 +1,17 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.rocksdb.RocksDB in an unnamed module (file:/opt/teku/lib/rocksdbjni-10.10.1.1.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+CF_HEX=01 VALUE_BYTES=2545
+OTHER_RECORD=IllegalArgumentException
+CF_HEX=07 VALUE_BYTES=160
+OTHER_RECORD=IllegalArgumentException
+CF_HEX=92 VALUE_BYTES=824
+ROOT=0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+SLOT=0
+PARENT_HASH=0x0000000000000000000000000000000000000000000000000000000000000000
+BLOCK_HASH=0x65a17c8257288fc4b3cc7ff8b5d986401606709c5cc6aa005ff4072479cce7e9
+BLOCK_NUMBER=0
+GAS_LIMIT=0
+EXTRACTED_BYTES=824

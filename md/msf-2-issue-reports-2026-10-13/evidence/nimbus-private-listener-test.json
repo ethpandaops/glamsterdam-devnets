@@ -1,0 +1,58 @@
+{
+  "started_at": "2026-10-13T08:33:12.927142+00:00",
+  "image_id": "sha256:5af7d6b22e8de087c74f342db41ea1325e74a9b299d3a5358b0b83bec465b53e",
+  "mode": "fresh-minimal-fault-injection",
+  "before": {
+    "8545": {
+      "response": {
+        "jsonrpc": "2.0",
+        "result": "0x1",
+        "id": 1
+      },
+      "latency_seconds": 0.03182380087673664
+    },
+    "8551": {
+      "response": {
+        "jsonrpc": "2.0",
+        "result": [],
+        "id": 1
+      },
+      "latency_seconds": 0.005387140437960625
+    }
+  },
+  "after_fin": {
+    "8545": {
+      "response": {
+        "jsonrpc": "2.0",
+        "result": "0x1",
+        "id": 1
+      },
+      "latency_seconds": 0.003597727045416832
+    },
+    "8551": {
+      "response": {
+        "jsonrpc": "2.0",
+        "result": [],
+        "id": 1
+      },
+      "latency_seconds": 0.0019697435200214386
+    }
+  },
+  "after_rst": {
+    "8545": {
+      "response": {
+        "jsonrpc": "2.0",
+        "result": "0x1",
+        "id": 1
+      },
+      "latency_seconds": 0.003920624032616615
+    },
+    "8551": {
+      "error": "timed out",
+      "latency_seconds": 2.0028420481830835
+    }
+  },
+  "process_running": "true",
+  "passed": true,
+  "completed_at": "2026-10-13T08:33:18.162522+00:00"
+}

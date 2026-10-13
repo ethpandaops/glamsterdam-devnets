@@ -1,0 +1,86 @@
+2026-10-13 08:31:32.605 WARN  - Ignoring unknown items in network configuration: MIN_SLOTS_FOR_INCLUSION_LISTS_REQUESTS,CONFIRMATION_BYZANTINE_THRESHOLD
+2026-10-13 08:31:32.867 INFO  - Teku version: teku/v26.9.1/linux-x86_64/-eclipseadoptium-openjdk64bitservervm-java-25
+2026-10-13 08:31:32.868 INFO  - This software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+2026-10-13 08:31:33.053 INFO  - Configuration | Network: empty, Storage Mode: MINIMAL
+2026-10-13 08:31:33.054 INFO  - Host Configuration | Maximum Heap Size: 4.00 GB, Total Memory: 47.05 GB, CPU Cores: 12
+2026-10-13 08:31:33.054 INFO  - Rest Api Configuration | Enabled: false
+2026-10-13 08:31:33.054 INFO  - Validator Api Configuration | Enabled: false
+2026-10-13 08:31:33.449 INFO  - Using execution engine at http://127.0.0.1:8551
+2026-10-13 08:31:33.449 INFO  - Enabling Builder Circuit Breaker
+2026-10-13 08:31:33.468 INFO  - New execution engine JWT secret generated in /case/run26.9/beacon/ee-jwt-secret.hex
+2026-10-13 08:31:33.584 INFO  - Gas limit schedule is active: the network recommends a gas limit of 200000000 from epoch 0.
+2026-10-13 08:31:33.593 INFO  - Loading 0 validator keys...
+2026-10-13 08:31:33.594 INFO  - Storing beacon chain data in: /case/run26.9/beacon
+2026-10-13 08:31:33.595 INFO  - Loaded 0 Validators: 
+2026-10-13 08:31:33.598 INFO  - validator-api-enabled is false, not starting rest api.
+2026-10-13 08:31:33.610 INFO  - jemalloc: 5.3.0-0-g54eaed1d8b56b1aa528be3bdd1877e59c56fa90c
+2026-10-13 08:31:33.619 INFO  - Beacon data directory set to: /case/run26.9/beacon
+2026-10-13 08:31:33.630 INFO  - RocksDB BlobDB for static data columns is disabled for this database
+2026-10-13 08:31:34.199 INFO  - Created RocksDB V6 Hot and Finalized database (6) at /case/run26.9/beacon/db
+2026-10-13 08:31:34.200 INFO  - State pruner will run every: 5 minute(s), retaining states for the last 0 finalized slots. Limited to 1 state prune per execution.
+2026-10-13 08:31:34.248 INFO  - Initializing storage
+2026-10-13 08:31:34.401 FATAL - Failed to initialize storage. Check the existing database matches the current network configuration. Set log level to debug for more information.
+2026-10-13 08:31:34.404 FATAL - Teku failed to start
+java.util.concurrent.CompletionException: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeThrowable(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenCompleteStage(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.whenComplete(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:762)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.whenComplete(SafeFuture.java:38)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.propagateResult(SafeFuture.java:145)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$exceptionallyCompose$0(SafeFuture.java:566)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateResult$0(SafeFuture.java:148)
+at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.postComplete(Unknown Source)
+at java.base/java.util.concurrent.CompletableFuture.completeExceptionally(Unknown Source)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.lambda$propagateToAsync$3(SafeFuture.java:465)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:82)
+at tech.pegasys.teku.infrastructure.async.AsyncRunner.lambda$runAsync$1(AsyncRunner.java:47)
+at tech.pegasys.teku.infrastructure.async.SafeFuture.of(SafeFuture.java:74)
+at tech.pegasys.teku.infrastructure.async.ScheduledExecutorAsyncRunner.lambda$createRunnableForAction$0(ScheduledExecutorAsyncRunner.java:124)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+at com.google.common.base.Preconditions.checkState(Preconditions.java:907)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getValidatedPayloadHeader(StoredBlockMetadata.java:265)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.getPayloadBlockNumber(StoredBlockMetadata.java:245)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$2(StoredBlockMetadata.java:218)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.lambda$extractGloasForkChoiceRebuildData$1(StoredBlockMetadata.java:217)
+at java.base/java.util.Optional.map(Unknown Source)
+at tech.pegasys.teku.storage.api.StoredBlockMetadata.extractGloasForkChoiceRebuildData(StoredBlockMetadata.java:212)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.lambda$buildHotBlockMetadata$0(KvStoreDatabase.java:345)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline$3$1.accept(Unknown Source)
+at java.base/java.util.Iterator.forEachRemaining(Unknown Source)
+at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.copyInto(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Unknown Source)
+at java.base/java.util.stream.AbstractPipeline.evaluate(Unknown Source)
+at java.base/java.util.stream.ReferencePipeline.forEach(Unknown Source)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.buildHotBlockMetadata(KvStoreDatabase.java:338)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:851)
+at tech.pegasys.teku.storage.server.kvstore.KvStoreDatabase.createMemoryStore(KvStoreDatabase.java:829)
+at tech.pegasys.teku.storage.server.ChainStorage.getStore(ChainStorage.java:103)
+at tech.pegasys.teku.storage.server.ChainStorage.onStoreRequest(ChainStorage.java:119)
+... 5 more
+Teku failed to start: java.lang.IllegalStateException: Blinded execution payload envelope parent block hash 0x0000000000000000000000000000000000000000000000000000000000000000 does not match GLOAS block bid parent block hash 0x04da4849f769bf233751505c809d291d8ab70f91cccdcd46909b4bb55c649f7b for block root 0x3c681a001b2ec71bf23d98c8b1b963b756d53477cb9a4daa52f65c71f25c6549
+
+To display full help:
+teku [COMMAND] --help

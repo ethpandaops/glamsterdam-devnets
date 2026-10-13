@@ -1,0 +1,391 @@
+{
+  "status": "success",
+  "isPartial": false,
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "consensus_client": "grandine",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-grandine-besu-1",
+          "ip_address": "165.22.7.245",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.000025000000000000946"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "grandine",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-grandine-besu-1",
+          "ip_address": "165.22.7.245",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "grandine",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-grandine-besu-1",
+          "ip_address": "165.22.7.245",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.001166666666666553"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lighthouse",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lighthouse-besu-1",
+          "ip_address": "68.183.166.243",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.00003333333333332966"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lighthouse",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lighthouse-besu-1",
+          "ip_address": "68.183.166.243",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lighthouse",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lighthouse-besu-1",
+          "ip_address": "68.183.166.243",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.0009000000000005078"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lodestar",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lodestar-besu-1",
+          "ip_address": "207.154.253.19",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lodestar",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lodestar-besu-1",
+          "ip_address": "207.154.253.19",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "lodestar",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-lodestar-besu-1",
+          "ip_address": "207.154.253.19",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.000608333333333159"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "nimbus",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-nimbus-besu-1",
+          "ip_address": "168.144.244.100",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.00004166666666665838"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "nimbus",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-nimbus-besu-1",
+          "ip_address": "168.144.244.100",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "nimbus",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-nimbus-besu-1",
+          "ip_address": "168.144.244.100",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.00024166666666663634"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "prysm",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-prysm-besu-1",
+          "ip_address": "152.42.133.125",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.00003333333333332966"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "prysm",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-prysm-besu-1",
+          "ip_address": "152.42.133.125",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "prysm",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-prysm-besu-1",
+          "ip_address": "152.42.133.125",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.0013916666666669167"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "teku",
+          "execution_client": "besu",
+          "gc": "G1 Concurrent GC",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-teku-besu-1",
+          "ip_address": "167.99.59.150",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "teku",
+          "execution_client": "besu",
+          "gc": "G1 Old Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-teku-besu-1",
+          "ip_address": "167.99.59.150",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0"
+        ]
+      },
+      {
+        "metric": {
+          "consensus_client": "teku",
+          "execution_client": "besu",
+          "gc": "G1 Young Generation",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-teku-besu-1",
+          "ip_address": "167.99.59.150",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "value": [
+          1791880292,
+          "0.0006833333333332803"
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "seriesFetched": "18",
+    "executionTimeMsec": 21
+  }
+}

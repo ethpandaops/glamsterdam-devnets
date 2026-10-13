@@ -1,0 +1,27 @@
+{
+  "probe_started_at_utc": "2026-10-13T08:43:35.329329+00:00",
+  "probe_completed_at_utc": "2026-10-13T08:43:46.985536+00:00",
+  "method": "engine_exchangeCapabilities",
+  "read_only": true,
+  "results": {
+    "nimbus-nimbusel-1": {
+      "exit_code": 0,
+      "probe": {
+        "latency_seconds": 10.018629878002685,
+        "error": "timed out"
+      }
+    },
+    "lighthouse-nimbusel-1": {
+      "exit_code": 0,
+      "probe": {
+        "latency_seconds": 0.009654237001086585,
+        "response": {
+          "jsonrpc": "2.0",
+          "result": [],
+          "id": 1
+        }
+      }
+    },
+    "internal_listeners": "State  Recv-Q Send-Q Local Address:Port  Peer Address:Port\nLISTEN 0      4096         0.0.0.0:6060       0.0.0.0:*   \nLISTEN 0      100          0.0.0.0:8545       0.0.0.0:*   \nLISTEN 101    100          0.0.0.0:8551       0.0.0.0:*   \nLISTEN 0      4096      127.0.0.11:45157      0.0.0.0:*   \nLISTEN 0      4096               *:30303            *:*   \n"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-10-13T08:42:31.682991+00:00",
+  "mode": "private-restore, then extracted-record reproduction",
+  "network_access": "Docker --network none",
+  "validator_material": "none copied; only beacon/db and public network metadata were restored",
+  "runs": [
+    {
+      "version": "26.10.0",
+      "image": "consensys/teku:26.10.0",
+      "image_id": "sha256:a784516802e3174d04311d46ab2279e12c2455c7a8d64c7e275cdde06b9e4c1d",
+      "started_at": "2026-10-13T08:30:20.197542773Z",
+      "finished_at": "2026-10-13T08:30:23.525561615Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "args": [
+        "--data-path=/case/run26.10",
+        "--network=/case/config.yaml",
+        "--p2p-enabled=false",
+        "--ee-endpoint=http://127.0.0.1:8551",
+        "--log-destination=CONSOLE"
+      ],
+      "expected_same_root_failure": true
+    },
+    {
+      "version": "26.9.1",
+      "image": "consensys/teku:26.9.1",
+      "image_id": "sha256:0360d1bdc4de93ba7981322e025147fb0d083947e55e541397d0efb188319842",
+      "started_at": "2026-10-13T08:31:30.805073399Z",
+      "finished_at": "2026-10-13T08:31:34.433938421Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "args": [
+        "--data-path=/case/run26.9",
+        "--network=/case/config.yaml",
+        "--p2p-enabled=false",
+        "--ee-endpoint=http://127.0.0.1:8551",
+        "--log-destination=CONSOLE"
+      ],
+      "expected_same_root_failure": true
+    }
+  ],
+  "minimal_control": "same stored block + canonical envelope passes StoredBlockMetadata.extractGloasForkChoiceRebuildData; stored envelope fails"
+}

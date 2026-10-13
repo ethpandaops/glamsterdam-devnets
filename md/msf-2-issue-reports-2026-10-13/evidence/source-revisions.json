@@ -1,0 +1,65 @@
+{
+  "captured_at": "2026-10-13T08:35:05.752035+00:00",
+  "clients": [
+    {
+      "client": "besu",
+      "repository": "besu-eth/besu",
+      "runtime_ref": "26.9.0",
+      "runtime_commit": "ee9c64c8ed031cba5c6bcdb502a79c03c3a467c4",
+      "upstream_branch": "main",
+      "upstream_commit": "7e35f46ab6b78214f375f191ffc989b6cbc556c0",
+      "fetch_success": true,
+      "error": null
+    },
+    {
+      "client": "teku",
+      "repository": "Consensys-Incorporated/teku",
+      "runtime_ref": "26.10.0",
+      "runtime_commit": "a46f9e1e3679e4c2707d27447628d07a6c67b600",
+      "upstream_branch": "master",
+      "upstream_commit": "ac42e053343b18fd56f8fff4cb3682e4ad1e4e90",
+      "fetch_success": true,
+      "error": null
+    },
+    {
+      "client": "nimbus-eth1",
+      "repository": "status-im/nimbus-eth1",
+      "runtime_ref": "705f4d9aced29de0049d7ad5f686b0e585f3f38d",
+      "runtime_commit": "705f4d9aced29de0049d7ad5f686b0e585f3f38d",
+      "upstream_branch": "master",
+      "upstream_commit": "831663a27c9fa845197ee13a0a9f289cf2fee940",
+      "fetch_success": true,
+      "error": null
+    },
+    {
+      "client": "nimbus-eth2",
+      "repository": "status-im/nimbus-eth2",
+      "runtime_ref": "657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8",
+      "runtime_commit": "657beb3d6e13fcfddb1a7ca2dbd2d3d0516f8ca8",
+      "upstream_branch": "unstable",
+      "upstream_commit": "46628d9532fb848c108b5c59dc4c0f1524537fcc",
+      "fetch_success": true,
+      "error": null
+    },
+    {
+      "client": "erigon",
+      "repository": "erigontech/erigon",
+      "runtime_ref": "v3.7.1",
+      "runtime_commit": "8c1e3893d77d230720d172f1492d95b5777a862c",
+      "upstream_branch": "main",
+      "upstream_commit": "ffd1b0e36802e761beefb9f15a24005b7f50284d",
+      "fetch_success": true,
+      "error": null
+    },
+    {
+      "client": "reth",
+      "repository": "paradigmxyz/reth",
+      "runtime_ref": "v2.7.0",
+      "runtime_commit": "3d592ece6de8c4559987416a544fc215fd6d6921",
+      "upstream_branch": "main",
+      "upstream_commit": "22a68756c71a4a4e3408600c69ef5b6cf7169461",
+      "fetch_success": true,
+      "error": null
+    }
+  ]
+}

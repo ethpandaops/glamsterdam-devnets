@@ -1,0 +1,72 @@
+{
+  "captured_at": "2026-10-13T08:42:34.677463+00:00",
+  "block": 24458232,
+  "block_hash": "0x21fab9b5c2626a274de58db5bbd7b49276ca763c9fd1aa3220141eaefb33fbb5",
+  "original_block": 24455346,
+  "historical_attempt": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "error": {
+      "code": -32000,
+      "message": "historical state 0d7eafa0b6d9e9693cec6681d33ef9754d5bd65570f5a8f7d1eba209e868c14b is not available"
+    }
+  },
+  "samples": [
+    {
+      "salt": 16029,
+      "address": "0xe4b6bd7dacd7c2319036aefd963b4acf8741d52e",
+      "bytes": 65536,
+      "code_hash": "0x5e435a73c8201ba7acc51c06cda65a34386865b0cdb56670ff04ef5a8cff060d",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    },
+    {
+      "salt": 16030,
+      "address": "0x16ff5bf250e35a22b0a2b5f09d9b6e6b539db952",
+      "bytes": 65536,
+      "code_hash": "0x1c23f001b078c59094cf42c78b77165eae2fda86426661eab2570ad7fec05a27",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    },
+    {
+      "salt": 21371,
+      "address": "0x86d1b0e6f712e8d4ba0c3bf6827cadf86634dd32",
+      "bytes": 65536,
+      "code_hash": "0x2d8a5356865dcf872489d20aff79194b25a2a3b984cc95fe273edf649377f66f",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    },
+    {
+      "salt": 21372,
+      "address": "0x320d4f01a41044f43c08c3f1e6fc224dd55a4400",
+      "bytes": 65536,
+      "code_hash": "0x88e49e0b489584f9ea1baf800f326eabbce5246aa4fc8b44c2beb74a0947b5d8",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    },
+    {
+      "salt": 26714,
+      "address": "0x3e6af6770b62be932630b748aad1dbc3b7b66ab4",
+      "bytes": 65536,
+      "code_hash": "0xb9fafefbc26129f4cf19573cb4c0c1053b9cb77b2a609dfbdd7ea598e0ae7dfa",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    },
+    {
+      "salt": 42743,
+      "address": "0xf79a67df741504b2fae30564ff3bdc7d56411016",
+      "bytes": 65536,
+      "code_hash": "0xd44eba4e031e4ce1904fc8ab2cd4c2f1a9e1fc3eb9b49b211601a8acc5e20b89",
+      "prefix": "61ffff565b5b5b5b",
+      "suffix": "5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b5b",
+      "embedded_address_offset": 44
+    }
+  ],
+  "method": "eth_getCode",
+  "chain_id": 1
+}
