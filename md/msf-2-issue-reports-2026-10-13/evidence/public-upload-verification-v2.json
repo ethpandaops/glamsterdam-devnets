@@ -1,0 +1,126 @@
+{
+  "verified_at": "2026-10-13T10:22:45.442394+00:00",
+  "method": "curl -q; no cookies or Authorization supplied; content and integrity verified",
+  "checks": [
+    {
+      "slug": "03-nimbus-engine-listener",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/214841/03-nimbus-engine-listener-evidence.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 98114,
+      "sha256": "214841781a3e827e6cd9e43217d0123aa1211eab29e223bf575e1f226df51e54"
+    },
+    {
+      "slug": "03-nimbus-engine-listener",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/9a0af8/03-nimbus-engine-listener.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 70985,
+      "sha256": "8c141ac6f0457002956d9ee6658ddc2d147357126e79dcc73d27846efc0ded77"
+    },
+    {
+      "slug": "01-besu-heap-exhaustion",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/c63176/01-besu-heap-exhaustion-evidence.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 731222,
+      "sha256": "c6317696affec29783c0f0d13647300fc6e931764f6737e466e9ab9476132015"
+    },
+    {
+      "slug": "01-besu-heap-exhaustion",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/3b97c0/01-besu-heap-exhaustion.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 478623,
+      "sha256": "6f3ede1f4e79dae05fb5a46fa181540d1e269b611a6c17833596a72c852d08bc"
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/533111/02-teku-persisted-envelope-evidence.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 674173,
+      "sha256": "5331119e4dc560565db0438d5f12b3ad403605d4e04c23c93a73d80a3095a45a"
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "canonical_json_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/05f0f2/02-teku-persisted-envelope-canonical-json.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 646005,
+      "sha256": "05f0f200cce0e744ff6797f6a372c35bfcda8a8d99c22103c64474f1c00ff62d"
+    },
+    {
+      "slug": "02-teku-persisted-envelope",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/a6a9f8/02-teku-persisted-envelope.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 69418,
+      "sha256": "e740227d33566b279f772be196b4979de42d8874674a1f3becae09decf6add7d"
+    },
+    {
+      "slug": "04-teku-optimistic-recovery",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/a333e3/04-teku-optimistic-recovery-evidence.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 131001,
+      "sha256": "a333e3e132c5338af70435feb9fb8c636d0505ea02f1b72a1f36d4b77b531909"
+    },
+    {
+      "slug": "04-teku-optimistic-recovery",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/1d8c96/04-teku-optimistic-recovery.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 84171,
+      "sha256": "57fd0b6be37dede0d24b8c63e0f358d13f4de4d151e83459c1a9bb44f9e8fb3a"
+    },
+    {
+      "slug": "05-nimbus-remote-bid-fallback",
+      "kind": "evidence_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/33a53c/05-nimbus-remote-bid-fallback-evidence.zip",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "archive member equality and SHA-256 manifest",
+      "bytes": 156822,
+      "sha256": "33a53c54665ba6d88137ed6739b9068da3c6d3b9af6d61d56b45e25f71642ff2"
+    },
+    {
+      "slug": "05-nimbus-remote-bid-fallback",
+      "kind": "report_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/0d07ae/05-nimbus-remote-bid-fallback.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 78717,
+      "sha256": "843a36dd7944df47649359020ca6cde848ca7e0cdab1698dfccbf4fadad3390b"
+    },
+    {
+      "slug": "index",
+      "kind": "index_url",
+      "url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/12c764/index.html",
+      "http_status": 200,
+      "passed": true,
+      "comparison": "full HTML prefix plus expected static Panda footer",
+      "bytes": 6652,
+      "sha256": "8a0848f7bb482215059044f30cda507e68aaade98447c4d8a72ae3aaf35f337f"
+    }
+  ]
+}

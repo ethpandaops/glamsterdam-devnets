@@ -1,9 +1,10 @@
 {
-  "source_commit": "146667c5881c1d1a764fc32c5083d8c451a9404c",
+  "source_commit": "69b8a89a3c8aa39ec7f994cab843bbf831741559",
   "published_on": "2026-10-13",
   "retention_days": 60,
   "approximate_expiry": "2026-12-12",
-  "index_url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/56c640/index.html",
-  "index_verified_without_authentication": true,
-  "upstream_issues_filed": false
+  "index_url": "https://panda-uploads-production.devops-539.workers.dev/panda/uploads/12c764/index.html",
+  "upstream_issues_filed": false,
+  "revision": "profiling deployed; visuals and client-team impact added",
+  "index_verified_without_authentication": true
 }

@@ -1,0 +1,107 @@
+{
+  "mode": "Local Chromium; desktop and mobile; all new standalone figures visually inspected separately",
+  "checks": [
+    {
+      "title": "Besu heap exhaustion during block processing \u00b7 msf-2",
+      "width": 1279,
+      "overflow": false,
+      "images": [
+        true,
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Teku rejects a persisted payload envelope during restart \u00b7 msf-2",
+      "width": 1279,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Nimbus execution Engine API listener stops serving requests \u00b7 msf-2",
+      "width": 1279,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Optimistic recovery delays during rollout and live operation \u00b7 msf-2",
+      "width": 1279,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Nimbus drops proposer duties when the local payload times out \u00b7 msf-2",
+      "width": 1279,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Besu heap exhaustion during block processing \u00b7 msf-2",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        true,
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Teku rejects a persisted payload envelope during restart \u00b7 msf-2",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Nimbus execution Engine API listener stops serving requests \u00b7 msf-2",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Optimistic recovery delays during rollout and live operation \u00b7 msf-2",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    },
+    {
+      "title": "Nimbus drops proposer duties when the local payload times out \u00b7 msf-2",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        true
+      ],
+      "relativeMarkdown": false,
+      "impactHeading": true
+    }
+  ]
+}
