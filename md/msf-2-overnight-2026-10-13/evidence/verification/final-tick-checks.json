@@ -1,0 +1,14 @@
+[
+  {
+    "publication_failed": false,
+    "complete": true,
+    "retry_possible": false,
+    "passed": true
+  },
+  {
+    "publication_failed": true,
+    "complete": false,
+    "retry_possible": true,
+    "passed": true
+  }
+]

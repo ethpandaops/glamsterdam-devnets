@@ -184,22 +184,22 @@
     }
   },
   "last_full": "2026-10-13T21:58:23.318033+00:00",
-  "last_push": null,
-  "cycle": 3,
+  "last_push": "2026-10-13T21:58:23.318033+00:00",
+  "cycle": 4,
   "missed": [],
   "assigned": {},
-  "latest_health": "evidence/health/20261013T215823Z.json",
+  "latest_health": "evidence/health/20261013T215901Z.json",
   "latest_full_health": "evidence/health/20261013T215823Z.json",
   "latest_full_at": "2026-10-13T21:58:23.318033+00:00",
   "finality_advanced_at": "2026-10-13T21:55:59.688146+00:00",
   "finalized": 306,
   "first_finalized": 305,
   "validator_ok": 36,
-  "wall_slot": 9876,
-  "last_health_at": "2026-10-13T21:58:23.318033+00:00",
+  "wall_slot": 9880,
+  "last_health_at": "2026-10-13T21:59:01.715047+00:00",
   "logs_cursor": "2026-10-13T21:56:23.318033+00:00",
   "start": "2026-10-13T21:48:30+00:00",
   "end": "2026-10-14T08:00:00+00:00",
   "status": "running",
-  "last_tick": "2026-10-13T21:58:23.318033+00:00"
+  "last_tick": "2026-10-13T21:59:01.715047+00:00"
 }

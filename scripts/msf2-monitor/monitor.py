@@ -456,6 +456,7 @@ def main():
     parser.add_argument('--repo', type=Path, required=True)
     parser.add_argument('--state-dir', type=Path, required=True)
     parser.add_argument('--no-publish', action='store_true')
+    parser.add_argument('--timer-unit')
     args = parser.parse_args()
     os.umask(0o077)
     args.state_dir.mkdir(parents=True, exist_ok=True)
@@ -466,6 +467,8 @@ def main():
             monitor.publish = lambda: None
         try:
             monitor.tick()
+            if monitor.state.get('complete') and args.timer_unit:
+                command(['systemctl', '--user', 'disable', '--now', args.timer_unit])
         except Exception as e:
             monitor.event('collector_failure', 'collector', str(e), '')
             monitor.report()

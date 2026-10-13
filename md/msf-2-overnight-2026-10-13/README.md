@@ -1,6 +1,6 @@
 # Glamsterdam msf 2 overnight monitoring October 13 to 14 2026
 
-Monitoring is running for **2026-10-13T21:48:30+00:00 to 2026-10-14T08:00:00+00:00**. Last tick: **2026-10-13T21:58:23.318033+00:00**. The latest full check found **36/36 validator pairings** healthy at **2026-10-13T21:58:23.318033+00:00**. Reference finalized epoch advanced from **305** to **306**. This is sampled health, not a claim of uninterrupted operation.
+Monitoring is running for **2026-10-13T21:48:30+00:00 to 2026-10-14T08:00:00+00:00**. Last tick: **2026-10-13T21:59:01.715047+00:00**. The latest full check found **36/36 validator pairings** healthy at **2026-10-13T21:58:23.318033+00:00**. Reference finalized epoch advanced from **305** to **306**. This is sampled health, not a claim of uninterrupted operation.
 
 The initial baseline found all 36 validator pairings healthy. Two unstaked Nimbus EL observers retained their previously documented optimistic or Engine offline state. These are tracked as known conditions. [Baseline](evidence/baseline.json). All six Besu hosts also retained afternoon OOM artifacts discovered at startup; these predate the overnight window and are detailed in [the Besu follow-up](besu-oom-followup.md). [Existing client reports](../msf-2-issue-reports-2026-10-13/README.md).
 
