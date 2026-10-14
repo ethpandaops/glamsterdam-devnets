@@ -4,140 +4,141 @@
       "kind": "health",
       "host": "lighthouse-nimbusel-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/health/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": [
-        "is_optimistic"
+        "is_optimistic",
+        "el_syncing_or_unknown"
       ],
-      "latest_evidence": "evidence/health/20261014T045901Z.json"
+      "latest_evidence": "evidence/health/20261014T055901Z.json"
     },
     "health:nimbus-nimbusel-1": {
       "kind": "health",
       "host": "nimbus-nimbusel-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/health/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": [
         "is_optimistic",
         "el_offline"
       ],
-      "latest_evidence": "evidence/health/20261014T045901Z.json"
+      "latest_evidence": "evidence/health/20261014T055901Z.json"
     },
     "besu_heap_dump:grandine-besu-1": {
       "kind": "besu_heap_dump",
       "host": "grandine-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof",
         "bytes": 26973208860,
         "mtime": "2026-10-13T16:44:12.603203+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "besu_heap_dump:lighthouse-besu-1": {
       "kind": "besu_heap_dump",
       "host": "lighthouse-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof",
         "bytes": 26748214310,
         "mtime": "2026-10-13T17:00:47.594610+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "besu_heap_dump:lodestar-besu-1": {
       "kind": "besu_heap_dump",
       "host": "lodestar-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof",
         "bytes": 27729214978,
         "mtime": "2026-10-13T20:23:26.367896+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "besu_heap_dump:nimbus-besu-1": {
       "kind": "besu_heap_dump",
       "host": "nimbus-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof",
         "bytes": 26750411558,
         "mtime": "2026-10-13T16:29:56.446991+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "besu_heap_dump:prysm-besu-1": {
       "kind": "besu_heap_dump",
       "host": "prysm-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof",
         "bytes": 27409332283,
         "mtime": "2026-10-13T19:03:22.903096+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "besu_heap_dump:teku-besu-1": {
       "kind": "besu_heap_dump",
       "host": "teku-besu-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 86,
+      "observations": 98,
       "known_before_window": true,
       "first_evidence": "evidence/profiling/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
         "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof",
         "bytes": 26811699345,
         "mtime": "2026-10-13T16:35:45.675959+00:00",
         "privacy": "Host-local metadata only; no dump uploaded"
       },
-      "latest_evidence": "evidence/profiling/20261014T045901Z.json"
+      "latest_evidence": "evidence/profiling/20261014T055901Z.json"
     },
     "log_engine_timeout:nimbus-nimbusel-1": {
       "kind": "log_engine_timeout",
       "host": "nimbus-nimbusel-1",
       "first_seen": "2026-10-13T21:52:45.932727+00:00",
-      "observations": 430,
+      "observations": 490,
       "known_before_window": true,
       "first_evidence": "evidence/logs/20261013T215245Z.json",
-      "last_seen": "2026-10-14T04:59:01.729002+00:00",
+      "last_seen": "2026-10-14T05:59:01.720468+00:00",
       "latest_detail": {
-        "timestamp": "2026-10-14 04:56:59.000820893",
+        "timestamp": "2026-10-14 05:56:59.000997294",
         "container": "beacon",
-        "body": "DBG 2026-10-14 04:56:58.999+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\"",
+        "body": "DBG 2026-10-14 05:56:58.995+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\"",
         "requires": "correlate with duties and health; logs alone do not prove a new defect"
       },
-      "latest_evidence": "evidence/logs/20261014T045901Z.json"
+      "latest_evidence": "evidence/logs/20261014T055901Z.json"
     },
     "collection_gap:collector": {
       "kind": "collection_gap",
@@ -279,60 +280,60 @@
       "latest_evidence": "evidence/logs/20261014T034901Z.json"
     }
   },
-  "last_full": "2026-10-14T04:59:01.729002+00:00",
-  "last_push": "2026-10-14T04:01:01.723580+00:00",
-  "cycle": 428,
+  "last_full": "2026-10-14T05:59:01.720468+00:00",
+  "last_push": "2026-10-14T05:02:01.727726+00:00",
+  "cycle": 489,
   "missed": [],
   "assigned": {
-    "teku-reth-1": 51,
-    "nimbus-reth-1": 65,
-    "lodestar-besu-1": 55,
-    "lighthouse-besu-1": 53,
-    "nimbus-geth-1": 77,
-    "prysm-nethermind-1": 53,
-    "lighthouse-ethrex-1": 59,
-    "nimbus-erigon-1": 59,
-    "nimbus-nethermind-1": 63,
-    "nimbus-ethrex-1": 57,
-    "prysm-erigon-1": 60,
-    "grandine-ethrex-1": 70,
-    "teku-nethermind-1": 59,
-    "lighthouse-geth-1": 47,
-    "lighthouse-erigon-1": 61,
-    "grandine-geth-1": 54,
-    "lodestar-ethrex-1": 59,
-    "lodestar-nethermind-1": 55,
-    "lodestar-reth-1": 67,
-    "prysm-geth-1": 52,
-    "lodestar-geth-1": 63,
-    "prysm-besu-1": 45,
-    "teku-ethrex-1": 65,
-    "grandine-nethermind-1": 46,
-    "grandine-erigon-1": 67,
-    "prysm-reth-1": 52,
-    "nimbus-besu-1": 60,
-    "teku-besu-1": 68,
-    "grandine-reth-1": 54,
-    "grandine-besu-1": 64,
-    "lighthouse-reth-1": 58,
-    "lodestar-erigon-1": 50,
-    "prysm-ethrex-1": 50,
-    "teku-erigon-1": 58,
-    "lighthouse-nethermind-1": 45,
-    "teku-geth-1": 59
+    "teku-reth-1": 55,
+    "nimbus-reth-1": 71,
+    "lodestar-besu-1": 65,
+    "lighthouse-besu-1": 60,
+    "nimbus-geth-1": 85,
+    "prysm-nethermind-1": 58,
+    "lighthouse-ethrex-1": 70,
+    "nimbus-erigon-1": 72,
+    "nimbus-nethermind-1": 76,
+    "nimbus-ethrex-1": 67,
+    "prysm-erigon-1": 69,
+    "grandine-ethrex-1": 80,
+    "teku-nethermind-1": 66,
+    "lighthouse-geth-1": 53,
+    "lighthouse-erigon-1": 70,
+    "grandine-geth-1": 60,
+    "lodestar-ethrex-1": 67,
+    "lodestar-nethermind-1": 65,
+    "lodestar-reth-1": 77,
+    "prysm-geth-1": 59,
+    "lodestar-geth-1": 72,
+    "prysm-besu-1": 49,
+    "teku-ethrex-1": 70,
+    "grandine-nethermind-1": 55,
+    "grandine-erigon-1": 77,
+    "prysm-reth-1": 60,
+    "nimbus-besu-1": 74,
+    "teku-besu-1": 76,
+    "grandine-reth-1": 60,
+    "grandine-besu-1": 71,
+    "lighthouse-reth-1": 65,
+    "lodestar-erigon-1": 54,
+    "prysm-ethrex-1": 59,
+    "teku-erigon-1": 64,
+    "lighthouse-nethermind-1": 51,
+    "teku-geth-1": 66
   },
-  "latest_health": "evidence/health/20261014T050201Z.json",
-  "latest_full_health": "evidence/health/20261014T045901Z.json",
-  "latest_full_at": "2026-10-14T04:59:01.729002+00:00",
-  "finality_advanced_at": "2026-10-14T04:57:01.719056+00:00",
-  "finalized": 372,
+  "latest_health": "evidence/health/20261014T060301Z.json",
+  "latest_full_health": "evidence/health/20261014T055901Z.json",
+  "latest_full_at": "2026-10-14T05:59:01.720468+00:00",
+  "finality_advanced_at": "2026-10-14T06:01:01.717681+00:00",
+  "finalized": 382,
   "first_finalized": 305,
   "validator_ok": 36,
-  "wall_slot": 11995,
-  "last_health_at": "2026-10-14T05:02:01.727726+00:00",
-  "logs_cursor": "2026-10-14T04:57:01.729002+00:00",
+  "wall_slot": 12300,
+  "last_health_at": "2026-10-14T06:03:01.717069+00:00",
+  "logs_cursor": "2026-10-14T05:57:01.720468+00:00",
   "start": "2026-10-13T21:48:30+00:00",
   "end": "2026-10-14T08:00:00+00:00",
   "status": "running",
-  "last_tick": "2026-10-14T05:02:01.727726+00:00"
+  "last_tick": "2026-10-14T06:03:01.717069+00:00"
 }
