@@ -1,0 +1,138 @@
+{
+  "from": "2026-10-13T23:52:01.717700+00:00",
+  "to": "2026-10-14T00:02:01.724568+00:00",
+  "overlap_seconds": 300,
+  "records": {
+    "critical": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'OutOfMemoryError|Terminating due|\\\\bFATAL\\\\b|panic:|state root mismatch|INVALID_PAYLOAD|Invalid execution payload') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'OutOfMemoryError|Terminating due|\\\\bFATAL\\\\b|panic:|state root mismatch|INVALID_PAYLOAD|Invalid execution payload') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": []
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": []
+      }
+    },
+    "engine_timeout": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": [
+          [
+            "nimbus-nimbusel-1",
+            "beacon",
+            "50",
+            "2026-10-13 23:52:11.000746317",
+            "2026-10-14 00:01:59.000498102"
+          ]
+        ]
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": [
+          [
+            "2026-10-14 00:01:59.000498102",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 00:01:58.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 00:01:47.000779040",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 00:01:46.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 00:01:35.000877920",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 00:01:34.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 00:01:23.003702746",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 00:01:22.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 00:01:11.000895127",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 00:01:10.996+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ]
+        ]
+      }
+    },
+    "duty_loss": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": []
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": []
+      }
+    },
+    "optimistic_activation": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-13 23:52:01') AND Timestamp < toDateTime('2026-10-14 00:02:01') AND match(Body,'(?i)optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": []
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": []
+      }
+    }
+  }
+}
