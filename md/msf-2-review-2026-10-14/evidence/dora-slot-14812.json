@@ -1,0 +1,30 @@
+{
+  "status": "OK",
+  "data": {
+    "attestationscount": 1,
+    "attesterslashingscount": 0,
+    "blockroot": "0xb4abb789bed35e2d2f81b68caa97af072858a4bdfb40258412d94e6c76292c77",
+    "depositscount": 0,
+    "epoch": 462,
+    "exec_base_fee_per_gas": 82400040,
+    "exec_block_hash": "0x89a77e3c72003efdf737c2979626a7809b05f84fdf8b65f7459314aeb07f4947",
+    "exec_block_number": 24467020,
+    "exec_extra_data": "0x6275696c646f6f722f2f4e65746865726d696e642076322e312e30",
+    "exec_fee_recipient": "0xf97e180c050e5ab072211ad2c213eb5aee4df134",
+    "exec_gas_limit": 200000000,
+    "exec_gas_used": 99336876,
+    "exec_transactions_count": 6,
+    "graffiti": "0x6c69676874686f7573652d626573752d31204255656539634c48343932300000",
+    "graffiti_text": "lighthouse-besu-1 BUee9cLH4920",
+    "parentroot": "0x074abee65251b0228f19f2f06bc2fe11623ae42b256c4067aa09a2061856f1f4",
+    "proposer": 12081,
+    "proposerslashingscount": 0,
+    "slot": 14812,
+    "stateroot": "0x29f848fa80a246010e8556b3a9d4e36af150ec46f1a8d33013e4986051778467",
+    "status": "Canonical",
+    "syncaggregate_participation": 1,
+    "voluntaryexitscount": 0,
+    "withdrawalcount": 16,
+    "blob_count": 0
+  }
+}

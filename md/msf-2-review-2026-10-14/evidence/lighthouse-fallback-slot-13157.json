@@ -1,0 +1,187 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='lighthouse-reth-1' AND ResourceAttributes['container.name'] IN ('beacon','validator') AND Timestamp>=toDateTime('2026-10-14 08:54:19') AND Timestamp<toDateTime('2026-10-14 08:54:30') AND match(Body,'bid|Bid|payload|Payload|published block|Execution engine call failed') ORDER BY Timestamp ASC LIMIT 80 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 08:54:20.002445571",
+        "beacon",
+        "Oct 14 08:54:20.002 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:20.002473866",
+        "beacon",
+        "Oct 14 08:54:20.002 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.503293624",
+        "beacon",
+        "Oct 14 08:54:23.503 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.505336346",
+        "beacon",
+        "Oct 14 08:54:23.505 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.505452905",
+        "beacon",
+        "Oct 14 08:54:23.505 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.507048309",
+        "beacon",
+        "Oct 14 08:54:23.506 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.507073180",
+        "beacon",
+        "Oct 14 08:54:23.506 DEBUG Beacon proposer found                         payload_attributes: V4(PayloadAttributesV4 { timestamp: 1791968064, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [Withdrawal { index: 205264, validator_index: 1099511627776, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 101000000 }, Withdrawal { index: 205265, validator_index: 12602, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205266, validator_index: 12603, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205267, validator_index: 12604, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205268, validator_index: 12605, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205269, validator_index: 12606, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205270, validator_index: 12607, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205271, validator_index: 12608, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 13754699 }, Withdrawal { index: 205272, validator_index: 12609, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205273, validator_index: 12610, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205274, validator_index: 12611, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205275, validator_index: 12612, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205276, validator_index: 12613, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }, Withdrawal { index: 205277, validator_index: 12614, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205278, validator_index: 12615, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 12298444 }, Withdrawal { index: 205279, validator_index: 12616, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 3816299 }], parent_beacon_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot_number: 13157, target_gas_limit: 200000000 }), head_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592, slot: 13157, validator_index: 18742"
+      ],
+      [
+        "2026-10-14 08:54:23.613950625",
+        "beacon",
+        "Oct 14 08:54:23.613 DEBUG Successfully verified gossip payload bid      slot: 13157, parent_block_hash: 0x0c77\u202683b2, parent_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592"
+      ],
+      [
+        "2026-10-14 08:54:23.645349915",
+        "beacon",
+        "Oct 14 08:54:23.645 DEBUG Rejected gossip payload bid                   error: \"BidValueBelowCached { cached_value: 101000000, incoming_value: 101000000 }\", slot: 13157, parent_block_hash: 0x0c77\u202683b2, parent_block_root: 0x728d32acbd806c2e8d9ad47b16fd25d6e2cc8bf794fd05e98270a0ee0b7e1592"
+      ],
+      [
+        "2026-10-14 08:54:24.019143913",
+        "beacon",
+        "Oct 14 08:54:24.018 DEBUG Issuing engine_getPayload                     suggested_fee_recipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, prev_randao: 0x736a5e8101e46d7167e4139892e77bbcb2213877db9eab8e243112ad3ab3bdd7, timestamp: 1791968064, parent_hash: 0x0c77dd6feab98275149e55f7f0d5f7d2c191e0818be8753a3effefa72a4483b2"
+      ],
+      [
+        "2026-10-14 08:54:26.020121525",
+        "beacon",
+        "Oct 14 08:54:26.019 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-14 08:54:26.020179526",
+        "beacon",
+        "Oct 14 08:54:26.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 13157"
+      ],
+      [
+        "2026-10-14 08:54:26.028699821",
+        "validator",
+        "Oct 14 08:54:26.028 INFO  Builder bid won; the builder reveals the payload envelope  slot: 13157, builder_index: 0, validator_pubkey: 0x94d9c92241c8f56e0a4af060a000266c33308ea6042be1ef2a499f16d6d8db910f8511bab540bcb667e4c2f57b06c6de"
+      ],
+      [
+        "2026-10-14 08:54:26.054227653",
+        "validator",
+        "Oct 14 08:54:26.054 INFO  Successfully published block                  block_type: Full, deposits: 0, attestations: 1, graffiti: Some(\"lighthouse-reth-1\"), slot: 13157, validator_pubkey: 0x94d9c92241c8f56e0a4af060a000266c33308ea6042be1ef2a499f16d6d8db910f8511bab540bcb667e4c2f57b06c6de"
+      ],
+      [
+        "2026-10-14 08:54:26.663074687",
+        "beacon",
+        "Oct 14 08:54:26.662 DEBUG Launching a PayloadEnvelopeStreamer           envelopes: 1"
+      ],
+      [
+        "2026-10-14 08:54:26.663412938",
+        "beacon",
+        "Oct 14 08:54:26.663 WARN  Error processing HTTP API request             elapsed_ms: 0.809, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0xd0c389e5a93ddfb7dc66e7fb3f78af57ce32f3d6ef707bb91397eed6cb2476ed, method: GET"
+      ],
+      [
+        "2026-10-14 08:54:27.121088609",
+        "beacon",
+        "Oct 14 08:54:27.120 DEBUG Processed engine_newPayload                   status: \"valid\", parent_hash: 0x0c77dd6feab98275149e55f7f0d5f7d2c191e0818be8753a3effefa72a4483b2, block_hash: 0xbd38f97b6a6b24ddfb277dfcb492fffb0f689a46915a21479799302597f3f089, block_number: 24465369, response_time_ms: 254"
+      ],
+      [
+        "2026-10-14 08:54:27.121113884",
+        "beacon",
+        "Oct 14 08:54:27.120 DEBUG Bid has no blobs, data is available           block_root: 0xd0c389e5a93ddfb7dc66e7fb3f78af57ce32f3d6ef707bb91397eed6cb2476ed"
+      ],
+      [
+        "2026-10-14 08:54:27.130781897",
+        "beacon",
+        "Oct 14 08:54:27.129 INFO  Execution payload envelope imported           block_root: 0xd0c389e5a93ddfb7dc66e7fb3f78af57ce32f3d6ef707bb91397eed6cb2476ed, slot: 13157, source: gossip, envelope_source: gossip"
+      ],
+      [
+        "2026-10-14 08:54:27.130853401",
+        "beacon",
+        "Oct 14 08:54:27.130 DEBUG Processed HTTP API request                    elapsed_ms: 0.981, status: 200 OK, path: /eth/v1/validator/payload_attestation_data, method: GET"
+      ],
+      [
+        "2026-10-14 08:54:27.139383195",
+        "beacon",
+        "Oct 14 08:54:27.139 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.143261952",
+        "beacon",
+        "Oct 14 08:54:27.142 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.145531754",
+        "beacon",
+        "Oct 14 08:54:27.145 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.147176820",
+        "beacon",
+        "Oct 14 08:54:27.147 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.148048476",
+        "beacon",
+        "Oct 14 08:54:27.147 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.151687769",
+        "beacon",
+        "Oct 14 08:54:27.150 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.153754304",
+        "beacon",
+        "Oct 14 08:54:27.153 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.155907735",
+        "beacon",
+        "Oct 14 08:54:27.155 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.157934124",
+        "beacon",
+        "Oct 14 08:54:27.157 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.158841803",
+        "beacon",
+        "Oct 14 08:54:27.158 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.159961974",
+        "beacon",
+        "Oct 14 08:54:27.159 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.160992621",
+        "beacon",
+        "Oct 14 08:54:27.160 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.162069070",
+        "beacon",
+        "Oct 14 08:54:27.161 DEBUG Sending pubsub messages                       count: 1, topics: [PayloadAttestation]"
+      ],
+      [
+        "2026-10-14 08:54:27.162183853",
+        "beacon",
+        "Oct 14 08:54:27.162 DEBUG Processed HTTP API request                    elapsed_ms: 27.799, status: 200 OK, path: /eth/v1/beacon/pool/payload_attestations, method: POST"
+      ],
+      [
+        "2026-10-14 08:54:27.162428530",
+        "validator",
+        "Oct 14 08:54:27.162 INFO  Successfully published payload attestations   slot: 13157, count: 13"
+      ]
+    ]
+  }
+}

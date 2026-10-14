@@ -1,0 +1,23 @@
+{
+  "query": "SELECT ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,count() AS count,min(Timestamp) AS first_seen,max(Timestamp) AS last_seen,substring(argMax(Body,Timestamp),1,2000) AS latest_body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp>=toDateTime('2026-10-14 16:00:16') AND Timestamp<toDateTime('2026-10-14 16:11:30') AND match(Body,'(?i)OutOfMemoryError|Terminating due|\\\\bFATAL\\\\b|panic:|state root mismatch|INVALID_PAYLOAD|Timeout while getting execution payload|TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)|Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late|optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline') GROUP BY host,container ORDER BY host,container LIMIT 200 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "host",
+      "container",
+      "count",
+      "first_seen",
+      "last_seen",
+      "latest_body"
+    ],
+    "rows": [
+      [
+        "nimbus-nimbusel-1",
+        "beacon",
+        "56",
+        "2026-10-14 16:00:23.001197058",
+        "2026-10-14 16:11:23.002232631",
+        "DBG 2026-10-14 16:11:22.998+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+      ]
+    ]
+  }
+}

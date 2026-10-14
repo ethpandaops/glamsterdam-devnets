@@ -1,0 +1,73 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name']='beacon' AND ((Timestamp>=toDateTime('2026-10-14 06:24:56') AND Timestamp<toDateTime('2026-10-14 06:25:06')) OR (Timestamp>=toDateTime('2026-10-14 06:36:44') AND Timestamp<toDateTime('2026-10-14 06:36:54'))) AND match(Body,'Execution payload bid validated|First bid for this slot|Timeout while getting|getPayload|Getting execution payload|No execution payload|Unable to propose|Sending proposal fcU|Block proposed|Failed.*proposal') ORDER BY Timestamp ASC LIMIT 80 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 06:24:58.501948246",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:58.496+00:00 Sending proposal fcU                       topics=\"cman\" proposalSlot=12410 validatorIndex=21850 nextProposer=b31798634f8217df3296be93c67fd0257020cb79269d2054acf8ba4c69f8c547df7c5a8b53eb1efa20c9896b9ccab93e"
+      ],
+      [
+        "2026-10-14 06:24:59.609812982",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:59.604+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=12410 builder_index=0 blockRoot=5944d078"
+      ],
+      [
+        "2026-10-14 06:24:59.609851615",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:59.604+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=12410 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-14 06:25:00.049854967",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:00.044+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=91 id=25178 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 06:25:01.550113455",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 06:25:01.544+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 06:36:46.501849985",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:36:46.495+00:00 Sending proposal fcU                       topics=\"cman\" proposalSlot=12469 validatorIndex=21631 nextProposer=8fbe929ad62fd075becaa2a4219199c6e8e879b472e12df41519e238cc21f1b4fbe0aaee49acee8519868805259f7a91"
+      ],
+      [
+        "2026-10-14 06:36:47.611516575",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:36:47.607+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=12469 builder_index=0 blockRoot=b37fb0b1"
+      ],
+      [
+        "2026-10-14 06:36:47.611550205",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:36:47.607+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=12469 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-14 06:36:48.050927460",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:36:48.047+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=91 id=25300 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 06:36:49.552099637",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 06:36:49.547+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ]
+    ]
+  }
+}

@@ -42,6 +42,7 @@ class MonitorChecks(unittest.TestCase):
         normal = 'DBG New LC optimistic header topics="beacnde"'
         self.assertFalse(any(m.re.search(p, normal) for p in m.PATTERNS.values()))
         self.assertTrue(m.re.search(m.PATTERNS['engine_timeout'], 'Local getPayload TimeoutGetPayload'))
+        self.assertTrue(m.re.search(m.PATTERNS['engine_timeout'], 'WRN Timeout while getting execution payload topics=beacval'))
 
 
 if __name__ == '__main__':

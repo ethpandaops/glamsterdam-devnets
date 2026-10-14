@@ -1,0 +1,9 @@
+{
+  "start": "2026-10-13T21:48:30+00:00",
+  "end": "2026-10-14T16:11:30.788361+00:00",
+  "previous_automatic_capture_end": "2026-10-14T08:05:01.721543+00:00",
+  "reviewed_log_end": "2026-10-14T16:11:30.788361+00:00",
+  "first_census_epoch": 308,
+  "last_census_epoch": 477,
+  "method": "Preserved overnight samples plus retrospective canonical census and ClickHouse/Prometheus through current health snapshot; no continuous direct health capture after 08:05"
+}

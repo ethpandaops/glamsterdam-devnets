@@ -1,0 +1,973 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name']='beacon' AND Timestamp>=toDateTime('2026-10-14 06:24:35') AND Timestamp<toDateTime('2026-10-14 06:37:10') AND match(Body,'12410|12469|Timeout while getting execution payload|Getting execution payload|No execution payload|Unable to|Block proposed') ORDER BY Timestamp ASC LIMIT 160 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 06:24:45.531643823",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:24:45.527+00:00 Slot end                                   topics=\"beacnde\" slot=12408 nextActionWait=2s468ms467us877ns nextAttestationSlot=12409 nextProposalSlot=12410 syncCommitteeDuties=current head=95dbf810:12408"
+      ],
+      [
+        "2026-10-14 06:24:56.652436318",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:56.648+00:00 Updated earliest available slot            topics=\"column_reconstruction_backfiller\" eaSlot=12410 head=12409"
+      ],
+      [
+        "2026-10-14 06:24:57.532721948",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:24:57.528+00:00 Slot end                                   topics=\"beacnde\" slot=12409 nextActionWait=2s467ms379us717ns nextAttestationSlot=12410 nextProposalSlot=12410 syncCommitteeDuties=current head=5944d078:12409"
+      ],
+      [
+        "2026-10-14 06:24:58.501915891",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:58.496+00:00 Prepared clearance state for next block    topics=\"cman\" nextBsi=5944d078:12409@12410 updateStateDur=1ms6us947ns"
+      ],
+      [
+        "2026-10-14 06:24:58.501948246",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:58.496+00:00 Sending proposal fcU                       topics=\"cman\" proposalSlot=12410 validatorIndex=21850 nextProposer=b31798634f8217df3296be93c67fd0257020cb79269d2054acf8ba4c69f8c547df7c5a8b53eb1efa20c9896b9ccab93e"
+      ],
+      [
+        "2026-10-14 06:24:58.521388740",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:58.516+00:00 Attestation subnets                        topics=\"beacnde\" slot=12410 epoch=387 gossipState={0} stabilitySubnets=\"@[0, 63]\" aggregateSubnets=\"@[18, 19, 20, 24, 25, 28, 30, 37, 39, 40, 42, 43, 45, 46]\" prevSubnets=\"@[0, 10, 18, 19, 20, 24, 25, 28, 30, 37, 39, 63]\" subscribeSubnets=\"@[40, 42, 43, 45, 46]\" unsubscribeSubnets=@[10]"
+      ],
+      [
+        "2026-10-14 06:24:59.609812982",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:59.604+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=12410 builder_index=0 blockRoot=5944d078"
+      ],
+      [
+        "2026-10-14 06:24:59.609851615",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:24:59.604+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=12410 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-14 06:25:00.000723595",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:24:59.996+00:00 Slot start                                 topics=\"beacnde\" slot=12410 epoch=387 sync=synced peers=32 head=5944d078:12409 finalized=385:5828ef15 delay=365us252ns"
+      ],
+      [
+        "2026-10-14 06:25:00.049817828",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:00.044+00:00 Requesting engine payload                  topics=\"beacval\" slot=12410 beaconHead=5944d078:12409 executionHead=372ce4c2 latestSafe=3842e006 latestFinalized=72e23080 feeRecipient=0xf97e180c050e5ab072211ad2c213eb5aee4df134"
+      ],
+      [
+        "2026-10-14 06:25:00.114713726",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:00.112+00:00 Overseer debug statistics                  topics=\"sync\" wall_slot=12410 head=5944d078:12409 tail=cfb2fbeb:0 era_bid=\"not available\" backfill_slot=0 backfill_parent_root=00000000 finalized=385:5828ef15 last_seen_head=5944d078:12409 last_seen_finalized=385:5828ef15 finalized_distance=0 backfill_distance=0 column_horizon=0 sdag_peer_entries_count=32 sdag_roots_count=91 sdag_slots_count=90 forward_sync_status=[finished] backward_sync_status=[finished] forward_block_buffer=[empty] backward_block_buffer=[empty] forward_blocks_queue=[F:12320:12320@12320] forward_sidecars_queue=[F:12320:12320@12320] backfill_blocks_queue=[empty] backfill_sidecars_queue=[empty] sidecarless_quarantine=0 blocks_quarantine=0 envelopeless_quarantine=0 fulu_column_quarantine=[M:0/1024;D:0/12288]/0 gloas_column_quarantine=[M:0/1024;D:0/12288]/0 useful_peers=32 useless_peers=0 supernodes_peers=31 inbound_peers=28 outbound_peers=4 columns_count=128 counts=[31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,32,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,32,31,31,31,31,31,31,31,31,31,32,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,32,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31] columns_fill_rate=100.00% custody_groups_count=128 custody_state=full custody_stability=\"not available\" last_seen_syncdag_path=\"12320@5828ef15[F]...12409@5944d078[][P:0/M:0/E:0 of 90]\""
+      ],
+      [
+        "2026-10-14 06:25:01.550113455",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 06:25:01.544+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 06:25:03.004385905",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.000+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=4ms260us567ns attestation=\"(committee_index: 0, attester_index: 21091, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b53d4513)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.004478000",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.000+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21091, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b53d4513)\""
+      ],
+      [
+        "2026-10-14 06:25:03.005364926",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.000+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21091, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b53d4513)\" delay=4ms449us8ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.005841433",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.000+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=5ms778us655ns attestation=\"(committee_index: 0, attester_index: 21476, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 848c6b17)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.006307810",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.000+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21476, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 848c6b17)\""
+      ],
+      [
+        "2026-10-14 06:25:03.006467123",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.004+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21476, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 848c6b17)\" delay=5ms937us267ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.006965873",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=6ms918us206ns attestation=\"(committee_index: 0, attester_index: 21781, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 94ec3baa)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.007093588",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=3 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21781, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 94ec3baa)\""
+      ],
+      [
+        "2026-10-14 06:25:03.007481657",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.004+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21781, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 94ec3baa)\" delay=7ms74us431ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.007907953",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=7ms863us216ns attestation=\"(committee_index: 0, attester_index: 21005, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8284dc9e)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.008018809",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=4 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21005, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8284dc9e)\""
+      ],
+      [
+        "2026-10-14 06:25:03.008332255",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.004+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21005, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8284dc9e)\" delay=7ms997us117ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.008758665",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=8ms721us209ns attestation=\"(committee_index: 0, attester_index: 21791, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a3e21fde)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.008881720",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=5 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21791, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a3e21fde)\""
+      ],
+      [
+        "2026-10-14 06:25:03.009219458",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.004+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21791, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a3e21fde)\" delay=8ms858us144ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.009633196",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=9ms591us49ns attestation=\"(committee_index: 0, attester_index: 21076, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8480721c)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.009761866",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.004+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=6 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21076, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8480721c)\""
+      ],
+      [
+        "2026-10-14 06:25:03.010230143",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.008+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21076, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 8480721c)\" delay=9ms735us188ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.010701550",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=10ms663us752ns attestation=\"(committee_index: 0, attester_index: 21539, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aa3bda1a)\" subnet_id=16 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.011077427",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=7 aggregates=0 attestation=\"(committee_index: 0, attester_index: 21539, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aa3bda1a)\""
+      ],
+      [
+        "2026-10-14 06:25:03.011162109",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.008+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 0, attester_index: 21539, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aa3bda1a)\" delay=10ms814us680ns subnet_id=16"
+      ],
+      [
+        "2026-10-14 06:25:03.011665434",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=11ms619us179ns attestation=\"(committee_index: 1, attester_index: 21865, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a7b832bc)\" subnet_id=17 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.011806647",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 1, attester_index: 21865, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a7b832bc)\""
+      ],
+      [
+        "2026-10-14 06:25:03.012089492",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.008+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 1, attester_index: 21865, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a7b832bc)\" delay=11ms778us201ns subnet_id=17"
+      ],
+      [
+        "2026-10-14 06:25:03.012575279",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=12ms532us423ns attestation=\"(committee_index: 1, attester_index: 21719, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 95f66d77)\" subnet_id=17 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.012783609",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 1, attester_index: 21719, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 95f66d77)\""
+      ],
+      [
+        "2026-10-14 06:25:03.013032349",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.008+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 1, attester_index: 21719, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 95f66d77)\" delay=12ms758us141ns subnet_id=17"
+      ],
+      [
+        "2026-10-14 06:25:03.013451251",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=13ms410us681ns attestation=\"(committee_index: 2, attester_index: 21733, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b1356395)\" subnet_id=18 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.013572787",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.008+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 2, attester_index: 21733, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b1356395)\""
+      ],
+      [
+        "2026-10-14 06:25:03.013918388",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.008+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 2, attester_index: 21733, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b1356395)\" delay=13ms548us236ns subnet_id=18"
+      ],
+      [
+        "2026-10-14 06:25:03.014438861",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=14ms390us99ns attestation=\"(committee_index: 2, attester_index: 21277, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 83a3331e)\" subnet_id=18 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.014562117",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 2, attester_index: 21277, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 83a3331e)\""
+      ],
+      [
+        "2026-10-14 06:25:03.014973989",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.012+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 2, attester_index: 21277, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 83a3331e)\" delay=14ms532us181ns subnet_id=18"
+      ],
+      [
+        "2026-10-14 06:25:03.015474102",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=15ms422us477ns attestation=\"(committee_index: 2, attester_index: 21856, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 86fc32ed)\" subnet_id=18 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.015598025",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=3 aggregates=0 attestation=\"(committee_index: 2, attester_index: 21856, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 86fc32ed)\""
+      ],
+      [
+        "2026-10-14 06:25:03.015938583",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.012+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 2, attester_index: 21856, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 86fc32ed)\" delay=15ms573us552ns subnet_id=18"
+      ],
+      [
+        "2026-10-14 06:25:03.016385907",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=16ms348us518ns attestation=\"(committee_index: 2, attester_index: 21278, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afb369a1)\" subnet_id=18 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.016523271",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=4 aggregates=0 attestation=\"(committee_index: 2, attester_index: 21278, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afb369a1)\""
+      ],
+      [
+        "2026-10-14 06:25:03.016909212",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.012+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 2, attester_index: 21278, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afb369a1)\" delay=16ms479us927ns subnet_id=18"
+      ],
+      [
+        "2026-10-14 06:25:03.017363573",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=17ms309us183ns attestation=\"(committee_index: 2, attester_index: 21507, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: acea44f4)\" subnet_id=18 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.017473326",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.012+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=5 aggregates=0 attestation=\"(committee_index: 2, attester_index: 21507, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: acea44f4)\""
+      ],
+      [
+        "2026-10-14 06:25:03.017787392",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.012+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 2, attester_index: 21507, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: acea44f4)\" delay=17ms449us653ns subnet_id=18"
+      ],
+      [
+        "2026-10-14 06:25:03.018235710",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=18ms184us633ns attestation=\"(committee_index: 3, attester_index: 21152, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 96271065)\" subnet_id=19 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.018364712",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 3, attester_index: 21152, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 96271065)\""
+      ],
+      [
+        "2026-10-14 06:25:03.018781203",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.016+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 3, attester_index: 21152, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 96271065)\" delay=18ms341us88ns subnet_id=19"
+      ],
+      [
+        "2026-10-14 06:25:03.019214051",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=19ms167us582ns attestation=\"(committee_index: 3, attester_index: 21767, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b66e9aa2)\" subnet_id=19 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.019330245",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 3, attester_index: 21767, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b66e9aa2)\""
+      ],
+      [
+        "2026-10-14 06:25:03.019702290",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.016+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 3, attester_index: 21767, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b66e9aa2)\" delay=19ms298us357ns subnet_id=19"
+      ],
+      [
+        "2026-10-14 06:25:03.020198910",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=20ms154us646ns attestation=\"(committee_index: 3, attester_index: 21251, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 91606697)\" subnet_id=19 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.020331079",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=3 aggregates=0 attestation=\"(committee_index: 3, attester_index: 21251, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 91606697)\""
+      ],
+      [
+        "2026-10-14 06:25:03.020688337",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.016+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 3, attester_index: 21251, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 91606697)\" delay=20ms303us302ns subnet_id=19"
+      ],
+      [
+        "2026-10-14 06:25:03.021174185",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=21ms133us955ns attestation=\"(committee_index: 3, attester_index: 21932, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b68359fb)\" subnet_id=19 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.021318930",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.016+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=4 aggregates=0 attestation=\"(committee_index: 3, attester_index: 21932, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b68359fb)\""
+      ],
+      [
+        "2026-10-14 06:25:03.021711847",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.016+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 3, attester_index: 21932, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b68359fb)\" delay=21ms286us495ns subnet_id=19"
+      ],
+      [
+        "2026-10-14 06:25:03.022220396",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=22ms176us7ns attestation=\"(committee_index: 3, attester_index: 21875, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a373e4eb)\" subnet_id=19 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.022351564",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=5 aggregates=0 attestation=\"(committee_index: 3, attester_index: 21875, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a373e4eb)\""
+      ],
+      [
+        "2026-10-14 06:25:03.022897828",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.020+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 3, attester_index: 21875, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a373e4eb)\" delay=22ms325us980ns subnet_id=19"
+      ],
+      [
+        "2026-10-14 06:25:03.023191592",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=23ms142us832ns attestation=\"(committee_index: 4, attester_index: 21168, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 949ab4e3)\" subnet_id=20 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.023313802",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 4, attester_index: 21168, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 949ab4e3)\""
+      ],
+      [
+        "2026-10-14 06:25:03.023663007",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.020+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 4, attester_index: 21168, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 949ab4e3)\" delay=23ms301us64ns subnet_id=20"
+      ],
+      [
+        "2026-10-14 06:25:03.024131114",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=24ms101us464ns attestation=\"(committee_index: 4, attester_index: 21236, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b00c551e)\" subnet_id=20 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.024271097",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 4, attester_index: 21236, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b00c551e)\""
+      ],
+      [
+        "2026-10-14 06:25:03.024645270",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.020+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 4, attester_index: 21236, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: b00c551e)\" delay=24ms238us479ns subnet_id=20"
+      ],
+      [
+        "2026-10-14 06:25:03.025091670",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=25ms41us367ns attestation=\"(committee_index: 4, attester_index: 21311, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 87b20548)\" subnet_id=20 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.025309935",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=3 aggregates=0 attestation=\"(committee_index: 4, attester_index: 21311, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 87b20548)\""
+      ],
+      [
+        "2026-10-14 06:25:03.025515811",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.020+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 4, attester_index: 21311, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 87b20548)\" delay=25ms180us918ns subnet_id=20"
+      ],
+      [
+        "2026-10-14 06:25:03.025931054",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=25ms893us105ns attestation=\"(committee_index: 4, attester_index: 21125, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a9b3135e)\" subnet_id=20 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.026058849",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.020+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=4 aggregates=0 attestation=\"(committee_index: 4, attester_index: 21125, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a9b3135e)\""
+      ],
+      [
+        "2026-10-14 06:25:03.026410634",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.024+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 4, attester_index: 21125, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a9b3135e)\" delay=26ms33us54ns subnet_id=20"
+      ],
+      [
+        "2026-10-14 06:25:03.026915881",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=26ms870us692ns attestation=\"(committee_index: 4, attester_index: 21606, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 81231d63)\" subnet_id=20 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.027037102",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=5 aggregates=0 attestation=\"(committee_index: 4, attester_index: 21606, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 81231d63)\""
+      ],
+      [
+        "2026-10-14 06:25:03.027394768",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.024+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 4, attester_index: 21606, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 81231d63)\" delay=27ms18us774ns subnet_id=20"
+      ],
+      [
+        "2026-10-14 06:25:03.027883162",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=27ms838us559ns attestation=\"(committee_index: 5, attester_index: 21225, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aae752f2)\" subnet_id=21 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.028073055",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 5, attester_index: 21225, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aae752f2)\""
+      ],
+      [
+        "2026-10-14 06:25:03.028428393",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.024+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 5, attester_index: 21225, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: aae752f2)\" delay=27ms993us493ns subnet_id=21"
+      ],
+      [
+        "2026-10-14 06:25:03.028908300",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=28ms864us620ns attestation=\"(committee_index: 5, attester_index: 21698, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: ac20300c)\" subnet_id=21 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.029045782",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 5, attester_index: 21698, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: ac20300c)\""
+      ],
+      [
+        "2026-10-14 06:25:03.029316294",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.024+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 5, attester_index: 21698, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: ac20300c)\" delay=29ms14us291ns subnet_id=21"
+      ],
+      [
+        "2026-10-14 06:25:03.029798633",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=29ms753us41ns attestation=\"(committee_index: 5, attester_index: 21164, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a2f08b01)\" subnet_id=21 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.029899473",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.024+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=3 aggregates=0 attestation=\"(committee_index: 5, attester_index: 21164, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a2f08b01)\""
+      ],
+      [
+        "2026-10-14 06:25:03.030198492",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.028+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 5, attester_index: 21164, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a2f08b01)\" delay=29ms880us420ns subnet_id=21"
+      ],
+      [
+        "2026-10-14 06:25:03.030602242",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=30ms563us601ns attestation=\"(committee_index: 6, attester_index: 21744, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a0d45b8c)\" subnet_id=22 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.030721260",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 6, attester_index: 21744, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a0d45b8c)\""
+      ],
+      [
+        "2026-10-14 06:25:03.031235368",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.028+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 6, attester_index: 21744, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: a0d45b8c)\" delay=30ms700us641ns subnet_id=22"
+      ],
+      [
+        "2026-10-14 06:25:03.031539961",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=31ms497us94ns attestation=\"(committee_index: 6, attester_index: 21457, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 818e4c47)\" subnet_id=22 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.031660023",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=2 aggregates=0 attestation=\"(committee_index: 6, attester_index: 21457, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 818e4c47)\""
+      ],
+      [
+        "2026-10-14 06:25:03.031850181",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.028+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 6, attester_index: 21457, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: 818e4c47)\" delay=31ms631us565ns subnet_id=22"
+      ],
+      [
+        "2026-10-14 06:25:03.032417626",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation received                 topics=\"gossip_eth2\" delay=32ms304us72ns attestation=\"(committee_index: 7, attester_index: 21408, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afe61f5f)\" subnet_id=23 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.032538492",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 SingleAttestation resolved                 topics=\"attpool\" singles=1 aggregates=0 attestation=\"(committee_index: 7, attester_index: 21408, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afe61f5f)\""
+      ],
+      [
+        "2026-10-14 06:25:03.033052000",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.028+00:00 Attestation sent                           topics=\"message_router\" attestation=\"(committee_index: 7, attester_index: 21408, data: (slot: 12410, index: 1, beacon_block_root: 5944d078, source: 386:63447f37, target: 387:0d0b7095), signature: afe61f5f)\" delay=32ms511us585ns subnet_id=23"
+      ],
+      [
+        "2026-10-14 06:25:03.033267825",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=33ms224us274ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21366, signature: 8151610e)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.033381525",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21366"
+      ],
+      [
+        "2026-10-14 06:25:03.033859459",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.028+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21366, signature: 8151610e)\" delay=33ms352us306ns"
+      ],
+      [
+        "2026-10-14 06:25:03.033865148",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.028+00:00 Waiting to send LC updates                 topics=\"beacval\" slot=12410 delay=965ms767us378ns"
+      ],
+      [
+        "2026-10-14 06:25:03.034399515",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=34ms352us133ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21787, signature: 95dc7aa7)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.034494560",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21787"
+      ],
+      [
+        "2026-10-14 06:25:03.034843676",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.032+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21787, signature: 95dc7aa7)\" delay=34ms477us831ns"
+      ],
+      [
+        "2026-10-14 06:25:03.035289082",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=35ms199us77ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21134, signature: b17f06ca)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.035393772",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21134"
+      ],
+      [
+        "2026-10-14 06:25:03.035636381",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.032+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21134, signature: b17f06ca)\" delay=35ms349us940ns"
+      ],
+      [
+        "2026-10-14 06:25:03.036045870",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=36ms13us349ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21802, signature: b4f193d8)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.036124138",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21802"
+      ],
+      [
+        "2026-10-14 06:25:03.036375417",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.032+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21802, signature: b4f193d8)\" delay=36ms106us627ns"
+      ],
+      [
+        "2026-10-14 06:25:03.036774612",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=36ms743us217ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21832, signature: ab58b2d9)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.036852174",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21832"
+      ],
+      [
+        "2026-10-14 06:25:03.037116733",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.032+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21832, signature: ab58b2d9)\" delay=36ms835us592ns"
+      ],
+      [
+        "2026-10-14 06:25:03.037509627",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=37ms477us746ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21121, signature: a9ac3f62)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.037584720",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.032+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21121"
+      ],
+      [
+        "2026-10-14 06:25:03.037857822",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.032+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21121, signature: a9ac3f62)\" delay=37ms569us775ns"
+      ],
+      [
+        "2026-10-14 06:25:03.038296174",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=38ms262us727ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21469, signature: b869087f)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.038376865",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21469"
+      ],
+      [
+        "2026-10-14 06:25:03.038803329",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.036+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21469, signature: b869087f)\" delay=38ms360us25ns"
+      ],
+      [
+        "2026-10-14 06:25:03.039188515",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=39ms156us967ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21355, signature: 85fd3b26)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.039281548",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21355"
+      ],
+      [
+        "2026-10-14 06:25:03.039658134",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.036+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21355, signature: 85fd3b26)\" delay=39ms253us508ns"
+      ],
+      [
+        "2026-10-14 06:25:03.040096618",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=40ms61us928ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21264, signature: ae68cd3f)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.040184577",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21264"
+      ],
+      [
+        "2026-10-14 06:25:03.040833570",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.036+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21264, signature: ae68cd3f)\" delay=40ms159us938ns"
+      ],
+      [
+        "2026-10-14 06:25:03.040996557",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=40ms966us102ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21239, signature: b96bf8c7)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.041102573",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21239"
+      ],
+      [
+        "2026-10-14 06:25:03.041433175",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.036+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21239, signature: b96bf8c7)\" delay=41ms83us944ns"
+      ],
+      [
+        "2026-10-14 06:25:03.041892471",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=41ms804us332ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21255, signature: 8743d4d6)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.042236163",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.036+00:00 Sync committee message resolved            topics=\"syncpool\" slot=12410 blockRoot=5944d078 validatorIndex=21255"
+      ],
+      [
+        "2026-10-14 06:25:03.042248531",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 06:25:03.040+00:00 Sync committee message sent                topics=\"message_router\" message=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 21255, signature: 8743d4d6)\" delay=41ms964us575ns"
+      ],
+      [
+        "2026-10-14 06:25:03.043885265",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=43ms819us539ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 18563, signature: ad3355b5)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.043982536",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=43ms956us550ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 18912, signature: a88f6dda)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044123062",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms92us857ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14467, signature: 8f671061)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044487206",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms312us419ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14615, signature: 8579a1d8)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044490702",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms434us353ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14038, signature: b1d5cc24)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044584372",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms547us311ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14853, signature: 8b834b47)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044691835",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms665us447ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14555, signature: a17fe9a9)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.044815782",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms780us355ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 14687, signature: abee812b)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045009474",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=44ms980us497ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26804, signature: 8a763dcd)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045131051",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms102us462ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26489, signature: b7231f54)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045246414",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms221us853ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26302, signature: b08d2964)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045370999",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms341us411ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26596, signature: 8c57845d)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045573752",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms547us782ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26927, signature: 99fee15b)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045704481",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms674us38ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26142, signature: 978d5283)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.045813269",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms789us808ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26394, signature: b45c958c)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046032969",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=45ms906us578ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26977, signature: a7b77a0f)\" subcommitteeIdx=1 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046057556",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.040+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms23us614ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26038, signature: a1562aad)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046214961",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms163us754ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26486, signature: b03e156c)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046530740",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms497us556ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26187, signature: a5bbc365)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046844193",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms613us464ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26497, signature: b3b3bed8)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046847630",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms731us518ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26036, signature: 85b89c0f)\" subcommitteeIdx=3 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046878549",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms852us23ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26964, signature: a7f34830)\" subcommitteeIdx=2 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.046998634",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=46ms970us83ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26164, signature: a197744a)\" subcommitteeIdx=0 wallSlot=12410"
+      ],
+      [
+        "2026-10-14 06:25:03.047118041",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 06:25:03.044+00:00 Sync committee message received            topics=\"gossip_eth2\" delay=47ms87us140ns syncCommitteeMsg=\"(slot: 12410, beacon_block_root: 5944d078, validator_index: 26032, signature: b3e5abdf)\" subcommitteeIdx=3 wallSlot=12410"
+      ]
+    ]
+  }
+}

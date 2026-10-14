@@ -70,7 +70,7 @@ print(json.dumps({'epoch':epoch,'headers':headers,'proposer_duties':duties}))
 '''
 PATTERNS = {
  'critical': r'OutOfMemoryError|Terminating due|\bFATAL\b|panic:|state root mismatch|INVALID_PAYLOAD|Invalid execution payload',
- 'engine_timeout': r'(?i)TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)',
+ 'engine_timeout': r'(?i)TimeoutGetPayload|Timeout while getting execution payload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)',
  'duty_loss': r'(?i)Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late',
  'optimistic_activation': r'(?i)optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline',
 }

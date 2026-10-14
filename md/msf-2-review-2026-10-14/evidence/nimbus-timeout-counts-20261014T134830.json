@@ -1,0 +1,28 @@
+{
+  "query": "SELECT ResourceAttributes['host.name'] AS host,count() AS count,min(Timestamp) AS first_seen,max(Timestamp) AS last_seen,substring(argMax(Body,Timestamp),1,2000) AS latest_body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name']='beacon' AND Timestamp>=toDateTime('2026-10-14 13:48:30') AND Timestamp<toDateTime('2026-10-14 15:48:30') AND match(Body,'Timeout while getting execution payload|no local.*payload|No local.*payload') GROUP BY host ORDER BY host LIMIT 50 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "host",
+      "count",
+      "first_seen",
+      "last_seen",
+      "latest_body"
+    ],
+    "rows": [
+      [
+        "nimbus-besu-1",
+        "1",
+        "2026-10-14 14:28:49.578491105",
+        "2026-10-14 14:28:49.578491105",
+        "WRN 2026-10-14 14:28:49.573+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "nimbus-reth-1",
+        "1",
+        "2026-10-14 14:33:13.550058139",
+        "2026-10-14 14:33:13.550058139",
+        "WRN 2026-10-14 14:33:13.544+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ]
+    ]
+  }
+}

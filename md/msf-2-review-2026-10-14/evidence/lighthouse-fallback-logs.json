@@ -1,0 +1,385 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='lighthouse-reth-1' AND ResourceAttributes['container.name'] IN ('beacon','validator','execution') AND Timestamp>=toDateTime('2026-10-14 06:38:30') AND Timestamp<toDateTime('2026-10-14 06:39:00') AND NOT match(Body,'New LC optimistic header|TRACE|DEBUG|\"level\":\"debug\"') ORDER BY Timestamp ASC LIMIT 180 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 06:38:30.002701316",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:30.001 INFO  Synced                                        peers: \"40\", exec_hash: \"0x7903\u202643b3 (verified)\", finalized_root: 0x0d0b\u20263a83, finalized_epoch: 387, epoch: 389, block: \"0xc253\u2026c3ab\", slot: 12477"
+      ],
+      [
+        "2026-10-14 06:38:30.003638847",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.001 INFO  Connected to beacon node(s)                   primary: \"http://beacon:5052/\", total: 1, available: 1, synced: 1"
+      ],
+      [
+        "2026-10-14 06:38:30.003665885",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.002 INFO  All validators active                         current_epoch_proposers: 1, current_epoch_ptc: 375, active_validators: 1000, total_validators: 1000, epoch: 389, slot: 12477"
+      ],
+      [
+        "2026-10-14 06:38:30.009755875",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.009 INFO  Successfully published attestation            aggregator: 18665, signatures: 141, head_block: \"0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab\", committee_index: 7, slot: 12477, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:30.011370411",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.010 INFO  Successfully published attestation            aggregator: 18585, signatures: 140, head_block: \"0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab\", committee_index: 0, slot: 12477, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:30.011399818",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.010 INFO  Successfully published sync contributions     subnet: 2, beacon_block_root: 0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab, num_signers: 128, slot: 12477, subnet_id: 2"
+      ],
+      [
+        "2026-10-14 06:38:30.011403101",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.010 INFO  Successfully published attestation            aggregator: 18492, signatures: 141, head_block: \"0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab\", committee_index: 1, slot: 12477, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:30.011854659",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.011 INFO  Successfully published attestation            aggregator: 18518, signatures: 140, head_block: \"0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab\", committee_index: 5, slot: 12477, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:30.012780417",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.012 INFO  Successfully published sync contributions     subnet: 0, beacon_block_root: 0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab, num_signers: 128, slot: 12477, subnet_id: 0"
+      ],
+      [
+        "2026-10-14 06:38:30.013017921",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.012 INFO  Successfully published attestation            aggregator: 18867, signatures: 141, head_block: \"0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab\", committee_index: 3, slot: 12477, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:30.015049602",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:30.014 INFO  Successfully published sync contributions     subnet: 3, beacon_block_root: 0xc253bb82c1a9b0cd7161a7e07de7998197bad0afbcac231bc2b2fa5b24e8c3ab, num_signers: 128, slot: 12477, subnet_id: 3"
+      ],
+      [
+        "2026-10-14 06:38:36.532172171",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:36.531 INFO  New block received                            slot: 12478, root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1"
+      ],
+      [
+        "2026-10-14 06:38:36.550767321",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:36.550 INFO  Prepared beacon proposer                      prepare_slot: 12479, validator: 18793, parent_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, payload_status: Empty"
+      ],
+      [
+        "2026-10-14 06:38:36.564853639",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:36.564 INFO  Successfully published sync committee messages  count: 12, head_block: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, slot: 12478, beacon_block_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1"
+      ],
+      [
+        "2026-10-14 06:38:36.614787783",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:36.614 INFO  Successfully published attestations           count: 26, validator_indices: [18473, 18264, 18485, 18032, 18943, 18847, 18980, 18068, 18318, 18446, 18930, 18357, 18934, 18115, 18727, 18647, 18748, 18319, 18645, 18724, 18594, 18022, 18079, 18352, 18528, 18794], head_block: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, committee_index: 0, slot: 12478, type: \"unaggregated\", attestation_data.beacon_block_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1"
+      ],
+      [
+        "2026-10-14 06:38:37.224399359",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:37.223 INFO  New envelope received                         slot: 12478, root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1"
+      ],
+      [
+        "2026-10-14 06:38:37.232448464",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:37.232321Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464690 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f"
+      ],
+      [
+        "2026-10-14 06:38:37.410955151",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:37.410347Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xea4e2cdf45e61e2ae2f223d311845d188f1ce881027bf0d5f2bd680eca18cb3c \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m54.33551ms"
+      ],
+      [
+        "2026-10-14 06:38:37.411943557",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:37.411854Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Block added to canonical chain \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464690 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f \u001b[3mpeers\u001b[0m\u001b[2m=\u001b[0m31 \u001b[3mtxs\u001b[0m\u001b[2m=\u001b[0m11 \u001b[3mgas_used\u001b[0m\u001b[2m=\u001b[0m154.05Mgas \u001b[3mgas_throughput\u001b[0m\u001b[2m=\u001b[0m864.11Mgas/second \u001b[3mgas_limit\u001b[0m\u001b[2m=\u001b[0m200.00Mgas \u001b[3mfull\u001b[0m\u001b[2m=\u001b[0m77.0% \u001b[3mbase_fee\u001b[0m\u001b[2m=\u001b[0m0.00Gwei \u001b[3mblobs\u001b[0m\u001b[2m=\u001b[0m0 \u001b[3mexcess_blobs\u001b[0m\u001b[2m=\u001b[0m0 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m178.280519ms"
+      ],
+      [
+        "2026-10-14 06:38:37.414651623",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:37.414 INFO  Execution payload envelope imported           block_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, slot: 12478, source: gossip, envelope_source: gossip"
+      ],
+      [
+        "2026-10-14 06:38:37.423187578",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:37.423111Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Canonical chain committed \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464690 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m3.475935ms"
+      ],
+      [
+        "2026-10-14 06:38:37.424642497",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:37.424 INFO  Prepared beacon proposer                      prepare_slot: 12479, validator: 18793, parent_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, payload_status: Full"
+      ],
+      [
+        "2026-10-14 06:38:37.431158941",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:37.431 INFO  Successfully published payload attestations   slot: 12478, count: 8"
+      ],
+      [
+        "2026-10-14 06:38:42.000937950",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.000 INFO  Connected to beacon node(s)                   primary: \"http://beacon:5052/\", total: 1, available: 1, synced: 1"
+      ],
+      [
+        "2026-10-14 06:38:42.001610574",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.001 INFO  All validators active                         current_epoch_proposers: 1, current_epoch_ptc: 375, active_validators: 1000, total_validators: 1000, epoch: 389, slot: 12478"
+      ],
+      [
+        "2026-10-14 06:38:42.001661286",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:42.001 INFO  Synced                                        peers: \"40\", exec_hash: \"0x5ec4\u2026692f (verified)\", finalized_root: 0x0d0b\u20263a83, finalized_epoch: 387, epoch: 389, block: \"0xa3ba\u2026f6c1\", slot: 12478"
+      ],
+      [
+        "2026-10-14 06:38:42.007156522",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.006 INFO  Successfully published attestation            aggregator: 18352, signatures: 140, head_block: \"0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1\", committee_index: 2, slot: 12478, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:42.011370391",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.011 INFO  Successfully published attestation            aggregator: 18943, signatures: 141, head_block: \"0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1\", committee_index: 3, slot: 12478, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:42.011387523",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.011 INFO  Successfully published attestation            aggregator: 18068, signatures: 141, head_block: \"0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1\", committee_index: 3, slot: 12478, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:42.011402460",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.011 INFO  Successfully published attestation            aggregator: 18930, signatures: 140, head_block: \"0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1\", committee_index: 5, slot: 12478, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:42.011405503",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.011 INFO  Successfully published attestation            aggregator: 18318, signatures: 141, head_block: \"0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1\", committee_index: 4, slot: 12478, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:42.012544416",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.011 INFO  Successfully published sync contributions     subnet: 0, beacon_block_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, num_signers: 128, slot: 12478, subnet_id: 0"
+      ],
+      [
+        "2026-10-14 06:38:42.012560382",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:42.012 INFO  Successfully published sync contributions     subnet: 2, beacon_block_root: 0xa3ba6b899016907677d1d06ceb996a1a1e400efb21d43be6099388340f0ef6c1, num_signers: 128, slot: 12478, subnet_id: 2"
+      ],
+      [
+        "2026-10-14 06:38:44.006101832",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:44.005996Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x0a7bef9a79ccac0d \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f"
+      ],
+      [
+        "2026-10-14 06:38:48.004995851",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:48.002 INFO  Requesting unsigned block                     slot: 12479, validator_pubkey: 0x8f0ac0a8a654edd58fb0324090b6a5d72725c806584c9d0ae40bc112ac2e24b73517a7e1f96dbdbef145626124c69ea2"
+      ],
+      [
+        "2026-10-14 06:38:50.019616512",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.019 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-14 06:38:50.019652353",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 12479"
+      ],
+      [
+        "2026-10-14 06:38:50.027765041",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.027 INFO  Builder bid won; the builder reveals the payload envelope  slot: 12479, builder_index: 0, validator_pubkey: 0x8f0ac0a8a654edd58fb0324090b6a5d72725c806584c9d0ae40bc112ac2e24b73517a7e1f96dbdbef145626124c69ea2"
+      ],
+      [
+        "2026-10-14 06:38:50.027792546",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.027 INFO  Received unsigned block                       slot: 12479, validator_pubkey: 0x8f0ac0a8a654edd58fb0324090b6a5d72725c806584c9d0ae40bc112ac2e24b73517a7e1f96dbdbef145626124c69ea2"
+      ],
+      [
+        "2026-10-14 06:38:50.032947577",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.032 INFO  Publishing signed block                       slot: 12479, signing_time_ms: 5, validator_pubkey: 0x8f0ac0a8a654edd58fb0324090b6a5d72725c806584c9d0ae40bc112ac2e24b73517a7e1f96dbdbef145626124c69ea2"
+      ],
+      [
+        "2026-10-14 06:38:50.034610482",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.034 INFO  Signed block published to network via HTTP API  slot: 12479, publish_delay_ms: 1, validation_level: Gossip"
+      ],
+      [
+        "2026-10-14 06:38:50.047659910",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.046 INFO  Valid block from HTTP API                     block_delay: 2.033447813s, root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, proposer_index: 18793, slot: 12479, validation_level: Gossip"
+      ],
+      [
+        "2026-10-14 06:38:50.054342623",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.052 ERROR Block broadcast was delayed                   msg: \"system may be overloaded, block may be orphaned\", provenance: \"local\", delay_ms: 2033, slot: 12479, root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, validation_level: Gossip"
+      ],
+      [
+        "2026-10-14 06:38:50.055319745",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.055 INFO  Successfully published block                  block_type: Full, deposits: 0, attestations: 1, graffiti: Some(\"lighthouse-reth-1\"), slot: 12479, validator_pubkey: 0x8f0ac0a8a654edd58fb0324090b6a5d72725c806584c9d0ae40bc112ac2e24b73517a7e1f96dbdbef145626124c69ea2"
+      ],
+      [
+        "2026-10-14 06:38:50.071369709",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.071 INFO  Successfully published sync committee messages  count: 12, head_block: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, slot: 12479, beacon_block_root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834"
+      ],
+      [
+        "2026-10-14 06:38:50.142119493",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.139 INFO  Successfully published attestations           count: 36, validator_indices: [18173, 18213, 18086, 18701, 18066, 18716, 18785, 18209, 18081, 18977, 18311, 18519, 18421, 18820, 18070, 18192, 18539, 18033, 18288, 18626, 18710, 18825, 18991, 18780, 18021, 18726, 18297, 18873, 18011, 18739, 18856, 18722, 18380, 18179, 18495, 18269], head_block: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, committee_index: 0, slot: 12479, type: \"unaggregated\", attestation_data.beacon_block_root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834"
+      ],
+      [
+        "2026-10-14 06:38:50.675619368",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.675 WARN  Error processing HTTP API request             elapsed_ms: 1.366, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, method: GET"
+      ],
+      [
+        "2026-10-14 06:38:50.726047930",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.725 INFO  New envelope received                         slot: 12479, root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834"
+      ],
+      [
+        "2026-10-14 06:38:50.732496569",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:50.732371Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464691 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12"
+      ],
+      [
+        "2026-10-14 06:38:50.917719716",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:50.917566Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xbf908b3d61294ab502bcc8d3fad2f4b667722f933edd4d74de2f99565ba677bf \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m61.776266ms"
+      ],
+      [
+        "2026-10-14 06:38:50.917941003",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:50.917840Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Block added to canonical chain \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464691 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12 \u001b[3mpeers\u001b[0m\u001b[2m=\u001b[0m31 \u001b[3mtxs\u001b[0m\u001b[2m=\u001b[0m9 \u001b[3mgas_used\u001b[0m\u001b[2m=\u001b[0m125.84Mgas \u001b[3mgas_throughput\u001b[0m\u001b[2m=\u001b[0m677.90Mgas/second \u001b[3mgas_limit\u001b[0m\u001b[2m=\u001b[0m200.00Mgas \u001b[3mfull\u001b[0m\u001b[2m=\u001b[0m62.9% \u001b[3mbase_fee\u001b[0m\u001b[2m=\u001b[0m0.00Gwei \u001b[3mblobs\u001b[0m\u001b[2m=\u001b[0m0 \u001b[3mexcess_blobs\u001b[0m\u001b[2m=\u001b[0m0 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m185.633417ms"
+      ],
+      [
+        "2026-10-14 06:38:50.923636421",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:50.921 INFO  Execution payload envelope imported           block_root: 0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834, slot: 12479, source: gossip, envelope_source: gossip"
+      ],
+      [
+        "2026-10-14 06:38:50.937195593",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:50.937112Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Canonical chain committed \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464691 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m4.550004ms"
+      ],
+      [
+        "2026-10-14 06:38:50.963488114",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:50.963 INFO  Successfully published payload attestations   slot: 12479, count: 20"
+      ],
+      [
+        "2026-10-14 06:38:54.001998972",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.001 INFO  Connected to beacon node(s)                   primary: \"http://beacon:5052/\", total: 1, available: 1, synced: 1"
+      ],
+      [
+        "2026-10-14 06:38:54.002251930",
+        "lighthouse-reth-1",
+        "beacon",
+        "Oct 14 06:38:54.002 INFO  Synced                                        peers: \"40\", exec_hash: \"0xe133\u20269d12 (verified)\", finalized_root: 0x0d0b\u20263a83, finalized_epoch: 387, epoch: 389, block: \"0x8973\u20269834\", slot: 12479"
+      ],
+      [
+        "2026-10-14 06:38:54.002654524",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.002 INFO  All validators active                         current_epoch_proposers: 1, current_epoch_ptc: 375, active_validators: 1000, total_validators: 1000, epoch: 389, slot: 12479"
+      ],
+      [
+        "2026-10-14 06:38:54.009568941",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.009 INFO  Successfully published attestation            aggregator: 18209, signatures: 140, head_block: \"0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834\", committee_index: 5, slot: 12479, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:54.009587931",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.009 INFO  Successfully published attestation            aggregator: 18086, signatures: 140, head_block: \"0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834\", committee_index: 2, slot: 12479, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:54.009590387",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.009 INFO  Successfully published attestation            aggregator: 18311, signatures: 141, head_block: \"0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834\", committee_index: 1, slot: 12479, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:54.010885452",
+        "lighthouse-reth-1",
+        "validator",
+        "Oct 14 06:38:54.010 INFO  Successfully published attestation            aggregator: 18021, signatures: 141, head_block: \"0x8973a7a464d3cbfc4fb9b243e6139e1af608835569b57ac6b020eb114fdd9834\", committee_index: 4, slot: 12479, type: \"aggregated\""
+      ],
+      [
+        "2026-10-14 06:38:59.520281454",
+        "lighthouse-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T06:38:59.520205Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Forkchoice updated \u001b[3mhead_block_hash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12 \u001b[3msafe_block_hash\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f \u001b[3mfinalized_block_hash\u001b[0m\u001b[2m=\u001b[0m0x30dff0f8dbc027c7b4235bf3504fa53ea4b7f768444ce84ced95fb638cb22bc1"
+      ]
+    ]
+  }
+}
