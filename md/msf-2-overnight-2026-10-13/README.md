@@ -89,3 +89,7 @@ Prometheus captures Besu heap fraction, GC time, payload latency, scrape health,
 The user systemd timer on the monitoring workstation survives the chat session, with login lingering enabled. It publishes sanitized captures to branch **qu0b/msf-2-overnight-20261013** hourly and on completion. It stops after the final ingestion catch-up at **2026-10-14T08:05:00+00:00**. Health snapshots in the five-minute ingestion catch-up can extend beyond the requested window. A workstation outage creates a coverage gap; this does not send unattended alerts or file upstream issues.
 
 [Machine readable summary](summary.json) includes exact event details and every missing slot. [Configuration](config.json) records the window and source baseline. The checked-in collector is [monitor.py](../../scripts/msf2-monitor/monitor.py).
+
+## Follow up review on October 14
+
+The [review through 16:11 UTC](../msf-2-review-2026-10-14/README.md) extends this capture with retrospective logs and a finalized census: nine canonical misses, including Nimbus fallback failures with both Reth and Besu, and late Reth VALID responses. The original overnight window and counts above are preserved.

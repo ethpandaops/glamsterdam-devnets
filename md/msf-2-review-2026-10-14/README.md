@@ -86,3 +86,7 @@ Canonical data excludes partial boundary and unfinalized tail epochs. Every repo
 The original collector filter missed Nimbus's phrase `Timeout while getting execution payload`. The duty census still found the two overnight misses. This review backfills that phrase across the complete period and records eight matching timeout events; the collector now has the corrected filter and a regression check. No upstream issue or client-team message has been sent.
 
 [Machine readable summary](evidence/review-summary.json), [exact window](window.json), [current 41-host snapshot](evidence/current-network.json), [profiling metadata](evidence/current-besu-profiling.json), [Engine read control](evidence/current-engine-capabilities.json), and [collection evidence](evidence/) preserve the result. Run `python3 summarize.py` and `python3 plot_review.py` here to rebuild statistics and figures without live queries. The collection scripts use authenticated local SSH and Panda configuration; re-running them captures new live evidence.
+
+## Public shareable report
+
+[Open the visual Panda review](https://panda-uploads-production.devops-539.workers.dev/panda/uploads/2b87b6/msf-2-review-2026-10-14.html) or [download the curated evidence](https://panda-uploads-production.devops-539.workers.dev/panda/uploads/8e2fb0/msf-2-review-2026-10-14-evidence.zip). Panda links expire 60 days after publication; this repository retains the complete evidence and generated artifacts.
