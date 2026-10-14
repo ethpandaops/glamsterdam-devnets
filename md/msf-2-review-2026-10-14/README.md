@@ -61,7 +61,7 @@ Four canonical payloads anchor a replay:
 | 24467031 | 116,118,346 | 7 | 200,000,000 |
 | 24467032 | 199,995,900 | 12 | 200,000,000 |
 
-The [block fixture](evidence/reth-delayed-payload-blocks.json) contains exact hashes and public transaction inputs. The elapsed metric includes queueing and execution; it cannot be equated with EVM execution time. The affected Reth hosts have low sampled CPU steal, below 0.06%, and at least 29.8 GiB available memory in the preserved five-minute series. This narrows the evidence but does not isolate CPU saturation, lock contention, storage or queueing.
+The [block fixture](evidence/reth-delayed-payload-blocks.json) contains exact hashes and public transaction inputs. In the [released Reth Engine tree](https://github.com/paradigmxyz/reth/blob/3d592ece6de8c4559987416a544fc215fd6d6921/crates/engine/tree/src/tree/mod.rs), the timer starts when the NewPayload branch is handled and is read when response delivery fails. Time spent waiting in the request queue before that branch is excluded. These are handler durations, not isolated EVM execution times. The affected Reth hosts have low sampled CPU steal, below 0.06%, and at least 29.8 GiB available memory in the preserved five-minute series. This narrows the evidence but does not isolate CPU saturation, lock contention, storage or queueing.
 
 Reth team follow-up: replay these payloads against the required parent state, trace queue entry, worker start, execution, state-root computation and response delivery, and compare newPayload and local build deadlines separately. Grandine and Prysm traces should identify cancellation budgets. A generic timeout increase could mask missed duty deadlines rather than resolve the delay.
 

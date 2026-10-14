@@ -52,7 +52,7 @@ for i, x in enumerate(slow):
     ax.text(x['elapsed_seconds'] + .1, i, f"{x['elapsed_seconds']:.2f}s", va='center', fontsize=9)
 ax.axvline(12, color='#34495e', linestyle='--')
 ax.text(12.1, -.65, '12 second slot', color='#34495e', fontsize=9)
-ax.set(yticks=range(len(labels)), yticklabels=labels, xlim=(0, 16), xlabel='Reth logged request elapsed time (seconds)', title='VALID results arrived after the CL had cancelled the request\n14:27–14:28 UTC · elapsed time includes queueing and execution')
+ax.set(yticks=range(len(labels)), yticklabels=labels, xlim=(0, 16), xlabel='Reth logged handler elapsed time (seconds)', title='VALID results arrived after the CL had cancelled the request\n14:27–14:28 UTC · handler time excludes the preceding request queue')
 ax.invert_yaxis()
 ax.grid(axis='x', alpha=.15); ax.set_axisbelow(True)
 save(fig, 'reth-delayed-valid')
