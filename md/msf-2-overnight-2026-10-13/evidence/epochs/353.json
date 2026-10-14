@@ -1,0 +1,331 @@
+{
+  "epoch": 353,
+  "headers": [
+    {
+      "slot": 11296,
+      "exists": true,
+      "root": "0xf70e9b7db1b7a2bb13c5cba331df779cd20d9468a5101f5d2ac02877881b3d6c"
+    },
+    {
+      "slot": 11297,
+      "exists": true,
+      "root": "0x94a7c4d651fbd0a4cd5be2790569358f30dbaaed68a41e7801e253172152c9fe"
+    },
+    {
+      "slot": 11298,
+      "exists": true,
+      "root": "0x79b43caeaec55328d9682ff4a7648d4cf1bf9e125123508390b57ea5379a93cd"
+    },
+    {
+      "slot": 11299,
+      "exists": true,
+      "root": "0xef60e40148404e6bdd7136b69f1ee66e8501cef4be102a67c6ee7b3df6bc2e16"
+    },
+    {
+      "slot": 11300,
+      "exists": true,
+      "root": "0x2136cc3f37400210d4c9d7d566009cc21bfb64e5bfc26ad06dc6a0475227becc"
+    },
+    {
+      "slot": 11301,
+      "exists": true,
+      "root": "0xbda2d06cc218221747f781806717220610d4d53c9a597a50bed36a3e251265a6"
+    },
+    {
+      "slot": 11302,
+      "exists": true,
+      "root": "0x5343520b5214a47854198d98abe62bd533bb48537c2ca5f3b271e0d84c6d3592"
+    },
+    {
+      "slot": 11303,
+      "exists": true,
+      "root": "0xf4b38c1431c562bb9e9e5b327b7352aa246f1d550869adfdb52124993f8ca2c9"
+    },
+    {
+      "slot": 11304,
+      "exists": true,
+      "root": "0x7fc46b3229a52ba72158a0585fdf26ccdb4fede1d5665732c8cee3efeca7efc7"
+    },
+    {
+      "slot": 11305,
+      "exists": true,
+      "root": "0x55d493707696b2b6b3eb09aa9d24097164076ff0ed2b1acdfbc53bc85ea1bb5a"
+    },
+    {
+      "slot": 11306,
+      "exists": true,
+      "root": "0x95263a44f0dc1f4284da8e15940415cd1a5539ea0224b7e352805c49ae9574a3"
+    },
+    {
+      "slot": 11307,
+      "exists": true,
+      "root": "0x6642c09aa2bc5a05db14868490af00bd41803c8b4d9b1a7319b8d7e95a91deb2"
+    },
+    {
+      "slot": 11308,
+      "exists": true,
+      "root": "0xd75881747360fc6b5673d919ffa573a9d50e4f94ed51304fffbfb18f3150f14d"
+    },
+    {
+      "slot": 11309,
+      "exists": true,
+      "root": "0xe4e35b90c6f8d07f1982426a4d3f90926cbefabda5f8a68a0897d91d9805e942"
+    },
+    {
+      "slot": 11310,
+      "exists": true,
+      "root": "0x6f67554a6db03a62592739f94fe95887c54aa174d10577540ae84cf90b145930"
+    },
+    {
+      "slot": 11311,
+      "exists": true,
+      "root": "0x6ff690c7c5e63efbadab0e307b490e8043ff2a33eee219c4eb0c3b796be0cff0"
+    },
+    {
+      "slot": 11312,
+      "exists": true,
+      "root": "0x0321be2b40bbb0baf3f9d5050a4abe3c6d8b08abd41ece2d37f4c1327335328a"
+    },
+    {
+      "slot": 11313,
+      "exists": true,
+      "root": "0x954f2c393d884e0673c12db5bba05a7e4994a16de96d30f7518289e34366793b"
+    },
+    {
+      "slot": 11314,
+      "exists": true,
+      "root": "0x1fdf5c5863a3f12a4889598334f5abb6adfb0b912ca41fb588b2558f7b907895"
+    },
+    {
+      "slot": 11315,
+      "exists": true,
+      "root": "0xdf8029e65ea902c4282111127b25c320109ba68e4d43f47df22c84f342a9c4b3"
+    },
+    {
+      "slot": 11316,
+      "exists": true,
+      "root": "0x5b031d1017472fca74fb5d2eb73e07f978701d86f3fca564387694caa0812cdb"
+    },
+    {
+      "slot": 11317,
+      "exists": true,
+      "root": "0xe28906721508c77327bcf5788b6a5cd7ae2ab954de05762366fccbe095216ed2"
+    },
+    {
+      "slot": 11318,
+      "exists": true,
+      "root": "0x0b8fffa9e86641c416b39822cd18afa2e24085cda4b023906f5b2343c8596290"
+    },
+    {
+      "slot": 11319,
+      "exists": true,
+      "root": "0x5cd48536fc360d53d903cbc18d89c0a69eea3a37a44f5a70149a8ee7648342e7"
+    },
+    {
+      "slot": 11320,
+      "exists": true,
+      "root": "0x612795630ca077c29a47384d1caefc504d6334d2cc2879bb2a7a52d2c84e091a"
+    },
+    {
+      "slot": 11321,
+      "exists": true,
+      "root": "0x1bc1062ac10e4d3bde2d7fc603e37446d93d5994867acf8af9e04ad916c90afe"
+    },
+    {
+      "slot": 11322,
+      "exists": true,
+      "root": "0x6eb22c70e0ad2a2b6212902911933ac71bcd8b571d5f404de61206f93b69c002"
+    },
+    {
+      "slot": 11323,
+      "exists": true,
+      "root": "0x00fe43cde82f07ac840e9b37cd73fb1425d466c72c77c71907cc2b6b016d4be4"
+    },
+    {
+      "slot": 11324,
+      "exists": true,
+      "root": "0x39ac4bd0a47d9cbba7854d9bbf4a0623f4d53c67efdcd6c10c4b30b13dabe9a0"
+    },
+    {
+      "slot": 11325,
+      "exists": true,
+      "root": "0x3e1618d1501d9c82ad157255dacf4cebf95374359d46726bae4821bcb96d6524"
+    },
+    {
+      "slot": 11326,
+      "exists": true,
+      "root": "0xc1473d859de6ae577ceb0d9b4998f3162aafd77c07767e9a2d6d69fff55bf133"
+    },
+    {
+      "slot": 11327,
+      "exists": true,
+      "root": "0x497df2f9cd8b67b2d8398bab35874822f160402ffff1637345c048f87f9c1f58"
+    }
+  ],
+  "proposer_duties": {
+    "dependent_root": "0xad74d4fc611eff8776c720014e8d9dd7451f54f01c477f8b6243844f88b1acee",
+    "execution_optimistic": false,
+    "data": [
+      {
+        "pubkey": "0x95d2d44061045a3f3a0f7623ed298ca1c24ffe4a3629964c8e3886842d370bcd603bf2693ec74615c49dc1ce63f95a1b",
+        "validator_index": "30569",
+        "slot": "11296"
+      },
+      {
+        "pubkey": "0xa46df5163b7b6385537cbdf9492d89fc62e839efab64c83202966e0f8f59e8c749274736f0baf40d21914290030851a2",
+        "validator_index": "21380",
+        "slot": "11297"
+      },
+      {
+        "pubkey": "0x88cc43b98c9cc60291115b3512a72e3c75257138f1082e0eb37ced2895cfbb618d0251a7e14f99b878efed090adb90d4",
+        "validator_index": "13034",
+        "slot": "11298"
+      },
+      {
+        "pubkey": "0xb018e5a54809f96456e9c8963ce36693eb83b6997fd5ea16b911e7f2f4df859f6e3f8aab4265f2ec462ae44affa6dea5",
+        "validator_index": "6228",
+        "slot": "11299"
+      },
+      {
+        "pubkey": "0x848a8e0c29e76fd5b0bdaab56511f1a48353a08fd3a4c911bc932cba180db3c77276cb01564d2bfb43b9d6c7a3874f21",
+        "validator_index": "122",
+        "slot": "11300"
+      },
+      {
+        "pubkey": "0x84b2f3f45b05762006fd8074ab48540905abb3c93b006ecc32bdc958083c01786e4a6c656706f4696a243acebbbbf592",
+        "validator_index": "25039",
+        "slot": "11301"
+      },
+      {
+        "pubkey": "0xaa19832f0b4b93aa706e0b85ec261774531dbcbf6d0a4a9b07254cc06b22ea29e23d513730c09396ae59b893dc075166",
+        "validator_index": "14713",
+        "slot": "11302"
+      },
+      {
+        "pubkey": "0xa5f0ce162aae42760dcce1835fe54a5002500c963e8543290e7d9fab6a0e741c90d6253ac56a097e4f756d65ec0063e1",
+        "validator_index": "3041",
+        "slot": "11303"
+      },
+      {
+        "pubkey": "0x83da6979fc30eeef1ec6a1a720e23c9b5f8a52204abef63623dc00c34a98c7ac982f642cf98a991198bd99c5cb919688",
+        "validator_index": "26130",
+        "slot": "11304"
+      },
+      {
+        "pubkey": "0xacd02be983246011987a62af37ba96cb602a513868521b497eb8b2bbd1ee477dd10e267ac0aa1df670f7ee0dce958002",
+        "validator_index": "3022",
+        "slot": "11305"
+      },
+      {
+        "pubkey": "0xadefd8831e2b2b31b1a0ab44f42c388ddc35ec7a97ac42d9ded664d73dbf7b257dd6df92ac7808fa3cb1cfe33d8774d6",
+        "validator_index": "12399",
+        "slot": "11306"
+      },
+      {
+        "pubkey": "0xb61e8def80b84acf5b16d82c7156ae22ada475c1842515db6c8f4de44a7bc1f5c4087f3693414bc60f05c5e16c77c869",
+        "validator_index": "24361",
+        "slot": "11307"
+      },
+      {
+        "pubkey": "0x935ea2b4f7abc430261749a4d064f2064f3331cc0806f9118a25716b9ea597e2655624c3ee68a682b016853865fa4040",
+        "validator_index": "20690",
+        "slot": "11308"
+      },
+      {
+        "pubkey": "0xab29a1d7dc5e486ba9ed296d1f6bd17715d017a496195e70f8431502923908922b06af4612720903430363750fdb885a",
+        "validator_index": "14715",
+        "slot": "11309"
+      },
+      {
+        "pubkey": "0x8f9b5dc9d043f5947d542374aa74730e97990fb9789e6fc1f45ae7e5468a010ac054d089b2f1ba83b18c56d999d09265",
+        "validator_index": "26391",
+        "slot": "11310"
+      },
+      {
+        "pubkey": "0x98da0fdfb01af4f247653846bc29a2dbc59123fd9bd093a0290a067d989c1d4f5eb48bc450ac1adbfe1ba6a150db7cc7",
+        "validator_index": "28115",
+        "slot": "11311"
+      },
+      {
+        "pubkey": "0x82531dbbb276fd98bb970026fa5b3e1ebf818dc722b203046f390f9dd60f2551b3899dd1639f8a983e627d668eb3a32c",
+        "validator_index": "5412",
+        "slot": "11312"
+      },
+      {
+        "pubkey": "0x96a89a0e2b95938b0d944aa2a586894d13fc46a4df3828ac181db24602b6685ef26db1be398373d40752b557a272f1df",
+        "validator_index": "10776",
+        "slot": "11313"
+      },
+      {
+        "pubkey": "0x918f0b5aa14bc49575f0b7debf1384cf343d0cfe98f963699c6de6c32ad677331dc7502a214c65eb66821b1aee49f9b7",
+        "validator_index": "29857",
+        "slot": "11314"
+      },
+      {
+        "pubkey": "0xa954ffe26b15190b3d8b0c959553a033e563fa80ce737e312cb9df0114b8c0e08307694168afa06e1fc8ed52f767058b",
+        "validator_index": "33421",
+        "slot": "11315"
+      },
+      {
+        "pubkey": "0xb7eebd10337a7b54482121bfd922a885f9fea8aed12f01e6fbe8f6e8d503e4996cbceaa155545e82ae67bcf7dd74d584",
+        "validator_index": "13379",
+        "slot": "11316"
+      },
+      {
+        "pubkey": "0x947086e3dfc7529415f34a8c9d919ec071b374b02fd6c0cd938a47382aa27c09631988403f98b00e7ed2fd0ac8fe6e5d",
+        "validator_index": "7905",
+        "slot": "11317"
+      },
+      {
+        "pubkey": "0x93a948ad94f94627955ad7c605503e99c3d48dfa4af7ab1315aafe6b06b0e6bd4d269bb8c4e77fd7f18fce661a846fd6",
+        "validator_index": "32498",
+        "slot": "11318"
+      },
+      {
+        "pubkey": "0x869666c8c6628d611acc0f1e59aa08c4bedbcf8c0a5f55012764fff79cc985c1990e9143eca644d97711b9a0b17b3ca3",
+        "validator_index": "16261",
+        "slot": "11319"
+      },
+      {
+        "pubkey": "0x89b5a73cf03cdbcd14f0ddbdcae21f5152bc73c45cb99f6ffbb18beaf071a18ce4c2b65bfe897f4bd2c4a79af2188c86",
+        "validator_index": "9180",
+        "slot": "11320"
+      },
+      {
+        "pubkey": "0xb635550fa041525d13c594272235c6e90c68c2ccdf1d7535eeed1fb4002cfecaef1778ae1018dc0d532651964d7c76bd",
+        "validator_index": "1806",
+        "slot": "11321"
+      },
+      {
+        "pubkey": "0x86e481e2b48ba9403d28aa6a7999b0923b3f80099d132ee49722f5d1ab333c7bf161b81c3c94343f980975ddc2c58428",
+        "validator_index": "4122",
+        "slot": "11322"
+      },
+      {
+        "pubkey": "0xb9d76aa1449f329cd555f733f0b8c5b652a5972a164d1469e692b95918fde5096c43506c002a2360e70ac3882bb939be",
+        "validator_index": "1246",
+        "slot": "11323"
+      },
+      {
+        "pubkey": "0xa22e9287c5cfa3e0d6ced48952b9c707d999115d06f252d3e25c803e8bf903365fa2ca063b331adf4dfc8ce6adacd858",
+        "validator_index": "4821",
+        "slot": "11324"
+      },
+      {
+        "pubkey": "0x82d151c656e8d5814c52592d53677664793a4a45126ad74d76af8d19fad6cf81236508e20b64ebffa5122dd5234fd8b5",
+        "validator_index": "17806",
+        "slot": "11325"
+      },
+      {
+        "pubkey": "0xaa2c4c5616ba52e0789836409bdc6e1b7e5dddfd4d1b08e98fb553eaa0e76e2a47a06871a385d52a5bb152e796b11b4c",
+        "validator_index": "7012",
+        "slot": "11326"
+      },
+      {
+        "pubkey": "0x8518ec093a413411018d4fa027ef1e84b242d84f70d78d1455795f04c529723a7a644fdeb93bb25751bd56e441f487f9",
+        "validator_index": "14914",
+        "slot": "11327"
+      }
+    ]
+  }
+}
