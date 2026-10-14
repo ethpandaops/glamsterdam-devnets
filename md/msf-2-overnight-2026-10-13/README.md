@@ -1,6 +1,6 @@
 # Glamsterdam msf 2 overnight monitoring October 13 to 14 2026
 
-Monitoring is running for **2026-10-13T21:48:30+00:00 to 2026-10-14T08:00:00+00:00**. Last tick: **2026-10-14T04:01:01.723580+00:00**. The latest full check found **36/36 validator pairings** healthy at **2026-10-14T03:59:01.721698+00:00**. Reference finalized epoch advanced from **305** to **363**. This is sampled health, not a claim of uninterrupted operation.
+Monitoring is running for **2026-10-13T21:48:30+00:00 to 2026-10-14T08:00:00+00:00**. Last tick: **2026-10-14T05:02:01.727726+00:00**. The latest full check found **36/36 validator pairings** healthy at **2026-10-14T04:59:01.729002+00:00**. Reference finalized epoch advanced from **305** to **372**. This is sampled health, not a claim of uninterrupted operation.
 
 The initial baseline found all 36 validator pairings healthy. Two unstaked Nimbus EL observers retained their previously documented optimistic or Engine offline state. These are tracked as known conditions. [Baseline](evidence/baseline.json). All six Besu hosts also retained afternoon OOM artifacts discovered at startup; these predate the overnight window and are detailed in [the Besu follow-up](besu-oom-followup.md). [Existing client reports](../msf-2-issue-reports-2026-10-13/README.md).
 
@@ -10,15 +10,15 @@ Events are evidence for investigation. Threshold crossings and log errors are ca
 
 | Signal | Host | Classification | First observed UTC | Last observed UTC | Observations | Latest detail |
 |---|---|---|---|---|---:|---|
-| besu_heap_dump | grandine-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof", "bytes": 26973208860, "mtime": "2026-10-13T16:44:12.603203+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| besu_heap_dump | lighthouse-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof", "bytes": 26748214310, "mtime": "2026-10-13T17:00:47.594610+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| besu_heap_dump | lodestar-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof", "bytes": 27729214978, "mtime": "2026-10-13T20:23:26.367896+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| besu_heap_dump | nimbus-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof", "bytes": 26750411558, "mtime": "2026-10-13T16:29:56.446991+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| besu_heap_dump | prysm-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof", "bytes": 27409332283, "mtime": "2026-10-13T19:03:22.903096+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| besu_heap_dump | teku-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | {"path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof", "bytes": 26811699345, "mtime": "2026-10-13T16:35:45.675959+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T035901Z.json) |
-| health | lighthouse-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | ["is_optimistic"] [evidence](evidence/health/20261014T035901Z.json) |
-| health | nimbus-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 74 | ["is_optimistic", "el_offline"] [evidence](evidence/health/20261014T035901Z.json) |
-| log_engine_timeout | nimbus-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T03:59:01.721698+00:00 | 370 | {"timestamp": "2026-10-14 03:56:59.001049652", "container": "beacon", "body": "DBG 2026-10-14 03:56:58.998+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\"", "requires": "correlate with duties and health; logs alone do not prove a new defect"} [evidence](evidence/logs/20261014T035901Z.json) |
+| besu_heap_dump | grandine-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof", "bytes": 26973208860, "mtime": "2026-10-13T16:44:12.603203+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| besu_heap_dump | lighthouse-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof", "bytes": 26748214310, "mtime": "2026-10-13T17:00:47.594610+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| besu_heap_dump | lodestar-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof", "bytes": 27729214978, "mtime": "2026-10-13T20:23:26.367896+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| besu_heap_dump | nimbus-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof", "bytes": 26750411558, "mtime": "2026-10-13T16:29:56.446991+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| besu_heap_dump | prysm-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof", "bytes": 27409332283, "mtime": "2026-10-13T19:03:22.903096+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| besu_heap_dump | teku-besu-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | {"path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof", "bytes": 26811699345, "mtime": "2026-10-13T16:35:45.675959+00:00", "privacy": "Host-local metadata only; no dump uploaded"} [evidence](evidence/profiling/20261014T045901Z.json) |
+| health | lighthouse-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | ["is_optimistic"] [evidence](evidence/health/20261014T045901Z.json) |
+| health | nimbus-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 86 | ["is_optimistic", "el_offline"] [evidence](evidence/health/20261014T045901Z.json) |
+| log_engine_timeout | nimbus-nimbusel-1 | Known recurrence | 2026-10-13T21:52:45.932727+00:00 | 2026-10-14T04:59:01.729002+00:00 | 430 | {"timestamp": "2026-10-14 04:56:59.000820893", "container": "beacon", "body": "DBG 2026-10-14 04:56:58.999+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\"", "requires": "correlate with duties and health; logs alone do not prove a new defect"} [evidence](evidence/logs/20261014T045901Z.json) |
 | collection_gap | collector | Review candidate | 2026-10-13T21:55:59.688146+00:00 | 2026-10-13T21:55:59.688146+00:00 | 1 | {"last_health_at": "2026-10-13T21:52:45.932727+00:00", "seconds": 193.755419} collector state |
 | metric_besu_heap_fraction | glamsterdam-msf-2-nimbus-besu-1 | Review candidate | 2026-10-13T21:58:23.318033+00:00 | 2026-10-14T00:04:01.724568+00:00 | 21 | {"value": 0.9425172843039036, "labels": {"area": "heap", "consensus_client": "nimbus", "execution_client": "besu", "ingress_user": "glamsterdam-msf-2", "instance": "glamsterdam-msf-2-nimbus-besu-1", "ip_address": "168.144.244.100", "job": "execution", "network": "glamsterdam-msf-2", "supernode": "True", "tenant_tier": "external", "testnet": "glamsterdam-msf-2", "vm_account_id": "1", "vm_project_id": "0"}, "interpretation": "threshold observation, not proof of a client defect"} [evidence](evidence/metrics/20261014T000401Z.json) |
 | metric_besu_heap_fraction | glamsterdam-msf-2-teku-besu-1 | Review candidate | 2026-10-13T22:19:01.716249+00:00 | 2026-10-14T00:54:01.717906+00:00 | 20 | {"value": 0.9078083923086524, "labels": {"area": "heap", "consensus_client": "teku", "execution_client": "besu", "ingress_user": "glamsterdam-msf-2", "instance": "glamsterdam-msf-2-teku-besu-1", "ip_address": "167.99.59.150", "job": "execution", "network": "glamsterdam-msf-2", "supernode": "True", "tenant_tier": "external", "testnet": "glamsterdam-msf-2", "vm_account_id": "1", "vm_project_id": "0"}, "interpretation": "threshold observation, not proof of a client defect"} [evidence](evidence/metrics/20261014T005401Z.json) |
@@ -33,42 +33,42 @@ Only finalized epochs fully contained in the monitoring window enter the census.
 
 | Pairing | Missing canonical slots | Assigned duties |
 |---|---:|---:|
-| grandine-besu-1 | 0 | 56 |
-| grandine-erigon-1 | 0 | 59 |
-| grandine-ethrex-1 | 0 | 58 |
-| grandine-geth-1 | 0 | 45 |
-| grandine-nethermind-1 | 0 | 41 |
-| grandine-reth-1 | 0 | 45 |
-| lighthouse-besu-1 | 0 | 47 |
-| lighthouse-erigon-1 | 0 | 49 |
-| lighthouse-ethrex-1 | 0 | 52 |
-| lighthouse-geth-1 | 0 | 43 |
-| lighthouse-nethermind-1 | 0 | 37 |
-| lighthouse-reth-1 | 0 | 49 |
-| lodestar-besu-1 | 0 | 50 |
-| lodestar-erigon-1 | 0 | 44 |
-| lodestar-ethrex-1 | 0 | 54 |
-| lodestar-geth-1 | 0 | 57 |
-| lodestar-nethermind-1 | 0 | 48 |
-| lodestar-reth-1 | 0 | 55 |
-| nimbus-besu-1 | 0 | 50 |
-| nimbus-erigon-1 | 0 | 52 |
-| nimbus-ethrex-1 | 0 | 46 |
-| nimbus-geth-1 | 0 | 71 |
-| nimbus-nethermind-1 | 0 | 58 |
-| nimbus-reth-1 | 0 | 55 |
-| prysm-besu-1 | 0 | 39 |
-| prysm-erigon-1 | 0 | 50 |
-| prysm-ethrex-1 | 0 | 47 |
-| prysm-geth-1 | 0 | 45 |
-| prysm-nethermind-1 | 0 | 41 |
-| prysm-reth-1 | 0 | 45 |
-| teku-besu-1 | 0 | 56 |
-| teku-erigon-1 | 0 | 50 |
-| teku-ethrex-1 | 0 | 55 |
-| teku-geth-1 | 0 | 49 |
-| teku-nethermind-1 | 0 | 52 |
-| teku-reth-1 | 0 | 42 |
+| grandine-besu-1 | 0 | 64 |
+| grandine-erigon-1 | 0 | 67 |
+| grandine-ethrex-1 | 0 | 70 |
+| grandine-geth-1 | 0 | 54 |
+| grandine-nethermind-1 | 0 | 46 |
+| grandine-reth-1 | 0 | 54 |
+| lighthouse-besu-1 | 0 | 53 |
+| lighthouse-erigon-1 | 0 | 61 |
+| lighthouse-ethrex-1 | 0 | 59 |
+| lighthouse-geth-1 | 0 | 47 |
+| lighthouse-nethermind-1 | 0 | 45 |
+| lighthouse-reth-1 | 0 | 58 |
+| lodestar-besu-1 | 0 | 55 |
+| lodestar-erigon-1 | 0 | 50 |
+| lodestar-ethrex-1 | 0 | 59 |
+| lodestar-geth-1 | 0 | 63 |
+| lodestar-nethermind-1 | 0 | 55 |
+| lodestar-reth-1 | 0 | 67 |
+| nimbus-besu-1 | 0 | 60 |
+| nimbus-erigon-1 | 0 | 59 |
+| nimbus-ethrex-1 | 0 | 57 |
+| nimbus-geth-1 | 0 | 77 |
+| nimbus-nethermind-1 | 0 | 63 |
+| nimbus-reth-1 | 0 | 65 |
+| prysm-besu-1 | 0 | 45 |
+| prysm-erigon-1 | 0 | 60 |
+| prysm-ethrex-1 | 0 | 50 |
+| prysm-geth-1 | 0 | 52 |
+| prysm-nethermind-1 | 0 | 53 |
+| prysm-reth-1 | 0 | 52 |
+| teku-besu-1 | 0 | 68 |
+| teku-erigon-1 | 0 | 58 |
+| teku-ethrex-1 | 0 | 65 |
+| teku-geth-1 | 0 | 59 |
+| teku-nethermind-1 | 0 | 59 |
+| teku-reth-1 | 0 | 51 |
 
 ## Collection and coverage
 
