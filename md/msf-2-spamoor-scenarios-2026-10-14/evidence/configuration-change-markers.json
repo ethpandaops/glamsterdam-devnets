@@ -1,0 +1,415 @@
+[
+  {
+    "id": 102,
+    "timestamp": 1791817341,
+    "fields": []
+  },
+  {
+    "id": 106,
+    "timestamp": 1791879345,
+    "fields": []
+  },
+  {
+    "id": 108,
+    "timestamp": 1791879535,
+    "fields": []
+  },
+  {
+    "id": 109,
+    "timestamp": 1791879889,
+    "fields": []
+  },
+  {
+    "id": 113,
+    "timestamp": 1791884683,
+    "fields": [
+      {
+        "change": "-",
+        "key": "throughput",
+        "value": "1         # one deployment per slot; see the state-gas note"
+      },
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "4        # 4 is slack, not need: at 1 tx/slot a single wallet"
+      },
+      {
+        "change": "+",
+        "key": "throughput",
+        "value": "1         # one deployment per slot; see the state-gas note"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "4        # 4 is slack, not need: at 1 tx/slot a single wallet"
+      },
+      {
+        "change": "-",
+        "key": "gas_limit",
+        "value": "102000000"
+      },
+      {
+        "change": "+",
+        "key": "gas_limit",
+        "value": "102000000"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"100000000\"   # 0.1 gwei cap"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\"      # 0.001 gwei tip"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"100000000\"   # 0.1 gwei cap"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\"      # 0.001 gwei tip"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "timestamp": 1791885981,
+    "fields": []
+  },
+  {
+    "id": 112,
+    "timestamp": 1791906317,
+    "fields": []
+  },
+  {
+    "id": 111,
+    "timestamp": 1791906329,
+    "fields": []
+  },
+  {
+    "id": 111,
+    "timestamp": 1791907521,
+    "fields": [
+      {
+        "change": "-",
+        "key": "throughput",
+        "value": "12"
+      },
+      {
+        "change": "+",
+        "key": "throughput",
+        "value": "60"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"200000000\" # 0.2 gwei cap -> 0.0034 ETH reserved per tx"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"100000000\" # 0.1 gwei tip"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"20000000\"    # 0.02 gwei cap -> 0.000336 ETH reserved per tx"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"2000000\"      # 0.002 gwei tip"
+      },
+      {
+        "change": "+",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee",
+        "value": "2"
+      },
+      {
+        "change": "-",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "timestamp": 1791966581,
+    "fields": [
+      {
+        "change": "-",
+        "key": "throughput",
+        "value": "12"
+      },
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "12 # one wallet per transaction, so all 12 fit one slot"
+      },
+      {
+        "change": "+",
+        "key": "throughput",
+        "value": "20"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "20"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"2000000000\"   # 2 gwei cap"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\"       # 0.001 gwei tip"
+      },
+      {
+        "change": "-",
+        "key": "target_address",
+        "value": "\"\" # set to reuse an already deployed and funded contract"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"100000000\" # 0.1 gwei cap"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\" # 0.001 gwei tip"
+      },
+      {
+        "change": "+",
+        "key": "target_address",
+        "value": "\"\""
+      },
+      {
+        "change": "-",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "timestamp": 1791967980,
+    "fields": [
+      {
+        "change": "-",
+        "key": "throughput",
+        "value": "60"
+      },
+      {
+        "change": "+",
+        "key": "throughput",
+        "value": "60        # 5 tx/s; the limiter cannot overshoot max_pending"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"20000000\"    # 0.02 gwei cap -> 0.000336 ETH reserved per tx"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"2000000\"      # 0.002 gwei tip"
+      },
+      {
+        "change": "-",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee",
+        "value": "2"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"2000000000\"   # 2 gwei cap"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"2000000\"       # 0.002 gwei tip"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "timestamp": 1791972291,
+    "fields": []
+  },
+  {
+    "id": 115,
+    "timestamp": 1791984310,
+    "fields": []
+  },
+  {
+    "id": 116,
+    "timestamp": 1791986663,
+    "fields": [
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "12 # one wallet per transaction, so all 12 fit one slot"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "12       # one wallet per transaction, so all 12 fit one slot"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"5000000000\" # 5 gwei cap"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\" # 0.001 gwei tip"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"5000000000\"   # 5 gwei cap"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\"       # 0.001 gwei tip"
+      },
+      {
+        "change": "-",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "timestamp": 1791986664,
+    "fields": []
+  },
+  {
+    "id": 116,
+    "timestamp": 1791986804,
+    "fields": []
+  },
+  {
+    "id": 103,
+    "timestamp": 1791987486,
+    "fields": []
+  },
+  {
+    "id": 103,
+    "timestamp": 1791987707,
+    "fields": [
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "12 # one wallet per transaction, so all 12 fit one slot"
+      },
+      {
+        "change": "-",
+        "key": "base_fee_wei",
+        "value": "\"100000000\" # 0.1 gwei cap"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\" # 0.001 gwei tip -> ~0.0002 ETH per slot"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "12"
+      },
+      {
+        "change": "+",
+        "key": "base_fee_wei",
+        "value": "\"10000000000\"   # 10 gwei; chain was at 3.5-4.9 gwei"
+      },
+      {
+        "change": "+",
+        "key": "tip_fee_wei",
+        "value": "\"1000000\""
+      },
+      {
+        "change": "-",
+        "key": "base_fee",
+        "value": "20"
+      },
+      {
+        "change": "-",
+        "key": "tip_fee",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "timestamp": 1791987990,
+    "fields": []
+  },
+  {
+    "id": 103,
+    "timestamp": 1791995612,
+    "fields": [
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "12"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "36"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "timestamp": 1791995960,
+    "fields": [
+      {
+        "change": "-",
+        "key": "max_wallets",
+        "value": "12"
+      },
+      {
+        "change": "+",
+        "key": "max_wallets",
+        "value": "36"
+      }
+    ]
+  }
+]
