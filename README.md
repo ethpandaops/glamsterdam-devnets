@@ -26,9 +26,9 @@ WIP | [devnet-8](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-8)| 
  🔴 | [devnet-11](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-11)| -    | [🔗](ansible/inventories/devnet-11) | [🔗](terraform/devnet-11) | [🔗](kubernetes-archive/devnet-11)
 WIP | [devnet-12](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-12)| -    | [🔗](ansible/inventories/devnet-12) | [🔗](terraform/devnet-12) | -
  🔴 | sepsf-1 (sepolia shadowfork)| [Network config](network-configs/sepsf-1)    | [🔗](ansible/inventories/sepsf-1) | [🔗](terraform/sepsf-1) | [🔗](kubernetes-archive/sepsf-1)
- On | [sepsf-2](https://dora.glamsterdam-sepsf-2.ethpandaops.io) (sepolia shadowfork)| [Network config](network-configs/sepsf-2)    | [🔗](ansible/inventories/sepsf-2) | [🔗](terraform/sepsf-2) | [🔗](kubernetes/sepsf-2)
+ 🔴 | sepsf-2 (sepolia shadowfork)| [Network config](network-configs/sepsf-2)    | [🔗](ansible/inventories/sepsf-2) | [🔗](terraform/sepsf-2) | [🔗](kubernetes-archive/sepsf-2)
  🔴 | msf-1 (mainnet shadowfork)| [Network config](network-configs/msf-1)    | [🔗](ansible/inventories/msf-1) | [🔗](terraform/msf-1) | [🔗](kubernetes-archive/msf-1)
-WIP | msf-2 (mainnet shadowfork, jochemnet release, benchmarking)| -    | [🔗](ansible/inventories/msf-2) | [🔗](terraform/msf-2) | -
+ 🔴 | msf-2 (mainnet shadowfork, jochemnet release, benchmarking)| [Network config](network-configs/msf-2)    | [🔗](ansible/inventories/msf-2) | [🔗](terraform/msf-2) | [🔗](kubernetes-archive/msf-2)
 # Development
 ## Version management for tools
 
