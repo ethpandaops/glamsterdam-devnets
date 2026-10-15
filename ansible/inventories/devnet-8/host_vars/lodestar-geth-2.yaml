@@ -1,0 +1,11 @@
+---
+# Ultra sound Plataberget relay (ePBS/Gloas builder API); maxExecutionPayment > 0
+# requires --allowDangerousTrustedPayments.
+lodestar_validator_container_command_extra_args: >-
+  {{ lodestar_validator_container_command_extra_simple_args
+     + [
+         '--builder.urls=https://relay-plataberget.ultrasound.money',
+         '--builder.selection=maxprofit',
+         '--builder.maxExecutionPayment=1000000000',
+         '--allowDangerousTrustedPayments'
+       ] }}
