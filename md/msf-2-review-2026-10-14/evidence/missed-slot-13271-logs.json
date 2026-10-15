@@ -1,0 +1,129 @@
+{
+  "slot": 13271,
+  "slot_start": "2026-10-14T09:17:12+00:00",
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='nimbus-reth-1' AND ResourceAttributes['container.name'] IN ('beacon','validator') AND Timestamp>=toDateTime('2026-10-14 09:17:08') AND Timestamp<toDateTime('2026-10-14 09:17:27') AND match(Body,'Execution payload bid validated|First bid for this slot|Timeout while getting|getPayload|Getting execution payload|No execution payload|Unable to propose|Sending proposal fcU|Block proposed|Failed.*proposal|WARN|WRN|ERROR|ERR|Proposal|proposal|[Pp]ropos.*block|[Bb]lock.*propos') ORDER BY Timestamp ASC LIMIT 100 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 09:17:09.534043440",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 09:17:09.526+00:00 Slot end                                   topics=\"beacnde\" slot=13270 nextActionWait=2s466ms64us418ns nextAttestationSlot=13271 nextProposalSlot=13271 syncCommitteeDuties=current head=84cb93de:13270"
+      ],
+      [
+        "2026-10-14 09:17:10.501755262",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:10.498+00:00 Sending proposal fcU                       topics=\"cman\" proposalSlot=13271 validatorIndex=21045 nextProposer=b1c9ef837da42d0e32413439bea5676fab3ed7aa2d040cdb375b3a51263d222541d2ebd23116327ac8e38c8f8d9cbc38"
+      ],
+      [
+        "2026-10-14 09:17:10.522028389",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:10.514+00:00 Fork-choice updated for proposal           topics=\"cman\" status=VALID executionHead=488c2d95 attributes=\"(timestamp: 0x6acf4898, prevRandao: 0x148a285592739d4cac45bf21c061f4ab6f9bb35beb3773e5718957ef5a5eed0c, suggestedFeeRecipient: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, withdrawals: [(index: 0x328c0, validatorIndex: 0x10000000001, address: 0xf97e180c050e5ab072211ad2c213eb5aee4df134, amount: 0x6052340), (index: 0x328c1, validatorIndex: 0x37bb, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c2, validatorIndex: 0x37bc, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c3, validatorIndex: 0x37bd, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c4, validatorIndex: 0x37be, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c5, validatorIndex: 0x37bf, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c6, validatorIndex: 0x37c0, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c7, validatorIndex: 0x37c1, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328c8, validatorIndex: 0x37c2, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a097d), (index: 0x328c9, validatorIndex: 0x37c3, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0xbba8cc), (index: 0x328ca, validatorIndex: 0x37c4, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328cb, validatorIndex: 0x37c5, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328cc, validatorIndex: 0x37c6, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328cd, validatorIndex: 0x37c7, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328ce, validatorIndex: 0x37c8, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b), (index: 0x328cf, validatorIndex: 0x37c9, address: 0x454b0ea7d8ad3c56d0cf2e44ed97b2feab4d7af2, amount: 0x3a3b6b)], parentBeaconBlockRoot: 0x84cb93de06f288a9c5f2d71d940792f117278724c509856b21ecb7a0ff8c3e83, slotNumber: 0x33d7, targetGasLimit: 0xbebc200)\""
+      ],
+      [
+        "2026-10-14 09:17:11.609449500",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:11.602+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=13271 builder_index=0 blockRoot=84cb93de"
+      ],
+      [
+        "2026-10-14 09:17:11.609485948",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:11.602+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=13271 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-14 09:17:12.051605190",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:12.046+00:00 Unknown constants in config file           unknowns=\"[GAS_LIMIT_SCHEDULE, GAS_LIMIT, \"- EPOCH\", \"    GAS_LIMIT\"]\""
+      ],
+      [
+        "2026-10-14 09:17:12.052285698",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:12.046+00:00 Unknown constants in config file           unknowns=\"[GAS_LIMIT_SCHEDULE, GAS_LIMIT, \"- EPOCH\", \"    GAS_LIMIT\"]\""
+      ],
+      [
+        "2026-10-14 09:17:12.052490146",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:12.046+00:00 Sending JSON-RPC request                   topics=\"jsonrpc client\" name=engine_getPayloadV6 len=91 id=26966 remote=snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 09:17:12.544826934",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:12.538+00:00 Peer count low, no new peers discovered    topics=\"networking\" discovered_nodes=0 new_peers=[] current_peers=28 wanted_peers=160"
+      ],
+      [
+        "2026-10-14 09:17:13.553530662",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:13.546+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 09:17:18.606096495",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:18.598+00:00 Peer count low, no new peers discovered    topics=\"networking\" discovered_nodes=0 new_peers=[] current_peers=28 wanted_peers=160"
+      ],
+      [
+        "2026-10-14 09:17:21.528663326",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 09:17:21.522+00:00 Slot end                                   topics=\"beacnde\" slot=13271 nextActionWait=2s471ms517us750ns nextAttestationSlot=13272 nextProposalSlot=-1 syncCommitteeDuties=current head=84cb93de:13270"
+      ],
+      [
+        "2026-10-14 09:17:22.501452145",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:22.494+00:00 Skipping proposal fcU, no proposers registered topics=\"cman\" head=84cb93de:13270 proposalSlot=13272"
+      ],
+      [
+        "2026-10-14 09:17:23.609814696",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:23.602+00:00 Execution payload bid validated            topics=\"gossip_eth2\" bidSlot=13272 builder_index=0 blockRoot=84cb93de"
+      ],
+      [
+        "2026-10-14 09:17:23.609856086",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:23.602+00:00 First bid for this slot and parent         topics=\"bidpool\" bid_slot=13272 builder_index=0 bid_value=101000000"
+      ],
+      [
+        "2026-10-14 09:17:24.002605321",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:23.998+00:00 Expecting block proposal                   topics=\"beacval\" headRoot=84cb93de slot=13272 proposer_index=17104 proposer=b0bcff9b"
+      ],
+      [
+        "2026-10-14 09:17:24.174621041",
+        "nimbus-reth-1",
+        "beacon",
+        "DBG 2026-10-14 09:17:24.170+00:00 Block received                             topics=\"beacnde\" bid=cb5a9f19:13272 blck=\"(slot: 13272, proposer_index: 17104, parent_root: 84cb93de, state_root: 421b80f8, eth1data: (deposit_root: d70a2347, deposit_count: 0, block_hash: 0fd7242b), graffiti: grandine-besu-1 BUee9cGRe3ce, proposer_slashings_len: 0, attester_slashings_len: 0, attestations_len: 2, deposits_len: 0, voluntary_exits_len: 0, sync_committee_participants: 512, block_number: 0, block_hash: , parent_hash: , fee_recipient: , bls_to_execution_changes_len: 0, blob_kzg_commitments_len: 0)\" signature=a999f7fd wallSlot=13272 delay=174ms469us6ns"
+      ],
+      [
+        "2026-10-14 09:17:24.185626773",
+        "nimbus-reth-1",
+        "beacon",
+        "INF 2026-10-14 09:17:24.178+00:00 Block resolved                             topics=\"gossip_blocks\" blockRoot=cb5a9f19 blck=\"(slot: 13272, proposer_index: 17104, parent_root: 84cb93de, state_root: 421b80f8, eth1data: (deposit_root: d70a2347, deposit_count: 0, block_hash: 0fd7242b), graffiti: grandine-besu-1 BUee9cGRe3ce, proposer_slashings_len: 0, attester_slashings_len: 0, attestations_len: 2, deposits_len: 0, voluntary_exits_len: 0, sync_committee_participants: 512, block_number: 0, block_hash: , parent_hash: , fee_recipient: , bls_to_execution_changes_len: 0, blob_kzg_commitments_len: 0)\" optimisticStatus=NOT_VALIDATED heads=1 stateDataDur=81us496ns sigVerifyDur=3ms914us807ns stateVerifyDur=3ms190us510ns putBlockDur=2ms203us981ns epochRefDur=8us792ns"
+      ],
+      [
+        "2026-10-14 09:17:24.535934306",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 09:17:24.530+00:00 Peer count low, no new peers discovered    topics=\"networking\" discovered_nodes=0 new_peers=[] current_peers=28 wanted_peers=160"
+      ]
+    ]
+  }
+}

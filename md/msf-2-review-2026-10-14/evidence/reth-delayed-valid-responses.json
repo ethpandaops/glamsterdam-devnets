@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-10-14 14:27:24.834675454",
+    "host": "prysm-reth-1",
+    "block": 24467029,
+    "elapsed_seconds": 10.040615845,
+    "body": "2026-10-14T14:27:24.834555Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a) }) payload=NumHash { number: 24467029, hash: 0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a } elapsed=10.040615845s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:27.729356392",
+    "host": "grandine-reth-1",
+    "block": 24467029,
+    "elapsed_seconds": 12.979691809,
+    "body": "2026-10-14T14:27:27.729208Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a) }) payload=NumHash { number: 24467029, hash: 0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a } elapsed=12.979691809s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:36.194898257",
+    "host": "nimbus-reth-1",
+    "block": 24467030,
+    "elapsed_seconds": 7.172137413,
+    "body": "2026-10-14T14:27:36.194792Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) payload=NumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } elapsed=7.172137413s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:38.816689511",
+    "host": "prysm-reth-1",
+    "block": 24467030,
+    "elapsed_seconds": 9.815397847,
+    "body": "2026-10-14T14:27:38.816484Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) payload=NumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } elapsed=9.815397847s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:42.727720638",
+    "host": "grandine-reth-1",
+    "block": 24467030,
+    "elapsed_seconds": 13.216749054,
+    "body": "2026-10-14T14:27:42.727580Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) payload=NumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } elapsed=13.216749054s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:52.756001238",
+    "host": "prysm-reth-1",
+    "block": 24467031,
+    "elapsed_seconds": 9.855300948,
+    "body": "2026-10-14T14:27:52.754976Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa) }) payload=NumHash { number: 24467031, hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa } elapsed=9.855300948s"
+  },
+  {
+    "timestamp": "2026-10-14 14:27:57.105098616",
+    "host": "grandine-reth-1",
+    "block": 24467031,
+    "elapsed_seconds": 14.348001802,
+    "body": "2026-10-14T14:27:57.105025Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa) }) payload=NumHash { number: 24467031, hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa } elapsed=14.348001802s"
+  },
+  {
+    "timestamp": "2026-10-14 14:28:08.868154085",
+    "host": "prysm-reth-1",
+    "block": 24467032,
+    "elapsed_seconds": 8.20456767,
+    "body": "2026-10-14T14:28:08.868086Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08) }) payload=NumHash { number: 24467032, hash: 0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08 } elapsed=8.20456767s"
+  },
+  {
+    "timestamp": "2026-10-14 14:28:11.183802076",
+    "host": "grandine-reth-1",
+    "block": 24467032,
+    "elapsed_seconds": 10.321542341,
+    "body": "2026-10-14T14:28:11.183700Z  WARN engine::tree: Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08) }) payload=NumHash { number: 24467032, hash: 0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08 } elapsed=10.321542341s"
+  }
+]

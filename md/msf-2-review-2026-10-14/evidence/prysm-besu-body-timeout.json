@@ -1,0 +1,655 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='prysm-besu-1' AND ResourceAttributes['container.name'] IN ('execution','beacon') AND Timestamp>=toDateTime('2026-10-14 02:31:00') AND Timestamp<toDateTime('2026-10-14 02:32:20') AND match(Body,'WARN|ERROR|timeout|Timeout|f5e4a143|payload|Payload') ORDER BY Timestamp ASC LIMIT 120 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 02:31:00.163369633",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.16]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mparentHash\u001b[0m=0x2a1801ff6307 \u001b[32mpayloadHash\u001b[0m=0xedbdb4544b6b \u001b[32mslot\u001b[0m=11240 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:31:00.614846073",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13932"
+      ],
+      [
+        "2026-10-14 02:31:00.619975087",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13852"
+      ],
+      [
+        "2026-10-14 02:31:00.620100465",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13725"
+      ],
+      [
+        "2026-10-14 02:31:00.620533245",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13985"
+      ],
+      [
+        "2026-10-14 02:31:00.620542891",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13859"
+      ],
+      [
+        "2026-10-14 02:31:00.620545491",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13732"
+      ],
+      [
+        "2026-10-14 02:31:00.620547846",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13627"
+      ],
+      [
+        "2026-10-14 02:31:00.620559795",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13460"
+      ],
+      [
+        "2026-10-14 02:31:00.620682995",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13195"
+      ],
+      [
+        "2026-10-14 02:31:00.620952121",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13621"
+      ],
+      [
+        "2026-10-14 02:31:00.621137089",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13968"
+      ],
+      [
+        "2026-10-14 02:31:00.621976418",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13131"
+      ],
+      [
+        "2026-10-14 02:31:00.621986168",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xb3e2c7a66bc8352539f262c267524aa6c0c2ead5438162eb49642be8e1e97fe3 \u001b[34mslot\u001b[0m=11240 \u001b[34mvalidatorIndex\u001b[0m=13696"
+      ],
+      [
+        "2026-10-14 02:31:00.659435517",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:00.659+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,454  (edbdb.....14a3d)| 1012 tx (100.0% parallel)| 16 ws|  0 blobs|   2.10 kwei bfee| 100,453,680 ( 50.2%) gas used| 34.9ms exec| 2879.05 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:31:00.661167881",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:00.66]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0xedbdb4544b6b \u001b[32mblockRoot\u001b[0m=0xb3e2c7a66bc8 \u001b[32mparentHash\u001b[0m=0x2a1801ff6307 \u001b[32mslot\u001b[0m=11240"
+      ],
+      [
+        "2026-10-14 02:31:12.119986797",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.11]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mparentHash\u001b[0m=0xedbdb4544b6b \u001b[32mpayloadHash\u001b[0m=0x33585d06aee8 \u001b[32mslot\u001b[0m=11241 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:31:12.620594792",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13380"
+      ],
+      [
+        "2026-10-14 02:31:12.620634613",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13933"
+      ],
+      [
+        "2026-10-14 02:31:12.620802535",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13917"
+      ],
+      [
+        "2026-10-14 02:31:12.620807657",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13726"
+      ],
+      [
+        "2026-10-14 02:31:12.620810646",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13810"
+      ],
+      [
+        "2026-10-14 02:31:12.620876281",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13360"
+      ],
+      [
+        "2026-10-14 02:31:12.621494647",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13261"
+      ],
+      [
+        "2026-10-14 02:31:12.621936365",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13996"
+      ],
+      [
+        "2026-10-14 02:31:12.621947217",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13242"
+      ],
+      [
+        "2026-10-14 02:31:12.621950100",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13833"
+      ],
+      [
+        "2026-10-14 02:31:12.622192456",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13906"
+      ],
+      [
+        "2026-10-14 02:31:12.622199710",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.62]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xac34ef5a39e504456eeee692fbf397b66a486e8f175e0d9fbb4a99c3548eff2d \u001b[34mslot\u001b[0m=11241 \u001b[34mvalidatorIndex\u001b[0m=13866"
+      ],
+      [
+        "2026-10-14 02:31:12.661321035",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:12.661+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,455  (33585.....ec54b)|  891 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 34.4ms exec| 2918.08 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:31:12.662652796",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:12.66]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0x33585d06aee8 \u001b[32mblockRoot\u001b[0m=0xac34ef5a39e5 \u001b[32mparentHash\u001b[0m=0xedbdb4544b6b \u001b[32mslot\u001b[0m=11241"
+      ],
+      [
+        "2026-10-14 02:31:24.180821296",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.18]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced new block \u001b[32mblock\u001b[0m=0xa0979fe9... \u001b[32mblockHash\u001b[0m=0xf5e4a1434de3 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mchainServiceProcessedTime\u001b[0m=16.40005ms \u001b[32mepoch\u001b[0m=351 \u001b[32mfinalizedEpoch\u001b[0m=349 \u001b[32mfinalizedRoot\u001b[0m=0x52b3c1c5... \u001b[32mjustifiedEpoch\u001b[0m=350 \u001b[32mjustifiedRoot\u001b[0m=0x2027c26a... \u001b[32mparentHash\u001b[0m=0x33585d06aee8 \u001b[32mparentRoot\u001b[0m=0xac34ef5a... \u001b[32msinceSlotStartTime\u001b[0m=180.64377ms \u001b[32mslot\u001b[0m=11242 \u001b[32mslotInEpoch\u001b[0m=10 \u001b[32mversion\u001b[0m=gloas"
+      ],
+      [
+        "2026-10-14 02:31:24.181461878",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.18]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mparentHash\u001b[0m=0x33585d06aee8 \u001b[32mpayloadHash\u001b[0m=0xf5e4a1434de3 \u001b[32mslot\u001b[0m=11242 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:31:24.717418822",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13437"
+      ],
+      [
+        "2026-10-14 02:31:24.717437214",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13752"
+      ],
+      [
+        "2026-10-14 02:31:24.717440858",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13266"
+      ],
+      [
+        "2026-10-14 02:31:24.717443798",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13223"
+      ],
+      [
+        "2026-10-14 02:31:24.718562183",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13304"
+      ],
+      [
+        "2026-10-14 02:31:24.719331870",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13829"
+      ],
+      [
+        "2026-10-14 02:31:24.720848880",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.71]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13647"
+      ],
+      [
+        "2026-10-14 02:31:24.720861707",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13506"
+      ],
+      [
+        "2026-10-14 02:31:24.721650235",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13677"
+      ],
+      [
+        "2026-10-14 02:31:24.721670408",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13981"
+      ],
+      [
+        "2026-10-14 02:31:24.721673827",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13668"
+      ],
+      [
+        "2026-10-14 02:31:24.721676490",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13914"
+      ],
+      [
+        "2026-10-14 02:31:24.721679023",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13931"
+      ],
+      [
+        "2026-10-14 02:31:24.721681558",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13680"
+      ],
+      [
+        "2026-10-14 02:31:24.721976880",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.72]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0xa0979fe9016d9a9cd58ae26d35a3a9af959afc286c12ea11ddcf90b0b34ca19d \u001b[34mslot\u001b[0m=11242 \u001b[34mvalidatorIndex\u001b[0m=13196"
+      ],
+      [
+        "2026-10-14 02:31:24.755978063",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:24.755+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,456  (f5e4a.....ee589)|  899 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 31.6ms exec| 3176.78 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:31:24.757085940",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:24.75]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0xf5e4a1434de3 \u001b[32mblockRoot\u001b[0m=0xa0979fe9016d \u001b[32mparentHash\u001b[0m=0x33585d06aee8 \u001b[32mslot\u001b[0m=11242"
+      ],
+      [
+        "2026-10-14 02:31:25.037111073",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:25.03]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m sync:\u001b[0m Could not batch reconstruct full execution payload envelopes \u001b[34merror\u001b[0m=could not fetch payload bodies V2 by hash: unexpected EOF \u001b[34mhandler\u001b[0m=execution_payload_envelopes_by_root"
+      ],
+      [
+        "2026-10-14 02:31:25.037146255",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:25.03]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m sync:\u001b[0m Could not handle p2p RPC \u001b[34merror\u001b[0m=could not fetch payload bodies V2 by hash: unexpected EOF \u001b[34mpeer\u001b[0m=16Uiu2HAmLShyKKJDYDhEGDyJFuNm1VWGuuVgDVVihzHSQonvz1ZN \u001b[34mtopic\u001b[0m=/eth2/beacon_chain/req/execution_payload_envelopes_by_root/1/ssz_snappy"
+      ],
+      [
+        "2026-10-14 02:31:36.171989826",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.17]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced new block \u001b[32mblock\u001b[0m=0x9de52baf... \u001b[32mblockHash\u001b[0m=0x16f16bbe90d7 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mchainServiceProcessedTime\u001b[0m=16.361262ms \u001b[32mepoch\u001b[0m=351 \u001b[32mfinalizedEpoch\u001b[0m=349 \u001b[32mfinalizedRoot\u001b[0m=0x52b3c1c5... \u001b[32mjustifiedEpoch\u001b[0m=350 \u001b[32mjustifiedRoot\u001b[0m=0x2027c26a... \u001b[32mparentHash\u001b[0m=0xf5e4a1434de3 \u001b[32mparentRoot\u001b[0m=0xa0979fe9... \u001b[32msinceSlotStartTime\u001b[0m=171.598814ms \u001b[32mslot\u001b[0m=11243 \u001b[32mslotInEpoch\u001b[0m=11 \u001b[32mversion\u001b[0m=gloas"
+      ],
+      [
+        "2026-10-14 02:31:36.172348252",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.17]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mparentHash\u001b[0m=0xf5e4a1434de3 \u001b[32mpayloadHash\u001b[0m=0x16f16bbe90d7 \u001b[32mslot\u001b[0m=11243 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:31:36.654760610",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13666"
+      ],
+      [
+        "2026-10-14 02:31:36.654781835",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13447"
+      ],
+      [
+        "2026-10-14 02:31:36.654785733",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13764"
+      ],
+      [
+        "2026-10-14 02:31:36.654788226",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13013"
+      ],
+      [
+        "2026-10-14 02:31:36.654790677",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13974"
+      ],
+      [
+        "2026-10-14 02:31:36.654793263",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13954"
+      ],
+      [
+        "2026-10-14 02:31:36.654795639",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.65]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a \u001b[34mslot\u001b[0m=11243 \u001b[34mvalidatorIndex\u001b[0m=13750"
+      ],
+      [
+        "2026-10-14 02:31:36.678142765",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.67]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m execution:\u001b[0m Execution client does not have block, skipping payload reconstruction \u001b[34mblockHash\u001b[0m=0x16f16bbe90d7b2592099c85a3e41da03a72883f47f01aabde400b35c932956b0"
+      ],
+      [
+        "2026-10-14 02:31:36.678163254",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.67]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m sync:\u001b[0m Missing reconstructed payload after successful batch call \u001b[34mhandler\u001b[0m=execution_payload_envelopes_by_root \u001b[34mroot\u001b[0m=0x9de52baf7dc52d4ebcadb1d6b9eec02e470b2cb802b4c73718c3243ffb13768a"
+      ],
+      [
+        "2026-10-14 02:31:36.693476753",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:36.693+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,457  (16f16.....956b0)|  913 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 34.9ms exec| 2879.09 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:31:36.698463138",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:36.69]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0x16f16bbe90d7 \u001b[32mblockRoot\u001b[0m=0x9de52baf7dc5 \u001b[32mparentHash\u001b[0m=0xf5e4a1434de3 \u001b[32mslot\u001b[0m=11243"
+      ],
+      [
+        "2026-10-14 02:31:48.199169522",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.19]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=1 \u001b[32mparentHash\u001b[0m=0x16f16bbe90d7 \u001b[32mpayloadHash\u001b[0m=0x9d34ad3ec8e9 \u001b[32mslot\u001b[0m=11244 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:31:48.784780010",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13098"
+      ],
+      [
+        "2026-10-14 02:31:48.789010252",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13414"
+      ],
+      [
+        "2026-10-14 02:31:48.789023325",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13058"
+      ],
+      [
+        "2026-10-14 02:31:48.789026270",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13113"
+      ],
+      [
+        "2026-10-14 02:31:48.789028972",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13023"
+      ],
+      [
+        "2026-10-14 02:31:48.789031916",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13030"
+      ],
+      [
+        "2026-10-14 02:31:48.789034596",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13276"
+      ],
+      [
+        "2026-10-14 02:31:48.789036991",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13383"
+      ],
+      [
+        "2026-10-14 02:31:48.789120892",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13537"
+      ],
+      [
+        "2026-10-14 02:31:48.789133691",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13762"
+      ],
+      [
+        "2026-10-14 02:31:48.789136459",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13966"
+      ],
+      [
+        "2026-10-14 02:31:48.789139110",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13287"
+      ],
+      [
+        "2026-10-14 02:31:48.789141762",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13587"
+      ],
+      [
+        "2026-10-14 02:31:48.789151803",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13521"
+      ],
+      [
+        "2026-10-14 02:31:48.789154499",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13488"
+      ],
+      [
+        "2026-10-14 02:31:48.789461533",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.78]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f \u001b[34mslot\u001b[0m=11244 \u001b[34mvalidatorIndex\u001b[0m=13558"
+      ],
+      [
+        "2026-10-14 02:31:48.819012768",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.81]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m execution:\u001b[0m Execution client does not have block, skipping payload reconstruction \u001b[34mblockHash\u001b[0m=0x9d34ad3ec8e9f0a2b597dc59a48d55dbbe54db26ed382d246b0f4230844ae9cd"
+      ],
+      [
+        "2026-10-14 02:31:48.821709308",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.81]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m sync:\u001b[0m Missing reconstructed payload after successful batch call \u001b[34mhandler\u001b[0m=execution_payload_envelopes_by_root \u001b[34mroot\u001b[0m=0x4f6a67187237a45902a746dbfaec3e56d927a4e3374fc3359d30a0844bd08e0f"
+      ],
+      [
+        "2026-10-14 02:31:48.828738583",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:48.828+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,458  (9d34a.....ae9cd)|  896 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 35.1ms exec| 2858.17 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:31:48.832492447",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:31:48.83]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0x9d34ad3ec8e9 \u001b[32mblockRoot\u001b[0m=0x4f6a67187237 \u001b[32mparentHash\u001b[0m=0x16f16bbe90d7 \u001b[32mslot\u001b[0m=11244"
+      ],
+      [
+        "2026-10-14 02:31:55.036265517",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:31:55.036+0000 | vert.x-eventloop-thread-1 | WARN  | JsonRpcExecutorHandler | Timeout (30000 ms) occurred in JSON-RPC executor for method {\"jsonrpc\":\"2.0\",\"id\":10115,\"method\":\"engine_getPayloadBodiesByHashV2\",\"params\":[[\"0xf5e4a1434de3a03334e58ffac94c089efd2ef304921c4e6c22e72555b36ee589\"]]}"
+      ],
+      [
+        "2026-10-14 02:32:00.091915517",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.09]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=0 \u001b[32mparentHash\u001b[0m=0x9d34ad3ec8e9 \u001b[32mpayloadHash\u001b[0m=0xbef7c2556c4e \u001b[32mslot\u001b[0m=11245 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:32:00.613585633",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x1036d7b5603f5f5200fd64f9b4d464583dbe031b58ae2170049dc44b88252f86 \u001b[34mslot\u001b[0m=11245 \u001b[34mvalidatorIndex\u001b[0m=13146"
+      ],
+      [
+        "2026-10-14 02:32:00.614485333",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x1036d7b5603f5f5200fd64f9b4d464583dbe031b58ae2170049dc44b88252f86 \u001b[34mslot\u001b[0m=11245 \u001b[34mvalidatorIndex\u001b[0m=13630"
+      ],
+      [
+        "2026-10-14 02:32:00.615847144",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x1036d7b5603f5f5200fd64f9b4d464583dbe031b58ae2170049dc44b88252f86 \u001b[34mslot\u001b[0m=11245 \u001b[34mvalidatorIndex\u001b[0m=13551"
+      ],
+      [
+        "2026-10-14 02:32:00.616004049",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x1036d7b5603f5f5200fd64f9b4d464583dbe031b58ae2170049dc44b88252f86 \u001b[34mslot\u001b[0m=11245 \u001b[34mvalidatorIndex\u001b[0m=13722"
+      ],
+      [
+        "2026-10-14 02:32:00.617108651",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.61]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x1036d7b5603f5f5200fd64f9b4d464583dbe031b58ae2170049dc44b88252f86 \u001b[34mslot\u001b[0m=11245 \u001b[34mvalidatorIndex\u001b[0m=13036"
+      ],
+      [
+        "2026-10-14 02:32:00.653891396",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:32:00.653+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,459  (bef7c.....32af7)|  915 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 33.8ms exec| 2970.76 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:32:00.663104505",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:00.66]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0xbef7c2556c4e \u001b[32mblockRoot\u001b[0m=0x1036d7b5603f \u001b[32mparentHash\u001b[0m=0x9d34ad3ec8e9 \u001b[32mslot\u001b[0m=11245"
+      ],
+      [
+        "2026-10-14 02:32:12.231658573",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:12.22]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Finished applying state transition \u001b[32mattestations\u001b[0m=1 \u001b[32mblobKzgCommitmentCount\u001b[0m=0 \u001b[32mbuilderIndex\u001b[0m=1 \u001b[32mparentHash\u001b[0m=0xbef7c2556c4e \u001b[32mpayloadHash\u001b[0m=0x1b748bbd09e4 \u001b[32mslot\u001b[0m=11246 \u001b[32msyncBitsCount\u001b[0m=512"
+      ],
+      [
+        "2026-10-14 02:32:12.954635032",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-14 02:32:12.954+0000 | engine-ordered-execution-0 | INFO  | EngineNewPayloadV5 | Imported #24,463,460  (1b748.....ad246)|  883 tx (100.0% parallel)| 16 ws|  0 blobs|   2.11 kwei bfee| 100,453,680 ( 50.2%) gas used| 37.6ms exec| 2668.46 Mgas/s| 25 peers"
+      ],
+      [
+        "2026-10-14 02:32:13.017369663",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m blockchain:\u001b[0m Synced execution payload envelope \u001b[32mblockHash\u001b[0m=0x1b748bbd09e4 \u001b[32mblockRoot\u001b[0m=0x3ce6a18d1052 \u001b[32mparentHash\u001b[0m=0xbef7c2556c4e \u001b[32mslot\u001b[0m=11246"
+      ],
+      [
+        "2026-10-14 02:32:13.019738025",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13134"
+      ],
+      [
+        "2026-10-14 02:32:13.020292511",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13391"
+      ],
+      [
+        "2026-10-14 02:32:13.020449763",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13909"
+      ],
+      [
+        "2026-10-14 02:32:13.020483161",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13754"
+      ],
+      [
+        "2026-10-14 02:32:13.020961805",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13403"
+      ],
+      [
+        "2026-10-14 02:32:13.020972184",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13644"
+      ],
+      [
+        "2026-10-14 02:32:13.020986140",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.01]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13605"
+      ],
+      [
+        "2026-10-14 02:32:13.020988838",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.02]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13026"
+      ],
+      [
+        "2026-10-14 02:32:13.021203498",
+        "prysm-besu-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 02:32:13.02]\u001b[0m \u001b[34mDEBUG\u001b[0m\u001b[36m rpc/validator:\u001b[0m Submitted payload attestation message \u001b[34mblockRoot\u001b[0m=0x3ce6a18d1052b7c5a1039a90aa9ad763066b456e43e4729f2f856c6748425dfa \u001b[34mslot\u001b[0m=11246 \u001b[34mvalidatorIndex\u001b[0m=13971"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Monitor Glamsterdam msf-2 through October 14 08:00 UTC
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+AccuracySec=2s
+Persistent=true
+Unit=msf2-overnight-20261013.service
+
+[Install]
+WantedBy=timers.target

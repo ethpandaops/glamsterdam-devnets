@@ -1,0 +1,460 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='grandine-reth-1' AND ResourceAttributes['container.name'] IN ('beacon','validator','execution') AND Timestamp>=toDateTime('2026-10-14 14:27:30') AND Timestamp<toDateTime('2026-10-14 14:28:20') AND match(Body,'bid|payload|Payload|block_producer|WARN|ERROR|error') ORDER BY Timestamp ASC LIMIT 200 SETTINGS max_threads=2",
+  "attempt_errors": [
+    "panda exited 1: khouse/?default_format=TabSeparatedWithNames\": read tcp 172.18.0.2:60464->104.26.13.152:443: read: connection reset by peer\n\n  hint: an upstream datasource or node returned a gateway error; the target may be temporarily unreachable \u2014 retry, or confirm it is still advertised with 'panda datasources'\n"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 14:27:36.293339706",
+        "beacon",
+        "[2026-10-14T14:27:36.293Z] DEBUG on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 14823: 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 (block hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa, payload status: Empty, payload verified: false, payload timely: false) peers=[39/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAm8NgipzKidhaJ72FSTQ35vBP5x6yoXzZ3xqScaQLpXYiX\"), message_id: MessageId(e4255e58a9c93f16bf16f0d8d835ddd822f71cca) } slot=14823 block_root=0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20"
+      ],
+      [
+        "2026-10-14 14:27:36.293824868",
+        "beacon",
+        "[2026-10-14T14:27:36.293Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 31/39] add execution payload envelope request by root (block_root: 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20, peer_id: 16Uiu2HAm8NgipzKidhaJ72FSTQ35vBP5x6yoXzZ3xqScaQLpXYiX)"
+      ],
+      [
+        "2026-10-14 14:27:36.294347997",
+        "beacon",
+        "[2026-10-14T14:27:36.293Z] DEBUG p2p::network:2859: sending ExecutionPayloadEnvelopesByRoot request (app_request_id: Application(28943), peer_id: 16Uiu2HAm8NgipzKidhaJ72FSTQ35vBP5x6yoXzZ3xqScaQLpXYiX, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:36.296573925",
+        "beacon",
+        "[2026-10-14T14:27:36.296Z] DEBUG p2p::network:2336: peer 16Uiu2HAm8NgipzKidhaJ72FSTQ35vBP5x6yoXzZ3xqScaQLpXYiX terminated ExecutionPayloadEnvelopesByRoot response stream (app_request_id: Application(28943)) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:36.634502601",
+        "beacon",
+        "[2026-10-14T14:27:36.634Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAkvCgJjzqLbqGSuuThZddK3reotTCuCXkFxgjLWVhAaQ2y, inbound_request_id: InboundRequestId { connection_id: ConnectionId(11683), substream_id: SubstreamId(659) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:36.634680023",
+        "beacon",
+        "[2026-10-14T14:27:36.634Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.066620677",
+        "beacon",
+        "[2026-10-14T14:27:37.066Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAkvCgJjzqLbqGSuuThZddK3reotTCuCXkFxgjLWVhAaQ2y, inbound_request_id: InboundRequestId { connection_id: ConnectionId(11683), substream_id: SubstreamId(660) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.066808386",
+        "beacon",
+        "[2026-10-14T14:27:37.066Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.498170184",
+        "beacon",
+        "[2026-10-14T14:27:37.497Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.498213757",
+        "beacon",
+        "[2026-10-14T14:27:37.498Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.676321612",
+        "beacon",
+        "[2026-10-14T14:27:37.676Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAkvCgJjzqLbqGSuuThZddK3reotTCuCXkFxgjLWVhAaQ2y, inbound_request_id: InboundRequestId { connection_id: ConnectionId(11683), substream_id: SubstreamId(661) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.676518910",
+        "beacon",
+        "[2026-10-14T14:27:37.676Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.700008514",
+        "beacon",
+        "[2026-10-14T14:27:37.699Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20, slot: 14823, seen before deadline: true ) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:37.700047908",
+        "beacon",
+        "[2026-10-14T14:27:37.699Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 14823: 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 (block hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa, payload status: Full, payload verified: true, payload timely: true) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:38.113504613",
+        "beacon",
+        "[2026-10-14T14:27:38.113Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAkvCgJjzqLbqGSuuThZddK3reotTCuCXkFxgjLWVhAaQ2y, inbound_request_id: InboundRequestId { connection_id: ConnectionId(11683), substream_id: SubstreamId(662) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:38.113890484",
+        "beacon",
+        "[2026-10-14T14:27:38.113Z] DEBUG p2p::network:1676: sending ExecutionPayloadEnvelopesByRoot response chunk (inbound_request_id: InboundRequestId { connection_id: ConnectionId(11683), substream_id: SubstreamId(662) }, peer_id: 16Uiu2HAkvCgJjzqLbqGSuuThZddK3reotTCuCXkFxgjLWVhAaQ2y, block_root: 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:38.113902614",
+        "beacon",
+        "[2026-10-14T14:27:38.113Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:42.727296193",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:42.727139Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xdac39eadede2a0921a95e535d9ae1d4746d7d130416e45f58dea6d598ffc7986 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m6.545\u00b5s"
+      ],
+      [
+        "2026-10-14 14:27:42.727720638",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:42.727580Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m13.216749054s"
+      ],
+      [
+        "2026-10-14 14:27:42.732425769",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:42.732365Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x002176ad1332ebb5 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa"
+      ],
+      [
+        "2026-10-14 14:27:42.733452092",
+        "beacon",
+        "[2026-10-14T14:27:42.733Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x002176ad1332ebb5) for head 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 at slot 14824 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:42.758142129",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:42.757106Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24467031 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa"
+      ],
+      [
+        "2026-10-14 14:27:50.741293860",
+        "beacon",
+        "[2026-10-14T14:27:50.741Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:50.741349314",
+        "beacon",
+        "[2026-10-14T14:27:50.741Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.104847783",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:57.104682Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0x7e4666f28b0a0f5a750ae53be053cee0590537afd2221a6b1c3d461f554d5b94 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m5.988\u00b5s"
+      ],
+      [
+        "2026-10-14 14:27:57.105098616",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:57.105025Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467031, hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m14.348001802s"
+      ],
+      [
+        "2026-10-14 14:27:57.107483414",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:57.107364Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x0ed6db739b4e59d2 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa"
+      ],
+      [
+        "2026-10-14 14:27:57.108233428",
+        "beacon",
+        "[2026-10-14T14:27:57.108Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x0ed6db739b4e59d2) for head 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 at slot 14824 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.122151809",
+        "beacon",
+        "[2026-10-14T14:27:57.121Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x0ed6db739b4e59d2) for head 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 at slot 14824 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.133068475",
+        "beacon",
+        "[2026-10-14T14:27:57.132Z]  INFO block_producer::block_producer:2135: started work on execution payload with id Gloas(0x0ed6db739b4e59d2) for head 0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20 at slot 14824 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135031637",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  INFO block_producer::block_producer:935: block producer starting build beacon block without state root task peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135048408",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  INFO block_producer::block_producer:946: block producer prepared proposer slashings peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135051326",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  INFO block_producer::block_producer:950: block producer prepared voluntary exits peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135064421",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  WARN operation_pools::attestation_agg_pool::tasks:73: no optimal attestations for slot: 14824 peers=[39/200] feature=DebugAttestationPacker"
+      ],
+      [
+        "2026-10-14 14:27:57.145679013",
+        "beacon",
+        "[2026-10-14T14:27:57.145Z]  INFO block_producer::block_producer:954: block producer prepared attestations peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.145970890",
+        "beacon",
+        "[2026-10-14T14:27:57.145Z]  INFO block_producer::block_producer:958: block producer prepared sync aggregate peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.146180123",
+        "beacon",
+        "[2026-10-14T14:27:57.146Z]  INFO block_producer::block_producer:962: block producer prepared bls to execution changes peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.146196058",
+        "beacon",
+        "[2026-10-14T14:27:57.146Z]  INFO block_producer::block_producer:1105: block producer converted attestations peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.146198846",
+        "beacon",
+        "[2026-10-14T14:27:57.146Z]  INFO block_producer::block_producer:1120: block producer computed on chain aggregates peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149058143",
+        "beacon",
+        "[2026-10-14T14:27:57.148Z]  INFO block_producer::block_producer:1181: block producer prepared payload attestations peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149084343",
+        "beacon",
+        "[2026-10-14T14:27:57.148Z]  INFO block_producer::block_producer:1197: block producer prepared parent execution requests peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149099152",
+        "beacon",
+        "[2026-10-14T14:27:57.148Z]  INFO block_producer::block_producer:1231: block producer finishing build beacon block without state root task peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149101909",
+        "beacon",
+        "[2026-10-14T14:27:57.149Z]  INFO block_producer::block_producer:852: block producer built beacon block without state root peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149131558",
+        "beacon",
+        "[2026-10-14T14:27:57.149Z]  INFO block_producer::block_producer:857: block producer starting to build local option peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.149143949",
+        "beacon",
+        "[2026-10-14T14:27:57.149Z]  INFO block_producer::block_producer:870: block producer starting to build blinded option peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:58.134356501",
+        "beacon",
+        "[2026-10-14T14:27:58.134Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:58.134396329",
+        "beacon",
+        "[2026-10-14T14:27:58.134Z]  WARN block_producer::block_producer:2388: unable to retrieve payload with payload_id Cached(Gloas(0x0ed6db739b4e59d2)): all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:58.138232657",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:58.138101Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x0ed6db739b4e59d2 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa"
+      ],
+      [
+        "2026-10-14 14:27:58.139164068",
+        "beacon",
+        "[2026-10-14T14:27:58.138Z]  INFO block_producer::block_producer:2408: successfully retrieved non-cached payload_id: Gloas(0x0ed6db739b4e59d2) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.140358972",
+        "beacon",
+        "[2026-10-14T14:27:59.139Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.140399682",
+        "beacon",
+        "[2026-10-14T14:27:59.140Z]  WARN block_producer::block_producer:2482: execution engine failed to produce payload: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.156010825",
+        "beacon",
+        "[2026-10-14T14:27:59.155Z]  INFO block_producer::block_producer:883: block producer finished building local option peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.156065128",
+        "beacon",
+        "[2026-10-14T14:27:59.155Z]  INFO block_producer::block_producer:887: block producer finished building blinded option peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.176600272",
+        "beacon",
+        "[2026-10-14T14:27:59.176Z] DEBUG on_own_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 14824: 0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c (block hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa, payload status: Empty, payload verified: false, payload timely: false) peers=[39/200] slot=14824 block_root=0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c"
+      ],
+      [
+        "2026-10-14 14:27:59.984336038",
+        "beacon",
+        "[2026-10-14T14:27:59.984Z] DEBUG fork_choice_control::mutator:2607: payload bid ignored (reason: this bid is the highest value bid seen for the tuple (bid.slot, bid.parent_block_hash, bid.parent_block_root)) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.261114343",
+        "beacon",
+        "[2026-10-14T14:28:00.261Z] DEBUG on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 14825: 0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478 (block hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa, payload status: Empty, payload verified: false, payload timely: false) peers=[39/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAkw11B9LucxFZQHpwvgWS9rhcGz22dAVSh4s85Mxjwp6uv\"), message_id: MessageId(b6586dd7d756dec083ed10c90306e3c87c62422e) } slot=14825 block_root=0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478"
+      ],
+      [
+        "2026-10-14 14:28:00.263177499",
+        "beacon",
+        "[2026-10-14T14:28:00.262Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 26/39] add execution payload envelope request by root (block_root: 0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478, peer_id: 16Uiu2HAkw11B9LucxFZQHpwvgWS9rhcGz22dAVSh4s85Mxjwp6uv)"
+      ],
+      [
+        "2026-10-14 14:28:00.263189919",
+        "beacon",
+        "[2026-10-14T14:28:00.262Z] DEBUG p2p::network:2859: sending ExecutionPayloadEnvelopesByRoot request (app_request_id: Application(28947), peer_id: 16Uiu2HAkw11B9LucxFZQHpwvgWS9rhcGz22dAVSh4s85Mxjwp6uv, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.270793733",
+        "beacon",
+        "[2026-10-14T14:28:00.270Z] DEBUG p2p::network:2336: peer 16Uiu2HAkw11B9LucxFZQHpwvgWS9rhcGz22dAVSh4s85Mxjwp6uv terminated ExecutionPayloadEnvelopesByRoot response stream (app_request_id: Application(28947)) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.509389572",
+        "beacon",
+        "[2026-10-14T14:28:00.509Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAmA2Ey3HYeQteo6yJsNUSuEkvp7qs5BvxpSyWYx8XUnWcs, inbound_request_id: InboundRequestId { connection_id: ConnectionId(440), substream_id: SubstreamId(8547) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.509417733",
+        "beacon",
+        "[2026-10-14T14:28:00.509Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.731149080",
+        "beacon",
+        "[2026-10-14T14:28:00.730Z]  INFO http_api_utils::logging:31: received request (GET /eth/v1/beacon/execution_payload_envelopes/0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c HTTP/1.1) from 172.18.0.3:40418 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.731192811",
+        "beacon",
+        "[2026-10-14T14:28:00.731Z]  INFO http_api_utils::logging:73: produced response (HTTP/1.1 404 Not Found) to (GET /eth/v1/beacon/execution_payload_envelopes/0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c HTTP/1.1) for 172.18.0.3:40418 in 142.148\u00b5s (error: execution payload envelope not found) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.826998740",
+        "beacon",
+        "[2026-10-14T14:28:00.826Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c, slot: 14824, seen before deadline: false ) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.827859421",
+        "beacon",
+        "[2026-10-14T14:28:00.826Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 14825: 0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478 (block hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa, payload status: Empty, payload verified: false, payload timely: false) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:00.862426410",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:00.862246Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24467032 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08"
+      ],
+      [
+        "2026-10-14 14:28:01.166588299",
+        "beacon",
+        "[2026-10-14T14:28:01.166Z]  INFO http_api_utils::logging:31: received request (GET /eth/v1/beacon/execution_payload_envelopes/0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478 HTTP/1.1) from 172.18.0.3:40418 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.166805438",
+        "beacon",
+        "[2026-10-14T14:28:01.166Z]  INFO http_api_utils::logging:73: produced response (HTTP/1.1 404 Not Found) to (GET /eth/v1/beacon/execution_payload_envelopes/0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478 HTTP/1.1) for 172.18.0.3:40418 in 175.182\u00b5s (error: execution payload envelope not found) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.174655467",
+        "beacon",
+        "[2026-10-14T14:28:01.174Z]  INFO http_api_utils::logging:31: received request (GET /eth/v1/beacon/execution_payload_envelopes/0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c HTTP/1.1) from 172.18.0.3:40418 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.176607503",
+        "beacon",
+        "[2026-10-14T14:28:01.176Z]  INFO http_api_utils::logging:75: produced response (HTTP/1.1 200 OK) to (GET /eth/v1/beacon/execution_payload_envelopes/0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c HTTP/1.1) for 172.18.0.3:40418 in 1.966846ms peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.774625838",
+        "beacon",
+        "[2026-10-14T14:28:01.774Z] DEBUG p2p::network:1642: received ExecutionPayloadEnvelopesByRoot request (peer_id: 16Uiu2HAmA2Ey3HYeQteo6yJsNUSuEkvp7qs5BvxpSyWYx8XUnWcs, inbound_request_id: InboundRequestId { connection_id: ConnectionId(440), substream_id: SubstreamId(8549) }, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.775090427",
+        "beacon",
+        "[2026-10-14T14:28:01.774Z] DEBUG p2p::network:1676: sending ExecutionPayloadEnvelopesByRoot response chunk (inbound_request_id: InboundRequestId { connection_id: ConnectionId(440), substream_id: SubstreamId(8549) }, peer_id: 16Uiu2HAmA2Ey3HYeQteo6yJsNUSuEkvp7qs5BvxpSyWYx8XUnWcs, block_root: 0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:01.775103235",
+        "beacon",
+        "[2026-10-14T14:28:01.774Z] DEBUG p2p::network:1691: terminating ExecutionPayloadEnvelopesByRoot response stream peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:02.839307326",
+        "beacon",
+        "[2026-10-14T14:28:02.838Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478, slot: 14825, seen before deadline: true ) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:02.839344825",
+        "beacon",
+        "[2026-10-14T14:28:02.838Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 14825: 0x339927ee1657598b88da15f78cfe51d9916b53e25916bb76fe2947dd7547c478 (block hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa, payload status: Full, payload verified: true, payload timely: true) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:08.842397481",
+        "beacon",
+        "[2026-10-14T14:28:08.842Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:08.842468386",
+        "beacon",
+        "[2026-10-14T14:28:08.842Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:11.183463178",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:11.183273Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xea77a3f74ff4969db8c428fcff81a47b74f34d54daefe56a76c349d675fc585f \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m7.645\u00b5s"
+      ],
+      [
+        "2026-10-14 14:28:11.183802076",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:11.183700Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467032, hash: 0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08 } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m10.321542341s"
+      ],
+      [
+        "2026-10-14 14:28:11.214071276",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:11.212535Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24467032 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0x4d3e92682f3ff30fffb04f2fb8b79c5b3dd8a1f5de56f9a604f4a36b697f8282"
+      ],
+      [
+        "2026-10-14 14:28:11.706381376",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:11.706225Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0x96c5c9c89163fb5391a4bcdb507ea10548f206d80dd571eb12d09b8efe8e6ce7 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m6.435\u00b5s"
+      ],
+      [
+        "2026-10-14 14:28:13.577650291",
+        "beacon",
+        "[2026-10-14T14:28:13.577Z] DEBUG on_gossip_block:handle_block:accept_block: fork_choice_control::mutator:3870: fork choice head at slot 14826: 0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773 (block hash: 0x4d3e92682f3ff30fffb04f2fb8b79c5b3dd8a1f5de56f9a604f4a36b697f8282, payload status: Empty, payload verified: false, payload timely: false) peers=[39/200] gossip_id=GossipId { source: PeerId(\"16Uiu2HAmQBgU9HTUgr2HX4adHrdR9jdYN1EnxzWBVdB12vWcAekN\"), message_id: MessageId(bd5ad045feb06895bc44ae2802c779f84404b8f7) } slot=14826 block_root=0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773"
+      ],
+      [
+        "2026-10-14 14:28:13.578896818",
+        "beacon",
+        "[2026-10-14T14:28:13.578Z] DEBUG p2p::sync_manager:1253: [Sync Peers: 20/39] add execution payload envelope request by root (block_root: 0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773, peer_id: 16Uiu2HAmQBgU9HTUgr2HX4adHrdR9jdYN1EnxzWBVdB12vWcAekN)"
+      ],
+      [
+        "2026-10-14 14:28:13.579481264",
+        "beacon",
+        "[2026-10-14T14:28:13.578Z] DEBUG p2p::network:2859: sending ExecutionPayloadEnvelopesByRoot request (app_request_id: Application(28949), peer_id: 16Uiu2HAmQBgU9HTUgr2HX4adHrdR9jdYN1EnxzWBVdB12vWcAekN, request: ExecutionPayloadEnvelopesByRootRequest { block_roots: [0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773] }) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:13.581369347",
+        "beacon",
+        "[2026-10-14T14:28:13.581Z] DEBUG p2p::network:2336: peer 16Uiu2HAmQBgU9HTUgr2HX4adHrdR9jdYN1EnxzWBVdB12vWcAekN terminated ExecutionPayloadEnvelopesByRoot response stream (app_request_id: Application(28949)) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:13.635963681",
+        "beacon",
+        "[2026-10-14T14:28:13.635Z] DEBUG fork_choice_control::mutator:2206: execution payload envelope accepted (block root: 0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773, slot: 14826, seen before deadline: true ) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:13.636367240",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:13.636274Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24467033 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0x4264d74759400f87752bbbfa96f23b0da0af64092c6d97b9b4090d26111a6974"
+      ],
+      [
+        "2026-10-14 14:28:13.636765187",
+        "beacon",
+        "[2026-10-14T14:28:13.636Z] DEBUG fork_choice_control::mutator:3870: fork choice head at slot 14826: 0xf169a5bd8984e9ad4d8cde3a198f278a1f4c7b2465c297743cfbbba3e2591773 (block hash: 0x4d3e92682f3ff30fffb04f2fb8b79c5b3dd8a1f5de56f9a604f4a36b697f8282, payload status: Full, payload verified: true, payload timely: true) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:13.640329040",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:13.640189Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0x55f7f4833541d9307ada54e72e22075b20aa5150467ed7ecb6b3cb9896177331 \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m3.324222ms"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "grandine-besu-1": {
+    "captured_at": "2026-10-13T23:59:10.357453+00:00",
+    "free_bytes": 649555075072,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:54:41.774829+00:00",
+      "run_id": "20261013T164418Z-ee95a91c-87f1-439d-b00d-ff6b69143123",
+      "container_started_at": "2026-10-13T16:44:18.476052128Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T164418Z-ee95a91c-87f1-439d-b00d-ff6b69143123/checkpoints/checkpoint-20261013T235441583661Z.jfr",
+      "bytes": 7293943
+    },
+    "active_run": "20261013T164418Z-ee95a91c-87f1-439d-b00d-ff6b69143123",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof",
+        "bytes": 26973208860,
+        "mtime": "2026-10-13T16:44:12.603203+00:00"
+      }
+    ]
+  },
+  "lighthouse-besu-1": {
+    "captured_at": "2026-10-13T23:59:11.026609+00:00",
+    "free_bytes": 653728940032,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:58:32.275406+00:00",
+      "run_id": "20261013T170053Z-24f6eb1e-146d-450b-b81c-41b19de86424",
+      "container_started_at": "2026-10-13T17:00:53.343419583Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T170053Z-24f6eb1e-146d-450b-b81c-41b19de86424/checkpoints/checkpoint-20261013T235832086307Z.jfr",
+      "bytes": 7724728
+    },
+    "active_run": "20261013T170053Z-24f6eb1e-146d-450b-b81c-41b19de86424",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof",
+        "bytes": 26748214310,
+        "mtime": "2026-10-13T17:00:47.594610+00:00"
+      }
+    ]
+  },
+  "lodestar-besu-1": {
+    "captured_at": "2026-10-13T23:59:09.412404+00:00",
+    "free_bytes": 651484327936,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:55:41.157815+00:00",
+      "run_id": "20261013T202328Z-232933f0-9c10-42a1-ad2e-a4920b2b1b79",
+      "container_started_at": "2026-10-13T20:23:28.076197254Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T202328Z-232933f0-9c10-42a1-ad2e-a4920b2b1b79/checkpoints/checkpoint-20261013T235540972826Z.jfr",
+      "bytes": 7431815
+    },
+    "active_run": "20261013T202328Z-232933f0-9c10-42a1-ad2e-a4920b2b1b79",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof",
+        "bytes": 27729214978,
+        "mtime": "2026-10-13T20:23:26.367896+00:00"
+      }
+    ]
+  },
+  "nimbus-besu-1": {
+    "captured_at": "2026-10-13T23:59:11.008636+00:00",
+    "free_bytes": 646430072832,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:58:02.429550+00:00",
+      "run_id": "20261013T162958Z-ceb11f81-fde1-4908-b741-849ce44c9928",
+      "container_started_at": "2026-10-13T16:29:57.941422457Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T162958Z-ceb11f81-fde1-4908-b741-849ce44c9928/checkpoints/checkpoint-20261013T235802260137Z.jfr",
+      "bytes": 7444468
+    },
+    "active_run": "20261013T162958Z-ceb11f81-fde1-4908-b741-849ce44c9928",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof",
+        "bytes": 26750411558,
+        "mtime": "2026-10-13T16:29:56.446991+00:00"
+      }
+    ]
+  },
+  "prysm-besu-1": {
+    "captured_at": "2026-10-13T23:59:09.524896+00:00",
+    "free_bytes": 653342642176,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:57:39.389073+00:00",
+      "run_id": "20261013T190325Z-b7f1e195-c1ac-40a8-928a-83aa17e5bd92",
+      "container_started_at": "2026-10-13T19:03:25.308809401Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T190325Z-b7f1e195-c1ac-40a8-928a-83aa17e5bd92/checkpoints/checkpoint-20261013T235739205859Z.jfr",
+      "bytes": 7055125
+    },
+    "active_run": "20261013T190325Z-b7f1e195-c1ac-40a8-928a-83aa17e5bd92",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof",
+        "bytes": 27409332283,
+        "mtime": "2026-10-13T19:03:22.903096+00:00"
+      }
+    ]
+  },
+  "teku-besu-1": {
+    "captured_at": "2026-10-13T23:59:10.365528+00:00",
+    "free_bytes": 653603389440,
+    "besu-profiling.timer": {
+      "Result": "success",
+      "ActiveState": "active",
+      "SubState": "waiting"
+    },
+    "besu-profiling.service": {
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "status": {
+      "captured_at_utc": "2026-10-13T23:54:44.059904+00:00",
+      "run_id": "20261013T163547Z-25bac784-1060-485d-ad0f-a6847804618d",
+      "container_started_at": "2026-10-13T16:35:47.370921553Z",
+      "image_id": "sha256:fc1813d67d630d7660eea6ee555c01e73bfecda3e54d24f9484c1c4a52c6fcb0",
+      "recording": "/data/besu-profiling/runs/20261013T163547Z-25bac784-1060-485d-ad0f-a6847804618d/checkpoints/checkpoint-20261013T235443862553Z.jfr",
+      "bytes": 6857941
+    },
+    "active_run": "20261013T163547Z-25bac784-1060-485d-ad0f-a6847804618d",
+    "heap_dumps": [
+      {
+        "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof",
+        "bytes": 26811699345,
+        "mtime": "2026-10-13T16:35:45.675959+00:00"
+      }
+    ]
+  }
+}

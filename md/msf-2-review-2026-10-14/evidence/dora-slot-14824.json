@@ -1,0 +1,30 @@
+{
+  "status": "OK",
+  "data": {
+    "attestationscount": 3,
+    "attesterslashingscount": 0,
+    "blockroot": "0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c",
+    "depositscount": 0,
+    "epoch": 463,
+    "exec_base_fee_per_gas": 51070885,
+    "exec_block_hash": "0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08",
+    "exec_block_number": 24467032,
+    "exec_extra_data": "0x6275696c646f6f722f2fd883011108846765746888676f312e32372e31856c69",
+    "exec_fee_recipient": "0xf97e180c050e5ab072211ad2c213eb5aee4df134",
+    "exec_gas_limit": 200000000,
+    "exec_gas_used": 199995900,
+    "exec_transactions_count": 12,
+    "graffiti": "0x6772616e64696e652d726574682d31204772616e64696e652f332e302e300000",
+    "graffiti_text": "grandine-reth-1 Grandine/3.0.0",
+    "parentroot": "0x0eefe5c01f9a653034911d09b11ef335a4d774acf8df539be0f2d8b843913d20",
+    "proposer": 23833,
+    "proposerslashingscount": 0,
+    "slot": 14824,
+    "stateroot": "0xb280be14f05f06de430a9b1286302a943c6ff5b3de4dd44c5ceba343f7ccd310",
+    "status": "Orphaned",
+    "syncaggregate_participation": 0.943359375,
+    "voluntaryexitscount": 0,
+    "withdrawalcount": 16,
+    "blob_count": 0
+  }
+}

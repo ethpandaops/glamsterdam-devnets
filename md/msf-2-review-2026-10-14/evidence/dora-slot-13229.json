@@ -1,0 +1,30 @@
+{
+  "status": "OK",
+  "data": {
+    "attestationscount": 0,
+    "attesterslashingscount": 0,
+    "blockroot": "",
+    "depositscount": 0,
+    "epoch": 413,
+    "exec_base_fee_per_gas": 0,
+    "exec_block_hash": "",
+    "exec_block_number": 0,
+    "exec_extra_data": "",
+    "exec_fee_recipient": "",
+    "exec_gas_limit": 0,
+    "exec_gas_used": 0,
+    "exec_transactions_count": 0,
+    "graffiti": "",
+    "graffiti_text": "",
+    "parentroot": "",
+    "proposer": 21008,
+    "proposerslashingscount": 0,
+    "slot": 13229,
+    "stateroot": "",
+    "status": "Missing",
+    "syncaggregate_participation": 0,
+    "voluntaryexitscount": 0,
+    "withdrawalcount": 0,
+    "blob_count": 0
+  }
+}

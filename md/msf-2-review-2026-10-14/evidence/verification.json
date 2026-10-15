@@ -1,0 +1,19 @@
+{
+  "local_html": {
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "document_overflow": false,
+    "loaded_figures": 3
+  },
+  "scientific_figures": "All three inspected visually",
+  "collector_tests": "4 passed",
+  "statistics": "5440 finalized slots, 9 missing: 7 Nimbus\u2013Reth, 1 Nimbus\u2013Besu, 1 Grandine\u2013Reth",
+  "readonly": true,
+  "public_html": {
+    "desktop_width": 1280,
+    "mobile_width": 390,
+    "document_overflow": false,
+    "loaded_figures": 3,
+    "portable_markdown_links": true
+  }
+}

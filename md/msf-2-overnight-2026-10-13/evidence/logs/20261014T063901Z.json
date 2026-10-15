@@ -1,0 +1,356 @@
+{
+  "from": "2026-10-14T06:27:01.720280+00:00",
+  "to": "2026-10-14T06:37:01.715806+00:00",
+  "overlap_seconds": 300,
+  "records": {
+    "critical": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'OutOfMemoryError|Terminating due|\\\\bFATAL\\\\b|panic:|state root mismatch|INVALID_PAYLOAD|Invalid execution payload') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'OutOfMemoryError|Terminating due|\\\\bFATAL\\\\b|panic:|state root mismatch|INVALID_PAYLOAD|Invalid execution payload') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": []
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": []
+      }
+    },
+    "engine_timeout": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)TimeoutGetPayload|(?:getPayload|newPayload|forkchoice|execution engine|engine API).{0,100}(?:timed out|timeout)|(?:timed out|timeout).{0,100}(?:getPayload|newPayload|forkchoice|execution engine)') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": [
+          [
+            "nimbus-nimbusel-1",
+            "beacon",
+            "49",
+            "2026-10-14 06:27:11.000551481",
+            "2026-10-14 06:36:47.000930056"
+          ]
+        ]
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": [
+          [
+            "2026-10-14 06:36:47.000930056",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 06:36:46.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 06:36:35.001406744",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 06:36:34.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 06:36:23.001375057",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 06:36:22.997+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 06:36:11.000791693",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 06:36:10.996+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ],
+          [
+            "2026-10-14 06:35:59.000631825",
+            "nimbus-nimbusel-1",
+            "beacon",
+            "DBG 2026-10-14 06:35:58.996+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\""
+          ]
+        ]
+      }
+    },
+    "duty_loss": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)Skipping.{0,100}(?:attestation|duties)|Failed to produce block|Unable to produce block|Failed to propose|Block production failed|Failed to create.*block|broadcast.*late') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": [
+          [
+            "prysm-besu-1",
+            "validator",
+            "4",
+            "2026-10-14 06:36:57.001130982",
+            "2026-10-14 06:36:57.001412359"
+          ],
+          [
+            "prysm-erigon-1",
+            "validator",
+            "14",
+            "2026-10-14 06:36:57.001527626",
+            "2026-10-14 06:36:57.001846875"
+          ],
+          [
+            "prysm-ethrex-1",
+            "validator",
+            "11",
+            "2026-10-14 06:36:57.001713821",
+            "2026-10-14 06:36:57.002362038"
+          ],
+          [
+            "prysm-geth-1",
+            "validator",
+            "10",
+            "2026-10-14 06:36:57.001359944",
+            "2026-10-14 06:36:57.001639478"
+          ],
+          [
+            "prysm-nethermind-1",
+            "validator",
+            "7",
+            "2026-10-14 06:36:57.001709413",
+            "2026-10-14 06:36:57.002014461"
+          ],
+          [
+            "prysm-reth-1",
+            "validator",
+            "16",
+            "2026-10-14 06:36:57.002778936",
+            "2026-10-14 06:36:57.002901685"
+          ]
+        ]
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": [
+          [
+            "2026-10-14 06:36:57.002901685",
+            "prysm-reth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002898719",
+            "prysm-reth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002895813",
+            "prysm-reth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002893040",
+            "prysm-reth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002890340",
+            "prysm-reth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002362038",
+            "prysm-ethrex-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.002014461",
+            "prysm-nethermind-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001846875",
+            "prysm-erigon-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001833129",
+            "prysm-nethermind-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001830457",
+            "prysm-nethermind-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001827680",
+            "prysm-nethermind-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001824639",
+            "prysm-nethermind-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001797537",
+            "prysm-ethrex-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001794424",
+            "prysm-ethrex-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001791286",
+            "prysm-ethrex-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001787175",
+            "prysm-ethrex-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001752179",
+            "prysm-erigon-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001693622",
+            "prysm-erigon-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001691935",
+            "prysm-erigon-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001690183",
+            "prysm-erigon-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001639478",
+            "prysm-geth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001533613",
+            "prysm-geth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001433427",
+            "prysm-geth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001431211",
+            "prysm-geth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001426373",
+            "prysm-geth-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001412359",
+            "prysm-besu-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001375182",
+            "prysm-besu-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001171840",
+            "prysm-besu-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ],
+          [
+            "2026-10-14 06:36:57.001130982",
+            "prysm-besu-1",
+            "validator",
+            "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469"
+          ]
+        ]
+      }
+    },
+    "optimistic_activation": {
+      "count_query": "SELECT ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, count() AS rows, min(Timestamp) AS first_seen, max(Timestamp) AS last_seen FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline') GROUP BY host, container ORDER BY host, container LIMIT 200",
+      "sample_query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name'] IN ('execution','beacon','validator') AND Timestamp >= toDateTime('2026-10-14 06:27:01') AND Timestamp < toDateTime('2026-10-14 06:37:01') AND match(Body,'(?i)optimistic head activation|optimistic mode.*activ|execution engine.*offline|execution layer.*offline') ORDER BY Timestamp DESC LIMIT 5 BY host, container LIMIT 500",
+      "counts": {
+        "columns": [
+          "host",
+          "container",
+          "rows",
+          "first_seen",
+          "last_seen"
+        ],
+        "rows": []
+      },
+      "samples": {
+        "columns": [
+          "Timestamp",
+          "host",
+          "container",
+          "Body"
+        ],
+        "rows": []
+      }
+    }
+  }
+}

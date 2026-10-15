@@ -1,0 +1,15 @@
+{
+  "network": "glamsterdam-msf-2",
+  "start": "2026-10-13T21:48:30+00:00",
+  "end": "2026-10-14T08:00:00+00:00",
+  "finish_after": "2026-10-14T08:05:00+00:00",
+  "genesis_time": 1791810180,
+  "branch": "qu0b/msf-2-overnight-20261013",
+  "source_baseline": "04f086b",
+  "known_conditions": [
+    "lighthouse-nimbusel-1 optimism and cold EL sync",
+    "nimbus-nimbusel-1 Engine listener outage",
+    "nimbus-reth-1 local payload timeouts and missed proposals"
+  ],
+  "read_only": true
+}

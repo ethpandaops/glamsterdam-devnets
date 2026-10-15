@@ -1,0 +1,222 @@
+{
+  "at": "2026-10-14T05:15:01.714901+00:00",
+  "full": false,
+  "wall_slot": 12060,
+  "nodes": {
+    "nimbus-nethermind-1": {
+      "captured_at": "2026-10-14T05:15:03.253185+00:00",
+      "sync": {
+        "head_slot": "12060",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "head": {
+        "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+        "canonical": true,
+        "header": {
+          "message": {
+            "slot": "12060",
+            "proposer_index": "19309",
+            "parent_root": "0xe1b9456fabb832a9d8b2de6f7b6fc9a4f6df016de203eb82b8eda2f4a1d71904",
+            "state_root": "0xb6c7e6c869878205ca810dccaedd379c820e39f0394f3f80509a1d3830558eba",
+            "body_root": "0x9dbb86650031b03e6d9bdfc0ea45a2af08ab7ba075b7255d73731fd838a3497a"
+          },
+          "signature": "0x8b149f4870a1f9b1356a7ac3f49f4420d126a1d2b24fa437aa67d099043eb622109bf8bfebc5eff5e69f9e3d82c676f6035c99c6a7310336d64f517c179c0f1386b0b6c7348aff565af59fa758ef727c803de02abb36a432005dd63f736807ac"
+        }
+      },
+      "finality": {
+        "previous_justified": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        },
+        "current_justified": {
+          "epoch": "375",
+          "root": "0x80edf34a33cf9342dcdbc296ba1c918a5fcb43b010f6cc58eb1cee8109508c0f"
+        },
+        "finalized": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        }
+      },
+      "el_syncing": false,
+      "el_block": 24464274,
+      "el_peers": 28,
+      "slot": 12060,
+      "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+      "finalized": 374,
+      "containers": [
+        {
+          "name": "execution",
+          "id": "39ecb2bdc3c0a83b94bc6b5ce39b1176c9ce5dfdc32a2a990cb54fa0199c3819",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "image_id": "sha256:25f72063f6fc8ba89f1c08abe1ed3211203b3cf303c9618cc3a2488e1e4ab2e0",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:53.601625349Z",
+          "oom_killed": false,
+          "exit_code": 0
+        },
+        {
+          "name": "beacon",
+          "id": "6d297aad33a5a98bd49f5b19e8f794d9360992863ab5575fac36f4742d296c11",
+          "image": "registry-1.docker.io/statusim/nimbus-eth2:multiarch-v26.10.0",
+          "image_id": "sha256:4d9db09276316440fbd7efc08c8c170755344c9a537928a5bf4e74f46dfec480",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:26.696555925Z",
+          "oom_killed": false,
+          "exit_code": 0
+        }
+      ]
+    },
+    "lighthouse-geth-1": {
+      "captured_at": "2026-10-14T05:15:02.436404+00:00",
+      "sync": {
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false,
+        "head_slot": "12060",
+        "sync_distance": "0"
+      },
+      "head": {
+        "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+        "canonical": true,
+        "header": {
+          "message": {
+            "slot": "12060",
+            "proposer_index": "19309",
+            "parent_root": "0xe1b9456fabb832a9d8b2de6f7b6fc9a4f6df016de203eb82b8eda2f4a1d71904",
+            "state_root": "0xb6c7e6c869878205ca810dccaedd379c820e39f0394f3f80509a1d3830558eba",
+            "body_root": "0x9dbb86650031b03e6d9bdfc0ea45a2af08ab7ba075b7255d73731fd838a3497a"
+          },
+          "signature": "0x8b149f4870a1f9b1356a7ac3f49f4420d126a1d2b24fa437aa67d099043eb622109bf8bfebc5eff5e69f9e3d82c676f6035c99c6a7310336d64f517c179c0f1386b0b6c7348aff565af59fa758ef727c803de02abb36a432005dd63f736807ac"
+        }
+      },
+      "finality": {
+        "previous_justified": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        },
+        "current_justified": {
+          "epoch": "375",
+          "root": "0x80edf34a33cf9342dcdbc296ba1c918a5fcb43b010f6cc58eb1cee8109508c0f"
+        },
+        "finalized": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        }
+      },
+      "el_syncing": false,
+      "el_block": 24464274,
+      "el_peers": 32,
+      "slot": 12060,
+      "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+      "finalized": 374,
+      "containers": [
+        {
+          "name": "execution",
+          "id": "1e05fa4e682cff57351cc6a4805743cdab8a2148eb84015405862d1d4f12945d",
+          "image": "registry-1.docker.io/ethereum/client-go:v1.17.8",
+          "image_id": "sha256:abf3605177f8bdcfce436985a8054cca4ae59256323a4ffb72c56c04f3d1fadd",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T08:48:41.269507964Z",
+          "oom_killed": false,
+          "exit_code": 0
+        },
+        {
+          "name": "beacon",
+          "id": "140dca7813eabb79730b3b738d0032d23e3aeb61cf72fe1ff3960765776022cb",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "image_id": "sha256:3e5f0609c74b824d3cb1049920169114d99fd7bc9082b996b3adae3d4e9ef8dc",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:20.358463686Z",
+          "oom_killed": false,
+          "exit_code": 0
+        },
+        {
+          "name": "validator",
+          "id": "94decb1f3901019bcf01c83dc80613934cc55c751667c58a5aea0df0761e1c9a",
+          "image": "registry-1.docker.io/sigp/lighthouse:v8.3.0-rc.0",
+          "image_id": "sha256:3e5f0609c74b824d3cb1049920169114d99fd7bc9082b996b3adae3d4e9ef8dc",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T11:45:23.943613475Z",
+          "oom_killed": false,
+          "exit_code": 0
+        }
+      ]
+    },
+    "teku-nethermind-1": {
+      "captured_at": "2026-10-14T05:15:02.094927+00:00",
+      "sync": {
+        "head_slot": "12060",
+        "sync_distance": "0",
+        "is_syncing": false,
+        "is_optimistic": false,
+        "el_offline": false
+      },
+      "head": {
+        "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+        "canonical": true,
+        "header": {
+          "message": {
+            "slot": "12060",
+            "proposer_index": "19309",
+            "parent_root": "0xe1b9456fabb832a9d8b2de6f7b6fc9a4f6df016de203eb82b8eda2f4a1d71904",
+            "state_root": "0xb6c7e6c869878205ca810dccaedd379c820e39f0394f3f80509a1d3830558eba",
+            "body_root": "0x9dbb86650031b03e6d9bdfc0ea45a2af08ab7ba075b7255d73731fd838a3497a"
+          },
+          "signature": "0x8b149f4870a1f9b1356a7ac3f49f4420d126a1d2b24fa437aa67d099043eb622109bf8bfebc5eff5e69f9e3d82c676f6035c99c6a7310336d64f517c179c0f1386b0b6c7348aff565af59fa758ef727c803de02abb36a432005dd63f736807ac"
+        }
+      },
+      "finality": {
+        "previous_justified": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        },
+        "current_justified": {
+          "epoch": "375",
+          "root": "0x80edf34a33cf9342dcdbc296ba1c918a5fcb43b010f6cc58eb1cee8109508c0f"
+        },
+        "finalized": {
+          "epoch": "374",
+          "root": "0xe9b4f0031bfa065b7554e4b8ef8586e4b7638402f5b4776c385194a17ec3a9e9"
+        }
+      },
+      "el_syncing": false,
+      "el_block": 24464274,
+      "el_peers": 27,
+      "slot": 12060,
+      "root": "0x891147f99df59845d84db1c87677a4fccab63ac1903b534d1b72a4cc184dd020",
+      "finalized": 374,
+      "containers": [
+        {
+          "name": "execution",
+          "id": "3ec7c2bdd49f2b72785ab311cb1a780acf2e1f1c71e3c18f23baaee485ab7baf",
+          "image": "registry-1.docker.io/nethermind/nethermind:2.1.0",
+          "image_id": "sha256:25f72063f6fc8ba89f1c08abe1ed3211203b3cf303c9618cc3a2488e1e4ab2e0",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-13T09:01:52.267563574Z",
+          "oom_killed": false,
+          "exit_code": 0
+        },
+        {
+          "name": "beacon",
+          "id": "652f58e4626c1f2e9b6250e63432f8b0f88b221ca59910cf4073e6587b55e5ad",
+          "image": "registry-1.docker.io/consensys/teku:26.10.0",
+          "image_id": "sha256:a784516802e3174d04311d46ab2279e12c2455c7a8d64c7e275cdde06b9e4c1d",
+          "running": true,
+          "restarts": 0,
+          "started": "2026-10-12T21:13:22.592445724Z",
+          "oom_killed": false,
+          "exit_code": 0
+        }
+      ]
+    }
+  }
+}

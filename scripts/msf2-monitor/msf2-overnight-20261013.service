@@ -1,0 +1,12 @@
+[Unit]
+Description=Read-only Glamsterdam msf-2 overnight evidence capture
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/repos/glamsterdam-devnets-msf2-monitor
+Environment=PATH=/home/ubuntu/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 /home/ubuntu/repos/glamsterdam-devnets-msf2-monitor/scripts/msf2-monitor/monitor.py --repo /home/ubuntu/repos/glamsterdam-devnets-msf2-monitor --state-dir /home/ubuntu/.local/share/msf2-monitor-20261013 --timer-unit msf2-overnight-20261013.timer
+TimeoutStartSec=8min
+UMask=0077
+Nice=10

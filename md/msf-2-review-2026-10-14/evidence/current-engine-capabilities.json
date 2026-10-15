@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-14T16:07:50.498795+00:00",
+  "read_only_method": "engine_exchangeCapabilities",
+  "results": {
+    "nimbus-nimbusel-1": {
+      "latency_seconds": 10.01152168601402,
+      "error": "timed out"
+    },
+    "lighthouse-nimbusel-1": {
+      "latency_seconds": 0.009621528995921835,
+      "response": {
+        "jsonrpc": "2.0",
+        "result": [],
+        "id": 1
+      }
+    }
+  }
+}

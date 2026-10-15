@@ -1,0 +1,6 @@
+{
+  "url": "https://raw.githubusercontent.com/paradigmxyz/reth/3d592ece6de8c4559987416a544fc215fd6d6921/crates/engine/tree/src/tree/mod.rs",
+  "release_commit": "3d592ece6de8c4559987416a544fc215fd6d6921",
+  "download_sha256": "11a9fdf55806f9bd16bf38974987fc77e8bd4500efc055e2a19e277845df5945",
+  "interpretation": "The NewPayload handler branch starts its timer immediately before on_new_payload and reads elapsed time at failed response delivery. Pre-handler queue time is excluded; handler-internal validation and work are included. This is not an isolated EVM benchmark."
+}

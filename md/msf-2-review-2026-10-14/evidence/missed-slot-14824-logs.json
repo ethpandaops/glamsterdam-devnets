@@ -1,0 +1,75 @@
+{
+  "slot": 14824,
+  "slot_start": "2026-10-14T14:27:48+00:00",
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name']='grandine-reth-1' AND ResourceAttributes['container.name'] IN ('beacon','validator') AND Timestamp>=toDateTime('2026-10-14 14:27:44') AND Timestamp<toDateTime('2026-10-14 14:28:03') AND match(Body,'Execution payload bid validated|First bid for this slot|Timeout while getting|getPayload|Getting execution payload|No execution payload|Unable to propose|Sending proposal fcU|Block proposed|Failed.*proposal|WARN|WRN|ERROR|ERR|Proposal|proposal|[Pp]ropos.*block|[Bb]lock.*propos') ORDER BY Timestamp ASC LIMIT 100 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 14:27:50.741293860",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:50.741Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:50.741349314",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:50.741Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.133607034",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:57.133Z]  INFO validator::validator:986: starting block proposal task for validator 23833 at slot 14824 peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135048408",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  INFO block_producer::block_producer:946: block producer prepared proposer slashings peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:57.135064421",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:57.134Z]  WARN operation_pools::attestation_agg_pool::tasks:73: no optimal attestations for slot: 14824 peers=[39/200] feature=DebugAttestationPacker"
+      ],
+      [
+        "2026-10-14 14:27:58.134356501",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:58.134Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:58.134396329",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:58.134Z]  WARN block_producer::block_producer:2388: unable to retrieve payload with payload_id Cached(Gloas(0x0ed6db739b4e59d2)): all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.140358972",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:59.139Z]  WARN eth1_api::eth1_api::http_api:630: last available Eth1 RPC endpoint http://snooper-engine:8561/ returned an error: failed to send request: error sending request for url (http://snooper-engine:8561/) peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.140399682",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:59.140Z]  WARN block_producer::block_producer:2482: execution engine failed to produce payload: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.158803162",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:59.158Z]  INFO validator::validator:1147: validator 23833 proposing beacon block with root 0x6004b7f7793f3ea35537b5012cb3569df2d24662b8eeca8ca6ccdf375f3c236c in slot 14824 using builder 0 peers=[39/200]"
+      ]
+    ]
+  }
+}

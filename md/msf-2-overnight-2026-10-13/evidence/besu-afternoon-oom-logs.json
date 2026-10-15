@@ -1,0 +1,199 @@
+{
+  "query": "SELECT DISTINCT Timestamp, ResourceAttributes['host.name'] AS host, ResourceAttributes['container.name'] AS container, substring(Body,1,6000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['container.name']='execution' AND ResourceAttributes['host.name'] LIKE '%-besu-%' AND Timestamp >= toDateTime('2026-10-13 10:08:20') AND Timestamp < toDateTime('2026-10-13 21:48:30') AND match(Body,'OutOfMemoryError|Terminating due|Dumping heap|Heap dump file created|Starting Besu') ORDER BY Timestamp ASC LIMIT 200",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-13 16:27:44.192947922",
+        "nimbus-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:27:44.192986730",
+        "nimbus-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 16:28:09.428186537",
+        "nimbus-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:29:56.449345878",
+        "nimbus-besu-1",
+        "execution",
+        "Heap dump file created [26750411558 bytes in 132.256 secs]"
+      ],
+      [
+        "2026-10-13 16:29:56.449815846",
+        "nimbus-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:30:00.053119902",
+        "nimbus-besu-1",
+        "execution",
+        "2026-10-13 16:30:00.050+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-13 16:33:36.510141123",
+        "teku-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:33:36.510181529",
+        "teku-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 16:35:45.679776315",
+        "teku-besu-1",
+        "execution",
+        "Heap dump file created [26811699345 bytes in 129.169 secs]"
+      ],
+      [
+        "2026-10-13 16:35:45.679817094",
+        "teku-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:35:49.428593349",
+        "teku-besu-1",
+        "execution",
+        "2026-10-13 16:35:49.426+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-13 16:42:06.877580478",
+        "grandine-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:42:06.877614488",
+        "grandine-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 16:44:12.610947381",
+        "grandine-besu-1",
+        "execution",
+        "Heap dump file created [26973208860 bytes in 125.733 secs]"
+      ],
+      [
+        "2026-10-13 16:44:12.611200103",
+        "grandine-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:44:20.425110482",
+        "grandine-besu-1",
+        "execution",
+        "2026-10-13 16:44:20.423+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-13 16:59:17.974394631",
+        "lighthouse-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 16:59:17.974430570",
+        "lighthouse-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 17:00:47.600011732",
+        "lighthouse-besu-1",
+        "execution",
+        "Heap dump file created [26748214310 bytes in 89.626 secs]"
+      ],
+      [
+        "2026-10-13 17:00:47.600322007",
+        "lighthouse-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 17:00:55.226335038",
+        "lighthouse-besu-1",
+        "execution",
+        "2026-10-13 17:00:55.224+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-13 19:01:56.470151669",
+        "prysm-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 19:01:56.470190104",
+        "prysm-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 19:03:22.908856273",
+        "prysm-besu-1",
+        "execution",
+        "Heap dump file created [27409332283 bytes in 86.439 secs]"
+      ],
+      [
+        "2026-10-13 19:03:22.909089727",
+        "prysm-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 19:03:27.106461087",
+        "prysm-besu-1",
+        "execution",
+        "2026-10-13 19:03:27.104+0000 | main | INFO  | Besu | Starting Besu"
+      ],
+      [
+        "2026-10-13 20:21:02.988067586",
+        "lodestar-besu-1",
+        "execution",
+        "java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 20:21:02.988104734",
+        "lodestar-besu-1",
+        "execution",
+        "Dumping heap to /profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof ..."
+      ],
+      [
+        "2026-10-13 20:23:26.371090816",
+        "lodestar-besu-1",
+        "execution",
+        "Heap dump file created [27729214978 bytes in 143.383 secs]"
+      ],
+      [
+        "2026-10-13 20:23:26.371799051",
+        "lodestar-besu-1",
+        "execution",
+        "Terminating due to java.lang.OutOfMemoryError: Java heap space"
+      ],
+      [
+        "2026-10-13 20:23:29.824451801",
+        "lodestar-besu-1",
+        "execution",
+        "2026-10-13 20:23:29.822+0000 | main | INFO  | Besu | Starting Besu"
+      ]
+    ]
+  }
+}

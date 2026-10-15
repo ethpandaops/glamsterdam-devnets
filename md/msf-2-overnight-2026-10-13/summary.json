@@ -1,0 +1,483 @@
+{
+  "events": {
+    "health:lighthouse-nimbusel-1": {
+      "kind": "health",
+      "host": "lighthouse-nimbusel-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/health/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": [
+        "is_optimistic"
+      ],
+      "latest_evidence": "evidence/health/20261014T080501Z.json"
+    },
+    "health:nimbus-nimbusel-1": {
+      "kind": "health",
+      "host": "nimbus-nimbusel-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/health/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": [
+        "is_optimistic",
+        "el_offline"
+      ],
+      "latest_evidence": "evidence/health/20261014T080501Z.json"
+    },
+    "besu_heap_dump:grandine-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "grandine-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof",
+        "bytes": 26973208860,
+        "mtime": "2026-10-13T16:44:12.603203+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "besu_heap_dump:lighthouse-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "lighthouse-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof",
+        "bytes": 26748214310,
+        "mtime": "2026-10-13T17:00:47.594610+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "besu_heap_dump:lodestar-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "lodestar-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof",
+        "bytes": 27729214978,
+        "mtime": "2026-10-13T20:23:26.367896+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "besu_heap_dump:nimbus-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "nimbus-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof",
+        "bytes": 26750411558,
+        "mtime": "2026-10-13T16:29:56.446991+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "besu_heap_dump:prysm-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "prysm-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof",
+        "bytes": 27409332283,
+        "mtime": "2026-10-13T19:03:22.903096+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "besu_heap_dump:teku-besu-1": {
+      "kind": "besu_heap_dump",
+      "host": "teku-besu-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 124,
+      "known_before_window": true,
+      "first_evidence": "evidence/profiling/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:05:01.721543+00:00",
+      "latest_detail": {
+        "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof",
+        "bytes": 26811699345,
+        "mtime": "2026-10-13T16:35:45.675959+00:00",
+        "privacy": "Host-local metadata only; no dump uploaded"
+      },
+      "latest_evidence": "evidence/profiling/20261014T080501Z.json"
+    },
+    "log_engine_timeout:nimbus-nimbusel-1": {
+      "kind": "log_engine_timeout",
+      "host": "nimbus-nimbusel-1",
+      "first_seen": "2026-10-13T21:52:45.932727+00:00",
+      "observations": 615,
+      "known_before_window": true,
+      "first_evidence": "evidence/logs/20261013T215245Z.json",
+      "last_seen": "2026-10-14T08:04:01.711783+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 07:59:59.001238768",
+        "container": "beacon",
+        "body": "DBG 2026-10-14 07:59:58.999+00:00 Failed EL Request                          topics=\"elman\" requestName=newPayload statusCode=0 err=\"Request timed out\"",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T080401Z.json"
+    },
+    "collection_gap:collector": {
+      "kind": "collection_gap",
+      "host": "collector",
+      "first_seen": "2026-10-13T21:55:59.688146+00:00",
+      "observations": 1,
+      "known_before_window": false,
+      "first_evidence": "",
+      "last_seen": "2026-10-13T21:55:59.688146+00:00",
+      "latest_detail": {
+        "last_health_at": "2026-10-13T21:52:45.932727+00:00",
+        "seconds": 193.755419
+      },
+      "latest_evidence": ""
+    },
+    "metric_besu_heap_fraction:glamsterdam-msf-2-nimbus-besu-1": {
+      "kind": "metric_besu_heap_fraction",
+      "host": "glamsterdam-msf-2-nimbus-besu-1",
+      "first_seen": "2026-10-13T21:58:23.318033+00:00",
+      "observations": 21,
+      "known_before_window": false,
+      "first_evidence": "evidence/metrics/20261013T215823Z.json",
+      "last_seen": "2026-10-14T00:04:01.724568+00:00",
+      "latest_detail": {
+        "value": 0.9425172843039036,
+        "labels": {
+          "area": "heap",
+          "consensus_client": "nimbus",
+          "execution_client": "besu",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-nimbus-besu-1",
+          "ip_address": "168.144.244.100",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "interpretation": "threshold observation, not proof of a client defect"
+      },
+      "latest_evidence": "evidence/metrics/20261014T000401Z.json"
+    },
+    "metric_besu_heap_fraction:glamsterdam-msf-2-teku-besu-1": {
+      "kind": "metric_besu_heap_fraction",
+      "host": "glamsterdam-msf-2-teku-besu-1",
+      "first_seen": "2026-10-13T22:19:01.716249+00:00",
+      "observations": 20,
+      "known_before_window": false,
+      "first_evidence": "evidence/metrics/20261013T221901Z.json",
+      "last_seen": "2026-10-14T00:54:01.717906+00:00",
+      "latest_detail": {
+        "value": 0.9078083923086524,
+        "labels": {
+          "area": "heap",
+          "consensus_client": "teku",
+          "execution_client": "besu",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-teku-besu-1",
+          "ip_address": "167.99.59.150",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "interpretation": "threshold observation, not proof of a client defect"
+      },
+      "latest_evidence": "evidence/metrics/20261014T005401Z.json"
+    },
+    "metric_besu_heap_fraction:glamsterdam-msf-2-grandine-besu-1": {
+      "kind": "metric_besu_heap_fraction",
+      "host": "glamsterdam-msf-2-grandine-besu-1",
+      "first_seen": "2026-10-13T22:59:01.723872+00:00",
+      "observations": 7,
+      "known_before_window": false,
+      "first_evidence": "evidence/metrics/20261013T225901Z.json",
+      "last_seen": "2026-10-13T23:44:01.722242+00:00",
+      "latest_detail": {
+        "value": 0.9117392916232347,
+        "labels": {
+          "area": "heap",
+          "consensus_client": "grandine",
+          "execution_client": "besu",
+          "ingress_user": "glamsterdam-msf-2",
+          "instance": "glamsterdam-msf-2-grandine-besu-1",
+          "ip_address": "165.22.7.245",
+          "job": "execution",
+          "network": "glamsterdam-msf-2",
+          "supernode": "True",
+          "tenant_tier": "external",
+          "testnet": "glamsterdam-msf-2",
+          "vm_account_id": "1",
+          "vm_project_id": "0"
+        },
+        "interpretation": "threshold observation, not proof of a client defect"
+      },
+      "latest_evidence": "evidence/metrics/20261013T234401Z.json"
+    },
+    "log_engine_timeout:prysm-besu-1": {
+      "kind": "log_engine_timeout",
+      "host": "prysm-besu-1",
+      "first_seen": "2026-10-14T02:34:01.716226+00:00",
+      "observations": 1,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T023401Z.json",
+      "last_seen": "2026-10-14T02:34:01.716226+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 02:31:55.036265517",
+        "container": "execution",
+        "body": "2026-10-14 02:31:55.036+0000 | vert.x-eventloop-thread-1 | WARN  | JsonRpcExecutorHandler | Timeout (30000 ms) occurred in JSON-RPC executor for method {\"jsonrpc\":\"2.0\",\"id\":10115,\"method\":\"engine_getPayloadBodiesByHashV2\",\"params\":[[\"0xf5e4a1434de3a03334e58ffac94c089efd2ef304921c4e6c22e72555b36ee589\"]]}",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T023401Z.json"
+    },
+    "logs_collection_error:duty_loss": {
+      "kind": "logs_collection_error",
+      "host": "duty_loss",
+      "first_seen": "2026-10-14T03:49:01.716728+00:00",
+      "observations": 1,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T034901Z.json",
+      "last_seen": "2026-10-14T03:49:01.716728+00:00",
+      "latest_detail": "panda exited 1: P 500: Code: 241. DB::Exception: Received from chi-clickhouse-raw-replicated-1-1:9000. DB::Exception: (total) memory limit exceeded: would use 89.50 GiB (attempt to allocate chunk of 0.00 B), current RSS: 189.07 GiB, maximum: 188.56 GiB.. (MEMORY_LIMIT_EXCEEDED) (version 26.2.5.45 (official build))\n",
+      "latest_evidence": "evidence/logs/20261014T034901Z.json"
+    },
+    "logs_collection_error:optimistic_activation": {
+      "kind": "logs_collection_error",
+      "host": "optimistic_activation",
+      "first_seen": "2026-10-14T03:49:01.716728+00:00",
+      "observations": 1,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T034901Z.json",
+      "last_seen": "2026-10-14T03:49:01.716728+00:00",
+      "latest_detail": "panda exited 1: Error: HTTP 500: Code: 241. DB::Exception: (total) memory limit exceeded: would use 89.65 GiB (attempt to allocate chunk of 0.00 B), current RSS: 189.19 GiB, maximum: 188.56 GiB. (MEMORY_LIMIT_EXCEEDED)\n",
+      "latest_evidence": "evidence/logs/20261014T034901Z.json"
+    },
+    "log_duty_loss:prysm-ethrex-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-ethrex-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 10,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.002362038",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "log_duty_loss:prysm-reth-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-reth-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 10,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.002901685",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "log_duty_loss:prysm-besu-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-besu-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 9,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.001412359",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "log_duty_loss:prysm-erigon-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-erigon-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 10,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.001846875",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "log_duty_loss:prysm-geth-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-geth-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 10,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.001639478",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "log_duty_loss:prysm-nethermind-1": {
+      "kind": "log_duty_loss",
+      "host": "prysm-nethermind-1",
+      "first_seen": "2026-10-14T06:29:01.720584+00:00",
+      "observations": 10,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T062901Z.json",
+      "last_seen": "2026-10-14T06:39:01.715806+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:36:57.002014461",
+        "container": "validator",
+        "body": "\u001b[90m[2026-10-14 06:36:57.00]\u001b[0m \u001b[32m INFO\u001b[0m\u001b[36m client:\u001b[0m Skipping payload attestation: no block for slot \u001b[32merror\u001b[0m=PayloadAttestationData: rpc error: code = NotFound desc = no block found at slot=12469 \u001b[32mretried\u001b[0m=false \u001b[32mslot\u001b[0m=12469",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T063901Z.json"
+    },
+    "missing_canonical_proposal:nimbus-reth-1": {
+      "kind": "missing_canonical_proposal",
+      "host": "nimbus-reth-1",
+      "first_seen": "2026-10-14T06:34:01.720280+00:00",
+      "observations": 2,
+      "known_before_window": true,
+      "first_evidence": "evidence/epochs/387.json",
+      "last_seen": "2026-10-14T06:49:01.721630+00:00",
+      "latest_detail": {
+        "slot": 12469,
+        "epoch": 389,
+        "validator": 21631,
+        "host": "nimbus-reth-1",
+        "evidence": "evidence/epochs/389.json",
+        "interpretation": "A missing canonical slot; may include a late or orphaned attempted proposal"
+      },
+      "latest_evidence": "evidence/epochs/389.json"
+    },
+    "log_engine_timeout:lighthouse-reth-1": {
+      "kind": "log_engine_timeout",
+      "host": "lighthouse-reth-1",
+      "first_seen": "2026-10-14T06:44:01.722749+00:00",
+      "observations": 2,
+      "known_before_window": false,
+      "first_evidence": "evidence/logs/20261014T064401Z.json",
+      "last_seen": "2026-10-14T06:44:01.722749+00:00",
+      "latest_detail": {
+        "timestamp": "2026-10-14 06:38:50.019652353",
+        "container": "beacon",
+        "body": "Oct 14 06:38:50.019 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 12479",
+        "requires": "correlate with duties and health; logs alone do not prove a new defect"
+      },
+      "latest_evidence": "evidence/logs/20261014T064401Z.json"
+    }
+  },
+  "last_full": "2026-10-14T08:05:01.721543+00:00",
+  "last_push": "2026-10-14T08:04:01.711783+00:00",
+  "cycle": 611,
+  "missed": [
+    {
+      "slot": 12410,
+      "epoch": 387,
+      "validator": 21850,
+      "host": "nimbus-reth-1",
+      "evidence": "evidence/epochs/387.json"
+    },
+    {
+      "slot": 12469,
+      "epoch": 389,
+      "validator": 21631,
+      "host": "nimbus-reth-1",
+      "evidence": "evidence/epochs/389.json"
+    }
+  ],
+  "assigned": {
+    "teku-reth-1": 73,
+    "nimbus-reth-1": 97,
+    "lodestar-besu-1": 83,
+    "lighthouse-besu-1": 75,
+    "nimbus-geth-1": 99,
+    "prysm-nethermind-1": 82,
+    "lighthouse-ethrex-1": 89,
+    "nimbus-erigon-1": 89,
+    "nimbus-nethermind-1": 87,
+    "nimbus-ethrex-1": 87,
+    "prysm-erigon-1": 90,
+    "grandine-ethrex-1": 100,
+    "teku-nethermind-1": 85,
+    "lighthouse-geth-1": 73,
+    "lighthouse-erigon-1": 83,
+    "grandine-geth-1": 72,
+    "lodestar-ethrex-1": 84,
+    "lodestar-nethermind-1": 78,
+    "lodestar-reth-1": 102,
+    "prysm-geth-1": 75,
+    "lodestar-geth-1": 91,
+    "prysm-besu-1": 68,
+    "teku-ethrex-1": 86,
+    "grandine-nethermind-1": 72,
+    "grandine-erigon-1": 86,
+    "prysm-reth-1": 84,
+    "nimbus-besu-1": 96,
+    "teku-besu-1": 91,
+    "grandine-reth-1": 78,
+    "grandine-besu-1": 90,
+    "lighthouse-reth-1": 75,
+    "lodestar-erigon-1": 79,
+    "prysm-ethrex-1": 75,
+    "teku-erigon-1": 84,
+    "lighthouse-nethermind-1": 69,
+    "teku-geth-1": 81
+  },
+  "latest_health": "evidence/health/20261014T080501Z.json",
+  "latest_full_health": "evidence/health/20261014T080501Z.json",
+  "latest_full_at": "2026-10-14T08:05:01.721543+00:00",
+  "finality_advanced_at": "2026-10-14T08:03:01.719764+00:00",
+  "finalized": 401,
+  "first_finalized": 305,
+  "validator_ok": 36,
+  "wall_slot": 12910,
+  "last_health_at": "2026-10-14T08:05:01.721543+00:00",
+  "logs_cursor": "2026-10-14T08:00:00+00:00",
+  "start": "2026-10-13T21:48:30+00:00",
+  "end": "2026-10-14T08:00:00+00:00",
+  "status": "complete",
+  "last_tick": "2026-10-14T08:05:01.721543+00:00"
+}

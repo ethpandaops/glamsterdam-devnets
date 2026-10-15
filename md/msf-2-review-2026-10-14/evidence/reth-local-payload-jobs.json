@@ -1,0 +1,47 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,substring(Body,1,7000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name'] IN ('nimbus-reth-1','lighthouse-reth-1') AND ResourceAttributes['container.name']='execution' AND (((Timestamp>=toDateTime('2026-10-14 06:24:56') AND Timestamp<toDateTime('2026-10-14 06:25:06')) OR (Timestamp>=toDateTime('2026-10-14 06:36:44') AND Timestamp<toDateTime('2026-10-14 06:36:54'))) OR (Timestamp>=toDateTime('2026-10-14 06:38:42') AND Timestamp<toDateTime('2026-10-14 06:38:57'))) AND match(Body,'payload|Payload|WARN|ERROR') ORDER BY Timestamp ASC LIMIT 120 SETTINGS max_threads=2",
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 06:24:58.524331136",
+        "nimbus-reth-1",
+        "\u001b[2m2026-10-14T06:24:58.524211Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0xa6d7a1b03dc2e301 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x372ce4c2961e8ddcb325a9a93fec8dea21ba3ce2d5904c454a093a519741fd85"
+      ],
+      [
+        "2026-10-14 06:36:46.520944805",
+        "nimbus-reth-1",
+        "\u001b[2m2026-10-14T06:36:46.520842Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x765da1ce8f7b66c0 \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x723929540c14102afb2efcd52ece787cf5ca6c686307a79b3992b68e8a235e77"
+      ],
+      [
+        "2026-10-14 06:38:44.006101832",
+        "lighthouse-reth-1",
+        "\u001b[2m2026-10-14T06:38:44.005996Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mpayload_builder\u001b[0m\u001b[2m:\u001b[0m New payload job created \u001b[3mid\u001b[0m\u001b[2m=\u001b[0m0x0a7bef9a79ccac0d \u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x5ec420f080bc6f2896d23d609f643e61950da10f5aaf15212b341a53ac4b692f"
+      ],
+      [
+        "2026-10-14 06:38:50.732496569",
+        "lighthouse-reth-1",
+        "\u001b[2m2026-10-14T06:38:50.732371Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464691 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12"
+      ],
+      [
+        "2026-10-14 06:38:50.757020290",
+        "nimbus-reth-1",
+        "\u001b[2m2026-10-14T06:38:50.756917Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mreth_node_events::node\u001b[0m\u001b[2m:\u001b[0m Received new payload from consensus engine \u001b[3mnumber\u001b[0m\u001b[2m=\u001b[0m24464691 \u001b[3mhash\u001b[0m\u001b[2m=\u001b[0m0xe133d687ada84d511e7e633fb1fb07d6237424914d6d4bfa2ad6501b83cc9d12"
+      ],
+      [
+        "2026-10-14 06:38:50.873349653",
+        "nimbus-reth-1",
+        "\u001b[2m2026-10-14T06:38:50.873208Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xbf908b3d61294ab502bcc8d3fad2f4b667722f933edd4d74de2f99565ba677bf \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m6.678\u00b5s"
+      ],
+      [
+        "2026-10-14 06:38:50.917719716",
+        "lighthouse-reth-1",
+        "\u001b[2m2026-10-14T06:38:50.917566Z\u001b[0m \u001b[32m INFO\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m State root job finished \u001b[3mstrategy\u001b[0m\u001b[2m=\u001b[0m\"sparse-trie\" \u001b[3mstate_root\u001b[0m\u001b[2m=\u001b[0m0xbf908b3d61294ab502bcc8d3fad2f4b667722f933edd4d74de2f99565ba677bf \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m61.776266ms"
+      ]
+    ]
+  }
+}

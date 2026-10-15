@@ -1,0 +1,194 @@
+[
+  {
+    "id": 100,
+    "name": "Deploy CREATE2 unique max sized (64 KiB, EIP-7954) JUMPDEST contracts for theoretical max of 300 Mgas",
+    "scenario": "factorydeploytx",
+    "fields": {
+      "refill_amount": 5000000000000000000,
+      "throughput": 10,
+      "gas_limit": 120000000
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 101,
+    "name": "JUMPDEST CALL attack (indices 1-66678, target: 200 MGas)",
+    "scenario": "calltx",
+    "fields": {
+      "refill_amount": 50000000000000000000,
+      "contract_address": "",
+      "contract_addr_path": "",
+      "call_data": "",
+      "amount": 0,
+      "random_amount": false,
+      "random_target": false,
+      "gas_limit": 16777216,
+      "deploy_gas_limit": 0,
+      "throughput": 20
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 102,
+    "name": "EELS account-load (cold EXTCODEHASH, 64 KiB targets)",
+    "scenario": "account-load",
+    "fields": {
+      "refill_amount": 30000000000000000,
+      "throughput": 12,
+      "target_address": "0xa248ca6166fcf800ff1217c6cb6c547323f59a77",
+      "deploy_gas": 500000,
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 103,
+    "name": "EELS account-access (cold CALL)",
+    "scenario": "account-call",
+    "fields": {
+      "throughput": 12,
+      "target_address": "",
+      "deploy_gas": 500000,
+      "refill_amount": 300000000000000000,
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 106,
+    "name": "ether-transfer / diff-max-64k, value 0",
+    "scenario": "ether-transfer",
+    "fields": {
+      "transfer_amount": 0,
+      "block_gas_limit": 200000000,
+      "refill_amount": 2000000000000000,
+      "funding_gas_limit": 0,
+      "throughput": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 107,
+    "name": "ether-transfer / diff-max-64k, value 1",
+    "scenario": "ether-transfer",
+    "fields": {
+      "transfer_amount": 1,
+      "block_gas_limit": 200000000,
+      "refill_amount": 20000000000000000,
+      "funding_gas_limit": 0,
+      "throughput": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 108,
+    "name": "ether-transfer / jumpdest-64k, value 0",
+    "scenario": "ether-transfer",
+    "fields": {
+      "transfer_amount": 0,
+      "block_gas_limit": 200000000,
+      "refill_amount": 2000000000000000,
+      "funding_gas_limit": 0,
+      "throughput": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 109,
+    "name": "ether-transfer / jumpdest-64k, value 1",
+    "scenario": "ether-transfer",
+    "fields": {
+      "transfer_amount": 1,
+      "block_gas_limit": 200000000,
+      "refill_amount": 2000000000000000,
+      "funding_gas_limit": 0,
+      "throughput": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 110,
+    "name": "EELS account writes (value-bearing cold CALL)",
+    "scenario": "account-write",
+    "fields": {
+      "throughput": 20,
+      "refill_amount": 500000000000000000,
+      "deploy_gas": 500000,
+      "target_address": "",
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 111,
+    "name": "EELS sload-bloated / existing slots",
+    "scenario": "sload-bloated",
+    "fields": {
+      "throughput": 60,
+      "refill_amount": 1000000000000000000,
+      "deploy_gas": 1000000,
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 112,
+    "name": "EELS sload-bloated / empty slots",
+    "scenario": "sload-bloated",
+    "fields": {
+      "throughput": 12,
+      "refill_amount": 10000000000000000,
+      "deploy_gas": 1000000,
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 113,
+    "name": "Max code size contract deployment",
+    "scenario": "deploytx",
+    "fields": {
+      "throughput": 1,
+      "gas_limit": 102000000,
+      "refill_amount": 100000000000000000
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 114,
+    "name": "selfdestruct & creation",
+    "scenario": "deploy-destruct",
+    "fields": {
+      "throughput": 900,
+      "gas_limit": 220000,
+      "amount": 20,
+      "random_amount": false,
+      "refill_amount": 10000000000000000
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 115,
+    "name": "EELS storage writes (zero to non-zero)",
+    "scenario": "sstore-bloated",
+    "fields": {
+      "throughput": 60,
+      "refill_amount": 1000000000000000000,
+      "deploy_gas": 1000000,
+      "funding_gas_limit": 0
+    },
+    "public_state_addresses": []
+  },
+  {
+    "id": 116,
+    "name": "EELS tstore (none / hit / miss, round-robin)",
+    "scenario": "tstore",
+    "fields": {
+      "throughput": 12,
+      "target_addresses": "",
+      "deploy_gas": 120184173,
+      "refill_amount": 400000000000000000
+    },
+    "public_state_addresses": []
+  }
+]

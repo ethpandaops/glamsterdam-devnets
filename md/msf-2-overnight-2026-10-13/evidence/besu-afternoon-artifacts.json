@@ -1,0 +1,1670 @@
+{
+  "grandine-besu-1": {
+    "captured_at": "2026-10-13T21:54:12.825340+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/heap.hprof",
+        "heap_bytes": 26973208860,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T16:44:12.603203+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/gc-1-2026-10-13_10-06-40.log",
+            "bytes": 16857597,
+            "tail": [
+              "[2026-10-13T16:41:47.928+0000][23706.977s][info][gc,phases,start] GC(7915) Phase 1: Mark live objects",
+              "[2026-10-13T16:41:50.829+0000][23709.878s][info][gc,phases      ] GC(7915) Phase 1: Mark live objects 2900.166ms",
+              "[2026-10-13T16:41:50.829+0000][23709.878s][info][gc,phases,start] GC(7915) Phase 2: Prepare compaction",
+              "[2026-10-13T16:41:50.832+0000][23709.881s][info][gc,phases      ] GC(7915) Phase 2: Prepare compaction 3.303ms",
+              "[2026-10-13T16:41:50.832+0000][23709.881s][info][gc,phases,start] GC(7915) Phase 3: Adjust pointers",
+              "[2026-10-13T16:41:51.656+0000][23710.705s][info][gc,phases      ] GC(7915) Phase 3: Adjust pointers 823.591ms",
+              "[2026-10-13T16:41:51.656+0000][23710.705s][info][gc,phases,start] GC(7915) Phase 4: Compact heap",
+              "[2026-10-13T16:41:51.660+0000][23710.709s][info][gc,phases      ] GC(7915) Phase 4: Compact heap 3.883ms",
+              "[2026-10-13T16:41:51.660+0000][23710.709s][info][gc,phases,start] GC(7915) Phase 5: Reset Metadata",
+              "[2026-10-13T16:41:52.253+0000][23711.302s][info][gc,phases      ] GC(7915) Phase 5: Reset Metadata 592.905ms",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,heap        ] GC(7915) Eden regions: 0->0(3)",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,heap        ] GC(7915) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,heap        ] GC(7915) Old regions: 2048->2045",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,heap        ] GC(7915) Humongous regions: 0->0",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,metaspace   ] GC(7915) Metaspace: 74201K(75008K)->74201K(75008K) NonClass: 59290K(59712K)->59290K(59712K) Class: 14910K(15296K)->14910K(15296K)",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc             ] GC(7915) Pause Full (G1 Compaction Pause) 16351M->16320M(16384M) 4338.731ms",
+              "[2026-10-13T16:41:52.267+0000][23711.316s][info][gc,cpu         ] GC(7915) User=31.53s Sys=0.16s Real=4.34s",
+              "[2026-10-13T16:41:52.276+0000][23711.326s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 63733894 ns, Reaching safepoint: 108109 ns, At safepoint: 4342592449 ns, Leaving safepoint: 9493953 ns, Total: 4352194511 ns, Threads: 3 runnable, 160 total",
+              "[2026-10-13T16:41:52.328+0000][23711.377s][info][gc,start       ] GC(7916) Pause Young (Concurrent Start) (G1 Evacuation Pause)",
+              "[2026-10-13T16:41:52.328+0000][23711.377s][info][gc,task        ] GC(7916) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:41:52.331+0000][23711.381s][info][gc,phases      ] GC(7916)   Pre Evacuate Collection Set: 0.31ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,phases      ] GC(7916)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,phases      ] GC(7916)   Evacuate Collection Set: 2.47ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,phases      ] GC(7916)   Post Evacuate Collection Set: 0.61ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,phases      ] GC(7916)   Other: 0.13ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,heap        ] GC(7916) Eden regions: 3->0(1)",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,heap        ] GC(7916) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,heap        ] GC(7916) Old regions: 2045->2048",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,heap        ] GC(7916) Humongous regions: 0->0",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,metaspace   ] GC(7916) Metaspace: 74205K(75008K)->74205K(75008K) NonClass: 59294K(59712K)->59294K(59712K) Class: 14910K(15296K)->14910K(15296K)",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc             ] GC(7916) Pause Young (Concurrent Start) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16344M->16344M(16384M) 3.810ms",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc             ] GC(7917) Concurrent Mark Cycle",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,cpu         ] GC(7916) User=0.03s Sys=0.00s Real=0.01s",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,marking     ] GC(7917) Concurrent Scan Root Regions",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,start       ] GC(7918) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:41:52.332+0000][23711.381s][info][gc,task        ] GC(7918) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:41:52.333+0000][23711.382s][info][gc,marking     ] GC(7917) Concurrent Scan Root Regions 1.463ms",
+              "[2026-10-13T16:41:52.333+0000][23711.382s][info][gc,marking     ] GC(7917) Concurrent Mark",
+              "[2026-10-13T16:41:52.333+0000][23711.382s][info][gc,marking     ] GC(7917) Concurrent Mark From Roots",
+              "[2026-10-13T16:41:52.333+0000][23711.382s][info][gc,task        ] GC(7917) Using 2 workers of 2 for marking",
+              "[2026-10-13T16:41:52.338+0000][23711.387s][info][gc,phases,start] GC(7918) Phase 1: Mark live objects",
+              "[2026-10-13T16:41:54.998+0000][23714.047s][info][gc,phases      ] GC(7918) Phase 1: Mark live objects 2660.079ms",
+              "[2026-10-13T16:41:54.998+0000][23714.047s][info][gc,phases,start] GC(7918) Phase 2: Prepare compaction",
+              "[2026-10-13T16:41:55.000+0000][23714.049s][info][gc,phases      ] GC(7918) Phase 2: Prepare compaction 1.963ms",
+              "[2026-10-13T16:41:55.000+0000][23714.049s][info][gc,phases,start] GC(7918) Phase 3: Adjust pointers",
+              "[2026-10-13T16:41:55.839+0000][23714.888s][info][gc,phases      ] GC(7918) Phase 3: Adjust pointers 839.121ms",
+              "[2026-10-13T16:41:55.839+0000][23714.888s][info][gc,phases,start] GC(7918) Phase 4: Compact heap",
+              "[2026-10-13T16:41:55.842+0000][23714.891s][info][gc,phases      ] GC(7918) Phase 4: Compact heap 2.247ms",
+              "[2026-10-13T16:41:55.842+0000][23714.891s][info][gc,phases,start] GC(7918) Phase 5: Reset Metadata",
+              "[2026-10-13T16:41:56.417+0000][23715.466s][info][gc,phases      ] GC(7918) Phase 5: Reset Metadata 575.059ms",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,heap        ] GC(7918) Eden regions: 0->0(2)",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,heap        ] GC(7918) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,heap        ] GC(7918) Old regions: 2048->2046",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,heap        ] GC(7918) Humongous regions: 0->0",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,metaspace   ] GC(7918) Metaspace: 74205K(75008K)->74205K(75008K) NonClass: 59294K(59712K)->59294K(59712K) Class: 14910K(15296K)->14910K(15296K)",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc             ] GC(7918) Pause Full (G1 Compaction Pause) 16344M->16321M(16384M) 4098.987ms",
+              "[2026-10-13T16:41:56.431+0000][23715.480s][info][gc,cpu         ] GC(7918) User=31.52s Sys=0.00s Real=4.10s",
+              "[2026-10-13T16:41:56.434+0000][23715.483s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 51202847 ns, Reaching safepoint: 34248 ns, At safepoint: 4102974548 ns, Leaving safepoint: 2867999 ns, Total: 4105876795 ns, Threads: 0 runnable, 160 total",
+              "[2026-10-13T16:41:56.438+0000][23715.487s][info][gc,marking     ] GC(7917) Concurrent Mark From Roots 4105.224ms",
+              "[2026-10-13T16:41:56.438+0000][23715.487s][info][gc,marking     ] GC(7917) Concurrent Mark Abort",
+              "[2026-10-13T16:41:56.438+0000][23715.487s][info][gc             ] GC(7917) Concurrent Mark Cycle 4106.800ms",
+              "[2026-10-13T16:41:56.461+0000][23715.510s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 10945169 ns, Reaching safepoint: 16832655 ns, At safepoint: 34377 ns, Leaving safepoint: 14338 ns, Total: 16881370 ns, Threads: 1 runnable, 160 total",
+              "[2026-10-13T16:41:56.462+0000][23715.511s][info][gc,start       ] GC(7919) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T16:41:56.462+0000][23715.511s][info][gc,task        ] GC(7919) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases      ] GC(7919)   Pre Evacuate Collection Set: 0.19ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases      ] GC(7919)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases      ] GC(7919)   Evacuate Collection Set: 1.30ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases      ] GC(7919)   Post Evacuate Collection Set: 0.58ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases      ] GC(7919)   Other: 0.09ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,heap        ] GC(7919) Eden regions: 2->0(1)",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,heap        ] GC(7919) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,heap        ] GC(7919) Old regions: 2046->2048",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,heap        ] GC(7919) Humongous regions: 0->0",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,metaspace   ] GC(7919) Metaspace: 74205K(75008K)->74205K(75008K) NonClass: 59294K(59712K)->59294K(59712K) Class: 14910K(15296K)->14910K(15296K)",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc             ] GC(7919) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16337M->16337M(16384M) 2.396ms",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,cpu         ] GC(7919) User=0.01s Sys=0.00s Real=0.01s",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,start       ] GC(7920) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,task        ] GC(7920) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:41:56.464+0000][23715.513s][info][gc,phases,start] GC(7920) Phase 1: Mark live objects",
+              "[2026-10-13T16:41:59.079+0000][23718.128s][info][gc,phases      ] GC(7920) Phase 1: Mark live objects 2614.613ms",
+              "[2026-10-13T16:41:59.079+0000][23718.128s][info][gc,phases,start] GC(7920) Phase 2: Prepare compaction",
+              "[2026-10-13T16:41:59.082+0000][23718.131s][info][gc,phases      ] GC(7920) Phase 2: Prepare compaction 3.225ms",
+              "[2026-10-13T16:41:59.082+0000][23718.131s][info][gc,phases,start] GC(7920) Phase 3: Adjust pointers",
+              "[2026-10-13T16:41:59.902+0000][23718.951s][info][gc,phases      ] GC(7920) Phase 3: Adjust pointers 819.486ms",
+              "[2026-10-13T16:41:59.902+0000][23718.951s][info][gc,phases,start] GC(7920) Phase 4: Compact heap",
+              "[2026-10-13T16:41:59.906+0000][23718.955s][info][gc,phases      ] GC(7920) Phase 4: Compact heap 4.204ms",
+              "[2026-10-13T16:41:59.906+0000][23718.955s][info][gc,phases,start] GC(7920) Phase 5: Reset Metadata",
+              "[2026-10-13T16:42:00.490+0000][23719.539s][info][gc,phases      ] GC(7920) Phase 5: Reset Metadata 584.030ms",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,heap        ] GC(7920) Eden regions: 0->0(2)",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,heap        ] GC(7920) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,heap        ] GC(7920) Old regions: 2048->2046",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,heap        ] GC(7920) Humongous regions: 0->0",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,metaspace   ] GC(7920) Metaspace: 74205K(75008K)->74205K(75008K) NonClass: 59294K(59712K)->59294K(59712K) Class: 14910K(15296K)->14910K(15296K)",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc             ] GC(7920) Pause Full (G1 Compaction Pause) 16337M->16322M(16384M) 4040.024ms",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,cpu         ] GC(7920) User=31.44s Sys=0.06s Real=4.04s",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,start       ] GC(7921) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:42:00.504+0000][23719.553s][info][gc,task        ] GC(7921) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:42:00.505+0000][23719.554s][info][gc,phases,start] GC(7921) Phase 1: Mark live objects",
+              "[2026-10-13T16:42:03.189+0000][23722.238s][info][gc,phases      ] GC(7921) Phase 1: Mark live objects 2684.802ms",
+              "[2026-10-13T16:42:03.189+0000][23722.238s][info][gc,phases,start] GC(7921) Phase 2: Prepare compaction",
+              "[2026-10-13T16:42:04.205+0000][23723.254s][info][gc,phases      ] GC(7921) Phase 2: Prepare compaction 1015.417ms",
+              "[2026-10-13T16:42:04.205+0000][23723.254s][info][gc,phases,start] GC(7921) Phase 3: Adjust pointers",
+              "[2026-10-13T16:42:05.547+0000][23724.596s][info][gc,phases      ] GC(7921) Phase 3: Adjust pointers 1342.165ms",
+              "[2026-10-13T16:42:05.547+0000][23724.596s][info][gc,phases,start] GC(7921) Phase 4: Compact heap",
+              "[2026-10-13T16:42:06.851+0000][23725.900s][info][gc,phases      ] GC(7921) Phase 4: Compact heap 1303.804ms",
+              "[2026-10-13T16:42:06.851+0000][23725.900s][info][gc,phases,start] GC(7921) Phase 5: Reset Metadata",
+              "[2026-10-13T16:42:06.852+0000][23725.902s][info][gc,phases      ] GC(7921) Phase 5: Reset Metadata 1.418ms",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,heap        ] GC(7921) Eden regions: 0->0(25)",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,heap        ] GC(7921) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,heap        ] GC(7921) Old regions: 2046->2023",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,heap        ] GC(7921) Humongous regions: 0->0",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,metaspace   ] GC(7921) Metaspace: 74205K(75008K)->74190K(75008K) NonClass: 59294K(59712K)->59282K(59712K) Class: 14910K(15296K)->14907K(15296K)",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc             ] GC(7921) Pause Full (G1 Compaction Pause) 16322M->16176M(16384M) 6372.432ms",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc,cpu         ] GC(7921) User=47.51s Sys=0.11s Real=6.37s",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T16:42:06.877+0000][23725.926s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 277421 ns, Reaching safepoint: 13788 ns, At safepoint: 10415067718 ns, Leaving safepoint: 173156 ns, Total: 10415254662 ns, Threads: 0 runnable, 160 total",
+              "[2026-10-13T16:42:34.250+0000][23753.299s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 266916 ns, Reaching safepoint: 1158192 ns, At safepoint: 27369680548 ns, Leaving safepoint: 2069285 ns, Total: 27372908025 ns, Threads: 4 runnable, 160 total"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T162551752142Z.jfr",
+            "bytes": 4453280
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T164057003110Z.jfr",
+            "bytes": 2704674
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T153551615982Z.jfr",
+            "bytes": 5968339
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T145040887184Z.jfr",
+            "bytes": 6687431
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T144540863488Z.jfr",
+            "bytes": 5664917
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T161551745565Z.jfr",
+            "bytes": 9653178
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T152541442726Z.jfr",
+            "bytes": 5454832
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T162051726256Z.jfr",
+            "bytes": 8473728
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T155551634565Z.jfr",
+            "bytes": 4431334
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T154051782938Z.jfr",
+            "bytes": 5314356
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T161051747663Z.jfr",
+            "bytes": 5286694
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T154551614737Z.jfr",
+            "bytes": 11323286
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T160551732628Z.jfr",
+            "bytes": 4745482
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T152041377907Z.jfr",
+            "bytes": 5421034
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T151541003174Z.jfr",
+            "bytes": 12067948
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T163555263999Z.jfr",
+            "bytes": 4055802
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T155051611706Z.jfr",
+            "bytes": 11268025
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T163051757472Z.jfr",
+            "bytes": 9608970
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T150540951352Z.jfr",
+            "bytes": 12437394
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T151040998110Z.jfr",
+            "bytes": 6019060
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T160051666587Z.jfr",
+            "bytes": 8776118
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T145540871743Z.jfr",
+            "bytes": 13351574
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T150040952723Z.jfr",
+            "bytes": 6423006
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/checkpoints/checkpoint-20261013T153051377775Z.jfr",
+            "bytes": 5462751
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_25_51.jfr",
+            "bytes": 5155690
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_35_55.jfr",
+            "bytes": 2704674
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_20_51.jfr",
+            "bytes": 4453280
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_41_01.jfr",
+            "bytes": 731857
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_30_51.jfr",
+            "bytes": 4055802
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_15_51.jfr",
+            "bytes": 4107244
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/repository/2026_10_13_10_06_41_1/2026_10_13_16_10_51.jfr",
+            "bytes": 4366484
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T100640Z-94444f52-6769-4dcb-ba01-6ef765f9d254/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T164418Z-ee95a91c-87f1-439d-b00d-ff6b69143123/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  },
+  "lighthouse-besu-1": {
+    "captured_at": "2026-10-13T21:54:13.424376+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/heap.hprof",
+        "heap_bytes": 26748214310,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T17:00:47.594610+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/gc-1-2026-10-13_09-59-39.log",
+            "bytes": 17408375,
+            "tail": [
+              "[2026-10-13T16:59:02.372+0000][25162.730s][info][gc,phases,start] GC(8160) Phase 3: Adjust pointers",
+              "[2026-10-13T16:59:03.213+0000][25163.571s][info][gc,phases      ] GC(8160) Phase 3: Adjust pointers 841.107ms",
+              "[2026-10-13T16:59:03.213+0000][25163.571s][info][gc,phases,start] GC(8160) Phase 4: Compact heap",
+              "[2026-10-13T16:59:03.217+0000][25163.575s][info][gc,phases      ] GC(8160) Phase 4: Compact heap 4.430ms",
+              "[2026-10-13T16:59:03.217+0000][25163.575s][info][gc,phases,start] GC(8160) Phase 5: Reset Metadata",
+              "[2026-10-13T16:59:03.758+0000][25164.117s][info][gc,phases      ] GC(8160) Phase 5: Reset Metadata 541.145ms",
+              "[2026-10-13T16:59:03.771+0000][25164.129s][info][gc,heap        ] GC(8160) Eden regions: 0->0(4)",
+              "[2026-10-13T16:59:03.771+0000][25164.129s][info][gc,heap        ] GC(8160) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:03.771+0000][25164.129s][info][gc,heap        ] GC(8160) Old regions: 2045->2041",
+              "[2026-10-13T16:59:03.771+0000][25164.129s][info][gc,heap        ] GC(8160) Humongous regions: 3->3",
+              "[2026-10-13T16:59:03.771+0000][25164.129s][info][gc,metaspace   ] GC(8160) Metaspace: 74453K(75264K)->74453K(75264K) NonClass: 59478K(59904K)->59478K(59904K) Class: 14974K(15360K)->14974K(15360K)",
+              "[2026-10-13T16:59:03.771+0000][25164.130s][info][gc             ] GC(8160) Pause Full (G1 Compaction Pause) 16340M->16317M(16384M) 4127.171ms",
+              "[2026-10-13T16:59:03.771+0000][25164.130s][info][gc,cpu         ] GC(8160) User=31.04s Sys=0.18s Real=4.13s",
+              "[2026-10-13T16:59:03.773+0000][25164.132s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 15670593 ns, Reaching safepoint: 106232 ns, At safepoint: 4131141630 ns, Leaving safepoint: 1925609 ns, Total: 4133173471 ns, Threads: 1 runnable, 166 total",
+              "[2026-10-13T16:59:03.774+0000][25164.132s][info][gc,marking     ] GC(8159) Concurrent Mark From Roots 4129.629ms",
+              "[2026-10-13T16:59:03.774+0000][25164.132s][info][gc,marking     ] GC(8159) Concurrent Mark Abort",
+              "[2026-10-13T16:59:03.774+0000][25164.132s][info][gc             ] GC(8159) Concurrent Mark Cycle 4131.211ms",
+              "[2026-10-13T16:59:03.788+0000][25164.146s][info][gc,start       ] GC(8161) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T16:59:03.788+0000][25164.146s][info][gc,task        ] GC(8161) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases      ] GC(8161)   Pre Evacuate Collection Set: 0.20ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases      ] GC(8161)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases      ] GC(8161)   Evacuate Collection Set: 1.15ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases      ] GC(8161)   Post Evacuate Collection Set: 0.51ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases      ] GC(8161)   Other: 0.09ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,heap        ] GC(8161) Eden regions: 4->0(1)",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,heap        ] GC(8161) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,heap        ] GC(8161) Old regions: 2041->2045",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,heap        ] GC(8161) Humongous regions: 3->3",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,metaspace   ] GC(8161) Metaspace: 74453K(75264K)->74453K(75264K) NonClass: 59478K(59904K)->59478K(59904K) Class: 14974K(15360K)->14974K(15360K)",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc             ] GC(8161) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16349M->16349M(16384M) 2.188ms",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,cpu         ] GC(8161) User=0.02s Sys=0.00s Real=0.01s",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,start       ] GC(8162) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,task        ] GC(8162) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:59:03.790+0000][25164.148s][info][gc,phases,start] GC(8162) Phase 1: Mark live objects",
+              "[2026-10-13T16:59:06.379+0000][25166.737s][info][gc,phases      ] GC(8162) Phase 1: Mark live objects 2588.644ms",
+              "[2026-10-13T16:59:06.379+0000][25166.737s][info][gc,phases,start] GC(8162) Phase 2: Prepare compaction",
+              "[2026-10-13T16:59:06.381+0000][25166.739s][info][gc,phases      ] GC(8162) Phase 2: Prepare compaction 2.357ms",
+              "[2026-10-13T16:59:06.381+0000][25166.739s][info][gc,phases,start] GC(8162) Phase 3: Adjust pointers",
+              "[2026-10-13T16:59:07.183+0000][25167.542s][info][gc,phases      ] GC(8162) Phase 3: Adjust pointers 802.293ms",
+              "[2026-10-13T16:59:07.183+0000][25167.542s][info][gc,phases,start] GC(8162) Phase 4: Compact heap",
+              "[2026-10-13T16:59:07.187+0000][25167.546s][info][gc,phases      ] GC(8162) Phase 4: Compact heap 3.985ms",
+              "[2026-10-13T16:59:07.187+0000][25167.546s][info][gc,phases,start] GC(8162) Phase 5: Reset Metadata",
+              "[2026-10-13T16:59:07.738+0000][25168.097s][info][gc,phases      ] GC(8162) Phase 5: Reset Metadata 550.838ms",
+              "[2026-10-13T16:59:07.751+0000][25168.110s][info][gc,heap        ] GC(8162) Eden regions: 0->0(1)",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc,heap        ] GC(8162) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc,heap        ] GC(8162) Old regions: 2045->2044",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc,heap        ] GC(8162) Humongous regions: 3->3",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc,metaspace   ] GC(8162) Metaspace: 74453K(75264K)->74453K(75264K) NonClass: 59478K(59904K)->59478K(59904K) Class: 14974K(15360K)->14974K(15360K)",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc             ] GC(8162) Pause Full (G1 Compaction Pause) 16349M->16330M(16384M) 3961.698ms",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][gc,cpu         ] GC(8162) User=30.95s Sys=0.08s Real=3.96s",
+              "[2026-10-13T16:59:07.752+0000][25168.110s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 14207258 ns, Reaching safepoint: 35371 ns, At safepoint: 3964074254 ns, Leaving safepoint: 326192 ns, Total: 3964435817 ns, Threads: 0 runnable, 165 total",
+              "[2026-10-13T16:59:07.754+0000][25168.112s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 2088548 ns, Reaching safepoint: 100807 ns, At safepoint: 19152 ns, Leaving safepoint: 14017 ns, Total: 133976 ns, Threads: 3 runnable, 165 total",
+              "[2026-10-13T16:59:07.755+0000][25168.113s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 281947 ns, Reaching safepoint: 82100 ns, At safepoint: 13954 ns, Leaving safepoint: 10871 ns, Total: 106925 ns, Threads: 10 runnable, 165 total",
+              "[2026-10-13T16:59:07.758+0000][25168.116s][info][gc,start       ] GC(8163) Pause Young (Concurrent Start) (G1 Evacuation Pause)",
+              "[2026-10-13T16:59:07.758+0000][25168.116s][info][gc,task        ] GC(8163) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,phases      ] GC(8163)   Pre Evacuate Collection Set: 0.43ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,phases      ] GC(8163)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,phases      ] GC(8163)   Evacuate Collection Set: 0.82ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,phases      ] GC(8163)   Post Evacuate Collection Set: 0.34ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,phases      ] GC(8163)   Other: 0.10ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,heap        ] GC(8163) Eden regions: 1->0(1)",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,heap        ] GC(8163) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,heap        ] GC(8163) Old regions: 2044->2045",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,heap        ] GC(8163) Humongous regions: 3->3",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,metaspace   ] GC(8163) Metaspace: 74453K(75264K)->74453K(75264K) NonClass: 59478K(59904K)->59478K(59904K) Class: 14974K(15360K)->14974K(15360K)",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc             ] GC(8163) Pause Young (Concurrent Start) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16338M->16338M(16384M) 1.911ms",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc             ] GC(8164) Concurrent Mark Cycle",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,cpu         ] GC(8163) User=0.01s Sys=0.01s Real=0.00s",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,marking     ] GC(8164) Concurrent Scan Root Regions",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,start       ] GC(8165) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:59:07.760+0000][25168.118s][info][gc,task        ] GC(8165) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:59:07.761+0000][25168.119s][info][gc,marking     ] GC(8164) Concurrent Scan Root Regions 1.304ms",
+              "[2026-10-13T16:59:07.761+0000][25168.119s][info][gc,marking     ] GC(8164) Concurrent Mark",
+              "[2026-10-13T16:59:07.761+0000][25168.119s][info][gc,marking     ] GC(8164) Concurrent Mark From Roots",
+              "[2026-10-13T16:59:07.761+0000][25168.119s][info][gc,task        ] GC(8164) Using 2 workers of 2 for marking",
+              "[2026-10-13T16:59:07.765+0000][25168.124s][info][gc,phases,start] GC(8165) Phase 1: Mark live objects",
+              "[2026-10-13T16:59:10.376+0000][25170.734s][info][gc,phases      ] GC(8165) Phase 1: Mark live objects 2610.811ms",
+              "[2026-10-13T16:59:10.376+0000][25170.734s][info][gc,phases,start] GC(8165) Phase 2: Prepare compaction",
+              "[2026-10-13T16:59:10.378+0000][25170.736s][info][gc,phases      ] GC(8165) Phase 2: Prepare compaction 1.671ms",
+              "[2026-10-13T16:59:10.378+0000][25170.736s][info][gc,phases,start] GC(8165) Phase 3: Adjust pointers",
+              "[2026-10-13T16:59:11.204+0000][25171.562s][info][gc,phases      ] GC(8165) Phase 3: Adjust pointers 825.656ms",
+              "[2026-10-13T16:59:11.204+0000][25171.562s][info][gc,phases,start] GC(8165) Phase 4: Compact heap",
+              "[2026-10-13T16:59:11.207+0000][25171.565s][info][gc,phases      ] GC(8165) Phase 4: Compact heap 3.341ms",
+              "[2026-10-13T16:59:11.207+0000][25171.565s][info][gc,phases,start] GC(8165) Phase 5: Reset Metadata",
+              "[2026-10-13T16:59:11.751+0000][25172.109s][info][gc,phases      ] GC(8165) Phase 5: Reset Metadata 543.868ms",
+              "[2026-10-13T16:59:11.764+0000][25172.122s][info][gc,heap        ] GC(8165) Eden regions: 0->0(5)",
+              "[2026-10-13T16:59:11.764+0000][25172.122s][info][gc,heap        ] GC(8165) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,heap        ] GC(8165) Old regions: 2045->2040",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,heap        ] GC(8165) Humongous regions: 3->3",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,metaspace   ] GC(8165) Metaspace: 74453K(75264K)->74453K(75264K) NonClass: 59478K(59904K)->59478K(59904K) Class: 14974K(15360K)->14974K(15360K)",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc             ] GC(8165) Pause Full (G1 Compaction Pause) 16338M->16333M(16384M) 4004.526ms",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,cpu         ] GC(8165) User=31.15s Sys=0.06s Real=4.01s",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,start       ] GC(8166) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:59:11.764+0000][25172.123s][info][gc,task        ] GC(8166) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:59:11.769+0000][25172.127s][info][gc,phases,start] GC(8166) Phase 1: Mark live objects",
+              "[2026-10-13T16:59:14.425+0000][25174.783s][info][gc,phases      ] GC(8166) Phase 1: Mark live objects 2656.180ms",
+              "[2026-10-13T16:59:14.425+0000][25174.783s][info][gc,phases,start] GC(8166) Phase 2: Prepare compaction",
+              "[2026-10-13T16:59:15.394+0000][25175.753s][info][gc,phases      ] GC(8166) Phase 2: Prepare compaction 969.367ms",
+              "[2026-10-13T16:59:15.394+0000][25175.753s][info][gc,phases,start] GC(8166) Phase 3: Adjust pointers",
+              "[2026-10-13T16:59:16.767+0000][25177.125s][info][gc,phases      ] GC(8166) Phase 3: Adjust pointers 1372.661ms",
+              "[2026-10-13T16:59:16.767+0000][25177.125s][info][gc,phases,start] GC(8166) Phase 4: Compact heap",
+              "[2026-10-13T16:59:17.948+0000][25178.307s][info][gc,phases      ] GC(8166) Phase 4: Compact heap 1181.270ms",
+              "[2026-10-13T16:59:17.949+0000][25178.307s][info][gc,phases,start] GC(8166) Phase 5: Reset Metadata",
+              "[2026-10-13T16:59:17.950+0000][25178.308s][info][gc,phases      ] GC(8166) Phase 5: Reset Metadata 1.449ms",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,heap        ] GC(8166) Eden regions: 0->0(36)",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,heap        ] GC(8166) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,heap        ] GC(8166) Old regions: 2040->2009",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,heap        ] GC(8166) Humongous regions: 3->3",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,metaspace   ] GC(8166) Metaspace: 74453K(75264K)->74436K(75264K) NonClass: 59478K(59904K)->59465K(59904K) Class: 14974K(15360K)->14970K(15360K)",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc             ] GC(8166) Pause Full (G1 Compaction Pause) 16333M->16086M(16384M) 6209.002ms",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc,cpu         ] GC(8166) User=46.77s Sys=0.24s Real=6.21s",
+              "[2026-10-13T16:59:17.973+0000][25178.332s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T16:59:17.974+0000][25178.332s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 3135153 ns, Reaching safepoint: 102580 ns, At safepoint: 10215682237 ns, Leaving safepoint: 250164 ns, Total: 10216034981 ns, Threads: 1 runnable, 165 total",
+              "[2026-10-13T16:59:42.232+0000][25202.590s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 206188 ns, Reaching safepoint: 2125080 ns, At safepoint: 24255814887 ns, Leaving safepoint: 131538 ns, Total: 24258071505 ns, Threads: 7 runnable, 164 total",
+              "[2026-10-13T16:59:42.236+0000][25202.594s][info][gc,marking     ] GC(8164) Concurrent Mark From Roots 34474.972ms",
+              "[2026-10-13T16:59:42.236+0000][25202.594s][info][gc,marking     ] GC(8164) Concurrent Mark Abort",
+              "[2026-10-13T16:59:42.236+0000][25202.594s][info][gc             ] GC(8164) Concurrent Mark Cycle 34476.401ms"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T162856219476Z.jfr",
+            "bytes": 3899996
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T150841364039Z.jfr",
+            "bytes": 12839179
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T152841442041Z.jfr",
+            "bytes": 6167103
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T151841411403Z.jfr",
+            "bytes": 5668903
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T160352339034Z.jfr",
+            "bytes": 4296601
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T153841537472Z.jfr",
+            "bytes": 10620717
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T151341361897Z.jfr",
+            "bytes": 12117156
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T155342151351Z.jfr",
+            "bytes": 4908112
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T162352379545Z.jfr",
+            "bytes": 4299580
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T161352386975Z.jfr",
+            "bytes": 4808155
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T152341403976Z.jfr",
+            "bytes": 11459463
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T163912103246Z.jfr",
+            "bytes": 4066574
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T161852358976Z.jfr",
+            "bytes": 9020672
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T154842094694Z.jfr",
+            "bytes": 11567076
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T153341530040Z.jfr",
+            "bytes": 5262239
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T164422232936Z.jfr",
+            "bytes": 3821163
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T154342107326Z.jfr",
+            "bytes": 6084336
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T150341432746Z.jfr",
+            "bytes": 6844165
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T145832158341Z.jfr",
+            "bytes": 7021598
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T160852343801Z.jfr",
+            "bytes": 9336955
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T165442280079Z.jfr",
+            "bytes": 3763548
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T164932078406Z.jfr",
+            "bytes": 3777358
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T155852104674Z.jfr",
+            "bytes": 4382491
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/checkpoints/checkpoint-20261013T163402102319Z.jfr",
+            "bytes": 4393715
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_54_42.jfr",
+            "bytes": 2882416
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_28_56.jfr",
+            "bytes": 4393715
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_49_32.jfr",
+            "bytes": 3763548
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_39_12.jfr",
+            "bytes": 3821163
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_44_22.jfr",
+            "bytes": 3777358
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_34_02.jfr",
+            "bytes": 4066574
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/repository/2026_10_13_09_59_40_1/2026_10_13_16_23_52.jfr",
+            "bytes": 3899996
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095939Z-7b2c4fe2-30bd-4cd2-9731-8cf6c93e0e38/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T170053Z-24f6eb1e-146d-450b-b81c-41b19de86424/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  },
+  "lodestar-besu-1": {
+    "captured_at": "2026-10-13T21:54:11.900902+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/heap.hprof",
+        "heap_bytes": 27729214978,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T20:23:26.367896+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/gc-1-2026-10-13_09-57-22.log",
+            "bytes": 21818731,
+            "tail": [
+              "[2026-10-13T20:20:40.343+0000][37397.365s][info][gc,phases,start] GC(10197) Phase 1: Mark live objects",
+              "[2026-10-13T20:20:43.646+0000][37400.668s][info][gc,phases      ] GC(10197) Phase 1: Mark live objects 3302.857ms",
+              "[2026-10-13T20:20:43.646+0000][37400.668s][info][gc,phases,start] GC(10197) Phase 2: Prepare compaction",
+              "[2026-10-13T20:20:43.653+0000][37400.675s][info][gc,phases      ] GC(10197) Phase 2: Prepare compaction 7.154ms",
+              "[2026-10-13T20:20:43.653+0000][37400.675s][info][gc,phases,start] GC(10197) Phase 3: Adjust pointers",
+              "[2026-10-13T20:20:44.573+0000][37401.595s][info][gc,phases      ] GC(10197) Phase 3: Adjust pointers 919.602ms",
+              "[2026-10-13T20:20:44.573+0000][37401.595s][info][gc,phases,start] GC(10197) Phase 4: Compact heap",
+              "[2026-10-13T20:20:44.580+0000][37401.601s][info][gc,phases      ] GC(10197) Phase 4: Compact heap 6.688ms",
+              "[2026-10-13T20:20:44.580+0000][37401.601s][info][gc,phases,start] GC(10197) Phase 5: Reset Metadata",
+              "[2026-10-13T20:20:45.207+0000][37402.228s][info][gc,phases      ] GC(10197) Phase 5: Reset Metadata 626.924ms",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,heap        ] GC(10197) Eden regions: 0->0(9)",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,heap        ] GC(10197) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,heap        ] GC(10197) Old regions: 2044->2036",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,heap        ] GC(10197) Humongous regions: 4->3",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,metaspace   ] GC(10197) Metaspace: 74318K(75072K)->74318K(75072K) NonClass: 59384K(59776K)->59384K(59776K) Class: 14933K(15296K)->14933K(15296K)",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc             ] GC(10197) Pause Full (G1 Compaction Pause) 16342M->16275M(16384M) 4885.221ms",
+              "[2026-10-13T20:20:45.223+0000][37402.245s][info][gc,cpu         ] GC(10197) User=36.48s Sys=0.07s Real=4.89s",
+              "[2026-10-13T20:20:45.224+0000][37402.245s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 16712589 ns, Reaching safepoint: 41800 ns, At safepoint: 4887767161 ns, Leaving safepoint: 102854 ns, Total: 4887911815 ns, Threads: 0 runnable, 177 total",
+              "[2026-10-13T20:20:45.224+0000][37402.246s][info][gc,marking     ] GC(10194) Concurrent Mark From Roots 4914.018ms",
+              "[2026-10-13T20:20:45.224+0000][37402.246s][info][gc,marking     ] GC(10194) Concurrent Mark Abort",
+              "[2026-10-13T20:20:45.224+0000][37402.246s][info][gc             ] GC(10194) Concurrent Mark Cycle 4918.305ms",
+              "[2026-10-13T20:20:45.267+0000][37402.289s][info][gc,start       ] GC(10198) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T20:20:45.267+0000][37402.289s][info][gc,task        ] GC(10198) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,phases      ] GC(10198)   Pre Evacuate Collection Set: 0.17ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,phases      ] GC(10198)   Merge Heap Roots: 0.06ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,phases      ] GC(10198)   Evacuate Collection Set: 7.47ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,phases      ] GC(10198)   Post Evacuate Collection Set: 2.40ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,phases      ] GC(10198)   Other: 0.08ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,heap        ] GC(10198) Eden regions: 9->0(1)",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,heap        ] GC(10198) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,heap        ] GC(10198) Old regions: 2036->2045",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,heap        ] GC(10198) Humongous regions: 3->3",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,metaspace   ] GC(10198) Metaspace: 74318K(75072K)->74318K(75072K) NonClass: 59384K(59776K)->59384K(59776K) Class: 14933K(15296K)->14933K(15296K)",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc             ] GC(10198) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16347M->16347M(16384M) 10.352ms",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,cpu         ] GC(10198) User=0.07s Sys=0.01s Real=0.00s",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,start       ] GC(10199) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T20:20:45.277+0000][37402.299s][info][gc,task        ] GC(10199) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T20:20:45.278+0000][37402.299s][info][gc,phases,start] GC(10199) Phase 1: Mark live objects",
+              "[2026-10-13T20:20:48.531+0000][37405.553s][info][gc,phases      ] GC(10199) Phase 1: Mark live objects 3253.673ms",
+              "[2026-10-13T20:20:48.531+0000][37405.553s][info][gc,phases,start] GC(10199) Phase 2: Prepare compaction",
+              "[2026-10-13T20:20:48.537+0000][37405.559s][info][gc,phases      ] GC(10199) Phase 2: Prepare compaction 6.123ms",
+              "[2026-10-13T20:20:48.537+0000][37405.559s][info][gc,phases,start] GC(10199) Phase 3: Adjust pointers",
+              "[2026-10-13T20:20:49.532+0000][37406.554s][info][gc,phases      ] GC(10199) Phase 3: Adjust pointers 994.926ms",
+              "[2026-10-13T20:20:49.532+0000][37406.554s][info][gc,phases,start] GC(10199) Phase 4: Compact heap",
+              "[2026-10-13T20:20:49.539+0000][37406.561s][info][gc,phases      ] GC(10199) Phase 4: Compact heap 7.018ms",
+              "[2026-10-13T20:20:49.540+0000][37406.561s][info][gc,phases,start] GC(10199) Phase 5: Reset Metadata",
+              "[2026-10-13T20:20:50.133+0000][37407.154s][info][gc,phases      ] GC(10199) Phase 5: Reset Metadata 593.341ms",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,heap        ] GC(10199) Eden regions: 0->0(8)",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,heap        ] GC(10199) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,heap        ] GC(10199) Old regions: 2045->2037",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,heap        ] GC(10199) Humongous regions: 3->3",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,metaspace   ] GC(10199) Metaspace: 74318K(75072K)->74318K(75072K) NonClass: 59384K(59776K)->59384K(59776K) Class: 14933K(15296K)->14933K(15296K)",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc             ] GC(10199) Pause Full (G1 Compaction Pause) 16347M->16290M(16384M) 4869.609ms",
+              "[2026-10-13T20:20:50.147+0000][37407.169s][info][gc,cpu         ] GC(10199) User=36.38s Sys=0.09s Real=4.88s",
+              "[2026-10-13T20:20:50.148+0000][37407.169s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 43369917 ns, Reaching safepoint: 26451 ns, At safepoint: 4880135338 ns, Leaving safepoint: 465172 ns, Total: 4880626961 ns, Threads: 0 runnable, 177 total",
+              "[2026-10-13T20:20:50.153+0000][37407.175s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 5599978 ns, Reaching safepoint: 103875 ns, At safepoint: 23026 ns, Leaving safepoint: 7022 ns, Total: 133923 ns, Threads: 3 runnable, 177 total",
+              "[2026-10-13T20:20:50.154+0000][37407.175s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 329319 ns, Reaching safepoint: 95097 ns, At safepoint: 21642 ns, Leaving safepoint: 4751 ns, Total: 121490 ns, Threads: 1 runnable, 177 total",
+              "[2026-10-13T20:20:50.193+0000][37407.215s][info][gc,start       ] GC(10200) Pause Young (Concurrent Start) (G1 Evacuation Pause)",
+              "[2026-10-13T20:20:50.193+0000][37407.215s][info][gc,task        ] GC(10200) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,phases      ] GC(10200)   Pre Evacuate Collection Set: 0.25ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,phases      ] GC(10200)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,phases      ] GC(10200)   Evacuate Collection Set: 5.01ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,phases      ] GC(10200)   Post Evacuate Collection Set: 1.73ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,phases      ] GC(10200)   Other: 0.10ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,heap        ] GC(10200) Eden regions: 8->0(1)",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,heap        ] GC(10200) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,heap        ] GC(10200) Old regions: 2037->2045",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,heap        ] GC(10200) Humongous regions: 3->3",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,metaspace   ] GC(10200) Metaspace: 74318K(75072K)->74318K(75072K) NonClass: 59384K(59776K)->59384K(59776K) Class: 14933K(15296K)->14933K(15296K)",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc             ] GC(10200) Pause Young (Concurrent Start) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16354M->16354M(16384M) 7.341ms",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc             ] GC(10201) Concurrent Mark Cycle",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,cpu         ] GC(10200) User=0.05s Sys=0.00s Real=0.01s",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,marking     ] GC(10201) Concurrent Scan Root Regions",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,start       ] GC(10202) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T20:20:50.201+0000][37407.222s][info][gc,task        ] GC(10202) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T20:20:50.202+0000][37407.224s][info][gc,marking     ] GC(10201) Concurrent Scan Root Regions 1.741ms",
+              "[2026-10-13T20:20:50.208+0000][37407.230s][info][gc,phases,start] GC(10202) Phase 1: Mark live objects",
+              "[2026-10-13T20:20:53.471+0000][37410.493s][info][gc,phases      ] GC(10202) Phase 1: Mark live objects 3262.643ms",
+              "[2026-10-13T20:20:53.471+0000][37410.493s][info][gc,phases,start] GC(10202) Phase 2: Prepare compaction",
+              "[2026-10-13T20:20:53.476+0000][37410.498s][info][gc,phases      ] GC(10202) Phase 2: Prepare compaction 5.300ms",
+              "[2026-10-13T20:20:53.476+0000][37410.498s][info][gc,phases,start] GC(10202) Phase 3: Adjust pointers",
+              "[2026-10-13T20:20:54.426+0000][37411.448s][info][gc,phases      ] GC(10202) Phase 3: Adjust pointers 949.904ms",
+              "[2026-10-13T20:20:54.426+0000][37411.448s][info][gc,phases,start] GC(10202) Phase 4: Compact heap",
+              "[2026-10-13T20:20:54.432+0000][37411.453s][info][gc,phases      ] GC(10202) Phase 4: Compact heap 5.295ms",
+              "[2026-10-13T20:20:54.432+0000][37411.453s][info][gc,phases,start] GC(10202) Phase 5: Reset Metadata",
+              "[2026-10-13T20:20:55.045+0000][37412.066s][info][gc,phases      ] GC(10202) Phase 5: Reset Metadata 612.962ms",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,heap        ] GC(10202) Eden regions: 0->0(10)",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,heap        ] GC(10202) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,heap        ] GC(10202) Old regions: 2045->2036",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,heap        ] GC(10202) Humongous regions: 3->2",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,metaspace   ] GC(10202) Metaspace: 74318K(75072K)->74318K(75072K) NonClass: 59384K(59776K)->59384K(59776K) Class: 14933K(15296K)->14933K(15296K)",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc             ] GC(10202) Pause Full (G1 Compaction Pause) 16354M->16269M(16384M) 4858.005ms",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,cpu         ] GC(10202) User=36.53s Sys=0.09s Real=4.86s",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,start       ] GC(10203) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T20:20:55.059+0000][37412.080s][info][gc,task        ] GC(10203) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T20:20:55.064+0000][37412.085s][info][gc,phases,start] GC(10203) Phase 1: Mark live objects",
+              "[2026-10-13T20:20:58.287+0000][37415.309s][info][gc,phases      ] GC(10203) Phase 1: Mark live objects 3223.593ms",
+              "[2026-10-13T20:20:58.287+0000][37415.309s][info][gc,phases,start] GC(10203) Phase 2: Prepare compaction",
+              "[2026-10-13T20:20:59.486+0000][37416.507s][info][gc,phases      ] GC(10203) Phase 2: Prepare compaction 1198.225ms",
+              "[2026-10-13T20:20:59.486+0000][37416.507s][info][gc,phases,start] GC(10203) Phase 3: Adjust pointers",
+              "[2026-10-13T20:21:01.370+0000][37418.392s][info][gc,phases      ] GC(10203) Phase 3: Adjust pointers 1884.619ms",
+              "[2026-10-13T20:21:01.370+0000][37418.392s][info][gc,phases,start] GC(10203) Phase 4: Compact heap",
+              "[2026-10-13T20:21:02.935+0000][37419.956s][info][gc,phases      ] GC(10203) Phase 4: Compact heap 1564.168ms",
+              "[2026-10-13T20:21:02.935+0000][37419.956s][info][gc,phases,start] GC(10203) Phase 5: Reset Metadata",
+              "[2026-10-13T20:21:02.936+0000][37419.958s][info][gc,phases      ] GC(10203) Phase 5: Reset Metadata 1.687ms",
+              "[2026-10-13T20:21:02.987+0000][37420.008s][info][gc,heap        ] GC(10203) Eden regions: 0->0(45)",
+              "[2026-10-13T20:21:02.987+0000][37420.008s][info][gc,heap        ] GC(10203) Survivor regions: 0->0(0)",
+              "[2026-10-13T20:21:02.987+0000][37420.008s][info][gc,heap        ] GC(10203) Old regions: 2036->2001",
+              "[2026-10-13T20:21:02.987+0000][37420.008s][info][gc,heap        ] GC(10203) Humongous regions: 2->2",
+              "[2026-10-13T20:21:02.987+0000][37420.008s][info][gc,metaspace   ] GC(10203) Metaspace: 74318K(75072K)->74293K(75072K) NonClass: 59384K(59776K)->59365K(59776K) Class: 14933K(15296K)->14928K(15296K)",
+              "[2026-10-13T20:21:02.987+0000][37420.009s][info][gc             ] GC(10203) Pause Full (G1 Compaction Pause) 16269M->16016M(16384M) 7928.160ms",
+              "[2026-10-13T20:21:02.987+0000][37420.009s][info][gc,cpu         ] GC(10203) User=56.81s Sys=0.27s Real=7.93s",
+              "[2026-10-13T20:21:02.987+0000][37420.009s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T20:21:02.987+0000][37420.009s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 39425759 ns, Reaching safepoint: 29750 ns, At safepoint: 12793788668 ns, Leaving safepoint: 343320 ns, Total: 12794161738 ns, Threads: 0 runnable, 177 total",
+              "[2026-10-13T20:21:02.990+0000][37420.012s][info][gc,marking     ] GC(10201) Concurrent Mark Abort",
+              "[2026-10-13T20:21:02.990+0000][37420.012s][info][gc             ] GC(10201) Concurrent Mark Cycle 12789.648ms",
+              "[2026-10-13T20:21:31.501+0000][37448.523s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 4632994 ns, Reaching safepoint: 33111 ns, At safepoint: 28509000685 ns, Leaving safepoint: 77981 ns, Total: 28509111777 ns, Threads: 4 runnable, 174 total"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T182240805678Z.jfr",
+            "bytes": 3945757
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T194318670964Z.jfr",
+            "bytes": 3767138
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T200341792131Z.jfr",
+            "bytes": 3882243
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T185240843516Z.jfr",
+            "bytes": 4131207
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T191741590146Z.jfr",
+            "bytes": 3912354
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T185740939335Z.jfr",
+            "bytes": 4082208
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T191240966845Z.jfr",
+            "bytes": 8158805
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T193807427230Z.jfr",
+            "bytes": 3432859
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T183740809837Z.jfr",
+            "bytes": 3584216
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T184240825040Z.jfr",
+            "bytes": 7740314
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T194829994522Z.jfr",
+            "bytes": 3725089
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T182740793066Z.jfr",
+            "bytes": 7524714
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T201341712056Z.jfr",
+            "bytes": 3591186
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T193253898026Z.jfr",
+            "bytes": 3841128
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T200840840552Z.jfr",
+            "bytes": 7581495
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T190240919879Z.jfr",
+            "bytes": 8147052
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T195336950851Z.jfr",
+            "bytes": 3651880
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T192753421902Z.jfr",
+            "bytes": 4147394
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T195840812687Z.jfr",
+            "bytes": 3561058
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T184740823026Z.jfr",
+            "bytes": 8116187
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T201845773591Z.jfr",
+            "bytes": 2962430
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T190740968871Z.jfr",
+            "bytes": 4011921
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T183240804292Z.jfr",
+            "bytes": 3461584
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/checkpoints/checkpoint-20261013T192246893800Z.jfr",
+            "bytes": 4471288
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_19_58_40.jfr",
+            "bytes": 3882243
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_19_53_37.jfr",
+            "bytes": 3561058
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_20_03_41.jfr",
+            "bytes": 3699252
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_20_13_41.jfr",
+            "bytes": 2962430
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_20_08_40.jfr",
+            "bytes": 3591186
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_20_18_50.jfr",
+            "bytes": 1041647
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/repository/2026_10_13_09_57_23_1/2026_10_13_19_48_30.jfr",
+            "bytes": 3651880
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095722Z-6609d3b1-3e74-4749-89d9-9c826158ed9c/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T202328Z-232933f0-9c10-42a1-ad2e-a4920b2b1b79/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  },
+  "nimbus-besu-1": {
+    "captured_at": "2026-10-13T21:54:13.385365+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/heap.hprof",
+        "heap_bytes": 26750411558,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T16:29:56.446991+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/gc-1-2026-10-13_09-44-49.log",
+            "bytes": 17225951,
+            "tail": [
+              "[2026-10-13T16:27:26.174+0000][24156.724s][info][gc,task        ] GC(8063) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:27:26.174+0000][24156.724s][info][gc,phases,start] GC(8063) Phase 1: Mark live objects",
+              "[2026-10-13T16:27:28.763+0000][24159.313s][info][gc,phases      ] GC(8063) Phase 1: Mark live objects 2588.953ms",
+              "[2026-10-13T16:27:28.763+0000][24159.313s][info][gc,phases,start] GC(8063) Phase 2: Prepare compaction",
+              "[2026-10-13T16:27:28.766+0000][24159.316s][info][gc,phases      ] GC(8063) Phase 2: Prepare compaction 2.838ms",
+              "[2026-10-13T16:27:28.766+0000][24159.316s][info][gc,phases,start] GC(8063) Phase 3: Adjust pointers",
+              "[2026-10-13T16:27:29.579+0000][24160.129s][info][gc,phases      ] GC(8063) Phase 3: Adjust pointers 813.160ms",
+              "[2026-10-13T16:27:29.579+0000][24160.129s][info][gc,phases,start] GC(8063) Phase 4: Compact heap",
+              "[2026-10-13T16:27:29.581+0000][24160.132s][info][gc,phases      ] GC(8063) Phase 4: Compact heap 2.405ms",
+              "[2026-10-13T16:27:29.582+0000][24160.132s][info][gc,phases,start] GC(8063) Phase 5: Reset Metadata",
+              "[2026-10-13T16:27:30.159+0000][24160.709s][info][gc,phases      ] GC(8063) Phase 5: Reset Metadata 577.288ms",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc,heap        ] GC(8063) Eden regions: 0->0(2)",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc,heap        ] GC(8063) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc,heap        ] GC(8063) Old regions: 2048->2046",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc,heap        ] GC(8063) Humongous regions: 0->0",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc,metaspace   ] GC(8063) Metaspace: 74086K(74816K)->74086K(74816K) NonClass: 59211K(59584K)->59211K(59584K) Class: 14875K(15232K)->14875K(15232K)",
+              "[2026-10-13T16:27:30.175+0000][24160.726s][info][gc             ] GC(8063) Pause Full (G1 Compaction Pause) 16339M->16318M(16384M) 4001.640ms",
+              "[2026-10-13T16:27:30.176+0000][24160.726s][info][gc,cpu         ] GC(8063) User=30.35s Sys=0.08s Real=4.00s",
+              "[2026-10-13T16:27:30.178+0000][24160.728s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 2930559 ns, Reaching safepoint: 269788 ns, At safepoint: 4004106949 ns, Leaving safepoint: 1967200 ns, Total: 4006343937 ns, Threads: 0 runnable, 174 total",
+              "[2026-10-13T16:27:30.196+0000][24160.746s][info][gc,start       ] GC(8064) Pause Young (Concurrent Start) (G1 Evacuation Pause)",
+              "[2026-10-13T16:27:30.196+0000][24160.747s][info][gc,task        ] GC(8064) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,phases      ] GC(8064)   Pre Evacuate Collection Set: 0.28ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,phases      ] GC(8064)   Merge Heap Roots: 0.07ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,phases      ] GC(8064)   Evacuate Collection Set: 7.57ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,phases      ] GC(8064)   Post Evacuate Collection Set: 0.49ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,phases      ] GC(8064)   Other: 0.08ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,heap        ] GC(8064) Eden regions: 2->0(1)",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,heap        ] GC(8064) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,heap        ] GC(8064) Old regions: 2046->2048",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,heap        ] GC(8064) Humongous regions: 0->0",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,metaspace   ] GC(8064) Metaspace: 74086K(74816K)->74086K(74816K) NonClass: 59211K(59584K)->59211K(59584K) Class: 14875K(15232K)->14875K(15232K)",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc             ] GC(8064) Pause Young (Concurrent Start) (G1 Evacuation Pause) (Evacuation Failure: Allocation / Pinned) 16334M->16334M(16384M) 8.637ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,cpu         ] GC(8064) User=0.02s Sys=0.01s Real=0.01s",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,start       ] GC(8065) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,task        ] GC(8065) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc             ] GC(8066) Concurrent Mark Cycle",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,marking     ] GC(8066) Concurrent Scan Root Regions",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,marking     ] GC(8066) Concurrent Scan Root Regions 0.020ms",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,marking     ] GC(8066) Concurrent Mark",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,marking     ] GC(8066) Concurrent Mark From Roots",
+              "[2026-10-13T16:27:30.205+0000][24160.755s][info][gc,task        ] GC(8066) Using 2 workers of 2 for marking",
+              "[2026-10-13T16:27:30.211+0000][24160.761s][info][gc,phases,start] GC(8065) Phase 1: Mark live objects",
+              "[2026-10-13T16:27:32.723+0000][24163.273s][info][gc,phases      ] GC(8065) Phase 1: Mark live objects 2511.943ms",
+              "[2026-10-13T16:27:32.723+0000][24163.273s][info][gc,phases,start] GC(8065) Phase 2: Prepare compaction",
+              "[2026-10-13T16:27:32.725+0000][24163.275s][info][gc,phases      ] GC(8065) Phase 2: Prepare compaction 1.816ms",
+              "[2026-10-13T16:27:32.725+0000][24163.275s][info][gc,phases,start] GC(8065) Phase 3: Adjust pointers",
+              "[2026-10-13T16:27:33.528+0000][24164.079s][info][gc,phases      ] GC(8065) Phase 3: Adjust pointers 803.489ms",
+              "[2026-10-13T16:27:33.528+0000][24164.079s][info][gc,phases,start] GC(8065) Phase 4: Compact heap",
+              "[2026-10-13T16:27:33.530+0000][24164.081s][info][gc,phases      ] GC(8065) Phase 4: Compact heap 2.016ms",
+              "[2026-10-13T16:27:33.531+0000][24164.081s][info][gc,phases,start] GC(8065) Phase 5: Reset Metadata",
+              "[2026-10-13T16:27:34.083+0000][24164.633s][info][gc,phases      ] GC(8065) Phase 5: Reset Metadata 552.383ms",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,heap        ] GC(8065) Eden regions: 0->0(1)",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,heap        ] GC(8065) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,heap        ] GC(8065) Old regions: 2048->2047",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,heap        ] GC(8065) Humongous regions: 0->0",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,metaspace   ] GC(8065) Metaspace: 74086K(74816K)->74086K(74816K) NonClass: 59211K(59584K)->59211K(59584K) Class: 14875K(15232K)->14875K(15232K)",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc             ] GC(8065) Pause Full (G1 Compaction Pause) 16334M->16326M(16384M) 3890.791ms",
+              "[2026-10-13T16:27:34.096+0000][24164.646s][info][gc,cpu         ] GC(8065) User=30.44s Sys=0.01s Real=3.88s",
+              "[2026-10-13T16:27:34.098+0000][24164.648s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 18362990 ns, Reaching safepoint: 401439 ns, At safepoint: 3899609944 ns, Leaving safepoint: 1792399 ns, Total: 3901803782 ns, Threads: 2 runnable, 174 total",
+              "[2026-10-13T16:27:34.098+0000][24164.648s][info][gc,marking     ] GC(8066) Concurrent Mark From Roots 3892.570ms",
+              "[2026-10-13T16:27:34.098+0000][24164.648s][info][gc,marking     ] GC(8066) Concurrent Mark Abort",
+              "[2026-10-13T16:27:34.098+0000][24164.648s][info][gc             ] GC(8066) Concurrent Mark Cycle 3892.660ms",
+              "[2026-10-13T16:27:34.109+0000][24164.659s][info][gc,start       ] GC(8067) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T16:27:34.109+0000][24164.659s][info][gc,task        ] GC(8067) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,phases      ] GC(8067)   Pre Evacuate Collection Set: 0.19ms",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,phases      ] GC(8067)   Merge Heap Roots: 0.07ms",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,phases      ] GC(8067)   Evacuate Collection Set: 0.75ms",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,phases      ] GC(8067)   Post Evacuate Collection Set: 0.44ms",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,phases      ] GC(8067)   Other: 0.08ms",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,heap        ] GC(8067) Eden regions: 1->0(1)",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,heap        ] GC(8067) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,heap        ] GC(8067) Old regions: 2047->2048",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,heap        ] GC(8067) Humongous regions: 0->0",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc,metaspace   ] GC(8067) Metaspace: 74086K(74816K)->74086K(74816K) NonClass: 59211K(59584K)->59211K(59584K) Class: 14875K(15232K)->14875K(15232K)",
+              "[2026-10-13T16:27:34.110+0000][24164.661s][info][gc             ] GC(8067) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16334M->16334M(16384M) 1.666ms",
+              "[2026-10-13T16:27:34.111+0000][24164.661s][info][gc,cpu         ] GC(8067) User=0.01s Sys=0.00s Real=0.00s",
+              "[2026-10-13T16:27:34.111+0000][24164.661s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:27:34.111+0000][24164.661s][info][gc,start       ] GC(8068) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:27:34.111+0000][24164.661s][info][gc,task        ] GC(8068) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:27:34.111+0000][24164.661s][info][gc,phases,start] GC(8068) Phase 1: Mark live objects",
+              "[2026-10-13T16:27:36.648+0000][24167.199s][info][gc,phases      ] GC(8068) Phase 1: Mark live objects 2537.721ms",
+              "[2026-10-13T16:27:36.648+0000][24167.199s][info][gc,phases,start] GC(8068) Phase 2: Prepare compaction",
+              "[2026-10-13T16:27:36.650+0000][24167.200s][info][gc,phases      ] GC(8068) Phase 2: Prepare compaction 1.761ms",
+              "[2026-10-13T16:27:36.650+0000][24167.200s][info][gc,phases,start] GC(8068) Phase 3: Adjust pointers",
+              "[2026-10-13T16:27:37.445+0000][24167.995s][info][gc,phases      ] GC(8068) Phase 3: Adjust pointers 794.880ms",
+              "[2026-10-13T16:27:37.445+0000][24167.995s][info][gc,phases,start] GC(8068) Phase 4: Compact heap",
+              "[2026-10-13T16:27:37.448+0000][24167.998s][info][gc,phases      ] GC(8068) Phase 4: Compact heap 2.836ms",
+              "[2026-10-13T16:27:37.448+0000][24167.998s][info][gc,phases,start] GC(8068) Phase 5: Reset Metadata",
+              "[2026-10-13T16:27:38.019+0000][24168.569s][info][gc,phases      ] GC(8068) Phase 5: Reset Metadata 570.658ms",
+              "[2026-10-13T16:27:38.031+0000][24168.582s][info][gc,heap        ] GC(8068) Eden regions: 0->0(2)",
+              "[2026-10-13T16:27:38.031+0000][24168.582s][info][gc,heap        ] GC(8068) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:38.031+0000][24168.582s][info][gc,heap        ] GC(8068) Old regions: 2048->2046",
+              "[2026-10-13T16:27:38.031+0000][24168.582s][info][gc,heap        ] GC(8068) Humongous regions: 0->0",
+              "[2026-10-13T16:27:38.031+0000][24168.582s][info][gc,metaspace   ] GC(8068) Metaspace: 74086K(74816K)->74086K(74816K) NonClass: 59211K(59584K)->59211K(59584K) Class: 14875K(15232K)->14875K(15232K)",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc             ] GC(8068) Pause Full (G1 Compaction Pause) 16334M->16319M(16384M) 3920.966ms",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc,cpu         ] GC(8068) User=30.42s Sys=0.02s Real=3.92s",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc,start       ] GC(8069) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc,task        ] GC(8069) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:27:38.032+0000][24168.582s][info][gc,phases,start] GC(8069) Phase 1: Mark live objects",
+              "[2026-10-13T16:27:40.667+0000][24171.217s][info][gc,phases      ] GC(8069) Phase 1: Mark live objects 2634.852ms",
+              "[2026-10-13T16:27:40.667+0000][24171.217s][info][gc,phases,start] GC(8069) Phase 2: Prepare compaction",
+              "[2026-10-13T16:27:41.578+0000][24172.128s][info][gc,phases      ] GC(8069) Phase 2: Prepare compaction 911.538ms",
+              "[2026-10-13T16:27:41.578+0000][24172.128s][info][gc,phases,start] GC(8069) Phase 3: Adjust pointers",
+              "[2026-10-13T16:27:42.950+0000][24173.501s][info][gc,phases      ] GC(8069) Phase 3: Adjust pointers 1372.180ms",
+              "[2026-10-13T16:27:42.950+0000][24173.501s][info][gc,phases,start] GC(8069) Phase 4: Compact heap",
+              "[2026-10-13T16:27:44.171+0000][24174.721s][info][gc,phases      ] GC(8069) Phase 4: Compact heap 1220.531ms",
+              "[2026-10-13T16:27:44.171+0000][24174.721s][info][gc,phases,start] GC(8069) Phase 5: Reset Metadata",
+              "[2026-10-13T16:27:44.173+0000][24174.723s][info][gc,phases      ] GC(8069) Phase 5: Reset Metadata 1.737ms",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,heap        ] GC(8069) Eden regions: 0->0(33)",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,heap        ] GC(8069) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,heap        ] GC(8069) Old regions: 2046->2015",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,heap        ] GC(8069) Humongous regions: 0->0",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,metaspace   ] GC(8069) Metaspace: 74086K(74816K)->74076K(74816K) NonClass: 59211K(59584K)->59203K(59584K) Class: 14875K(15232K)->14873K(15232K)",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc             ] GC(8069) Pause Full (G1 Compaction Pause) 16319M->16112M(16384M) 6160.207ms",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc,cpu         ] GC(8069) User=45.57s Sys=0.11s Real=6.16s",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T16:27:44.192+0000][24174.742s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 11002009 ns, Reaching safepoint: 99064 ns, At safepoint: 10083095273 ns, Leaving safepoint: 237863 ns, Total: 10083432200 ns, Threads: 3 runnable, 174 total",
+              "[2026-10-13T16:28:09.354+0000][24199.904s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 635083 ns, Reaching safepoint: 554844 ns, At safepoint: 25160841528 ns, Leaving safepoint: 69609 ns, Total: 25161465981 ns, Threads: 10 runnable, 168 total"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T151743349004Z.jfr",
+            "bytes": 5627441
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T152743437915Z.jfr",
+            "bytes": 11048338
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T160312234133Z.jfr",
+            "bytes": 5130602
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T155258795435Z.jfr",
+            "bytes": 5184119
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T153752208140Z.jfr",
+            "bytes": 5317807
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T153243524575Z.jfr",
+            "bytes": 5529875
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T155802216933Z.jfr",
+            "bytes": 4708979
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T161843220361Z.jfr",
+            "bytes": 4139625
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T142722320412Z.jfr",
+            "bytes": 10614174
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T162342754554Z.jfr",
+            "bytes": 7531763
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T143742286470Z.jfr",
+            "bytes": 5939687
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T144242657475Z.jfr",
+            "bytes": 6011533
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T151243155653Z.jfr",
+            "bytes": 5704964
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T145242757010Z.jfr",
+            "bytes": 6944129
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T152243451870Z.jfr",
+            "bytes": 5529392
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T145742694604Z.jfr",
+            "bytes": 13586454
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T154253496546Z.jfr",
+            "bytes": 5728398
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T160822212156Z.jfr",
+            "bytes": 4839696
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T150742738710Z.jfr",
+            "bytes": 5838403
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T143232207415Z.jfr",
+            "bytes": 6231180
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T144742649174Z.jfr",
+            "bytes": 12294264
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T154753708362Z.jfr",
+            "bytes": 5516554
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T161332230358Z.jfr",
+            "bytes": 4903897
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/checkpoints/checkpoint-20261013T150242706225Z.jfr",
+            "bytes": 12837046
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_15_52_58.jfr",
+            "bytes": 4708979
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_16_03_12.jfr",
+            "bytes": 4839696
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_15_58_02.jfr",
+            "bytes": 5130602
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_16_18_43.jfr",
+            "bytes": 3392138
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_16_13_32.jfr",
+            "bytes": 4139625
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_16_08_22.jfr",
+            "bytes": 4903897
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/repository/2026_10_13_09_44_49_1/2026_10_13_16_23_42.jfr",
+            "bytes": 2118866
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T094449Z-42cf0cfb-966d-41d6-806d-9342b1b27159/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T162958Z-ceb11f81-fde1-4908-b741-849ce44c9928/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  },
+  "prysm-besu-1": {
+    "captured_at": "2026-10-13T21:54:12.017912+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/heap.hprof",
+        "heap_bytes": 27409332283,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T19:03:22.903096+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/gc-1-2026-10-13_09-53-10.log",
+            "bytes": 21589762,
+            "tail": [
+              "[2026-10-13T19:01:41.427+0000][32910.939s][info][gc,marking     ] GC(10129) Concurrent Mark Abort",
+              "[2026-10-13T19:01:41.427+0000][32910.939s][info][gc             ] GC(10129) Concurrent Mark Cycle 4113.045ms",
+              "[2026-10-13T19:01:41.434+0000][32910.946s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 1756102 ns, Reaching safepoint: 5854603 ns, At safepoint: 20934 ns, Leaving safepoint: 9942 ns, Total: 5885479 ns, Threads: 2 runnable, 182 total",
+              "[2026-10-13T19:01:41.435+0000][32910.946s][info][gc,start       ] GC(10131) Pause Young (Concurrent Start) (G1 Humongous Allocation)",
+              "[2026-10-13T19:01:41.435+0000][32910.947s][info][gc,task        ] GC(10131) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,phases      ] GC(10131)   Pre Evacuate Collection Set: 0.37ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,phases      ] GC(10131)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,phases      ] GC(10131)   Evacuate Collection Set: 10.87ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,phases      ] GC(10131)   Post Evacuate Collection Set: 0.34ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,phases      ] GC(10131)   Other: 0.08ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,heap        ] GC(10131) Eden regions: 3->0(6)",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,heap        ] GC(10131) Survivor regions: 0->1(1)",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,heap        ] GC(10131) Old regions: 2037->2037",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,heap        ] GC(10131) Humongous regions: 4->4",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,metaspace   ] GC(10131) Metaspace: 74589K(75392K)->74589K(75392K) NonClass: 59624K(60032K)->59624K(60032K) Class: 14964K(15360K)->14964K(15360K)",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc             ] GC(10131) Pause Young (Concurrent Start) (G1 Humongous Allocation) 16316M->16298M(16384M) 11.873ms",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc             ] GC(10132) Concurrent Mark Cycle",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,cpu         ] GC(10131) User=0.02s Sys=0.00s Real=0.01s",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][gc,marking     ] GC(10132) Concurrent Scan Root Regions",
+              "[2026-10-13T19:01:41.446+0000][32910.958s][info][safepoint      ] Safepoint \"G1TryInitiateConcMark\", Time since last: 740183 ns, Reaching safepoint: 97481 ns, At safepoint: 11964084 ns, Leaving safepoint: 16866 ns, Total: 12078431 ns, Threads: 5 runnable, 182 total",
+              "[2026-10-13T19:01:41.449+0000][32910.961s][info][gc,marking     ] GC(10132) Concurrent Scan Root Regions 2.549ms",
+              "[2026-10-13T19:01:41.449+0000][32910.961s][info][gc,marking     ] GC(10132) Concurrent Mark",
+              "[2026-10-13T19:01:41.449+0000][32910.961s][info][gc,marking     ] GC(10132) Concurrent Mark From Roots",
+              "[2026-10-13T19:01:41.449+0000][32910.961s][info][gc,task        ] GC(10132) Using 2 workers of 2 for marking",
+              "[2026-10-13T19:01:41.450+0000][32910.962s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 489709 ns, Reaching safepoint: 2102910 ns, At safepoint: 21671 ns, Leaving safepoint: 779732 ns, Total: 2904313 ns, Threads: 10 runnable, 182 total",
+              "[2026-10-13T19:01:41.489+0000][32911.001s][info][gc,start       ] GC(10133) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T19:01:41.489+0000][32911.001s][info][gc,task        ] GC(10133) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,phases      ] GC(10133)   Pre Evacuate Collection Set: 0.42ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,phases      ] GC(10133)   Merge Heap Roots: 0.08ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,phases      ] GC(10133)   Evacuate Collection Set: 3.25ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,phases      ] GC(10133)   Post Evacuate Collection Set: 1.12ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,phases      ] GC(10133)   Other: 0.09ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,heap        ] GC(10133) Eden regions: 5->0(1)",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,heap        ] GC(10133) Survivor regions: 1->0(0)",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,heap        ] GC(10133) Old regions: 2037->2043",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,heap        ] GC(10133) Humongous regions: 5->5",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,metaspace   ] GC(10133) Metaspace: 74589K(75392K)->74589K(75392K) NonClass: 59624K(60032K)->59624K(60032K) Class: 14964K(15360K)->14964K(15360K)",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc             ] GC(10133) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16346M->16346M(16384M) 5.115ms",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,cpu         ] GC(10133) User=0.02s Sys=0.01s Real=0.01s",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,start       ] GC(10134) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T19:01:41.494+0000][32911.006s][info][gc,task        ] GC(10134) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T19:01:41.499+0000][32911.011s][info][gc,phases,start] GC(10134) Phase 1: Mark live objects",
+              "[2026-10-13T19:01:44.207+0000][32913.719s][info][gc,phases      ] GC(10134) Phase 1: Mark live objects 2707.983ms",
+              "[2026-10-13T19:01:44.207+0000][32913.719s][info][gc,phases,start] GC(10134) Phase 2: Prepare compaction",
+              "[2026-10-13T19:01:44.211+0000][32913.723s][info][gc,phases      ] GC(10134) Phase 2: Prepare compaction 4.580ms",
+              "[2026-10-13T19:01:44.211+0000][32913.723s][info][gc,phases,start] GC(10134) Phase 3: Adjust pointers",
+              "[2026-10-13T19:01:44.976+0000][32914.488s][info][gc,phases      ] GC(10134) Phase 3: Adjust pointers 764.456ms",
+              "[2026-10-13T19:01:44.976+0000][32914.488s][info][gc,phases,start] GC(10134) Phase 4: Compact heap",
+              "[2026-10-13T19:01:44.979+0000][32914.491s][info][gc,phases      ] GC(10134) Phase 4: Compact heap 3.616ms",
+              "[2026-10-13T19:01:44.979+0000][32914.491s][info][gc,phases,start] GC(10134) Phase 5: Reset Metadata",
+              "[2026-10-13T19:01:45.545+0000][32915.057s][info][gc,phases      ] GC(10134) Phase 5: Reset Metadata 565.389ms",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,heap        ] GC(10134) Eden regions: 0->0(6)",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,heap        ] GC(10134) Survivor regions: 0->0(0)",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,heap        ] GC(10134) Old regions: 2043->2037",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,heap        ] GC(10134) Humongous regions: 5->5",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,metaspace   ] GC(10134) Metaspace: 74589K(75392K)->74589K(75392K) NonClass: 59624K(60032K)->59624K(60032K) Class: 14964K(15360K)->14964K(15360K)",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc             ] GC(10134) Pause Full (G1 Compaction Pause) 16346M->16300M(16384M) 4065.049ms",
+              "[2026-10-13T19:01:45.559+0000][32915.071s][info][gc,cpu         ] GC(10134) User=30.73s Sys=0.17s Real=4.06s",
+              "[2026-10-13T19:01:45.560+0000][32915.072s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 38767628 ns, Reaching safepoint: 142322 ns, At safepoint: 4070312029 ns, Leaving safepoint: 476067 ns, Total: 4070930418 ns, Threads: 0 runnable, 182 total",
+              "[2026-10-13T19:01:45.562+0000][32915.074s][info][gc,marking     ] GC(10132) Concurrent Mark From Roots 4113.196ms",
+              "[2026-10-13T19:01:45.562+0000][32915.074s][info][gc,marking     ] GC(10132) Concurrent Mark Abort",
+              "[2026-10-13T19:01:45.562+0000][32915.074s][info][gc             ] GC(10132) Concurrent Mark Cycle 4115.842ms",
+              "[2026-10-13T19:01:45.639+0000][32915.151s][info][gc,start       ] GC(10135) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T19:01:45.639+0000][32915.151s][info][gc,task        ] GC(10135) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases      ] GC(10135)   Pre Evacuate Collection Set: 0.26ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases      ] GC(10135)   Merge Heap Roots: 0.15ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases      ] GC(10135)   Evacuate Collection Set: 4.06ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases      ] GC(10135)   Post Evacuate Collection Set: 1.46ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases      ] GC(10135)   Other: 0.09ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,heap        ] GC(10135) Eden regions: 6->0(1)",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,heap        ] GC(10135) Survivor regions: 0->0(0)",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,heap        ] GC(10135) Old regions: 2037->2043",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,heap        ] GC(10135) Humongous regions: 5->5",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,metaspace   ] GC(10135) Metaspace: 74589K(75392K)->74589K(75392K) NonClass: 59624K(60032K)->59624K(60032K) Class: 14964K(15360K)->14964K(15360K)",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc             ] GC(10135) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16347M->16347M(16384M) 6.182ms",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,cpu         ] GC(10135) User=0.05s Sys=0.00s Real=0.00s",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,start       ] GC(10136) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,task        ] GC(10136) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T19:01:45.645+0000][32915.157s][info][gc,phases,start] GC(10136) Phase 1: Mark live objects",
+              "[2026-10-13T19:01:48.541+0000][32918.053s][info][gc,phases      ] GC(10136) Phase 1: Mark live objects 2895.972ms",
+              "[2026-10-13T19:01:48.541+0000][32918.053s][info][gc,phases,start] GC(10136) Phase 2: Prepare compaction",
+              "[2026-10-13T19:01:48.549+0000][32918.061s][info][gc,phases      ] GC(10136) Phase 2: Prepare compaction 7.775ms",
+              "[2026-10-13T19:01:48.549+0000][32918.061s][info][gc,phases,start] GC(10136) Phase 3: Adjust pointers",
+              "[2026-10-13T19:01:49.420+0000][32918.932s][info][gc,phases      ] GC(10136) Phase 3: Adjust pointers 870.674ms",
+              "[2026-10-13T19:01:49.420+0000][32918.932s][info][gc,phases,start] GC(10136) Phase 4: Compact heap",
+              "[2026-10-13T19:01:49.433+0000][32918.945s][info][gc,phases      ] GC(10136) Phase 4: Compact heap 13.323ms",
+              "[2026-10-13T19:01:49.433+0000][32918.945s][info][gc,phases,start] GC(10136) Phase 5: Reset Metadata",
+              "[2026-10-13T19:01:49.963+0000][32919.475s][info][gc,phases      ] GC(10136) Phase 5: Reset Metadata 529.292ms",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,heap        ] GC(10136) Eden regions: 0->0(6)",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,heap        ] GC(10136) Survivor regions: 0->0(0)",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,heap        ] GC(10136) Old regions: 2043->2037",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,heap        ] GC(10136) Humongous regions: 5->5",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,metaspace   ] GC(10136) Metaspace: 74589K(75392K)->74589K(75392K) NonClass: 59624K(60032K)->59624K(60032K) Class: 14964K(15360K)->14964K(15360K)",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc             ] GC(10136) Pause Full (G1 Compaction Pause) 16347M->16297M(16384M) 4330.736ms",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,cpu         ] GC(10136) User=30.97s Sys=0.13s Real=4.34s",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,start       ] GC(10137) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,task        ] GC(10137) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T19:01:49.976+0000][32919.488s][info][gc,phases,start] GC(10137) Phase 1: Mark live objects",
+              "[2026-10-13T19:01:52.707+0000][32922.219s][info][gc,phases      ] GC(10137) Phase 1: Mark live objects 2730.576ms",
+              "[2026-10-13T19:01:52.707+0000][32922.219s][info][gc,phases,start] GC(10137) Phase 2: Prepare compaction",
+              "[2026-10-13T19:01:53.695+0000][32923.207s][info][gc,phases      ] GC(10137) Phase 2: Prepare compaction 988.222ms",
+              "[2026-10-13T19:01:53.695+0000][32923.207s][info][gc,phases,start] GC(10137) Phase 3: Adjust pointers",
+              "[2026-10-13T19:01:55.149+0000][32924.661s][info][gc,phases      ] GC(10137) Phase 3: Adjust pointers 1453.724ms",
+              "[2026-10-13T19:01:55.149+0000][32924.661s][info][gc,phases,start] GC(10137) Phase 4: Compact heap",
+              "[2026-10-13T19:01:56.416+0000][32925.928s][info][gc,phases      ] GC(10137) Phase 4: Compact heap 1266.725ms",
+              "[2026-10-13T19:01:56.416+0000][32925.928s][info][gc,phases,start] GC(10137) Phase 5: Reset Metadata",
+              "[2026-10-13T19:01:56.417+0000][32925.929s][info][gc,phases      ] GC(10137) Phase 5: Reset Metadata 1.457ms",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,heap        ] GC(10137) Eden regions: 0->0(42)",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,heap        ] GC(10137) Survivor regions: 0->0(0)",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,heap        ] GC(10137) Old regions: 2037->2001",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,heap        ] GC(10137) Humongous regions: 5->5",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,metaspace   ] GC(10137) Metaspace: 74589K(75392K)->74572K(75392K) NonClass: 59624K(60032K)->59611K(60032K) Class: 14964K(15360K)->14961K(15360K)",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc             ] GC(10137) Pause Full (G1 Compaction Pause) 16297M->16032M(16384M) 6492.739ms",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc,cpu         ] GC(10137) User=48.12s Sys=0.31s Real=6.49s",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T19:01:56.469+0000][32925.981s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 79417643 ns, Reaching safepoint: 26293 ns, At safepoint: 10829882872 ns, Leaving safepoint: 581456 ns, Total: 10830490621 ns, Threads: 0 runnable, 182 total",
+              "[2026-10-13T19:02:20.408+0000][32949.920s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 3150117 ns, Reaching safepoint: 102673 ns, At safepoint: 23934575060 ns, Leaving safepoint: 288720 ns, Total: 23934966453 ns, Threads: 5 runnable, 180 total"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T170342384720Z.jfr",
+            "bytes": 4449033
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T173849575373Z.jfr",
+            "bytes": 4648226
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T184442403624Z.jfr",
+            "bytes": 9087855
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T175852860160Z.jfr",
+            "bytes": 9297232
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T182418761895Z.jfr",
+            "bytes": 4188449
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T181908760274Z.jfr",
+            "bytes": 4496176
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T184943244273Z.jfr",
+            "bytes": 4290048
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T170842356286Z.jfr",
+            "bytes": 9174807
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T171842473566Z.jfr",
+            "bytes": 4097557
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T173348767812Z.jfr",
+            "bytes": 4172177
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T174852767811Z.jfr",
+            "bytes": 9833765
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T180352831895Z.jfr",
+            "bytes": 8942341
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T185946354830Z.jfr",
+            "bytes": 3336362
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T172842687540Z.jfr",
+            "bytes": 4114142
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T171342437303Z.jfr",
+            "bytes": 4474464
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T180854256490Z.jfr",
+            "bytes": 4873147
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T174352783348Z.jfr",
+            "bytes": 4714207
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T175354627694Z.jfr",
+            "bytes": 4702262
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T185445034903Z.jfr",
+            "bytes": 4497285
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T172342665801Z.jfr",
+            "bytes": 4389771
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T182928766935Z.jfr",
+            "bytes": 4023525
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T181358289278Z.jfr",
+            "bytes": 4594814
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T183942388410Z.jfr",
+            "bytes": 4561914
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/checkpoints/checkpoint-20261013T183438772888Z.jfr",
+            "bytes": 4775501
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_59_46.jfr",
+            "bytes": 1493877
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_34_38.jfr",
+            "bytes": 4561914
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_49_43.jfr",
+            "bytes": 4497285
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_29_28.jfr",
+            "bytes": 4775501
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_44_42.jfr",
+            "bytes": 4290048
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_54_45.jfr",
+            "bytes": 3336362
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/repository/2026_10_13_09_53_10_1/2026_10_13_18_39_42.jfr",
+            "bytes": 4525941
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095310Z-c72db8ba-9f15-452d-8e29-3a5839a7052b/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T190325Z-b7f1e195-c1ac-40a8-928a-83aa17e5bd92/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  },
+  "teku-besu-1": {
+    "captured_at": "2026-10-13T21:54:12.809170+00:00",
+    "incidents": [
+      {
+        "heap": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/heap.hprof",
+        "heap_bytes": 26811699345,
+        "header_ascii": "JAVA PROFILE 1.0.2",
+        "heap_mtime": "2026-10-13T16:35:45.675959+00:00",
+        "gc_logs": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/gc-1-2026-10-13_09-55-00.log",
+            "bytes": 17358550,
+            "tail": [
+              "[2026-10-13T16:33:22.065+0000][23901.592s][info][gc,cpu         ] GC(8151) User=30.78s Sys=0.07s Real=3.96s",
+              "[2026-10-13T16:33:22.069+0000][23901.595s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 131432743 ns, Reaching safepoint: 35631 ns, At safepoint: 3972586946 ns, Leaving safepoint: 3697128 ns, Total: 3976319705 ns, Threads: 0 runnable, 166 total",
+              "[2026-10-13T16:33:22.166+0000][23901.692s][info][gc,start       ] GC(8152) Pause Young (Concurrent Start) (G1 Evacuation Pause)",
+              "[2026-10-13T16:33:22.166+0000][23901.693s][info][gc,task        ] GC(8152) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:33:22.170+0000][23901.697s][info][gc,phases      ] GC(8152)   Pre Evacuate Collection Set: 0.27ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,phases      ] GC(8152)   Merge Heap Roots: 0.06ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,phases      ] GC(8152)   Evacuate Collection Set: 3.39ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,phases      ] GC(8152)   Post Evacuate Collection Set: 0.85ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,phases      ] GC(8152)   Other: 0.09ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,heap        ] GC(8152) Eden regions: 6->0(1)",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,heap        ] GC(8152) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,heap        ] GC(8152) Old regions: 2042->2047",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,heap        ] GC(8152) Humongous regions: 0->0",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,metaspace   ] GC(8152) Metaspace: 74293K(75136K)->74293K(75136K) NonClass: 59383K(59840K)->59383K(59840K) Class: 14909K(15296K)->14909K(15296K)",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc             ] GC(8152) Pause Young (Concurrent Start) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16348M->16340M(16384M) 4.851ms",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc             ] GC(8153) Concurrent Mark Cycle",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,cpu         ] GC(8152) User=0.03s Sys=0.00s Real=0.00s",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][gc,marking     ] GC(8153) Concurrent Scan Root Regions",
+              "[2026-10-13T16:33:22.171+0000][23901.697s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 96944507 ns, Reaching safepoint: 31246 ns, At safepoint: 4987997 ns, Leaving safepoint: 9431 ns, Total: 5028674 ns, Threads: 0 runnable, 166 total",
+              "[2026-10-13T16:33:22.180+0000][23901.706s][info][gc,marking     ] GC(8153) Concurrent Scan Root Regions 8.910ms",
+              "[2026-10-13T16:33:22.180+0000][23901.706s][info][gc,marking     ] GC(8153) Concurrent Mark",
+              "[2026-10-13T16:33:22.180+0000][23901.706s][info][gc,marking     ] GC(8153) Concurrent Mark From Roots",
+              "[2026-10-13T16:33:22.180+0000][23901.706s][info][gc,task        ] GC(8153) Using 2 workers of 2 for marking",
+              "[2026-10-13T16:33:22.181+0000][23901.708s][info][gc,start       ] GC(8154) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T16:33:22.181+0000][23901.708s][info][gc,task        ] GC(8154) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,phases      ] GC(8154)   Pre Evacuate Collection Set: 0.27ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,phases      ] GC(8154)   Merge Heap Roots: 0.05ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,phases      ] GC(8154)   Evacuate Collection Set: 3.55ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,phases      ] GC(8154)   Post Evacuate Collection Set: 1.25ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,phases      ] GC(8154)   Other: 0.11ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,heap        ] GC(8154) Eden regions: 1->0(1)",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,heap        ] GC(8154) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,heap        ] GC(8154) Old regions: 2047->2048",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,heap        ] GC(8154) Humongous regions: 0->0",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,metaspace   ] GC(8154) Metaspace: 74293K(75136K)->74293K(75136K) NonClass: 59383K(59840K)->59383K(59840K) Class: 14909K(15296K)->14909K(15296K)",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc             ] GC(8154) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16348M->16348M(16384M) 5.399ms",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,cpu         ] GC(8154) User=0.03s Sys=0.00s Real=0.01s",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,start       ] GC(8155) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:33:22.187+0000][23901.713s][info][gc,task        ] GC(8155) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:33:22.192+0000][23901.719s][info][gc,phases,start] GC(8155) Phase 1: Mark live objects",
+              "[2026-10-13T16:33:24.734+0000][23904.261s][info][gc,phases      ] GC(8155) Phase 1: Mark live objects 2542.261ms",
+              "[2026-10-13T16:33:24.734+0000][23904.261s][info][gc,phases,start] GC(8155) Phase 2: Prepare compaction",
+              "[2026-10-13T16:33:24.739+0000][23904.266s][info][gc,phases      ] GC(8155) Phase 2: Prepare compaction 4.983ms",
+              "[2026-10-13T16:33:24.739+0000][23904.266s][info][gc,phases,start] GC(8155) Phase 3: Adjust pointers",
+              "[2026-10-13T16:33:25.651+0000][23905.177s][info][gc,phases      ] GC(8155) Phase 3: Adjust pointers 911.209ms",
+              "[2026-10-13T16:33:25.651+0000][23905.177s][info][gc,phases,start] GC(8155) Phase 4: Compact heap",
+              "[2026-10-13T16:33:25.657+0000][23905.183s][info][gc,phases      ] GC(8155) Phase 4: Compact heap 6.075ms",
+              "[2026-10-13T16:33:25.657+0000][23905.184s][info][gc,phases,start] GC(8155) Phase 5: Reset Metadata",
+              "[2026-10-13T16:33:26.235+0000][23905.762s][info][gc,phases      ] GC(8155) Phase 5: Reset Metadata 578.500ms",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,heap        ] GC(8155) Eden regions: 0->0(10)",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,heap        ] GC(8155) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,heap        ] GC(8155) Old regions: 2048->2038",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,heap        ] GC(8155) Humongous regions: 0->0",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,metaspace   ] GC(8155) Metaspace: 74293K(75136K)->74293K(75136K) NonClass: 59383K(59840K)->59383K(59840K) Class: 14909K(15296K)->14909K(15296K)",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc             ] GC(8155) Pause Full (G1 Compaction Pause) 16348M->16275M(16384M) 4062.388ms",
+              "[2026-10-13T16:33:26.249+0000][23905.776s][info][gc,cpu         ] GC(8155) User=30.77s Sys=0.07s Real=4.06s",
+              "[2026-10-13T16:33:26.254+0000][23905.780s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 10479274 ns, Reaching safepoint: 32046 ns, At safepoint: 4067968363 ns, Leaving safepoint: 4435864 ns, Total: 4072436273 ns, Threads: 0 runnable, 166 total",
+              "[2026-10-13T16:33:26.254+0000][23905.781s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 189320 ns, Reaching safepoint: 353135 ns, At safepoint: 20311 ns, Leaving safepoint: 7613 ns, Total: 381059 ns, Threads: 4 runnable, 156 total",
+              "[2026-10-13T16:33:26.254+0000][23905.781s][info][gc,marking     ] GC(8153) Concurrent Mark From Roots 4074.567ms",
+              "[2026-10-13T16:33:26.254+0000][23905.781s][info][gc,marking     ] GC(8153) Concurrent Mark Abort",
+              "[2026-10-13T16:33:26.254+0000][23905.781s][info][gc             ] GC(8153) Concurrent Mark Cycle 4083.620ms",
+              "[2026-10-13T16:33:26.255+0000][23905.781s][info][safepoint      ] Safepoint \"FindDeadlocks\", Time since last: 323536 ns, Reaching safepoint: 82272 ns, At safepoint: 20672 ns, Leaving safepoint: 4792 ns, Total: 107736 ns, Threads: 4 runnable, 156 total",
+              "[2026-10-13T16:33:26.287+0000][23905.814s][info][gc,start       ] GC(8156) Pause Young (Normal) (G1 Evacuation Pause)",
+              "[2026-10-13T16:33:26.287+0000][23905.814s][info][gc,task        ] GC(8156) Using 8 workers of 8 for evacuation",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases      ] GC(8156)   Pre Evacuate Collection Set: 0.18ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases      ] GC(8156)   Merge Heap Roots: 0.07ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases      ] GC(8156)   Evacuate Collection Set: 4.76ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases      ] GC(8156)   Post Evacuate Collection Set: 1.95ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases      ] GC(8156)   Other: 0.10ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,heap        ] GC(8156) Eden regions: 10->0(1)",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,heap        ] GC(8156) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,heap        ] GC(8156) Old regions: 2038->2048",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,heap        ] GC(8156) Humongous regions: 0->0",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,metaspace   ] GC(8156) Metaspace: 74293K(75136K)->74293K(75136K) NonClass: 59383K(59840K)->59383K(59840K) Class: 14909K(15296K)->14909K(15296K)",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc             ] GC(8156) Pause Young (Normal) (G1 Evacuation Pause) (Evacuation Failure: Allocation) 16355M->16355M(16384M) 7.214ms",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,cpu         ] GC(8156) User=0.05s Sys=0.00s Real=0.01s",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,ergo        ] Attempting full compaction",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,start       ] GC(8157) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,task        ] GC(8157) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:33:26.294+0000][23905.821s][info][gc,phases,start] GC(8157) Phase 1: Mark live objects",
+              "[2026-10-13T16:33:28.951+0000][23908.478s][info][gc,phases      ] GC(8157) Phase 1: Mark live objects 2656.848ms",
+              "[2026-10-13T16:33:28.951+0000][23908.478s][info][gc,phases,start] GC(8157) Phase 2: Prepare compaction",
+              "[2026-10-13T16:33:28.954+0000][23908.481s][info][gc,phases      ] GC(8157) Phase 2: Prepare compaction 3.123ms",
+              "[2026-10-13T16:33:28.954+0000][23908.481s][info][gc,phases,start] GC(8157) Phase 3: Adjust pointers",
+              "[2026-10-13T16:33:29.748+0000][23909.274s][info][gc,phases      ] GC(8157) Phase 3: Adjust pointers 793.395ms",
+              "[2026-10-13T16:33:29.748+0000][23909.274s][info][gc,phases,start] GC(8157) Phase 4: Compact heap",
+              "[2026-10-13T16:33:29.751+0000][23909.278s][info][gc,phases      ] GC(8157) Phase 4: Compact heap 3.588ms",
+              "[2026-10-13T16:33:29.751+0000][23909.278s][info][gc,phases,start] GC(8157) Phase 5: Reset Metadata",
+              "[2026-10-13T16:33:30.349+0000][23909.875s][info][gc,phases      ] GC(8157) Phase 5: Reset Metadata 597.174ms",
+              "[2026-10-13T16:33:30.364+0000][23909.890s][info][gc,heap        ] GC(8157) Eden regions: 0->0(8)",
+              "[2026-10-13T16:33:30.364+0000][23909.890s][info][gc,heap        ] GC(8157) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:30.364+0000][23909.890s][info][gc,heap        ] GC(8157) Old regions: 2048->2040",
+              "[2026-10-13T16:33:30.364+0000][23909.890s][info][gc,heap        ] GC(8157) Humongous regions: 0->0",
+              "[2026-10-13T16:33:30.364+0000][23909.890s][info][gc,metaspace   ] GC(8157) Metaspace: 74293K(75136K)->74293K(75136K) NonClass: 59383K(59840K)->59383K(59840K) Class: 14909K(15296K)->14909K(15296K)",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc             ] GC(8157) Pause Full (G1 Compaction Pause) 16355M->16289M(16384M) 4069.691ms",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc,cpu         ] GC(8157) User=30.71s Sys=0.10s Real=4.06s",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc,ergo        ] Attempting maximal full compaction clearing soft references",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc,start       ] GC(8158) Pause Full (G1 Compaction Pause)",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc,task        ] GC(8158) Using 8 workers of 8 for full compaction",
+              "[2026-10-13T16:33:30.364+0000][23909.891s][info][gc,phases,start] GC(8158) Phase 1: Mark live objects",
+              "[2026-10-13T16:33:32.952+0000][23912.478s][info][gc,phases      ] GC(8158) Phase 1: Mark live objects 2587.646ms",
+              "[2026-10-13T16:33:32.952+0000][23912.478s][info][gc,phases,start] GC(8158) Phase 2: Prepare compaction",
+              "[2026-10-13T16:33:33.875+0000][23913.401s][info][gc,phases      ] GC(8158) Phase 2: Prepare compaction 922.903ms",
+              "[2026-10-13T16:33:33.875+0000][23913.401s][info][gc,phases,start] GC(8158) Phase 3: Adjust pointers",
+              "[2026-10-13T16:33:35.183+0000][23914.710s][info][gc,phases      ] GC(8158) Phase 3: Adjust pointers 1308.152ms",
+              "[2026-10-13T16:33:35.183+0000][23914.710s][info][gc,phases,start] GC(8158) Phase 4: Compact heap",
+              "[2026-10-13T16:33:36.481+0000][23916.008s][info][gc,phases      ] GC(8158) Phase 4: Compact heap 1297.958ms",
+              "[2026-10-13T16:33:36.481+0000][23916.008s][info][gc,phases,start] GC(8158) Phase 5: Reset Metadata",
+              "[2026-10-13T16:33:36.483+0000][23916.009s][info][gc,phases      ] GC(8158) Phase 5: Reset Metadata 1.655ms",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,heap        ] GC(8158) Eden regions: 0->0(33)",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,heap        ] GC(8158) Survivor regions: 0->0(0)",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,heap        ] GC(8158) Old regions: 2040->2015",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,heap        ] GC(8158) Humongous regions: 0->0",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,metaspace   ] GC(8158) Metaspace: 74293K(75136K)->74278K(75136K) NonClass: 59383K(59840K)->59371K(59840K) Class: 14909K(15296K)->14906K(15296K)",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc             ] GC(8158) Pause Full (G1 Compaction Pause) 16289M->16114M(16384M) 6143.534ms",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc,cpu         ] GC(8158) User=46.09s Sys=0.03s Real=6.15s",
+              "[2026-10-13T16:33:36.507+0000][23916.034s][info][gc             ] GC Overhead Limit exceeded too often (5).",
+              "[2026-10-13T16:33:36.508+0000][23916.035s][info][safepoint      ] Safepoint \"G1CollectForAllocation\", Time since last: 32156904 ns, Reaching safepoint: 22167 ns, At safepoint: 10220702436 ns, Leaving safepoint: 287748 ns, Total: 10221012351 ns, Threads: 0 runnable, 154 total",
+              "[2026-10-13T16:33:58.016+0000][23937.543s][info][safepoint      ] Safepoint \"HeapDumper\", Time since last: 6318840 ns, Reaching safepoint: 82341 ns, At safepoint: 21502055094 ns, Leaving safepoint: 53129 ns, Total: 21502190564 ns, Threads: 1 runnable, 139 total"
+            ]
+          }
+        ],
+        "jfr_files": [
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T160955843535Z.jfr",
+            "bytes": 4924645
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T151943667208Z.jfr",
+            "bytes": 10880399
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T152443772611Z.jfr",
+            "bytes": 5274252
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T152944076073Z.jfr",
+            "bytes": 5720820
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T160455531678Z.jfr",
+            "bytes": 4601272
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T150943643380Z.jfr",
+            "bytes": 12039338
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T144431425154Z.jfr",
+            "bytes": 6226406
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T162458815070Z.jfr",
+            "bytes": 4009069
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T153449070917Z.jfr",
+            "bytes": 5061426
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T150443675917Z.jfr",
+            "bytes": 5934889
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T163000774178Z.jfr",
+            "bytes": 3138266
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T154454745863Z.jfr",
+            "bytes": 5650317
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T161456035037Z.jfr",
+            "bytes": 4789333
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T151443669785Z.jfr",
+            "bytes": 11571336
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T145443559313Z.jfr",
+            "bytes": 6596177
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T145943577937Z.jfr",
+            "bytes": 6278516
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T155955302673Z.jfr",
+            "bytes": 5093602
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T154954790202Z.jfr",
+            "bytes": 5666082
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T143921408776Z.jfr",
+            "bytes": 6658295
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T155455148565Z.jfr",
+            "bytes": 4509582
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T144941412419Z.jfr",
+            "bytes": 6813788
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T161958465575Z.jfr",
+            "bytes": 4491415
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T143411415910Z.jfr",
+            "bytes": 5689400
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/checkpoints/checkpoint-20261013T153949002014Z.jfr",
+            "bytes": 10804826
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_15_59_55.jfr",
+            "bytes": 4601272
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_09_55.jfr",
+            "bytes": 4789333
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_24_58.jfr",
+            "bytes": 3138266
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_19_58.jfr",
+            "bytes": 4009069
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_04_55.jfr",
+            "bytes": 4924645
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_14_56.jfr",
+            "bytes": 4491415
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/repository/2026_10_13_09_55_01_1/2026_10_13_16_30_00.jfr",
+            "bytes": 1640897
+          },
+          {
+            "path": "/data/besu-profiling/runs/20261013T095500Z-7e634ded-1958-42a6-b8d0-82a1cf01136a/exit.jfr",
+            "bytes": 0
+          }
+        ]
+      }
+    ],
+    "current_heap_flags": [
+      "-XX:+ExitOnOutOfMemoryError",
+      "-XX:+HeapDumpOnOutOfMemoryError",
+      "-XX:HeapDumpPath=/profiling/runs/20261013T163547Z-25bac784-1060-485d-ad0f-a6847804618d/heap.hprof",
+      "-XX:MaxHeapFreeRatio=30",
+      "-XX:MaxHeapSize=17179869184",
+      "-XX:MinHeapFreeRatio=10",
+      "-XX:SoftMaxHeapSize=17179869184"
+    ]
+  }
+}

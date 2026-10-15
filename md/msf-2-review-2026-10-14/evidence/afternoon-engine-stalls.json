@@ -1,0 +1,172 @@
+{
+  "query": "SELECT DISTINCT Timestamp,ResourceAttributes['host.name'] AS host,ResourceAttributes['container.name'] AS container,substring(Body,1,5000) AS Body FROM external.otel_logs WHERE ResourceAttributes['network']='glamsterdam-msf-2' AND ResourceAttributes['host.name'] IN ('nimbus-besu-1','lighthouse-besu-1','nimbus-reth-1','grandine-reth-1','prysm-reth-1') AND ResourceAttributes['container.name'] IN ('beacon','execution') AND Timestamp>=toDateTime('2026-10-14 14:24:00') AND Timestamp<toDateTime('2026-10-14 14:34:00') AND match(Body,'(WARN|WRN|ERROR|ERR).*(timeout|Timeout|timed out|payload|Payload|sync)|Block imported|Imported block|Validated.*block') ORDER BY Timestamp ASC LIMIT 300 SETTINGS max_threads=2",
+  "attempt_errors": [
+    "panda exited 1: khouse/?default_format=TabSeparatedWithNames\": read tcp 172.18.0.2:60464->104.26.13.152:443: read: connection reset by peer\n\n  hint: an upstream datasource or node returned a gateway error; the target may be temporarily unreachable \u2014 retry, or confirm it is still advertised with 'panda datasources'\n"
+  ],
+  "result": {
+    "columns": [
+      "Timestamp",
+      "host",
+      "container",
+      "Body"
+    ],
+    "rows": [
+      [
+        "2026-10-14 14:25:26.022455379",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 14 14:25:26.022 WARN  Execution engine call failed                  error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out)"
+      ],
+      [
+        "2026-10-14 14:25:26.023482145",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 14 14:25:26.022 ERROR Local execution payload build failed; falling back to an external bid  error: GetPayloadFailed(EngineError(Api { error: HttpClient(url: http://snooper-engine:8561/, kind: timeout, detail: operation timed out) })), slot: 14812"
+      ],
+      [
+        "2026-10-14 14:27:22.740518426",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:22.740Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:22.762461522",
+        "prysm-reth-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 14:27:22.76]\u001b[0m \u001b[31mERROR\u001b[0m\u001b[36m sync:\u001b[0m Could not handle p2p pubsub \u001b[31merror\u001b[0m=timeout from http.Client: received an undefined execution engine error \u001b[31mtopic\u001b[0m=/eth2/5ca8f8c9/execution_payload/ssz_snappy"
+      ],
+      [
+        "2026-10-14 14:27:24.834675454",
+        "prysm-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:24.834555Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467029, hash: 0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m10.040615845s"
+      ],
+      [
+        "2026-10-14 14:27:27.729356392",
+        "grandine-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:27.729208Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467029, hash: 0xbc5f4c44e1c0558e4ba221f4358107c32bf5296b9f06c1fc993c15148253029a } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m12.979691809s"
+      ],
+      [
+        "2026-10-14 14:27:36.194898257",
+        "nimbus-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:36.194792Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m7.172137413s"
+      ],
+      [
+        "2026-10-14 14:27:36.970941823",
+        "prysm-reth-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 14:27:36.97]\u001b[0m \u001b[31mERROR\u001b[0m\u001b[36m sync:\u001b[0m Could not handle p2p pubsub \u001b[31merror\u001b[0m=timeout from http.Client: received an undefined execution engine error \u001b[31mtopic\u001b[0m=/eth2/5ca8f8c9/execution_payload/ssz_snappy"
+      ],
+      [
+        "2026-10-14 14:27:37.498213757",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:37.498Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:38.816689511",
+        "prysm-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:38.816484Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m9.815397847s"
+      ],
+      [
+        "2026-10-14 14:27:42.727720638",
+        "grandine-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:42.727580Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467030, hash: 0xce660bd33c396b072b2cb49d04c78ee108b0daa9f85c3fb43e8fe1bd64b29daa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m13.216749054s"
+      ],
+      [
+        "2026-10-14 14:27:50.741349314",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:50.741Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:52.756001238",
+        "prysm-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:52.754976Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467031, hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m9.855300948s"
+      ],
+      [
+        "2026-10-14 14:27:57.105098616",
+        "grandine-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:27:57.105025Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467031, hash: 0xea554d2f60f3ee4d70903ac984eac4b8b9ae555c92fb7005df8f2bb8fb3218fa } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m14.348001802s"
+      ],
+      [
+        "2026-10-14 14:27:58.134396329",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:58.134Z]  WARN block_producer::block_producer:2388: unable to retrieve payload with payload_id Cached(Gloas(0x0ed6db739b4e59d2)): all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:27:59.140399682",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:27:59.140Z]  WARN block_producer::block_producer:2482: execution engine failed to produce payload: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:08.631429442",
+        "prysm-reth-1",
+        "beacon",
+        "\u001b[90m[2026-10-14 14:28:08.63]\u001b[0m \u001b[31mERROR\u001b[0m\u001b[36m sync:\u001b[0m Could not handle p2p pubsub \u001b[31merror\u001b[0m=timeout from http.Client: received an undefined execution engine error \u001b[31mtopic\u001b[0m=/eth2/5ca8f8c9/execution_payload/ssz_snappy"
+      ],
+      [
+        "2026-10-14 14:28:08.842468386",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:28:08.842Z]  WARN eth1_api::execution_service:113: engine_newPayload call failed: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:28:08.868154085",
+        "prysm-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:08.868086Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467032, hash: 0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08 } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m8.20456767s"
+      ],
+      [
+        "2026-10-14 14:28:11.183802076",
+        "grandine-reth-1",
+        "execution",
+        "\u001b[2m2026-10-14T14:28:11.183700Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Failed to deliver newPayload response, receiver dropped (request cancelled): Ok(PayloadStatus { status: Valid, latest_valid_hash: Some(0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08) }) \u001b[3mpayload\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 24467032, hash: 0xb5cbd002784c503ff0f4bda69867f0c81effd90372a210f4740fd08d24465e08 } \u001b[3melapsed\u001b[0m\u001b[2m=\u001b[0m10.321542341s"
+      ],
+      [
+        "2026-10-14 14:28:49.578491105",
+        "nimbus-besu-1",
+        "beacon",
+        "WRN 2026-10-14 14:28:49.573+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ],
+      [
+        "2026-10-14 14:28:50.780202605",
+        "nimbus-besu-1",
+        "execution",
+        "2026-10-14 14:28:50.779+0000 | vert.x-worker-thread-18 | ERROR | JsonRpcExecutorHandler | engine_getPayloadV6 - Error streaming JSON-RPC response"
+      ],
+      [
+        "2026-10-14 14:29:13.451236929",
+        "lighthouse-besu-1",
+        "beacon",
+        "Oct 14 14:29:13.450 WARN  Error processing HTTP API request             elapsed_ms: 0.866, status: 404 Not Found, path: /eth/v1/beacon/execution_payload_envelopes/0x3dfba19bb72be0fc4ee30169a935dbbae18b8138f64c9702f505497630199a91, method: GET"
+      ],
+      [
+        "2026-10-14 14:30:37.006107098",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:30:37.005Z]  WARN block_producer::block_producer:2388: unable to retrieve payload with payload_id Cached(Gloas(0x7817021f718074c9)): all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:30:38.012770940",
+        "grandine-reth-1",
+        "beacon",
+        "[2026-10-14T14:30:38.012Z]  WARN block_producer::block_producer:2482: execution engine failed to produce payload: all Eth1 RPC endpoints exhausted peers=[39/200]"
+      ],
+      [
+        "2026-10-14 14:33:13.550058139",
+        "nimbus-reth-1",
+        "beacon",
+        "WRN 2026-10-14 14:33:13.544+00:00 Timeout while getting execution payload    topics=\"beacval\" url=http://snooper-engine:8561"
+      ]
+    ]
+  }
+}
