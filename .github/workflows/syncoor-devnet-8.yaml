@@ -50,30 +50,30 @@ on:
         default: ""
         type: string
       el-image:
-        description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
+        description: 'Execution layer client images as JSON (e.g., {"geth": "ethpandaops/geth:master", "besu": "ethpandaops/besu:main"})'
         required: false
         default: >-
           {
-            "besu": "hyperledger/besu:26.9.0",
-            "geth": "ethereum/client-go:v1.17.8",
-            "erigon": "erigontech/erigon:v3.7.1",
-            "nethermind": "nethermind/nethermind:2.1.0",
-            "reth": "ghcr.io/paradigmxyz/reth:v2.7.0",
-            "nimbusel": "statusim/nimbus-eth1:v0.4.2",
-            "ethrex": "ghcr.io/lambdaclass/ethrex:29.0.1"
+            "besu": "ethpandaops/besu:main",
+            "geth": "ethpandaops/geth:master",
+            "erigon": "ethpandaops/erigon:main",
+            "nethermind": "ethpandaops/nethermind:master",
+            "reth": "ethpandaops/reth:main",
+            "nimbusel": "ethpandaops/nimbus-eth1:master",
+            "ethrex": "ethpandaops/ethrex:main"
           }
         type: string
       cl-image:
-        description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "sigp/lighthouse:latest", "teku": "consensys/teku:latest"})'
+        description: 'Consensus layer client images as JSON (e.g., {"lighthouse": "ethpandaops/lighthouse:unstable", "teku": "ethpandaops/teku:master"})'
         required: false
         default: >-
           {
-            "lighthouse": "sigp/lighthouse:v8.3.0-rc.0",
-            "teku": "consensys/teku:26.10.0",
-            "prysm": "offchainlabs/prysm-beacon-chain:v7.2.1",
-            "nimbus": "statusim/nimbus-eth2:multiarch-v26.10.0",
-            "lodestar": "chainsafe/lodestar:v1.50.0",
-            "grandine": "sifrai/grandine:3.0.0-rc.0"
+            "lighthouse": "ethpandaops/lighthouse:unstable",
+            "teku": "ethpandaops/teku:master",
+            "prysm": "ethpandaops/prysm-beacon-chain:develop",
+            "nimbus": "ethpandaops/nimbus-eth2:unstable",
+            "lodestar": "ethpandaops/lodestar:unstable",
+            "grandine": "ethpandaops/grandine:develop"
           }
         type: string
 
@@ -142,25 +142,25 @@ jobs:
         run: |
           cat > /tmp/default-el-images.json <<'EOF'
           {
-            "besu": "hyperledger/besu:26.9.0",
-            "geth": "ethereum/client-go:v1.17.8",
-            "erigon": "erigontech/erigon:v3.7.1",
-            "nethermind": "nethermind/nethermind:2.1.0",
-            "reth": "ghcr.io/paradigmxyz/reth:v2.7.0",
-            "nimbusel": "statusim/nimbus-eth1:v0.4.2",
-            "ethrex": "ghcr.io/lambdaclass/ethrex:29.0.1"
+            "besu": "ethpandaops/besu:main",
+            "geth": "ethpandaops/geth:master",
+            "erigon": "ethpandaops/erigon:main",
+            "nethermind": "ethpandaops/nethermind:master",
+            "reth": "ethpandaops/reth:main",
+            "nimbusel": "ethpandaops/nimbus-eth1:master",
+            "ethrex": "ethpandaops/ethrex:main"
           }
           EOF
           echo "el-images=$(cat /tmp/default-el-images.json | jq -c .)" >> $GITHUB_OUTPUT
 
           cat > /tmp/default-cl-images.json <<'EOF'
           {
-            "lighthouse": "sigp/lighthouse:v8.3.0-rc.0",
-            "teku": "consensys/teku:26.10.0",
-            "prysm": "offchainlabs/prysm-beacon-chain:v7.2.1",
-            "nimbus": "statusim/nimbus-eth2:multiarch-v26.10.0",
-            "lodestar": "chainsafe/lodestar:v1.50.0",
-            "grandine": "sifrai/grandine:3.0.0-rc.0"
+            "lighthouse": "ethpandaops/lighthouse:unstable",
+            "teku": "ethpandaops/teku:master",
+            "prysm": "ethpandaops/prysm-beacon-chain:develop",
+            "nimbus": "ethpandaops/nimbus-eth2:unstable",
+            "lodestar": "ethpandaops/lodestar:unstable",
+            "grandine": "ethpandaops/grandine:develop"
           }
           EOF
           echo "cl-images=$(cat /tmp/default-cl-images.json | jq -c .)" >> $GITHUB_OUTPUT
