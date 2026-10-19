@@ -71,6 +71,13 @@ def main():
              '_snapshot_integrity.json':report,'_snapshot_reopen.json':proof,
              '_snapshot_startup.json':{'preparation_command':read('client-command.json'),
                  'notes':'The reopened proof uses this pinned preparation profile. Supply the bundled source genesis; adjust host paths and resource limits for consumers. Nethermind requires FlatDB and TTD=0; Erigon uses snap.stop.'}}
+    if c=='nethermind':
+        cleanup=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/nethermind-flatdb-cleanup/complete.json']))
+        assert cleanup['head']==plan['anchor']==24452538 and cleanup['image']==proof['image']
+        assert cleanup['patricia_bytes_after']<16*1024**2
+        assert cleanup['reclaimed_bytes']==cleanup['patricia_bytes_before']-cleanup['patricia_bytes_after']>0
+        objects['_snapshot_flatdb_cleanup.json']=cleanup
+        metadata['pbt']['patricia_cleanup_evidence']=prefix+'_snapshot_flatdb_cleanup.json'
     for name,value in objects.items():
         data=json.dumps(value,indent=2).encode()
         s3.put_object(Bucket=BUCKET,Key=prefix+name,Body=data,ContentType='application/json')
