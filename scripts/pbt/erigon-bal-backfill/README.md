@@ -47,6 +47,13 @@ again before export. The benchmark snapshot's startup profile must retain this
 flag to prevent immediate sidecar pruning. This is an isolated benchmark profile;
 the flag also disables other database pruning and is not a production default.
 
+In the pinned source, `PruneExecutionStage` checks `dbg.NoPrune()` before
+pruning the BAL table. `SnapshotsPrune` also checks it before
+`PruneAncientBlocks`, which otherwise deletes sidecars together with frozen
+block bodies. The other native sidecar-deletion paths remove or truncate the
+blocks themselves; they are not normal restart housekeeping. The final API
+audit still checks actual retention rather than relying on these source guards.
+
 Publication includes `_snapshot_bal_backfill.json` and
 `_snapshot_bal_backfill_build.json`, alongside the exhaustive restart/API proof.
 The report clearly identifies restoration from validated replay inputs.
