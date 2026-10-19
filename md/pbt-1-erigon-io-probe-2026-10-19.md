@@ -581,3 +581,27 @@ their final restart proofs each cover 51,420 bodies and 50,400 qualifying blocks
 with identical final block hash, state root and BAL hash. This cross-client
 comparison is recorded in controller `three-client-final-audits.json`. Upload
 completion and remote verification remain outstanding.
+
+## Continued replay profiling at 23:34 UTC
+
+The same native PID (173387) continued without a restart. A 30.02-second CPU
+profile collected 54.04 CPU-seconds. `DomainRoTx.getLatestFromFiles` accounted
+for 53.85% of sampled CPU cumulatively; binary-fuse filter membership checks
+accounted for 37.27%. These percentages overlap and describe CPU samples, not
+wall-clock attribution. Source inspection shows the latest-value lookup walks
+snapshot files newest first and tests each file's existence filter. This makes
+file lookup a concrete optimization candidate; no cache or lookup semantics
+were changed in this measurement.
+
+The first two completed 64-block batches spent 23.07/24.86 seconds executing
+and 30.67/31.02 seconds in the main shared-domain flush/commit. The latter
+included 13.79/18.39 seconds flushing and 16.69/12.44 seconds committing.
+Pruning took roughly two additional seconds per batch. These nested timings
+must not be added twice. Normal durability remains enabled.
+
+Controller `original-2g-steady.cpu.pprof`, `original-2g-steady-top.txt`, the
+before/after process samples and `original-2g-steady-summary.json` preserve the
+measurement. The summary measures throughput between completed persistence
+events, excludes the first batch, and labels its ETA as replay-only. Short
+window variability and profiling overhead limit the estimate; the final full
+BAL audit and upload remain necessary before delivery.
