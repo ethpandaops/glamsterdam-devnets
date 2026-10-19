@@ -211,3 +211,20 @@ the result confirms the location of the wait, not uncontended throughput.
 Evidence: `erigon-native-commit-steady.{log,json}`. MDBX's pinned source routes
 WRITE_MAP commits through `msync` and non-WRITE_MAP commits through its file-sync
 path; both preserve normal durability in the planned comparison.
+
+The transfer finished at 21:39:42 UTC. Its count gate stopped because the
+checkpoint's earlier read-only native validation had created an empty
+`chaindata/mdbx.lck` after the checkpoint manifest was recorded. Source and
+destination inventories matched exactly: 179,486 paths and 515,054,564,136
+bytes, with no path or size differences. The original manifest excluded lock
+files and counted 179,485 files. The empty copied lock was archived outside
+the data directory after checking that neither it nor MDBX was open. Database
+checksum verification was resumed without retransferring or changing data
+files. The original failure and inventory comparison remain recorded. Future
+copies explicitly exclude this one lock file.
+
+Native measurements now record log byte offsets around the replay window.
+`summarize-erigon-native.py` reports stage timings from that window separately
+from startup/restart audits. Nested timings overlap and must not be summed;
+device IO covers the whole VM. The existing native batched-insert/forkchoice
+tests also passed, but no batch API or replay behavior has been changed.

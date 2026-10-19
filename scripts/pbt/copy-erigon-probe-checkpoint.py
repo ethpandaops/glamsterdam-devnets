@@ -31,7 +31,7 @@ def main():
     assert shutil.disk_usage(DATA).free>expected+200*1024**3
     assert not subprocess.check_output(['docker','ps','-q'],text=True).strip(), 'Probe must not run client containers during copy'
     command=['rsync','-aHXS','--numeric-ids','--partial','--info=progress2','--outbuf=L',
-             '--bwlimit=262144','-e',
+             '--bwlimit=262144','--exclude=/chaindata/mdbx.lck','-e',
              'ssh -i /data/pbt-1/io-probe/checkpoint-read-key -o UserKnownHostsFile=/data/pbt-1/io-probe/source-known-hosts -o StrictHostKeyChecking=yes -o BatchMode=yes',
              'root@10.35.0.2:/',str(DATA)+'/']
     result={'started_at':time.time(),'phase':'copying','source_checkpoint':proof['path'],
