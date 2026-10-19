@@ -91,6 +91,25 @@ unit=subprocess.check_output(['systemctl','show','pbt-1-checkpoint-copy',
 log=root/'checkpoint-copy.log'
 r={'time':time.time(),'copy':copy,
    'service':dict(x.split('=',1) for x in unit.splitlines() if '=' in x)}
+native=Path('/data/pbt-1/native')
+if native.exists():
+    build_unit=subprocess.check_output(['systemctl','show','pbt-1-native-build',
+        '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
+    r['native_build_service']=dict(x.split('=',1) for x in build_unit.splitlines() if '=' in x)
+    build=native/'build-report.json'
+    if build.exists():r['native_build']=json.loads(build.read_text())
+    r['native_trials']={}
+    for variant in ('stock','profile','profile-no-writemap'):
+        trial=native/variant
+        if not trial.exists():continue
+        current={}
+        for key in ('status','timing'):
+            path=trial/(key+'.json')
+            if path.exists():current[key]=json.loads(path.read_text())
+        trial_unit=subprocess.check_output(['systemctl','show','pbt-1-native-'+variant,
+            '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
+        current['service']=dict(x.split('=',1) for x in trial_unit.splitlines() if '=' in x)
+        r['native_trials'][variant]=current
 if log.exists():
     r['log_bytes']=log.stat().st_size
     r['log_updated_at']=log.stat().st_mtime
@@ -204,6 +223,11 @@ def main():
                 report['alerts'].append('temporary Erigon probe: copy is incomplete and its service is not active')
             if phase=='copying' and now-probe.get('log_updated_at',now)>900:
                 report['alerts'].append('temporary Erigon probe: no copy progress output for 15 minutes')
+            if probe.get('native_build_service',{}).get('ActiveState')=='failed':
+                report['alerts'].append('temporary Erigon probe: native build failed; inspect build logs')
+            for variant,trial in probe.get('native_trials',{}).items():
+                if trial['service'].get('ActiveState')=='failed' or trial.get('status',{}).get('phase')=='failed':
+                    report['alerts'].append(f'temporary Erigon probe: native {variant} trial failed')
         except Exception as exc:
             report['temporary_probe']={'error':str(exc)}
             report['alerts'].append('temporary Erigon probe: '+str(exc))
@@ -249,6 +273,11 @@ def main():
             lines += ['', f'Temporary Erigon probe: {phase}; copy service '
                       f'{probe["service"].get("ActiveState", "unknown")}. '
                       f'{progress}']
+            if 'native_build_service' in probe:
+                built=', '.join(item['name'] for item in probe.get('native_build',{}).get('builds',[])) or 'none yet'
+                lines += [f'Native Erigon build: {probe["native_build_service"].get("ActiveState", "unknown")}; binaries built: {built}.']
+            for variant,trial in probe.get('native_trials',{}).items():
+                lines += [f'Native {variant} trial: {trial.get("status",{}).get("phase", "preparing")}.']
     lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
               'Events: ' + ('; '.join(report['events']) or 'none'), '',
               'Pipeline stages are reported separately; generation/replay completion does not establish snapshot upload completion.']

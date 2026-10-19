@@ -130,3 +130,66 @@ retry failed activation or promote the probe.
 Controller provisioning/access records are in `erigon-io-probe.json` and
 `io-probe-ansible.log`. Copy failures stop for inspection; neither the copy
 script nor monitoring automatically restarts failed database work.
+
+## Native profiling and source optimization
+
+The user redirected the investigation toward source profiling and direct Go
+builds on the VM. No Panda build was dispatched. The earlier Docker activation
+path above remains unused; the next experiment uses native binaries, private
+network namespaces, eight allowed CPUs and a 48 GiB memory limit. The larger
+VM is now a checkpoint-isolated test environment; no hardware promotion has
+been approved by the evidence or performed.
+
+The original source restarted cleanly with the same pinned image, memory,
+pruning and normal durability, adding only `MDBX_TRACE_TX=true`. Exact head and
+four complete BAL samples matched before/after. Replay resumed with driver PID
+148290. The initial trace contains 49 commits; the 16 commits over 100 ms
+averaged 2.023 seconds, including 2.021 seconds of native sync and 1.562 ms of
+GC. This isolates the wait within those commits, not the entire block latency.
+The sample includes startup/cache warming and competing checkpoint-copy IO.
+Evidence: `native-profile-complete.json`, `native-profile-shutdown.json` and
+`erigon-native-commit-profile.{log,json}` in the controller run directory.
+
+Opt-in `REPLAY_PROFILE=true` instrumentation adds timing boundaries around
+forkchoice transaction acquisition, reader release, shared-domain commit,
+head notification and the extra durability update; shared-domain flushing,
+native commit and cache publication; and temporal changeset/writer flushing.
+It changes logging only, not validation or durability. This exploratory logging
+change uses existing commit/forkchoice tests rather than new behavior tests.
+Both lint passes, `make erigon integration`, and focused commit/forkchoice tests
+passed. Source branch: `qu0b/erigon:pbt-1-replay-profile`, commit
+`cb002d6581`.
+
+`build-erigon-native.py` cloned upstream tag `v3.7.1` on the probe, verified
+commit `8c1e3893d77d230720d172f1492d95b5777a862c`, and built directly with Go
+1.26.0, `GOAMD64_VERSION=v2`, and `BUILD_TAGS=nosqlite,noboltdb`:
+
+| Binary | Build seconds | SHA-256 |
+| --- | ---: | --- |
+| `/data/pbt-1/native/erigon-stock` | 117.04 | `3209fc200fc2e84a9d9748b028037f5fd050c86f700894c9f9c7ffad77b13ec5` |
+| `/data/pbt-1/native/erigon-profile` | 64.41 | `aa7cf967d9b6250fde93a7a8f85fe5b049e89dccaf3989bfb01ca1f115242c9c` |
+
+The instrumented binary was built from the pinned revision plus patch SHA-256
+`8830903b2c876dee4877be1eb94c5496cab0d35aea61be900caec2cd47c4e0d4`;
+the patch is represented by the branch commit above. Its embedded version still
+reports the base revision, so use the binary and patch hashes as provenance.
+The build manifest is `/data/pbt-1/native/build-report.json` and controller
+`erigon-native-build-report.json`. Initial setup failures occurred before cloning
+or compiling: the bootstrap Go binary was older and systemd provided no module
+cache home. Explicit `GOTOOLCHAIN=go1.26.0`, `GOPATH` and `GOCACHE` fixed these;
+the final native build service completed successfully.
+
+`probe-erigon-native.py` is staged for bounded 64–256 block trials. It requires
+verified transfer and revoked checkpoint-key evidence, preserves the transferred
+checkpoint, copies mutable files into each fresh trial directory, and hardlinks
+only immutable snapshot files. Each native client runs under a persistent
+systemd unit with private networking and identical CPU/RAM limits. Trials
+record CPU profiles and replay timings, then verify every pilot body and
+commitment before and after a clean restart. No final upload or canonical-host
+transition is performed by the harness.
+
+The first configuration candidate is `--db.writemap=false`, compared on the
+same VM and starting checkpoint with normal durability retained. This is a
+hypothesis based on the observed sync wait, not an established speedup. No
+native replay trial or write-mode optimization has passed yet. The existing
+15-minute monitor now also reports native build/trial status and failures.
