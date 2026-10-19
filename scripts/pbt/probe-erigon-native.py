@@ -35,8 +35,26 @@ def digest(path):
 
 def state(unit):
     output = run('systemctl', 'show', unit, '-p', 'ActiveState', '-p', 'MainPID',
-                 '-p', 'Result', '-p', 'ExecMainCode', '-p', 'ExecMainStatus')
+                 '-p', 'Result', '-p', 'ExecMainCode', '-p', 'ExecMainStatus', '-p', 'InvocationID')
     return dict(line.split('=', 1) for line in output.splitlines())
+
+
+def verify_stop(unit, invocation):
+    assert len(invocation) == 32
+    stopped = state(unit)
+    assert stopped['ActiveState'] == 'inactive' and stopped['MainPID'] == '0', stopped
+    assert stopped['Result'] == 'success', stopped
+    events = [json.loads(line) for line in run('journalctl', '-u', unit,
+        'INVOCATION_ID='+invocation, '-o', 'json', '--no-pager').splitlines()]
+    success = [event for event in events if event.get('MESSAGE_ID') == '7ad2d189f7e94e70a38c781354912448']
+    assert len(success) == 1, 'Require systemd successful deactivation for this exact invocation'
+    return {'state': stopped, 'invocation': invocation, 'deactivation': success[0]}
+
+
+def stop_verified(unit, path):
+    invocation = state(unit)['InvocationID']
+    subprocess.run(['systemctl', 'stop', unit], check=True, timeout=1810)
+    save(path, verify_stop(unit, invocation))
 
 
 def namespace(unit, *args):
@@ -210,17 +228,11 @@ def main(args):
         'device_write_bytes_per_block': (io_after['device'][6]-io_before['device'][6])*512/args.blocks,
         'process_write_bytes_per_block': (io_after['process']['write_bytes']-io_before['process']['write_bytes'])/args.blocks})
     check('before')
-    subprocess.run(['systemctl', 'stop', unit], check=True, timeout=1810)
-    stopped = state(unit)
-    assert stopped['ActiveState'] == 'inactive' and stopped['Result'] == 'success', stopped
-    assert stopped['ExecMainCode'] == '1' and stopped['ExecMainStatus'] in ('0', '130'), stopped
-    save(trial/'shutdown.json', stopped)
+    stop_verified(unit, trial/'shutdown.json')
     subprocess.run(['systemctl', 'start', unit], check=True)
     wait_ready(unit)
     check('after')
-    subprocess.run(['systemctl', 'stop', unit], check=True, timeout=1810)
-    final = state(unit)
-    assert final['Result'] == 'success' and final['ExecMainCode'] == '1' and final['ExecMainStatus'] in ('0', '130'), final
+    stop_verified(unit, trial/'final-shutdown.json')
     assert digest(CHECKPOINT/'chaindata/mdbx.dat') == SHA, 'Pristine source checkpoint changed'
     save(trial/'status.json', {'phase': 'verified_stopped', 'time': time.time(), 'blocks': args.blocks,
         'head': HEAD+args.blocks, 'all_bodies_verified_before_and_after': True,
