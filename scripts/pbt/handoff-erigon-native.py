@@ -169,6 +169,10 @@ def main(args):
     unit.unlink()
     subprocess.run(['systemctl', 'daemon-reload'], check=True)
     replay_lock.close()
+    if args.seal_only:
+        print(json.dumps({'sealed_segment': str(destination), 'head': proof['end'],
+                          'pinned_client_running': True}), flush=True)
+        return
     subprocess.run(['systemd-run', '--unit=pbt-1-native-replay', '--property=Type=exec',
         'python3', '-u', '/data/pbt-1/replay-erigon-native.py', '--binary', str(args.binary),
         '--build-report', str(args.build_report), '--probe-proof', str(args.probe_proof),
@@ -181,6 +185,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--audit-native', action='store_true')
     parser.add_argument('--audit-pinned', action='store_true')
+    parser.add_argument('--seal-only', action='store_true')
     parser.add_argument('--binary', type=Path)
     parser.add_argument('--build-report', type=Path)
     parser.add_argument('--probe-proof', type=Path)

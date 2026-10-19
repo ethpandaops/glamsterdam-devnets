@@ -497,3 +497,26 @@ started by 23:12:22 UTC under
 `pbt-1/20261019-mixed-8037-v2/nethermind/24503958/snapshot.tar.zst`, with its first
 256-MiB part acknowledged. This does not establish upload completion. The
 Patricia directory is excluded; Geth/Besu audits and Erigon replay remain active.
+
+## Bounded original-VM buffer pilot at 23:18 UTC
+
+The default-buffer batch-of-64 segment ended at 24,472,242 after 448 validated
+blocks. The handoff checked all segment headers, the last 16 bodies and clean
+shutdown, then verified the same pinned-image head/body. It is preserved under
+`native-replay-segments/0002/`. Its final 192 blocks took 242.463 seconds between
+post-forkchoice persistence events: 0.79187 blocks/second. This is the baseline
+for the next trial, with evidence in controller `buffer-pilot-baseline.json`.
+
+At 23:18:04 UTC, `pilot-erigon-buffer.py` started on the original VM. It advances
+24,472,243–24,472,498 using the same continuation build, batches of 64 and a
+2-GiB execution buffer. CPU allocation, memory limit, durability and pruning are
+unchanged. The first 64 blocks and their persistence are excluded from the
+measured window; final persistence is included. The complete 256-block range
+must pass header/body checks before shutdown and after pinned-image reopen.
+Only that evidence can qualify the buffer for the remaining full replay.
+
+Sixteen Python driver/handoff/pilot checks pass, including a regression that
+first rejected a bounded prefix of the full raw stream, warmup persistence,
+wrong older BALs and wrong intermediate roots. Monitoring follows the live
+pilot service/client, and publication retains successful pilot evidence in the
+native segment history. The pilot result is pending.

@@ -52,9 +52,13 @@ if client=='geth' and (root/'raw-stream').exists():
     result['raw_export']={'service':dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)}
     path=root/'raw-stream/status.json'
     if path.exists():result['raw_export']['status']=json.loads(path.read_text())
-if client=='erigon' and (root/'native-replay').exists():
+native_runner='pbt-1-native-replay'
+buffer_trial=root/'native-buffer-pilot'
+if not (root/'native-replay').exists() and buffer_trial.exists() and not (buffer_trial/'complete.json').exists():
+    native_runner='pbt-1-native-buffer-pilot'
+if client=='erigon' and ((root/'native-replay').exists() or native_runner=='pbt-1-native-buffer-pilot'):
     result['native_replay']={}
-    for key,unit in [('service','pbt-1-native-replay'),('client','pbt-1-native-replay-client')]:
+    for key,unit in [('service',native_runner),('client','pbt-1-native-replay-client')]:
         service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result')
         result['native_replay'][key]=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
 if client=='erigon' and (root/'native-source-pilot').exists():

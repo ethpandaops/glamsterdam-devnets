@@ -289,6 +289,17 @@ head. Publication checks segment continuity and includes each prior build and
 sealed-segment proof. A failure requires inspection; it does not automatically
 retry or overwrite the preserved evidence.
 
+`pilot-erigon-buffer.py` qualifies a 2-GiB execution buffer over exactly 256
+blocks after `handoff-erigon-native.py --seal-only` has verified the pinned
+reopen. It keeps the verified continuation binary, batches of 64, eight CPUs,
+48-GiB process limit and normal durability. The first 64 blocks are warmup;
+timing waits for their persistence before measuring the remaining 192. Every
+pilot body and header is checked before native shutdown and after pinned-image
+reopen. A successful pilot becomes a contiguous sealed segment and leaves the
+pinned client running. Continuing with the new buffer still requires explicitly
+starting the continuous driver with the pilot's `proof.json`; failure never
+automatically retries the database operation.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable

@@ -111,7 +111,7 @@ def main():
                 'evidence':prefix+'_snapshot_native_replay_complete.json',
                 'build_evidence':prefix+'_snapshot_native_replay_continuous_build.json',
                 'notes':'The remaining replay used this native build, with VALID payloads and matching commitments for each block; final validation reopened the pinned image.'}
-            history_code = "import json;from pathlib import Path;root=Path('/data/pbt-1/native-replay-segments');print(json.dumps([{'proof':json.loads((p/'handoff-complete.json').read_text()),'build':json.loads((p/'build.json').read_text())} for p in sorted(root.iterdir())] if root.exists() else []))"
+            history_code = "import json;from pathlib import Path;root=Path('/data/pbt-1/native-replay-segments');print(json.dumps([{'proof':json.loads((p/'handoff-complete.json').read_text()),'build':json.loads((p/'build.json').read_text()),'buffer_pilot':json.loads((p/'buffer-pilot-proof.json').read_text()) if (p/'buffer-pilot-proof.json').exists() else None} for p in sorted(root.iterdir())] if root.exists() else []))"
             history=json.loads(subprocess.check_output(ssh+[shlex.join(['python3','-c',history_code])]))
             next_start=None
             for segment in history:
@@ -123,6 +123,12 @@ def main():
                 assert sealed['validated_blocks']==sealed['end']-sealed['start']+1>0
                 assert sealed['previously_validated_blocks']+sealed['tail_payloads_verified']==sealed['validated_blocks']
                 assert int(sealed['head']['number'],16)==sealed['end']
+                if segment.get('buffer_pilot'):
+                    pilot_proof=segment['buffer_pilot']
+                    assert pilot_proof['status']['all_bodies_verified_before_and_after']
+                    assert pilot_proof['status']['pinned_reopen_verified'] and pilot_proof['status']['head']==sealed['end']
+                    assert pilot_proof['timing']['binary']['sha256']==sealed['binary_sha256']
+                    assert pilot_proof['timing']['execution_buffer']==sealed['execution_buffer']
                 if next_start is not None:assert sealed['start']==next_start, 'Native segment gap or overlap'
                 next_start=sealed['end']+1
             if history:

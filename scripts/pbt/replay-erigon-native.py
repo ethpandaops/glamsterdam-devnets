@@ -91,9 +91,10 @@ def replay():
     first = number = int(head['number'], 16)
     assert head == json.loads((RUN/'before.json').read_text())['head']
     assert request['start'] == first+1 and raw_request['start'] <= first+1
-    assert raw_request['end'] == request['end']
+    assert request['end'] <= raw_request['end']
     batch_size = request['batch_size']
     manifests = {}
+    timings = []
     started = time.monotonic()
     while number < request['end']:
         assert shutil.disk_usage(ROOT).free > 150*10**9, 'Less than 150 GB free'
@@ -106,7 +107,7 @@ def replay():
             continue
         for low in chunks-manifests.keys():
             manifest = json.loads((RAW/f'{low:08d}/manifest.json').read_text())
-            assert manifest['start'] == low and manifest['end'] == min(low+255, request['end'])
+            assert manifest['start'] == low and manifest['end'] == min(low+255, raw_request['end'])
             assert [x['name'] for x in manifest['files']] == [f'{n:08d}.json.gz' for n in range(low, manifest['end']+1)]
             manifests[low] = {x['name']: x['sha256'] for x in manifest['files']}
         records, raw = [], []
@@ -147,6 +148,8 @@ def replay():
         head = rpc.head()
         assert head['hash'] == records[-1]['hash']
         prior_number, number = number, last
+        if request.get('record_batch_timings') and number-first == batch_size:
+            persist_fence(prior_number)
         status = {'phase': 'native_replaying', 'time': time.time(), 'head': number,
             'target_head': request['end'], 'qualifying_blocks': number-ANCHOR-1020,
             'blocks_per_second': (number-first)/(time.monotonic()-started),
@@ -154,6 +157,9 @@ def replay():
             'batch_size': batch_size, 'validated_blocks': number-first}
         save(ROOT/'status.json', status)
         save(RUN/'progress.json', status)
+        if request.get('record_batch_timings'):
+            timings.append(status)
+            save(RUN/'batch-timings.json', timings)
         print(json.dumps(status), flush=True)
     persist_fence(prior_number)
     save(RUN/'replay-complete.json', {**status, 'final_persistence_verified': True,

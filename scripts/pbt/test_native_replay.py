@@ -68,6 +68,8 @@ class ReplayChecks(unittest.TestCase):
         self.calls.append((method, params))
         if method == 'testing_insertRawBlocksV2':
             return [str(int(value, 16)) for value in params[1]]
+        if method == 'testing_insertRawBlocksV1':
+            return [str(int(value, 16)) for value in params[0]]
         if method == 'engine_forkchoiceUpdatedV3':
             self.head = self.header(int(params[0]['headBlockHash']))
             return {'payloadStatus': {'status': 'VALID', 'latestValidHash': self.head['hash']}}
@@ -97,6 +99,26 @@ class ReplayChecks(unittest.TestCase):
         with self.assertRaises(AssertionError):
             module.replay()
         self.assertEqual(self.calls, [])
+
+    def test_bounded_prefix_of_full_raw_stream(self):
+        module.save(module.RUN/'request.json', {'start': self.base+1, 'end': self.base+12,
+                    'batch_size': 64, 'record_batch_timings': True})
+        module.replay()
+        result = json.loads((module.RUN/'replay-complete.json').read_text())
+        self.assertEqual(result['head'], self.base+12)
+        self.assertEqual(sum(name == 'engine_newPayloadV5' for name, _ in self.calls), 12)
+        timings = json.loads((module.RUN/'batch-timings.json').read_text())
+        self.assertEqual(timings[0]['validated_blocks'], 12)
+
+    def test_trial_warmup_waits_for_persistence_before_next_batch(self):
+        module.save(module.RUN/'request.json', {'start': self.base+1, 'end': self.end,
+                    'batch_size': 16, 'record_batch_timings': True})
+        module.replay()
+        fences = [i for i, (name, _) in enumerate(self.calls) if name == 'persist']
+        self.assertEqual(len(fences), 2)
+        self.assertEqual(sum(name == 'engine_newPayloadV5' for name, _ in self.calls[:fences[0]]), 16)
+        self.assertEqual(sum(name == 'engine_newPayloadV5' for name, _ in self.calls[fences[0]+1:]), 4)
+        self.assertEqual(self.calls[-1], ('persist', self.base+16))
 
     def test_wrong_intermediate_commitment_prevents_completion(self):
         self.bad_header = True
