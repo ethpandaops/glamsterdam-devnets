@@ -79,6 +79,22 @@ def main():
         objects['_snapshot_flatdb_cleanup.json']=cleanup
         metadata['pbt']['patricia_cleanup_evidence']=prefix+'_snapshot_flatdb_cleanup.json'
     if c=='erigon':
+        pilot_present=subprocess.run(ssh+['test -d /data/pbt-1/native-source-pilot']).returncode
+        assert pilot_present in (0,1), 'Could not inspect native replay provenance'
+        if pilot_present==0:
+            pilot=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-source-pilot/complete.json']))
+            build=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/erigon-native-batch-build-report.json']))
+            assert pilot['pinned_reopen_verified'] and pilot['normal_durability']
+            assert pilot['pilot_blocks']==192 and pilot['image']==proof['image']
+            assert int(pilot['head']['number'],16)<=report['head']
+            assert pilot['binary_sha256']==build['sha256']
+            assert build['source']['base_commit']=='8c1e3893d77d230720d172f1492d95b5777a862c'
+            objects['_snapshot_native_replay_probe.json']=pilot
+            objects['_snapshot_native_replay_build.json']=build
+            metadata['pbt']['native_replay']={
+                'notes':'A bounded replay comparison used a custom native build. The database then passed pinned-image reopen validation; final snapshot validation also uses the pinned image.',
+                'probe_evidence':prefix+'_snapshot_native_replay_probe.json',
+                'build_evidence':prefix+'_snapshot_native_replay_build.json'}
         backfill=read('erigon-bal-backfill.json');retention=read('bal-retention-prepared.json')
         assert not backfill['dry_run'] and backfill['verified_records']==v['final_records']
         assert backfill['written_sidecars']+backfill['existing_sidecars']==v['final_records']

@@ -256,6 +256,13 @@ before its second clean stop. Preserve this benchmark retention flag when using
 the snapshot. Publication includes the backfill and build evidence; it explicitly
 records restoration from validated replay inputs.
 
+If the original Erigon database was advanced by the native replay comparison,
+publication also requires its completed pinned-image reopen proof and matching
+binary build manifest. These are published as `_snapshot_native_replay_probe.json`
+and `_snapshot_native_replay_build.json`, linked from the snapshot metadata.
+An incomplete comparison prevents publication; the final pinned-image validation
+remains required.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable
