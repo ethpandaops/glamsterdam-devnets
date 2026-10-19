@@ -1,0 +1,10 @@
+[Unit]
+Description=Check PBT-1 workflow gates every 30 seconds
+
+[Timer]
+OnBootSec=20s
+OnUnitInactiveSec=30s
+Unit=pbt-1-advance.service
+
+[Install]
+WantedBy=timers.target

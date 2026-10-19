@@ -1,0 +1,10 @@
+[Unit]
+Description=Continuously deliver newly generated PBT-1 blocks
+
+[Timer]
+OnBootSec=15s
+OnUnitInactiveSec=20s
+Unit=pbt-1-relay.service
+
+[Install]
+WantedBy=timers.target

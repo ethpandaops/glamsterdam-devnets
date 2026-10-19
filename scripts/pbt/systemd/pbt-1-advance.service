@@ -1,0 +1,9 @@
+[Unit]
+Description=Advance PBT-1 preparation through verified workflow gates
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/repos/glamsterdam-devnets
+ExecStart=/usr/bin/python3 /home/ubuntu/repos/glamsterdam-devnets/scripts/pbt/advance.py
+TimeoutStartSec=120
+UMask=0077

@@ -40,6 +40,8 @@ if client=='nethermind':
 # A future producer/replay/upload runner can publish explicit phase progress here.
 p=root/'pipeline/status.json'
 result['pipeline']=json.loads(p.read_text()) if p.is_file() else None
+r=cmd('docker','inspect','pbt-1-'+client+'-execution')
+result['execution']=json.loads(r.stdout)[0]['State'] if r.returncode==0 else None
 print(json.dumps(result))
 '''
 
@@ -98,6 +100,17 @@ def main():
                     r['eta_seconds']=round((r['total_chunks']-r['emitted'])*elapsed/delta)
             if r['restore_complete'] and not old.get('restore_complete'):
                 report['events'].append(f'{client}: restore complete')
+            pipeline = r.get('pipeline') or {}
+            if pipeline.get('phase') == 'failed':
+                report['alerts'].append(f'{client}: pipeline failed: {pipeline.get("error", "inspect logs")}')
+            if pipeline.get('phase') in ('generating','replaying','uploading','awaiting_upload_verification') and now-pipeline.get('time',now) > 900:
+                report['alerts'].append(f'{client}: pipeline progress is over 15 minutes old')
+            execution=r.get('execution') or {}
+            if execution.get('OOMKilled'):
+                report['alerts'].append(f'{client}: execution container was OOM-killed')
+            allowed_stopped=('validated_stopped','uploading','awaiting_upload_verification','snapshot_uploaded_verified','failed','restart_validation')
+            if execution and not execution.get('Running') and pipeline.get('phase') not in allowed_stopped:
+                report['alerts'].append(f'{client}: execution container unexpectedly stopped; exit={execution.get("ExitCode")}')
             if client=='nethermind':
                 if r['cleanup_service']=='failed':
                     report['alerts'].append('nethermind: FlatDB cleanup service failed; inspect phase logs')
@@ -106,22 +119,31 @@ def main():
                 if r['restore_complete'] and not r['cleanup_complete'] and r['cleanup_service'] not in ('active','activating'):
                     report['alerts'].append('nethermind: restore complete but cleanup has not completed and is not running')
     tmp=args.output/'latest.json.tmp'
+    controller=Path.home()/'.local/state/pbt-1-run/advance-status.json'
+    if controller.is_file():
+        workflow=json.loads(controller.read_text())
+        report['workflow']=workflow
+        report['alerts'].extend('workflow: '+error for error in workflow.get('errors',[]))
     tmp.write_text(json.dumps(report,indent=2)+'\n');tmp.replace(latest)
     with (args.output/'history.jsonl').open('a') as out:
         out.write(json.dumps(report)+'\n')
     lines=[f'# PBT-1 progress — {report["checked_at"]}', '',
-           '| Client | Restore | Extracted GiB | Free GiB | Cleanup |',
-           '| --- | --- | ---: | ---: | --- |']
+           '| Client | Restore | Extracted GiB | Free GiB | Cleanup | Pipeline |',
+           '| --- | --- | ---: | ---: | --- | --- |']
     for client in HOSTS:
         r=report['clients'][client]
         if 'error' in r:
-            lines.append(f'| {client} | CHECK FAILED | — | — | — |');continue
+            lines.append(f'| {client} | CHECK FAILED | — | — | — | — |');continue
         cleanup='—'
         if client=='nethermind':cleanup='verified complete' if r['cleanup_complete'] else r['cleanup_service']
-        lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {(r["data_bytes"] or 0)/2**30:.1f} | {r["free_bytes"]/2**30:.1f} | {cleanup} |')
+        p=r.get('pipeline') or {}
+        phase=p.get('phase','not started')
+        if 'head' in p:phase+=f' at {p["head"]:,}'
+        if p.get('qualifying_blocks') is not None:phase+=f'; {p["qualifying_blocks"]:,} qualifying'
+        lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {(r["data_bytes"] or 0)/2**30:.1f} | {r["free_bytes"]/2**30:.1f} | {cleanup} | {phase} |')
     lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
               'Events: ' + ('; '.join(report['events']) or 'none'), '',
-              'Payload generation, cross-client replay and upload are unverified unless a client pipeline field reports them.']
+              'Pipeline stages are reported separately; generation/replay completion does not establish snapshot upload completion.']
     (args.output/'status.md').write_text('\n'.join(lines)+'\n')
     print('\n'.join(lines),flush=True)
     # An alert is recorded as a failed check in systemd, but the timer keeps running.

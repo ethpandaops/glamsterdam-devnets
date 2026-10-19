@@ -23,7 +23,15 @@ Delivery requires:
   Publish under a new immutable PBT preparation prefix/height; preserve the
   existing Jochemnet release and avoid replacing its `latest` pointers.
 
-This is a target, not yet a measured completion forecast. Restore the other
+The operator additionally requires approximately 50% utilization of **both**
+EIP-8037 gas dimensions at the 200M block limit and substantial BALs. The revised
+pilot measured ~100.53M execution gas, 99.98M state gas and ~443 KiB BALs per block.
+The full run enforces these targets and archives the dimension measurements.
+The first low-load pilot is retained only as a preparation prefix, outside the
+50,400 qualifying blocks. See the [active workload and automation procedure](../scripts/pbt/README.md#overnight-workload-and-publication)
+for exact anchors, validation gates, live evidence paths and publication layout.
+
+This is a target, not a guaranteed completion forecast. Restore the other
 clients while Geth prepares the workload; replay consumers concurrently and upload
 each snapshot as soon as its own validation completes. The 1,000-block pilot must
 measure producer/consumer throughput, BAL sizes and database growth. Include both
@@ -72,9 +80,10 @@ Add a Geth preparation VM using the same DigitalOcean storage-optimized class.
 It can later become `geth-import-32`, preserving the nine-machine benchmark
 matrix. It must finish generation and retain the replay bundle before that reuse;
 keeping a separate live producer during all nine trials would require a tenth
-machine. The additional Geth VM is now provisioned at `46.101.230.44` and restoring.
-Besu (`138.68.76.218`) and Nethermind (`167.172.188.11`) are also restoring on
-separate machines of the same class. Erigon's restore has completed successfully.
+machine. Geth (`46.101.230.44`), Besu (`138.68.76.218`), Nethermind
+(`167.172.188.11`) and Erigon have now restored successfully. Nethermind's
+client-managed Patricia deletion and FlatDB restart verification are complete.
+All four are participating in workload generation/replay qualification.
 
 Use the existing Geth-first payload-generation / cross-client replay pattern
 from the snapshot build tooling. Qualify its current build and configuration on

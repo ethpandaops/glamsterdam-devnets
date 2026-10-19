@@ -142,3 +142,93 @@ Generation/replay/upload runners can publish `/data/pbt-1/pipeline/status.json`
 on their VMs; absent that evidence, the report leaves those phases unverified.
 Stop recurring checks when no longer needed with
 `systemctl --user disable --now pbt-1-monitor.timer`.
+
+## Overnight workload and publication
+
+The active goal is delivery by **2026-10-20 09:00 UTC**: generate the workload,
+replay it on all four clients, verify restarts and BAL availability, and upload
+four native snapshots plus the replay bundle. The remaining five migration-test
+VMs are a subsequent stage. Preparation clients use a 48 GiB container limit;
+the agreed 16/32 GiB budgets apply to the later nine-worker migration trials.
+
+The first pilot (1,000 blocks, approximately 29.7M gas) remains a recorded
+preparation prefix. The operator subsequently required approximately **50%
+occupancy in both EIP-8037 dimensions**, with substantial BALs. Version 2 uses:
+
+- 200M block gas limit, targeting 100M execution gas and 100M state gas.
+- 900 mixed ETH/WETH/single-storage transactions, eight batches creating 1,021
+  fresh slots, and 34 batches updating 4,300 existing slots: 942 transactions.
+- Eight batch-storage contracts and a separately seeded existing-state working
+  set. Fresh slots have unique hashed keys; existing slots and values are nonzero.
+- 99,976,320 state gas (`1021 * 64 * 1530`) and measured execution gas near
+  100,532,000. Every qualifying block must stay within 5M of each 100M target.
+- At least 300 KiB of encoded BAL per qualifying block. The first ten measured
+  approximately 453,500 bytes each (~443 KiB), versus ~57 KiB in the first pilot.
+
+Execution gas is derived from the receipt gas sum minus state gas. This workload
+has no storage clears/refunds or calldata-floor-bound transactions; the derived
+`max(execution,state)` must equal the header's `gasUsed` on every block. A separate
+Geth prestate trace of block 24,453,559 confirmed 1,021 fresh slots, zero clears,
+zero new accounts and 942 transactions. This is a synthetic mixed workload,
+not a measured reproduction of mainnet traffic. No blobs or CL consensus run.
+
+The source anchor is **24,452,538**. The original 1,003 records plus 17 version-2
+setup records form a **1,020-block preparation prefix**. The qualifying anchor is
+**24,453,558**; the 50,400 qualifying blocks end at **24,503,958**. Twelve seconds
+per block provide 604,800 seconds from qualifying anchor to final head. The
+original source releases and the complete prefix remain recoverable; a new
+native copy at the qualifying anchor can be reconstructed by replaying the prefix.
+
+`source-client.py` starts pinned images with Docker networking disabled. The
+driver joins the container's network namespace; RPC is not exposed externally.
+`generate.py` saves a pending replay record before canonicalizing it, verifies
+all receipts, checks both gas dimensions and the BAL hash/size, and atomically
+publishes an immutable `blocks/<height>.json.gz`. `replay.py` requires Engine
+`VALID`, then matching canonical hash, state root and BAL hash. Erigon's RPC view
+may lag its Engine acknowledgement briefly; the driver waits for that view.
+
+`reopen.py` performs a clean stop/restart, compares state samples, and retrieves
+**every** generated BAL body and transaction list through
+`engine_getPayloadBodiesByRangeV2`. The initial version-2 pilot requires 1,000
+qualifying blocks to pass this gate on all four clients before the full run.
+The legacy `--workload-blocks` argument counts records after the first three
+setup blocks, so the version-2 pilot uses **2017** and the full run **51417**.
+The report's `qualifying_blocks` is the operator-facing workload count.
+
+Controller user timers:
+
+- `pbt-1-monitor.timer`: read-only status/alert report every 15 minutes.
+- `pbt-1-relay.timer`: copy completed payload records to consumers every 20
+  seconds after the previous transfer completes; SSH keys stay on the controller.
+- `pbt-1-advance.timer`: inspect evidence gates every 30 seconds, run restart
+  checks, start the qualified full run, and schedule verified publication.
+
+Failures stop the affected stage for inspection; the controller does not
+automatically retry failed database operations. Inspect
+`~/.local/state/pbt-1-run/advance-status.json` and the corresponding systemd
+journals. `full-run-gate.json` records the four passing pilot gates. Sensitive
+controller storage authorization is in a mode-0600 file outside the repository.
+
+Publication is under the new immutable prefix
+`s3://ethpandaops-shadowfork-images/pbt-1/20261019-mixed-8037-v2/`.
+Each native archive is `<client>/<head>/snapshot.tar.zst`. Geth remains a flat
+instance directory and must be restored under `<datadir>/geth`. Nethermind
+retains its required native databases under `mainnet/`; obsolete Patricia state
+is omitted. The client-managed cleanup reclaimed **341,910,994,944 bytes** and
+passed state/head/restart validation on 2026-10-19.
+
+`prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
+VM. `upload.py` requires the final stopped/reopened proof, streams sparse tar
+through zstd level 1, and uploads bounded 256 MiB parts with Content-MD5 checks.
+`finish-upload.py` completes the object, checks size, verifies first/last and
+sampled part SHA-256 values by remote readback, and publishes provenance. No
+account storage credentials are copied to a source VM. Original Jochemnet
+objects and latest pointers are preserved.
+
+After all four native snapshots pass, `publish-bundle.py` uploads
+`replay/snapshot.tar.zst` containing `blocks/`, `workload.json`, `manifest.json`
+and the source genesis. It verifies the **entire** replay archive by remote
+readback and publishes `_snapshot_manifest.json` and `_snapshot_workload.json`.
+Only `~/.local/state/pbt-1-run/delivery-complete.json` establishes completion of
+the full requested delivery. Snapshot publication alone does not establish that
+the separate replay bundle has completed.

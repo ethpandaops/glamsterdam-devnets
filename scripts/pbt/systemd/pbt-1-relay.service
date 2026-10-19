@@ -1,0 +1,9 @@
+[Unit]
+Description=Relay immutable PBT-1 payloads to replay clients
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/repos/glamsterdam-devnets
+ExecStart=/usr/bin/python3 /home/ubuntu/repos/glamsterdam-devnets/scripts/pbt/relay.py
+TimeoutStartSec=600
+UMask=0077
