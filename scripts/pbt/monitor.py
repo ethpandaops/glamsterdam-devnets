@@ -42,6 +42,8 @@ p=root/'pipeline/status.json'
 result['pipeline']=json.loads(p.read_text()) if p.is_file() else None
 r=cmd('docker','inspect','pbt-1-'+client+'-execution')
 result['execution']=json.loads(r.stdout)[0]['State'] if r.returncode==0 else None
+r=cmd('systemctl','show','pbt-1-full-run','-p','ActiveState','-p','Result')
+result['full_run_service']=dict(line.split('=',1) for line in r.stdout.splitlines() if '=' in line)
 print(json.dumps(result))
 '''
 
@@ -101,6 +103,8 @@ def main():
             if r['restore_complete'] and not old.get('restore_complete'):
                 report['events'].append(f'{client}: restore complete')
             pipeline = r.get('pipeline') or {}
+            if r.get('full_run_service',{}).get('ActiveState')=='failed':
+                report['alerts'].append(f'{client}: full-run service failed; inspect journal')
             if pipeline.get('phase') == 'failed':
                 report['alerts'].append(f'{client}: pipeline failed: {pipeline.get("error", "inspect logs")}')
             if pipeline.get('phase') in ('generating','replaying','uploading','awaiting_upload_verification') and now-pipeline.get('time',now) > 900:
@@ -124,6 +128,16 @@ def main():
         workflow=json.loads(controller.read_text())
         report['workflow']=workflow
         report['alerts'].extend('workflow: '+error for error in workflow.get('errors',[]))
+        if now-workflow.get('time',0)>180:
+            report['alerts'].append('workflow: coordinator status is over three minutes old')
+    active_replay=any((r.get('pipeline') or {}).get('phase') in
+                      ('generating','replaying','waiting_for_payload') for r in report['clients'].values())
+    relay=controller.parent/'relay-status.json'
+    if active_replay:
+        if not relay.is_file():
+            report['alerts'].append('relay: no successful transfer report')
+        elif now-json.loads(relay.read_text()).get('time',0)>900:
+            report['alerts'].append('relay: no successful transfer in 15 minutes')
     tmp.write_text(json.dumps(report,indent=2)+'\n');tmp.replace(latest)
     with (args.output/'history.jsonl').open('a') as out:
         out.write(json.dumps(report)+'\n')

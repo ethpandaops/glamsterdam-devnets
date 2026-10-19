@@ -36,7 +36,8 @@ def main():
             pass
     files = sorted((ROOT / 'blocks').glob('*.json.gz'))
     report = {'time':time.time(), 'files':len(files), 'last':files[-1].name if files else None}
-    (ROOT / 'relay-status.json').write_text(json.dumps(report)+'\n')
+    tmp=ROOT/'relay-status.json.tmp'
+    tmp.write_text(json.dumps(report)+'\n');tmp.replace(ROOT/'relay-status.json')
     print(json.dumps(report),flush=True)
 
 
