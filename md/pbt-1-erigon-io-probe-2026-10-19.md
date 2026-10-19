@@ -271,3 +271,12 @@ for the 64-block pilot was exported from the canonical Geth source and has a
 checksum manifest. Batch timing divides elapsed batch time across its blocks;
 those values are not individual block latency. No batch pilot or authoritative
 replay transition has run yet.
+
+The write-mode comparison completed its 64 replayed blocks at 0.7894 measured
+blocks/second after the eight-block warmup, versus 0.9993 for the baseline:
+about 21% lower throughput. Its first block took 37.84 seconds. This option is
+rejected for adoption; the original source retains its write mode. Restart
+audit and pristine-checkpoint verification remain separate completion gates.
+The baseline CPU profile includes the first-block warmup and therefore is not
+a steady-replay CPU profile; its snapshot filename/filter work must not be
+treated as evidence of the steady-state bottleneck.
