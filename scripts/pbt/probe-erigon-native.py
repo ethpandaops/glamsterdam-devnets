@@ -191,17 +191,20 @@ def main(args):
     profile = subprocess.Popen(namespace(unit, 'curl', '-fsS', '--max-time', '75',
         '-o', str(trial/'cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=60'))
     io_before = io_sample(unit)
+    log_start = (trial/'client.log').stat().st_size
     started = time.monotonic()
     try:
         subprocess.run(namespace(unit, 'python3', '-u', __file__, '--variant', args.variant,
             '--blocks', str(args.blocks), '--replay'), check=True)
         elapsed = time.monotonic()-started
         io_after = io_sample(unit)
+        log_end = (trial/'client.log').stat().st_size
     finally:
         profile_code = profile.wait(timeout=80)
     save(trial/'timing.json', {'time': time.time(), 'blocks': args.blocks,
         'seconds': elapsed, 'blocks_per_second': args.blocks/elapsed, 'cpu_profile_exit_code': profile_code,
         'binary': artifact, 'normal_durability': True, 'memory_GiB': 48, 'cpus': '0-7',
+        'log_window': {'start_byte': log_start, 'end_byte': log_end},
         'replay': json.loads((trial/'replay-timing.json').read_text())})
     save(trial/'io.json', {'before': io_before, 'after': io_after,
         'device_write_bytes_per_block': (io_after['device'][6]-io_before['device'][6])*512/args.blocks,
