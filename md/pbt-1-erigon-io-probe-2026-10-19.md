@@ -75,11 +75,22 @@ At 20:52:45 UTC, `pbt-1-checkpoint-copy.service` began copying the preserved
 checkpoint from the original VM at `10.35.0.2`. It contains 179,485 files and
 515,054,564,136 logical bytes, at head 24,468,025. The expected MDBX SHA-256 is
 `b799a0df4b18dcbd5c662640eca94c6b3913027a43d1375dc8aceb4766c725ce`.
-The copy preserves sparse files and hard links, uses idle IO priority on the
-source, and caps transfer at 256 MiB/s. Its status file and live systemd handle
+The copy preserves sparse files and hard links, initially used idle IO priority
+on the source, and caps transfer at 256 MiB/s. Its status file and live systemd handle
 are included in the existing 15-minute monitor. The monitor computes progress
 against the full checkpoint size; rsync's incremental file-list percentages
 and ETA are not full-transfer estimates.
+
+A bounded IO-priority experiment completed at 21:03:17 UTC and restored idle
+priority afterward. Over 45 seconds at idle priority, the copy read 57.49 MiB/s
+and canonical replay advanced at 0.333 blocks/s. Over 90 seconds with the copy
+sender at best-effort priority 7, it read 214.97 MiB/s while replay advanced at
+0.289 blocks/s. At 21:06:18 UTC, best-effort priority 7 was adopted for that
+specific, identity-checked rsync sender to shorten the checkpoint transfer.
+This changes only the copy process and expires when it exits; client durability
+and process priority are unchanged. These short windows indicate a tradeoff,
+not a precise long-term replay forecast. Evidence: controller/source pipeline
+`checkpoint-copy-priority-probe.json` and `checkpoint-copy-priority-adopted.json`.
 
 The probe holds a temporary SSH key. The original VM accepts it only from
 `10.35.0.6`, with a forced read-only `rrsync` command restricted to the checkpoint
@@ -103,6 +114,18 @@ not block the existing three-consumer relay. Candidate activation remains gated:
 6. Remove the temporary VM if it is not useful. Remove its Terraform resources,
    temporary count contribution and controller `erigon-io-probe.json` only when
    the final use/cleanup decision has been executed and verified.
+
+`activate-erigon-probe.py` implements the candidate's bounded activation gate.
+It refuses to open before verified copy and revoked-key evidence, rechecks the
+MDBX digest, and requires the needed immutable replay records. It starts the
+same pinned image with a 224 GiB memory limit, normal durability and pruning,
+and background maintenance disabled. The larger memory limit is for source
+preparation, not the eventual 16/32 GiB migration measurements. It checks the
+exact checkpoint header and historical BAL samples, replays 256 identical
+blocks through 24,468,281, verifies every pilot body/commitment, and repeats
+those checks after a clean shutdown/reopen. It records timing separately from
+the audits and leaves canonical routing unchanged. It does not automatically
+retry failed activation or promote the probe.
 
 Controller provisioning/access records are in `erigon-io-probe.json` and
 `io-probe-ansible.log`. Copy failures stop for inspection; neither the copy
