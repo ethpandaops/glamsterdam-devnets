@@ -2,8 +2,8 @@
 tracoor-single:
   fullnameOverride: "tracoor"
   image:
-    repository: registry-1.docker.io/ethpandaops/tracoor
-    tag: 0.0.2-glamsterdam-devnet-11
+    repository: ethpandaops/tracoor
+    tag: 0.1.2-debian
     pullPolicy: IfNotPresent
   resources:
     requests:
