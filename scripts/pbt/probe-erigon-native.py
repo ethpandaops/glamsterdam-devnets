@@ -2,6 +2,7 @@
 """Compare native replay modes on private clones of the verified checkpoint."""
 import argparse
 import fcntl
+import gzip
 import hashlib
 import importlib.util
 import json
@@ -13,7 +14,7 @@ import shutil
 import subprocess
 import time
 
-from pipeline_rpc import ANCHOR, ROOT, save
+from pipeline_rpc import ROOT, RPC, save
 
 NATIVE = Path('/data/pbt-1/native')
 PROBE = Path('/data/pbt-1/io-probe')
@@ -44,6 +45,15 @@ def namespace(unit, *args):
     return ['nsenter', '--target', current['MainPID'], '--net', *args]
 
 
+def io_sample(unit):
+    pid = state(unit)['MainPID']
+    return {'time': time.time(), 'pid': int(pid),
+        'process': {key: int(value) for key, value in
+                    (line.split(':', 1) for line in Path('/proc', pid, 'io').read_text().splitlines())},
+        'device': [int(value) for value in Path('/sys/block/vda/stat').read_text().split()],
+        'pressure': Path('/proc/pressure/io').read_text()}
+
+
 def audit(phase, trial, blocks):
     spec = importlib.util.spec_from_file_location('activation', '/data/pbt-1/activate-erigon-probe.py')
     module = importlib.util.module_from_spec(spec)
@@ -64,6 +74,27 @@ def wait_ready(unit):
             return
         assert time.monotonic() < deadline, 'Inspect startup before retrying'
         time.sleep(5)
+
+
+def replay(trial, blocks):
+    rpc = RPC()
+    assert int(rpc.head()['number'], 16) == HEAD
+    durations = []
+    started = time.monotonic()
+    for offset in range(1, blocks+1):
+        number = HEAD+offset
+        record = json.loads(gzip.decompress((ROOT/'blocks'/f'{number:08d}.json.gz').read_bytes()))
+        before = time.monotonic()
+        head = rpc.apply(record)
+        durations.append(time.monotonic()-before)
+        save(trial/'replay-progress.json', {'time': time.time(), 'head': number,
+            'hash': head['hash'], 'state_root': head['stateRoot'], 'bal_hash': head['blockAccessListHash'],
+            'completed': offset, 'target_blocks': blocks})
+    measured = sum(durations[8:])
+    save(trial/'replay-timing.json', {'time': time.time(), 'blocks': blocks,
+        'elapsed_seconds': time.monotonic()-started, 'warmup_blocks': 8,
+        'measured_blocks': blocks-8, 'measured_apply_seconds': measured,
+        'measured_blocks_per_second': (blocks-8)/measured, 'apply_seconds_per_block': durations})
 
 
 def clone(trial):
@@ -159,16 +190,22 @@ def main(args):
     save(trial/'status.json', {'phase': 'replaying', 'time': time.time(), 'blocks': args.blocks})
     profile = subprocess.Popen(namespace(unit, 'curl', '-fsS', '--max-time', '75',
         '-o', str(trial/'cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=60'))
+    io_before = io_sample(unit)
     started = time.monotonic()
     try:
-        subprocess.run(namespace(unit, 'python3', '-u', '/data/pbt-1/replay.py',
-            '--workload-blocks', str(HEAD+args.blocks-ANCHOR-3)), check=True)
+        subprocess.run(namespace(unit, 'python3', '-u', __file__, '--variant', args.variant,
+            '--blocks', str(args.blocks), '--replay'), check=True)
         elapsed = time.monotonic()-started
+        io_after = io_sample(unit)
     finally:
         profile_code = profile.wait(timeout=80)
     save(trial/'timing.json', {'time': time.time(), 'blocks': args.blocks,
         'seconds': elapsed, 'blocks_per_second': args.blocks/elapsed, 'cpu_profile_exit_code': profile_code,
-        'binary': artifact, 'normal_durability': True, 'memory_GiB': 48, 'cpus': '0-7'})
+        'binary': artifact, 'normal_durability': True, 'memory_GiB': 48, 'cpus': '0-7',
+        'replay': json.loads((trial/'replay-timing.json').read_text())})
+    save(trial/'io.json', {'before': io_before, 'after': io_after,
+        'device_write_bytes_per_block': (io_after['device'][6]-io_before['device'][6])*512/args.blocks,
+        'process_write_bytes_per_block': (io_after['process']['write_bytes']-io_before['process']['write_bytes'])/args.blocks})
     check('before')
     subprocess.run(['systemctl', 'stop', unit], check=True, timeout=1810)
     stopped = state(unit)
@@ -192,10 +229,13 @@ if __name__ == '__main__':
     parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap'], required=True)
     parser.add_argument('--blocks', type=int, default=64)
     parser.add_argument('--audit', choices=['checkpoint', 'before', 'after'])
+    parser.add_argument('--replay', action='store_true')
     args = parser.parse_args()
     assert 64 <= args.blocks <= 256
     if args.audit:
         audit(args.audit, NATIVE/args.variant, args.blocks)
+    elif args.replay:
+        replay(NATIVE/args.variant, args.blocks)
     else:
         try:
             main(args)

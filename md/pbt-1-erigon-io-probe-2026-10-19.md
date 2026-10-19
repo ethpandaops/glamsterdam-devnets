@@ -193,3 +193,21 @@ same VM and starting checkpoint with normal durability retained. This is a
 hypothesis based on the observed sync wait, not an established speedup. No
 native replay trial or write-mode optimization has passed yet. The existing
 15-minute monitor now also reports native build/trial status and failures.
+
+The controller's `pbt-1-native-probe-preparation.service` is now waiting on the
+live copy handle. On successful copy verification it removes only the exact
+restricted checkpoint key from the original VM, deletes the corresponding
+private/public key files from the probe, saves revocation evidence on both
+hosts and the controller, and starts `pbt-1-native-probe-profile.service` for
+one 64-block trial. It does not retry failed copy, revocation or trial work.
+The monitor reports preparation and trial-job failures, including failures
+before a client starts. Trial timing separates the first eight warmup blocks
+and records per-block apply durations plus process/device IO counters.
+
+A longer original-source trace collected after 21:20 UTC contained 336 commits,
+including 112 over 100 ms. Those slow commits averaged 2.063 seconds, with
+2.061 seconds in sync and 1.593 ms in GC. Copy IO still competes with replay;
+the result confirms the location of the wait, not uncontended throughput.
+Evidence: `erigon-native-commit-steady.{log,json}`. MDBX's pinned source routes
+WRITE_MAP commits through `msync` and non-WRITE_MAP commits through its file-sync
+path; both preserve normal durability in the planned comparison.

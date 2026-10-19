@@ -101,8 +101,11 @@ if native.exists():
     r['native_trials']={}
     for variant in ('stock','profile','profile-no-writemap'):
         trial=native/variant
-        if not trial.exists():continue
-        current={}
+        job=subprocess.check_output(['systemctl','show','pbt-1-native-probe-'+variant,
+            '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
+        job_state=dict(x.split('=',1) for x in job.splitlines() if '=' in x)
+        if not trial.exists() and job_state.get('ActiveState') not in ('active','failed'):continue
+        current={'job':job_state}
         for key in ('status','timing'):
             path=trial/(key+'.json')
             if path.exists():current[key]=json.loads(path.read_text())
@@ -214,6 +217,9 @@ def main():
     probe_path=controller.parent/'erigon-io-probe.json'
     if probe_path.is_file():
         try:
+            preparation=controller.parent/'native-probe-preparation.json'
+            if preparation.exists() and json.loads(preparation.read_text()).get('phase')=='failed':
+                report['alerts'].append('temporary Erigon probe: native preparation failed; inspect controller service')
             probe=check_probe(json.loads(probe_path.read_text())['public_ip'],args.identity)
             report['temporary_probe']=probe
             phase=(probe.get('copy') or {}).get('phase')
@@ -226,7 +232,8 @@ def main():
             if probe.get('native_build_service',{}).get('ActiveState')=='failed':
                 report['alerts'].append('temporary Erigon probe: native build failed; inspect build logs')
             for variant,trial in probe.get('native_trials',{}).items():
-                if trial['service'].get('ActiveState')=='failed' or trial.get('status',{}).get('phase')=='failed':
+                if (trial['service'].get('ActiveState')=='failed' or trial.get('status',{}).get('phase')=='failed'
+                        or trial.get('job',{}).get('ActiveState')=='failed'):
                     report['alerts'].append(f'temporary Erigon probe: native {variant} trial failed')
         except Exception as exc:
             report['temporary_probe']={'error':str(exc)}
