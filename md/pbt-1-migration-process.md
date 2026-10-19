@@ -26,7 +26,11 @@ Delivery requires:
 The operator additionally requires approximately 50% utilization of **both**
 EIP-8037 gas dimensions at the 200M block limit and substantial BALs. The revised
 pilot measured ~100.53M execution gas, 99.98M state gas and ~443 KiB BALs per block.
-The full run enforces these targets and archives the dimension measurements.
+From block 24,467,832, existing-slot updates are slightly reduced to keep execution
+gas near 99.90M and prevent base-fee growth; state gas stays at 99.98M and BALs
+remain about 451 KB. The full run enforces both dimensions, a 300 KiB BAL minimum,
+and a 100M header-gas ceiling for this packing revision. It archives the dimension
+measurements and the effective revision in the replay bundle.
 The first low-load pilot is retained only as a preparation prefix, outside the
 50,400 qualifying blocks. See the [active workload and automation procedure](../scripts/pbt/README.md#overnight-workload-and-publication)
 for exact anchors, validation gates, live evidence paths and publication layout.

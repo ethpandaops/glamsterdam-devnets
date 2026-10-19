@@ -169,6 +169,16 @@ occupancy in both EIP-8037 dimensions**, with substantial BALs. Version 2 uses:
 - At least 300 KiB of encoded BAL per qualifying block. The first ten measured
   approximately 453,500 bytes each (~443 KiB), versus ~57 KiB in the first pilot.
 
+Starting at block **24,467,832**, `v2.packing_revisions` reduces the existing-slot
+updates to **4,252** while preserving the 942 transactions and 1,021 fresh slots.
+The ten-block calibration measured approximately **99.90M execution gas**,
+**99.98M state gas**, and BALs of at least **450,889 bytes**. This keeps header
+gas below the 100M fee target, preventing the gradual base-fee increase observed
+with the initial 100.53M execution load. Generation and final audits enforce the
+new header-gas ceiling from the revision's effective index. Earlier qualifying
+records are retained unchanged. Calibration evidence is included in the replay
+bundle; see the [pilot report](../../md/pbt-1-8037-pilot-2026-10-19.md#fee-stable-packing-adjustment).
+
 Execution gas is derived from the receipt gas sum minus state gas. This workload
 has no storage clears/refunds or calldata-floor-bound transactions; the derived
 `max(execution,state)` must equal the header's `gasUsed` on every block. A separate
