@@ -118,6 +118,9 @@ Check download status on that node; it runs independently of this workspace sess
 ## Continuous monitoring
 
 [`monitor.py`](monitor.py) runs read-only checks against all four source VMs.
+It also checks controller disk headroom for the replay bundle, estimating remaining
+records at 125% of the observed average size plus a 10 GiB reserve. Bundle upload
+streams tar/zstd output and does not require a second complete archive on disk.
 The controller's enabled user timer `pbt-1-monitor.timer` runs it at :00, :15,
 :30 and :45 UTC. User lingering is enabled, so checks survive shell logout.
 Each run records progress, free disk, container failures/OOMs, restore completion,

@@ -4,7 +4,9 @@ import argparse
 import concurrent.futures
 import datetime
 import json
+import math
 from pathlib import Path
+import shutil
 import subprocess
 import time
 
@@ -136,6 +138,21 @@ def main():
                     report['alerts'].append('nethermind: restore complete but cleanup has not completed and is not running')
     tmp=args.output/'latest.json.tmp'
     controller=Path.home()/'.local/state/pbt-1-run/advance-status.json'
+    plan_path=controller.parent/'workload.json'
+    if plan_path.is_file():
+        plan=json.loads(plan_path.read_text())
+        files=list((controller.parent/'blocks').glob('*.json.gz'))
+        recorded_bytes=sum(p.stat().st_size for p in files)
+        remaining=max(0,plan['v2']['final_records']-len(files))
+        # Allow 25% above the observed average, plus 10 GiB for logs/metadata.
+        # Publication streams its tar/zstd output and needs no second full copy.
+        estimated=math.ceil(1.25*recorded_bytes/max(1,len(files))*remaining)
+        free=shutil.disk_usage(controller.parent).free
+        report['controller_storage']={'free_bytes':free,'replay_bytes':recorded_bytes,
+            'replay_records':len(files),'remaining_records':remaining,
+            'estimated_additional_bytes':estimated,'reserve_bytes':10*2**30}
+        if free<estimated+10*2**30:
+            report['alerts'].append('controller: insufficient projected replay-bundle disk headroom')
     if controller.is_file():
         workflow=json.loads(controller.read_text())
         report['workflow']=workflow
@@ -168,6 +185,11 @@ def main():
         if p.get('qualifying_blocks') is not None:phase+=f'; {p["qualifying_blocks"]:,} qualifying'
         data_gib=f'{r["data_bytes"]/2**30:.1f}' if r['data_bytes'] is not None else '—'
         lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {data_gib} | {r["free_bytes"]/2**30:.1f} | {cleanup} | {phase} |')
+    if 'controller_storage' in report:
+        s=report['controller_storage']
+        lines += ['', f'Controller replay storage: {s["replay_bytes"]/2**30:.1f} GiB; '
+                  f'{s["free_bytes"]/2**30:.1f} GiB free; estimated additional '
+                  f'{s["estimated_additional_bytes"]/2**30:.1f} GiB plus 10 GiB reserve.']
     lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
               'Events: ' + ('; '.join(report['events']) or 'none'), '',
               'Pipeline stages are reported separately; generation/replay completion does not establish snapshot upload completion.']
