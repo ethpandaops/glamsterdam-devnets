@@ -95,6 +95,21 @@ def main():
                 'notes':'A bounded replay comparison used a custom native build. The database then passed pinned-image reopen validation; final snapshot validation also uses the pinned image.',
                 'probe_evidence':prefix+'_snapshot_native_replay_probe.json',
                 'build_evidence':prefix+'_snapshot_native_replay_build.json'}
+        native_present=subprocess.run(ssh+['test -d /data/pbt-1/native-replay']).returncode
+        assert native_present in (0,1), 'Could not inspect continuous native replay provenance'
+        if native_present==0:
+            native=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-replay/complete.json']))
+            build=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-replay/build.json']))
+            assert native['pinned_reopen_verified'] and native['normal_durability']
+            assert native['end']==report['head'] and native['head']['hash']==proof['head']['hash']
+            assert native['image']==proof['image'] and native['binary_sha256']==build['sha256']
+            assert native['validated_blocks']==native['end']-native['start']+1>0
+            objects['_snapshot_native_replay_complete.json']=native
+            objects['_snapshot_native_replay_continuous_build.json']=build
+            metadata['pbt']['native_replay']['continuous']={
+                'evidence':prefix+'_snapshot_native_replay_complete.json',
+                'build_evidence':prefix+'_snapshot_native_replay_continuous_build.json',
+                'notes':'The remaining replay used this native build, with VALID payloads and matching commitments for each block; final validation reopened the pinned image.'}
         backfill=read('erigon-bal-backfill.json');retention=read('bal-retention-prepared.json')
         assert not backfill['dry_run'] and backfill['verified_records']==v['final_records']
         assert backfill['written_sidecars']+backfill['existing_sidecars']==v['final_records']

@@ -263,6 +263,22 @@ and `_snapshot_native_replay_build.json`, linked from the snapshot metadata.
 An incomplete comparison prevents publication; the final pinned-image validation
 remains required.
 
+`export-raw-stream.py` exports the remaining Geth raw blocks into bounded,
+hashed chunks. `relay-raw-stream.py` streams each chunk through the controller,
+verifies every compressed file on Erigon, and atomically exposes the chunk.
+The controller retains no full second raw-block stream. Geth's final shutdown
+waits for its requested export to complete, so the export cannot lose its RPC
+source during publication preparation.
+
+`replay-erigon-native.py` is the continuous native driver. Activation requires
+a completed original-VM pilot, a matching binary/build manifest, and a completed
+probe of the selected batch size with persistence and restart checks. It verifies
+raw-file hashes before staging and requires ordinary Engine `VALID` responses and
+matching commitments for every block. Its final clean stop and pinned-image reopen
+precede the existing exhaustive BAL audit and upload gates. The monitor follows
+the native systemd PID while Docker is stopped. Publication includes the continuous
+run's build and completion evidence whenever its work directory exists.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable

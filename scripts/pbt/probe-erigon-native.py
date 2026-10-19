@@ -108,20 +108,29 @@ def wait_persisted(trial, blocks, batch_size):
         time.sleep(.05)
 
 
-def replay(trial, blocks, batched=False):
+def replay(trial, blocks, batch_size=1):
     rpc = RPC()
     assert int(rpc.head()['number'], 16) == HEAD
     durations = []
     started = time.monotonic()
+    steady_profile = None
+    staged = batch_size > 16
+    batched = batch_size > 1
     if batched:
-        for offset in range(1, blocks+1, 8):
+        for offset in range(1, blocks+1, batch_size):
             records = [json.loads(gzip.decompress((ROOT/'blocks'/f'{number:08d}.json.gz').read_bytes()))
-                       for number in range(HEAD+offset, HEAD+min(offset+8, blocks+1))]
-            raw = [json.loads(gzip.decompress((Path('/data/pbt-1/raw-replay-fixture')/f'{record["number"]:08d}.json.gz').read_bytes()))['raw']
+                       for number in range(HEAD+offset, HEAD+min(offset+batch_size, blocks+1))]
+            fixture = Path('/data/pbt-1/raw-wide-fixture' if staged else '/data/pbt-1/raw-replay-fixture')
+            raw = [json.loads(gzip.decompress((fixture/f'{record["number"]:08d}.json.gz').read_bytes()))['raw']
                    for record in records]
             before = time.monotonic()
-            inserted = rpc.call('testing_insertRawBlocksV1', [raw, [r['new_payload'][0]['blockAccessList'] for r in records]])
-            assert inserted == [r['hash'] for r in records], 'Staged block hashes differ from immutable replay stream'
+            for index in range(0, len(records), 16):
+                chunk = records[index:index+16]
+                params = [raw[index:index+16], [r['new_payload'][0]['blockAccessList'] for r in chunk]]
+                if staged:
+                    params.insert(0, chunk[0]['new_payload'][0]['parentHash'])
+                inserted = rpc.call('testing_insertRawBlocksV2' if staged else 'testing_insertRawBlocksV1', params)
+                assert inserted == [r['hash'] for r in chunk], 'Staged block hashes differ from immutable replay stream'
             tip = records[-1]
             deadline = time.monotonic()+600
             while True:
@@ -140,7 +149,10 @@ def replay(trial, blocks, batched=False):
             assert rpc.head()['hash'] == tip['hash']
             durations.extend([(time.monotonic()-before)/len(records)]*len(records))
             save(trial/'replay-progress.json', {'time': time.time(), 'head': tip['number'],
-                'completed': offset+len(records)-1, 'target_blocks': blocks, 'batch_size': 8})
+                'completed': offset+len(records)-1, 'target_blocks': blocks, 'batch_size': batch_size})
+            if staged and steady_profile is None:
+                steady_profile = subprocess.Popen(['curl', '-fsS', '--max-time', '45', '-o',
+                    str(trial/'steady.cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=20'])
     for offset in (() if batched else range(1, blocks+1)):
         number = HEAD+offset
         record = json.loads(gzip.decompress((ROOT/'blocks'/f'{number:08d}.json.gz').read_bytes()))
@@ -152,19 +164,24 @@ def replay(trial, blocks, batched=False):
             'completed': offset, 'target_blocks': blocks})
     persistence_wait = 0
     if trial.name != 'stock':
-        final_batch = min(8, blocks % 8 or 8) if batched else 1
+        final_batch = min(batch_size, blocks % batch_size or batch_size)
         persistence_wait = wait_persisted(trial, blocks, final_batch)
         for i in range(len(durations)-final_batch, len(durations)):
             durations[i] += persistence_wait/final_batch
-    measured = sum(durations[8:])
+    warmup = max(8, batch_size)
+    measured = sum(durations[warmup:])
     save(trial/'replay-timing.json', {'time': time.time(), 'blocks': blocks,
-        'elapsed_seconds': time.monotonic()-started, 'warmup_blocks': 8,
-        'measured_blocks': blocks-8, 'measured_apply_seconds': measured,
-        'measured_blocks_per_second': (blocks-8)/measured, 'apply_seconds_per_block': durations,
-        'batch_size': 8 if batched else 1,
+        'elapsed_seconds': time.monotonic()-started, 'warmup_blocks': warmup,
+        'measured_blocks': blocks-warmup, 'measured_apply_seconds': measured,
+        'measured_blocks_per_second': (blocks-warmup)/measured, 'apply_seconds_per_block': durations,
+        'batch_size': batch_size,
         'final_persistence_wait_seconds': persistence_wait,
         'final_persistence_verified': trial.name != 'stock',
         'duration_allocation': 'batch elapsed divided equally; not individual latency' if batched else 'individual apply calls'})
+    if steady_profile is not None:
+        code = steady_profile.wait(timeout=50)
+        save(trial/'steady-profile.json', {'exit_code': code, 'seconds': 20,
+            'started_after_blocks': batch_size, 'time': time.time()})
 
 
 def clone(trial):
@@ -213,10 +230,13 @@ def main(args):
     assert shutil.disk_usage(NATIVE).free > 150*1024**3
     build = json.loads((NATIVE/'build-report.json').read_text())
     assert build['source_commit'] == '8c1e3893d77d230720d172f1492d95b5777a862c'
-    if args.variant == 'profile-batch':
-        artifact = json.loads((NATIVE/'batch-build-report.json').read_text())
+    if args.variant.startswith('profile-batch'):
+        staged = args.variant in ('profile-batch64', 'profile-batch128')
+        artifact = json.loads((NATIVE/('continuation-build-report.json' if staged else 'batch-build-report.json')).read_text())
         assert artifact['source']['batch_commit'] == 'a7d50626108b2428d5cd0b65089330fee6b357d8'
-        fixture = Path('/data/pbt-1/raw-replay-fixture')
+        if staged:
+            assert artifact['source']['continuation_commit'] == '72b4a99bbb46a61ce3ab0932111533da8cb9fcda'
+        fixture = Path('/data/pbt-1/raw-wide-fixture' if staged else '/data/pbt-1/raw-replay-fixture')
         manifest = json.loads((fixture/'manifest.json').read_text())
         assert manifest['start'] == HEAD+1 and manifest['end'] >= HEAD+args.blocks
         for entry in manifest['files']:
@@ -244,7 +264,7 @@ def main(args):
                    for item in client_args]
     if args.variant == 'profile-no-writemap':
         client_args.append('--db.writemap=false')
-    if args.variant == 'profile-batch':
+    if args.variant.startswith('profile-batch'):
         client_args = [item+',testing' if item.startswith('--http.api=') else item for item in client_args]
     client_args += ['--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
     unit = 'pbt-1-native-'+args.variant
@@ -269,8 +289,9 @@ def main(args):
             '--blocks', str(args.blocks), '--audit', phase), check=True)
     check('checkpoint')
     save(trial/'status.json', {'phase': 'replaying', 'time': time.time(), 'blocks': args.blocks})
-    profile = subprocess.Popen(namespace(unit, 'curl', '-fsS', '--max-time', '75',
-        '-o', str(trial/'cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=60'))
+    profile = None if args.variant in ('profile-batch64', 'profile-batch128') else subprocess.Popen(
+        namespace(unit, 'curl', '-fsS', '--max-time', '75',
+            '-o', str(trial/'cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=60'))
     io_before = io_sample(unit)
     log_start = (trial/'client.log').stat().st_size
     started = time.monotonic()
@@ -281,7 +302,7 @@ def main(args):
         io_after = io_sample(unit)
         log_end = (trial/'client.log').stat().st_size
     finally:
-        profile_code = profile.wait(timeout=80)
+        profile_code = profile.wait(timeout=80) if profile is not None else None
     save(trial/'timing.json', {'time': time.time(), 'blocks': args.blocks,
         'seconds': elapsed, 'blocks_per_second': args.blocks/elapsed, 'cpu_profile_exit_code': profile_code,
         'binary': artifact, 'normal_durability': True, 'memory_GiB': 48, 'cpus': '0-7',
@@ -304,16 +325,19 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap', 'profile-batch'], required=True)
+    parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap', 'profile-batch',
+        'profile-batch16', 'profile-batch64', 'profile-batch128'], required=True)
     parser.add_argument('--blocks', type=int, default=64)
     parser.add_argument('--audit', choices=['checkpoint', 'before', 'after'])
     parser.add_argument('--replay', action='store_true')
     args = parser.parse_args()
     assert 64 <= args.blocks <= 256
+    batch_size = 128 if args.variant == 'profile-batch128' else 64 if args.variant == 'profile-batch64' else 16 if args.variant.startswith('profile-batch16') else 8 if args.variant == 'profile-batch' else 1
+    assert args.blocks > max(8, batch_size)
     if args.audit:
         audit(args.audit, NATIVE/args.variant, args.blocks)
     elif args.replay:
-        replay(NATIVE/args.variant, args.blocks, batched=args.variant == 'profile-batch')
+        replay(NATIVE/args.variant, args.blocks, batch_size=batch_size)
     else:
         try:
             main(args)

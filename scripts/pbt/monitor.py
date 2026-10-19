@@ -47,6 +47,16 @@ r=cmd('docker','inspect','pbt-1-'+client+'-execution')
 result['execution']=json.loads(r.stdout)[0]['State'] if r.returncode==0 else None
 r=cmd('systemctl','show','pbt-1-full-run','-p','ActiveState','-p','Result')
 result['full_run_service']=dict(line.split('=',1) for line in r.stdout.splitlines() if '=' in line)
+if client=='geth' and (root/'raw-stream').exists():
+    service=cmd('systemctl','show','pbt-1-export-raw-stream','-p','ActiveState','-p','MainPID','-p','Result')
+    result['raw_export']={'service':dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)}
+    path=root/'raw-stream/status.json'
+    if path.exists():result['raw_export']['status']=json.loads(path.read_text())
+if client=='erigon' and (root/'native-replay').exists():
+    result['native_replay']={}
+    for key,unit in [('service','pbt-1-native-replay'),('client','pbt-1-native-replay-client')]:
+        service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result')
+        result['native_replay'][key]=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
 if client=='erigon' and (root/'native-source-pilot').exists():
     pilot=root/'native-source-pilot'
     service=cmd('systemctl','show','pbt-1-native-source-pilot','-p','ActiveState','-p','MainPID','-p','Result')
@@ -60,9 +70,10 @@ if client=='erigon' and (root/'native-source-pilot').exists():
         result['native_source_pilot']['complete']={key:complete[key] for key in
             ('time','pilot_blocks','speedup','pinned_reopen_verified','continuous_batch_replay_enabled')}
 p=result.get('pipeline') or {}
-if p.get('phase') in ('generating','replaying','waiting_for_payload') and p.get('head',0)>=24453559:
+if p.get('phase') in ('generating','replaying','waiting_for_payload','native_replaying','native_waiting_for_raw') and p.get('head',0)>=24453559:
     try:
-        probe=subprocess.run(['nsenter','--target',str(result['execution']['Pid']),'--net',
+        pid=result['native_replay']['client']['MainPID'] if p['phase'].startswith('native_') else result['execution']['Pid']
+        probe=subprocess.run(['nsenter','--target',str(pid),'--net',
                               'python3','/data/pbt-1/bal-sentinel.py'],
                              capture_output=True,text=True,timeout=55)
         if probe.returncode:raise RuntimeError(probe.stderr[-500:])
@@ -116,7 +127,7 @@ if native.exists():
     batch_build=native/'batch-build-report.json'
     if batch_build.exists():r['native_batch_build']=json.loads(batch_build.read_text())
     r['native_trials']={}
-    for variant in ('stock','profile','profile-no-writemap','profile-batch'):
+    for variant in ('stock','profile','profile-no-writemap','profile-batch','profile-batch16','profile-batch64','profile-batch128'):
         trial=native/variant
         job=subprocess.check_output(['systemctl','show','pbt-1-native-probe-'+variant,
             '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
@@ -191,16 +202,23 @@ def main():
                 report['alerts'].append(f'{client}: full-run service failed; inspect journal')
             if r.get('native_source_pilot',{}).get('service',{}).get('ActiveState')=='failed':
                 report['alerts'].append('erigon: original-VM native pilot failed; inspect preserved evidence')
+            for key in ('native_replay','raw_export'):
+                if r.get(key,{}).get('service',{}).get('ActiveState')=='failed':
+                    report['alerts'].append(f'{client}: {key} service failed; inspect journal')
             if 'error' in r.get('bal_retention_probe',{}):
                 report['alerts'].append(f'{client}: BAL retention probe failed: '+r['bal_retention_probe']['error'])
             if pipeline.get('phase') == 'failed':
                 report['alerts'].append(f'{client}: pipeline failed: {pipeline.get("error", "inspect logs")}')
-            if pipeline.get('phase') in ('generating','replaying','uploading','awaiting_upload_verification') and now-pipeline.get('time',now) > 900:
+            if pipeline.get('phase') in ('generating','replaying','native_replaying','native_waiting_for_raw','uploading','awaiting_upload_verification') and now-pipeline.get('time',now) > 900:
                 report['alerts'].append(f'{client}: pipeline progress is over 15 minutes old')
             execution=r.get('execution') or {}
             if execution.get('OOMKilled'):
                 report['alerts'].append(f'{client}: execution container was OOM-killed')
-            allowed_stopped=('validated_stopped','uploading','awaiting_upload_verification','snapshot_uploaded_verified','failed','restart_validation')
+            allowed_stopped=('validated_stopped','uploading','awaiting_upload_verification','snapshot_uploaded_verified','failed','restart_validation','native_replaying','native_waiting_for_raw')
+            if pipeline.get('phase') in ('native_replaying','native_waiting_for_raw'):
+                native=r.get('native_replay',{})
+                if any(native.get(key,{}).get('ActiveState')!='active' or native.get(key,{}).get('MainPID')=='0' for key in ('service','client')):
+                    report['alerts'].append('erigon: native replay handle is not live')
             if execution and not execution.get('Running') and pipeline.get('phase') not in allowed_stopped:
                 report['alerts'].append(f'{client}: execution container unexpectedly stopped; exit={execution.get("ExitCode")}')
             if client=='nethermind':
@@ -233,6 +251,13 @@ def main():
         report['alerts'].extend('workflow: '+error for error in workflow.get('errors',[]))
         if now-workflow.get('time',0)>180:
             report['alerts'].append('workflow: coordinator status is over three minutes old')
+    raw_relay=controller.parent/'raw-relay-status.json'
+    if raw_relay.exists():
+        report['raw_relay']=json.loads(raw_relay.read_text())
+        service=subprocess.run(['systemctl','--user','show','pbt-1-relay-raw-stream','-p','ActiveState','-p','MainPID','-p','Result'],capture_output=True,text=True,timeout=10)
+        report['raw_relay_service']=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
+        if report['raw_relay']['phase']=='failed' or (report['raw_relay']['phase']!='complete' and report['raw_relay_service'].get('ActiveState')!='active'):
+            report['alerts'].append('raw relay: incomplete transfer has no healthy live service')
     probe_path=controller.parent/'erigon-io-probe.json'
     if probe_path.is_file():
         try:
@@ -260,7 +285,7 @@ def main():
             report['temporary_probe']={'error':str(exc)}
             report['alerts'].append('temporary Erigon probe: '+str(exc))
     active_replay=any((r.get('pipeline') or {}).get('phase') in
-                      ('generating','replaying','waiting_for_payload') for r in report['clients'].values())
+                      ('generating','replaying','waiting_for_payload','native_replaying','native_waiting_for_raw') for r in report['clients'].values())
     relay=controller.parent/'relay-status.json'
     if active_replay:
         if not relay.is_file():

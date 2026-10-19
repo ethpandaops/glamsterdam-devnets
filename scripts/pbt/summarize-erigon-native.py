@@ -45,7 +45,7 @@ def summarize(trial):
             'device_write_MiB_per_block': io['device_write_bytes_per_block']/1024**2,
             'process_write_MiB_per_block': io['process_write_bytes_per_block']/1024**2,
             'stages': details,
-            'scope': 'Log stages cover the timed replay window, including eight warmup blocks. '
+            'scope': 'Log stages cover the timed replay window, including the warmup blocks recorded in timing.replay. '
                      'Nested stage totals overlap. Device IO covers the entire VM; '
                      'process IO may omit mmap write attribution. Fixed CPU/RAM limits '
                      'do not establish hardware equivalence with the original source VM.'}

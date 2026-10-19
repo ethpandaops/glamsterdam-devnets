@@ -54,6 +54,14 @@ def advance(c,status,full):
     if phase in ('generation_complete','replay_complete'):
         n=status['workload_blocks']
         if n not in (pilot,final):return  # A calibration/setup run, not a gate.
+        if c=='geth' and n==final:
+            # Raw export needs the live source RPC. Preserve it until all requested
+            # blocks are exported; a failed export needs operator inspection.
+            raw=json.loads(ssh(c,['python3','-c',"import json;from pathlib import Path;p=Path('/data/pbt-1/raw-stream');print(json.dumps({'present':p.exists(),'complete':json.loads((p/'complete.json').read_text()) if (p/'complete.json').exists() else None,'status':json.loads((p/'status.json').read_text()) if (p/'status.json').exists() else {}}))"]))
+            if raw['present']:
+                if raw['status'].get('phase')=='failed':raise RuntimeError('Raw block export failed; inspect before Geth shutdown')
+                if raw['complete'] is None:return
+                assert raw['complete']['end']==status['head'] and raw['complete']['phase']=='complete'
         start(c,f'pbt-1-reopen-{n}', ['python3','-u','/data/pbt-1/reopen.py',c,'--workload-blocks',str(n)]
               +(['--stop-after'] if n==final else []))
     elif phase=='pilot_validated' and full:

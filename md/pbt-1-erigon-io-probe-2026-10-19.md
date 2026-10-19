@@ -320,3 +320,60 @@ body/commitment, then cleanly reopen with the pinned client and resume the
 authoritative run. Any transition to continuous native batch replay requires
 those results, native-runtime monitoring and final pinned-client reopen
 provenance. No authoritative client transition has occurred yet.
+
+## Original-VM comparison completed at 22:26 UTC
+
+The source VM preserved a separately copied mutable checkpoint at 24,470,563,
+verified its MDBX SHA-256 and checked its head/root with the native read-only
+helper. It then ran the native batch binary with the original eight CPUs,
+48 GiB memory limit and normal durability:
+
+| Mode | Range | Measured blocks after warmup | Blocks/second |
+| --- | --- | ---: | ---: |
+| Sequential | 24,470,564–24,470,627 | 56 | 0.272274 |
+| Batch of eight | 24,470,628–24,470,755 | 120 | 0.554971 |
+
+Both timings include final persistence and pruning. The batch result is 2.0383×
+the sequential result. These are consecutive ranges on advancing state, not
+identical starting databases. All 192 new bodies and commitments were checked,
+then the native client stopped cleanly and the pinned Docker image reopened with
+the same head, state root and BALs. Normal replay resumed. Controller evidence:
+`native-source-pilot-complete.json`; remote evidence:
+`/data/pbt-1/native-source-pilot/`.
+
+Eight-block commits on the original VM still spent roughly 4–8.5 seconds in
+native MDBX synchronization, plus about 2.6–3.2 seconds flushing state and
+execution time. This remains the main measured reason to test larger batches.
+
+## Larger-batch work at 22:33 UTC
+
+The probe's 16-block trial passed all 64 body/commitment checks after a clean
+restart. It measured 1.85093 blocks/second over 48 blocks after excluding its
+first full 16-block batch and including final persistence. The earlier eight-block
+trial used an eight-block warmup; do not treat their published rates as a matched
+measurement window. An externally launched steady CPU capture was interrupted
+by shutdown and is unusable; it is not performance evidence.
+
+Source commit `72b4a99bbb46a61ce3ab0932111533da8cb9fcda` adds
+`testing_insertRawBlocksV2`: requests still contain at most 16 blocks, but can
+extend already staged descendants within 128 blocks of the current canonical
+head. It checks the ancestry before admission. This keeps requests under the
+HTTP body limit while allowing one normal forkchoice execution for a longer
+chain. Execution, intermediate-root validation, payload validation and durability
+remain enabled. Tests first failed for the missing endpoint and then for missing
+ancestry/distance guards; both cycles passed after implementation. Existing batch
+execution/bad-block/intermediate-root tests, `make lint` and
+`make erigon integration` passed.
+
+The direct VM build took 29.64 seconds after correcting the build service's Go
+PATH. The failed launch log is preserved as `build-continuation-path-failure.log`.
+Binary SHA-256: `f5feda744e0db70f49fc1ddf9bbc02cfcdd0bbabbb78fb8b07f0ab47b7f5e475`.
+The 256-block, batch-of-64 trial is running on a private checkpoint clone;
+no source VM uses this new binary yet. Its CPU profile begins after the warmup
+batch, and the harness waits for profiling before shutdown.
+
+The remaining raw-block stream starts at 24,470,756. Export and hash-checked
+transfer are running. The continuous native driver and publication/monitoring
+support are prepared but activation awaits the selected probe's completed
+validation. Four driver failure-path tests pass. Final snapshots and the replay
+bundle are still unpublished; the morning deadline remains at risk.
