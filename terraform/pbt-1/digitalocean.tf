@@ -22,17 +22,7 @@ variable "digitalocean_fullnode_size" {
 }
 
 variable "digitalocean_regions" {
-  default = [
-    "nyc1",
-    "sgp1",
-    "lon1",
-    "nyc3",
-    "ams3",
-    "fra1",
-    "tor1",
-    "blr1",
-    "sfo2" # so1_5-8vcpu-64gb-intel is unavailable in sfo3 (2026-10-12)
-  ]
+  default = ["fra1"]
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

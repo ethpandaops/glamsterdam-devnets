@@ -1,0 +1,178 @@
+# Restore only: no genesis generation, client startup, validators or PBT conversion.
+# Uses the PBT-1 Terraform inventory and a namespaced datadir/container.
+# Run from ansible/ with explicit inventory and cache; see scripts/pbt/README.md.
+- name: Prepare the PBT-1 Erigon source snapshot
+  hosts: erigon
+  become: true
+  gather_facts: false
+  vars:
+    seed_root: /data/pbt-1
+    seed_datadir: "{{ seed_root }}/erigon"
+    seed_state_dir: "{{ seed_root }}/snapshot-fetcher"
+    seed_container: pbt-1-erigon-snapshot
+    seed_image: docker.io/library/alpine:3.19.1
+    seed_min_free_bytes: 550000000000
+    seed_authenticated_source: false
+    snapshot_fetcher_base_url: https://shadowfork-images.ethpandaops.io
+    snapshot_fetcher_network: jochemnet
+    snapshot_fetcher_client: erigon
+    snapshot_fetcher_block: 24452538
+    snapshot_fetcher_filename: snapshot-pruned.tar.zst
+    snapshot_fetcher_workers: 8
+    snapshot_fetcher_chunk_bytes: 67108864
+    snapshot_fetcher_max_attempts: 20
+    seed_url: "{{ snapshot_fetcher_base_url }}/{{ snapshot_fetcher_network }}/erigon/{{ snapshot_fetcher_block }}"
+    seed_head_hash: "0x0fd7242bab5055dda36f374f352c78cae381daae9b3e8febe895dce35c907591"
+  tasks:
+    - name: Create experiment directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ seed_root }}"
+        - "{{ seed_datadir }}"
+        - "{{ seed_state_dir }}"
+        - "{{ seed_state_dir }}/tmp"
+
+    - name: Check available space on the destination filesystem
+      ansible.builtin.command: "df -B1 --output=avail {{ seed_datadir }}"
+      register: seed_space
+      changed_when: false
+
+    - name: Check completed restore marker
+      ansible.builtin.stat:
+        path: "{{ seed_state_dir }}/done"
+      register: seed_done
+
+    - name: Check for Docker
+      ansible.builtin.command: docker info --format '{{ '{{' }}.ServerVersion{{ '}}' }}'
+      register: seed_docker
+      changed_when: false
+      failed_when: false
+
+    - name: Install Docker on the new source node
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      when: seed_docker.rc != 0
+
+    - name: Enable Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Inspect the experiment fetcher
+      ansible.builtin.command: "docker inspect {{ seed_container }}"
+      register: seed_inspect
+      changed_when: false
+      failed_when: seed_inspect.rc not in [0, 1]
+
+    - name: Read fetcher state
+      ansible.builtin.set_fact:
+        seed_existing: "{{ (seed_inspect.stdout | from_json | first) if seed_inspect.rc == 0 else {} }}"
+
+    - name: Refuse a failed or stopped partial restore
+      ansible.builtin.assert:
+        that: seed_done.stat.exists or seed_existing | length == 0 or seed_existing.State.Running
+        fail_msg: "Inspect docker logs {{ seed_container }}. A partial restore needs explicit recovery; this play never wipes it."
+
+    - name: Launch a new restore
+      when: not seed_done.stat.exists and seed_existing | length == 0
+      block:
+        - name: Inspect destination contents
+          ansible.builtin.find:
+            paths: "{{ seed_datadir }}"
+            hidden: true
+            file_type: any
+          register: seed_files
+
+        - name: Require empty destination and restore space
+          ansible.builtin.assert:
+            that:
+              - seed_files.matched == 0
+              - seed_space.stdout_lines[-1] | trim | int >= seed_min_free_bytes | int
+            fail_msg: "Restore needs an empty {{ seed_datadir }} and at least 550 GB free. Conversion space is budgeted separately."
+
+        - name: Ensure curl is installed
+          ansible.builtin.apt:
+            name: curl
+            state: present
+            update_cache: true
+            cache_valid_time: 3600
+
+        - name: Read the pinned snapshot metadata
+          ansible.builtin.command: "curl -fsSL --max-time 30 {{ seed_url }}/_snapshot_metadata.json"
+          register: seed_metadata
+          changed_when: false
+
+        - name: Verify the release identity
+          ansible.builtin.assert:
+            that:
+              - (seed_metadata.stdout | from_json).shadowfork.head | int == snapshot_fetcher_block | int
+              - (seed_metadata.stdout | from_json).shadowfork.head_hash == seed_head_hash
+              - (seed_metadata.stdout | from_json).data_size_bytes | int == 428144697343
+
+        - name: Check snapshot availability from the target VM
+          ansible.builtin.command: "curl -fsSI --max-time 30 {{ seed_url }}/{{ snapshot_fetcher_filename }}"
+          changed_when: false
+          when: not seed_authenticated_source | bool
+
+        - name: Check object-scoped authenticated download
+          ansible.builtin.shell: |
+            curl -fsS --max-time 30 --range 0-0 --max-filesize 1 \
+              -o /dev/null "$(cat {{ seed_state_dir | quote }}/source-url)"
+          changed_when: false
+          no_log: true
+          when: seed_authenticated_source | bool
+
+        - name: Configure authenticated source with verified archive size
+          ansible.builtin.set_fact:
+            snapshot_fetcher_url_file: /fetcher/source-url
+            snapshot_fetcher_archive_bytes: 276341609865
+          when: seed_authenticated_source | bool
+
+        - name: Save source provenance
+          ansible.builtin.copy:
+            content: "{{ seed_metadata.stdout }}\n"
+            dest: "{{ seed_state_dir }}/source-metadata.json"
+            mode: "0644"
+
+        - name: Render the existing parallel streaming downloader
+          ansible.builtin.template:
+            src: snapshot_download.sh.j2
+            dest: "{{ seed_state_dir }}/download.sh"
+            mode: "0755"
+
+        - name: Start the detached snapshot download and extraction
+          ansible.builtin.command:
+            argv:
+              - docker
+              - run
+              - --detach
+              - --name
+              - "{{ seed_container }}"
+              - --restart=no
+              - --label
+              - network=glamsterdam-pbt-1
+              - --volume
+              - "{{ seed_datadir }}:/data"
+              - --volume
+              - "{{ seed_state_dir }}:/fetcher"
+              - --volume
+              - "{{ seed_state_dir }}/tmp:/tmp"
+              - --entrypoint
+              - /bin/sh
+              - "{{ seed_image }}"
+              - /fetcher/download.sh
+          changed_when: true
+
+    - name: Show monitoring instructions
+      ansible.builtin.debug:
+        msg:
+          - "Progress: sudo docker logs --tail 30 {{ seed_container }}"
+          - "Complete only when {{ seed_state_dir }}/done exists and the fetcher exits successfully."
+          - "Erigon database: {{ seed_datadir }}. No execution client is started by this play."
