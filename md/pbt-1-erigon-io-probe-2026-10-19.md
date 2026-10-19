@@ -480,3 +480,20 @@ be measured. Eleven driver/handoff checks pass, covering validation gaps,
 incorrect commitments/bodies, invalid payloads, persistence fencing and the
 missing-service regression. Final pinned-image reopen and exhaustive BAL checks
 remain required after the entire replay.
+
+By 23:11:51 UTC, the batch-of-64 driver had validated 256 more blocks and reached
+24,472,050. Its startup-inclusive rate was 0.689 blocks/second. Individual later
+64-block intervals took approximately 83–92 seconds; this is only a small gain
+over the preceding batch-of-16 segment's final 256-block persistence-inclusive
+window (380.751 seconds, 0.672 blocks/second). The 512-MiB buffer still forces
+intermediate commits near 31 blocks. A larger buffer remains an unvalidated
+candidate for a bounded original-VM trial; no such setting has been adopted.
+
+At 23:11:45 UTC, Nethermind completed its final restart and exhaustive audit:
+51,420 bodies, 50,400 qualifying blocks, 22,832,500,199 BAL bytes and a minimum
+qualifying BAL size of 450,865 bytes. Average qualifying execution/state gas was
+100,078,541.73 / 99,976,320. Its final clean stop passed. The multipart upload
+started by 23:12:22 UTC under
+`pbt-1/20261019-mixed-8037-v2/nethermind/24503958/snapshot.tar.zst`, with its first
+256-MiB part acknowledged. This does not establish upload completion. The
+Patricia directory is excluded; Geth/Besu audits and Erigon replay remain active.
