@@ -28,12 +28,15 @@ def main():
         data=path.read_bytes()
         entries.append({'file':'blocks/'+path.name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
     genesis=REPO/'network-configs/msf-2/metadata/genesis.json'
-    (ROOT/'source-genesis.json').write_bytes(genesis.read_bytes())
+    source=json.loads(genesis.read_text())
+    source['alloc']={('0x'+k if not k.startswith('0x') else k):v for k,v in source['alloc'].items()}
+    source_bytes=json.dumps(source).encode()
+    (ROOT/'source-genesis.json').write_bytes(source_bytes)
     manifest={'version':2,'generated_at':time.time(),'network':'pbt-1','source_anchor':24452538,
               'qualifying_anchor':24452538+v['qualifying_start_index'],'head':target,
               'preparation_blocks':v['qualifying_start_index'],'qualifying_blocks':50400,
               'qualifying_chain_seconds':50400*12,'workload':plan,'snapshots':snapshots,
-              'genesis_sha256':hashlib.sha256(genesis.read_bytes()).hexdigest(),
+              'genesis_sha256':hashlib.sha256(source_bytes).hexdigest(),
               'repository_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
               'records':entries,'bundle_layout':'blocks/<height>.json.gz contains payload, forkchoice, BAL and gas accounting; see workload.json for the preparation prefix and qualifying range'}
     (ROOT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -43,7 +46,7 @@ def main():
         if exc.response['Error']['Code'] not in ('404','NoSuchKey','NotFound'):raise
     else:raise RuntimeError('Bundle destination already exists; inspect before retrying')
     # Streaming avoids needing a second full copy of the bundle on the controller.
-    tar=subprocess.Popen(['tar','--sort=name','-C',str(ROOT),'-cf','-','blocks','workload.json','manifest.json','source-genesis.json'],stdout=subprocess.PIPE)
+    tar=subprocess.Popen(['tar','--sort=name','-C',str(ROOT),'-cf','-','blocks','workload.json','manifest.json','source-genesis.json','8037-trace-calibration.json'],stdout=subprocess.PIPE)
     zstd=subprocess.Popen(['zstd','-1','-T2','-q'],stdin=tar.stdout,stdout=subprocess.PIPE);tar.stdout.close()
     class Stream:
         def __init__(self):self.sha=hashlib.sha256();self.size=0
@@ -67,7 +70,8 @@ def main():
     public_base='https://shadowfork-images.ethpandaops.io/'
     manifest['urls']={c:public_base+x['key'] for c,x in snapshots.items()}
     manifest['urls']['replay']=public_base+key
-    for name,value in [('workload',plan),('manifest',manifest)]:
+    calibration=json.loads((ROOT/'8037-trace-calibration.json').read_text())
+    for name,value in [('workload',plan),('manifest',manifest),('8037_calibration',calibration)]:
         data=json.dumps(value,indent=2).encode();object_key=PREFIX+f'_snapshot_{name}.json'
         s3.put_object(Bucket=BUCKET,Key=object_key,Body=data,ContentType='application/json')
         assert s3.get_object(Bucket=BUCKET,Key=object_key)['Body'].read()==data

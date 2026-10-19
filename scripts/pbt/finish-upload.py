@@ -68,7 +68,9 @@ def main():
                      'nethermind_patricia_omitted':c=='nethermind','clean_restart_verified':True,
                      'workload_manifest':PREFIX+'_snapshot_workload.json'}}
     objects={'_snapshot_metadata.json':metadata,'_snapshot_eth_getBlockByNumber.json':{'jsonrpc':'2.0','id':1,'result':proof['head']},
-             '_snapshot_integrity.json':report,'_snapshot_reopen.json':proof}
+             '_snapshot_integrity.json':report,'_snapshot_reopen.json':proof,
+             '_snapshot_startup.json':{'preparation_command':read('client-command.json'),
+                 'notes':'The reopened proof uses this pinned preparation profile. Supply the bundled source genesis; adjust host paths and resource limits for consumers. Nethermind requires FlatDB and TTD=0; Erigon uses snap.stop.'}}
     for name,value in objects.items():
         data=json.dumps(value,indent=2).encode()
         s3.put_object(Bucket=BUCKET,Key=prefix+name,Body=data,ContentType='application/json')
