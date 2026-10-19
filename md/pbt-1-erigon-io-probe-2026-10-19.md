@@ -520,3 +520,33 @@ first rejected a bounded prefix of the full raw stream, warmup persistence,
 wrong older BALs and wrong intermediate roots. Monitoring follows the live
 pilot service/client, and publication retains successful pilot evidence in the
 native segment history. The pilot result is pending.
+
+The initial pilot rejected its first staging request: the execution module's
+`CurrentHeader` uses `ReadHeadHeaderHash`, whereas RPC `latest` still reported the
+last forkchoice head. Sixty-four blocks previously staged by the interrupted
+driver were ahead of that forkchoice head. The guard correctly refused insertion
+below its current header; it was not loosened. The failure occurred before any
+pilot batch completed, and its log is retained as `staging-guard-failure.log`.
+
+All 64 stored headers and complete bodies/BALs were then retrieved by hash and
+matched to the immutable input records, with the RPC head unchanged. A first
+recovery through ordinary forkchoice returned VALID but did not update RPC
+`latest`; the driver's exact-head assertion caught this and stopped. Source
+inspection found that the duplicate-FCU path writes forkchoice metadata into an
+overlay and returns before the normal flush/publish path. This is evidence of a
+head disagreement, not a successful replay. The second failure is retained as
+`duplicate-forkchoice-head-failure.log`.
+
+At 23:25 UTC, inspected recovery resumed on the same native PID. Its first batch
+combines the verified 64-block stored prefix with 64 newly staged blocks, then
+uses normal forward forkchoice, ordinary VALID checks and all header checks.
+The staging guard is unchanged. The first 128 blocks and their persistence are
+warmup; only the final 128 of the unchanged 256-block pilot are measured. The
+complete pilot still requires both full body audits and a pinned-image reopen.
+Seventeen tests pass, including the stored-prefix forward-execution regression.
+No failed trial has been accepted as qualification evidence.
+
+Geth's final restart/body gate passed at 23:18:22 UTC and Besu's at 23:22:17 UTC.
+Both verified all 51,420 bodies and 50,400 qualifying blocks before clean stop.
+All three completed clients are now uploading under the immutable release
+prefix. The replay bundle remains gated on all four verified native uploads.

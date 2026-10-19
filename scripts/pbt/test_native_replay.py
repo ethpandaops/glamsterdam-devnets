@@ -120,6 +120,20 @@ class ReplayChecks(unittest.TestCase):
         self.assertEqual(sum(name == 'engine_newPayloadV5' for name, _ in self.calls[fences[0]+1:]), 4)
         self.assertEqual(self.calls[-1], ('persist', self.base+16))
 
+    def test_verified_stored_prefix_still_gets_engine_validation(self):
+        module.save(module.RUN/'request.json', {'start': self.base+1, 'end': self.end,
+                    'batch_size': 16, 'first_batch_size': 20, 'record_batch_timings': True, 'pre_staged_first_batch': True})
+        module.save(module.RUN/'pre-staged-prefix.json', {'start': self.base+1, 'end': self.base+16,
+                    'hashes': [str(n) for n in range(self.base+1, self.base+17)],
+                    'verified_stored_headers_and_bodies': 16, 'forkchoice_head_unchanged': True})
+        module.replay()
+        methods = [name for name, _ in self.calls]
+        self.assertEqual(methods[:2], ['testing_insertRawBlocksV2', 'engine_forkchoiceUpdatedV3'])
+        self.assertEqual(len(self.calls[0][1][1]), 4)
+        self.assertEqual(methods.count('engine_newPayloadV5'), 20)
+        self.assertEqual(methods.count('eth_getBlockByNumber'), 20)
+        self.assertEqual(self.calls[-1], ('persist', self.base+16))
+
     def test_wrong_intermediate_commitment_prevents_completion(self):
         self.bad_header = True
         with self.assertRaises(AssertionError):

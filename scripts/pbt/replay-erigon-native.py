@@ -93,12 +93,14 @@ def replay():
     assert request['start'] == first+1 and raw_request['start'] <= first+1
     assert request['end'] <= raw_request['end']
     batch_size = request['batch_size']
+    first_batch_size = request.get('first_batch_size', batch_size)
+    assert batch_size <= first_batch_size <= 128
     manifests = {}
     timings = []
     started = time.monotonic()
     while number < request['end']:
         assert shutil.disk_usage(ROOT).free > 150*10**9, 'Less than 150 GB free'
-        last = min(number+batch_size, request['end'])
+        last = min(number+(first_batch_size if number == first else batch_size), request['end'])
         chunks = {raw_request['start']+((n-raw_request['start'])//256)*256 for n in range(number+1, last+1)}
         if any(not (RAW/f'{low:08d}/manifest.json').exists() for low in chunks):
             save(ROOT/'status.json', {'phase': 'native_waiting_for_raw', 'time': time.time(),
@@ -124,12 +126,22 @@ def replay():
             records.append(item)
             raw.append(encoded['raw'])
             parent = item['hash']
-        for index in range(0, len(records), 16):
+        stored_prefix = number == first and request.get('pre_staged_first_batch')
+        staged_count = 0
+        if stored_prefix:
+            assert request.get('record_batch_timings'), 'Stored-prefix recovery is restricted to bounded trials'
+            proof = json.loads((RUN/'pre-staged-prefix.json').read_text())
+            staged_count = proof['verified_stored_headers_and_bodies']
+            assert proof['start'] == number+1 and proof['end'] == number+staged_count
+            assert 0 < staged_count < len(records), 'Recovery must advance beyond the already stored prefix'
+            assert proof['forkchoice_head_unchanged'] and proof['hashes'] == [r['hash'] for r in records[:staged_count]]
+        continuation = max(batch_size, len(records)) > 16
+        for index in range(staged_count, len(records), 16):
             chunk = records[index:index+16]
             params = [raw[index:index+16], [r['new_payload'][0]['blockAccessList'] for r in chunk]]
-            if batch_size > 16:
+            if continuation:
                 params.insert(0, chunk[0]['new_payload'][0]['parentHash'])
-            result = rpc.call('testing_insertRawBlocksV2' if batch_size > 16 else 'testing_insertRawBlocksV1', params)
+            result = rpc.call('testing_insertRawBlocksV2' if continuation else 'testing_insertRawBlocksV1', params)
             assert result == [r['hash'] for r in chunk]
         deadline = time.monotonic()+600
         while True:
@@ -148,8 +160,9 @@ def replay():
         head = rpc.head()
         assert head['hash'] == records[-1]['hash']
         prior_number, number = number, last
-        if request.get('record_batch_timings') and number-first == batch_size:
-            persist_fence(prior_number)
+        persistence_before = prior_number+staged_count
+        if request.get('record_batch_timings') and number-first == first_batch_size:
+            persist_fence(persistence_before)
         status = {'phase': 'native_replaying', 'time': time.time(), 'head': number,
             'target_head': request['end'], 'qualifying_blocks': number-ANCHOR-1020,
             'blocks_per_second': (number-first)/(time.monotonic()-started),
@@ -161,7 +174,7 @@ def replay():
             timings.append(status)
             save(RUN/'batch-timings.json', timings)
         print(json.dumps(status), flush=True)
-    persist_fence(prior_number)
+    persist_fence(persistence_before)
     save(RUN/'replay-complete.json', {**status, 'final_persistence_verified': True,
         'elapsed_seconds': time.monotonic()-started,
         'blocks_per_second': (number-first)/(time.monotonic()-started)})

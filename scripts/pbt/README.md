@@ -300,6 +300,15 @@ pinned client running. Continuing with the new buffer still requires explicitly
 starting the continuous driver with the pilot's `proof.json`; failure never
 automatically retries the database operation.
 
+An inspected startup mismatch can use `--resume-staged` only before any pilot
+batch completes. It requires a same-PID proof that all 64 already-stored headers
+and bodies match the inputs and that the forkchoice head is unchanged. Recovery
+adds 64 new blocks to that stored prefix for a 128-block warmup, retaining normal
+forkchoice, per-payload VALID checks, header checks and persistence. This avoids
+re-inserting below the header-sync tip and advances beyond the duplicate-FCU
+path. The final two 64-block batches form the 128-block measured window; all 256
+pilot bodies still require both audits. The original guard remains unchanged.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable
