@@ -88,6 +88,17 @@ def main():
         objects['_snapshot_bal_backfill_build.json']=read('erigon-bal-backfill-build.json')
         metadata['pbt']['bal_retention']={'mode':'Native sidecars restored from validated replay inputs after clean stop',
             'required_flag':'--exec.no-prune=true','evidence':prefix+'_snapshot_bal_backfill.json'}
+        command=objects['_snapshot_startup.json']['preparation_command']
+        if '--exec.no-background-maintenance=true' in command:
+            maintenance=read('maintenance-restart-complete.json')
+            assert maintenance['same_head_and_sampled_bals_verified'] and maintenance['image']==proof['image']
+            assert maintenance['head']<=report['head']
+            assert all(flag in command for flag in maintenance['flags'])
+            objects['_snapshot_maintenance_restart.json']=maintenance
+            metadata['pbt']['background_maintenance']={
+                'during_preparation':'Disabled to avoid a large merge backlog during the bounded replay run',
+                'profile_flag':'--exec.no-background-maintenance=true',
+                'evidence':prefix+'_snapshot_maintenance_restart.json'}
     for name,value in objects.items():
         data=json.dumps(value,indent=2).encode()
         s3.put_object(Bucket=BUCKET,Key=prefix+name,Body=data,ContentType='application/json')

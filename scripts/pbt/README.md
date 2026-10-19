@@ -256,6 +256,17 @@ before its second clean stop. Preserve this benchmark retention flag when using
 the snapshot. Publication includes the backfill and build evidence; it explicitly
 records restoration from validated replay inputs.
 
+After the first large Erigon merge completed, another 20 GiB merge range began.
+[`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
+paused datadir, verified a separate mutable MDBX copy and preserved immutable
+snapshot files, then restarted the same image with background maintenance and
+pruning disabled for the bounded preparation run. Shutdown was clean (exit 0),
+and the exact head and sampled BALs matched after restart. Replay resumed at
+20:00:31 UTC. This keeps new state and BALs in native storage; monitor database
+growth. The final startup profile and maintenance-restart evidence are published
+with the snapshot. These diagnostic preparation flags are not an operational
+network default; retain `--exec.no-prune=true` when native BAL retention is needed.
+
 `prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
 VM. `upload.py` requires the final stopped/reopened proof, streams sparse tar
 through zstd level 1, and uploads bounded 256 MiB parts with Content-MD5 checks.

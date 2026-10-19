@@ -143,3 +143,38 @@ execution PID. The saved startup command remains consistent with the container.
 Evidence is `~/.local/state/pbt-1-run/memory-probe.json`; the probe did not change
 workload targets, replay validation, database contents outside normal execution,
 or the final snapshot gates.
+
+## Merge backlog and bounded preparation profile
+
+The code-compression pass for range 1,049,600–1,050,624 reached EOF at about
+19:51 UTC. Its final code segment and indexes were created, but the client
+immediately began range 1,050,624–1,051,648. That range contained 14,342 domain
+files totaling 21,079,793,905 bytes. Completion of one compression pass therefore
+did not mean that background maintenance was finished. Evidence is
+`~/.local/state/pbt-1-run/merge-range-transition.json`.
+
+At 19:57 UTC, `suppress-erigon-maintenance.py` stopped only the replay driver,
+checked the canonical head and four historical/current BAL samples, and paused
+the container while creating a local checkpoint. Mutable files were copied to
+separate inodes, including a SHA-256-verified copy of `chaindata/mdbx.dat`;
+completed immutable snapshot files were hard-linked. The checkpoint contains
+179,485 files, 497,051,488,017 bytes of linked immutable data and 18,003,076,119
+bytes of copied mutable data. A read-only native open verified its canonical
+head and state/BAL commitments. The original container was then unpaused.
+
+Normal SIGTERM shutdown completed at 19:59:34 UTC with **exit code 0**. No SIGQUIT
+or forced recovery was needed. The same pinned image reopened with
+`--exec.no-background-maintenance=true --exec.no-prune=true`, retaining the
+48 GiB memory limit, network isolation and existing database. Head 24,468,025,
+hash `0x28573936f78bbd655b0487f59cb5c59874197a81c79e05aed09d4e0989d36082`,
+state root `0x0037ffe36558ce8f8dc49a34b1819a1c9029ce7eb6e38345b3807c5842cd52b4`,
+and all four sampled BALs matched before and after restart. Replay resumed at
+20:00:31 UTC. A subsequent goroutine profile showed no active merge/compressor.
+
+This is a bounded preparation profile: state remains in the native database
+without background aggregation or pruning, so disk growth must be monitored.
+The snapshot startup command and `_snapshot_maintenance_restart.json` disclose
+the profile and transition evidence. All final clean-restart, exhaustive BAL
+audit and upload gates remain required. The local checkpoint is retained outside
+the exported datadir. Suppression does not establish a throughput improvement;
+that requires subsequent measurement.
