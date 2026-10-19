@@ -53,6 +53,10 @@ def main():
                     assert abs(expected['state_gas']-v['target_state_gas'])<=v['dimension_tolerance']
                     assert expected['gas_used']==max(expected['execution_gas'],expected['state_gas'])
                     assert expected['bal_bytes']>=v['minimum_bal_bytes']
+                    for revision in v.get('packing_revisions',[]):
+                        if expected['index']>=revision['start_index']:
+                            assert expected['gas_used']<=revision['header_gas_ceiling']
+                            assert expected.get('packing_revision')==revision['name']
                     qualifying+=1;execution_sum+=expected['execution_gas'];state_sum+=expected['state_gas']
                     bal_min=min(bal_min or expected['bal_bytes'],expected['bal_bytes'])
             if count%1008==0:

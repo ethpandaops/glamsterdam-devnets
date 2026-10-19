@@ -44,6 +44,10 @@ def value(block, position):
 
 def make_txs(plan,index,signed,wallets,treasury,weth):
     v=plan['v2'];contracts=v['contracts']
+    old_slots=OLD_SLOTS
+    for revision in v.get('packing_revisions',[]):
+        if index>=revision['start_index']:
+            old_slots=revision['existing_slot_writes_per_block']
     old_count=1000*900
     def initial_nonce(w):
         return plan['wallet_initial_nonces'][w]+1+old_count//64+(w<old_count%64)
@@ -78,7 +82,8 @@ def make_txs(plan,index,signed,wallets,treasury,weth):
                       +value(index,BASE_TXS+c*128+j) for j in range(count))
         add(contracts[c],'0x'+data.hex(),gas=16000000)
     for batch in range(34):
-        c=batch%8;count=min(128,OLD_SLOTS-batch*128)
+        c=batch%8;count=min(128,old_slots-batch*128)
+        assert count>0
         data=b''.join(key(c,(block*541+(batch//8)*128+j)%2048)+value(index,2000+batch*128+j) for j in range(count))
         add(contracts[c],'0x'+data.hex(),gas=3000000)
     assert len(txs)==PER_BLOCK

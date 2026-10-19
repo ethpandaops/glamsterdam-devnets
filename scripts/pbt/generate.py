@@ -117,6 +117,12 @@ def verify_receipts(rpc, record):
         assert abs(execution-v['target_execution_gas'])<=v['dimension_tolerance'], f'Execution gas outside target: {execution}'
         assert abs(state-v['target_state_gas'])<=v['dimension_tolerance'], f'State gas outside target: {state}'
         assert bal_bytes>=v['minimum_bal_bytes'], f'BAL too small: {bal_bytes}'
+        record['base_fee_per_gas']=int(record['new_payload'][0]['baseFeePerGas'],16)
+        for revision in v.get('packing_revisions',[]):
+            if record['index']>=revision['start_index']:
+                record.update(packing_revision=revision['name'],
+                              existing_slot_writes=revision['existing_slot_writes_per_block'])
+                assert record['gas_used']<=revision['header_gas_ceiling'], 'Packing would increase base fee'
 
 
 def main():

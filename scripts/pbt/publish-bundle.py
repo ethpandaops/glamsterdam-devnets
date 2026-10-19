@@ -46,7 +46,7 @@ def main():
         if exc.response['Error']['Code'] not in ('404','NoSuchKey','NotFound'):raise
     else:raise RuntimeError('Bundle destination already exists; inspect before retrying')
     # Streaming avoids needing a second full copy of the bundle on the controller.
-    tar=subprocess.Popen(['tar','--sort=name','-C',str(ROOT),'-cf','-','blocks','workload.json','manifest.json','source-genesis.json','8037-trace-calibration.json'],stdout=subprocess.PIPE)
+    tar=subprocess.Popen(['tar','--sort=name','-C',str(ROOT),'-cf','-','blocks','workload.json','manifest.json','source-genesis.json','8037-trace-calibration.json','packing-adjustment-before.json','packing-adjustment-complete.json'],stdout=subprocess.PIPE)
     zstd=subprocess.Popen(['zstd','-1','-T2','-q'],stdin=tar.stdout,stdout=subprocess.PIPE);tar.stdout.close()
     class Stream:
         def __init__(self):self.sha=hashlib.sha256();self.size=0
