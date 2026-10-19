@@ -550,3 +550,34 @@ Geth's final restart/body gate passed at 23:18:22 UTC and Besu's at 23:22:17 UTC
 Both verified all 51,420 bodies and 50,400 qualifying blocks before clean stop.
 All three completed clients are now uploading under the immutable release
 prefix. The replay bundle remains gated on all four verified native uploads.
+
+## Original-VM buffer qualification and adoption at 23:30 UTC
+
+The recovered pilot completed at head 24,472,498. All 256 headers and complete
+bodies/BALs matched the immutable inputs both before native shutdown and after
+reopening the pinned image. Native shutdown was clean, normal durability was
+retained, and the successful range is sealed as `native-replay-segments/0003/`.
+The two rejected attempts remain in the pilot evidence; neither was counted as
+a successful batch. Controller evidence is archived in
+`native-buffer-pilot-evidence.tar.gz`.
+
+After excluding the 128-block recovery warmup and its persistence, the remaining
+128 blocks took 117.051 seconds including final persistence: 1.09354 blocks/s.
+The preceding default-buffer segment's last 128 blocks took 160.475 seconds:
+0.79763 blocks/s. The rate ratio is 1.371. These are different sequential block
+windows, so this is an operational comparison, not a controlled same-input
+benchmark. `buffer-pilot-comparison.json` records that limitation explicitly.
+
+At 23:30:32 UTC the full replay service started with the qualified 2-GiB buffer,
+batches of 64 and the same continuation binary on the original eight-CPU VM.
+The process limit remains 48 GiB, with normal durability and ordinary per-block
+VALID/header checks. The remaining range is 24,472,499–24,503,958: 31,460 blocks.
+At the pilot's measured rate, replay alone requires roughly eight hours;
+final BAL restoration/audit and archive upload follow, so delivery by 09:00 UTC
+remains at risk. Sustained replay throughput must be measured separately.
+
+The 23:30 monitor reported no alerts. Geth, Besu and Nethermind uploads are live;
+their final restart proofs each cover 51,420 bodies and 50,400 qualifying blocks,
+with identical final block hash, state root and BAL hash. This cross-client
+comparison is recorded in controller `three-client-final-audits.json`. Upload
+completion and remote verification remain outstanding.
