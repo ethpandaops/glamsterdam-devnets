@@ -94,6 +94,20 @@ def wait_ready(unit):
         time.sleep(5)
 
 
+def wait_persisted(trial, blocks, batch_size):
+    started = time.monotonic()
+    expected = f'headBefore={HEAD+blocks-batch_size} '
+    while True:
+        seen = False
+        for line in (trial/'client.log').read_text().splitlines():
+            if '[replay-profile] forkchoice' in line and expected in line:
+                seen = True
+            if seen and 'Timings: Post-Forkchoice' in line:
+                return time.monotonic()-started
+        assert time.monotonic()-started < 600, 'Inspect final commit before retrying'
+        time.sleep(.05)
+
+
 def replay(trial, blocks, batched=False):
     rpc = RPC()
     assert int(rpc.head()['number'], 16) == HEAD
@@ -136,12 +150,20 @@ def replay(trial, blocks, batched=False):
         save(trial/'replay-progress.json', {'time': time.time(), 'head': number,
             'hash': head['hash'], 'state_root': head['stateRoot'], 'bal_hash': head['blockAccessListHash'],
             'completed': offset, 'target_blocks': blocks})
+    persistence_wait = 0
+    if trial.name != 'stock':
+        final_batch = min(8, blocks % 8 or 8) if batched else 1
+        persistence_wait = wait_persisted(trial, blocks, final_batch)
+        for i in range(len(durations)-final_batch, len(durations)):
+            durations[i] += persistence_wait/final_batch
     measured = sum(durations[8:])
     save(trial/'replay-timing.json', {'time': time.time(), 'blocks': blocks,
         'elapsed_seconds': time.monotonic()-started, 'warmup_blocks': 8,
         'measured_blocks': blocks-8, 'measured_apply_seconds': measured,
         'measured_blocks_per_second': (blocks-8)/measured, 'apply_seconds_per_block': durations,
         'batch_size': 8 if batched else 1,
+        'final_persistence_wait_seconds': persistence_wait,
+        'final_persistence_verified': trial.name != 'stock',
         'duration_allocation': 'batch elapsed divided equally; not individual latency' if batched else 'individual apply calls'})
 
 

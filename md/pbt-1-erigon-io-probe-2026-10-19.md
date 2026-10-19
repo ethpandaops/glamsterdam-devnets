@@ -292,3 +292,31 @@ the build manifest records source file Git blobs, the base revision and both
 patches. Its embedded version still reports the pinned base revision.
 `pbt-1-native-probe-profile-batch.service` has started the 64-block private-clone
 pilot. No batch performance result or authoritative cutover is established.
+
+## Batch pilot result and next gate
+
+The batch pilot reached `verified_stopped` at 22:03 UTC. All 64 bodies, BALs and
+header commitments matched before and after restart; the pristine checkpoint
+checksum was unchanged. All three trials end at the same head/hash/state/BAL.
+
+Engine API acknowledgements can precede completion of the final persistence
+operation. The original timer ended at that acknowledgement, missing 0.779 s
+of final persistence/pruning in baseline, 0.822 s without WRITE_MAP, and 1.993 s
+for batching. Exact final `headBefore` and post-forkchoice log timestamps give
+corrected measured rates of **0.9856**, **0.7803**, and **1.6350 blocks/second**,
+respectively. Batching improves this same-VM comparison by about 66%. Original
+timings remain preserved alongside `persistence-timing.json`; millisecond log
+timestamps limit the correction's precision. The harness now waits for final
+persistence/pruning before stopping its timer and sampling device IO. Earlier
+IO counters omit that final tail and are not complete per-block write totals.
+
+This is not yet a result on the authoritative VM. Its MDBX file is now about
+48 GiB, larger than the pilot checkpoint, and its observed replay remains
+about 0.31 blocks/second. The next gate is a bounded same-hardware comparison
+on that VM's current state: preserve a recoverable checkpoint, cleanly stop the
+pinned client, run the native binary with the same 48 GiB limit and normal
+durability, compare sequential and eight-block replay, verify every pilot
+body/commitment, then cleanly reopen with the pinned client and resume the
+authoritative run. Any transition to continuous native batch replay requires
+those results, native-runtime monitoring and final pinned-client reopen
+provenance. No authoritative client transition has occurred yet.
