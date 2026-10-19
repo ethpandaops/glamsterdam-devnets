@@ -49,6 +49,8 @@ def main():
         # The image entrypoint changes UID; invoke Besu directly so the root-only
         # JWT remains readable without making it world-readable on the host.
         args += ['--entrypoint=/opt/besu/bin/besu', '-e', 'JAVA_OPTS=-Xmx24g']
+    if c == 'erigon':
+        args += ['-e', 'COMPRESS_WORKERS=2', '-e', 'MERGE_WORKERS=2']
     args += [image]
     if c == 'geth':
         args += ['--datadir=/data', '--override.genesis=/genesis.json', '--override.amsterdam=1769856769',

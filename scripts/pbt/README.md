@@ -199,6 +199,14 @@ The legacy `--workload-blocks` argument counts records after the first three
 setup blocks, so the version-2 pilot uses **2017** and the full run **51417**.
 The report's `qualifying_blocks` is the operator-facing workload count.
 
+Erigon uses two merge and two compression workers after the observed slowdown.
+Before either final shutdown, `erigon_idle.py` waits for merge/compression work
+to finish using SIGUSR1 goroutine profiles; it refuses SIGTERM after two hours
+without an idle result. This avoids the observed compressor cancellation
+deadlock. The intermediate forced-stop recovery preserved exact commitments
+but does not qualify as a clean shutdown. See the
+[incident and recovery evidence](../../md/pbt-1-erigon-merge-2026-10-19.md).
+
 Controller user timers:
 
 - `pbt-1-monitor.timer`: read-only status/alert report every 15 minutes.

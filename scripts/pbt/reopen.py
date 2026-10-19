@@ -16,6 +16,9 @@ def state(name):return json.loads(run('docker','inspect',name))[0]['State']
 
 
 def stop(name, log):
+    if '-erigon-' in name:
+        from erigon_idle import wait_for_idle
+        wait_for_idle(name,log.with_suffix('.merge-wait.json'))
     run('docker','stop','--time=1800',name)
     s=state(name)
     with log.open('w') as out:
