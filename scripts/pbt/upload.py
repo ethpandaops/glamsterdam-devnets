@@ -47,6 +47,8 @@ def main():
     excludes=['--exclude=./nodekey','--exclude=./nodes','--exclude=./key',
               '--exclude=./jwtsecret','--exclude=./logs','--exclude=./LOG',
               '--exclude=./LOCK','--exclude=./geth.ipc','--exclude=./mainnet/state']
+    if c=='erigon':
+        excludes.append('--exclude=./temp')
     tarlog=(ROOT/'upload-tar.log').open('w')
     tar=subprocess.Popen(['tar','--sparse','--sort=name',*excludes,'-C',str(db),'-cf','-','.'],stdout=subprocess.PIPE,stderr=tarlog)
     zlog=(ROOT/'upload-zstd.log').open('w')

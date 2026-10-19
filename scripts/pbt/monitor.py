@@ -166,7 +166,8 @@ def main():
         phase=p.get('phase','not started')
         if 'head' in p:phase+=f' at {p["head"]:,}'
         if p.get('qualifying_blocks') is not None:phase+=f'; {p["qualifying_blocks"]:,} qualifying'
-        lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {(r["data_bytes"] or 0)/2**30:.1f} | {r["free_bytes"]/2**30:.1f} | {cleanup} | {phase} |')
+        data_gib=f'{r["data_bytes"]/2**30:.1f}' if r['data_bytes'] is not None else '—'
+        lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {data_gib} | {r["free_bytes"]/2**30:.1f} | {cleanup} | {phase} |')
     lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
               'Events: ' + ('; '.join(report['events']) or 'none'), '',
               'Pipeline stages are reported separately; generation/replay completion does not establish snapshot upload completion.']

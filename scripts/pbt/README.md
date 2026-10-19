@@ -226,7 +226,8 @@ Publication is under the new immutable prefix
 Each native archive is `<client>/<head>/snapshot.tar.zst`. Geth remains a flat
 instance directory and must be restored under `<datadir>/geth`. Nethermind
 retains its required native databases under `mainnet/`; obsolete Patricia state
-is omitted. The client-managed cleanup reclaimed **341,910,994,944 bytes** and
+is omitted. Erigon's disposable `temp/` merge directory is also omitted; the
+pinned client clears that directory on startup. The client-managed cleanup reclaimed **341,910,994,944 bytes** and
 passed state/head/restart validation on 2026-10-19.
 
 `prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
