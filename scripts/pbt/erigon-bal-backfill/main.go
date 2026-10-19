@@ -16,6 +16,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/erigontech/erigon/common"
@@ -60,6 +61,66 @@ type Payload struct {
 	Hash      string `json:"blockHash"`
 	StateRoot string `json:"stateRoot"`
 	BAL       string `json:"blockAccessList"`
+}
+
+type decodedRecord struct {
+	record Record
+	bal    []byte
+	digest [32]byte
+	err    error
+}
+
+// Only decoding runs concurrently. The caller owns all database access and
+// consumes results in block order, retaining at most one 128-record batch.
+func decodeBatch(ctx context.Context, dir string, first, last uint64, workers int) ([]decodedRecord, error) {
+	if first == 0 || last < first || last-first >= 128 || workers < 1 || workers > 4 {
+		return nil, fmt.Errorf("invalid decoding batch")
+	}
+	results := make([]decodedRecord, last-first+1)
+	var pending sync.WaitGroup
+	for worker := 0; worker < min(workers, len(results)); worker++ {
+		pending.Add(1)
+		go func(index int) {
+			defer pending.Done()
+			for i := index; i < len(results); i += workers {
+				if err := ctx.Err(); err != nil {
+					results[i].err = err
+					continue
+				}
+				r, _, bal, digest, err := load(dir, first+uint64(i))
+				// The canonical checks need metadata and BAL bytes, not the raw
+				// payload JSON retained by the decoder.
+				r.NewPayload = nil
+				results[i] = decodedRecord{r, bal, digest, err}
+			}
+		}(worker)
+	}
+	pending.Wait()
+	for i := range results {
+		if results[i].err != nil {
+			return nil, fmt.Errorf("decode block %d: %w", first+uint64(i), results[i].err)
+		}
+	}
+	return results, nil
+}
+
+func batchReader(ctx context.Context, dir string, end uint64) func(uint64) (Record, []byte, [32]byte, error) {
+	var first uint64
+	var batch []decodedRecord
+	return func(n uint64) (Record, []byte, [32]byte, error) {
+		if len(batch) == 0 || n < first || n-first >= uint64(len(batch)) {
+			// Release the previous batch before allocating the next one.
+			batch = nil
+			var err error
+			batch, err = decodeBatch(ctx, dir, n, min(end, n+127), 4)
+			if err != nil {
+				return Record{}, nil, [32]byte{}, err
+			}
+			first = n
+		}
+		item := batch[n-first]
+		return item.record, item.bal, item.digest, nil
+	}
 }
 
 func hash(s string) (common.Hash, error) {
@@ -174,6 +235,7 @@ func backfill(ctx context.Context, db kv.RwDB, dir string, start, end uint64, dr
 	}
 	digests := make([][32]byte, end-start+1)
 	source := sha256.New()
+	read := batchReader(ctx, dir, end)
 	// Validate the entire input before the first write. A dry run may inspect an
 	// older prefix of a live node through one consistent, read-only MDBX view.
 	err := db.View(ctx, func(tx kv.Tx) error {
@@ -190,7 +252,7 @@ func backfill(ctx context.Context, db kv.RwDB, dir string, start, end uint64, dr
 		r.HeadHash = h.Hex()
 		r.StateRoot = header.Root.Hex()
 		for n := start; n <= end; n++ {
-			record, _, bal, digest, err := load(dir, n)
+			record, bal, digest, err := read(n)
 			if err != nil {
 				return err
 			}
@@ -218,12 +280,15 @@ func backfill(ctx context.Context, db kv.RwDB, dir string, start, end uint64, dr
 	}
 	r.SourceSHA256 = hex.EncodeToString(source.Sum(nil))
 	if !dry {
+		// A fresh reader is mandatory: the write pass must re-read every file
+		// and compare its digest with the complete preflight, even for short runs.
+		read = batchReader(ctx, dir, end)
 		for first := start; first <= end; first += 128 {
 			last := min(end, first+127)
 			written := uint64(0)
 			err := db.Update(ctx, func(tx kv.RwTx) error {
 				for n := first; n <= last; n++ {
-					record, _, bal, digest, err := load(dir, n)
+					record, bal, digest, err := read(n)
 					if err != nil {
 						return err
 					}

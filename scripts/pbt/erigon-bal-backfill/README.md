@@ -13,6 +13,11 @@ sidecars, detects changed input files, and writes only missing BAL sidecars in
 bounded durable transactions. The native head and state root must remain unchanged.
 Repeated runs are idempotent. The final API audit remains mandatory.
 
+Input decoding uses four workers and retains at most 128 decoded records.
+Canonical checks and MDBX access stay serial and ordered. The write pass creates
+a fresh decoder and re-reads the records before comparing their preflight
+digests; cached decoded input cannot hide a change between passes.
+
 Build from an untouched checkout of Erigon commit
 `8c1e3893d77d230720d172f1492d95b5777a862c` (v3.7.1):
 
@@ -20,8 +25,10 @@ Build from an untouched checkout of Erigon commit
 bash scripts/pbt/erigon-bal-backfill/build.sh /path/to/erigon-v3.7.1 /path/to/erigon-bal-backfill
 ```
 
-The build runs native MDBX tests for corruption/conflict rejection, canonical
-identity, dry runs, idempotence and persistence across an exclusive native reopen.
+The build runs native MDBX tests under Go's race detector for corruption/conflict
+rejection, canonical identity, dry runs, idempotence and persistence across an
+exclusive native reopen. Tests also cover corruption beyond the first 128-record
+batch, input mutation between preflight and writes, and ordered parallel decoding.
 It produces the binary and a `.json` manifest with its SHA-256, dependency/build
 information and source digests. The Erigon checkout is left unchanged.
 

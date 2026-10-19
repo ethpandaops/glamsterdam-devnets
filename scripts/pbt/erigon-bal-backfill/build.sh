@@ -22,7 +22,7 @@ replace github.com/holiman/bloomfilter/v2 => github.com/AskAlexSharov/bloomfilte
 EOF
 export GOWORK=off GOTOOLCHAIN=auto
 go mod edit -replace="github.com/erigontech/erigon=$source_dir"
-go test -mod=mod -count=1 ./...
+go test -race -mod=mod -count=1 ./...
 go build -mod=mod -trimpath -buildvcs=false -o "$output" .
 python3 - "$output" "$tool_dir" "$revision" <<'PY'
 import datetime,hashlib,json,subprocess,sys

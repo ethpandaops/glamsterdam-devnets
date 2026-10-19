@@ -605,3 +605,38 @@ measurement. The summary measures throughput between completed persistence
 events, excludes the first batch, and labels its ETA as replay-only. Short
 window variability and profiling overhead limit the estimate; the final full
 BAL audit and upload remain necessary before delivery.
+
+## Final BAL restoration decoding at 23:52 UTC
+
+A read-only preflight on 1,008 qualifying records (24,453,559–24,454,566)
+took 48.082 seconds with the serial backfill helper, a one-CPU quota and nice 19.
+It verified 457,128,186 BAL bytes, found 1,008 missing sidecars and wrote none.
+The measured CPU time was 47.078 seconds. Linear extrapolation to both input
+passes over 51,420 records is approximately 82 minutes before durable writes;
+this exposed additional deadline risk beyond replay throughput.
+
+The helper now decodes records with four workers in batches of at most 128.
+Database reads, canonical checks and writes remain serial and ordered. Full
+preflight still precedes every production write. The write pass starts a fresh
+decoder and checks every record digest again. Ten native tests pass under the
+race detector, including corruption after the first batch, mutation between
+passes, and persistence/idempotence across a 130-record native reopen.
+
+On the same VM and same 1,008 records, the candidate took 15.355 seconds with a
+four-CPU quota and nice 19: 3.131 times faster in wall time. This deliberately
+uses more of the existing VM's CPUs, with no new machine. CPU time was 50.778
+seconds; peak process RSS was approximately 184 MiB (the service's memory
+accounting including file cache peaked near 1 GiB). Both runs produced the same
+record-digest hash and all counts matched, with zero writes. The shorter run's
+linear estimate is approximately 26 minutes for both input passes, excluding
+write costs, restart, exhaustive API audit and upload. It is not a full-range
+benchmark or a delivery guarantee.
+
+At 23:52:49 UTC the qualified helper was installed at the final backfill path,
+with the serial binary and manifest preserved. Its SHA-256 is
+`d7d1f9ed1ff7db5c59a585b69b9afd0cff6c4938d6942710cd81d751a9c84e24`.
+The source-client revision, native writer API, exclusive write lock, durability
+and final audit requirements are unchanged. Replay continued on its original
+PID throughout. Controller and VM evidence is named
+`erigon-bal-backfill-{timing,timed-preflight,parallel-timing,parallel-preflight,decoder-adoption}.json`.
+Production sidecar restoration remains pending until final replay and clean stop.

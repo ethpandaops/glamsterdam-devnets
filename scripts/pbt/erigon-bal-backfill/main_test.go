@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"compress/gzip"
 	"context"
 	"encoding/json"
@@ -22,6 +23,10 @@ import (
 )
 
 func fixture(t *testing.T) (kv.RwDB, string, []*types.Header) {
+	return fixtureCount(t, 2)
+}
+
+func fixtureCount(t *testing.T, count uint64) (kv.RwDB, string, []*types.Header) {
 	t.Helper()
 	db, err := mdbx.New(dbcfg.ChainDB, log.New()).Path(t.TempDir()).MapSize(128 * datasize.MB).GrowthStep(16 * datasize.MB).Open(context.Background())
 	if err != nil {
@@ -30,7 +35,7 @@ func fixture(t *testing.T) (kv.RwDB, string, []*types.Header) {
 	t.Cleanup(db.Close)
 	dir := t.TempDir()
 	var headers []*types.Header
-	for n := uint64(1); n <= 2; n++ {
+	for n := uint64(1); n <= count; n++ {
 		zero := common.Hash{}
 		u := uint64(0)
 		balHash := crypto.Keccak256Hash([]byte{0xc0})
@@ -57,6 +62,77 @@ func fixture(t *testing.T) (kv.RwDB, string, []*types.Header) {
 		writeRecord(t, dir, h, "0xc0")
 	}
 	return db, dir, headers
+}
+
+func TestParallelDecodePreservesOrderAndDigests(t *testing.T) {
+	_, dir, _ := fixtureCount(t, 128)
+	serial, err := decodeBatch(context.Background(), dir, 1, 128, 1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	parallel, err := decodeBatch(context.Background(), dir, 1, 128, 4)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i := range serial {
+		if parallel[i].record.Number != uint64(i+1) || serial[i].digest != parallel[i].digest ||
+			!bytes.Equal(serial[i].bal, parallel[i].bal) {
+			t.Fatalf("decoding differs at index %d", i)
+		}
+	}
+}
+
+func TestLateBatchCorruptionPreventsAllWrites(t *testing.T) {
+	db, dir, headers := fixtureCount(t, 130)
+	writeRecord(t, dir, headers[129], "0xc101")
+	if _, err := backfill(context.Background(), db, dir, 1, 130, false); err == nil {
+		t.Fatal("accepted corruption beyond first decoding batch")
+	}
+	for _, h := range headers {
+		if len(stored(t, db, h)) != 0 {
+			t.Fatal("wrote before validating the entire input range")
+		}
+	}
+}
+
+type changingDB struct {
+	kv.RwDB
+	change func()
+}
+
+func (db *changingDB) View(ctx context.Context, fn func(kv.Tx) error) error {
+	err := db.RwDB.View(ctx, fn)
+	if err == nil && db.change != nil {
+		db.change()
+		db.change = nil
+	}
+	return err
+}
+
+func TestRejectInputChangedAfterPreflight(t *testing.T) {
+	db, dir, headers := fixture(t)
+	changing := &changingDB{RwDB: db, change: func() { writeRecord(t, dir, headers[0], "0xc101") }}
+	if _, err := backfill(context.Background(), changing, dir, 1, 2, false); err == nil {
+		t.Fatal("write pass reused inputs decoded before mutation")
+	}
+	for _, h := range headers {
+		if len(stored(t, db, h)) != 0 {
+			t.Fatal("wrote a sidecar after input mutation")
+		}
+	}
+}
+
+func TestDecodeCancellationAndBounds(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	if _, err := decodeBatch(ctx, t.TempDir(), 1, 128, 4); err == nil {
+		t.Fatal("ignored cancellation")
+	}
+	for _, last := range []uint64{0, 129} {
+		if _, err := decodeBatch(context.Background(), t.TempDir(), 1, last, 4); err == nil {
+			t.Fatal("accepted invalid batch bounds")
+		}
+	}
 }
 
 func writeRecord(t *testing.T, dir string, h *types.Header, bal string) {
@@ -168,8 +244,8 @@ func TestRejectNoncanonicalRecord(t *testing.T) {
 }
 
 func TestNativeReopenPreservesSidecars(t *testing.T) {
-	db, dir, headers := fixture(t)
-	if _, err := backfill(context.Background(), db, dir, 1, 2, false); err != nil {
+	db, dir, headers := fixtureCount(t, 130)
+	if _, err := backfill(context.Background(), db, dir, 1, 130, false); err != nil {
 		t.Fatal(err)
 	}
 	path := db.(interface{ Path() string }).Path()
@@ -179,8 +255,8 @@ func TestNativeReopenPreservesSidecars(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Cleanup(reopened.Close)
-	r, err := backfill(context.Background(), reopened, dir, 1, 2, false)
-	if err != nil || r.Existing != 2 || r.Written != 0 {
+	r, err := backfill(context.Background(), reopened, dir, 1, 130, false)
+	if err != nil || r.Existing != 130 || r.Written != 0 {
 		t.Fatalf("native reopen: %+v %v", r, err)
 	}
 	for _, h := range headers {
