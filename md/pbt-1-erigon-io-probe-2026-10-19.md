@@ -377,3 +377,17 @@ transfer are running. The continuous native driver and publication/monitoring
 support are prepared but activation awaits the selected probe's completed
 validation. Four driver failure-path tests pass. Final snapshots and the replay
 bundle are still unpublished; the morning deadline remains at risk.
+
+The batch-of-64 trial completed 256 blocks at 22:37 UTC. Its 192-block measured
+window after a 64-block warmup averaged **1.68506 blocks/second**, including final
+persistence. This does not establish an improvement over the shorter batch-of-16
+trial. The internal 512 MiB execution limit caused additional commits within
+each 64-block request. A follow-up variant keeps the same 256 blocks, batch size,
+binary and 48 GiB process limit, changing only `--batchSize=2G`.
+
+The valid 20-second CPU profile started after the warmup batch. Snapshot-file
+existence-filter lookup (`ReaderSharded.ContainsHash`) accounted for 53.21% of
+sampled CPU cumulatively; `DomainRoTx.lookupLatestFromFiles` accounted for 64.67%.
+These CPU fractions overlap and do not measure time blocked on disk sync. No
+filter-cache change has been made. Controller evidence is under
+`native-profile-batch64/` and `native-profile-batch64-summary.json`.

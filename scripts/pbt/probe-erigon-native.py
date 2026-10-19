@@ -231,7 +231,7 @@ def main(args):
     build = json.loads((NATIVE/'build-report.json').read_text())
     assert build['source_commit'] == '8c1e3893d77d230720d172f1492d95b5777a862c'
     if args.variant.startswith('profile-batch'):
-        staged = args.variant in ('profile-batch64', 'profile-batch128')
+        staged = args.variant in ('profile-batch64', 'profile-batch64-2g', 'profile-batch128')
         artifact = json.loads((NATIVE/('continuation-build-report.json' if staged else 'batch-build-report.json')).read_text())
         assert artifact['source']['batch_commit'] == 'a7d50626108b2428d5cd0b65089330fee6b357d8'
         if staged:
@@ -267,6 +267,8 @@ def main(args):
     if args.variant.startswith('profile-batch'):
         client_args = [item+',testing' if item.startswith('--http.api=') else item for item in client_args]
     client_args += ['--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
+    if args.variant.endswith('-2g'):
+        client_args.append('--batchSize=2G')
     unit = 'pbt-1-native-'+args.variant
     command = [str(binary), *client_args]
     save(trial/'command.json', command)
@@ -289,7 +291,7 @@ def main(args):
             '--blocks', str(args.blocks), '--audit', phase), check=True)
     check('checkpoint')
     save(trial/'status.json', {'phase': 'replaying', 'time': time.time(), 'blocks': args.blocks})
-    profile = None if args.variant in ('profile-batch64', 'profile-batch128') else subprocess.Popen(
+    profile = None if args.variant in ('profile-batch64', 'profile-batch64-2g', 'profile-batch128') else subprocess.Popen(
         namespace(unit, 'curl', '-fsS', '--max-time', '75',
             '-o', str(trial/'cpu.pprof'), 'http://127.0.0.1:6060/debug/pprof/profile?seconds=60'))
     io_before = io_sample(unit)
@@ -306,6 +308,7 @@ def main(args):
     save(trial/'timing.json', {'time': time.time(), 'blocks': args.blocks,
         'seconds': elapsed, 'blocks_per_second': args.blocks/elapsed, 'cpu_profile_exit_code': profile_code,
         'binary': artifact, 'normal_durability': True, 'memory_GiB': 48, 'cpus': '0-7',
+        'execution_buffer': '2G' if args.variant.endswith('-2g') else '512M',
         'log_window': {'start_byte': log_start, 'end_byte': log_end},
         'replay': json.loads((trial/'replay-timing.json').read_text())})
     save(trial/'io.json', {'before': io_before, 'after': io_after,
@@ -326,13 +329,13 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap', 'profile-batch',
-        'profile-batch16', 'profile-batch64', 'profile-batch128'], required=True)
+        'profile-batch16', 'profile-batch64', 'profile-batch64-2g', 'profile-batch128'], required=True)
     parser.add_argument('--blocks', type=int, default=64)
     parser.add_argument('--audit', choices=['checkpoint', 'before', 'after'])
     parser.add_argument('--replay', action='store_true')
     args = parser.parse_args()
     assert 64 <= args.blocks <= 256
-    batch_size = 128 if args.variant == 'profile-batch128' else 64 if args.variant == 'profile-batch64' else 16 if args.variant.startswith('profile-batch16') else 8 if args.variant == 'profile-batch' else 1
+    batch_size = 128 if args.variant == 'profile-batch128' else 64 if args.variant.startswith('profile-batch64') else 16 if args.variant.startswith('profile-batch16') else 8 if args.variant == 'profile-batch' else 1
     assert args.blocks > max(8, batch_size)
     if args.audit:
         audit(args.audit, NATIVE/args.variant, args.blocks)

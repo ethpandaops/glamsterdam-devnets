@@ -127,7 +127,7 @@ if native.exists():
     batch_build=native/'batch-build-report.json'
     if batch_build.exists():r['native_batch_build']=json.loads(batch_build.read_text())
     r['native_trials']={}
-    for variant in ('stock','profile','profile-no-writemap','profile-batch','profile-batch16','profile-batch64','profile-batch128'):
+    for variant in ('stock','profile','profile-no-writemap','profile-batch','profile-batch16','profile-batch64','profile-batch64-2g','profile-batch128'):
         trial=native/variant
         job=subprocess.check_output(['systemctl','show','pbt-1-native-probe-'+variant,
             '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)

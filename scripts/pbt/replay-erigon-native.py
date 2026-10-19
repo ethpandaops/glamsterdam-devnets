@@ -166,6 +166,7 @@ def main(args):
     assert probe['status']['phase'] == 'verified_stopped' and probe['status']['all_bodies_verified_before_and_after']
     assert probe['timing']['binary']['sha256'] == build['sha256'] and probe['timing']['normal_durability']
     assert probe['timing']['replay']['batch_size'] == args.batch_size
+    assert probe['timing'].get('execution_buffer', '512M') == args.execution_buffer
     assert probe['timing']['replay']['final_persistence_verified']
     if args.batch_size > 16:
         assert build['source']['continuation_commit'] == '72b4a99bbb46a61ce3ab0932111533da8cb9fcda'
@@ -198,6 +199,8 @@ def main(args):
         f'--authrpc.jwtsecret={ROOT}/jwt' if x == '--authrpc.jwtsecret=/jwt' else
         x+',testing' if x.startswith('--http.api=') else x for x in original['Config']['Cmd']]
     client_args += ['--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
+    if args.execution_buffer != '512M':
+        client_args.append('--batchSize='+args.execution_buffer)
     unit = Path('/etc/systemd/system')/(UNIT+'.service')
     assert not unit.exists()
     text = '\n'.join(['[Unit]', 'Description=PBT verified native replay', '[Service]',
@@ -236,6 +239,7 @@ def main(args):
     assert int(after['number'], 16) == end
     save(RUN/'complete.json', {'time': time.time(), 'start': first, 'end': end, 'head': after,
         'validated_blocks': end-first+1, 'batch_size': args.batch_size, 'binary_sha256': build['sha256'],
+        'execution_buffer': args.execution_buffer,
         'normal_durability': True, 'pinned_reopen_verified': True, 'image': original['Config']['Image']})
     save(ROOT/'status.json', {'phase': 'replay_complete', 'time': time.time(), 'head': end, 'target_head': end,
         'workload_blocks': end-ANCHOR-3, 'qualifying_blocks': end-ANCHOR-1020,
@@ -248,6 +252,7 @@ if __name__ == '__main__':
     parser.add_argument('--build-report', type=Path)
     parser.add_argument('--probe-proof', type=Path)
     parser.add_argument('--batch-size', type=int, choices=[8, 16, 64, 128])
+    parser.add_argument('--execution-buffer', choices=['512M', '2G'], default='512M')
     parser.add_argument('--audit', choices=['before', 'opened', 'native-after', 'pinned-reopen'])
     parser.add_argument('--replay', action='store_true')
     args = parser.parse_args()
