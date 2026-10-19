@@ -126,3 +126,20 @@ conflicting bytes cause failure. The same pinned image then starts with
 API audit verifies all bodies/BALs after restart, followed by another clean stop.
 Publication records the backfill explicitly and includes its build provenance.
 This final production backfill/restart/API gate remains pending while replay runs.
+
+## Live memory-limit probe
+
+At 19:16–19:22 UTC, a reversible live probe compared the existing 48 GiB
+container limit for 120 seconds against 56 GiB for 240 seconds. The execution
+PID and replay process remained unchanged, and the background merge continued.
+Replay advanced at 0.5833 versus 0.5917 blocks/second, respectively (about 1.4%).
+Average file-cache residency changed from 15.98 to 16.37 GiB; file-cache refaults
+changed from about 9,002 to 8,685 pages/second. There were no OOM events.
+
+This short, sequential comparison does not establish a useful speedup, especially
+with the merge still progressing. The probe restored the original 48 GiB limit
+at 19:22:34 UTC; Docker inspection verified that limit and the unchanged live
+execution PID. The saved startup command remains consistent with the container.
+Evidence is `~/.local/state/pbt-1-run/memory-probe.json`; the probe did not change
+workload targets, replay validation, database contents outside normal execution,
+or the final snapshot gates.
