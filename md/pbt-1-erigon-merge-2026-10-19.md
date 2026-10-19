@@ -67,3 +67,27 @@ isolated benchmark of fork-choice overhead, and did not justify adopting batchin
 Ordinary replay resumed automatically at 16:36:26 UTC. The full probe record is
 `/data/pbt-1/pipeline/batch-probe.json`, with a controller copy at
 `~/.local/state/pbt-1-run/erigon-batch-probe.json`.
+
+## Live heap-size trial
+
+At 17:34–17:40 UTC, a runtime-only probe sampled two minutes at the original
+GC target of 100, then four minutes at 50 through `debug_setGCPercent`. It
+restored 100 at 17:40:21 UTC. The execution container and replay process stayed
+running; every sampled head's hash, state root and BAL commitment matched the
+archived record. No database settings or client image changed.
+
+Observed rates were 0.592 blocks/s before and 0.692 blocks/s during the trial.
+Mean sampled heap allocation decreased from 16.02 to 14.75 GiB; mean file cache
+increased from 30.77 to 34.51 GiB. GC's cumulative CPU fraction remained below
+0.253%. The temporary commitment merge file also completed processing during
+this interval, so these sequential samples do not establish a GC-related speedup.
+The default GC target remains in use. Evidence and restoration confirmation are
+`gc-probe.json` and `gc-probe-restored.json` in the VM pipeline directory and the
+controller's `~/.local/state/pbt-1-run/` directory.
+
+The 17:15–17:30 monitoring interval advanced 667 blocks (0.741 blocks/s).
+Holding that rate constant projects replay alone to 2026-10-20 09:09 UTC,
+excluding restart validation, exhaustive BAL retrieval, compression and upload.
+The 09:00 delivery deadline was therefore reported as unlikely at that rate.
+Future merge completion can change throughput; the complete 50,400-block target
+and all final publication gates remain required.
