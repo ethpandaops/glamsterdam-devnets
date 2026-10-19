@@ -1,0 +1,11 @@
+[Unit]
+Description=Check PBT-1 progress every 15 minutes
+
+[Timer]
+OnCalendar=*-*-* *:00,15,30,45:00 UTC
+AccuracySec=1s
+Persistent=true
+Unit=pbt-1-monitor.service
+
+[Install]
+WantedBy=timers.target

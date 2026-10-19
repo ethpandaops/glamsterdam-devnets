@@ -114,3 +114,31 @@ metadata before any conversion. Choose the PBT build and commitment upgrade path
 separately. Do not let the restored chain-id-1 database peer with mainnet.
 
 Check download status on that node; it runs independently of this workspace session.
+
+## Continuous monitoring
+
+[`monitor.py`](monitor.py) runs read-only checks against all four source VMs.
+The controller's enabled user timer `pbt-1-monitor.timer` runs it at :00, :15,
+:30 and :45 UTC. User lingering is enabled, so checks survive shell logout.
+Each run records progress, free disk, container failures/OOMs, restore completion,
+and the Nethermind cleanup service/result. A running restore with no chunk
+progress between checks, low disk, failed SSH or failed cleanup raises an alert.
+
+Reports are local to the controller:
+
+- `~/.local/state/pbt-1-monitor/status.md`: latest readable report and alerts.
+- `~/.local/state/pbt-1-monitor/latest.json`: latest machine-readable evidence.
+- `~/.local/state/pbt-1-monitor/history.jsonl`: full check history.
+
+```sh
+systemctl --user list-timers pbt-1-monitor.timer
+journalctl --user -u pbt-1-monitor.service --no-pager
+python3 scripts/pbt/monitor.py
+```
+
+Alerts are recorded in these reports and the systemd journal; this timer does not
+send chat/email notifications. Failed checks do not disable subsequent timer runs.
+Generation/replay/upload runners can publish `/data/pbt-1/pipeline/status.json`
+on their VMs; absent that evidence, the report leaves those phases unverified.
+Stop recurring checks when no longer needed with
+`systemctl --user disable --now pbt-1-monitor.timer`.

@@ -1,0 +1,9 @@
+[Unit]
+Description=Check PBT-1 restores and Nethermind cleanup
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/repos/glamsterdam-devnets
+ExecStart=/usr/bin/python3 /home/ubuntu/repos/glamsterdam-devnets/scripts/pbt/monitor.py
+TimeoutStartSec=120
+UMask=0077

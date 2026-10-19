@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""Read-only PBT-1 progress checks; intended to run every 15 minutes."""
+import argparse
+import concurrent.futures
+import datetime
+import json
+from pathlib import Path
+import subprocess
+import time
+
+HOSTS = {
+    'erigon': ('164.92.239.96', 4118),
+    'geth': ('46.101.230.44', 14060),
+    'besu': ('138.68.76.218', 14211),
+    'nethermind': ('167.172.188.11', 19755),
+}
+REMOTE = r'''
+import glob,json,os,subprocess,sys,time
+from pathlib import Path
+client=sys.argv[1]
+root=Path('/data/pbt-1')
+def cmd(*args):
+    return subprocess.run(args,capture_output=True,text=True,timeout=20)
+r=cmd('docker','inspect','pbt-1-'+client+'-snapshot')
+if r.returncode: raise RuntimeError('snapshot container unavailable: '+r.stderr.strip())
+state=json.loads(r.stdout)[0]['State']
+counts=[int(Path(p).read_text()) for p in glob.glob(str(root/'snapshot-fetcher/tmp/*/emitted'))]
+v=os.statvfs(root)
+r=cmd('du','-s','-B1',str(root/client))
+result={'time':int(time.time()),'container':state['Status'],'exit_code':state['ExitCode'],
+        'oom':state['OOMKilled'],'started_at':state['StartedAt'],
+        'finished_at':state['FinishedAt'],'done':(root/'snapshot-fetcher/done').is_file(),
+        'emitted':max(counts,default=0),'free_bytes':v.f_bavail*v.f_frsize,
+        'data_bytes':int(r.stdout.split()[0]) if r.returncode==0 else None}
+if client=='nethermind':
+    result['cleanup_service']=cmd('systemctl','is-active','pbt-1-nethermind-flatdb-cleanup').stdout.strip()
+    p=root/'nethermind-flatdb-cleanup/complete.json'
+    result['cleanup_complete']=json.loads(p.read_text()) if p.is_file() else None
+    result['cleanup_phases']=[p.name for p in (root/'nethermind-flatdb-cleanup').glob('*.json')]
+# A future producer/replay/upload runner can publish explicit phase progress here.
+p=root/'pipeline/status.json'
+result['pipeline']=json.loads(p.read_text()) if p.is_file() else None
+print(json.dumps(result))
+'''
+
+
+def check(client, identity):
+    host, chunks = HOSTS[client]
+    result = subprocess.run(
+        ['ssh', '-i', identity, '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=15',
+         '-o', 'ServerAliveInterval=10', '-o', 'ServerAliveCountMax=2',
+         f'root@{host}', 'python3', '-', client],
+        input=REMOTE, capture_output=True, text=True, timeout=75,
+    )
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip()[-500:] or 'remote check failed')
+    record = json.loads(result.stdout)
+    record.update(host=host, total_chunks=chunks)
+    record['restore_complete'] = record['done'] and record['container']=='exited' and record['exit_code']==0
+    record['progress_percent'] = 100.0 if record['restore_complete'] else round(100*record['emitted']/chunks, 1)
+    return record
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--identity', default=str(Path.home()/'.ssh/devops_eth2_shared_key'))
+    parser.add_argument('--output', type=Path, default=Path.home()/'.local/state/pbt-1-monitor')
+    args = parser.parse_args()
+    args.output.mkdir(parents=True, exist_ok=True)
+    latest = args.output/'latest.json'
+    previous = json.loads(latest.read_text()) if latest.exists() else {}
+    now = time.time()
+    report = {'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'epoch':now,'clients':{},'alerts':[],'events':[]}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        jobs = {pool.submit(check,c,args.identity):c for c in HOSTS}
+        for job in concurrent.futures.as_completed(jobs):
+            client = jobs[job]
+            old = previous.get('clients',{}).get(client,{})
+            try:
+                r = job.result()
+            except Exception as exc:
+                r = {'error':str(exc)}
+                report['alerts'].append(f'{client}: {exc}')
+                report['clients'][client] = r
+                continue
+            report['clients'][client] = r
+            if r['oom'] or (r['container']=='exited' and not r['restore_complete']):
+                report['alerts'].append(f'{client}: restore failed/incomplete; exit={r["exit_code"]}, OOM={r["oom"]}')
+            if r['free_bytes'] < 100_000_000_000:
+                report['alerts'].append(f'{client}: free disk below 100 GB')
+            if r['container']=='running' and old.get('container')=='running':
+                delta=r['emitted']-old.get('emitted',0)
+                elapsed=now-previous.get('epoch',now)
+                if delta <= 0 and elapsed >= 600:
+                    report['alerts'].append(f'{client}: no extraction progress since previous check')
+                elif delta > 0 and elapsed > 0:
+                    r['eta_seconds']=round((r['total_chunks']-r['emitted'])*elapsed/delta)
+            if r['restore_complete'] and not old.get('restore_complete'):
+                report['events'].append(f'{client}: restore complete')
+            if client=='nethermind':
+                if r['cleanup_service']=='failed':
+                    report['alerts'].append('nethermind: FlatDB cleanup service failed; inspect phase logs')
+                if r['cleanup_complete'] and not old.get('cleanup_complete'):
+                    report['events'].append('nethermind: Patricia cleanup and FlatDB restart verification complete')
+                if r['restore_complete'] and not r['cleanup_complete'] and r['cleanup_service'] not in ('active','activating'):
+                    report['alerts'].append('nethermind: restore complete but cleanup has not completed and is not running')
+    tmp=args.output/'latest.json.tmp'
+    tmp.write_text(json.dumps(report,indent=2)+'\n');tmp.replace(latest)
+    with (args.output/'history.jsonl').open('a') as out:
+        out.write(json.dumps(report)+'\n')
+    lines=[f'# PBT-1 progress — {report["checked_at"]}', '',
+           '| Client | Restore | Extracted GiB | Free GiB | Cleanup |',
+           '| --- | --- | ---: | ---: | --- |']
+    for client in HOSTS:
+        r=report['clients'][client]
+        if 'error' in r:
+            lines.append(f'| {client} | CHECK FAILED | — | — | — |');continue
+        cleanup='—'
+        if client=='nethermind':cleanup='verified complete' if r['cleanup_complete'] else r['cleanup_service']
+        lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {(r["data_bytes"] or 0)/2**30:.1f} | {r["free_bytes"]/2**30:.1f} | {cleanup} |')
+    lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
+              'Events: ' + ('; '.join(report['events']) or 'none'), '',
+              'Payload generation, cross-client replay and upload are unverified unless a client pipeline field reports them.']
+    (args.output/'status.md').write_text('\n'.join(lines)+'\n')
+    print('\n'.join(lines),flush=True)
+    # An alert is recorded as a failed check in systemd, but the timer keeps running.
+    raise SystemExit(1 if report['alerts'] else 0)
+
+
+if __name__=='__main__':
+    main()
