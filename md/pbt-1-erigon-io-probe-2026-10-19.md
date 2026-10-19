@@ -280,3 +280,15 @@ audit and pristine-checkpoint verification remain separate completion gates.
 The baseline CPU profile includes the first-block warmup and therefore is not
 a steady-replay CPU profile; its snapshot filename/filter work must not be
 treated as evidence of the steady-state bottleneck.
+
+Both comparison trials subsequently reached `verified_stopped`, with identical
+head/hash/state/BAL commitments at 24,468,089 and matching pristine-checkpoint
+checksums. Device writes were 202.29 MiB/block for baseline and 203.59 MiB/block
+without WRITE_MAP. Controller evidence: `native-write-mode-comparison.json`.
+
+The batch binary built directly on the probe in 30.97 seconds. Its SHA-256 is
+`b1c3fc01aff41318597763c2b5b9c46ee16354995c279000ef4ac4b8db443403`;
+the build manifest records source file Git blobs, the base revision and both
+patches. Its embedded version still reports the pinned base revision.
+`pbt-1-native-probe-profile-batch.service` has started the 64-block private-clone
+pilot. No batch performance result or authoritative cutover is established.
