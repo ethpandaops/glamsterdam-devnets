@@ -1,0 +1,4 @@
+---
+# Own wallet (genesis mnemonic index 21): on sepsf-1 both buildoor instances sent from
+# mnemonic-12 and their deposit/bid txs collided on nonces.
+buildoor_wallet_privkey: "{{ secret_buildoor_wallet_privkey_2 }}"

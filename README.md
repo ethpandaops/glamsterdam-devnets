@@ -29,6 +29,7 @@ WIP | [devnet-12](https://notes.ethereum.org/@ethpandaops/glamsterdam-devnet-12)
  🔴 | sepsf-2 (sepolia shadowfork)| [Network config](network-configs/sepsf-2)    | [🔗](ansible/inventories/sepsf-2) | [🔗](terraform/sepsf-2) | [🔗](kubernetes-archive/sepsf-2)
  🔴 | msf-1 (mainnet shadowfork)| [Network config](network-configs/msf-1)    | [🔗](ansible/inventories/msf-1) | [🔗](terraform/msf-1) | [🔗](kubernetes-archive/msf-1)
  🔴 | msf-2 (mainnet shadowfork, jochemnet release, benchmarking)| [Network config](network-configs/msf-2)    | [🔗](ansible/inventories/msf-2) | [🔗](terraform/msf-2) | [🔗](kubernetes-archive/msf-2)
+WIP | pbt-1 (PBT migration, MSF-2 baseline) | - | [🔗](ansible/inventories/pbt-1) | [🔗](terraform/pbt-1) | [🔗](kubernetes/pbt-1)
 # Development
 ## Version management for tools
 
