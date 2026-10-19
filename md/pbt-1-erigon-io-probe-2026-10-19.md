@@ -228,3 +228,46 @@ Native measurements now record log byte offsets around the replay window.
 from startup/restart audits. Nested timings overlap and must not be summed;
 device IO covers the whole VM. The existing native batched-insert/forkchoice
 tests also passed, but no batch API or replay behavior has been changed.
+
+## Native baseline and batch prototype
+
+The 64-block native profile baseline reached 24,468,089. All replayed bodies,
+BALs and commitments matched both before and after a clean restart; the
+pristine checkpoint checksum remained unchanged. Excluding the first eight
+blocks, replay averaged 0.9993 blocks/second. The first block took 39.65 seconds
+to warm up. The measured window wrote about 202.3 MiB per block at the VM's
+block device. Shared-domain commit averaged 594 ms: about 188 ms flushing,
+391 ms native commit and 16 ms cache publication. These nested measurements
+must not be added again to the enclosing forkchoice time. This result uses
+the probe hardware and a less advanced checkpoint than the authoritative
+source; it is not evidence of a software speedup on the original VM.
+
+The first shutdown check incorrectly required systemd's transient exit fields
+to survive unit unloading. The journal recorded successful deactivation, but
+those fields had reset to zero. The harness now verifies the journal's
+successful-deactivation event for the exact invocation ID and records that
+proof. The completed replay was retained, the original reporting failure was
+archived, and its restart audit completed successfully. The `profile` trial's
+final phase is `verified_stopped`.
+
+The `profile-no-writemap` comparison uses the identical checkpoint, block range,
+binary, CPU/RAM limits and durability. A separate native batch build waits on
+the benchmark lock until this comparison is fully verified and stopped.
+
+Source commit `a7d50626108b2428d5cd0b65089330fee6b357d8` adds
+`testing_insertRawBlocksV1` for isolated replay experiments. It accepts 1–16
+contiguous raw blocks extending the current head, with one structurally valid,
+hash-matching BAL per block. It decodes and checks the entire input before
+insertion. Its returned hashes acknowledge staging only; normal forkchoice
+execution must still return VALID. No ordinary Engine API validation behavior
+was changed. Admission tests followed a failing-test/implementation cycle;
+existing execution tests and an additional intermediate-state-root rejection
+check verify the unchanged batch execution path. Lint and both binaries built.
+
+The staged `profile-batch` harness uses eight-block batches, requires VALID
+forkchoice and VALID Engine API checks for every block, checks every header
+commitment and full body, and repeats the body audit after restart. Raw input
+for the 64-block pilot was exported from the canonical Geth source and has a
+checksum manifest. Batch timing divides elapsed batch time across its blocks;
+those values are not individual block latency. No batch pilot or authoritative
+replay transition has run yet.

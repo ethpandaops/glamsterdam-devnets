@@ -98,8 +98,13 @@ if native.exists():
     r['native_build_service']=dict(x.split('=',1) for x in build_unit.splitlines() if '=' in x)
     build=native/'build-report.json'
     if build.exists():r['native_build']=json.loads(build.read_text())
+    batch_unit=subprocess.check_output(['systemctl','show','pbt-1-native-batch-build',
+        '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
+    r['native_batch_build_service']=dict(x.split('=',1) for x in batch_unit.splitlines() if '=' in x)
+    batch_build=native/'batch-build-report.json'
+    if batch_build.exists():r['native_batch_build']=json.loads(batch_build.read_text())
     r['native_trials']={}
-    for variant in ('stock','profile','profile-no-writemap'):
+    for variant in ('stock','profile','profile-no-writemap','profile-batch'):
         trial=native/variant
         job=subprocess.check_output(['systemctl','show','pbt-1-native-probe-'+variant,
             '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=10)
@@ -231,6 +236,8 @@ def main():
                 report['alerts'].append('temporary Erigon probe: no copy progress output for 15 minutes')
             if probe.get('native_build_service',{}).get('ActiveState')=='failed':
                 report['alerts'].append('temporary Erigon probe: native build failed; inspect build logs')
+            if probe.get('native_batch_build_service',{}).get('ActiveState')=='failed':
+                report['alerts'].append('temporary Erigon probe: native batch build failed; inspect build logs')
             for variant,trial in probe.get('native_trials',{}).items():
                 if (trial['service'].get('ActiveState')=='failed' or trial.get('status',{}).get('phase')=='failed'
                         or trial.get('job',{}).get('ActiveState')=='failed'):

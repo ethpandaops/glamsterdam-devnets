@@ -94,12 +94,40 @@ def wait_ready(unit):
         time.sleep(5)
 
 
-def replay(trial, blocks):
+def replay(trial, blocks, batched=False):
     rpc = RPC()
     assert int(rpc.head()['number'], 16) == HEAD
     durations = []
     started = time.monotonic()
-    for offset in range(1, blocks+1):
+    if batched:
+        for offset in range(1, blocks+1, 8):
+            records = [json.loads(gzip.decompress((ROOT/'blocks'/f'{number:08d}.json.gz').read_bytes()))
+                       for number in range(HEAD+offset, HEAD+min(offset+8, blocks+1))]
+            raw = [json.loads(gzip.decompress((Path('/data/pbt-1/raw-replay-fixture')/f'{record["number"]:08d}.json.gz').read_bytes()))['raw']
+                   for record in records]
+            before = time.monotonic()
+            inserted = rpc.call('testing_insertRawBlocksV1', [raw, [r['new_payload'][0]['blockAccessList'] for r in records]])
+            assert inserted == [r['hash'] for r in records], 'Staged block hashes differ from immutable replay stream'
+            tip = records[-1]
+            deadline = time.monotonic()+600
+            while True:
+                result = rpc.call('engine_forkchoiceUpdatedV3', tip['forkchoice'], True)['payloadStatus']
+                if result['status'] == 'VALID':
+                    assert result['latestValidHash'] == tip['hash'], result
+                    break
+                assert result['status'] == 'SYNCING' and time.monotonic() < deadline, result
+                time.sleep(.05)
+            for record in records:
+                result = rpc.call('engine_newPayloadV5', record['new_payload'], True)
+                assert result['status'] == 'VALID' and result['latestValidHash'] == record['hash'], result
+                block = rpc.call('eth_getBlockByNumber', [hex(record['number']), False])
+                for key, field in [('hash', 'hash'), ('stateRoot', 'state_root'), ('blockAccessListHash', 'bal_hash')]:
+                    assert block[key] == record[field], (record['number'], key)
+            assert rpc.head()['hash'] == tip['hash']
+            durations.extend([(time.monotonic()-before)/len(records)]*len(records))
+            save(trial/'replay-progress.json', {'time': time.time(), 'head': tip['number'],
+                'completed': offset+len(records)-1, 'target_blocks': blocks, 'batch_size': 8})
+    for offset in (() if batched else range(1, blocks+1)):
         number = HEAD+offset
         record = json.loads(gzip.decompress((ROOT/'blocks'/f'{number:08d}.json.gz').read_bytes()))
         before = time.monotonic()
@@ -112,7 +140,9 @@ def replay(trial, blocks):
     save(trial/'replay-timing.json', {'time': time.time(), 'blocks': blocks,
         'elapsed_seconds': time.monotonic()-started, 'warmup_blocks': 8,
         'measured_blocks': blocks-8, 'measured_apply_seconds': measured,
-        'measured_blocks_per_second': (blocks-8)/measured, 'apply_seconds_per_block': durations})
+        'measured_blocks_per_second': (blocks-8)/measured, 'apply_seconds_per_block': durations,
+        'batch_size': 8 if batched else 1,
+        'duration_allocation': 'batch elapsed divided equally; not individual latency' if batched else 'individual apply calls'})
 
 
 def clone(trial):
@@ -161,8 +191,17 @@ def main(args):
     assert shutil.disk_usage(NATIVE).free > 150*1024**3
     build = json.loads((NATIVE/'build-report.json').read_text())
     assert build['source_commit'] == '8c1e3893d77d230720d172f1492d95b5777a862c'
-    binary_name = 'stock' if args.variant == 'stock' else 'profile'
-    artifact = next(item for item in build['builds'] if item['name'] == binary_name)
+    if args.variant == 'profile-batch':
+        artifact = json.loads((NATIVE/'batch-build-report.json').read_text())
+        assert artifact['source']['batch_commit'] == 'a7d50626108b2428d5cd0b65089330fee6b357d8'
+        fixture = Path('/data/pbt-1/raw-replay-fixture')
+        manifest = json.loads((fixture/'manifest.json').read_text())
+        assert manifest['start'] == HEAD+1 and manifest['end'] >= HEAD+args.blocks
+        for entry in manifest['files']:
+            assert digest(fixture/entry['name']) == entry['sha256'], entry['name']
+    else:
+        binary_name = 'stock' if args.variant == 'stock' else 'profile'
+        artifact = next(item for item in build['builds'] if item['name'] == binary_name)
     binary = Path(artifact['path'])
     assert digest(binary) == artifact['sha256']
     for number in range(HEAD, HEAD+args.blocks+1):
@@ -183,6 +222,8 @@ def main(args):
                    for item in client_args]
     if args.variant == 'profile-no-writemap':
         client_args.append('--db.writemap=false')
+    if args.variant == 'profile-batch':
+        client_args = [item+',testing' if item.startswith('--http.api=') else item for item in client_args]
     client_args += ['--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
     unit = 'pbt-1-native-'+args.variant
     command = [str(binary), *client_args]
@@ -241,7 +282,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap'], required=True)
+    parser.add_argument('--variant', choices=['stock', 'profile', 'profile-no-writemap', 'profile-batch'], required=True)
     parser.add_argument('--blocks', type=int, default=64)
     parser.add_argument('--audit', choices=['checkpoint', 'before', 'after'])
     parser.add_argument('--replay', action='store_true')
@@ -250,7 +291,7 @@ if __name__ == '__main__':
     if args.audit:
         audit(args.audit, NATIVE/args.variant, args.blocks)
     elif args.replay:
-        replay(NATIVE/args.variant, args.blocks)
+        replay(NATIVE/args.variant, args.blocks, batched=args.variant == 'profile-batch')
     else:
         try:
             main(args)
