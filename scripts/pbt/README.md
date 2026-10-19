@@ -234,6 +234,12 @@ automatically retry failed database operations. Inspect
 journals. `full-run-gate.json` records the four passing pilot gates. Sensitive
 controller storage authorization is in a mode-0600 file outside the repository.
 
+The monitor reports a replay-only ETA after at least five minutes of advancing
+native replay from the same live service/client invocations. Stale observations,
+restarts and changed targets invalidate the estimate. It shows the time left
+before the 09:00 UTC deadline after replay and excludes final restart, BAL
+restoration/audit, upload and remote verification; it is not a delivery promise.
+
 Publication is under the new immutable prefix
 `s3://ethpandaops-shadowfork-images/pbt-1/20261019-mixed-8037-v2/`.
 Each native archive is `<client>/<head>/snapshot.tar.zst`. Geth remains a flat

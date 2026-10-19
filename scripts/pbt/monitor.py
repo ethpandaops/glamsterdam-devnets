@@ -59,7 +59,7 @@ if not (root/'native-replay').exists() and buffer_trial.exists() and not (buffer
 if client=='erigon' and ((root/'native-replay').exists() or native_runner=='pbt-1-native-buffer-pilot'):
     result['native_replay']={}
     for key,unit in [('service',native_runner),('client','pbt-1-native-replay-client')]:
-        service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result')
+        service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result','-p','InvocationID')
         result['native_replay'][key]=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
 if client=='erigon' and (root/'native-source-pilot').exists():
     pilot=root/'native-source-pilot'
@@ -164,6 +164,39 @@ print(json.dumps(r))
     return record
 
 
+def replay_projection(current, previous, now):
+    """Estimate replay alone from two fresh observations of the same live run."""
+    current_progress = current.get('pipeline') or {}
+    previous_progress = previous.get('pipeline') or {}
+    if any(p.get('phase') != 'native_replaying' for p in (current_progress, previous_progress)):
+        return None
+    for key in ('service', 'client'):
+        new = current.get('native_replay', {}).get(key, {})
+        old = previous.get('native_replay', {}).get(key, {})
+        if (new.get('ActiveState') != 'active' or old.get('ActiveState') != 'active'
+                or not new.get('InvocationID') or new.get('InvocationID') != old.get('InvocationID')
+                or new.get('MainPID') in (None, '0') or new.get('MainPID') != old.get('MainPID')):
+            return None
+    target = current_progress.get('target_head')
+    if not isinstance(target, int) or target != previous_progress.get('target_head'):
+        return None
+    head, prior_head = current_progress.get('head'), previous_progress.get('head')
+    stamp, prior_stamp = current_progress.get('time'), previous_progress.get('time')
+    if not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (head, prior_head, stamp, prior_stamp)):
+        return None
+    elapsed = stamp-prior_stamp
+    if elapsed < 300 or not 0 <= now-stamp <= 900 or not prior_head < head < target:
+        return None
+    rate = (head-prior_head)/elapsed
+    eta = now+(target-head)/rate
+    deadline = datetime.datetime(2026, 10, 20, 9, tzinfo=datetime.timezone.utc).timestamp()
+    return {'observed_blocks':head-prior_head, 'observed_seconds':elapsed,
+            'blocks_per_second':rate, 'remaining_blocks':target-head,
+            'replay_only_eta_utc':datetime.datetime.fromtimestamp(eta, datetime.timezone.utc).isoformat(),
+            'seconds_left_after_replay_before_deadline':deadline-eta,
+            'excludes':'Final restart, BAL restoration/audit, upload and remote verification'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--identity', default=str(Path.home()/'.ssh/devops_eth2_shared_key'))
@@ -202,6 +235,11 @@ def main():
             if r['restore_complete'] and not old.get('restore_complete'):
                 report['events'].append(f'{client}: restore complete')
             pipeline = r.get('pipeline') or {}
+            projection = replay_projection(r, old, now)
+            if projection:
+                r['replay_projection'] = projection
+                if projection['seconds_left_after_replay_before_deadline'] < 0:
+                    report['alerts'].append(f'{client}: replay alone projects past the 09:00 UTC delivery deadline')
             if r.get('full_run_service',{}).get('ActiveState')=='failed':
                 report['alerts'].append(f'{client}: full-run service failed; inspect journal')
             if r.get('native_source_pilot',{}).get('service',{}).get('ActiveState')=='failed':
@@ -314,6 +352,14 @@ def main():
         if p.get('qualifying_blocks') is not None:phase+=f'; {p["qualifying_blocks"]:,} qualifying'
         data_gib=f'{r["data_bytes"]/2**30:.1f}' if r['data_bytes'] is not None else '—'
         lines.append(f'| {client} | {r["progress_percent"]}% ({r["container"]}) | {data_gib} | {r["free_bytes"]/2**30:.1f} | {cleanup} | {phase} |')
+    for client, r in report['clients'].items():
+        if 'replay_projection' in r:
+            p = r['replay_projection']
+            lines += ['', f'{client}: {p["blocks_per_second"]:.3f} blocks/s over '
+                      f'{p["observed_seconds"]/60:.1f} minutes; replay-only estimate '
+                      f'{p["replay_only_eta_utc"]}. Time remaining before 09:00 UTC after replay: '
+                      f'{p["seconds_left_after_replay_before_deadline"]/3600:.2f} hours. '
+                      f'Excludes: {p["excludes"]}.']
     if 'controller_storage' in report:
         s=report['controller_storage']
         lines += ['', f'Controller replay storage: {s["replay_bytes"]/2**30:.1f} GiB; '
