@@ -11,7 +11,7 @@ from pipeline_rpc import ROOT, RPC, save
 
 def main(args):
     assert 1 <= args.end-args.start+1 <= 256
-    output = Path('/data/pbt-1/raw-replay-fixture')
+    output = args.output
     assert not output.exists(), 'Preserve existing fixture and inspect before retrying'
     output.mkdir()
     rpc = RPC()
@@ -34,4 +34,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--start', type=int, required=True)
     parser.add_argument('--end', type=int, required=True)
+    parser.add_argument('--output', type=Path, default=Path('/data/pbt-1/raw-replay-fixture'))
     main(parser.parse_args())
