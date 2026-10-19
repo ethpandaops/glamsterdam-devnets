@@ -219,10 +219,27 @@ that a client's historical MPT state at an earlier anchor is still accessible.
 
 ### Retention measurements still required
 
-**Current finding:** the checked PBT-1/MSF-2 per-client inventory files do not
+**Initial finding (13:18 UTC):** the checked PBT-1/MSF-2 per-client inventory files do not
 explicitly configure BAL retention. Effective defaults, retained ranges and
 retrieval support remain unmeasured. At 13:18 UTC on 2026-10-19, the source restore
 was still running (3190/4118 chunks); it had no execution client serving BALs.
+
+**Preparation update (20:30 UTC):** all four source restores are complete.
+Nethermind's native Patricia cleanup and FlatDB restart passed, reclaiming
+341,910,994,944 bytes. All four clients passed the 1,000 qualifying-block pilot,
+including clean restart and exhaustive retrieval/comparison of 2,020 generated
+bodies. See [pilot evidence and effective retention findings](pbt-1-8037-pilot-2026-10-19.md).
+This proves that generated interval; it does not establish complete historical
+coverage before the downloaded source anchor.
+
+The full run targets 50,400 qualifying blocks ending at 24,503,958, with 51,420
+total replay records including preparation. At the scheduled 20:30 check, Geth
+had generated 35,231 qualifying blocks, Besu had replayed 35,117, Nethermind's
+head was 24,488,717, and Erigon had replayed 15,164. All four passed the oldest
+generated, first qualifying and recent BAL spot checks. Full-range final audits
+and native snapshot uploads remain pending. Erigon throughput puts the
+2026-10-20 09:00 UTC delivery target at risk; its experiments and recovery
+evidence are recorded in the [Erigon preparation report](pbt-1-erigon-merge-2026-10-19.md).
 
 Audit the actual source network and every service that will supply replay data:
 
