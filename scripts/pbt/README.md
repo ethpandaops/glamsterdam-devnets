@@ -279,6 +279,16 @@ precede the existing exhaustive BAL audit and upload gates. The monitor follows
 the native systemd PID while Docker is stopped. Publication includes the continuous
 run's build and completion evidence whenever its work directory exists.
 
+`handoff-erigon-native.py` changes a running native replay's build/batch size only
+after verifying the candidate's completed probe. It stops the replay driver,
+waits for the last forkchoice to persist, checks every segment header and any
+unreported payloads, and compares recent bodies. A clean native shutdown and
+exact pinned-image reopen precede archiving the segment under
+`/data/pbt-1/native-replay-segments/`. The continuous driver then starts from that
+head. Publication checks segment continuity and includes each prior build and
+sealed-segment proof. A failure requires inspection; it does not automatically
+retry or overwrite the preserved evidence.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable

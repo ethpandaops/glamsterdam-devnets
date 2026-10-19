@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import shlex
 import subprocess
 import time
 from monitor import HOSTS
@@ -110,6 +111,24 @@ def main():
                 'evidence':prefix+'_snapshot_native_replay_complete.json',
                 'build_evidence':prefix+'_snapshot_native_replay_continuous_build.json',
                 'notes':'The remaining replay used this native build, with VALID payloads and matching commitments for each block; final validation reopened the pinned image.'}
+            history_code = "import json;from pathlib import Path;root=Path('/data/pbt-1/native-replay-segments');print(json.dumps([{'proof':json.loads((p/'handoff-complete.json').read_text()),'build':json.loads((p/'build.json').read_text())} for p in sorted(root.iterdir())] if root.exists() else []))"
+            history=json.loads(subprocess.check_output(ssh+[shlex.join(['python3','-c',history_code])]))
+            next_start=None
+            for segment in history:
+                sealed=segment['proof']
+                assert sealed['phase']=='segment_sealed' and sealed['pinned_reopen_verified']
+                assert sealed['normal_durability'] and sealed['all_headers_verified']
+                assert sealed['image']==proof['image'] and sealed['final_target']==native['end']
+                assert sealed['binary_sha256']==segment['build']['sha256']
+                assert sealed['validated_blocks']==sealed['end']-sealed['start']+1>0
+                assert sealed['previously_validated_blocks']+sealed['tail_payloads_verified']==sealed['validated_blocks']
+                assert int(sealed['head']['number'],16)==sealed['end']
+                if next_start is not None:assert sealed['start']==next_start, 'Native segment gap or overlap'
+                next_start=sealed['end']+1
+            if history:
+                assert next_start==native['start'], 'Final native segment does not extend sealed history'
+                objects['_snapshot_native_replay_segments.json']=history
+                metadata['pbt']['native_replay']['continuous']['previous_segments']=prefix+'_snapshot_native_replay_segments.json'
         backfill=read('erigon-bal-backfill.json');retention=read('bal-retention-prepared.json')
         assert not backfill['dry_run'] and backfill['verified_records']==v['final_records']
         assert backfill['written_sidecars']+backfill['existing_sidecars']==v['final_records']

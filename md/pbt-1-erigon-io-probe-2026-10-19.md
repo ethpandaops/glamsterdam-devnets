@@ -452,3 +452,31 @@ qualifying blocks. Raw export completed at 22:57:19 UTC with 33,203 blocks cover
 24,471,570 (18,012 qualifying blocks) at 22:56:58 UTC; its observed rate still
 puts full delivery beyond the 09:00 target. Replay, final audits and uploads
 remain incomplete; generation completion is not snapshot completion.
+
+## Original-VM batch-of-64 handoff at 23:05 UTC
+
+The native batch-of-16 segment covered 24,471,059–24,471,794: 736 validated
+blocks. `handoff-erigon-native.py` stopped its driver, required a completed
+post-forkchoice persistence record, rechecked every segment header and the last
+16 full bodies, and cleanly stopped the native client. There was no unreported
+payload tail. The pinned Docker image reopened with exactly the same head and
+body. All segment evidence is retained under
+`/data/pbt-1/native-replay-segments/0001/`; final publication now checks continuity
+and includes earlier segments and their build manifests.
+
+The first replacement-driver launch failed before touching the database because
+systemd had collected the old `pbt-1-full-run` transient service. The driver now
+accepts that specific missing-service case while retaining fatal handling for a
+failed stop of an existing service. Regression tests first failed and then passed.
+The failed start was archived under `native-replay-failed-starts/0001/` after
+confirming that the pinned head was unchanged and no blocks had been replayed.
+
+At 23:05:07 UTC, the corrected driver started the previously probe-verified
+continuation build (`72b4a99bbb46a61ce3ab0932111533da8cb9fcda`) on the original VM.
+It uses batches of 64, the default 512-MiB execution buffer, normal durability,
+eight CPUs and the same 48-GiB process limit. The canceled 2-GiB-buffer experiment
+has not been adopted. Original-VM performance of this configuration remains to
+be measured. Eleven driver/handoff checks pass, covering validation gaps,
+incorrect commitments/bodies, invalid payloads, persistence fencing and the
+missing-service regression. Final pinned-image reopen and exhaustive BAL checks
+remain required after the entire replay.

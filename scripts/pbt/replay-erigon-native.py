@@ -29,6 +29,13 @@ def inspect():
     return json.loads(command('docker', 'inspect', NAME))[0]
 
 
+def stop_previous_driver():
+    load = command('systemctl', 'show', 'pbt-1-full-run', '-p', 'LoadState', '--value')
+    assert load in ('loaded', 'not-found'), load
+    if load == 'loaded':
+        subprocess.run(['systemctl', 'stop', 'pbt-1-full-run'], check=True)
+
+
 def digest(path):
     with path.open('rb') as stream:
         return hashlib.file_digest(stream, 'sha256').hexdigest()
@@ -182,7 +189,7 @@ def main(args):
     save(RUN/'build.json', build)
     save(RUN/'probe-proof.json', probe)
     save(RUN/'original-command.json', original['Config'])
-    subprocess.run(['systemctl', 'stop', 'pbt-1-full-run'], check=True)
+    stop_previous_driver()
     save(ROOT/'status.json', {'phase': 'restart_validation', 'time': time.time(), 'reason': 'Starting verified native batch replay'})
     time.sleep(5)
     subprocess.run(['nsenter', '--target', str(original['State']['Pid']), '--net', 'python3', __file__, '--audit', 'before'], check=True)

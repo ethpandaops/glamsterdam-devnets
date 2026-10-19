@@ -8,6 +8,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
+import subprocess
 
 spec = importlib.util.spec_from_file_location('native_replay', Path(__file__).with_name('replay-erigon-native.py'))
 module = importlib.util.module_from_spec(spec)
@@ -108,6 +109,18 @@ class ReplayChecks(unittest.TestCase):
         with self.assertRaises(AssertionError):
             module.replay()
         self.assertFalse((module.RUN/'replay-complete.json').exists())
+
+
+class ServiceChecks(unittest.TestCase):
+    def test_absent_old_driver_does_not_block_startup(self):
+        with patch.object(module, 'command', return_value='not-found'), patch.object(module.subprocess, 'run') as run:
+            module.stop_previous_driver()
+            run.assert_not_called()
+
+    def test_existing_driver_stop_failure_remains_fatal(self):
+        with patch.object(module, 'command', return_value='loaded'), patch.object(module.subprocess, 'run', side_effect=subprocess.CalledProcessError(1, 'systemctl')):
+            with self.assertRaises(subprocess.CalledProcessError):
+                module.stop_previous_driver()
 
 
 if __name__ == '__main__':
