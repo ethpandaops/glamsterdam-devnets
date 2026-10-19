@@ -1,10 +1,10 @@
 # PBT-1 Erigon persistence comparison — 2026-10-19
 
-The four source pipelines remain authoritative. A fifth, temporary DigitalOcean
-VM is testing whether faster local storage can shorten Erigon preparation.
-It is separate from the planned nine migration workers. No source cutover has
-occurred, and neither its scratch benchmark nor its checkpoint copy establishes
-that the final Erigon snapshot is ready.
+The four source pipelines remain authoritative. The temporary DigitalOcean
+probe was deleted at 22:44 UTC; its evidence is archived on the controller.
+Replay continues on the original Erigon VM with validated native batching.
+The dated measurements below describe the experiments, including rejected and
+canceled variants. Final restart, BAL audit and upload remain required.
 
 ## Measured bottleneck and batching result
 
@@ -416,3 +416,39 @@ durability. At 22:46:38 it had validated 48 additional blocks and reached
 24,471,106. The initial cumulative rate was 0.534 blocks/second; this short
 startup window is not a reliable completion forecast. Final pinned-image
 restart, exhaustive BAL audit and publication gates remain required.
+
+## Original-VM profiling and writeback trial at 22:57 UTC
+
+A 20-second CPU capture on the live original VM collected 42.93 CPU-seconds.
+Snapshot-file lookup accounted for 67.37% cumulatively; sharded existence-filter
+checks accounted for 55.72%. These overlapping CPU samples do not include time
+blocked on storage. Native timing logs separately measured approximately
+4–5 seconds flushing state and 9 seconds in MDBX synchronization per batch of 16.
+The profile and summaries are preserved as `steady-original-cpu.pprof` and
+`steady-original-cpu-{flat,cumulative}.txt` on the controller.
+
+`probe-erigon-writeback.py` compared earlier kernel background writeback while
+the same native process and validated replay continued. It changed only
+`vm.dirty_background_bytes` to 64 MiB for three minutes, then restored the
+original ratio of 10% and byte setting of zero. Database durability remained
+normal throughout; the client PID remained `164768`.
+
+| Window | Seconds | Validated blocks advanced | Blocks/second |
+| --- | ---: | ---: | ---: |
+| Original setting | 120.02 | 96 | 0.79987 |
+| Earlier writeback | 180.02 | 144 | 0.79989 |
+| Original setting restored | 120.03 | 80 | 0.66652 |
+
+Mean sampled dirty memory fell from 852 to 520 MiB during the trial, but the
+replay rate matched the initial baseline. These short windows use consecutive
+blocks and vary with batch boundaries and storage timing; no useful speedup was
+established. The tuning was not adopted. The service exited successfully at
+22:56:49 UTC and restoration was independently checked through `sysctl`.
+Evidence: `writeback-probe.json` and `writeback-probe-summary.json` on the controller.
+
+Geth finished generation at 22:57:10 UTC: head 24,503,958 and exactly 50,400
+qualifying blocks. Raw export completed at 22:57:19 UTC with 33,203 blocks covering
+24,470,756–24,503,958. Geth then entered its final restart/BAL gate. Erigon was at
+24,471,570 (18,012 qualifying blocks) at 22:56:58 UTC; its observed rate still
+puts full delivery beyond the 09:00 target. Replay, final audits and uploads
+remain incomplete; generation completion is not snapshot completion.
