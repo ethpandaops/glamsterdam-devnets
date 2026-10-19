@@ -3,6 +3,7 @@
 import argparse
 import concurrent.futures
 import datetime
+import ipaddress
 import json
 import math
 from pathlib import Path
@@ -74,6 +75,38 @@ def check(client, identity):
     record.update(host=host, total_chunks=chunks)
     record['restore_complete'] = record['done'] and record['container']=='exited' and record['exit_code']==0
     record['progress_percent'] = 100.0 if record['restore_complete'] else round(100*record['emitted']/chunks, 1)
+    return record
+
+
+def check_probe(host, identity):
+    ipaddress.ip_address(host)
+    code = r'''
+import json,re,subprocess,time
+from pathlib import Path
+root=Path('/data/pbt-1/io-probe')
+p=root/'checkpoint-copy-status.json'
+copy=json.loads(p.read_text()) if p.exists() else None
+unit=subprocess.check_output(['systemctl','show','pbt-1-checkpoint-copy',
+    '-p','ActiveState','-p','MainPID','-p','Result'],text=True,timeout=15)
+log=root/'checkpoint-copy.log'
+r={'time':time.time(),'copy':copy,
+   'service':dict(x.split('=',1) for x in unit.splitlines() if '=' in x)}
+if log.exists():
+    r['log_bytes']=log.stat().st_size
+    r['log_updated_at']=log.stat().st_mtime
+    with log.open('rb') as f:
+        f.seek(max(0,log.stat().st_size-2048))
+        lines=f.read().decode(errors='replace').replace('\r','\n').splitlines()
+    r['latest_progress']=lines[-1] if lines else ''
+    match=re.match(r'\s*([\d,]+)\s+\d+%',r['latest_progress'])
+    if match:r['copied_logical_bytes']=int(match[1].replace(',',''))
+print(json.dumps(r))
+'''
+    result=subprocess.run(['ssh','-i',str(identity),'-o','BatchMode=yes','-o','ConnectTimeout=15',
+                           'root@'+host,'python3','-'],input=code,capture_output=True,text=True,timeout=30)
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip()[-500:] or 'probe check failed')
+    record=json.loads(result.stdout);record['host']=host
     return record
 
 
@@ -159,6 +192,21 @@ def main():
         report['alerts'].extend('workflow: '+error for error in workflow.get('errors',[]))
         if now-workflow.get('time',0)>180:
             report['alerts'].append('workflow: coordinator status is over three minutes old')
+    probe_path=controller.parent/'erigon-io-probe.json'
+    if probe_path.is_file():
+        try:
+            probe=check_probe(json.loads(probe_path.read_text())['public_ip'],args.identity)
+            report['temporary_probe']=probe
+            phase=(probe.get('copy') or {}).get('phase')
+            if phase=='failed' or probe['service'].get('ActiveState')=='failed':
+                report['alerts'].append('temporary Erigon probe: checkpoint copy failed; inspect preserved evidence')
+            if phase in ('copying','verifying') and probe['service'].get('ActiveState')!='active':
+                report['alerts'].append('temporary Erigon probe: copy is incomplete and its service is not active')
+            if phase=='copying' and now-probe.get('log_updated_at',now)>900:
+                report['alerts'].append('temporary Erigon probe: no copy progress output for 15 minutes')
+        except Exception as exc:
+            report['temporary_probe']={'error':str(exc)}
+            report['alerts'].append('temporary Erigon probe: '+str(exc))
     active_replay=any((r.get('pipeline') or {}).get('phase') in
                       ('generating','replaying','waiting_for_payload') for r in report['clients'].values())
     relay=controller.parent/'relay-status.json'
@@ -190,6 +238,17 @@ def main():
         lines += ['', f'Controller replay storage: {s["replay_bytes"]/2**30:.1f} GiB; '
                   f'{s["free_bytes"]/2**30:.1f} GiB free; estimated additional '
                   f'{s["estimated_additional_bytes"]/2**30:.1f} GiB plus 10 GiB reserve.']
+    if 'temporary_probe' in report:
+        probe=report['temporary_probe']
+        if 'error' not in probe:
+            phase=(probe.get('copy') or {}).get('phase','provisioned')
+            progress=''
+            if 'copied_logical_bytes' in probe:
+                progress=(f'{probe["copied_logical_bytes"]/2**30:.1f} / '
+                          f'{probe["copy"]["expected_bytes"]/2**30:.1f} GiB logical copy progress.')
+            lines += ['', f'Temporary Erigon probe: {phase}; copy service '
+                      f'{probe["service"].get("ActiveState", "unknown")}. '
+                      f'{progress}']
     lines += ['', 'Alerts: ' + ('; '.join(report['alerts']) or 'none'),
               'Events: ' + ('; '.join(report['events']) or 'none'), '',
               'Pipeline stages are reported separately; generation/replay completion does not establish snapshot upload completion.']

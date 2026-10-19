@@ -249,3 +249,7 @@ earlier assertion that 1.8 TB was DigitalOcean's largest disk was incorrect.
 No resize has been performed, and a larger machine's throughput remains
 unmeasured. The dated API evidence is `erigon-resize-catalog.json` in the
 controller evidence directory.
+
+Subsequent regional availability checks, the temporary VM's provisioning,
+storage measurements, revised batching test and checkpoint-transfer gates are
+recorded in the [persistence comparison report](pbt-1-erigon-io-probe-2026-10-19.md).

@@ -1,0 +1,65 @@
+# Isolated inventory only; this does not download state or start an EL client.
+- name: Provision the temporary PBT storage performance probe
+  hosts: pbt_io_probe
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Wait for SSH
+      ansible.builtin.wait_for_connection:
+        timeout: 300
+
+    - name: Wait for first boot
+      ansible.builtin.command: cloud-init status --wait
+      register: probe_cloud_init
+      changed_when: false
+      failed_when: probe_cloud_init.rc not in [0, 1, 2]
+
+    - name: Verify the completed filesystem resize after a busy resizefs report
+      when: probe_cloud_init.rc != 0
+      ansible.builtin.shell: |
+        python3 - <<'PY'
+        import json,os,subprocess
+        r=subprocess.run(['cloud-init','status','--format','json'],capture_output=True,text=True)
+        status=json.loads(r.stdout)
+        assert status['stage'] is None and status['extended_status'].endswith('done'),status
+        assert status['errors'] and all("('resizefs'," in e and 'Device or resource busy' in e for e in status['errors']),status
+        for phase in ['init-local','modules-config','modules-final']:
+            assert not status[phase]['errors'],status[phase]
+        partition=int(subprocess.check_output(['blockdev','--getsize64','/dev/vda1']))
+        fs=os.statvfs('/')
+        assert partition > 4*10**12 and fs.f_blocks*fs.f_frsize > partition*.97
+        print('Only resizefs reported busy; the root filesystem already covers the provisioned partition')
+        PY
+      changed_when: false
+
+    - name: Install probe and restore prerequisites
+      ansible.builtin.apt:
+        name: [docker.io, fio, rsync, curl, python3, zstd]
+        state: present
+        update_cache: true
+        lock_timeout: 300
+
+    - name: Start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Create isolated probe directory
+      ansible.builtin.file:
+        path: /data/pbt-1/io-probe
+        state: directory
+        mode: "0700"
+
+    - name: Record provisioned hardware
+      ansible.builtin.shell: |
+        python3 - <<'PY'
+        import json,os,shutil,time
+        from pathlib import Path
+        r={'time':time.time(),'cpus':os.cpu_count(),
+           'meminfo':Path('/proc/meminfo').read_text(),
+           'disk':dict(zip(('total','used','free'),shutil.disk_usage('/data/pbt-1')))}
+        Path('/data/pbt-1/io-probe/provisioned.json').write_text(json.dumps(r,indent=2)+'\n')
+        PY
+      args:
+        creates: /data/pbt-1/io-probe/provisioned.json
