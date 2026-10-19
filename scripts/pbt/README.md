@@ -121,7 +121,11 @@ Check download status on that node; it runs independently of this workspace sess
 The controller's enabled user timer `pbt-1-monitor.timer` runs it at :00, :15,
 :30 and :45 UTC. User lingering is enabled, so checks survive shell logout.
 Each run records progress, free disk, container failures/OOMs, restore completion,
-and the Nethermind cleanup service/result. A running restore with no chunk
+and the Nethermind cleanup service/result. During generation/replay,
+`bal-sentinel.py` retrieves the first generated body, first qualifying body and
+a recent body, comparing BAL bytes, transactions and withdrawals with the saved
+records. This detects retention problems before the final exhaustive audit.
+A running restore with no chunk
 progress between checks, low disk, failed SSH or failed cleanup raises an alert.
 
 Reports are local to the controller:

@@ -44,6 +44,16 @@ r=cmd('docker','inspect','pbt-1-'+client+'-execution')
 result['execution']=json.loads(r.stdout)[0]['State'] if r.returncode==0 else None
 r=cmd('systemctl','show','pbt-1-full-run','-p','ActiveState','-p','Result')
 result['full_run_service']=dict(line.split('=',1) for line in r.stdout.splitlines() if '=' in line)
+p=result.get('pipeline') or {}
+if p.get('phase') in ('generating','replaying','waiting_for_payload') and p.get('head',0)>=24453559:
+    try:
+        probe=subprocess.run(['nsenter','--target',str(result['execution']['Pid']),'--net',
+                              'python3','/data/pbt-1/bal-sentinel.py'],
+                             capture_output=True,text=True,timeout=55)
+        if probe.returncode:raise RuntimeError(probe.stderr[-500:])
+        result['bal_retention_probe']=json.loads(probe.stdout)
+    except Exception as exc:
+        result['bal_retention_probe']={'error':str(exc)}
 print(json.dumps(result))
 '''
 
@@ -105,6 +115,8 @@ def main():
             pipeline = r.get('pipeline') or {}
             if r.get('full_run_service',{}).get('ActiveState')=='failed':
                 report['alerts'].append(f'{client}: full-run service failed; inspect journal')
+            if 'error' in r.get('bal_retention_probe',{}):
+                report['alerts'].append(f'{client}: BAL retention probe failed: '+r['bal_retention_probe']['error'])
             if pipeline.get('phase') == 'failed':
                 report['alerts'].append(f'{client}: pipeline failed: {pipeline.get("error", "inspect logs")}')
             if pipeline.get('phase') in ('generating','replaying','uploading','awaiting_upload_verification') and now-pipeline.get('time',now) > 900:
