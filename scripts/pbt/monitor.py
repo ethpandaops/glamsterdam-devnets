@@ -47,6 +47,18 @@ r=cmd('docker','inspect','pbt-1-'+client+'-execution')
 result['execution']=json.loads(r.stdout)[0]['State'] if r.returncode==0 else None
 r=cmd('systemctl','show','pbt-1-full-run','-p','ActiveState','-p','Result')
 result['full_run_service']=dict(line.split('=',1) for line in r.stdout.splitlines() if '=' in line)
+if client=='erigon' and (root/'native-source-pilot').exists():
+    pilot=root/'native-source-pilot'
+    service=cmd('systemctl','show','pbt-1-native-source-pilot','-p','ActiveState','-p','MainPID','-p','Result')
+    result['native_source_pilot']={'service':dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)}
+    for name in ('request','progress','checkpoint'):
+        path=pilot/(name+'.json')
+        if path.exists():result['native_source_pilot'][name]=json.loads(path.read_text())
+    path=pilot/'complete.json'
+    if path.exists():
+        complete=json.loads(path.read_text())
+        result['native_source_pilot']['complete']={key:complete[key] for key in
+            ('time','pilot_blocks','speedup','pinned_reopen_verified','continuous_batch_replay_enabled')}
 p=result.get('pipeline') or {}
 if p.get('phase') in ('generating','replaying','waiting_for_payload') and p.get('head',0)>=24453559:
     try:
@@ -177,6 +189,8 @@ def main():
             pipeline = r.get('pipeline') or {}
             if r.get('full_run_service',{}).get('ActiveState')=='failed':
                 report['alerts'].append(f'{client}: full-run service failed; inspect journal')
+            if r.get('native_source_pilot',{}).get('service',{}).get('ActiveState')=='failed':
+                report['alerts'].append('erigon: original-VM native pilot failed; inspect preserved evidence')
             if 'error' in r.get('bal_retention_probe',{}):
                 report['alerts'].append(f'{client}: BAL retention probe failed: '+r['bal_retention_probe']['error'])
             if pipeline.get('phase') == 'failed':
