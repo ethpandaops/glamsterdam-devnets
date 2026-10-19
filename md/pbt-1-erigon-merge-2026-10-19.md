@@ -68,6 +68,16 @@ Ordinary replay resumed automatically at 16:36:26 UTC. The full probe record is
 `/data/pbt-1/pipeline/batch-probe.json`, with a controller copy at
 `~/.local/state/pbt-1-run/erigon-batch-probe.json`.
 
+A later review of the pinned v3.7.1 source supports retaining the single-block
+path. `execution/execmodule/exec_module.go:ValidateChain` clears the previous
+validation state and creates a new validation context. In
+`execution/execmodule/fork_validator.go:ValidatePayload`, a noncanonical parent
+causes the uncommitted ancestor chain to be collected and passed to the executor
+again. Delaying fork choice can therefore add repeated execution, rather than
+simply amortizing commit overhead. `SYNCING` can also be returned by the Engine
+readiness check before a payload is inserted, so accepting it as proof that a
+whole batch was queued would be incorrect. No further batching change was applied.
+
 ## Live heap-size trial
 
 At 17:34–17:40 UTC, a runtime-only probe sampled two minutes at the original
