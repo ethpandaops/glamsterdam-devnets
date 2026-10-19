@@ -178,3 +178,13 @@ the profile and transition evidence. All final clean-restart, exhaustive BAL
 audit and upload gates remain required. The local checkpoint is retained outside
 the exported datadir. Suppression does not establish a throughput improvement;
 that requires subsequent measurement.
+
+At approximately 20:03 UTC, a 20-second attached syscall trace recorded 84 timed
+sync calls totaling 9.774 seconds, including 12 data `msync(MS_SYNC)` calls of
+0.749–0.887 seconds each. Replay advanced 11 blocks during tracing. The observer
+can affect throughput, so this is evidence of sync cost, not an uncontaminated
+rate comparison. No durability setting was changed. Evidence is
+`~/.local/state/pbt-1-run/fsync-trace{,-summary}.json` and `fsync-trace.log`.
+At head 24,468,158, native chaindata occupied 19,847,458,816 allocated bytes,
+with 1,252,372,062,208 bytes free on the host. Growth without background
+maintenance/pruning must be tracked before projecting remaining disk needs.
