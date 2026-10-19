@@ -105,8 +105,8 @@ output "ssh_config_file" {
 }
 
 output "digitalocean_server_count" {
-  value       = length(digitalocean_droplet.main) + length([digitalocean_droplet.erigon_io_probe])
-  description = "Number of DigitalOcean servers, including the temporary Erigon IO probe"
+  value       = length(digitalocean_droplet.main)
+  description = "Number of DigitalOcean servers"
 }
 
 output "hetzner_server_count" {
@@ -115,6 +115,6 @@ output "hetzner_server_count" {
 }
 
 output "total_server_count" {
-  value       = length(digitalocean_droplet.main) + length(hcloud_server.main) + length([digitalocean_droplet.erigon_io_probe])
-  description = "Total servers across all providers, including the temporary Erigon IO probe"
+  value       = length(digitalocean_droplet.main) + length(hcloud_server.main)
+  description = "Total servers across all providers"
 }

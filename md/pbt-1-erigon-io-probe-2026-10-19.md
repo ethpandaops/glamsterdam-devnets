@@ -391,3 +391,28 @@ sampled CPU cumulatively; `DomainRoTx.lookupLatestFromFiles` accounted for 64.67
 These CPU fractions overlap and do not measure time blocked on disk sync. No
 filter-cache change has been made. Controller evidence is under
 `native-profile-batch64/` and `native-profile-batch64-summary.json`.
+
+## Probe retired at 22:44 UTC
+
+At the user's request, the temporary 32-vCPU, 256-GiB probe was deleted.
+DigitalOcean returns HTTP 404 for droplet `610654975` (`167.172.181.164`).
+Terraform removed the droplet and its project association; the subsequent full
+plan contained only output changes. The saved server count is now four.
+The active probe monitoring entry was retired, and its temporary source SSH key
+was confirmed absent.
+
+Before deletion, 123 build, benchmark, log and profile evidence files were saved
+in the controller's `retired-probe-evidence.tar.gz` (4,164,423 bytes), with SHA-256
+`ae5aa42077c690b94a667d76d2436814a7517773c4969626862eaa6cd58461ab`.
+The source commits and native binaries are also preserved. The batch-of-64,
+2-GiB-buffer experiment was canceled for cleanup and was not adopted. Its
+disposable database was removed with the VM.
+
+Authoritative replay remains on the original Erigon VM, `164.92.239.96`.
+The continuous native driver started at 22:43:58 UTC with the validated
+`a7d50626108b2428d5cd0b65089330fee6b357d8` build, batches of 16, the default
+512-MiB execution buffer, eight CPUs, a 48-GiB process limit and normal
+durability. At 22:46:38 it had validated 48 additional blocks and reached
+24,471,106. The initial cumulative rate was 0.534 blocks/second; this short
+startup window is not a reliable completion forecast. Final pinned-image
+restart, exhaustive BAL audit and publication gates remain required.
