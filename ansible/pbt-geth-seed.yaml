@@ -1,0 +1,9 @@
+---
+- name: Restore the PBT-1 Geth workload producer
+  ansible.builtin.import_playbook: pbt-source-seed.yaml
+  vars:
+    seed_hosts: geth
+    seed_client: geth
+    seed_expected_data_bytes: 1164875135677
+    seed_min_free_bytes: 1300000000000
+    snapshot_fetcher_workers: 16

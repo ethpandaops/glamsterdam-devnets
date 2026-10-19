@@ -26,10 +26,34 @@
 
 variable "nodes" {
   description = "List of node definitions for the devnet"
-  # Seed the dedicated Erigon source first. Expand the fleet after migration qualification.
+  # One source per client for workload generation, replay and refreshed snapshots.
   default = [
     {
       name      = "lighthouse-erigon"
+      count     = 1
+      cloud     = "digitalocean"
+      region    = "fra1"
+      size      = "so1_5-8vcpu-64gb-intel"
+      supernode = false
+    },
+    {
+      name      = "lighthouse-geth"
+      count     = 1
+      cloud     = "digitalocean"
+      region    = "fra1"
+      size      = "so1_5-8vcpu-64gb-intel"
+      supernode = false
+    },
+    {
+      name      = "lighthouse-besu"
+      count     = 1
+      cloud     = "digitalocean"
+      region    = "fra1"
+      size      = "so1_5-8vcpu-64gb-intel"
+      supernode = false
+    },
+    {
+      name      = "lighthouse-nethermind"
       count     = 1
       cloud     = "digitalocean"
       region    = "fra1"

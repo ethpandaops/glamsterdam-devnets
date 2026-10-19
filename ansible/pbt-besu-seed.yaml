@@ -1,0 +1,9 @@
+---
+- name: Restore the PBT-1 Besu replay source
+  ansible.builtin.import_playbook: pbt-source-seed.yaml
+  vars:
+    seed_hosts: besu
+    seed_client: besu
+    seed_expected_data_bytes: 1124402650612
+    seed_min_free_bytes: 1300000000000
+    snapshot_fetcher_workers: 16

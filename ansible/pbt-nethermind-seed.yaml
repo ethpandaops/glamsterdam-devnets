@@ -1,0 +1,9 @@
+---
+- name: Restore the PBT-1 Nethermind replay source
+  ansible.builtin.import_playbook: pbt-source-seed.yaml
+  vars:
+    seed_hosts: nethermind
+    seed_client: nethermind
+    seed_expected_data_bytes: 1470175076199
+    seed_min_free_bytes: 1650000000000
+    snapshot_fetcher_workers: 16
