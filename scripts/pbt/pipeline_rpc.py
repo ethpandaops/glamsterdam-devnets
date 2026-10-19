@@ -54,9 +54,15 @@ class RPC:
                 raise RuntimeError(f'newPayload {record["number"]}: {s}')
             self.call('engine_forkchoiceUpdatedV3', record['forkchoice'], True)
             time.sleep(delay); delay = min(delay * 2, 1)
-        s = self.call('engine_forkchoiceUpdatedV3', record['forkchoice'], True)['payloadStatus']
-        if s['status'] != 'VALID' or s['latestValidHash'] != record['hash']:
-            raise RuntimeError(f'forkchoice {record["number"]}: {s}')
+        delay = .01
+        while True:
+            s = self.call('engine_forkchoiceUpdatedV3', record['forkchoice'], True)['payloadStatus']
+            if s['status'] == 'VALID':
+                assert s['latestValidHash'] == record['hash'], s
+                break
+            if s['status'] != 'SYNCING' or time.monotonic() >= deadline:
+                raise RuntimeError(f'forkchoice {record["number"]}: {s}')
+            time.sleep(delay); delay = min(delay * 2, 1)
         # Erigon can acknowledge forkchoice before its separate RPC view catches
         # up. Wait for that view; a differing commitment at the target is fatal.
         deadline = time.monotonic() + 120

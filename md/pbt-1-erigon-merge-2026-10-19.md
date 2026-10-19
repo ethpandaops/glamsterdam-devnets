@@ -50,3 +50,20 @@ No source release was modified. The stopped original container remains as
 
 Controller copies are retained under `~/.local/state/pbt-1-run/` as
 `erigon-merge-recovery.json` and `erigon-merge-shutdown-stack.log`.
+
+## Fork-choice response handling
+
+A bounded batching probe on the same immutable payload stream exposed another
+runner issue: Erigon can return `SYNCING` from fork choice while its asynchronous
+commit is still in progress. The driver now retries that response until `VALID`
+with the expected hash; `INVALID` remains fatal. Canonical hash, state root and
+BAL hash checks still follow.
+
+The successful probe covered blocks 24,459,446–24,459,485. Every header and BAL
+body matched the saved records. Eight ordinary blocks took 10.71 seconds before
+body auditing; 32 blocks in batches of eight took 55.15 seconds including header
+and body audits and seven single-block fallbacks. These timings are not an
+isolated benchmark of fork-choice overhead, and did not justify adopting batching.
+Ordinary replay resumed automatically at 16:36:26 UTC. The full probe record is
+`/data/pbt-1/pipeline/batch-probe.json`, with a controller copy at
+`~/.local/state/pbt-1-run/erigon-batch-probe.json`.
