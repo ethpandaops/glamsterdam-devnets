@@ -59,5 +59,12 @@ requires the guarded fixture proof for the exact binary, and verifies owner
 identity before pausing production. It still requires its full 128-block and
 normal-durability restart gates before reporting success.
 
+At 20:38:11 UTC on 2026-10-19, the revised production pilot passed all 128
+block/body/BAL comparisons and the normal-durability restart. The measured
+120-block portion ran at 0.379 blocks/second including body checks. This did
+not establish a useful throughput improvement, so delayed flushing was not
+adopted. Normal-durability replay resumed; see `sync-policy-v2-pilot-complete.json`
+and the separate before/after restart evidence.
+
 Evidence is saved under `/data/pbt-1/pipeline/sync-policy-*.json`. Failures stop
 progress for inspection; the script does not automatically retry database work.

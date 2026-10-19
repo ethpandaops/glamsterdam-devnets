@@ -220,3 +220,32 @@ requires the owner to hold the exact database inode before MDBX is opened.
 The guarded fixture rejected the host invocation and passed inside the
 container at 20:29 UTC. These results justify testing the guarded approach;
 they do not establish a successful production pilot or an adopted sync policy.
+
+The revised production pilot subsequently passed at **20:38:11 UTC**. It
+replayed blocks 24,468,732–24,468,859 with 128 matching payload/BAL bodies
+(57,720,209 BAL bytes). Excluding eight warmup blocks, 120 blocks took
+316.511 seconds: **0.379 blocks/second**, including the body checks. Clean
+shutdown and reopening without `MDBX_NO_FSYNC` preserved the exact head and
+all four sampled BALs. The reopened head hash was
+`0xdff6c41ead9f0ca27f3fde85a28e221e7bc7c327de4a17551058c02b94088c31`,
+with state root
+`0x1f9ecd6349c1b488ac69db73e8afd1d4b3d370d9c9e4a5725f379220fdcc45b7`.
+
+Delayed flushing was **not adopted**: the result did not establish a useful
+speedup over the preceding roughly 0.37 blocks/second replay, and the two rates
+have different body-audit overhead. Native logs during the trial still showed
+about two seconds in forkchoice flush/commit, versus 4–6 milliseconds in
+post-forkchoice pruning. This directs further investigation toward persistence
+cost rather than assuming that pruning is the bottleneck. Normal durability,
+normal pruning and disabled background maintenance are the resumed profile.
+Evidence: `sync-policy-v2-pilot-complete.json`, `sync-policy-v2-build.json`,
+`sync-policy-v2-after-pilot.json`, `sync-policy-v2-durable-reopen.json`, and
+`sync-policy-v2-client-timings.log`.
+
+A read-only check of all 313 DigitalOcean size-catalog entries found larger
+compatible storage-optimized sizes available in `fra1`, including
+`so1_5-16vcpu-128gb-intel` with 128 GiB RAM and 3,600 GB disk. The repository's
+earlier assertion that 1.8 TB was DigitalOcean's largest disk was incorrect.
+No resize has been performed, and a larger machine's throughput remains
+unmeasured. The dated API evidence is `erigon-resize-catalog.json` in the
+controller evidence directory.
