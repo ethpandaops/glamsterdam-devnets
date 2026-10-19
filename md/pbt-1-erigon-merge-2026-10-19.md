@@ -188,3 +188,35 @@ rate comparison. No durability setting was changed. Evidence is
 At head 24,468,158, native chaindata occupied 19,847,458,816 allocated bytes,
 with 1,252,372,062,208 bytes free on the host. Growth without background
 maintenance/pruning must be tracked before projecting remaining disk needs.
+
+## Sync-policy failure, recovery and isolated reproduction
+
+Native table measurements between heads 24,468,025 and 24,468,232 showed
+5,746,946,048 bytes of net growth: about 2.51 GB in `CommitmentVals` and
+2.33 GB in `ChangeSets3`. Normal pruning was therefore restored; background
+maintenance remains disabled. The final BAL-restoration workflow will disable
+pruning again for the final restart and exhaustive BAL audit.
+
+At 20:13 UTC a bounded delayed-flush pilot selected native `MDBX_SAFE_NOSYNC`
+through `MDBX_NO_FSYNC=true`. The host-run configuration helper aborted in
+`mdbx_env_sync_ex` with a futex error before any pilot blocks ran. At 20:16:25 UTC,
+recovery had cleanly stopped that client and reopened the same pinned image
+without the delayed-flush environment variable or the no-prune flag. Head
+24,468,423, hash
+`0xae8cb3a6f831edbd63a0b6a4a359c7b41cecb6b579cd8377eae05cad2f2bb9b6`,
+state root
+`0xab24f1c094a188aff007e7e9fd941394de432edafc5bc47b947d95ba71ae6529`,
+and four sampled BALs matched. Replay resumed with normal durability.
+Evidence: `sync-policy-pilot-failure.log`, `sync-policy-recovery-complete.json`
+and `sync-policy-recovery-reopened.json` in the controller evidence directory.
+
+An initial disposable namespace test passed but had not exercised contention:
+the owner had no previously committed dirty transaction. Strengthening it to
+commit data before holding the next writer transaction reproduced a futex
+failure with the helper outside the owner's PID namespace. The in-container
+helper instead waited about 15 seconds, applied the thresholds, and the owner
+read them back and exited 0. A new guard rejects a different PID namespace and
+requires the owner to hold the exact database inode before MDBX is opened.
+The guarded fixture rejected the host invocation and passed inside the
+container at 20:29 UTC. These results justify testing the guarded approach;
+they do not establish a successful production pilot or an adopted sync policy.
