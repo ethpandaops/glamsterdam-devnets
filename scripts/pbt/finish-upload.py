@@ -78,6 +78,16 @@ def main():
         assert cleanup['reclaimed_bytes']==cleanup['patricia_bytes_before']-cleanup['patricia_bytes_after']>0
         objects['_snapshot_flatdb_cleanup.json']=cleanup
         metadata['pbt']['patricia_cleanup_evidence']=prefix+'_snapshot_flatdb_cleanup.json'
+    if c=='erigon':
+        backfill=read('erigon-bal-backfill.json');retention=read('bal-retention-prepared.json')
+        assert not backfill['dry_run'] and backfill['verified_records']==v['final_records']
+        assert backfill['written_sidecars']+backfill['existing_sidecars']==v['final_records']
+        assert backfill['head']==report['head'] and backfill['head_hash']==proof['head']['hash']
+        assert backfill['state_root']==proof['head']['stateRoot'] and retention['pruning_disabled']
+        objects['_snapshot_bal_backfill.json']=backfill
+        objects['_snapshot_bal_backfill_build.json']=read('erigon-bal-backfill-build.json')
+        metadata['pbt']['bal_retention']={'mode':'Native sidecars restored from validated replay inputs after clean stop',
+            'required_flag':'--exec.no-prune=true','evidence':prefix+'_snapshot_bal_backfill.json'}
     for name,value in objects.items():
         data=json.dumps(value,indent=2).encode()
         s3.put_object(Bucket=BUCKET,Key=prefix+name,Body=data,ContentType='application/json')

@@ -45,6 +45,9 @@ def main():
     audit('before')
     save(ROOT/'status.json',{'phase':'restart_validation','time':time.time(),'workload_blocks':a.workload_blocks})
     stop(name,ROOT/f'reopen-{a.workload_blocks}-before.log')
+    if a.client=='erigon' and a.stop_after:
+        subprocess.run(['python3','-u','/data/pbt-1/retain-erigon-bals.py',
+                        '--workload-blocks',str(a.workload_blocks)],check=True)
     run('docker','start',name)
     deadline=time.monotonic()+1800
     while True:
@@ -59,6 +62,9 @@ def main():
     if a.stop_after:stop(name,ROOT/f'reopen-{a.workload_blocks}-after.log')
     result=json.loads((ROOT/f'audit-{a.workload_blocks}-after.json').read_text())
     result.update(client=a.client,stopped=a.stop_after,image=json.loads(run('docker','inspect',name))[0]['Config']['Image'])
+    if a.client=='erigon' and a.stop_after:
+        result['bal_sidecar_backfill']=json.loads((ROOT/'erigon-bal-backfill.json').read_text())
+        result['bal_retention']=json.loads((ROOT/'bal-retention-prepared.json').read_text())
     save(ROOT/f'reopen-{a.workload_blocks}-complete.json',result)
     save(ROOT/'status.json',{'phase':'validated_stopped' if a.stop_after else 'pilot_validated',
                            'time':time.time(),'head':int(result['head']['number'],16),

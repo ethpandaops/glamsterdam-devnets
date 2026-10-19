@@ -16,6 +16,11 @@ Delivery requires:
 - Geth, Nethermind, Besu and Erigon advanced to the identical final block hash and
   MPT state root, with BAL commitments checked and actual BAL retention audited.
 - Cleanly stopped databases that reopen at that head before export.
+- For Erigon, restore any pruned BAL sidecars from the validated replay inputs
+  after the final clean stop, checking every native canonical header commitment.
+  Reopen the same image with `--exec.no-prune=true`, retrieve every BAL/body through
+  the Engine API, and stop cleanly again. Include the native backfill evidence and
+  retention profile with its snapshot.
 - Four uploaded native database snapshots, each with client/build provenance,
   head metadata, size and integrity records. Verify remote object sizes and
   uploaded content using the export tooling's integrity checks before release.

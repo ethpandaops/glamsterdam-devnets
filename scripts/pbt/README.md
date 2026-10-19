@@ -245,6 +245,17 @@ evidence is published beside the native archive as `_snapshot_flatdb_cleanup.jso
 linked from the snapshot metadata. Erigon's disposable `temp/` merge directory
 is also omitted; the pinned client clears that directory on startup.
 
+Erigon's finalized-head pruning also removes BAL sidecars. A live sample took
+20.10 seconds to regenerate 16 older qualifying BALs. After its final clean stop,
+[`retain-erigon-bals.py`](retain-erigon-bals.py) restores the already-validated
+sidecars through a [pinned native backfill utility](erigon-bal-backfill/README.md).
+Every sidecar must match the canonical native header, and the entire input range
+is checked before any write. The same image then reopens with
+`--exec.no-prune=true` and passes the unchanged exhaustive Engine body/BAL audit
+before its second clean stop. Preserve this benchmark retention flag when using
+the snapshot. Publication includes the backfill and build evidence; it explicitly
+records restoration from validated replay inputs.
+
 `prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
 VM. `upload.py` requires the final stopped/reopened proof, streams sparse tar
 through zstd level 1, and uploads bounded 256 MiB parts with Content-MD5 checks.

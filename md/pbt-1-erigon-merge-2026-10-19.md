@@ -101,3 +101,28 @@ excluding restart validation, exhaustive BAL retrieval, compression and upload.
 The 09:00 delivery deadline was therefore reported as unlikely at that rate.
 Future merge completion can change throughput; the complete 50,400-block target
 and all final publication gates remain required.
+
+## BAL retrieval cost and native retention
+
+At 18:51 UTC, 16 older qualifying BALs took **20.10 seconds** through
+`engine_getPayloadBodiesByRangeV2`; a range 128 blocks behind the head took
+**11.81 seconds**. All bytes, transactions and withdrawals matched their saved
+records. This exposed a potentially many-hour final audit: the pinned client
+prunes sidecars behind the finalized head and regenerates them by replaying
+historical state. Evidence is `~/.local/state/pbt-1-run/erigon-bal-range-throughput.json`.
+
+A read-only native preflight against blocks 24,453,559–24,453,622 verified all
+64 canonical header/state/BAL commitments and confirmed that all 64 sidecars
+were absent from native storage. It wrote no data. The utility uses Erigon
+v3.7.1's `rawdb.WriteBlockAccessListBytes`, whose secondary-storage use includes
+backfill. Native MDBX tests cover corrupt inputs, conflicts, noncanonical records,
+wrong heads, dry runs, idempotence and persistence across an exclusive reopen.
+
+The final restart sequence now restores the validated sidecars only after clean
+shutdown, using an exclusive database open and bounded durable transactions.
+The complete input range is checked before the first write, and existing
+conflicting bytes cause failure. The same pinned image then starts with
+`--exec.no-prune=true` so the cache is retained. The mandatory exhaustive Engine
+API audit verifies all bodies/BALs after restart, followed by another clean stop.
+Publication records the backfill explicitly and includes its build provenance.
+This final production backfill/restart/API gate remains pending while replay runs.
