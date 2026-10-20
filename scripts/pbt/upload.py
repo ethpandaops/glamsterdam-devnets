@@ -33,7 +33,7 @@ def main():
     lock=(ROOT/'upload.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     job=json.loads((ROOT/'upload-authorization.json').read_text())
     c=job['client'];head=job['head'];workload=head-24452538-3
-    workers=16 if c=='erigon' else 4
+    workers=32 if c=='erigon' else 4
     proof=json.loads((ROOT/f'reopen-{workload}-complete.json').read_text())
     assert proof['stopped'] and int(proof['head']['number'],16)==head
     assert proof['verified_bal_bodies']==workload+3

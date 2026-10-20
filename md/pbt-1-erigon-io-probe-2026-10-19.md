@@ -987,3 +987,51 @@ Evidence is `erigon-upload-concurrency-16.json` and
 adoption and final-stage readiness reports name sixteen transfers. The full
 native upload is still pending; this is not a delivered snapshot or a measured
 end-to-end upload duration.
+
+## Bounded archive-production sample at 02:46 UTC
+
+A read-only sample streamed three immutable storage-domain files through sparse
+tar, `zstd -1 -T4` and sequential SHA-256 hashing. Its 4,289,037,732 input bytes
+produced 2,838,744,298 compressed bytes in 104.732 seconds: 39.06 MiB/s input and
+25.85 MiB/s compressed output, a 0.662 output/input ratio. No archive data was
+retained or uploaded. File sizes and modification times matched afterwards;
+the live Erigon PID and invocation stayed unchanged.
+
+The sample ran alongside replay with idle I/O priority, nice level 19, an
+eight-CPU quota and a 2-GiB memory cap. It used 29.075 CPU-seconds and reached
+the memory cap including file cache. This measurement includes contention and
+does not establish throughput on the stopped source VM. It covers three storage
+files, not the entire database layout, and excludes staging and per-part hashes.
+The network-only transfer rate must not be used as the full archive rate.
+
+The first sample selection allowed only files up to 512 MiB and found too
+little eligible data; it failed before starting tar. The completed second
+attempt allowed larger individual files while retaining the 4-GiB total cap.
+Controller source, file list and completion report are in
+`archive-throughput-probe/`; the successful VM service was
+`pbt-1-archive-throughput-probe-v2`, invocation
+`3214a8736c9c45dfb969c1e2284b353a`.
+
+## Final upload concurrency comparison at 02:53 UTC
+
+The final transport test used 8 GiB per trial with 256-MiB parts. Sixteen /
+thirty-two / sixteen transfers measured 300.78 / 365.24 / 278.48 MiB/s.
+Thirty-two transfers were 21.4% faster than the faster control. All 24 GiB passed
+full remote readback against source part digests. Every temporary object was
+deleted and its absence checked. The test service exited successfully; the live
+Erigon process remained active without cgroup memory-limit or OOM events.
+
+The Erigon uploader now uses thirty-two transfers, with 8 GiB of simultaneous
+PUT buffers plus producer, compression and filesystem-cache memory. It runs
+after the source client stops on the existing 64-GiB VM. Other clients continue
+using four transfers. Both archive-layout tests passed, and the prior script is
+preserved as `/data/pbt-1/upload-sixteen.py`. No further throughput probes are
+planned during replay.
+
+Uploader SHA-256:
+`422e0851e5bcade358de5d6cdaf21d88cee8ed41550eca0cbd7d729bba8dc5fc`.
+Evidence is `erigon-upload-concurrency-32.json` and
+`erigon-upload-concurrency-32-adoption.json`; the current adoption and final-stage
+readiness reports name thirty-two transfers. The storage-file sample and these
+transport tests measure different parts of the pipeline. Full native archive
+throughput and completion remain unproven until the actual stopped-source export.

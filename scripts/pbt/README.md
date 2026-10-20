@@ -340,13 +340,16 @@ and the exact head and sampled BALs matched after restart. Replay resumed at
 growth. The final startup profile and maintenance-restart evidence are published
 with the snapshot. These diagnostic preparation flags are not an operational
 network default; retain `--exec.no-prune=true` when native BAL retention is needed.
+Normal pruning was subsequently restored for ongoing replay to control database
+growth. The final backfill/retention procedure applies `--exec.no-prune=true`
+again before the exhaustive pinned-image restart audit.
 
 `prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
 VM. `upload.py` requires the final stopped/reopened proof, streams sparse tar
 through zstd level 1, and uploads bounded 256 MiB parts with Content-MD5 checks.
-Erigon uses eight upload workers after a verified four/eight/four-worker
+Erigon uses thirty-two upload workers after a verified sixteen/thirty-two/sixteen-worker
 throughput comparison on its original VM; the other clients use four. This
-bounds PUT buffers at 2 GiB for Erigon, plus stream/compression overhead. The
+bounds PUT buffers at 8 GiB for Erigon, plus stream/compression overhead. The
 integrity report records the worker count used for newly started uploads.
 `finish-upload.py` completes the object, checks size, verifies first/last and
 sampled part SHA-256 values by remote readback, and publishes provenance. No
