@@ -238,7 +238,8 @@ def main():
             if r['restore_complete'] and not old.get('restore_complete'):
                 report['events'].append(f'{client}: restore complete')
             pipeline = r.get('pipeline') or {}
-            projection = replay_projection(r, old, now)
+            # The remote sample can advance while this check is in flight.
+            projection = replay_projection(r, old, time.time())
             if projection:
                 r['replay_projection'] = projection
                 if projection['seconds_left_after_replay_before_deadline'] < 0:

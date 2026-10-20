@@ -709,3 +709,44 @@ and `wide-pilot-comparison.json`. At the prior sustained rate, replay alone
 would finish around 08:15 UTC. BAL restoration, exhaustive restart audit,
 archive upload and remote verification still follow, making delivery by
 09:00 UTC unlikely. The complete target and publication gates remain required.
+
+## Compiler profile-guided build screened at 01:00 UTC
+
+The existing 30-second CPU profile attributed 53.85% of sampled CPU time to
+latest-file lookup, including 41.56% reached through execution storage reads.
+The data directory contains 4,880 storage domain files; 4,086 recent files
+account for 6,439,975,428 bytes of `.kv` data. The workload's new slot keys are
+random hashes in already-used contracts, so a simple address-absence or key-range
+cache was not implemented. Background merging also has documented shutdown and
+throughput costs; it remains disabled during this replay.
+
+A compiler-only candidate used Go 1.26.0, AMD64 v2, the unchanged source commit
+`72b4a99bbb46a61ce3ab0932111533da8cb9fcda`, and
+`GO_FLAGS=-pgo=original-2g-steady.cpu.pprof`. Its binary SHA-256 is
+`59fa021b75d9d35ffea7a862555bed62a89f4848f65f54f49a68479e9e420db8`.
+Selected Engine API insertion and execution-module batch, invalid-state,
+bad-block recovery, changeset and shallow-reorg tests passed with PGO enabled.
+No client source changes were made.
+
+The existing sharded-filter benchmark ran baseline/PGO/baseline on the original
+VM, with one CPU quota, nice 19 and three repetitions per case. Median
+nanoseconds per lookup were:
+
+| Filter size | Baseline first | PGO | Baseline second |
+| --- | ---: | ---: | ---: |
+| 100,000 keys | 6.742 | 7.193 | 10.300 |
+| 1,000,000 keys | 8.257 | 12.230 | 8.788 |
+
+The smaller case was variable; the larger case did not improve. This is a
+microbenchmark during live replay, not an end-to-end throughput comparison.
+It did not justify interrupting replay, and the candidate was **not deployed**.
+The same replay PID advanced from 24,477,298 to 24,477,362 during the bounded
+comparison. Build, test logs, checksums and benchmark evidence are retained in
+controller `pgo-build/`; VM evidence is `/data/pbt-1/pgo-probe/`.
+
+The 00:45–01:00 progress samples advanced 896 blocks in 927.641 seconds,
+0.96589 blocks/s. The resulting replay-only estimate is approximately 08:40
+UTC, before all final validation and native upload work. The monitor now uses
+the result receipt time for freshness checks, since a remote sample may be
+newer than the controller check's start time. Its stale, future-time, restarted
+process and bounded-trial rejection gates remain in place.
