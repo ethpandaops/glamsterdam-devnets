@@ -47,7 +47,25 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
-### Latest milestone at 08:45 UTC, October 20
+### Latest milestone at 09:26 UTC, October 20
+
+All four clients have passed their final restart/body audits at block
+24,503,958. Erigon restored 51,323 missing native BAL sidecars, retained 97
+existing sidecars, and reopened its pinned image with pruning disabled.
+Its exhaustive Engine API audit verified all 51,420 bodies and all 50,400
+qualifying blocks, then stopped cleanly with exit code 0 at 09:24:58 UTC.
+Its head/hash/state/BAL commitments, 19 sampled addresses, transaction and BAL
+totals, and qualifying gas measurements match the other three clients.
+
+Controller evidence is `erigon-final-retention/verified.json`,
+`erigon-final-reopen.json` and `four-client-final-audits.json`.
+Erigon's upload service started at 09:26:09 UTC. Archive completion, remote and
+public verification, and the common manifest remain pending. The 09:00 UTC
+deadline was missed; `delivery-deadline-outcome.json` records that outcome.
+Keep the delivery goal active until publication and the independent final
+completion audit pass.
+
+### Earlier milestone at 08:45 UTC, October 20
 
 Erigon finished replay at 08:41:29 UTC, reaching block 24,503,958 with all
 50,400 qualifying blocks. Its final block hash, MPT state root and BAL hash
