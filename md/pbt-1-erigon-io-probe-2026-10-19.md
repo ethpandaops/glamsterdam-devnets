@@ -880,3 +880,30 @@ entirely to writes. These overlapping CPU percentages do not measure storage
 wait. Together with the timing and I/O evidence, they show that reducing writer
 CPU work alone would leave the substantial synchronization cost. No further
 native change has been qualified from this evidence yet.
+
+## Final audit input prefetch qualified at 02:19 UTC
+
+The full Geth restart/BAL audit took 1,251.95 seconds from the before-audit
+report to the after-audit report. To reduce Erigon's remaining final-stage
+cost, `audit.py` now decodes expected records with four threads while requesting
+the corresponding 16 bodies. It retains at most one batch of expected records,
+yields them in block order and keeps every BAL, transaction, withdrawal, gas,
+packing and state-sample comparison. Input errors and short RPC responses remain
+fatal; there is no sampling or skipped record.
+
+On the original Erigon VM, serial/prefetch/serial decoding of the same 128
+records took 1.492 / 0.619 / 1.291 seconds. Every field of every decoded record
+matched. This is about 2.1 times faster than the warmed serial reader, not a
+measurement of full-audit throughput. A separate live Engine API check matched
+all transactions, withdrawals and BALs for blocks 24,481,571–24,481,586 in
+0.203 seconds. It did not alter the database or interrupt replay.
+
+Four new tests cover ordered pairing across a partial final batch, missing or
+corrupt records, truncated RPC responses and the prefetch bound. They failed
+before implementation; all 45 workflow tests then passed. The qualified script
+was atomically deployed for Erigon's future final audit, with its previous
+version preserved. Its SHA-256 is
+`3968b8d9dd94a793c566df1aabf308451d768ee52f975c54c386cfffea937d3a`.
+Controller evidence is `audit-decode-probe/adoption.json` and `rpc-proof.json`;
+the final-stage readiness report records the updated script digest. Existing
+completed client audits and the running Erigon replay are unchanged.
