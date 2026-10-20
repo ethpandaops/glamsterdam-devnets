@@ -750,3 +750,48 @@ UTC, before all final validation and native upload work. The monitor now uses
 the result receipt time for freshness checks, since a remote sample may be
 newer than the controller check's start time. Its stale, future-time, restarted
 process and bounded-trial rejection gates remain in place.
+
+## Combined storage-filter candidate prepared at 01:44 UTC
+
+A read-only probe built a 128-MiB Bloom filter over 4,086 recent storage
+files, including tombstones. It visited 75,735,117 keys and checked every key
+again in a second pass, with no false negatives and unchanged source-file
+hashes. The union SHA-256 is
+`57e86073c576570b00ef4a82b525e3af1bb22d0a6faf96b84e2f6a79a8713b24`.
+The source datadir was mounted read-only for the probe; MDBX was never opened.
+
+A second benchmark included all 4,880 physical storage files. Across 8,192
+random hash queries and 1,024 known-present samples, baseline/union/baseline
+times were 18.703 / 1.214 / 5.608 seconds. The union skipped 33,472,512 of
+44,974,080 per-file checks while retaining searches in older uncovered files.
+The warmed comparison is 4.62 times faster for this filter loop. These are
+physical-file microbenchmarks, not the client's visible-file set or replay
+throughput. The first full-file attempt was stopped before measurements to
+replace repeated directory scans with one indexed scan. The final benchmark
+used one CPU quota and a 6-GiB process cap on the original VM; it exited
+successfully after 34 seconds. No VM resources were added.
+
+Native candidate commit `88b2bb172592c460d546d776f9ceb295a7e569c3` extends
+continuation commit `72b4a99bbb46a61ce3ab0932111533da8cb9fcda`. It defaults off
+and is enabled by `DOMAIN_STORAGE_UNION=true`. Each visible storage-file
+generation builds its own in-memory filter from a suffix bounded to 8 GiB of
+source data, requiring at least 512 files. The filter is capped at 128 MiB.
+Negative results skip only that covered suffix; positive results use the
+existing lookup. Tombstones, bounded reads, source-file lifetime and salt
+matching remain required. No database format changes are made.
+
+Tests for tombstones, older values, historical bounds and concurrent shared
+construction passed under the race detector. `make lint` and both Erigon and
+integration builds passed. The final Go 1.26.0 / AMD64-v2 binary SHA-256 is
+`dc375f32df43fe8132b4e988b31f052ae1dfb0414fe5d35ac82e346a3515a6ed`.
+Controller evidence and the candidate are in `storage-union-probe/`.
+
+The prepared `union-64` pilot uses 256 blocks, 64-block batches, a 2-GiB buffer,
+the existing eight CPUs and the existing 48-GiB client limit. A read-only WETH
+storage query must match the pinned image and preserve the audited head before
+replay starts. All 256 bodies and headers must match before clean shutdown and
+after pinned-image reopen. The first 64 blocks are warmup; the remaining 192
+form the measured window. The extended workflow's 39 tests passed. The monitor
+recognizes this bounded trial and excludes it from full-replay forecasts.
+The candidate is staged but has not yet replayed blocks or been adopted for
+the full run.

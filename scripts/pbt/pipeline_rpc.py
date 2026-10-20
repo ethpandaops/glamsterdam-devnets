@@ -26,7 +26,7 @@ class RPC:
     def __init__(self):
         self.secret = bytes.fromhex((ROOT / 'jwt').read_text().strip())
 
-    def call(self, method, params, engine=False):
+    def call(self, method, params, engine=False, timeout=600):
         headers = {'Content-Type': 'application/json'}
         if engine:
             enc = lambda x: base64.urlsafe_b64encode(x).rstrip(b'=')
@@ -34,7 +34,7 @@ class RPC:
             headers['Authorization'] = 'Bearer ' + (body + b'.' + enc(hmac.new(self.secret, body, hashlib.sha256).digest())).decode()
         data = json.dumps({'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': params}).encode()
         req = urllib.request.Request('http://127.0.0.1:' + ('18551' if engine else '18545'), data=data, headers=headers)
-        result = json.load(urllib.request.urlopen(req, timeout=600))
+        result = json.load(urllib.request.urlopen(req, timeout=timeout))
         if 'error' in result:
             raise RuntimeError(f'{method}: {result["error"]}')
         return result['result']
