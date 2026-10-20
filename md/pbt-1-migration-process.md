@@ -319,6 +319,12 @@ volume (~2.68 decimal TB) was attached to the idle Besu source VM on October 20
 for a direct comparison with its local disk. The remaining volume rollout is
 undecided, as is using volumes for recovery copies versus active databases.
 See the [storage benchmark record](pbt-1-storage-benchmark-2026-10-20.md).
+All 12 jobs finished successfully at 10:00 UTC: local versus volume sequential
+writes were 862 versus 450 MiB/s, mixed 16-KiB I/O was 52,157 versus 9,999 IOPS,
+and 4-KiB writes with per-write `fdatasync` were 8,368 versus 1,704 writes/s.
+The test files were removed and Besu stayed stopped. These storage measurements
+favor local database placement where capacity permits; they do not measure a
+client's migration throughput or resolve its peak scratch-space requirement.
 Keep storage configuration identical between the 16- and 32-GiB variants.
 DigitalOcean sizes volumes in GiB: resolve the intended byte capacity explicitly
 when preparing Terraform. Record volume type and actual database, artifact and

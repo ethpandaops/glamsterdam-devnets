@@ -49,8 +49,11 @@ def metrics(job):
                 'mib_per_second': data['bw_bytes'] / 1024**2,
                 'completion_latency_ns': data['clat_ns'],
             }
-    if job.get('sync', {}).get('total_ios'):
-        result['fdatasync'] = job['sync']
+    sync = job.get('sync', {})
+    # fio 3.39's psync output can report total_ios=0 while lat_ns.N
+    # contains every fdatasync sample. Preserve that measured distribution.
+    if sync.get('total_ios') or sync.get('lat_ns', {}).get('N'):
+        result['fdatasync'] = sync
     return result
 
 

@@ -1,0 +1,537 @@
+{
+  "run_id": "full-20261020",
+  "started_at": "2026-10-20T09:20:54.265773+00:00",
+  "completed_at": "2026-10-20T10:00:21.608453+00:00",
+  "environment": {
+    "hostname": "glamsterdam-pbt-1-lighthouse-besu-1",
+    "fio_version": "fio-3.39",
+    "kernel": "6.12.111+deb13-amd64",
+    "mounts": {
+      "local": {
+        "filesystems": [
+          {
+            "target": "/",
+            "source": "/dev/vda1",
+            "fstype": "ext4",
+            "options": "rw,relatime,discard,errors=remount-ro"
+          }
+        ]
+      },
+      "volume": {
+        "filesystems": [
+          {
+            "target": "/mnt/glamsterdam_pbt_1_besu_benchmark",
+            "source": "/dev/sda",
+            "fstype": "ext4",
+            "options": "rw,noatime,discard"
+          }
+        ]
+      }
+    },
+    "file_bytes_each": 68719476736,
+    "runtime_seconds": 120,
+    "warmup_seconds": 60
+  },
+  "during_run": {
+    "time": 1792489768.50789,
+    "phase": "during_mixed_test",
+    "disk_usage": {
+      "local": {
+        "filesystem_bytes": 1902190370816,
+        "used_bytes": 1335966732288,
+        "available_bytes": 488873918464,
+        "test_file_bytes": 68719476736
+      },
+      "volume": {
+        "filesystem_bytes": 2662964412416,
+        "used_bytes": 68721610752,
+        "available_bytes": 2460008296448,
+        "test_file_bytes": 68719476736
+      }
+    },
+    "runner_sha256": "a3d159b500229c16e754506166420dda66861dd0731cb69257a6d735f355b1e0",
+    "service": "MainPID=704072\nMemoryMax=4294967296\nInvocationID=0b58fe9165f6468f8ec3d6fa00004ea1\n"
+  },
+  "postflight": {
+    "time": 1792490496.046964,
+    "files": {
+      "local": {
+        "full-20261020": false,
+        "smoke-20261020": false,
+        "smoke-v2-20261020": false
+      },
+      "volume": {
+        "full-20261020": false,
+        "smoke-20261020": false,
+        "smoke-v2-20261020": false
+      }
+    },
+    "disk_usage": {
+      "local": {
+        "available_bytes": 557593370624,
+        "used_bytes": 1267247280128
+      },
+      "volume": {
+        "available_bytes": 2528727785472,
+        "used_bytes": 2121728
+      }
+    },
+    "besu_state": {
+      "Status": "exited",
+      "Running": false,
+      "ExitCode": 143,
+      "OOMKilled": false,
+      "StartedAt": "2026-10-19T22:58:30.224842829Z",
+      "FinishedAt": "2026-10-19T23:22:16.628728273Z"
+    },
+    "volume_uuid": "125b91a3-eb46-41f9-bfc1-29a3ecf21a81",
+    "service": "MainPID=0\nResult=success\nExecMainStatus=0\nActiveState=inactive\n"
+  },
+  "runner_sha256": "a3d159b500229c16e754506166420dda66861dd0731cb69257a6d735f355b1e0",
+  "extractor_sha256": "d7e9ba35efde44e64c313ce71ef57d83930660b22d6f9f5a83fa70db3ab7110c",
+  "extraction_note": "Re-extracted from unchanged raw fio JSON. fio psync reports sync.total_ios=0 despite nonzero sync.lat_ns.N; the latter preserves the measured fdatasync distributions. The running benchmark was not modified. Local measured write count exceeds sync-latency sample count by one; both original counts are preserved.",
+  "verified_jobs": {
+    "sequential_read_1m_qd32-local.json": {
+      "sha256": "508e0e4671a27d1235297c1fdff23a415c8b976e0d7ec5cab7aa5111c8f1a83d",
+      "job_runtime_ms": 120001,
+      "error": 0
+    },
+    "sequential_read_1m_qd32-volume.json": {
+      "sha256": "1135d3a135bcd3fb396d0ea0a11f0a11c2f2060a196e12bd4a85dd0df66214d6",
+      "job_runtime_ms": 120070,
+      "error": 0
+    },
+    "sequential_write_1m_qd32-local.json": {
+      "sha256": "e0e922249e2e6a041ad2d7375ef6f7cd8fc843a42c9b9c5a96f0c55b7fb8191c",
+      "job_runtime_ms": 120023,
+      "error": 0
+    },
+    "sequential_write_1m_qd32-volume.json": {
+      "sha256": "a98fcfbd5e6dc3332272da96dcc5a7ea8f890bb79f863e6fcf8abd9c09c83958",
+      "job_runtime_ms": 120074,
+      "error": 0
+    },
+    "random_read_4k_qd1-local.json": {
+      "sha256": "6575d32f1512aa1ebeed10217a94beb0446bae513ecb8f2f5222bc61fa37296f",
+      "job_runtime_ms": 120000,
+      "error": 0
+    },
+    "random_read_4k_qd1-volume.json": {
+      "sha256": "7d93122b13ebd947703fc29be217c979727cfe55ab497c61625d370cf37286bd",
+      "job_runtime_ms": 120000,
+      "error": 0
+    },
+    "random_read_16k_qd32-local.json": {
+      "sha256": "849702414b0c52012dbf9267dcdac76a4ea02ed48a62bf70ab18b275b60737b6",
+      "job_runtime_ms": 120000,
+      "error": 0
+    },
+    "random_read_16k_qd32-volume.json": {
+      "sha256": "5e941ba92d663516700655e3009fa96355af3ce6f2db8f9130c2e0970b6caa5c",
+      "job_runtime_ms": 120003,
+      "error": 0
+    },
+    "mixed_16k_qd32-local.json": {
+      "sha256": "17558215f44ec645dc3861c199f6bee3dd9cab44e7fe8508fdcf5211cb91fb93",
+      "job_runtime_ms": 120001,
+      "error": 0
+    },
+    "mixed_16k_qd32-volume.json": {
+      "sha256": "15de5416af299480b10ff259cc2a7fa1296650dc796971bdcd70689833e3f2a9",
+      "job_runtime_ms": 120004,
+      "error": 0
+    },
+    "durable_write_4k_qd1-local.json": {
+      "sha256": "6b74be1bc014b7e17eea8db7bbfb16b256d1b80a6bb3199041d828dd17b730ba",
+      "job_runtime_ms": 120000,
+      "error": 0
+    },
+    "durable_write_4k_qd1-volume.json": {
+      "sha256": "8a19d86ea6fe81ffbe767a5cdbc7a354b8daf4605083e65a7bc079944ed010fe",
+      "job_runtime_ms": 120000,
+      "error": 0
+    }
+  },
+  "results": [
+    {
+      "workload": "sequential_read_1m_qd32",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 1.089991,
+        "sys_cpu": 22.938142,
+        "read": {
+          "bytes": 1087305154560,
+          "iops": 8640.722655,
+          "mib_per_second": 8640.980982780457,
+          "completion_latency_ns": {
+            "min": 527976,
+            "max": 17115218,
+            "mean": 3676741.186369,
+            "stddev": 842614.267601,
+            "N": 1036935,
+            "percentile": {
+              "50.000000": 3588096,
+              "95.000000": 5144576,
+              "99.000000": 5603328,
+              "99.900000": 6455296
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "sequential_read_1m_qd32",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 0.340635,
+        "sys_cpu": 2.389439,
+        "read": {
+          "bytes": 62937628672,
+          "iops": 499.629386,
+          "mib_per_second": 499.88756561279297,
+          "completion_latency_ns": {
+            "min": 2830072,
+            "max": 327494793,
+            "mean": 63996070.286895,
+            "stddev": 7572202.938576,
+            "N": 60022,
+            "percentile": {
+              "50.000000": 61603840,
+              "95.000000": 71827456,
+              "99.000000": 73924608,
+              "99.900000": 84410368
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "sequential_write_1m_qd32",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 19.225482,
+        "sys_cpu": 4.572457,
+        "write": {
+          "bytes": 108457361408,
+          "iops": 861.511031,
+          "mib_per_second": 861.7693119049072,
+          "completion_latency_ns": {
+            "min": 1387139,
+            "max": 88190463,
+            "mean": 36858783.694585,
+            "stddev": 12393263.588141,
+            "N": 103433,
+            "percentile": {
+              "50.000000": 36438016,
+              "95.000000": 56885248,
+              "99.000000": 65798144,
+              "99.900000": 77070336
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "sequential_write_1m_qd32",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 9.703183,
+        "sys_cpu": 2.130353,
+        "write": {
+          "bytes": 56672387072,
+          "iops": 449.852176,
+          "mib_per_second": 450.1103467941284,
+          "completion_latency_ns": {
+            "min": 7955555,
+            "max": 137927626,
+            "mean": 70822701.858531,
+            "stddev": 6808895.340536,
+            "N": 54047,
+            "percentile": {
+              "50.000000": 70778880,
+              "95.000000": 71827456,
+              "99.000000": 94896128,
+              "99.900000": 132644864
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "random_read_4k_qd1",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 1.931667,
+        "sys_cpu": 6.751667,
+        "read": {
+          "bytes": 5802119168,
+          "iops": 11804.343297,
+          "mib_per_second": 46.11071586608887,
+          "completion_latency_ns": {
+            "min": 667,
+            "max": 2963858,
+            "mean": 79795.493803,
+            "stddev": 28180.136102,
+            "N": 1416533,
+            "percentile": {
+              "50.000000": 84480,
+              "95.000000": 91648,
+              "99.000000": 136192,
+              "99.900000": 485376
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "random_read_4k_qd1",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 0.79,
+        "sys_cpu": 1.8575,
+        "read": {
+          "bytes": 1276198912,
+          "iops": 2596.411697,
+          "mib_per_second": 10.142232894897461,
+          "completion_latency_ns": {
+            "min": 235511,
+            "max": 18369210,
+            "mean": 378958.695194,
+            "stddev": 140833.708785,
+            "N": 311572,
+            "percentile": {
+              "50.000000": 358400,
+              "95.000000": 468992,
+              "99.000000": 757760,
+              "99.900000": 2244608
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "random_read_16k_qd32",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 11.610833,
+        "sys_cpu": 40.534167,
+        "read": {
+          "bytes": 255907725312,
+          "iops": 130160.057,
+          "mib_per_second": 2033.7549266815186,
+          "completion_latency_ns": {
+            "min": 53498,
+            "max": 8213373,
+            "mean": 242603.042457,
+            "stddev": 61461.374608,
+            "N": 15619368,
+            "percentile": {
+              "50.000000": 238592,
+              "95.000000": 325632,
+              "99.000000": 399360,
+              "99.900000": 880640
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "random_read_16k_qd32",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 2.320775,
+        "sys_cpu": 7.283151,
+        "read": {
+          "bytes": 19661307904,
+          "iops": 9999.666678,
+          "mib_per_second": 156.24882793426514,
+          "completion_latency_ns": {
+            "min": 342913,
+            "max": 258242716,
+            "mean": 3193844.251046,
+            "stddev": 1330002.17646,
+            "N": 1200031,
+            "percentile": {
+              "50.000000": 3162112,
+              "95.000000": 3424256,
+              "99.000000": 3686400,
+              "99.900000": 5275648
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "mixed_16k_qd32",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 9.784085,
+        "sys_cpu": 15.468204,
+        "read": {
+          "bytes": 71770963968,
+          "iops": 36503.833269,
+          "mib_per_second": 570.3748683929443,
+          "completion_latency_ns": {
+            "min": 69122,
+            "max": 10397950,
+            "mean": 568506.340642,
+            "stddev": 126118.269641,
+            "N": 4380552,
+            "percentile": {
+              "50.000000": 569344,
+              "95.000000": 757760,
+              "99.000000": 888832,
+              "99.900000": 1286144
+            }
+          }
+        },
+        "write": {
+          "bytes": 30776442880,
+          "iops": 15653.347444,
+          "mib_per_second": 244.58511543273926,
+          "completion_latency_ns": {
+            "min": 115187,
+            "max": 25726851,
+            "mean": 704820.507333,
+            "stddev": 393334.15667,
+            "N": 1878445,
+            "percentile": {
+              "50.000000": 667648,
+              "95.000000": 937984,
+              "99.000000": 1318912,
+              "99.900000": 6455296
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "mixed_16k_qd32",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 3.284891,
+        "sys_cpu": 7.667244,
+        "read": {
+          "bytes": 13760937984,
+          "iops": 6998.63339,
+          "mib_per_second": 109.35755252838135,
+          "completion_latency_ns": {
+            "min": 439250,
+            "max": 34025781,
+            "mean": 4385203.944198,
+            "stddev": 459165.402618,
+            "N": 839901,
+            "percentile": {
+              "50.000000": 4358144,
+              "95.000000": 5144576,
+              "99.000000": 5537792,
+              "99.900000": 6586368
+            }
+          }
+        },
+        "write": {
+          "bytes": 5899567104,
+          "iops": 3000.541644,
+          "mib_per_second": 46.88359260559082,
+          "completion_latency_ns": {
+            "min": 27453,
+            "max": 10396023,
+            "mean": 409918.275719,
+            "stddev": 251343.473228,
+            "N": 360081,
+            "percentile": {
+              "50.000000": 378880,
+              "95.000000": 880640,
+              "99.000000": 1204224,
+              "99.900000": 1597440
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "durable_write_4k_qd1",
+      "disk": "local",
+      "metrics": {
+        "usr_cpu": 2.8625,
+        "sys_cpu": 7.0125,
+        "write": {
+          "bytes": 4113137664,
+          "iops": 8368.130266,
+          "mib_per_second": 32.688008308410645,
+          "completion_latency_ns": {
+            "min": 35699,
+            "max": 19185305,
+            "mean": 79767.039447,
+            "stddev": 109874.969412,
+            "N": 1004184,
+            "percentile": {
+              "50.000000": 64768,
+              "95.000000": 173056,
+              "99.000000": 222208,
+              "99.900000": 733184
+            }
+          }
+        },
+        "fdatasync": {
+          "total_ios": 0,
+          "lat_ns": {
+            "min": 27098,
+            "max": 13587484,
+            "mean": 37704.357807,
+            "stddev": 20029.895133,
+            "N": 1004183,
+            "percentile": {
+              "50.000000": 36608,
+              "95.000000": 45824,
+              "99.000000": 55040,
+              "99.900000": 85504
+            }
+          }
+        }
+      }
+    },
+    {
+      "workload": "durable_write_4k_qd1",
+      "disk": "volume",
+      "metrics": {
+        "usr_cpu": 0.606667,
+        "sys_cpu": 1.961667,
+        "write": {
+          "bytes": 837795840,
+          "iops": 1704.485796,
+          "mib_per_second": 6.658146858215332,
+          "completion_latency_ns": {
+            "min": 32879,
+            "max": 3610485,
+            "mean": 45525.952117,
+            "stddev": 15831.65207,
+            "N": 204540,
+            "percentile": {
+              "50.000000": 43264,
+              "95.000000": 61696,
+              "99.000000": 86528,
+              "99.900000": 136192
+            }
+          }
+        },
+        "fdatasync": {
+          "total_ios": 0,
+          "lat_ns": {
+            "min": 36516,
+            "max": 24076774,
+            "mean": 539700.354552,
+            "stddev": 203726.527682,
+            "N": 204540,
+            "percentile": {
+              "50.000000": 501760,
+              "95.000000": 724992,
+              "99.000000": 1351680,
+              "99.900000": 2801664
+            }
+          }
+        }
+      }
+    }
+  ]
+}
