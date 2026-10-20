@@ -13,7 +13,7 @@ sidecars, detects changed input files, and writes only missing BAL sidecars in
 bounded durable transactions. The native head and state root must remain unchanged.
 Repeated runs are idempotent. The final API audit remains mandatory.
 
-Input decoding uses four workers and retains at most 128 decoded records.
+Input decoding uses eight workers and retains at most 128 decoded records.
 Canonical checks and MDBX access stay serial and ordered. The write pass creates
 a fresh decoder and re-reads the records before comparing their preflight
 digests; cached decoded input cannot hide a change between passes.

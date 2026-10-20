@@ -73,7 +73,7 @@ type decodedRecord struct {
 // Only decoding runs concurrently. The caller owns all database access and
 // consumes results in block order, retaining at most one 128-record batch.
 func decodeBatch(ctx context.Context, dir string, first, last uint64, workers int) ([]decodedRecord, error) {
-	if first == 0 || last < first || last-first >= 128 || workers < 1 || workers > 4 {
+	if first == 0 || last < first || last-first >= 128 || workers < 1 || workers > 8 {
 		return nil, fmt.Errorf("invalid decoding batch")
 	}
 	results := make([]decodedRecord, last-first+1)
@@ -112,7 +112,7 @@ func batchReader(ctx context.Context, dir string, end uint64) func(uint64) (Reco
 			// Release the previous batch before allocating the next one.
 			batch = nil
 			var err error
-			batch, err = decodeBatch(ctx, dir, n, min(end, n+127), 4)
+			batch, err = decodeBatch(ctx, dir, n, min(end, n+127), 8)
 			if err != nil {
 				return Record{}, nil, [32]byte{}, err
 			}

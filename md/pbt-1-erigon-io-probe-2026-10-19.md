@@ -907,3 +907,31 @@ version preserved. Its SHA-256 is
 Controller evidence is `audit-decode-probe/adoption.json` and `rpc-proof.json`;
 the final-stage readiness report records the updated script digest. Existing
 completed client audits and the running Erigon replay are unchanged.
+
+## Eight-worker BAL restoration decoder qualified at 02:28 UTC
+
+The post-replay sidecar helper now uses eight decoder workers on the original
+eight-CPU VM, retaining the existing 128-record batch bound. Native canonical
+checks and database writes remain serial and ordered. The full-input preflight,
+fresh second-pass input digest checks, exclusive write access and normal
+durability remain required. The extended ordering/digest test failed against
+the four-worker limit; the candidate then passed the race-enabled helper suite.
+
+A read-only baseline/candidate/baseline comparison on identical records
+24,453,559–24,454,566 took 13.980 / 9.403 / 13.808 seconds. All three checked
+1,008 records with input digest
+`168a387fad52154da24cab206eb62370d76e5f3d41bd4a60d2bb687de0c824a8`
+and wrote zero sidecars. The candidate was 1.47 times faster than the faster
+baseline. Each run had the same eight-CPU quota, 6-GiB process limit, 4-GiB Go
+memory limit and low scheduling priority. Peak service memory was 1.1 GiB.
+The live Erigon process and invocation remained unchanged throughout.
+
+The new helper SHA-256 is
+`a629abf89b6bc0398bd05e3cea02edb85d916036e181c1e79c71cb2d5b6d70dc`.
+It was installed with matching build metadata; the prior binary and metadata
+remain as `/data/pbt-1/erigon-bal-backfill-four{,.json}`. Controller evidence is
+under `backfill-eight-worker/`, and `erigon-final-stage-readiness.json` records
+the adoption. The measured decoding rate extrapolates to approximately 16
+minutes for two full input passes, excluding sidecar writes, restart, API audit
+and upload. This is not a measured final-stage completion time. Production
+sidecar restoration has not run yet.

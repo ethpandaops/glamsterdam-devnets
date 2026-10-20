@@ -70,7 +70,7 @@ func TestParallelDecodePreservesOrderAndDigests(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	parallel, err := decodeBatch(context.Background(), dir, 1, 128, 4)
+	parallel, err := decodeBatch(context.Background(), dir, 1, 128, 8)
 	if err != nil {
 		t.Fatal(err)
 	}
