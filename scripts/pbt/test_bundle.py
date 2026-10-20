@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import tarfile
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -82,6 +83,75 @@ class BundleTests(unittest.TestCase):
             publisher.main()
             prepare.assert_called_once();validate.assert_not_called()
             self.assertFalse((self.root/'delivery-complete.json').exists())
+
+    def test_native_archive_recheck_rejects_replacement_and_truncation(self):
+        snapshots={c:{'key':publisher.PREFIX+f'{c}/100/snapshot.tar.zst',
+                      'archive_bytes':123} for c in publisher.HOSTS}
+        completions={c:{'etag':f'"{c}-1"'} for c in snapshots}
+        class S3:
+            changed=None
+            truncate=False
+            def head_object(s,**kwargs):
+                c=next(c for c,v in snapshots.items() if v['key']==kwargs['Key'])
+                return {'ContentLength':122 if s.truncate and c==s.changed else 123,
+                        'ETag':'"replaced"' if not s.truncate and c==s.changed else completions[c]['etag']}
+        s3=S3()
+        result=publisher.verify_native_archives(s3,snapshots,completions)
+        self.assertEqual(set(result),set(snapshots))
+        for c in snapshots:
+            for truncate in (False,True):
+                s3.changed=c;s3.truncate=truncate
+                with self.assertRaises(AssertionError):
+                    publisher.verify_native_archives(s3,snapshots,completions)
+
+    def test_public_archive_requires_exact_status_length_and_etag(self):
+        expected={'bytes':123,'etag':'"archive-4"'}
+        headers='HTTP/2 200\r\nContent-Length: 123\r\nETag: "archive-4"\r\n\r\n'
+        publisher.verify_public_headers(headers,expected)
+        publisher.verify_public_headers('HTTP/1.1 200 Connection established\r\n\r\n'+headers,expected)
+        for changed in [
+            headers.replace('200','206'),
+            headers.replace('123','122'),
+            headers.replace('"archive-4"','"replacement-4"'),
+            headers.replace('Content-Length: 123\r\n',''),
+            headers.replace('ETag: "archive-4"\r\n',''),
+            'HTTP/2 200\r\nContent-Type: text/html\r\n\r\n',
+        ]:
+            with self.assertRaises(AssertionError):
+                publisher.verify_public_headers(changed,expected)
+
+    def test_failed_archive_identity_prevents_final_metadata_and_completion(self):
+        commitments={'head_hash':'h','state_root':'s','bal_hash':'b'}
+        manifest={'head':100,'expected_commitments':commitments,'workload':{},
+                  'records':[],'manifest_kind':'replay_artifact','delivery_complete':False}
+        manifest_bytes=json.dumps(manifest).encode()
+        (self.root/'replay-bundle-input').mkdir()
+        (self.root/'replay-bundle-input/manifest.json').write_bytes(manifest_bytes)
+        replay_key=publisher.PREFIX+'replay/snapshot.tar.zst'
+        ready={'phase':'replay_bundle_verified','head':100,
+               'manifest_sha256':hashlib.sha256(manifest_bytes).hexdigest(),
+               'replay_bundle':{'key':replay_key,'bytes':4,'etag':'"verified"',
+                                'verification':'full remote readback'}}
+        (self.root/'replay-bundle-ready.json').write_text(json.dumps(ready))
+        (self.root/'workload.json').write_text('{}')
+        for c in publisher.HOSTS:
+            snapshot={'phase':'snapshot_uploaded_verified','head':100,**commitments,
+                      'key':publisher.PREFIX+f'{c}/100/snapshot.tar.zst','archive_bytes':4}
+            (self.root/f'published-{c}.json').write_text(json.dumps(snapshot))
+            (self.root/f'upload-{c}-completed.json').write_text('{"etag":"\\"verified\\""}')
+        for failure in ('storage','public'):
+            with self.subTest(failure=failure), patch.object(publisher,'ROOT',self.root), \
+                 patch.object(publisher,'client') as client, \
+                 patch.object(publisher.subprocess,'check_output',
+                              return_value='HTTP/2 200\r\nContent-Length: 3\r\nETag: "verified"\r\n\r\n'):
+                s3=client.return_value
+                s3.head_object.side_effect=lambda **kw: {
+                    'ContentLength':4,
+                    'ETag':'"replaced"' if failure=='storage' and kw['Key']!=replay_key else '"verified"'}
+                with self.assertRaises(AssertionError):
+                    publisher.publish(SimpleNamespace(prepare_only=False))
+                s3.put_object.assert_not_called()
+                self.assertFalse((self.root/'delivery-complete.json').exists())
 
 
 if __name__=='__main__':unittest.main()

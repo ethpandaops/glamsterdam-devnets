@@ -373,9 +373,12 @@ artifact and explicitly does not claim completed snapshot delivery.
 The **entire** replay archive is verified by remote readback before writing
 `replay-bundle-ready.json`. After all four native snapshots pass, the normal
 `publish-bundle.py` invocation checks their head/hash/state/BAL against the
-prepared artifact, confirms the remote archive's ETag and size are unchanged,
-and publishes `_snapshot_manifest.json` and `_snapshot_workload.json`. The
-final manifest binds the embedded replay manifest by SHA-256. Existing bundle
+prepared artifact, and rechecks storage and public archive sizes and ETags for
+all four native snapshots and the replay bundle. Native ETags must match their
+multipart completion records. These checks precede publication of
+`_snapshot_manifest.json` and `_snapshot_workload.json`; a mismatch prevents
+the final manifest and delivery marker. The final manifest records these
+identity checks and binds the embedded replay manifest by SHA-256. Existing bundle
 objects are never overwritten by the preparation path; failures need inspection.
 Only `~/.local/state/pbt-1-run/delivery-complete.json` establishes completion of
 the full requested delivery. Snapshot publication alone does not establish that

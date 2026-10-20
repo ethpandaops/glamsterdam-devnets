@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Prepare the replay archive early; finalize delivery only after all four snapshots pass."""
 import argparse
+from email.parser import Parser
 import fcntl
 import gzip
 import hashlib
@@ -120,6 +121,28 @@ def validate_delivery(manifest,ready,snapshots):
             assert value[field]==manifest['expected_commitments'][field],field
 
 
+def verify_native_archives(s3,snapshots,completions):
+    checks={}
+    for name,snapshot in snapshots.items():
+        info=s3.head_object(Bucket=BUCKET,Key=snapshot['key'])
+        assert info['ContentLength']==snapshot['archive_bytes'], f'{name}: archive size changed'
+        assert info['ETag']==completions[name]['etag'], f'{name}: completed archive changed'
+        checks[name]={'key':snapshot['key'],'bytes':info['ContentLength'],'etag':info['ETag']}
+    return checks
+
+
+def verify_public_headers(headers,expected):
+    # A proxy may emit an initial CONNECT response; inspect the final response.
+    responses=[part for part in headers.replace('\r\n','\n').split('\n\n')
+               if part.startswith('HTTP/')]
+    assert responses, 'Missing public HTTP response'
+    status,_,fields=responses[-1].partition('\n')
+    assert status.split()[1]=='200', status
+    parsed=Parser().parsestr(fields)
+    assert parsed.get('Content-Length')==str(expected['bytes']), 'Public archive length differs'
+    assert parsed.get('ETag')==expected['etag'], 'Public archive ETag differs'
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prepare-only',action='store_true')
@@ -145,6 +168,9 @@ def publish(args):
     assert manifest['workload']==json.loads((ROOT/'workload.json').read_text()), 'Workload changed after bundle preparation'
     info=s3.head_object(Bucket=BUCKET,Key=ready['replay_bundle']['key'])
     assert info['ContentLength']==ready['replay_bundle']['bytes'] and info['ETag']==ready['replay_bundle']['etag']
+    completions={c:json.loads((ROOT/f'upload-{c}-completed.json').read_text()) for c in snapshots}
+    archive_checks=verify_native_archives(s3,snapshots,completions)
+    archive_checks['replay']={k:ready['replay_bundle'][k] for k in ('key','bytes','etag')}
     manifest.pop('records');manifest.pop('manifest_kind');manifest.pop('delivery_complete')
     manifest['snapshots']=snapshots
     manifest['replay_bundle']=ready['replay_bundle']
@@ -155,16 +181,18 @@ def publish(args):
     public_base='https://shadowfork-images.ethpandaops.io/'
     manifest['urls']={c:public_base+x['key'] for c,x in snapshots.items()}
     manifest['urls']['replay']=public_base+key
+    # Verify public response metadata identifies the completed objects before writing
+    # the final shared manifest, including all native snapshots and the replay.
+    for name,url in manifest['urls'].items():
+        headers=subprocess.check_output(['curl','-fsSI','--max-time','60',url],text=True)
+        verify_public_headers(headers,archive_checks[name])
+    manifest['archive_identity_checks']={'checked_at':time.time(),'objects':archive_checks,
+        'checks':['storage size and completion ETag','public HTTP 200, size and completion ETag']}
     calibration=json.loads((ROOT/'replay-bundle-input/8037-trace-calibration.json').read_text())
     for name,value in [('workload',plan),('manifest',manifest),('8037_calibration',calibration)]:
         data=json.dumps(value,indent=2).encode();object_key=PREFIX+f'_snapshot_{name}.json'
         s3.put_object(Bucket=BUCKET,Key=object_key,Body=data,ContentType='application/json')
         assert s3.get_object(Bucket=BUCKET,Key=object_key)['Body'].read()==data
-    # The gateway's browser integrity check rejects Python's default user agent;
-    # curl also verifies that the new public layout is actually downloadable.
-    for name,url in manifest['urls'].items():
-        headers=subprocess.check_output(['curl','-fsSI','--max-time','60',url],text=True)
-        assert '200' in headers.splitlines()[0],(name,headers)
     manifest['phase']='delivery_complete';manifest['verified_at']=time.time()
     (ROOT/'delivery-complete.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(json.dumps({'phase':'delivery_complete','head':target,'urls':manifest['urls']}),flush=True)
