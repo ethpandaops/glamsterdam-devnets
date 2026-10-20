@@ -74,6 +74,20 @@ native uploads and the replay bundle pass publication checks. Controller
 `delivery-complete.json` is the completion marker; individual upload progress
 and the presence of a partial release prefix are not sufficient.
 
+At 01:03 UTC the [replay archive](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/replay/snapshot.tar.zst)
+completed full remote readback verification. It contains all 51,420 records,
+including the 50,400 qualifying blocks. Every compressed input file matched
+the audited Geth source before upload and was checked again while archiving.
+The archive is 49,215,859,161 bytes, with SHA-256
+`746ade7c018b644de66df47dc23cc477da98333aaf5230e065ce7e2112be8ccc`.
+Its embedded replay manifest has SHA-256
+`c51eda562cc882fa2ba87bd110fb9156def42d7a9588d05a977b9729965bed01`.
+Public HEAD returned HTTP 200 with the verified length and ETag. Controller
+evidence is `replay-bundle-ready.json`; this establishes the replay artifact
+only. Native snapshot publication and the final delivery manifest remain
+pending. Preparing this archive early removes its upload/readback from the
+work that must follow Erigon's completion.
+
 For the later migration/backlog experiment, the qualifying anchor can be
 reconstructed from the preserved source release and the 1,020 preparation
 records. Qualify that reconstruction and produce the PBT artifacts at the
