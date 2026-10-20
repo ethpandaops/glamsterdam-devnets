@@ -353,10 +353,21 @@ sampled part SHA-256 values by remote readback, and publishes provenance. No
 account storage credentials are copied to a source VM. Original Jochemnet
 objects and latest pointers are preserved.
 
-After all four native snapshots pass, `publish-bundle.py` uploads
-`replay/snapshot.tar.zst` containing `blocks/`, `workload.json`, `manifest.json`
-and the source genesis. It verifies the **entire** replay archive by remote
-readback and publishes `_snapshot_manifest.json` and `_snapshot_workload.json`.
+Once the complete producer stream has passed its final restart audit,
+`publish-bundle.py --prepare-only` can upload `replay/snapshot.tar.zst` while
+the other clients finish. It compares all compressed record hashes with the
+audited Geth source, then checks each hash again while streaming the archive.
+The archive contains `blocks/`, `workload.json`, `manifest.json`, the source
+genesis and calibration artifacts. Its embedded manifest describes the replay
+artifact and explicitly does not claim completed snapshot delivery.
+
+The **entire** replay archive is verified by remote readback before writing
+`replay-bundle-ready.json`. After all four native snapshots pass, the normal
+`publish-bundle.py` invocation checks their head/hash/state/BAL against the
+prepared artifact, confirms the remote archive's ETag and size are unchanged,
+and publishes `_snapshot_manifest.json` and `_snapshot_workload.json`. The
+final manifest binds the embedded replay manifest by SHA-256. Existing bundle
+objects are never overwritten by the preparation path; failures need inspection.
 Only `~/.local/state/pbt-1-run/delivery-complete.json` establishes completion of
 the full requested delivery. Snapshot publication alone does not establish that
 the separate replay bundle has completed.
