@@ -353,6 +353,12 @@ sampled part SHA-256 values by remote readback, and publishes provenance. No
 account storage credentials are copied to a source VM. Original Jochemnet
 objects and latest pointers are preserved.
 
+Native archives omit node keys, JWT secrets, root keystores and Nethermind's
+`mainnet/keystore`, as well as its Patricia `mainnet/state` directory. The
+uploader records its actual exclusion arguments in the integrity report.
+Nethermind publication requires the keystore and Patricia exclusions. The
+archive-content tests exercise GNU tar against both flat and nested fixtures.
+
 Once the complete producer stream has passed its final restart audit,
 `publish-bundle.py --prepare-only` can upload `replay/snapshot.tar.zst` while
 the other clients finish. It compares all compressed record hashes with the

@@ -19,6 +19,16 @@ from pipeline_rpc import ROOT, save
 PART_SIZE=256*1024**2
 
 
+def archive_command(client, db):
+    excludes=['--exclude=./nodekey','--exclude=./nodes','--exclude=./key',
+              '--exclude=./jwtsecret','--exclude=./logs','--exclude=./LOG',
+              '--exclude=./LOCK','--exclude=./geth.ipc','--exclude=./mainnet/state',
+              '--exclude=./keystore','--exclude=./mainnet/keystore']
+    if client=='erigon':
+        excludes.append('--exclude=./temp')
+    return ['tar','--sparse','--sort=name',*excludes,'-C',str(db),'-cf','-','.']
+
+
 def main():
     lock=(ROOT/'upload.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     job=json.loads((ROOT/'upload-authorization.json').read_text())
@@ -45,13 +55,9 @@ def main():
     stage=ROOT/'upload-parts';stage.mkdir(exist_ok=True)
     # Native layouts match the source releases: Geth's instance dir is flat;
     # Nethermind includes mainnet/. Its empty Patricia stub is omitted too.
-    excludes=['--exclude=./nodekey','--exclude=./nodes','--exclude=./key',
-              '--exclude=./jwtsecret','--exclude=./logs','--exclude=./LOG',
-              '--exclude=./LOCK','--exclude=./geth.ipc','--exclude=./mainnet/state']
-    if c=='erigon':
-        excludes.append('--exclude=./temp')
+    archive_args=archive_command(c,db)
     tarlog=(ROOT/'upload-tar.log').open('w')
-    tar=subprocess.Popen(['tar','--sparse','--sort=name',*excludes,'-C',str(db),'-cf','-','.'],stdout=subprocess.PIPE,stderr=tarlog)
+    tar=subprocess.Popen(archive_args,stdout=subprocess.PIPE,stderr=tarlog)
     zlog=(ROOT/'upload-zstd.log').open('w')
     zstd=subprocess.Popen(['zstd','-1','-T4','-q'],stdin=tar.stdout,stdout=subprocess.PIPE,stderr=zlog)
     tar.stdout.close()
@@ -103,7 +109,7 @@ def main():
                 'parts':sorted(results,key=lambda x:x['PartNumber']),'archive_bytes':total,
                 'archive_sha256':digest.hexdigest(),'seconds':time.time()-started,'time':time.time(),
                 'data_bytes':int(subprocess.check_output(['du','-s','-B1',str(db)],text=True).split()[0]),
-                'upload_workers':workers}
+                'upload_workers':workers,'archive_excludes':[x for x in archive_args if x.startswith('--exclude=')]}
         save(ROOT/'upload-complete-parts.json',report)
         save(ROOT/'status.json',{'phase':'awaiting_upload_verification','time':time.time(),'head':head,'archive_bytes':total})
         print(json.dumps({k:v for k,v in report.items() if k not in ('parts','upload_id')}),flush=True)

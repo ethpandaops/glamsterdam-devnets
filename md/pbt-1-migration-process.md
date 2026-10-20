@@ -88,6 +88,19 @@ only. Native snapshot publication and the final delivery manifest remain
 pending. Preparing this archive early removes its upload/readback from the
 work that must follow Erigon's completion.
 
+At 01:05 UTC an archive review found Nethermind's nested
+`mainnet/keystore/node.key.plain` was missing from the uploader's exclusions.
+The still-unpublished multipart upload was stopped and aborted; storage
+confirmed that the archive object did not exist and the old multipart upload
+was gone. The key and native database remain on the VM. A fresh upload started
+at 01:08 UTC with both keystore locations and Patricia data excluded, and its
+live tar arguments were checked. Publication now requires those exclusions in
+the upload integrity report. The archive-content regression test first
+reproduced the omission, then passed with the fix; all 32 Python workflow
+tests passed. Evidence is controller
+`retired-nethermind-upload-keystore/abort-verified.json`. Geth and Besu's
+observed key paths were already excluded, so their uploads continued.
+
 For the later migration/backlog experiment, the qualifying anchor can be
 reconstructed from the preserved source release and the 1,020 preparation
 records. Qualify that reconstruction and produce the PBT artifacts at the

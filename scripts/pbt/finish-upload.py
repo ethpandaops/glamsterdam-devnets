@@ -25,6 +25,8 @@ def main():
     assert report['key']==job['key'] and report['upload_id']==job['upload_id']
     assert proof['stopped'] and report['head']==int(proof['head']['number'],16)==24452538+v['final_records']
     assert proof['qualifying_blocks']==50400
+    if c=='nethermind':
+        assert {'--exclude=./mainnet/keystore','--exclude=./keystore','--exclude=./mainnet/state'} <= set(report.get('archive_excludes',[])), 'Nethermind archive must omit keystores and Patricia data'
     parts=report['parts']
     assert [x['PartNumber'] for x in parts]==list(range(1,len(parts)+1))
     assert sum(x['bytes'] for x in parts)==report['archive_bytes']
