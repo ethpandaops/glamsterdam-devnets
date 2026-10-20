@@ -47,7 +47,24 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
-### Prepared range and release status at 04:21 UTC, October 20
+### Latest milestone at 08:45 UTC, October 20
+
+Erigon finished replay at 08:41:29 UTC, reaching block 24,503,958 with all
+50,400 qualifying blocks. Its final block hash, MPT state root and BAL hash
+match Geth, Besu and Nethermind. The native driver verified final persistence,
+stopped the native client successfully, and reopened the database with the
+pinned Erigon image. That reopen passed at 08:42:28 UTC.
+Controller evidence is `erigon-final-replay-milestone.json`; VM evidence is
+`native-replay/{replay-complete,native-shutdown,complete}.json`.
+
+The final validation service started at 08:43:21 UTC and is checking the
+51,420 BAL inputs before native sidecar restoration. The subsequent retained-BAL
+restart, exhaustive Engine API body audit, clean stop, archive upload, remote
+verification and global publication remain outstanding. The four-client
+delivery will miss the 09:00 UTC target. Keep the full validation and publication
+requirements; the completed replay alone does not satisfy delivery.
+
+### Prepared range and earlier release status at 04:21 UTC, October 20
 
 The generated stream is complete. Its preserved Jochemnet source anchor is
 24,452,538. The next 1,020 blocks are preparation; the qualifying anchor is
@@ -251,6 +268,50 @@ Nethermind's obsolete Patricia store **must be removed before upload**, as reque
 by the operator. Validate the flat database, measure the reclaimed space and retain
 the active flat data plus headers, blocks, BALs and other required native data. Do not
 assume every client's full experiment fits the source machine's disk size.
+
+#### Migration disk planning update, October 20
+
+The four source VMs use the same nominal 1800-GiB local disk. That capacity is
+not free space. Live filesystem checks around 08:45 UTC measured:
+
+| Client | Native database, approximately | Available filesystem space |
+|---|---:|---:|
+| Geth | 1.247 TB | 509 GB |
+| Besu | 1.215 TB | 558 GB |
+| Nethermind, FlatDB only | 1.192 TB | 580 GB |
+| Erigon | 1.031 TB, before final BAL restoration | 648 GB |
+
+TB and GB in this table are decimal. Available space includes the effects of
+other files and filesystem reservations; do not derive it by subtracting only
+the native database size from advertised disk capacity.
+
+The operator supplied a client-team planning figure of approximately 850 GB for
+Geth; confirm whether this denotes additional free space. Besu's quoted figures
+are 208 GiB permanent growth with approximately 370 GiB temporary import space.
+These are planning inputs from another test, not
+measured PBT-1 peaks. If both Besu allocations overlap, they total approximately
+621 GB; confirm the allocation timeline before treating their sum as a measured
+requirement. Peaks for all four clients and both memory limits remain to be
+measured. The linked [Besu preflight](https://cperezz.github.io/pbt-website/uploads/benchmarks/import/r1/besu/P1/preflight.txt)
+reports 1.5 TiB trimmed by `fstrim`, not a direct available-space measurement.
+
+The proposed capacity mitigation is an **additional 2.5 TB volume per migration
+worker**, alongside its existing disk. No such volumes have been provisioned.
+Keep storage configuration identical between the 16- and 32-GiB variants.
+DigitalOcean sizes volumes in GiB: resolve the intended byte capacity explicitly
+when preparing Terraform. Record volume type and actual database, artifact and
+scratch placement. A separate mounted filesystem does not increase free space
+under a client's existing data path; qualify the client's supported placement
+before using it. DigitalOcean volumes are network-attached and have different
+IOPS/throughput characteristics from local storage; include these in performance
+results. See [volume limits](https://docs.digitalocean.com/products/volumes/details/limits/).
+
+Aggressive history expiry is a separate optional experiment, not a prerequisite
+for publishing the refreshed snapshots. Before enabling it on a migration
+worker, validate the exact pinned client's flags, retain the common anchor and
+all required replay bodies/BALs, measure reclaimed space, and repeat the
+restart/retention audit. The supplied Besu pruning flags are a client-team
+proposal and have not been applied or qualified on these sources.
 
 The dedicated Nethermind VM completed `pbt-1-nethermind-flatdb-cleanup` on
 2026-10-19. After a successful restore, it checked the pinned head/root and
