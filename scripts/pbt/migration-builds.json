@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "scope": "PBT-1 migration workers; separate from native snapshot preparation provenance",
+  "updated": "2026-10-20",
+  "besu": {
+    "repository": "https://github.com/matkt/besu",
+    "branch_hint": "main-pbt",
+    "commit": "39377a2659f63c3bb230a5f57b4ef6846348f876",
+    "library": {
+      "repository": "https://github.com/besu-eth/besu-stateless",
+      "branch_hint": "feat/partitioned-binary-trie",
+      "commit": "62b752345cce00d9119f37c37d56eb9566269578",
+      "maven_coordinate": "org.hyperledger.besu:besu-stateless:0.1.8-SNAPSHOT",
+      "requirement": "Build the exact library commit, resolve Besu against that artifact, and record the resolved JAR SHA-256"
+    },
+    "build_verified": false,
+    "migration_qualified": false,
+    "image_digest": null
+  },
+  "geth": {
+    "repository": "https://github.com/CPerezz/go-ethereum",
+    "branch_hint": "pbt",
+    "commit": "4f7e4b23c066932bbd399bce94955468d6039bac",
+    "procedure_source": "https://github.com/misilva73/pbt-planning/pull/12",
+    "procedure_repository": "https://github.com/CPerezz/pbt-planning",
+    "procedure_commit": "ecc562fa83da7588ca6a0a1a9963c28787ce0073",
+    "procedure_pr_state_when_checked": "open",
+    "build_verified": false,
+    "migration_qualified": false,
+    "image_digest": null
+  }
+}

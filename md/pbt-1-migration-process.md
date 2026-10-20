@@ -465,8 +465,13 @@ block 24452538 against the retained metadata. Record the head hash, state root,
 database layout and recovery location before changing formats.
 
 Pin every client image and migration tool by digest/commit. Establish the Erigon
-database upgrade procedure, the exact Geth self-migration command and whether
-each client requires execution downtime. Run a small compatibility trial before
+database upgrade procedure and qualify each client's execution downtime.
+The [Besu and Geth migration command update](pbt-1-client-migration-commands.md)
+records the operator's exact Besu/library pins and Geth planning PR #12,
+including both Geth online migration paths. The
+[migration build pins](../scripts/pbt/migration-builds.json) are separate from
+native snapshot preparation provenance; builds and compatibility trials remain
+required. Run a small compatibility trial before
 the full-state measurement. Preserve finality when scheduling worker downtime.
 
 **Evidence:** source validation, build manifest, per-client commands, memory-limit
@@ -498,13 +503,16 @@ For the eight consumer workers, record the chosen import or Erigon-specific
 procedure and its start/end times under the assigned memory limit. Verify each
 result at the common anchor. Record any required pause in normal execution.
 
-For `geth-self-16`, generate PBT state locally from its own preserved source using
-the qualified self-migration procedure. Do not seed this trial from the shared
-PBT artifact. Use the same anchor and workload as the Geth import workers so the
-comparison is meaningful. Compare its resulting root with the consumer results.
+For `geth-self-16`, use the shared preimage file and anchor `N`, but omit the
+PBT snapshot flag. The updated online procedure converts the worker's own
+persisted state at `P >= N`, incorporating keys from BALs `N+1..P`, and attests
+at finalized `P`. Record both anchors and compare roots with the import workers
+at `P` or a later identical block hash. Use the same workload; do not require
+its first attestation to be at `N` when `P` is later.
 
 **Evidence:** nine individually identified results, peak memory/disk, elapsed
-time, OOM/failure/retry records and matching roots at the anchor.
+time, OOM/failure/retry records, actual attestation anchors and matching roots
+at common block hashes.
 
 ### 5. Catch up, then evaluate fork readiness
 
