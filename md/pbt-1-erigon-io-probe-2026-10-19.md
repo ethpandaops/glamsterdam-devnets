@@ -834,3 +834,49 @@ guard. All 51,420 input records were already present on Erigon. Removing the
 oldest 14 GiB of reproducible Go cache entries restored about 37 GiB free,
 without removing source, binaries, replay inputs, snapshots or evidence. The
 relay then completed successfully, and the 01:48 monitor reported no alerts.
+
+## Remaining flush cost after union adoption, 02:13 UTC
+
+The full replay is running the qualified union binary on the original VM,
+with client PID `193436` and invocation `1dca0152c5ff472e885444544e9ee7bb`.
+At 02:12:25 UTC it reached 24,481,138, or 27,580 qualifying blocks. Geth,
+Besu and Nethermind's upload processes were independently confirmed active.
+
+A 60-second read-only `/proc` and block-device sample recorded 106.3 MiB/s
+of device writes, approximately 17,487 write operations/s, a mean queue depth
+of 38.9 and 40.1% full I/O pressure. Device busy time was 58.2%; this does not
+establish a provider throughput ceiling. CPU steal was 0.17%. The client's
+memory cgroup reported no limit hits, OOM events or current memory pressure.
+These measurements support investigating database I/O before increasing RAM.
+
+The last 450 log lines contained 14 substantial flush/commit samples and 15
+execution samples, including startup. Their independent medians were 11.41
+seconds executing 64 blocks, 19.69 seconds flushing and 17.66 seconds in the
+native commit. Writer flushing accounted for 13.33 seconds within the flush.
+These are overlapping, independently sampled phases, not an additive batch
+latency calculation. A representative commit logged 18.017 seconds total,
+of which 17.996 seconds was synchronization.
+
+Source inspection confirms that domain flushing includes history and inverted
+index writes. The `loadFunc` wrapper intentionally prevents the ETL append
+fast path because duplicate values are not sorted for `AppendDup`; replacing
+it with the identity function would require proving those ordering constraints.
+No writer, durability, memory or kernel tuning was changed. Earlier write-mode,
+writeback and wider-batch trials did not establish an improvement.
+
+Controller evidence is under `storage-union-probe/`: `io-sample.jsonl`,
+`io-analysis.json`, `io-cgroup.json`, `io-window-client.log` and
+`phase-analysis.json`. A bounded two-minute CPU capture completed at 02:14:16
+UTC with the same live client PID and invocation before and after. Its SHA-256
+is `377f350323690784f458b6b490b9913900d676a07626c27f3f9bb2174c556939`;
+the downloaded copy was checked against that digest. Evidence and `pprof`
+summaries are in `storage-union-probe/cycle-profile/`.
+
+The capture collected 141.33 CPU-seconds over 120 wall seconds. Snapshot-file
+lookup accounted for 14.89% cumulatively, writer flushing for 12.23%, and all
+shared-domain flushing for 18.55%. MDBX cursor puts accounted for 13.35%; Cgo
+also includes signature recovery and reads, so its 31.64% must not be assigned
+entirely to writes. These overlapping CPU percentages do not measure storage
+wait. Together with the timing and I/O evidence, they show that reducing writer
+CPU work alone would leave the substantial synchronization cost. No further
+native change has been qualified from this evidence yet.
