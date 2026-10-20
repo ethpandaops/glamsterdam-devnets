@@ -47,7 +47,7 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
-### Prepared range and release status at 02:45 UTC, October 20
+### Prepared range and release status at 02:57 UTC, October 20
 
 The generated stream is complete. Its preserved Jochemnet source anchor is
 24,452,538. The next 1,020 blocks are preparation; the qualifying anchor is
@@ -61,12 +61,22 @@ Geth, Besu and Nethermind have reached the final head, passed clean restart and
 retrieval/comparison of all 51,420 generated bodies, and stopped cleanly for
 export. Their final block hash is
 `0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216`.
-The final MPT state root and BAL hash also match. Their native archives are
-uploading; no completed release is claimed. At the 02:45 monitor check,
+The final MPT state root and BAL hash also match. Geth and Besu's native
+archives completed upload and verification at 02:55 UTC; Nethermind's upload
+continues. The complete four-client release is not yet available. At the 02:45 monitor check,
 Erigon had verified 29,820 qualifying blocks and remained in replay. The
 15-minute monitor measured 1.129 blocks/s and projected replay alone to 07:49
 UTC, leaving about 71 minutes for restoration, audit, upload and verification
 before the 09:00 target. Delivery remains at risk.
+
+The [Geth metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_metadata.json)
+and [Besu metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/_snapshot_metadata.json)
+are public. Their archives are 1,129,134,606,193 and 1,145,428,233,899 bytes,
+respectively. Verification used per-part Content-MD5 during upload, exact object
+sizes, and SHA-256 readback of the first, last and three sampled parts. Public
+HEAD checks matched the completion ETags and exact lengths; public metadata
+matched the archived hashes and common head/state/BAL commitments. Controller
+evidence is `published-{geth,besu}.json` and `public-{geth,besu}.json`.
 
 The intended release prefix is
 `pbt-1/20261019-mixed-8037-v2/`, with native archives at
@@ -304,9 +314,10 @@ and native snapshot uploads remain pending. Erigon throughput puts the
 2026-10-20 09:00 UTC delivery target at risk; its experiments and recovery
 evidence are recorded in the [Erigon preparation report](pbt-1-erigon-merge-2026-10-19.md).
 
-**Snapshot refresh update (02:45 UTC, 2026-10-20):** Geth, Besu and Nethermind
+**Snapshot refresh update (02:57 UTC, 2026-10-20):** Geth, Besu and Nethermind
 have reached 24,503,958, passed all 51,420 body/BAL comparisons after restart,
-and stopped cleanly for native archive upload. Those uploads are still running.
+and stopped cleanly for native archive upload. Geth and Besu are now uploaded,
+remotely verified and publicly accessible; Nethermind's upload is still running.
 The replay archive has completed upload and full remote checksum readback;
 final delivery still requires all four verified native snapshots.
 
