@@ -299,8 +299,8 @@ def main():
     bundle_service=subprocess.run(['systemctl','--user','show','pbt-1-prepare-bundle',
         '-p','LoadState','-p','ActiveState','-p','MainPID','-p','Result'],capture_output=True,text=True,timeout=10)
     bundle_state=dict(line.split('=',1) for line in bundle_service.stdout.splitlines() if '=' in line)
-    if bundle_state.get('LoadState')=='loaded':
-        ready=controller.parent/'replay-bundle-ready.json'
+    ready=controller.parent/'replay-bundle-ready.json'
+    if bundle_state.get('LoadState')=='loaded' or ready.exists():
         report['replay_bundle']={'service':bundle_state,'ready':json.loads(ready.read_text()) if ready.exists() else None}
         if bundle_state.get('ActiveState')=='failed':
             report['alerts'].append('replay bundle: preparation failed; inspect preserved inputs and journal')
