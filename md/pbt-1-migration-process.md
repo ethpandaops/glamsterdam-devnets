@@ -47,7 +47,55 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
-### Latest milestone at 09:26 UTC, October 20
+### Refreshed snapshot delivery complete at 10:58 UTC, October 20
+
+All four native snapshots and the replay archive are published in the
+[final manifest](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/_snapshot_manifest.json). Publication completed at 10:57:54 UTC;
+all seven independent public verification checks passed at 10:58:10 UTC.
+The final runtime audit confirms all execution clients remain stopped, no
+process holds native database files open, scoped upload credentials are removed
+from all four VMs, and the original Jochemnet releases remain unchanged.
+**The 09:00 UTC deadline was missed.** The refreshed-snapshot delivery is complete;
+the nine-worker migration and PBT fork have not been run.
+
+| Artifact | Compressed bytes | Source database allocated bytes |
+|---|---:|---:|
+| [Geth](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/snapshot.tar.zst) | 1,129,134,606,193 | 1,247,339,806,720 |
+| [Besu](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/snapshot.tar.zst) | 1,145,428,233,899 | 1,215,262,593,024 |
+| [Nethermind](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/nethermind/24503958/snapshot.tar.zst) | 1,088,763,687,494 | 1,191,796,875,264 |
+| [Erigon](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/erigon/24503958/snapshot.tar.zst) | 534,953,200,071 | 1,054,319,771,648 |
+| [Replay bundle](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/replay/snapshot.tar.zst) | 49,215,859,161 | — |
+
+Database figures are measured allocated bytes before export, not a guarantee
+of extracted filesystem usage or migration peak space. Erigon includes the
+restored BAL sidecars; its compressed archive is 534.95 GB.
+
+All clients match at block **24,503,958**, with 51,420 retained BAL/body records.
+The qualifying range is **24,453,559–24,503,958**: 50,400 blocks covering seven
+days of accelerated chain time after qualifying anchor 24,453,558. The preserved
+source anchor is 24,452,538; replay its 1,020 preparation blocks to reconstruct
+the qualifying anchor. Using the final snapshot head as migration anchor would
+leave none of this prepared backlog to replay.
+
+The qualifying averages are 100,078,541.73 execution gas and 99,976,320 state
+gas per block against the 200M limit; the smallest qualifying BAL is 450,865
+bytes. This is a controlled mixed workload, not a live production traffic trace.
+
+Native uploads used Content-MD5 on every part and SHA-256 readbacks of the
+first, last and three sampled parts, followed by public size/ETag and metadata
+checks. The 49.22 GB replay archive passed full remote SHA-256 readback. Native
+archives were not re-downloaded in full. Exact sizes, checksums, commitments and
+requirement-level evidence are recorded in the
+[release audit](pbt-1-snapshot-release-2026-10-20.json).
+
+The 15-minute monitor remains enabled. Prometheus, node-exporter and Vector run
+on the four source VMs, and production node metrics show all four sources up.
+The execution clients remain stopped. Infrastructure PRs
+[ethPandaOps #1573](https://github.com/ethpandaops/ethPandaOps/pull/1573) and
+[platform #471](https://github.com/ethpandaops/platform/pull/471) remain pending
+review; no Cloudflare apply was performed.
+
+### Earlier milestone at 09:26 UTC, October 20
 
 All four clients have passed their final restart/body audits at block
 24,503,958. Erigon restored 51,323 missing native BAL sidecars, retained 97

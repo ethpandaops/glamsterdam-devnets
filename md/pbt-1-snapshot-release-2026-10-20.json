@@ -1,0 +1,119 @@
+{
+  "checked_at": "2026-10-20T11:00:17.566670+00:00",
+  "snapshot_delivery_complete": true,
+  "deadline_met": false,
+  "planned_deadline_utc": "2026-10-20T09:00:00Z",
+  "published_at": "2026-10-20T10:57:54.483934+00:00",
+  "independent_public_audit_at": "2026-10-20T10:58:06.618134+00:00",
+  "manifest_url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/_snapshot_manifest.json",
+  "head": 24503958,
+  "commitments": {
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "bal_hash": "0xe02703921d9d6d094b3f833657c710c6e65b0d3b817f9e3a24a754eb29a2515a"
+  },
+  "source_anchor": 24452538,
+  "qualifying_anchor": 24453558,
+  "preparation_blocks": 1020,
+  "qualifying_blocks": 50400,
+  "qualifying_chain_seconds": 604800,
+  "retained_bal_bodies_each": 51420,
+  "workload": {
+    "qualifying_execution_gas": 5043958502976,
+    "qualifying_state_gas": 5038806528000,
+    "average_execution_gas": 100078541.72571428,
+    "average_state_gas": 99976320.0,
+    "minimum_bal_bytes": 450865,
+    "verified_sample_addresses": 19
+  },
+  "snapshots": {
+    "geth": {
+      "url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/snapshot.tar.zst",
+      "metadata_url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_metadata.json",
+      "archive_bytes": 1129134606193,
+      "source_allocated_db_bytes": 1247339806720,
+      "archive_sha256": "5de78409912d018c8b26bf3df3a9abccf73777fa697c3c5d8208f289d2caa5f6",
+      "restart_evidence": {
+        "file": "geth-final-reopen.json",
+        "sha256": "150017cb0ef1ad833495710f9a02404c0e7b2eb87cd5c664b4c634510676729b"
+      }
+    },
+    "besu": {
+      "url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/snapshot.tar.zst",
+      "metadata_url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/_snapshot_metadata.json",
+      "archive_bytes": 1145428233899,
+      "source_allocated_db_bytes": 1215262593024,
+      "archive_sha256": "6130db1b49d374c49fe9715b32aeae595d7c3d8be5b2133dc81a019daf8ab64e",
+      "restart_evidence": {
+        "file": "besu-final-reopen.json",
+        "sha256": "021859cd0e17f295a1455e6bc8d65f9e322d68a1e93eff824c0e62296dcad569"
+      }
+    },
+    "nethermind": {
+      "url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/nethermind/24503958/snapshot.tar.zst",
+      "metadata_url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/nethermind/24503958/_snapshot_metadata.json",
+      "archive_bytes": 1088763687494,
+      "source_allocated_db_bytes": 1191796875264,
+      "archive_sha256": "925e81f4ccb2dd1464c29e77f5d6b3e361ae80153dbb0f49bf6bd5f34b2ba42c",
+      "restart_evidence": {
+        "file": "nethermind-final-reopen.json",
+        "sha256": "3bf9364a60b63a3593f11d6c308101c507a9c695b4d97b82c95d3da79e30d60f"
+      }
+    },
+    "erigon": {
+      "url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/erigon/24503958/snapshot.tar.zst",
+      "metadata_url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/erigon/24503958/_snapshot_metadata.json",
+      "archive_bytes": 534953200071,
+      "source_allocated_db_bytes": 1054319771648,
+      "archive_sha256": "e511af776332da1497c537b58770bec0b7e962c1484cd2dcb9a9d30f6ac268a7",
+      "restart_evidence": {
+        "file": "erigon-final-reopen.json",
+        "sha256": "46289f502de7e616609a8308d8ce23a9dba6c28858d982e54c6029575969291a"
+      }
+    }
+  },
+  "replay": {
+    "key": "pbt-1/20261019-mixed-8037-v2/replay/snapshot.tar.zst",
+    "bytes": 49215859161,
+    "sha256": "746ade7c018b644de66df47dc23cc477da98333aaf5230e065ce7e2112be8ccc",
+    "etag": "\"2619e666ac17390a41f541d5986db41e-184\"",
+    "verification": "full remote readback",
+    "url": "https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/replay/snapshot.tar.zst"
+  },
+  "gates": {
+    "all_four_restores_and_replays": "passed: matching final commitments and exhaustive 51,420-body audits after reopen",
+    "nethermind_patricia_cleanup": "passed: FlatDB reopen and published cleanup proof; Patricia and keystores excluded",
+    "workload_8037_and_bal_volume": "passed: 50,400 qualifying blocks, both gas dimensions near 50% of 200M, minimum BAL 450,865 bytes",
+    "native_snapshot_publication": "passed: all four public objects, metadata, startup and integrity provenance",
+    "replay_bundle": "passed: producer input comparison, checksummed records and full remote archive readback",
+    "common_manifest": "passed: public manifest equals controller release and all five archive identities",
+    "live_database_state": "passed: all execution clients stopped; no process has native database files open",
+    "credentials": "passed: scoped multipart authorization files removed on all four VMs; account storage credentials stayed on controller",
+    "source_preservation": "passed: original source metadata hashes and archive sizes/ETags/last-modified unchanged",
+    "monitoring": "passed: 15-minute monitor timer active; production node metrics read back for all four sources",
+    "deadline": "missed; delivery was published after 09:00 UTC"
+  },
+  "audit_evidence": [
+    {
+      "file": "independent-public-delivery-audit.json",
+      "sha256": "095202b6b744dc428f5251f40aac6b70d83db9f20c39242aa9bdafdac8b6a9cb"
+    },
+    {
+      "file": "final-runtime-source-credential-audit.json",
+      "sha256": "da25f79a4dd3fb823a42703f1208d76f8d97bc25e171ca38c11444da9e67986d"
+    },
+    {
+      "file": "replay-bundle-ready.json",
+      "sha256": "74752000a1c3720b7cc1bf1867002ce7eab1cc07a52921ad6fde5d6d943de9f9"
+    },
+    {
+      "file": "monitoring-four-vm-readback.json",
+      "sha256": "08e5da18223f927b14caa0fb015a1d004f5af37439a45d33e1daf1e7fe06e33d"
+    }
+  ],
+  "verification_limits": {
+    "native": "Per-part upload Content-MD5 and first/last/three sampled SHA256 range readbacks; no full native archive readback.",
+    "replay": "Previously completed full remote readback, with current public object identity checked."
+  },
+  "scope": "Refreshed snapshot preparation only. Nine-worker migration, PBT fork activation and pending infrastructure PRs are subsequent work."
+}
