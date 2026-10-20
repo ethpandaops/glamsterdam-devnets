@@ -1,7 +1,8 @@
 # PBT-1 attached-volume comparison
 
-Status at 09:21 UTC: volume attached; small smoke run passed; full benchmark
-started. Performance results are pending. This experiment does not change the
+Status at 09:42 UTC: volume attached; full benchmark running. Sequential and
+serial random-read tests have completed; concurrent random I/O and durable-write
+results are pending. This experiment does not change the
 database placement or provision the remaining migration workers.
 
 ## Host and volume
@@ -23,7 +24,28 @@ disk. Terraform created only the volume, its Besu attachment, and its project
 association; no existing resources were changed or destroyed. Configuration:
 [`benchmark-volume.tf`](../terraform/pbt-1/benchmark-volume.tf).
 The API attachment and mounted filesystem identity were independently checked.
-Besu remains cleanly stopped. Erigon continues validation on a separate VM.
+Besu remains cleanly stopped. Erigon completed validation and is uploading its
+snapshot on a separate VM.
+
+## Interim measurements
+
+| Workload | Local disk | Attached volume | Local / volume |
+|---|---:|---:|---:|
+| Sequential read, 1 MiB, QD32 | 8,640.98 MiB/s | 499.89 MiB/s | 17.29× |
+| Sequential write, 1 MiB, QD32 | 861.77 MiB/s | 450.11 MiB/s | 1.91× |
+
+| Serial random read, 4 KiB, QD1 | Local disk | Attached volume |
+|---|---:|---:|
+| IOPS | 11,804 | 2,596 |
+| Median completion latency | 84.48 µs | 358.40 µs |
+| p99 completion latency | 136.19 µs | 757.76 µs |
+
+These are measured rates for the warm 64-GiB working set described below.
+In particular, the high local read rate does not establish cold-read throughput
+for a full 1.2-TB database: direct I/O bypasses guest page cache, but does not
+exclude provider caching. The sequential writes do not synchronize each write;
+the separate `fdatasync` test is still pending. No database-placement decision
+has been made from these partial results.
 
 ## Method
 
