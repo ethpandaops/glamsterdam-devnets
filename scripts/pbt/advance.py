@@ -104,7 +104,12 @@ def main():
             except Exception as e:errors.append(f'{c}: {e}')
     if not (ROOT/'delivery-complete.json').exists() and all((ROOT/f'published-{c}.json').exists() for c in HOSTS):
         try:
-            start('geth','pbt-1-publish-bundle',[str(ROOT/'venv/bin/python'),'-u',str(REPO/'scripts/pbt/publish-bundle.py')],local=True)
+            preparation=dict(line.split('=',1) for line in command(['systemctl','--user','show',
+                'pbt-1-prepare-bundle','-p','LoadState','-p','ActiveState']).splitlines() if '=' in line)
+            if preparation.get('LoadState')=='loaded' and not (ROOT/'replay-bundle-ready.json').exists():
+                assert preparation.get('ActiveState') in ('active','activating'), 'Replay bundle preparation stopped without verification; inspect before retrying'
+            else:
+                start('geth','pbt-1-publish-bundle',[str(ROOT/'venv/bin/python'),'-u',str(REPO/'scripts/pbt/publish-bundle.py')],local=True)
         except Exception as e:errors.append(f'bundle: {e}')
     result={'time':time.time(),'full_run_enabled':approved.exists(),'clients':states,'errors':errors}
     tmp=ROOT/'advance-status.json.tmp';tmp.write_text(json.dumps(result,indent=2)+'\n');tmp.replace(ROOT/'advance-status.json')

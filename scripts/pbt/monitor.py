@@ -296,6 +296,16 @@ def main():
         report['alerts'].extend('workflow: '+error for error in workflow.get('errors',[]))
         if now-workflow.get('time',0)>180:
             report['alerts'].append('workflow: coordinator status is over three minutes old')
+    bundle_service=subprocess.run(['systemctl','--user','show','pbt-1-prepare-bundle',
+        '-p','LoadState','-p','ActiveState','-p','MainPID','-p','Result'],capture_output=True,text=True,timeout=10)
+    bundle_state=dict(line.split('=',1) for line in bundle_service.stdout.splitlines() if '=' in line)
+    if bundle_state.get('LoadState')=='loaded':
+        ready=controller.parent/'replay-bundle-ready.json'
+        report['replay_bundle']={'service':bundle_state,'ready':json.loads(ready.read_text()) if ready.exists() else None}
+        if bundle_state.get('ActiveState')=='failed':
+            report['alerts'].append('replay bundle: preparation failed; inspect preserved inputs and journal')
+        elif not ready.exists() and bundle_state.get('ActiveState') not in ('active','activating'):
+            report['alerts'].append('replay bundle: no verified archive and preparation is not running')
     raw_relay=controller.parent/'raw-relay-status.json'
     if raw_relay.exists():
         report['raw_relay']=json.loads(raw_relay.read_text())
@@ -368,6 +378,10 @@ def main():
         lines += ['', f'Controller replay storage: {s["replay_bytes"]/2**30:.1f} GiB; '
                   f'{s["free_bytes"]/2**30:.1f} GiB free; estimated additional '
                   f'{s["estimated_additional_bytes"]/2**30:.1f} GiB plus 10 GiB reserve.']
+    if 'replay_bundle' in report:
+        bundle=report['replay_bundle']
+        phase='full remote readback verified' if bundle['ready'] else bundle['service'].get('ActiveState','unknown')
+        lines += ['', f'Replay archive preparation: {phase}. Final delivery still requires all four verified native snapshots.']
     if 'temporary_probe' in report:
         probe=report['temporary_probe']
         if 'error' not in probe:
