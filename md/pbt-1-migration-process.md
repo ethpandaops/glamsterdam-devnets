@@ -296,7 +296,11 @@ measured. The linked [Besu preflight](https://cperezz.github.io/pbt-website/uplo
 reports 1.5 TiB trimmed by `fstrim`, not a direct available-space measurement.
 
 The proposed capacity mitigation is an **additional 2.5 TB volume per migration
-worker**, alongside its existing disk. No such volumes have been provisioned.
+worker**, alongside its existing disk. At the operator's request, one 2500-GiB
+volume (~2.68 decimal TB) was attached to the idle Besu source VM on October 20
+for a direct comparison with its local disk. The remaining volume rollout is
+undecided, as is using volumes for recovery copies versus active databases.
+See the [storage benchmark record](pbt-1-storage-benchmark-2026-10-20.md).
 Keep storage configuration identical between the 16- and 32-GiB variants.
 DigitalOcean sizes volumes in GiB: resolve the intended byte capacity explicitly
 when preparing Terraform. Record volume type and actual database, artifact and
