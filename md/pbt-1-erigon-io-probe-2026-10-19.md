@@ -1035,3 +1035,42 @@ Evidence is `erigon-upload-concurrency-32.json` and
 readiness reports name thirty-two transfers. The storage-file sample and these
 transport tests measure different parts of the pipeline. Full native archive
 throughput and completion remain unproven until the actual stopped-source export.
+
+## Existing-VM memory recheck at 04:45–04:59 UTC
+
+New memory-limit events appeared during the native union run after 04:40.
+The process was at its 48-GiB cgroup ceiling, and state-writer time had grown
+to roughly 63–66 seconds per batch. This changed the evidence behind the
+earlier decision to stop throughput experiments. A reversible live check
+allowed 56 GiB on the existing 64-GiB VM for eight minutes, automatically
+restored 48 GiB, then observed four more minutes. An independent rollback timer
+was armed before the change and canceled only after restoration was verified.
+The replay continued normally throughout, with identical process invocations,
+eight CPUs, normal pruning and normal durability.
+
+Complete 64-block inter-head intervals, excluding intervals across a setting
+change and the first minute at 56 GiB, measured:
+
+| Limit and window | Blocks | Seconds | Blocks/s |
+| --- | ---: | ---: | ---: |
+| 48 GiB before | 320 | 498.191 | 0.6423 |
+| 56 GiB | 384 | 340.068 | 1.1292 |
+| 48 GiB restored | 192 | 202.766 | 0.9469 |
+
+The candidate was 19.25% faster than the faster control. These are sequential
+live windows with different blocks, not an identical-input replay comparison.
+The measurements include the work between completed heads, including pruning
+and persistence. No OOM event or restart occurred. The candidate retained
+roughly 35–36 GiB of file cache, versus about 28 GiB at the original limit.
+
+At 04:59 UTC, after the rollback and comparison completed successfully, 56 GiB
+was retained for the remaining native replay at head 24,491,250. The VM shape
+and binary did not change. The pinned-image final restart/audit profile remains
+48 GiB. This does not change the later 16/32-GiB migration-worker matrix.
+The controller evidence is `native-memory-check/`, including before/candidate/
+after logs, observations, interval analysis and adoption report. The VM report
+is `native-replay/memory-adoption.json`; publication includes it as
+`_snapshot_native_memory.json`, linked from native replay provenance.
+The monitor now requires an unchanged known memory limit before projecting
+throughput; regression coverage first failed, then passed. All 49 Python
+workflow tests pass.

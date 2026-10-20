@@ -12,6 +12,7 @@ class ReplayProjectionTests(unittest.TestCase):
                     'native_replay': {key: {'ActiveState': 'active', 'MainPID': str(i),
                                            'InvocationID': 'invocation-'+key}
                                       for i, key in enumerate(('service', 'client'), 1)}}
+        self.old['native_replay']['client']['MemoryMax'] = str(48*1024**3)
         self.new = copy.deepcopy(self.old)
         self.new['pipeline'].update(head=1600, time=1600)
 
@@ -36,6 +37,16 @@ class ReplayProjectionTests(unittest.TestCase):
             new = copy.deepcopy(self.new)
             new['pipeline'][field] = value
             self.assertIsNone(replay_projection(new, self.old, 1600))
+
+    def test_changed_or_unknown_memory_limit_invalidates_projection(self):
+        for value in (str(56*1024**3), None, ''):
+            with self.subTest(value=value):
+                new = copy.deepcopy(self.new)
+                new['native_replay']['client']['MemoryMax'] = value
+                self.assertIsNone(replay_projection(new, self.old, 1600))
+        old = copy.deepcopy(self.old)
+        old['native_replay']['client'].pop('MemoryMax')
+        self.assertIsNone(replay_projection(self.new, old, 1600))
 
     def test_bounded_pilot_is_not_a_full_replay_forecast(self):
         for trial in (self.new, self.old):

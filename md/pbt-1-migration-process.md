@@ -73,6 +73,15 @@ looks unlikely. Existing phase logs around 04:16 showed independent medians
 of 13 seconds executing each 64-block batch, 37 seconds flushing state, and
 12 seconds committing; no memory-limit or OOM events were recorded.
 
+After new memory-limit events and longer writes appeared around 04:40, a
+48/56/48-GiB live comparison on the same VM measured 1.129 blocks/s at 56 GiB,
+19.25% above the faster 48-GiB control. The windows used different successive
+blocks. The original limit was restored for comparison, then 56 GiB was retained
+at 04:59 for the remaining native replay, without a restart or VM change.
+Its qualification and resource adjustment are included in native replay
+provenance. The pinned-image final audit and later migration-worker matrix
+retain their own resource limits. See the [memory recheck evidence](pbt-1-erigon-io-probe-2026-10-19.md#existing-vm-memory-recheck-at-04450459-utc).
+
 The [Geth metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_metadata.json),
 [Besu metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/_snapshot_metadata.json),
 and [Nethermind metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/nethermind/24503958/_snapshot_metadata.json)

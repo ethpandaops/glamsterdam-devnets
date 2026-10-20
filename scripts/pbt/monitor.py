@@ -60,7 +60,7 @@ for directory,runner in [('native-buffer-pilot','pbt-1-native-buffer-pilot'),('n
 if client=='erigon' and ((root/'native-replay').exists() or native_runner!='pbt-1-native-replay'):
     result['native_replay']={'bounded_trial':native_runner!='pbt-1-native-replay'}
     for key,unit in [('service',native_runner),('client','pbt-1-native-replay-client')]:
-        service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result','-p','InvocationID')
+        service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result','-p','InvocationID','-p','MemoryMax')
         result['native_replay'][key]=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
 if client=='erigon' and (root/'native-source-pilot').exists():
     pilot=root/'native-source-pilot'
@@ -179,6 +179,8 @@ def replay_projection(current, previous, now):
         if (new.get('ActiveState') != 'active' or old.get('ActiveState') != 'active'
                 or not new.get('InvocationID') or new.get('InvocationID') != old.get('InvocationID')
                 or new.get('MainPID') in (None, '0') or new.get('MainPID') != old.get('MainPID')):
+            return None
+        if key == 'client' and (not new.get('MemoryMax') or new.get('MemoryMax') != old.get('MemoryMax')):
             return None
     target = current_progress.get('target_head')
     if not isinstance(target, int) or target != previous_progress.get('target_head'):

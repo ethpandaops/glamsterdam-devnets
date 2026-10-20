@@ -120,6 +120,17 @@ def main():
                 'evidence':prefix+'_snapshot_native_replay_complete.json',
                 'build_evidence':prefix+'_snapshot_native_replay_continuous_build.json',
                 'notes':'The remaining replay used this native build, with VALID payloads and matching commitments for each block; final validation reopened the pinned image.'}
+            memory_present=subprocess.run(ssh+['test -f /data/pbt-1/native-replay/memory-adoption.json']).returncode
+            assert memory_present in (0,1), 'Could not inspect native replay memory provenance'
+            if memory_present==0:
+                memory=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-replay/memory-adoption.json']))
+                assert memory['binary_sha256']==native['binary_sha256']
+                assert native['start']<=memory['head_at_adoption']<native['end']
+                assert memory['normal_durability'] and memory['normal_pruning'] and not memory['vm_changed']
+                assert int(memory['after_service']['MemoryMax'])==memory['memory_max_after']
+                assert memory['before_service']['InvocationID']==memory['after_service']['InvocationID']
+                objects['_snapshot_native_memory.json']=memory
+                metadata['pbt']['native_replay']['continuous']['memory_adjustment']=prefix+'_snapshot_native_memory.json'
             if 'union_commit' in build['source']:
                 metadata['pbt']['native_replay']['continuous']['storage_union']=prefix+'_snapshot_native_storage_union.json'
             history_code = "import json;from pathlib import Path;root=Path('/data/pbt-1/native-replay-segments');print(json.dumps([{'proof':json.loads((p/'handoff-complete.json').read_text()),'build':json.loads((p/'build.json').read_text()),'buffer_pilot':json.loads((p/'buffer-pilot-proof.json').read_text()) if (p/'buffer-pilot-proof.json').exists() else None} for p in sorted(root.iterdir())] if root.exists() else []))"
