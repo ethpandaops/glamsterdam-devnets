@@ -2,7 +2,7 @@ import copy
 from types import SimpleNamespace
 import unittest
 
-from storage_union import PARAMS, verify_warmup
+from storage_union import PARAMS, qualified_environment, verify_warmup
 from test_buffer_pilot import module
 
 
@@ -71,6 +71,25 @@ class UnionBuildGate(unittest.TestCase):
     def test_wrong_candidate_binary_is_fatal(self):
         with self.assertRaises(AssertionError):
             module.verify_build(self.build, self.proof, 'other')
+
+    def test_full_replay_requires_the_qualified_environment_and_warmup(self):
+        proof = copy.deepcopy(self.proof)
+        proof['timing'].update(environment={'DOMAIN_STORAGE_UNION': 'true'},
+                               filter_warmup={'head_unchanged': True, 'pinned_value_verified': True})
+        self.assertEqual(qualified_environment(self.build, proof), {'DOMAIN_STORAGE_UNION': 'true'})
+        for change in ['environment', 'head_unchanged', 'pinned_value_verified']:
+            wrong = copy.deepcopy(proof)
+            if change == 'environment':
+                wrong['timing']['environment'] = {}
+            else:
+                wrong['timing']['filter_warmup'][change] = False
+            with self.assertRaises(AssertionError):
+                qualified_environment(self.build, wrong)
+
+    def test_legacy_build_cannot_inherit_union_environment(self):
+        self.assertEqual(qualified_environment({'source': {}}, {'timing': {}}), {})
+        with self.assertRaises(AssertionError):
+            qualified_environment({'source': {}}, {'timing': {'environment': {'DOMAIN_STORAGE_UNION': 'true'}}})
 
 
 if __name__ == '__main__':

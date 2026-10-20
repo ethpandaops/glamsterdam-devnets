@@ -795,3 +795,42 @@ form the measured window. The extended workflow's 39 tests passed. The monitor
 recognizes this bounded trial and excludes it from full-replay forecasts.
 The candidate is staged but has not yet replayed blocks or been adopted for
 the full run.
+
+## Storage union passed replay qualification at 01:56 UTC
+
+The preceding full segment sealed at 24,480,050 after all 4,032 headers, the
+unreported tail's VALID responses, recent bodies, normal persistence and pinned
+restart checks. It is retained as `native-replay-segments/0006/`.
+
+The union candidate then replayed 24,480,051–24,480,306. All 256 headers and
+full bodies matched before clean native shutdown and after reopening the
+pinned release. The trial is sealed as segment `0007`. The RPC storage filter
+built in 60.704 seconds; execution's separate reader generation built its filter
+in 11.578 seconds during the excluded first 64 blocks. Each covered 4,085
+visible files and used 128 MiB.
+
+The remaining 192 blocks took 157.773 seconds including final persistence:
+**1.21694 blocks/s**. The preceding 384-block window was 0.93010 blocks/s,
+and the earlier quieter 384-block baseline was 1.00927 blocks/s. These are
+30.8% and 20.6% higher throughputs, respectively, across different sequential
+windows. The recent baseline included concurrent read-only probes. The
+filter-loop microbenchmark gain must not be substituted for this replay result.
+
+This qualifies adoption on the original VM with 64-block batches, a 2-GiB
+buffer, normal durability, eight CPUs and the existing 48-GiB process limit.
+Full replay must carry the exact qualified environment and repeat the
+pinned/native read-only warmup. Final publication requires this qualification
+and full-run warmup evidence. The extended workflow's 41 tests passed.
+Controller evidence is `storage-union-probe/native-union-pilot-evidence.tar.gz`,
+`union-pilot-proof.json` and `union-pilot-comparison.json`.
+
+The verified head now contains 26,748 of 50,400 qualifying blocks. At the trial
+rate, the remaining 23,652 blocks take about 5 hours 24 minutes, before final
+BAL restoration, restart audit and native upload. Delivery by 09:00 UTC remains
+at risk. All other native snapshot uploads continue.
+
+The controller's build caches briefly crossed the relay's 30-GB free-space
+guard. All 51,420 input records were already present on Erigon. Removing the
+oldest 14 GiB of reproducible Go cache entries restored about 37 GiB free,
+without removing source, binaries, replay inputs, snapshots or evidence. The
+relay then completed successfully, and the 01:48 monitor reported no alerts.

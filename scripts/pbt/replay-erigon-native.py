@@ -14,6 +14,7 @@ import time
 
 from pipeline_rpc import ROOT, RPC, ANCHOR, save
 from reopen import stop
+from storage_union import qualified_environment
 
 RUN = Path('/data/pbt-1/native-replay')
 RAW = Path('/data/pbt-1/raw-stream')
@@ -194,6 +195,7 @@ def main(args):
     assert probe['timing']['replay']['batch_size'] == args.batch_size
     assert probe['timing'].get('execution_buffer', '512M') == args.execution_buffer
     assert probe['timing']['replay']['final_persistence_verified']
+    environment = qualified_environment(build, probe)
     if args.batch_size > 16:
         assert build['source']['continuation_commit'] == '72b4a99bbb46a61ce3ab0932111533da8cb9fcda'
     original = inspect()
@@ -219,6 +221,10 @@ def main(args):
     raw_request = json.loads((RAW/'request.json').read_text())
     assert raw_request['start'] <= first and raw_request['end'] == end
     save(RUN/'request.json', {'start': first, 'end': end, 'batch_size': args.batch_size, 'execution_buffer': args.execution_buffer})
+    warmup_args = ['python3', str(Path(__file__).with_name('storage_union.py')), '--before', str(RUN/'before.json')]
+    if environment:
+        subprocess.run(['nsenter', '--target', str(original['State']['Pid']), '--net',
+            *warmup_args, '--output', str(RUN/'warmup-pinned.json')], check=True)
     stop(NAME, RUN/'pinned-shutdown.log')
     save(RUN/'pinned-shutdown.json', inspect()['State'])
     client_args = ['--datadir=/data/pbt-1/erigon' if x == '--datadir=/data' else
@@ -233,7 +239,8 @@ def main(args):
         'Type=exec', 'PrivateNetwork=yes', 'MemoryMax=48G', 'MemorySwapMax=0', 'AllowedCPUs=0-7',
         'KillSignal=SIGINT', 'SuccessExitStatus=130', 'TimeoutStopSec=1800', 'SendSIGKILL=no',
         'StandardOutput=append:'+str(RUN/'client.log'), 'StandardError=inherit',
-        'Environment=COMPRESS_WORKERS=2 MERGE_WORKERS=2 MDBX_TRACE_TX=true REPLAY_PROFILE=true',
+        'Environment=COMPRESS_WORKERS=2 MERGE_WORKERS=2 MDBX_TRACE_TX=true REPLAY_PROFILE=true'+
+            ''.join(' '+key+'='+value for key,value in environment.items()),
         'ExecStart='+shlex.join([str(args.binary), *client_args]), ''])
     unit.write_text(text)
     (RUN/'client.service').write_text(text)
@@ -243,6 +250,10 @@ def main(args):
     helper = helpers()
     helper.wait_ready(UNIT)
     subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--audit', 'opened'), check=True)
+    if environment:
+        subprocess.run(helper.namespace(UNIT, *warmup_args, '--baseline', str(RUN/'warmup-pinned.json'),
+            '--output', str(RUN/'warmup-native.json')), check=True)
+        assert '[domain-union] built' in (RUN/'client.log').read_text(), 'Storage union did not activate'
     subprocess.run(helper.namespace(UNIT, 'python3', '-u', __file__, '--replay'), check=True)
     save(ROOT/'status.json', {'phase': 'restart_validation', 'time': time.time(), 'head': end,
         'reason': 'Native replay complete; validating pinned-image reopen'})
@@ -265,7 +276,7 @@ def main(args):
     assert int(after['number'], 16) == end
     save(RUN/'complete.json', {'time': time.time(), 'start': first, 'end': end, 'head': after,
         'validated_blocks': end-first+1, 'batch_size': args.batch_size, 'binary_sha256': build['sha256'],
-        'execution_buffer': args.execution_buffer,
+        'execution_buffer': args.execution_buffer, 'environment': environment,
         'normal_durability': True, 'pinned_reopen_verified': True, 'image': original['Config']['Image']})
     save(ROOT/'status.json', {'phase': 'replay_complete', 'time': time.time(), 'head': end, 'target_head': end,
         'workload_blocks': end-ANCHOR-3, 'qualifying_blocks': end-ANCHOR-1020,

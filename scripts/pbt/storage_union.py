@@ -11,6 +11,17 @@ PARAMS = ['0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
           '0x'+hashlib.sha256(b'pbt-1-storage-union-readonly-warmup').hexdigest(), 'latest']
 
 
+def qualified_environment(build, proof):
+    environment = proof['timing'].get('environment', {})
+    if 'union_commit' in build['source']:
+        assert environment == build['source']['union_environment'] == {'DOMAIN_STORAGE_UNION': 'true'}
+        warmup = proof['timing']['filter_warmup']
+        assert warmup['head_unchanged'] and warmup['pinned_value_verified']
+    else:
+        assert environment == {}, 'Unqualified native environment'
+    return environment
+
+
 def verify_warmup(rpc, head, baseline=None):
     assert rpc.head() == head, 'Warmup must start at the audited head'
     started = time.monotonic()

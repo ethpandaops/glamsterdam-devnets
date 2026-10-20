@@ -10,6 +10,7 @@ import subprocess
 import time
 from monitor import HOSTS
 from storage import client,BUCKET,PREFIX
+from storage_union import qualified_environment
 
 
 def main():
@@ -109,10 +110,18 @@ def main():
             assert native['validated_blocks']==native['end']-native['start']+1>0
             objects['_snapshot_native_replay_complete.json']=native
             objects['_snapshot_native_replay_continuous_build.json']=build
+            if 'union_commit' in build['source']:
+                qualification=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-replay/probe-proof.json']))
+                assert native['environment']==qualified_environment(build,qualification)
+                warmup=json.loads(subprocess.check_output(ssh+['cat /data/pbt-1/native-replay/warmup-native.json']))
+                assert warmup['head_unchanged'] and warmup['pinned_value_verified']
+                objects['_snapshot_native_storage_union.json']={'qualification':qualification,'full_run_warmup':warmup}
             metadata['pbt']['native_replay']['continuous']={
                 'evidence':prefix+'_snapshot_native_replay_complete.json',
                 'build_evidence':prefix+'_snapshot_native_replay_continuous_build.json',
                 'notes':'The remaining replay used this native build, with VALID payloads and matching commitments for each block; final validation reopened the pinned image.'}
+            if 'union_commit' in build['source']:
+                metadata['pbt']['native_replay']['continuous']['storage_union']=prefix+'_snapshot_native_storage_union.json'
             history_code = "import json;from pathlib import Path;root=Path('/data/pbt-1/native-replay-segments');print(json.dumps([{'proof':json.loads((p/'handoff-complete.json').read_text()),'build':json.loads((p/'build.json').read_text()),'buffer_pilot':json.loads((p/'buffer-pilot-proof.json').read_text()) if (p/'buffer-pilot-proof.json').exists() else None} for p in sorted(root.iterdir())] if root.exists() else []))"
             history=json.loads(subprocess.check_output(ssh+[shlex.join(['python3','-c',history_code])]))
             next_start=None
