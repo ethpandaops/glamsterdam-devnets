@@ -935,3 +935,55 @@ the adoption. The measured decoding rate extrapolates to approximately 16
 minutes for two full input passes, excluding sidecar writes, restart, API audit
 and upload. This is not a measured final-stage completion time. Production
 sidecar restoration has not run yet.
+
+## Mutable database size inspection at 02:34 UTC
+
+A short read-only probe using the pinned MDBX Go dependency, v0.43.0, collected
+table page statistics. It opened existing tables with `MDBX_DB_ACCEDE` so their
+stored flags were preserved. An initial attempt with default table flags was
+rejected on the first DupSort table; that attempt made no database writes.
+
+At the successful sample, the file was 229,092,884,480 bytes, the read
+transaction's committed geometry was 228,086,251,520 bytes, and reported table
+pages accounted for 222,727,368,704 bytes. Live replay can grow the file between
+the filesystem sample and the pinned read transaction. More than 97% of the
+file was accounted for by table pages. `CommitmentVals` alone held about
+146.82 GiB and 228,787,949 entries. Immutable snapshot files separately occupied
+497,525,137,408 bytes at the preceding size check.
+
+MDBX compact copy omits free pages and renumbers retained pages; these figures
+do not support spending time copying, switching and revalidating the database
+for the small possible free-page reduction. No compaction or deletion was
+performed. Replay continued on the same process and invocation. Source, binary,
+raw statistics and the decision report are preserved in the controller's
+`mdbx-size-probe/` directory.
+
+## Sixteen-transfer upload qualified at 02:41 UTC
+
+A transport-only comparison uploaded 4 GiB per trial using the same 256-MiB
+parts and original Erigon VM. Eight/sixteen/eight concurrent transfers measured
+128.00 / 225.43 / 177.22 MiB/s. Sixteen transfers were 27.2% faster than the
+faster control. The variation between controls matters: the larger gain against
+the first control must not be presented as the conservative result.
+
+Every byte of all three temporary objects was read back and checked against
+the source part SHA-256 values. Content-MD5 was also supplied for every PUT.
+Each object was deleted and its absence verified before the trial report was
+marked complete. The probe used generated payloads, so these measurements
+exclude native archive reading, tar, compression and production stream hashing.
+
+The Erigon uploader now uses sixteen transfers, bounding simultaneous PUT
+buffers to 4 GiB; its producer and compression buffers are additional. The
+source client will be stopped before upload. Other clients retain four
+transfers and their running uploads were not changed. Archive exclusions,
+clean-restart prerequisites and verification gates are unchanged. Both existing
+archive-layout tests passed. The prior Erigon script is preserved as
+`/data/pbt-1/upload-eight.py`.
+
+Uploader SHA-256:
+`c470d345e4402f25646739b4313b9751bb48bffd895a39211253a15ee0d36f7f`.
+Evidence is `erigon-upload-concurrency-16.json` and
+`erigon-upload-concurrency-16-adoption.json` on the controller. The current
+adoption and final-stage readiness reports name sixteen transfers. The full
+native upload is still pending; this is not a delivered snapshot or a measured
+end-to-end upload duration.
