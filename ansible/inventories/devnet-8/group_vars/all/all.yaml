@@ -252,6 +252,9 @@ gen_kubernetes_config_tracoor_resources:
   limits:
     cpu: 2000m
     memory: 8Gi
+# Its Argo app name is over helm's 53-char release name limit, and the chart renders disabled anyway.
+gen_kubernetes_config_disabled_services:
+  - xatu-relay-monitor
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
