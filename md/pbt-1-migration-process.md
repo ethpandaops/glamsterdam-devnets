@@ -104,10 +104,10 @@ to Cloudflare Access. MSF-2 TLS also recovered after the replacement gap.
 merging at the operator's request; existing automatic ingress-user discovery is
 already active for PBT-1.
 
-Checkpoint-sync's separate in-cluster certificate remains pending: cert-manager's
-HTTP-01 self-check attempts an IPv6 address unreachable from the cluster. Its
-public HTTPS endpoint works through the active Cloudflare certificate. Resolve
-that internal issuance issue before relying on direct-origin TLS. VM certificates
+Checkpoint-sync's separate in-cluster certificate also issued successfully.
+After the transient IPv6 self-check failure, cert-manager retried and reports
+`Ready=True`. A direct request to the services load balancer returned HTTP 200
+with successful TLS verification for the checkpoint hostname. VM certificates
 under `srv.glamsterdam-pbt-1.ethpandaops.io` still need bootnode DNS delegation and
 the wildcard issuer; the launch genesis and remaining fleet are also outstanding.
 Controller rollout evidence is `cloudflare-pbt-rollout-verified.json`.
