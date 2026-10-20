@@ -315,6 +315,21 @@ re-inserting below the header-sync tip and advances beyond the duplicate-FCU
 path. The final two 64-block batches form the 128-block measured window; all 256
 pilot bodies still require both audits. The original guard remains unchanged.
 
+The `--profile wide-128` pilot uses a separate `native-wide-pilot/` evidence
+directory, a 4-GiB execution buffer and four batches of 128 blocks. It excludes
+the first 128 blocks and their persistence from its measured window, then checks
+all 512 headers and bodies before shutdown and after pinned-image reopen. CPU,
+48-GiB process limit and normal durability remain unchanged. Success qualifies
+that configuration; a measured gain is still required before adopting it for
+the remaining replay. The continuous driver requires the matching proof.
+
+For a planned handoff, `handoff-erigon-native.py --seal-only --wait-next-head`
+waits for a fresh head-update notification before stopping the replay driver.
+This reduces the chance of leaving a later batch staged beyond the head. The
+notification is not a persistence proof: the handoff still waits for the
+post-forkchoice event, audits every segment header and any unreported payloads,
+and verifies pinned-image reopen before sealing the segment.
+
 After the first large Erigon merge completed, another 20 GiB merge range began.
 [`suppress-erigon-maintenance.py`](suppress-erigon-maintenance.py) checkpointed the
 paused datadir, verified a separate mutable MDBX copy and preserved immutable

@@ -2,7 +2,9 @@
 import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
+import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('handoff', Path(__file__).with_name('handoff-erigon-native.py'))
 module = importlib.util.module_from_spec(spec)
@@ -76,6 +78,25 @@ class HandoffChecks(unittest.TestCase):
         self.assertEqual(module.persisted_head('head updated number=116\nTimings: Post-Forkchoice\nhead updated number=132\n'), 116)
         self.assertEqual(module.persisted_head('head updated number=132\nTimings: Post-Forkchoice\n'), 132)
         self.assertIsNone(module.persisted_head('head updated number=132\n'))
+
+    def test_boundary_wait_ignores_old_log_and_handles_split_lines(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'client.log'
+            path.write_text('head updated number=999\n')
+            chunks = iter(['head updated number=', '132\n'])
+            def append(_):
+                with path.open('a') as stream:
+                    stream.write(next(chunks))
+            with patch.object(module.time, 'sleep', side_effect=append):
+                self.assertEqual(module.wait_next_head(path, 116), 132)
+
+    def test_boundary_wait_timeout_does_not_accept_old_head(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'client.log'
+            path.write_text('head updated number=132\n')
+            with patch.object(module.time, 'monotonic', side_effect=[0, 11]):
+                with self.assertRaisesRegex(AssertionError, 'driver was not stopped'):
+                    module.wait_next_head(path, 116, timeout=10)
 
 
 if __name__ == '__main__':

@@ -218,7 +218,7 @@ def main(args):
     assert int(pilot['head']['number'], 16) < first <= end
     raw_request = json.loads((RAW/'request.json').read_text())
     assert raw_request['start'] <= first and raw_request['end'] == end
-    save(RUN/'request.json', {'start': first, 'end': end, 'batch_size': args.batch_size})
+    save(RUN/'request.json', {'start': first, 'end': end, 'batch_size': args.batch_size, 'execution_buffer': args.execution_buffer})
     stop(NAME, RUN/'pinned-shutdown.log')
     save(RUN/'pinned-shutdown.json', inspect()['State'])
     client_args = ['--datadir=/data/pbt-1/erigon' if x == '--datadir=/data' else
@@ -278,7 +278,7 @@ if __name__ == '__main__':
     parser.add_argument('--build-report', type=Path)
     parser.add_argument('--probe-proof', type=Path)
     parser.add_argument('--batch-size', type=int, choices=[8, 16, 64, 128])
-    parser.add_argument('--execution-buffer', choices=['512M', '2G'], default='512M')
+    parser.add_argument('--execution-buffer', choices=['512M', '2G', '4G'], default='512M')
     parser.add_argument('--audit', choices=['before', 'opened', 'native-after', 'pinned-reopen'])
     parser.add_argument('--replay', action='store_true')
     args = parser.parse_args()

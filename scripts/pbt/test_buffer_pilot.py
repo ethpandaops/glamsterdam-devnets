@@ -54,6 +54,19 @@ class BufferBodyChecks(unittest.TestCase):
         with self.assertRaises(AssertionError):
             module.verify_bodies(self.rpc, self.record, 101, 118, self.head)
 
+    def test_wide_profile_has_separate_evidence_and_checks_all_512_bodies(self):
+        try:
+            module.configure('wide-128')
+            self.assertEqual((module.PILOT.name, module.BATCH_SIZE, module.BUFFER, module.BLOCKS),
+                             ('native-wide-pilot', 128, '4G', 512))
+            self.rpc.head = lambda: self.header(612)
+            self.assertEqual(module.verify_bodies(self.rpc, self.record, 101, 612, self.header(612)), 512)
+            self.assertEqual(self.headers, list(range(101, 613)))
+        finally:
+            module.configure('buffer-64')
+        self.assertEqual((module.PILOT.name, module.BATCH_SIZE, module.BUFFER, module.BLOCKS),
+                         ('native-buffer-pilot', 64, '2G', 256))
+
 
 if __name__ == '__main__':
     unittest.main()

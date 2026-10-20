@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Qualify a 2-GiB execution buffer on 256 canonical blocks on the original VM."""
+"""Qualify bounded replay batch/buffer profiles on the original VM."""
 import argparse
 import fcntl
 import importlib.util
@@ -11,12 +11,23 @@ import time
 
 from pipeline_rpc import ROOT, RPC, ANCHOR, save
 
+PROFILE = 'buffer-64'
 PILOT = Path('/data/pbt-1/native-buffer-pilot')
+BATCH_SIZE, BUFFER, BLOCKS = 64, '2G', 256
 HISTORY = Path('/data/pbt-1/native-replay-segments')
 UNIT = 'pbt-1-native-replay-client'
 NAME = 'pbt-1-erigon-execution'
 BINARY = Path('/data/pbt-1/erigon-native-continuation')
 BUILD = BINARY.with_name(BINARY.name+'-build-report.json')
+
+
+def configure(profile):
+    global PROFILE, PILOT, BATCH_SIZE, BUFFER, BLOCKS
+    profiles = {'buffer-64': ('native-buffer-pilot', 64, '2G', 256),
+                'wide-128': ('native-wide-pilot', 128, '4G', 512)}
+    name, BATCH_SIZE, BUFFER, BLOCKS = profiles[profile]
+    PROFILE = profile
+    PILOT = Path('/data/pbt-1')/name
 
 
 def driver():
@@ -96,24 +107,24 @@ def main():
     assert verified['status']['all_bodies_verified_before_and_after']
     assert verified['timing']['binary']['sha256'] == build['sha256']
     first = sealed['end']+1
-    end = first+255
+    end = first+BLOCKS-1
     assert end < sealed['final_target']
     raw = json.loads(Path('/data/pbt-1/raw-stream/complete.json').read_text())
     assert raw['start'] <= first and raw['end'] >= end
     PILOT.mkdir()
     save(PILOT/'build.json', build)
     save(PILOT/'before.json', {'head': sealed['head']})
-    save(PILOT/'request.json', {'start': first, 'end': end, 'batch_size': 64,
-        'record_batch_timings': True, 'execution_buffer': '2G', 'final_target': sealed['final_target']})
+    save(PILOT/'request.json', {'start': first, 'end': end, 'batch_size': BATCH_SIZE,
+        'record_batch_timings': True, 'execution_buffer': BUFFER, 'final_target': sealed['final_target']})
     save(ROOT/'status.json', {'phase': 'restart_validation', 'time': time.time(),
-        'head': first-1, 'reason': 'Bounded 256-block execution-buffer pilot'})
+        'head': first-1, 'reason': f'Bounded {BLOCKS}-block {PROFILE} pilot'})
     subprocess.run(['nsenter', '--target', str(original['State']['Pid']), '--net',
-        'python3', __file__, '--audit', 'opened'], check=True)
+        'python3', __file__, '--profile', PROFILE, '--audit', 'opened'], check=True)
     module.stop(NAME, PILOT/'pinned-shutdown.log')
     client_args = ['--datadir=/data/pbt-1/erigon' if x == '--datadir=/data' else
         f'--authrpc.jwtsecret={ROOT}/jwt' if x == '--authrpc.jwtsecret=/jwt' else
         x+',testing' if x.startswith('--http.api=') else x for x in original['Config']['Cmd']]
-    client_args += ['--batchSize=2G', '--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
+    client_args += ['--batchSize='+BUFFER, '--pprof', '--pprof.addr=127.0.0.1', '--pprof.port=6060']
     text = '\n'.join(['[Unit]', 'Description=PBT bounded execution-buffer pilot', '[Service]',
         'Type=exec', 'PrivateNetwork=yes', 'MemoryMax=48G', 'MemorySwapMax=0', 'AllowedCPUs=0-7',
         'KillSignal=SIGINT', 'SuccessExitStatus=130', 'TimeoutStopSec=1800', 'SendSIGKILL=no',
@@ -126,7 +137,7 @@ def main():
     subprocess.run(['systemctl', 'daemon-reload'], check=True)
     subprocess.run(['systemctl', 'start', UNIT], check=True)
     helper.wait_ready(UNIT)
-    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--audit', 'opened'), check=True)
+    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--profile', PROFILE, '--audit', 'opened'), check=True)
     finish(module, helper, build, sealed, first, end, unit)
 
 
@@ -145,13 +156,14 @@ def resume_staged():
     assert module.digest(Path('/proc')/state['MainPID']/'exe') == build['sha256']
     unit = Path('/etc/systemd/system')/(UNIT+'.service')
     assert unit.read_text() == (PILOT/'client.service').read_text()
-    assert '--batchSize=2G' in unit.read_text()
+    assert '--batchSize='+BUFFER in unit.read_text()
     sealed = json.loads((sorted(HISTORY.iterdir())[-1]/'handoff-complete.json').read_text())
     first, end = request['start'], request['end']
-    assert first == sealed['end']+1 and end == first+255 and request['batch_size'] == 64
+    assert first == sealed['end']+1 and end == first+BLOCKS-1 and request['batch_size'] == BATCH_SIZE
+    assert sealed['batch_size'] == 64, 'Stored-prefix recovery is qualified only after a 64-block driver'
     assert prefix['start'] == first and prefix['end'] == first+63
     assert prefix['verified_stored_headers_and_bodies'] == 64 and prefix['forkchoice_head_unchanged']
-    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--audit', 'opened'), check=True)
+    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--profile', PROFILE, '--audit', 'opened'), check=True)
     save(PILOT/'stored-prefix-recovery.json', {'time': time.time(), 'client_pid': prefix['client_pid'],
         'head': first-1, 'blocks_already_staged': 64, 'all_engine_validation_retained': True})
     request['pre_staged_first_batch'] = True
@@ -163,10 +175,10 @@ def resume_staged():
 
 
 def finish(module, helper, build, sealed, first, end, unit):
-    subprocess.run(helper.namespace(UNIT, 'python3', '-u', __file__, '--replay'), check=True)
+    subprocess.run(helper.namespace(UNIT, 'python3', '-u', __file__, '--profile', PROFILE, '--replay'), check=True)
     save(ROOT/'status.json', {'phase': 'restart_validation', 'time': time.time(), 'head': end,
-        'reason': 'Buffer pilot complete; verifying all 256 bodies before and after pinned reopen'})
-    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--audit', 'native-after'), check=True)
+        'reason': f'Pilot complete; verifying all {BLOCKS} bodies before and after pinned reopen'})
+    subprocess.run(helper.namespace(UNIT, 'python3', __file__, '--profile', PROFILE, '--audit', 'native-after'), check=True)
     helper.stop_verified(UNIT, PILOT/'native-shutdown.json')
     module.command('docker', 'start', NAME)
     deadline = time.monotonic()+1800
@@ -180,31 +192,32 @@ def finish(module, helper, build, sealed, first, end, unit):
             break
         assert time.monotonic() < deadline
         time.sleep(5)
-    subprocess.run(['nsenter', '--target', str(state['Pid']), '--net', 'python3', __file__, '--audit', 'pinned-reopen'], check=True)
+    subprocess.run(['nsenter', '--target', str(state['Pid']), '--net', 'python3', __file__, '--profile', PROFILE, '--audit', 'pinned-reopen'], check=True)
     after = json.loads((PILOT/'pinned-reopen.json').read_text())
-    assert after['verified_bodies'] == 256
+    assert after['verified_bodies'] == BLOCKS
     replay = json.loads((PILOT/'replay-complete.json').read_text())
-    assert replay['validated_blocks'] == 256 and replay['final_persistence_verified']
+    assert replay['validated_blocks'] == BLOCKS and replay['final_persistence_verified']
     timings = json.loads((PILOT/'batch-timings.json').read_text())
-    assert [x['validated_blocks'] for x in timings] in ([64, 128, 192, 256], [128, 192, 256])
     warmup_blocks = timings[0]['validated_blocks']
-    measured_blocks = 256-warmup_blocks
+    assert BATCH_SIZE <= warmup_blocks <= 128
+    assert [x['validated_blocks'] for x in timings] == list(range(warmup_blocks, BLOCKS+1, BATCH_SIZE))
+    measured_blocks = BLOCKS-warmup_blocks
     warmup = warmup_blocks/timings[0]['blocks_per_second']
     measured = replay['elapsed_seconds']-warmup
     assert measured > 0
-    proof = {'status': {'phase': 'verified_stopped', 'time': time.time(), 'blocks': 256,
+    proof = {'status': {'phase': 'verified_stopped', 'time': time.time(), 'blocks': BLOCKS,
             'head': end, 'all_bodies_verified_before_and_after': True, 'pinned_reopen_verified': True,
             'pinned_client_running': True},
-        'timing': {'binary': build, 'normal_durability': True, 'execution_buffer': '2G',
-            'memory_GiB': 48, 'cpus': '0-7', 'replay': {**replay, 'batch_size': 64,
+        'timing': {'binary': build, 'normal_durability': True, 'execution_buffer': BUFFER,
+            'memory_GiB': 48, 'cpus': '0-7', 'replay': {**replay, 'batch_size': BATCH_SIZE,
                 'warmup_blocks': warmup_blocks, 'measured_blocks': measured_blocks, 'measured_seconds': measured,
                 'measured_blocks_per_second': measured_blocks/measured}}}
     save(PILOT/'proof.json', proof)
     segment = {'phase': 'segment_sealed', 'time': time.time(), 'start': first, 'end': end,
-        'head': after['head'], 'validated_blocks': 256, 'previously_validated_blocks': 256,
-        'tail_payloads_verified': 0, 'all_headers_verified': True, 'recent_bodies_verified': 256,
+        'head': after['head'], 'validated_blocks': BLOCKS, 'previously_validated_blocks': BLOCKS,
+        'tail_payloads_verified': 0, 'all_headers_verified': True, 'recent_bodies_verified': BLOCKS,
         'normal_durability': True, 'pinned_reopen_verified': True, 'image': sealed['image'],
-        'binary_sha256': build['sha256'], 'batch_size': 64, 'execution_buffer': '2G',
+        'binary_sha256': build['sha256'], 'batch_size': BATCH_SIZE, 'execution_buffer': BUFFER,
         'final_target': sealed['final_target'], 'pilot_evidence': str(PILOT)}
     destination = HISTORY/f'{len(list(HISTORY.iterdir()))+1:04d}'
     assert not destination.exists()
@@ -224,10 +237,12 @@ def finish(module, helper, build, sealed, first, end, unit):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--profile', choices=['buffer-64', 'wide-128'], default='buffer-64')
     parser.add_argument('--audit', choices=['opened', 'native-after', 'pinned-reopen'])
     parser.add_argument('--replay', action='store_true')
     parser.add_argument('--resume-staged', action='store_true')
     args = parser.parse_args()
+    configure(args.profile)
     try:
         if args.audit:
             audit(args.audit)

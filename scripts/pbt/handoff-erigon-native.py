@@ -36,6 +36,29 @@ def persisted_head(log):
     return persisted
 
 
+def wait_next_head(path, prior_head, timeout=600):
+    """Catch a new head notification before the driver stages its next batch.
+
+    This only selects when to stop the driver. The persistence and full segment
+    audits still run afterward and remain mandatory.
+    """
+    deadline = time.monotonic()+timeout
+    with path.open() as stream:
+        stream.seek(0, 2)
+        pending = ''
+        while time.monotonic() < deadline:
+            pending += stream.read()
+            lines = pending.split('\n')
+            pending = lines.pop()
+            for line in lines:
+                if 'head updated ' in line:
+                    match = re.search(r'\bnumber=(\d+)\b', line)
+                    if match and int(match[1]) > prior_head:
+                        return int(match[1])
+            time.sleep(.02)
+    raise AssertionError('No new head notification; driver was not stopped')
+
+
 def verify_segment(rpc, read_record, request, progress):
     head = rpc.head()
     end = int(head['number'], 16)
@@ -131,6 +154,10 @@ def main(args):
     assert before['head']+512 < before['target_head'], 'Too close to completion for this handoff'
     save(RUN/'handoff-intent.json', {'time': time.time(), 'next_build': build,
         'next_batch_size': args.batch_size, 'client_state': helper.state(UNIT), 'progress': before})
+    if args.wait_next_head:
+        selected = wait_next_head(RUN/'client.log', before['head'])
+        save(RUN/'handoff-selected-head.json', {'time': time.time(), 'head': selected,
+                                               'persistence_audit_pending': True})
     subprocess.run(['systemctl', 'stop', 'pbt-1-native-replay'], check=True, timeout=120)
     assert module.command('systemctl', 'show', 'pbt-1-native-replay', '-p', 'MainPID', '--value') == '0'
     replay_lock = (ROOT/'native-replay.lock').open('w')
@@ -156,10 +183,13 @@ def main(args):
     proof = json.loads((RUN/'handoff-native.json').read_text())
     old_build = json.loads((RUN/'build.json').read_text())
     request = json.loads((RUN/'request.json').read_text())
+    current_probe = json.loads((RUN/'probe-proof.json').read_text())
+    execution_buffer = current_probe['timing'].get('execution_buffer', '512M')
     save(RUN/'handoff-complete.json', {**proof, 'phase': 'segment_sealed',
         'normal_durability': True, 'pinned_reopen_verified': True,
         'image': original['Config']['Image'], 'binary_sha256': old_build['sha256'],
-        'batch_size': request['batch_size'], 'final_target': request['end']})
+        'batch_size': request['batch_size'], 'execution_buffer': execution_buffer,
+        'final_target': request['end']})
     HISTORY.mkdir(exist_ok=True)
     destination = HISTORY/f'{len(list(HISTORY.iterdir()))+1:04d}'
     assert not destination.exists()
@@ -186,6 +216,7 @@ if __name__ == '__main__':
     parser.add_argument('--audit-native', action='store_true')
     parser.add_argument('--audit-pinned', action='store_true')
     parser.add_argument('--seal-only', action='store_true')
+    parser.add_argument('--wait-next-head', action='store_true')
     parser.add_argument('--binary', type=Path)
     parser.add_argument('--build-report', type=Path)
     parser.add_argument('--probe-proof', type=Path)

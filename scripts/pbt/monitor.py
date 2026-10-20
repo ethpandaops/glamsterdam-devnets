@@ -53,10 +53,11 @@ if client=='geth' and (root/'raw-stream').exists():
     path=root/'raw-stream/status.json'
     if path.exists():result['raw_export']['status']=json.loads(path.read_text())
 native_runner='pbt-1-native-replay'
-buffer_trial=root/'native-buffer-pilot'
-if not (root/'native-replay').exists() and buffer_trial.exists() and not (buffer_trial/'complete.json').exists():
-    native_runner='pbt-1-native-buffer-pilot'
-if client=='erigon' and ((root/'native-replay').exists() or native_runner=='pbt-1-native-buffer-pilot'):
+for directory,runner in [('native-buffer-pilot','pbt-1-native-buffer-pilot'),('native-wide-pilot','pbt-1-native-wide-pilot')]:
+    trial=root/directory
+    if not (root/'native-replay').exists() and trial.exists() and not (trial/'complete.json').exists():
+        native_runner=runner
+if client=='erigon' and ((root/'native-replay').exists() or native_runner!='pbt-1-native-replay'):
     result['native_replay']={}
     for key,unit in [('service',native_runner),('client','pbt-1-native-replay-client')]:
         service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result','-p','InvocationID')
