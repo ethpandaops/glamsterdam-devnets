@@ -1,6 +1,6 @@
 # PBT-1 migration process
 
-Updated: 2026-10-19. Status: process draft based on the call notes and the
+Updated: 2026-10-20. Status: process draft based on the call notes and the
 confirmed nine-machine matrix. This document does not provision the remaining fleet.
 
 ## Immediate delivery target: refreshed snapshots
@@ -47,6 +47,40 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
+### Prepared range and release status at 00:00 UTC, October 20
+
+The generated stream is complete. Its preserved Jochemnet source anchor is
+24,452,538. The next 1,020 blocks are preparation; the qualifying anchor is
+24,453,558, timestamp 1,770,370,818. The qualifying range is
+**24,453,559–24,503,958 inclusive: 50,400 blocks**. The final timestamp is
+1,770,975,618. Anchor-to-head coverage is exactly 604,800 seconds (seven days);
+the first-to-last qualifying block timestamps span 604,788 seconds. These
+figures describe accelerated chain time, not elapsed live operation.
+
+Geth, Besu and Nethermind have reached the final head, passed clean restart and
+retrieval/comparison of all 51,420 generated bodies, and stopped cleanly for
+export. Their final block hash is
+`0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216`.
+The final MPT state root and BAL hash also match. Their native archives are
+uploading; no completed release is claimed. At the midnight monitor check,
+Erigon had verified 20,732 qualifying blocks and remained in replay. The
+15-minute monitor measured 1.047 blocks/s and projected replay alone to 07:52
+UTC; final restoration/audit and upload make the 09:00 delivery target uncertain.
+
+The intended release prefix is
+`pbt-1/20261019-mixed-8037-v2/`, with native archives at
+`<client>/24503958/snapshot.tar.zst`. Use the final manifest only after all four
+native uploads and the replay bundle pass publication checks. Controller
+`delivery-complete.json` is the completion marker; individual upload progress
+and the presence of a partial release prefix are not sufficient.
+
+For the later migration/backlog experiment, the qualifying anchor can be
+reconstructed from the preserved source release and the 1,020 preparation
+records. Qualify that reconstruction and produce the PBT artifacts at the
+chosen anchor before consuming the tail. Do not assume that a refreshed native
+snapshot at 24,503,958 exposes historical MPT state at 24,453,558. Selecting the
+refreshed head as the migration anchor would remove this prepared replay backlog.
+
 ## Decisions from the call
 
 - Nine machines: eight import-path workers and one Geth self-migration worker.
@@ -83,16 +117,17 @@ The existing source is `164.92.239.96`, with 8 vCPU, 64 GiB physical RAM and
 1800 GiB nominal local disk. Its current inventory name is `lighthouse-erigon-1`.
 The [restore procedure](../scripts/pbt/README.md) describes its setup.
 
-### Proposed Geth workload producer
+### Geth workload producer and later reuse
 
-Add a Geth preparation VM using the same DigitalOcean storage-optimized class.
+The Geth preparation VM uses the same DigitalOcean storage-optimized class.
 It can later become `geth-import-32`, preserving the nine-machine benchmark
 matrix. It must finish generation and retain the replay bundle before that reuse;
 keeping a separate live producer during all nine trials would require a tenth
 machine. Geth (`46.101.230.44`), Besu (`138.68.76.218`), Nethermind
 (`167.172.188.11`) and Erigon have now restored successfully. Nethermind's
 client-managed Patricia deletion and FlatDB restart verification are complete.
-All four are participating in workload generation/replay qualification.
+Geth generation and the Besu/Nethermind final replay audits are complete;
+Erigon remains in replay.
 
 Use the existing Geth-first payload-generation / cross-client replay pattern
 from the snapshot build tooling. Qualify its current build and configuration on
@@ -161,15 +196,15 @@ by the operator. Validate the flat database, measure the reclaimed space and ret
 the active flat data plus headers, blocks, BALs and other required native data. Do not
 assume every client's full experiment fits the source machine's disk size.
 
-The dedicated Nethermind VM has a queued `pbt-1-nethermind-flatdb-cleanup` systemd
-job. It waits for a successful restore, checks the pinned head/root and sample
-state reads, invokes the pinned 2.1.0 image with
-`--FlatDb.DropPruningTrieState=true`, then checks another clean restart with that
-flag disabled. This uses the client's FlatDB ownership checks rather than an
-unguarded directory deletion. Evidence and the success marker are under
+The dedicated Nethermind VM completed `pbt-1-nethermind-flatdb-cleanup` on
+2026-10-19. After a successful restore, it checked the pinned head/root and
+sample state reads, invoked the pinned 2.1.0 image with
+`--FlatDb.DropPruningTrieState=true`, then verified another clean restart with
+that flag disabled. It reclaimed 341,910,994,944 bytes using the client's FlatDB
+ownership checks. Evidence and the success marker are under
 `/data/pbt-1/nethermind-flatdb-cleanup/`; require `complete.json` before export.
 An empty Patricia database stub may be recreated by the client; the obsolete
-Patricia data must be gone. The cleanup is queued, not yet verified complete.
+Patricia data is gone, and the exporter also excludes the empty stub.
 
 ## Relationship to the upstream plan
 
