@@ -90,10 +90,27 @@ requirement-level evidence are recorded in the
 
 The 15-minute monitor remains enabled. Prometheus, node-exporter and Vector run
 on the four source VMs, and production node metrics show all four sources up.
-The execution clients remain stopped. Infrastructure PRs
-[ethPandaOps #1573](https://github.com/ethpandaops/ethPandaOps/pull/1573) and
-[platform #471](https://github.com/ethpandaops/platform/pull/471) remain pending
-review; no Cloudflare apply was performed.
+The execution clients remain stopped.
+
+Infrastructure update at 11:35 UTC: the merged
+[ethPandaOps #1573](https://github.com/ethpandaops/ethPandaOps/pull/1573) was applied
+from commit `475edb9bb299c71e41bee4598fcd99b15582194b`. The scoped apply created
+five PBT DNS/Access resources and replaced the existing devnets certificate pack;
+no separate PBT certificate pack was created. The replacement pack is active,
+covers all 49 hostnames, and the post-apply scoped plan has no changes. Dora and
+checkpoint-sync return HTTP 200 with valid public TLS; the auth endpoint redirects
+to Cloudflare Access. MSF-2 TLS also recovered after the replacement gap.
+[Platform #471](https://github.com/ethpandaops/platform/pull/471) was closed without
+merging at the operator's request; existing automatic ingress-user discovery is
+already active for PBT-1.
+
+Checkpoint-sync's separate in-cluster certificate remains pending: cert-manager's
+HTTP-01 self-check attempts an IPv6 address unreachable from the cluster. Its
+public HTTPS endpoint works through the active Cloudflare certificate. Resolve
+that internal issuance issue before relying on direct-origin TLS. VM certificates
+under `srv.glamsterdam-pbt-1.ethpandaops.io` still need bootnode DNS delegation and
+the wildcard issuer; the launch genesis and remaining fleet are also outstanding.
+Controller rollout evidence is `cloudflare-pbt-rollout-verified.json`.
 
 ### Earlier milestone at 09:26 UTC, October 20
 
