@@ -47,7 +47,7 @@ measure producer/consumer throughput, BAL sizes and database growth. Include bot
 archive compression and upload in the finish-time projection. Do not silently
 reduce the 50,400-block target to meet the deadline.
 
-### Prepared range and release status at 02:57 UTC, October 20
+### Prepared range and release status at 04:21 UTC, October 20
 
 The generated stream is complete. Its preserved Jochemnet source anchor is
 24,452,538. The next 1,020 blocks are preparation; the qualifying anchor is
@@ -62,21 +62,30 @@ retrieval/comparison of all 51,420 generated bodies, and stopped cleanly for
 export. Their final block hash is
 `0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216`.
 The final MPT state root and BAL hash also match. Geth and Besu's native
-archives completed upload and verification at 02:55 UTC; Nethermind's upload
-continues. The complete four-client release is not yet available. At the 02:45 monitor check,
-Erigon had verified 29,820 qualifying blocks and remained in replay. The
-15-minute monitor measured 1.129 blocks/s and projected replay alone to 07:49
-UTC, leaving about 71 minutes for restoration, audit, upload and verification
-before the 09:00 target. Delivery remains at risk.
+archives completed upload and verification at 02:55 UTC; Nethermind completed
+at 04:20 UTC and passed public verification at 04:21 UTC. Erigon is the only
+remaining client. The complete four-client release is not yet available.
+At the 04:15 monitor check, Erigon had verified 35,388 qualifying blocks and
+remained in replay. The 15-minute monitor measured 0.916 blocks/s and projected
+replay alone to 08:48 UTC, leaving about 12 minutes for restoration, audit,
+upload and verification before the 09:00 target. Full delivery by that time
+looks unlikely. Existing phase logs around 04:16 showed independent medians
+of 13 seconds executing each 64-block batch, 37 seconds flushing state, and
+12 seconds committing; no memory-limit or OOM events were recorded.
 
-The [Geth metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_metadata.json)
-and [Besu metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/_snapshot_metadata.json)
-are public. Their archives are 1,129,134,606,193 and 1,145,428,233,899 bytes,
+The [Geth metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_metadata.json),
+[Besu metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/besu/24503958/_snapshot_metadata.json),
+and [Nethermind metadata](https://shadowfork-images.ethpandaops.io/pbt-1/20261019-mixed-8037-v2/nethermind/24503958/_snapshot_metadata.json)
+are public. Their archives are 1,129,134,606,193, 1,145,428,233,899 and 1,088,763,687,494 bytes,
 respectively. Verification used per-part Content-MD5 during upload, exact object
 sizes, and SHA-256 readback of the first, last and three sampled parts. Public
 HEAD checks matched the completion ETags and exact lengths; public metadata
 matched the archived hashes and common head/state/BAL commitments. Controller
-evidence is `published-{geth,besu}.json` and `public-{geth,besu}.json`.
+evidence is `published-{geth,besu,nethermind}.json` and
+`public-{geth,besu,nethermind}.json`. Nethermind's public integrity report
+records the Patricia and both keystore exclusions, and its public FlatDB
+cleanup proof matches the completed source cleanup. Its archive SHA-256 is
+`925e81f4ccb2dd1464c29e77f5d6b3e361ae80153dbb0f49bf6bd5f34b2ba42c`.
 
 The intended release prefix is
 `pbt-1/20261019-mixed-8037-v2/`, with native archives at
