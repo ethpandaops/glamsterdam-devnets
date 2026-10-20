@@ -303,6 +303,23 @@ and native snapshot uploads remain pending. Erigon throughput puts the
 2026-10-20 09:00 UTC delivery target at risk; its experiments and recovery
 evidence are recorded in the [Erigon preparation report](pbt-1-erigon-merge-2026-10-19.md).
 
+**Snapshot refresh update (02:00 UTC, 2026-10-20):** Geth, Besu and Nethermind
+have reached 24,503,958, passed all 51,420 body/BAL comparisons after restart,
+and stopped cleanly for native archive upload. Those uploads are still running.
+The replay archive has completed upload and full remote checksum readback;
+final delivery still requires all four verified native snapshots.
+
+Erigon passed a 256-block trial of an optional in-memory storage filter,
+including all bodies before shutdown and after pinned-release restart. Its
+qualified head is 24,480,306 (26,748 qualifying blocks). Full replay has restarted
+on the original VM with that build. Measured throughput was 1.21694 blocks/s,
+21–31% above the earlier sequential baselines; this is not a same-input controlled
+comparison. CPU/RAM limits remain eight CPUs and 48 GiB during preparation.
+See the [native optimization and qualification evidence](pbt-1-erigon-io-probe-2026-10-19.md).
+Final BAL restoration, exhaustive restart audit and native upload remain after
+Erigon replay, so the 09:00 UTC delivery deadline is still at risk. The temporary
+32-vCPU/256-GiB benchmark VM has been deleted.
+
 Audit the actual source network and every service that will supply replay data:
 
 1. Record client build/digest, effective retention and pruning settings, the units
