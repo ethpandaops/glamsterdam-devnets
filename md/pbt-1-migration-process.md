@@ -334,6 +334,41 @@ before using it. DigitalOcean volumes are network-attached and have different
 IOPS/throughput characteristics from local storage; include these in performance
 results. See [volume limits](https://docs.digitalocean.com/products/volumes/details/limits/).
 
+**Larger-local-disk alternative, checked October 20:** the operator is considering
+a larger shape instead of putting the active database on a volume. This remains
+a proposal; no resize or replacement has been performed.
+
+| Shape | vCPU / RAM GiB | Local disk GiB | Catalog $/month | Listed in `fra1` |
+|---|---:|---:|---:|---|
+| Actual current `so1_5-8vcpu-64gb-intel` | 8 / 64 | 1800 | 556 | Yes |
+| Originally quoted `so1_5-8vcpu-64gb` | 8 / 64 | 1800 | 652 | Yes |
+| `c5-32vcpu-64gb` | 32 / 64 | 2000 | 992 | No |
+| `m6-16vcpu-128gb` | 16 / 128 | 2400 | 1048 | Yes |
+| `so-16vcpu-128gb-intel` | 16 / 128 | 2400 | 1048 | Yes |
+
+The live DigitalOcean size API and the current Besu Droplet response confirmed
+these values. Controller evidence: `migration-shape-options.json`.
+Catalog regional availability does not reserve capacity. Listed prices exclude
+other resources and taxes.
+
+A 2500-GiB volume costs $250/month at the documented
+[$0.10/GiB-month rate](https://docs.digitalocean.com/products/volumes/details/pricing/).
+Consequently, the actual current shape plus one such volume is $806/month per
+worker, versus $1048 for the larger local-storage shape: a $242/month difference,
+or $2178/month across nine workers. Relative to the originally quoted $652 shape
+plus volume, the difference is $146/month per worker.
+
+The 2400-GiB alternatives add 600 GiB of local disk; the CPU-intensive candidate
+adds only 200 GiB. Prefer qualifying the larger storage-optimized shape for
+local active databases: its capacity increase addresses migration scratch space,
+while the extra CPU on the 2000-GiB option does not resolve that constraint.
+This is a proposed choice, not proof that its I/O matches the measured current
+shape. Benchmark a candidate and measure peak migration disk use before rollout.
+Keep recovery archives off the active filesystem when budgeting scratch space.
+Apply the original 8-vCPU and 16-/32-GiB workload limits, including charged page
+cache, on the larger host; its installed RAM is not the experimental RAM limit.
+Use identical shape and storage placement for each client's comparison pair.
+
 Aggressive history expiry is a separate optional experiment, not a prerequisite
 for publishing the refreshed snapshots. Before enabling it on a migration
 worker, validate the exact pinned client's flags, retain the common anchor and
