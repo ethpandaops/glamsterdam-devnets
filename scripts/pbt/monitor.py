@@ -58,7 +58,7 @@ for directory,runner in [('native-buffer-pilot','pbt-1-native-buffer-pilot'),('n
     if not (root/'native-replay').exists() and trial.exists() and not (trial/'complete.json').exists():
         native_runner=runner
 if client=='erigon' and ((root/'native-replay').exists() or native_runner!='pbt-1-native-replay'):
-    result['native_replay']={}
+    result['native_replay']={'bounded_trial':native_runner!='pbt-1-native-replay'}
     for key,unit in [('service',native_runner),('client','pbt-1-native-replay-client')]:
         service=cmd('systemctl','show',unit,'-p','ActiveState','-p','MainPID','-p','Result','-p','InvocationID')
         result['native_replay'][key]=dict(line.split('=',1) for line in service.stdout.splitlines() if '=' in line)
@@ -167,6 +167,8 @@ print(json.dumps(r))
 
 def replay_projection(current, previous, now):
     """Estimate replay alone from two fresh observations of the same live run."""
+    if any(record.get('native_replay', {}).get('bounded_trial') for record in (current, previous)):
+        return None
     current_progress = current.get('pipeline') or {}
     previous_progress = previous.get('pipeline') or {}
     if any(p.get('phase') != 'native_replaying' for p in (current_progress, previous_progress)):

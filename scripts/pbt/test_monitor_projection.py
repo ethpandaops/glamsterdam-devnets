@@ -37,6 +37,12 @@ class ReplayProjectionTests(unittest.TestCase):
             new['pipeline'][field] = value
             self.assertIsNone(replay_projection(new, self.old, 1600))
 
+    def test_bounded_pilot_is_not_a_full_replay_forecast(self):
+        for trial in (self.new, self.old):
+            trial['native_replay']['bounded_trial'] = True
+            self.assertIsNone(replay_projection(self.new, self.old, 1600))
+            trial['native_replay'].pop('bounded_trial')
+
     def test_short_stale_future_or_nonprogressing_samples_do_not_predict(self):
         for update, now in [({'time': 1200}, 1200), ({}, 2600), ({}, 1599),
                             ({'head': 1000}, 1600), ({'head': 999}, 1600),

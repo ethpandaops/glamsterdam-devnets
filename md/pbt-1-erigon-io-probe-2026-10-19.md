@@ -661,3 +661,28 @@ deployed uploader SHA-256 is
 Its final integrity report records the actual worker count. These short tests
 measure transfer capacity, not sparse-tar/compression throughput or a full
 native archive. Replay remained active throughout; no replacement VM was used.
+
+## Bounded 128-block batch trial at 00:22 UTC, October 20
+
+The 2-GiB-buffer continuous segment was stopped at a fresh head notification
+for 24,475,506. The handoff subsequently verified persistence, all 3,008 segment
+headers, ordinary VALID results for the final 64 unreported payloads, recent
+bodies, clean native shutdown and pinned-image reopen. It is sealed as
+`native-replay-segments/0004/`, covering 24,472,499–24,475,506. The baseline's
+last 384 blocks took 380.473 seconds between completed persistence events:
+1.00927 blocks/s (`wide-pilot-baseline.json`).
+
+The next bounded trial covers 24,475,507–24,476,018, using four batches of 128
+with a 4-GiB execution buffer. The first 128 blocks and persistence are warmup;
+the remaining 384 form the measured window. It uses the same continuation
+binary, eight CPUs, 48-GiB process limit, normal pruning and normal durability.
+Before the handoff, cgroup memory included roughly 16.5 GiB anonymous memory
+and 29.5 GiB file cache, with zero OOM events. A larger buffer may displace cache;
+the trial must establish its actual benefit and memory behavior.
+
+All 512 headers and full bodies must match both before shutdown and after
+pinned-image reopen. Successful qualification alone does not select the new
+setting; compare the measured rate before resuming full replay. Evidence is
+isolated in `native-wide-pilot/`. The monitor follows its live process handles
+but excludes bounded trials from the full-replay completion forecast. The trial
+is pending; no performance gain is claimed yet.
