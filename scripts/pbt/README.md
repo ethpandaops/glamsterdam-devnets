@@ -329,6 +329,10 @@ network default; retain `--exec.no-prune=true` when native BAL retention is need
 `prepare-upload.py` issues only object-scoped presigned multipart PUTs to the
 VM. `upload.py` requires the final stopped/reopened proof, streams sparse tar
 through zstd level 1, and uploads bounded 256 MiB parts with Content-MD5 checks.
+Erigon uses eight upload workers after a verified four/eight/four-worker
+throughput comparison on its original VM; the other clients use four. This
+bounds PUT buffers at 2 GiB for Erigon, plus stream/compression overhead. The
+integrity report records the worker count used for newly started uploads.
 `finish-upload.py` completes the object, checks size, verifies first/last and
 sampled part SHA-256 values by remote readback, and publishes provenance. No
 account storage credentials are copied to a source VM. Original Jochemnet

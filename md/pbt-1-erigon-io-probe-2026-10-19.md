@@ -640,3 +640,24 @@ and final audit requirements are unchanged. Replay continued on its original
 PID throughout. Controller and VM evidence is named
 `erigon-bal-backfill-{timing,timed-preflight,parallel-timing,parallel-preflight,decoder-adoption}.json`.
 Production sidecar restoration remains pending until final replay and clean stop.
+
+## Final upload concurrency qualification at 00:06 UTC, October 20
+
+Three sequential trials on the original Erigon VM uploaded eight 256-MiB parts
+each, using four, eight and four workers. The measured upload rates were
+70.830, 147.246 and 84.004 MiB/s respectively (28.914, 13.909 and 24.380 seconds
+for 2 GiB). Every part supplied Content-MD5; the controller completed each
+multipart object, checked its length and read back every byte against the
+per-part SHA-256 values. All 6 GiB passed verification, the temporary objects
+were deleted, and the probe service exited successfully. Evidence is controller
+`erigon-upload-concurrency.json`.
+
+Eight workers were 1.75 times faster than the faster four-worker control. The
+future Erigon uploader now uses eight workers, retaining 256-MiB parts, ordered
+archive hashing, bounded pending work and the existing verification gates.
+The other three running uploads retain their four-worker configuration. The
+deployed uploader SHA-256 is
+`995c104f6a51d633af5c709e5c4fd1589a0dbee4944e1a81a0e5eba72e7023ac`.
+Its final integrity report records the actual worker count. These short tests
+measure transfer capacity, not sparse-tar/compression throughput or a full
+native archive. Replay remained active throughout; no replacement VM was used.

@@ -23,6 +23,7 @@ def main():
     lock=(ROOT/'upload.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     job=json.loads((ROOT/'upload-authorization.json').read_text())
     c=job['client'];head=job['head'];workload=head-24452538-3
+    workers=8 if c=='erigon' else 4
     proof=json.loads((ROOT/f'reopen-{workload}-complete.json').read_text())
     assert proof['stopped'] and int(proof['head']['number'],16)==head
     assert proof['verified_bal_bodies']==workload+3
@@ -59,7 +60,7 @@ def main():
         number,path,size,sha=item
         for attempt in range(8):
             try:
-                # Bound memory at four 256 MiB parts; stages are removed after PUT.
+                # At most `workers` 256-MiB PUT buffers; remove stages after PUT.
                 data=path.read_bytes()
                 request=urllib.request.Request(job['urls'][number-1],data=data,method='PUT',
                     headers={'Content-MD5':base64.b64encode(hashlib.md5(data).digest()).decode()})
@@ -78,7 +79,7 @@ def main():
         save(ROOT/'status.json',{'phase':'uploading','time':time.time(),'head':head,
                                 'uploaded_bytes':sum(x['bytes'] for x in results),'parts':len(results)})
     try:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
             pending=set();number=0
             while True:
                 data=bytearray()
@@ -92,7 +93,7 @@ def main():
                 path=stage/f'{number:05d}.part';path.write_bytes(data)
                 sha=hashlib.sha256(data).hexdigest();size=len(data);del data
                 pending.add(pool.submit(put,(number,path,size,sha)))
-                if len(pending)>=4:
+                if len(pending)>=workers:
                     done,pending=concurrent.futures.wait(pending,return_when=concurrent.futures.FIRST_COMPLETED)
                     for future in done:collect(future)
             for future in concurrent.futures.as_completed(pending):collect(future)
@@ -101,7 +102,8 @@ def main():
         report={'client':c,'head':head,'key':job['key'],'upload_id':job['upload_id'],
                 'parts':sorted(results,key=lambda x:x['PartNumber']),'archive_bytes':total,
                 'archive_sha256':digest.hexdigest(),'seconds':time.time()-started,'time':time.time(),
-                'data_bytes':int(subprocess.check_output(['du','-s','-B1',str(db)],text=True).split()[0])}
+                'data_bytes':int(subprocess.check_output(['du','-s','-B1',str(db)],text=True).split()[0]),
+                'upload_workers':workers}
         save(ROOT/'upload-complete-parts.json',report)
         save(ROOT/'status.json',{'phase':'awaiting_upload_verification','time':time.time(),'head':head,'archive_bytes':total})
         print(json.dumps({k:v for k,v in report.items() if k not in ('parts','upload_id')}),flush=True)
