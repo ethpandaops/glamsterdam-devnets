@@ -685,4 +685,27 @@ pinned-image reopen. Successful qualification alone does not select the new
 setting; compare the measured rate before resuming full replay. Evidence is
 isolated in `native-wide-pilot/`. The monitor follows its live process handles
 but excludes bounded trials from the full-replay completion forecast. The trial
-is pending; no performance gain is claimed yet.
+completed as recorded below.
+
+## Wider trial verified; 64-block replay resumed at 00:35 UTC
+
+The 512-block trial passed all header and full-body comparisons before native
+shutdown and after reopening the pinned release image. The native service
+stopped successfully, and the range is sealed as `native-replay-segments/0005/`.
+The 384 measured blocks took 399.920 seconds including final persistence:
+0.96019 blocks/s, compared with 1.00927 blocks/s in the preceding 384-block
+64-batch window. This is 4.9% lower throughput across different sequential
+block windows, not a controlled same-input comparison. No OOM events occurred.
+
+The larger setting was not adopted. Full replay was resumed from 24,476,019
+using the existing qualified 64-block, 2-GiB-buffer configuration, unchanged
+continuation binary, normal durability and the original eight-CPU VM. All 512
+trial blocks remain validated progress toward the target, bringing the sealed
+head to 24,476,018 and the qualifying count to 22,460 of 50,400.
+
+Controller evidence is `native-wide-pilot-evidence.tar.gz` (SHA-256
+`352dbb33471b20e6ec092ebb2cd570e0eb6b8f8ac94597017a0dafda47fa004e`)
+and `wide-pilot-comparison.json`. At the prior sustained rate, replay alone
+would finish around 08:15 UTC. BAL restoration, exhaustive restart audit,
+archive upload and remote verification still follow, making delivery by
+09:00 UTC unlikely. The complete target and publication gates remain required.
