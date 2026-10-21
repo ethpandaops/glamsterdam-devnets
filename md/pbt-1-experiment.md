@@ -31,6 +31,15 @@ verified local cache remains available until the volume copy passes its own full
 SHA-256. The live database and historical qualification files are unchanged.
 Controller recovery-job reconciliation remains a separate completion gate.
 
+At 14:42 UTC, four closed scratch files from the completed bytecode-verification
+stage were removed after checking the remaining source code path, exact file
+identities, scratch-volume UUID, and absence of open descriptors or mappings.
+This reclaimed **259.90 GB**. Native verifier PID 64456 was not restarted and
+continued its storage merge; snapshot/preimage artifacts and all active MPT
+inputs were preserved. See
+`files/erigon-completed-code-scratch-cleanup.json` under the PBT inventory.
+This cleanup does not mean the whole artifact verification has passed.
+
 The conversion's frozen checkpoint is not the common launch head H. Native
 execution restored the retained tail before Erigon-2's H qualification.
 The completed tail run used the same pinned integration binary with a 4-GiB

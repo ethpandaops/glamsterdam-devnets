@@ -1,0 +1,68 @@
+{
+  "phase": "completed_code_scratch_reclaimed",
+  "time": 1792593738.1470518,
+  "files": [
+    {
+      "path": "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-expected.sorted",
+      "device": 2064,
+      "inode": 16056684,
+      "bytes": 91685504070,
+      "mtime_ns": 1792588997922659300,
+      "ctime_ns": 1792588997922659300,
+      "allocated": 91685519360
+    },
+    {
+      "path": "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-actual.sorted",
+      "device": 2064,
+      "inode": 16056336,
+      "bytes": 75376495534,
+      "mtime_ns": 1792585992772343600,
+      "ctime_ns": 1792585992772343600,
+      "allocated": 75376504832
+    },
+    {
+      "path": "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-rows.sorted",
+      "device": 2064,
+      "inode": 16056676,
+      "bytes": 89643999400,
+      "mtime_ns": 1792590100742368800,
+      "ctime_ns": 1792590100742368800,
+      "allocated": 89644011520
+    },
+    {
+      "path": "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-requirements.sorted",
+      "device": 2064,
+      "inode": 16056337,
+      "bytes": 3196319952,
+      "mtime_ns": 1792586017880693000,
+      "ctime_ns": 1792586017880693000,
+      "allocated": 3196325888
+    }
+  ],
+  "removed": [
+    "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-expected.sorted",
+    "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-actual.sorted",
+    "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-rows.sorted",
+    "/mnt/pbt-export-scratch/verify-temp/verify-pbt-1046435874/code-requirements.sorted"
+  ],
+  "native_pid": 64456,
+  "wrapper_pid": 47501,
+  "native_start_ticks": "6595875",
+  "source_sha256": "8d24e56d048d7d20bd84257b0f666719daaf11b312d05e2a0814665e6cccf869",
+  "free_before": 378843738112,
+  "reason": "Code verification returned successfully; remaining pbtVerifyMPT receives only leaves, joined slots, addresses and headers. Exact code scratch files have no FD or mmap owners.",
+  "completed_at": 1792593738.3534114,
+  "free_after": 638720933888,
+  "reclaimed_allocated_bytes": 259902361600,
+  "scope": "Temporary files from completed bytecode verification only; exported snapshot/preimages and MPT verification inputs preserved.",
+  "after_cleanup_observation": {
+    "time_utc": "2026-10-21T14:43:05Z",
+    "native_pid": 64456,
+    "wrapper_pid": 47501,
+    "active": true,
+    "phase": "verify storage",
+    "records": 1307309130,
+    "oom_kills": 0,
+    "scratch_free_GB": 635.2
+  }
+}
