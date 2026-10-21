@@ -79,6 +79,13 @@ if recovery_cache_root.exists():
   result=subprocess.run(['systemctl','show','pbt-1-v3-head-cache-readback','-p','LoadState','-p','ActiveState',
                          '-p','SubState','-p','MainPID','-p','Result'],capture_output=True,text=True)
   head_recovery_cache['stored_readback_service']=dict(l.split('=',1) for l in result.stdout.splitlines() if '=' in l)
+ replacement_status=recovery_cache_root/'replacement-status.json'
+ if replacement_status.exists():
+  value=json.loads(replacement_status.read_text())
+  head_recovery_cache['volume_replacement']={k:value[k] for k in ('phase','time','completed_bytes','archive_bytes','bytes','sha256','error_class') if k in value}
+  result=subprocess.run(['systemctl','show','pbt-1-v3-recovery-volume-replacement','-p','LoadState','-p','ActiveState',
+                         '-p','SubState','-p','MainPID','-p','Result'],capture_output=True,text=True)
+  head_recovery_cache['volume_replacement_service']=dict(l.split('=',1) for l in result.stdout.splitlines() if '=' in l)
 input_status=pathlib.Path('/data/pbt-1/migration-input-control/status.json')
 if input_status.exists():
  value=json.loads(input_status.read_text())
@@ -212,6 +219,14 @@ def main():
         elif (readback and readback.get('phase') != 'stored_cache_verified'
               and readback_service.get('ActiveState') not in ('active', 'activating')):
             alerts.append(name + ': corrected H stored-cache checksum stopped before completion')
+        replacement = state.get('head_recovery_cache', {}).get('volume_replacement', {})
+        replacement_service = state.get('head_recovery_cache', {}).get('volume_replacement_service', {})
+        if replacement.get('phase') == 'failed' or replacement_service.get('ActiveState') == 'failed':
+            alerts.append(name + ': recovery-volume replacement failed; preserve verified local cache')
+        elif (replacement and replacement.get('phase') not in
+              ('volume_verified_controller_reconciliation_pending', 'recovery_replacement_complete')
+              and replacement_service.get('ActiveState') not in ('active', 'activating')):
+            alerts.append(name + ': recovery-volume replacement stopped before stored checksum proof')
         restored = state.get('head_restore') or {}
         if restored:
             service = restored.get('service', {})
