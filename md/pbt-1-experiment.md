@@ -4,32 +4,33 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
-## Preparation checkpoint, October 21 at 14:10 UTC
+## Preparation checkpoint, October 21 at 15:10 UTC
 
-All nine recovery volumes are mounted. Eight original archives remain retained;
-Erigon-2 is replacing its original archive with the published v3 archive after
-a full stored-cache checksum passed. Its verified local cache and original
-provenance remain preserved while the recovery-volume copy is checked.
+All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
+v3 recovery archive, with matching worker/controller configuration and automatic
+restore disabled. Its original provenance and verified local cache remain
+preserved. The other eight original recovery archives remain retained.
 Eight workers have passed isolated startup checks at H, including Erigon-2;
 Erigon-1 remains pending. The read-only fleet monitor reports no alerts.
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
 | Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent native verifier running |
-| Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published and fully verified; recovery-volume replacement pending |
-| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier is processing MPT storage; publication follows its success |
+| Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published; recovery-volume replacement and configuration reconciliation complete |
+| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier completed the storage merge and is processing accounts; publication follows full verification |
 | Erigon-1 H database | Original H database preserved; verified H release inputs staged, with a 1,192,103,432,995-byte unpacked bound | Finish exporter work, preserve its artifacts, review space, then restore the verified H release and run this worker's own checks |
-| Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache SHA-256 passed at 14:04; recovery-volume copy started at 14:10, with independent stored-volume SHA-256 required before acceptance |
+| Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache and stored-volume SHA-256 passed; controller and worker recovery inputs agree; scoped URL range check passed |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
 
-Erigon-2 replacement uses the one-shot
-[`replace-erigon-2-recovery-volume.py`](../scripts/pbt/replace-erigon-2-recovery-volume.py)
-under `pbt-1-v3-recovery-volume-replacement.service`. Its default invocation is a
-read-only preflight; `--run` requires the exact stored-cache proof, original archive
-identity, mounted volume UUID, preserved provenance and stopped clients. The
-verified local cache remains available until the volume copy passes its own full
-SHA-256. The live database and historical qualification files are unchanged.
-Controller recovery-job reconciliation remains a separate completion gate.
+Erigon-2's one-shot recovery replacement completed its full stored-volume checksum
+at 15:02 UTC. The worker and controller now identify the same corrected release,
+with `restore: false`; the new scoped URL passed a worker range-read check.
+Original qualification files remain unchanged. The reviewed eight-file unsqueeze
+rollback directory was then removed, reclaiming **148.43 GB**. See
+`files/erigon-2-v3-recovery-ready.json` and `files/erigon-2-unsqueeze-cleanup.json`
+under the PBT inventory. The local verified archive cache is still preserved.
+The replacement procedure is
+[`replace-erigon-2-recovery-volume.py`](../scripts/pbt/replace-erigon-2-recovery-volume.py).
 
 At 14:42 UTC, four closed scratch files from the completed bytecode-verification
 stage were removed after checking the remaining source code path, exact file

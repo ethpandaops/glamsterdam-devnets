@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-10-21T12:08:28.267068+00:00",
+  "checked_at": "2026-10-21T15:10:12Z",
   "worker": "lighthouse-erigon-2",
   "host": "159.89.21.191",
   "root_filesystem": {
     "total_bytes": 2536325763072,
-    "used_bytes": 1683726102528,
-    "available_bytes": 749480816640
+    "used_bytes": 1996460154880,
+    "available_bytes": 436746764288
   },
   "live_erigon_allocated_bytes": 1528990081024,
   "published_archive_apparent_source_bytes": 1172094659363,
@@ -23,47 +23,58 @@
     "directory_device": 65025,
     "directory_inode": 68681751
   },
-  "cleanup_performed": false,
-  "requires_before_cleanup": [
-    "Corrected H release passes full remote SHA-256 readback",
-    "Erigon-2 own H qualification remains valid",
-    "Corrected local recovery cache passes independent stored-file SHA-256",
-    "Corrected recovery-volume copy passes stored-file SHA-256 and active recovery job/proofs identify the new release",
-    "Recheck exact directory identity and exclusive allocated bytes; no active conversion or process owns the backup files"
-  ],
+  "cleanup_performed": true,
   "preserve": [
     "/data/pbt-1/erigon",
     "/data/pbt-1/v3-head-upgrade conversion/verification/tail proof files and logs",
     "/data/pbt-1/qualification",
     "/data/pbt-1/node-identity"
   ],
-  "note": "The unsqueeze backup is required only for an unfinished conversion resume. Conversion has completed and qualified; retain this rollback data until the corrected recovery copy is proven. No database compaction or pruning is proposed.",
+  "note": "The eight unsqueeze rollback files were removed after full recovery-volume verification and configuration reconciliation. The live database and all surrounding qualification/conversion evidence are preserved. The verified local archive cache remains present; its later cleanup is separate.",
   "recovery_cache": {
     "staged": true,
     "download_started": true,
     "unit": "pbt-1-v3-head-recovery-cache",
-    "main_pid": 150731,
+    "main_pid": 0,
     "path": "/data/pbt-1/v3-head-recovery/cache",
-    "stored_cache_independent_hash_pending": true,
-    "volume_replacement_started": false,
-    "old_volume_archive_preserved": true,
-    "checked_at": "2026-10-21T12:14:58.993499+00:00",
+    "stored_cache_independent_hash_pending": false,
+    "volume_replacement_started": true,
+    "old_volume_archive_preserved": false,
+    "checked_at": "2026-10-21T15:10:12Z",
     "stored_file_readback": {
       "unit": "pbt-1-v3-head-cache-readback",
-      "main_pid": 156253,
-      "phase": "running_stored_file_checksum",
+      "main_pid": 0,
+      "phase": "stored_cache_verified",
       "script": "scripts/pbt/verify-erigon-recovery-cache.py",
       "script_sha256": "76b2e84233e1b09fb32fbd3c4437c87e442b4653ccd22d8598823752a1aa4116",
       "memory_max_bytes": 1073741824,
       "cpu_quota_percent": 100,
       "archive_replacement_authorized_by_this_job": false,
-      "checked_at": "2026-10-21T13:42:52Z",
+      "checked_at": "2026-10-21T14:04:49Z",
       "first_attempt_failure": "Completed transient download unit was collected by systemd before the waiter polled; stopped before hashing.",
       "fix": "Require completed download proof and exclusive lock when transient service is no longer loaded; always independently hash stored file.",
       "targeted_tests_passed": 8
     },
     "download_completed": true,
     "archive_bytes": 461165199193,
-    "stream_sha256_verified": true
-  }
+    "stream_sha256_verified": true,
+    "volume_replacement_completed": true,
+    "original_provenance_preserved": true,
+    "local_cache_preserved": true,
+    "recovery_ready_receipt": "erigon-2-v3-recovery-ready.json"
+  },
+  "root_filesystem_before_cache": {
+    "total_bytes": 2536325763072,
+    "used_bytes": 1683726102528,
+    "available_bytes": 749480816640
+  },
+  "cleanup_receipt": "erigon-2-unsqueeze-cleanup.json",
+  "cleanup_requirements_satisfied": true,
+  "cleanup_requirements": [
+    "Corrected H release passes full remote SHA-256 readback",
+    "Erigon-2 own H qualification remains valid",
+    "Corrected local recovery cache passes independent stored-file SHA-256",
+    "Corrected recovery-volume copy passes stored-file SHA-256 and active recovery job/proofs identify the new release",
+    "Recheck exact directory identity and exclusive allocated bytes; no active conversion or process owns the backup files"
+  ]
 }
