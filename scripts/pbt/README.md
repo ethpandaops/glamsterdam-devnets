@@ -16,6 +16,8 @@ Preparation checkpoint, **2026-10-21 12:13 UTC**:
 | Erigon-1 | Original H database and recovery archive preserved; N export (107.90 GB snapshot, 66.85 GB preimages) exited 0 at 07:18 UTC with matching metadata | Independent verification running; then preserve N artifacts, restore the verified v3 H release and run its own 32-GiB startup checks |
 | Genesis configuration | Private test candidate loaded in isolated Lighthouse at H with 2,304 validators; all nine inventory reviews passed | Regenerate and validate a fresh candidate after the user chooses G; distribute keys and promote only the public files afterward |
 
+The verified H release bundle and private scoped URL are now staged on Erigon-1. No restore is queued: its native N verification and shared-artifact publication must finish before the reviewed cleanup and capacity preflight.
+
 The frozen block in Erigon-2's conversion log is not the launch head. Its
 retained tail contained another 35,934 blocks. The native
 `stage_exec --block=24503958` reached H and exited successfully at 08:57 UTC;

@@ -195,5 +195,17 @@
       "replacement_started": false,
       "checked_at": "2026-10-21T12:14:58.993499+00:00"
     }
+  },
+  "verified_H_release_staged": {
+    "bundle_sha256": "aa1f372f6d73abf7d877fd631e9481004c17abe2b4cea363f93f83082d16ff45",
+    "archive_bytes": 461165199193,
+    "unpacked_upper_bound_bytes": 1192103432995,
+    "private_modes_verified": true,
+    "restore_started": false,
+    "cache_download_started": false,
+    "checked_at": "2026-10-21T12:19:01.213777+00:00",
+    "controller": "scripts/pbt/prepare-erigon-release-restore.py --stage",
+    "worker_directory": "/data/pbt-1/v3-head-restore",
+    "next_gate": "Verified shared N publication, stopped exporter and exact cleanup; remeasure free space before read-only restore preflight"
   }
 }
