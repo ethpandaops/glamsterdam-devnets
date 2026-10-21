@@ -1092,4 +1092,6 @@ release and promoted directory identities, then performs the worker's own
 `local_v3_conversion_performed=false`. Tests cover HTTP/checksum failures,
 partial extraction, failed promotion, preservation, source-verifier failures,
 directory substitution and worker identity/resource limits. This route is
-staged only; no restore is queued while the source release is incomplete.
+staged only. The corrected H release is complete; Erigon-1 still waits for
+verified N publication, exporter cleanup and sufficient local restore space.
+The current sequence is in `md/pbt-1-experiment.md` under "Immediate next work".

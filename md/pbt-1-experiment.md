@@ -100,8 +100,9 @@ conversion evidence, recoverable snapshots and an explicit status for the shared
 N artifacts. The current checkpoint above is dated; use the fleet monitor and
 completed proof files to establish readiness. Shared N verification/publication
 and Erigon-1 restore are still pending.
-The corrected H release is fully verified and published; local recovery-volume
-replacement remains pending.
+The corrected H release is fully verified and published. Erigon-2's recovery
+replacement is complete; Erigon-1's replacement follows its own H restore and
+qualification.
 Restore Erigon-1's original ext4 reservation and remove its temporary export
 scratch volume before launch. Preserve the verified exporter recovery on Geth-2
 until safely redundant; then reclaim it so it does not constrain that worker.
@@ -839,14 +840,43 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 
 ## Immediate next work
 
-1. Keep the old-source upload controller stopped; retain its useful exporter
-   preparation and all existing H recovery copies.
-2. Finish build/format qualification and implement per-client evidence collection.
-3. Qualify the backlog controls, root capture and historical-anchor requirements
-   on small fixtures. Resolve Besu BAL-path coverage and the supported live
-   catch-up sequence for the self-converting workers before migration.
-4. Complete network/finality setup and exporter artifacts, then execute the gates
-   above. Do not start an improvised nine-node migration from legacy templates.
+1. Let Erigon-1's native N verifier finish. Require its successful exit and
+   completion proof, then let the existing publication controller upload the
+   artifacts and complete full remote checksum readback. Do not start a second
+   publisher or reclaim its inputs before the verified release exists.
+2. After verified N publication, two preparation branches can proceed in parallel:
+   - **Recipient inputs:** preserve the exporter provenance, verify the original
+     older-source recovery object remains accessible, and inspect owners and
+     identities before removing only Geth-2's temporary
+     `/data/pbt-1/erigon-exporter-recovery/tree`. Preserve its Geth database and
+     recovery archive. Recheck space, then authorize and start the seven-worker
+     input downloads using the procedure in `scripts/pbt/README.md`. All seven
+     must pass their stored-file checksums and leave the 600-GB reserve.
+   - **Erigon-1 H restore:** after exporter/verifier/uploader shutdown, review the
+     exact candidates in `files/erigon-1-space-plan.json`. Preserve the original
+     H database/archive, payload corpus and proof/log directories. Reclaim only
+     the reviewed redundant exporter data, remeasure free space, and require the
+     read-only `erigon_verified_restore.py --stream` preflight before starting
+     `--run --stream`. The current unpacked bound is 1,192,103,432,995 bytes,
+     plus a 150-GB reserve. Then run this worker's own two-open qualification
+     under 32 GiB and eight CPUs; Erigon-2's result cannot substitute for it.
+3. After Erigon-1 qualifies, reconcile its corrected recovery archive and worker/
+   controller configuration. Preserve a verified recovery copy throughout the
+   replacement. Remove the temporary export scratch volume only after its guard
+   is stopped and both mount points have no owners; restore the original ext4
+   reservation. Recheck actual free space after cleanup.
+4. Once every worker's last preparation copy and content scan has finished,
+   complete and record the stopped-worker cache handoff. Review all nine H
+   qualification and recovery records, input readiness, resource limits and
+   network/validator assignments. Keep the unresolved Erigon-2 shared-artifact
+   verification procedure explicitly gated before migration. Also retain the
+   small-fixture checks for backlog controls, root capture and historical-anchor
+   requirements, the Besu BAL-path coverage question, and the supported live
+   catch-up/finality sequence for self-converting workers.
+5. Keep G and S unset. When the user supplies G, generate a new private candidate,
+   validate its H anchor and all 2,304 validators, and regenerate the tooling
+   values using the morning-handoff commands above. This preparation sequence
+   does not launch the shadowfork or activate PBT.
 
 Command templates remain in [client migration commands](pbt-1-client-migration-commands.md).
 The [older process](pbt-1-migration-process.md) records snapshot-generation results;
