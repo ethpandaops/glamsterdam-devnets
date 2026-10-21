@@ -121,8 +121,9 @@ authorization files and storage credentials stay private.
    `inputs_downloading_and_erigon_restore_started` status means jobs started,
    **not that they completed**.
 
-4. **Run Erigon-1's own H startup check — manual follow-up.** After successful
-   restore and promotion, run on Erigon-1:
+4. **Run Erigon-1's own H startup check — now queued automatically.** Controller
+   unit `pbt-1-erigon-1-restored-qualification` waits for successful restore and
+   promotion, then starts the following once on Erigon-1. Do not duplicate it:
 
    ```sh
    python3 /data/pbt-1/qualify-restored-worker.py \
@@ -131,6 +132,9 @@ authorization files and storage credentials stay private.
 
    Read `/data/pbt-1/qualification/result.json`; confirm this worker's assigned
    32-GiB/eight-CPU startup and clean stop. Erigon-2's result cannot substitute.
+   Controller status is in `erigon-1-restored-qualification/status.json` under
+   the private state directory. The 15-minute fleet monitor follows it. Failure
+   stops this handoff for inspection; it does not retry startup or launch CL.
 
 5. **Replace Erigon-1's recovery archive — helper staged, execution pending.** Preserve
    original provenance, confirm its own H startup succeeded and the corrected

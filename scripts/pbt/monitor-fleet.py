@@ -343,9 +343,24 @@ def main():
             alerts.append('Post-publication input/restore handoff failed; inspect private evidence')
         elif phase != 'inputs_downloading_and_erigon_restore_started' and active != 'active':
             alerts.append('Post-publication input/restore handoff stopped before completion')
+    restored_qualification = None
+    qualification_status = ROOT.parent / 'erigon-1-restored-qualification/status.json'
+    if qualification_status.exists():
+        restored_qualification = {'status': json.loads(qualification_status.read_text())}
+        service = subprocess.run(['systemctl', '--user', 'show', 'pbt-1-erigon-1-restored-qualification',
+                                  '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'],
+                                 capture_output=True, text=True, timeout=10)
+        restored_qualification['service'] = dict(line.split('=', 1) for line in service.stdout.splitlines() if '=' in line)
+        phase = restored_qualification['status'].get('phase')
+        active = restored_qualification['service'].get('ActiveState')
+        if phase == 'failed' or active == 'failed':
+            alerts.append('Erigon-1 restored startup handoff failed; inspect private evidence')
+        elif phase != 'own_H_startup_passed' and active != 'active':
+            alerts.append('Erigon-1 restored startup handoff stopped before completion')
     report = {'checked_at': time.time(), 'hosts': results, 'alerts': alerts,
               'head_publication': publication, 'artifact_publication': artifacts,
-              'post_publication': post_publication}
+              'post_publication': post_publication,
+              'erigon_1_restored_qualification': restored_qualification}
     temporary = ROOT / 'latest.tmp'
     temporary.write_text(json.dumps(report, indent=2) + '\n')
     temporary.replace(previous_path)
