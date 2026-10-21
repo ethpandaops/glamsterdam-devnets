@@ -10,7 +10,7 @@
   },
   "open_gates": [
     "Migration-qualify the pinned client builds (all five pinned and build-verified; see scripts/pbt/migration-builds.json)",
-    "Qualify retained anchor and BAL access on each client (eight workers, including Erigon-2 passed sampled H/N/BAL startup checks; see pbt-1-worker-preparation.json)",
+    "Qualify retained anchor and BAL access on each client (all nine workers passed sampled H/N/BAL startup checks; see pbt-1-worker-preparation.json)",
     "Qualify per-client progress and PBT root capture",
     "Qualify live migration catch-up and measure actual backlog per worker",
     "Prove Besu BAL-path coverage separately from trie-log catch-up",
@@ -165,8 +165,14 @@
       "observed_replay_ranges": [],
       "gates": {
         "build_and_restore": {
-          "status": "pending",
-          "evidence": []
+          "status": "startup_checks_passed",
+          "scope": "Own restored corrected H database; two isolated opens at 32 GiB / 8 CPU with H/N, state and retained BAL samples; migration and measured memory behavior remain unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json",
+            "../ansible/inventories/pbt-1/files/erigon-1-startup-result.json",
+            "../ansible/inventories/pbt-1/files/erigon-1-v3-restore-complete.json"
+          ],
+          "finished_at": 1792610660.7385066
         },
         "migration": {
           "status": "pending",
