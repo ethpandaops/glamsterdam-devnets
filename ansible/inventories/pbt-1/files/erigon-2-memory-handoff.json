@@ -1,0 +1,74 @@
+{
+  "worker": "lighthouse-erigon-2",
+  "checked_at": 1792599105.3587835,
+  "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
+  "recovery_archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "recovery_archive_identity": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 461165199193,
+    "mtime_ns": 1792593191722096567,
+    "ctime_ns": 1792594963900730579
+  },
+  "recovery_ready_receipt_sha256": "239f663c51855a4bb040d7b84eec6423ae59c3f70d1f10e4a28aa0af7c10d805",
+  "recovery_job_sha256": "7614ac69e764c2cd8b7fa78e6d21bcde9f9dffd7fc2f044ea4962b4262dea2bb",
+  "preparation_and_clients_stopped": true,
+  "allowed_running_containers": [
+    "nginx-proxy",
+    "nginx-proxy-cert-linker",
+    "nginx-proxy-cert-loader",
+    "nginx-proxy-gen",
+    "node_exporter",
+    "prometheus",
+    "vector"
+  ],
+  "before_memory_kib": {
+    "MemTotal": 131911684,
+    "MemFree": 5466256,
+    "MemAvailable": 129511392,
+    "Buffers": 134120,
+    "Cached": 121128456,
+    "SwapCached": 0,
+    "Dirty": 872,
+    "Writeback": 0,
+    "Shmem": 4684,
+    "SReclaimable": 4036168
+  },
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "migration_memory_measurement": false,
+  "after_sync_memory_kib": {
+    "MemTotal": 131911684,
+    "MemFree": 5462928,
+    "MemAvailable": 129508064,
+    "Buffers": 134128,
+    "Cached": 121128448,
+    "SwapCached": 0,
+    "Dirty": 20,
+    "Writeback": 0,
+    "Shmem": 4684,
+    "SReclaimable": 4036168
+  },
+  "after_drop_memory_kib": {
+    "MemTotal": 131911684,
+    "MemFree": 130588940,
+    "MemAvailable": 129949252,
+    "Buffers": 4368,
+    "Cached": 185192,
+    "SwapCached": 0,
+    "Dirty": 4,
+    "Writeback": 0,
+    "Shmem": 4696,
+    "SReclaimable": 235388
+  },
+  "completed_at": 1792599134.4280555,
+  "qualification_unchanged": true,
+  "recovery_archive_identity_unchanged": true,
+  "phase": "stopped_worker_cache_handoff_complete",
+  "commands": [
+    "sync",
+    "write 1 to /proc/sys/vm/drop_caches"
+  ],
+  "repeat_required_after": "Any later preparation read of database or migration-input contents before measured client startup",
+  "shared_artifact_verification_gate": "If Erigon-2 later verifies the shared pair, repeat the stopped-worker handoff after that preparation."
+}

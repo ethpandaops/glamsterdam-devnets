@@ -7,12 +7,12 @@ No genesis time is selected and no shadowfork is authorized to launch.
 The private timestamped validation candidate is archived test evidence only;
 regenerate it after the user selects a launch time.
 
-Preparation checkpoint, **2026-10-21 15:15 UTC**:
+Preparation checkpoint, **2026-10-21 16:12 UTC**:
 
 | Component | Verified so far | Still required |
 | --- | --- | --- |
 | Three Geth, two Besu, two Nethermind workers | Each passed isolated startup checks at H=24,503,958 with its assigned process limits | Verified migration-file delivery to the seven recipients |
-| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive and recovery-volume copy verified; worker/controller configuration reconciled, unsqueeze rollback and redundant local cache reclaimed; about 898 GB free locally |
+| Erigon-2 | V3 conversion and two own H opens passed under 16 GiB / 8 CPU; corrected recovery archive verified and reconciled; redundant copies reclaimed; stopped-worker cache handoff completed at 16:12 UTC | Repeat cache handoff after any later preparation content reads; resolve the documented shared-pair verification procedure before migration |
 | Erigon-1 | Original H database and recovery archive preserved; N export (107.90 GB snapshot, 66.85 GB preimages) exited 0 at 07:18 UTC with matching metadata | Independent verification running; then preserve N artifacts, restore the verified v3 H release and run its own 32-GiB startup checks |
 | Genesis configuration | Private test candidate loaded in isolated Lighthouse at H with 2,304 validators; all nine inventory reviews passed | Regenerate and validate a fresh candidate after the user chooses G; distribute keys and promote only the public files afterward |
 
@@ -54,7 +54,11 @@ workers. After the last file-content checks/downloads and with preparation and
 clients stopped, clear clean preparation page cache and record the per-worker
 handoff before measured startup. The experiment document explains why RSS and
 cgroup accounting differ; `files/memory-accounting-review.json` records the
-observed evidence. No live-job cache eviction has been performed.
+observed evidence. Erigon-2 completed its stopped-worker handoff at 16:12 UTC;
+`files/erigon-2-memory-handoff.json` records clean cache falling from about
+115 GiB to 181 MiB, with qualification and recovery archive identity unchanged.
+The other eight handoffs remain pending. Later preparation content reads require
+a repeat on the affected worker. No live-job cache eviction has been performed.
 The two publication paths can run independently once their respective
 proofs pass. Neither path chooses G or the later PBT activation time S.
 

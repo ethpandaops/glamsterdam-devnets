@@ -4,20 +4,20 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
-## Preparation checkpoint, October 21 at 15:15 UTC
+## Preparation checkpoint, October 21 at 16:12 UTC
 
 All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
 v3 recovery archive, with matching worker/controller configuration and automatic
 restore disabled. Its original provenance remains preserved; the redundant local archive cache
 was reclaimed after volume verification and configuration reconciliation. The other eight original recovery archives remain retained.
 Eight workers have passed isolated startup checks at H, including Erigon-2;
-Erigon-1 remains pending. The read-only fleet monitor reports no alerts.
+Erigon-1 remains pending. The read-only fleet monitor reports no alerts. Erigon-2's stopped-worker cache handoff is complete; eight workers remain pending.
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
 | Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent native verifier running |
 | Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published; recovery-volume replacement and configuration reconciliation complete |
-| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier completed the storage merge and is processing accounts; publication follows full verification |
+| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier completed the account scan/merge and is reconstructing MPT storage roots; publication follows full verification |
 | Erigon-1 H database | Original H database preserved; verified H release inputs staged, with a 1,192,103,432,995-byte unpacked bound | Finish exporter work, preserve its artifacts, review space, then restore the verified H release and run this worker's own checks |
 | Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache and stored-volume SHA-256 passed; controller and worker recovery inputs agree; scoped URL range check passed |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
@@ -685,9 +685,14 @@ baseline, run `sync`, then write `1` to `/proc/sys/vm/drop_caches` before the
 first measured client startup. Record completion and the resulting baseline.
 This clears clean preparation page cache so the limited client can populate
 its own cache; see [kernel cache-drop semantics](https://docs.kernel.org/admin-guide/sysctl/vm.html#drop-caches).
-Do not do this while the current exporter/replay is running or during measured
-migration. Any later out-of-cgroup scan of database/input contents requires
-repeating that stopped-worker handoff. This step is pending on all nine workers.
+Do not clear cache on a worker while its exporter/replay is running or during
+measured migration. Any later out-of-cgroup scan of database/input contents requires
+repeating that stopped-worker handoff. Erigon-2 completed this step at 16:12 UTC
+on October 21, after its recovery replacement and cleanup. Its clean page cache
+fell from about 115 GiB to 181 MiB, with the qualification and archive identity
+unchanged; see `files/erigon-2-memory-handoff.json`. The other eight workers
+remain pending. If Erigon-2 later verifies the shared pair before measured
+startup, repeat its handoff after that preparation.
 Record `memory.current`, `memory.peak`, `memory.stat`, `memory.events` and process
 RSS/PSS during the experiment. Existing startup checks remain startup evidence,
 not a completed memory benchmark.

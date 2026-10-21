@@ -35,7 +35,29 @@
     "https://docs.kernel.org/admin-guide/cgroup-v2.html#memory-ownership",
     "https://docs.kernel.org/admin-guide/sysctl/vm.html#drop-caches"
   ],
-  "pending_handoff": "After all preparation/hash/download jobs and clients stop, sync and evict clean preparation page cache before measured client startup; record evidence. No eviction performed during live preparation.",
+  "pending_handoff": "Erigon-2 completed its stopped-worker preparation-cache handoff at 16:12 UTC on October 21. Eight workers remain pending. Repeat on any worker after later preparation reads of database/input contents before measured client startup.",
   "genesis_time": null,
-  "pbt_activation_time": null
+  "pbt_activation_time": null,
+  "handoff_checkpoint": {
+    "checked_at": "2026-10-21T16:12:14.428056+00:00",
+    "completed_workers": {
+      "lighthouse-erigon-2": {
+        "evidence": "erigon-2-memory-handoff.json",
+        "before_cached_kib": 121128456,
+        "after_cached_kib": 185192,
+        "migration_memory_measurement": false
+      }
+    },
+    "pending_workers": [
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2",
+      "lighthouse-erigon-1"
+    ],
+    "requires_repeat_after_later_preparation_content_reads": true
+  }
 }
