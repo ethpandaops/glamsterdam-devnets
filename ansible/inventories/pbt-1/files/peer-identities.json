@@ -1,0 +1,101 @@
+{
+    "lighthouse-besu-1": {
+        "client": "besu",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://c6284ad5ffa91fd15b452fa7b44509cc33b884e38547388c6fd0f1cf417e68c304ff42d862fc6906c4f710ec2a60882326f92c5bb0fcbe53598ead0fb4189f47@138.68.76.218:30303",
+        "enr": "enr:-Iu4QIXLdrS07VhoaEzOZzid7VKA8FxoRKjnhe_5rLemQqJQK2UhnwDjZwMMbs3hBlKir2J4v8tu2MFwKUUhXd69R5iAgmlkgnY0gmlwhIpETNqJc2VjcDI1NmsxoQPGKErV_6kf0VtFL6e0RQnMM7iE44VHOIxv0PHPQX5ow4N0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "138.68.76.218",
+        "node_id": "c6284ad5ffa91fd15b452fa7b44509cc33b884e38547388c6fd0f1cf417e68c304ff42d862fc6906c4f710ec2a60882326f92c5bb0fcbe53598ead0fb4189f47",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-besu-2": {
+        "client": "besu",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://6fb8ff85c2370d3d13dae963498d66bdf8eed94d0234610fa6fc233832192fc12347ec8a110d59674dc2c1deb6eb23cbd2aaea05010612a9951f0177026bcaff@164.92.248.222:30303",
+        "enr": "enr:-Iu4QHh34GSI5vVR1j1rq0fKKl5SjfwGQtD0PmWkxQ6q4PlWWy7BqXko2oXv_vNfbxPPDF_TocF5p7hXY-w3-4Ud8UqAgmlkgnY0gmlwhKRc-N6Jc2VjcDI1NmsxoQNvuP-FwjcNPRPa6WNJjWa9-O7ZTQI0YQ-m_CM4MhkvwYN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "164.92.248.222",
+        "node_id": "6fb8ff85c2370d3d13dae963498d66bdf8eed94d0234610fa6fc233832192fc12347ec8a110d59674dc2c1deb6eb23cbd2aaea05010612a9951f0177026bcaff",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-erigon-1": {
+        "client": "erigon",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://856d375bd5b0d630ae5a52c88023954fa9dc30daf746f3ba4c39e383ca5da6808d45f158a8bcf216887829689e13c221674395d2b90db36c3df9a51412ed24e9@164.92.239.96:30303",
+        "enr": "enr:-Iu4QG2yfCiS6jvqLIjhKv8mz3WI0klJTwY3V_HYpXqjUk-bcP6UA7Qk0WW5vVUlwMmQexXxNw4mZjKO-vAQgk8oSDaAgmlkgnY0gmlwhKRc72CJc2VjcDI1NmsxoQOFbTdb1bDWMK5aUsiAI5VPqdww2vdG87pMOeODyl2mgIN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "164.92.239.96",
+        "node_id": "856d375bd5b0d630ae5a52c88023954fa9dc30daf746f3ba4c39e383ca5da6808d45f158a8bcf216887829689e13c221674395d2b90db36c3df9a51412ed24e9",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-erigon-2": {
+        "client": "erigon",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://a4a71053368b8c05e7cd9bf30e07964d1390a8e65d1333a532ba00c89bf32c6effffa7a0f214de51033c8408052f06eb7305bba327583c6dd67e36f96d8996e2@159.89.21.191:30303",
+        "enr": "enr:-Iu4QC_rQJ_8KvZcWM2beWeJ4zI7ExdFZIgD3U1UGdazbxH6ZeQYRt3qDAew3h8JsXIQreNd70lvGkTYVUaatmhm6hGAgmlkgnY0gmlwhJ9ZFb-Jc2VjcDI1NmsxoQKkpxBTNouMBefNm_MOB5ZNE5Co5l0TM6UyugDIm_MsboN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "159.89.21.191",
+        "node_id": "a4a71053368b8c05e7cd9bf30e07964d1390a8e65d1333a532ba00c89bf32c6effffa7a0f214de51033c8408052f06eb7305bba327583c6dd67e36f96d8996e2",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-geth-1": {
+        "client": "geth",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://88979db4d909f9acb7cbd316deb703eed00faf20ef1c073c8ad19364811dab3dbdd319c255bdef7f2fcf929d17f031e6db21d8ef91d01fcbb18cac87f1ca469a@46.101.230.44:30303",
+        "enr": "enr:-Iu4QI5me6Zdyrizd4jnK3GnXTLGXwJsCkS2veEIdE-5qKsJG_DO4y5mZ3RyAcdX1Xl1Fs3aUg8_wpNyZmkOoGvcbEaAgmlkgnY0gmlwhC5l5iyJc2VjcDI1NmsxoQKIl5202Qn5rLfL0xbetwPu0A-vIO8cBzyK0ZNkgR2rPYN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "46.101.230.44",
+        "node_id": "88979db4d909f9acb7cbd316deb703eed00faf20ef1c073c8ad19364811dab3dbdd319c255bdef7f2fcf929d17f031e6db21d8ef91d01fcbb18cac87f1ca469a",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-geth-2": {
+        "client": "geth",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://2096bde5681308cbd1c199afe980e68dd307ac0f0fa2c14c6887fbda85366644d051bc387376f87cc33a7a8678d5812056ad245a92aa5dc7936228bc6e1ca16e@46.101.159.233:30303",
+        "enr": "enr:-Iu4QKG83qhrryP3WwBJjTaYAneVcX5VoKmHF8Jy_R1_GWjDdJNTJ_P-0Mn3M6p3HNmVceG4rvqha6457qYEkq2RePaAgmlkgnY0gmlwhC5ln-mJc2VjcDI1NmsxoQIglr3laBMIy9HBma_pgOaN0wesDw-iwUxoh_vahTZmRIN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "46.101.159.233",
+        "node_id": "2096bde5681308cbd1c199afe980e68dd307ac0f0fa2c14c6887fbda85366644d051bc387376f87cc33a7a8678d5812056ad245a92aa5dc7936228bc6e1ca16e",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-geth-3": {
+        "client": "geth",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://8c1ee3b4dc98dd7a8051daa9fca0db10a400fbfdf762e5caf00f9d62d51059e778a820454a1f8395085486ffbdc79509cc8301b258da8ef3e2e6d106e3473377@164.92.171.244:30303",
+        "enr": "enr:-Iu4QOkiyZEyGUJ2MbSZAlf6SoZQnK8J3vUV4VepHxLrSm80QlMHF6jtMtKlnx9BfKYw42g_jVpS9pcWdjGFU_OQZoeAgmlkgnY0gmlwhKRcq_SJc2VjcDI1NmsxoQOMHuO03JjdeoBR2qn8oNsQpAD7_fdi5crwD51i1RBZ54N0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "164.92.171.244",
+        "node_id": "8c1ee3b4dc98dd7a8051daa9fca0db10a400fbfdf762e5caf00f9d62d51059e778a820454a1f8395085486ffbdc79509cc8301b258da8ef3e2e6d106e3473377",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-nethermind-1": {
+        "client": "nethermind",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://10ed620fbfdefa42fa127706ef60a2a4ef2c53ba2a8abb12d3496cf5cb285a1978cb4d3e34557485909c6336a2608bf7a76388962097efa0a21fb0941c4bcf3b@167.172.188.11:30303",
+        "enr": "enr:-Iu4QAoMS-Uyu92xrjZqRJAq4WZMV_Kh3P0106cZddbup7qdOtwdrpszYkkYALzQ-acsqq4DIV9yfxXGTbTzib9YpZiAgmlkgnY0gmlwhKesvAuJc2VjcDI1NmsxoQMQ7WIPv976QvoSdwbvYKKk7yxTuiqKuxLTSWz1yyhaGYN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "167.172.188.11",
+        "node_id": "10ed620fbfdefa42fa127706ef60a2a4ef2c53ba2a8abb12d3496cf5cb285a1978cb4d3e34557485909c6336a2608bf7a76388962097efa0a21fb0941c4bcf3b",
+        "private_keys_remained_on_worker": true
+    },
+    "lighthouse-nethermind-2": {
+        "client": "nethermind",
+        "client_started": false,
+        "datadir_changed": false,
+        "enode": "enode://90cbba7c5603bd91f3defce832b65e3c77300c08a2934795ebae94e67adf9efdb0da88876ac621aee03290c52d789b4a901910440e756ee90fe0518d01019ce6@201.79.83.218:30303",
+        "enr": "enr:-Iu4QPi9UlYlCTbubQFS6sr6eJHupdlXe5VhPJjbVpm7xxWJRGhXYKQ94AR_CrPQlETZRaoo4c5C8rgNUF9V31daBLmAgmlkgnY0gmlwhMlPU9qJc2VjcDI1NmsxoQKQy7p8VgO9kfPe_Ogytl48dzAMCKKTR5XrrpTmet-e_YN0Y3CCdl-DdWRwgnZf",
+        "identity_directory": "/data/pbt-1/node-identity",
+        "ip": "201.79.83.218",
+        "node_id": "90cbba7c5603bd91f3defce832b65e3c77300c08a2934795ebae94e67adf9efdb0da88876ac621aee03290c52d789b4a901910440e756ee90fe0518d01019ce6",
+        "private_keys_remained_on_worker": true
+    }
+}

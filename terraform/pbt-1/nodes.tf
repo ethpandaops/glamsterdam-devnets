@@ -26,39 +26,48 @@
 
 variable "nodes" {
   description = "List of node definitions for the devnet"
-  # One source per client for workload generation, replay and refreshed snapshots.
+  # Nine migration workers: two per client plus Geth self-migration.
+  # Client cgroup limits remain 8 CPUs and 16/32 GiB on these larger hosts.
   default = [
     {
-      name      = "lighthouse-erigon"
-      count     = 1
-      cloud     = "digitalocean"
-      region    = "fra1"
-      size      = "so1_5-8vcpu-64gb-intel"
-      supernode = false
+      name            = "lighthouse-erigon"
+      count           = 2
+      validator_start = 0
+      validator_end   = 512
+      cloud           = "digitalocean"
+      region          = "fra1"
+      size            = "so-16vcpu-128gb-intel"
+      supernode       = false
     },
     {
-      name      = "lighthouse-geth"
-      count     = 1
-      cloud     = "digitalocean"
-      region    = "fra1"
-      size      = "so1_5-8vcpu-64gb-intel"
-      supernode = false
+      name            = "lighthouse-geth"
+      count           = 3
+      validator_start = 512
+      validator_end   = 1280
+      cloud           = "digitalocean"
+      region          = "fra1"
+      size            = "so-16vcpu-128gb-intel"
+      supernode       = false
     },
     {
-      name      = "lighthouse-besu"
-      count     = 1
-      cloud     = "digitalocean"
-      region    = "fra1"
-      size      = "so1_5-8vcpu-64gb-intel"
-      supernode = false
+      name            = "lighthouse-besu"
+      count           = 2
+      validator_start = 1280
+      validator_end   = 1792
+      cloud           = "digitalocean"
+      region          = "fra1"
+      size            = "so-16vcpu-128gb-intel"
+      supernode       = false
     },
     {
-      name      = "lighthouse-nethermind"
-      count     = 1
-      cloud     = "digitalocean"
-      region    = "fra1"
-      size      = "so1_5-8vcpu-64gb-intel"
-      supernode = false
+      name            = "lighthouse-nethermind"
+      count           = 2
+      validator_start = 1792
+      validator_end   = 2304
+      cloud           = "digitalocean"
+      region          = "fra1"
+      size            = "so-16vcpu-128gb-intel"
+      supernode       = false
     },
   ]
 

@@ -1,0 +1,116 @@
+{
+  "checked_at": 1792519901.870883,
+  "status": "passed",
+  "scope": "Proxy configuration and shared origin certificate loaded on nine workers; serving client endpoints remains a deployment gate",
+  "genesis_time": null,
+  "workers": {
+    "lighthouse-geth-3": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-geth-2": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-nethermind-2": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-erigon-2": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-besu-2": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-nethermind-1": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-besu-1": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-geth-1": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    },
+    "lighthouse-erigon-1": {
+      "containers": [
+        "nginx-proxy",
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen"
+      ],
+      "certificate_loaded": true,
+      "certificate_fingerprint": "C7:2E:8E:D3:F2:1A:B9:61:83:9C:C5:EB:35:BF:DE:D9:F3:FA:5A:48:AD:2F:E3:1E:0C:59:84:B7:49:C2:1A:33",
+      "nginx_config_exit_code": 0,
+      "docker_api_error_in_generator_log": false
+    }
+  }
+}

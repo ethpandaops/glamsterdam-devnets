@@ -9,13 +9,21 @@
 # wallets and the L2 addresses - from index 0, as far as the sweep has paid out so
 # far. Re-run until nothing is left short; it only ever sends the shortfall.
 #
-# Usage: scripts/fund-shadowfork.sh <inventory dir, e.g. sepsf-1> [--dry-run]
-# Env:   RPC_ENDPOINT (default: rpc-bootnode-1 of the network), FUND_EACH_ETH,
+# Usage: scripts/fund-shadowfork.sh <inventory dir> [--dry-run] [--only-spamoor]
+# Env:   RPC_ENDPOINT (default: inventory primary_bootnode), FUND_EACH_ETH,
 #        FUND_AGENTS_ETH, FUND_STATIC_ETH, FUND_RESERVE_ETH
 set -euo pipefail
 
-net="${1:?usage: $0 <inventory dir, e.g. sepsf-1> [--dry-run]}"
-dry_run=false; [ "${2:-}" = "--dry-run" ] && dry_run=true
+net="${1:?usage: $0 <inventory dir> [--dry-run] [--only-spamoor]}"
+shift
+dry_run=false; only_spamoor=false
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) dry_run=true ;;
+    --only-spamoor) only_spamoor=true ;;
+    *) echo "error: unknown option $arg" >&2; exit 1 ;;
+  esac
+done
 root="$(cd "$(dirname "$0")/.." && pwd)"
 vars="$root/ansible/inventories/$net/group_vars/all"
 
@@ -26,22 +34,40 @@ reserve_eth="${FUND_RESERVE_ETH:-1000}"  # left on index 0 for gas
 
 die() { echo "error: $*" >&2; exit 1; }
 
+# PBT leaves its launch timestamp as a required template. Read the reviewed,
+# promoted public CL config once it exists; never choose a timestamp here.
+chain_id="$(yq '.ethereum_genesis_chain_id' "$vars/all.yaml")"
+height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
+genesis="$(yq '.ethereum_genesis_timestamp' "$vars/all.yaml")"
+if [[ ! "$genesis" =~ ^[0-9]+$ ]]; then
+  cl_config="$root/network-configs/$net/metadata/config.yaml"
+  [ -f "$cl_config" ] || die "no reviewed launch genesis for $net; funding waits for launch"
+  genesis="$(yq '.MIN_GENESIS_TIME + .GENESIS_DELAY' "$cl_config")"
+fi
+[[ "$genesis" =~ ^[0-9]+$ && "$height" =~ ^[0-9]+$ && "$chain_id" =~ ^[0-9]+$ ]] \
+  || die "invalid numeric genesis, anchor or chain id"
+primary="$(awk -F= '/^primary_bootnode=/{print $2; exit}' "$root/ansible/inventories/$net/inventory.ini")"
+primary="${primary:-bootnode-1}"
+
 # Secrets stay off argv: the mnemonic goes to a 0600 file cast reads, the basic
 # auth into ETH_RPC_URL.
 tmp="$(mktemp -d)"; chmod 700 "$tmp"; trap 'rm -rf "$tmp"' EXIT
+(umask 077; touch "$tmp/mnemonic")
 sops -d --extract '["secret_genesis_mnemonic"]' "$vars/all.sops.yaml" > "$tmp/mnemonic"
 user="$(sops -d --extract '["secret_nginx_shared_basic_auth"]["name"]' "$vars/all.sops.yaml")"
 pass="$(sops -d --extract '["secret_nginx_shared_basic_auth"]["password"]' "$vars/all.sops.yaml")"
 rpc_prefix="$(yq '.ethereum_node_rpc_prefix' "$vars/all.yaml")"
-export ETH_RPC_URL="${RPC_ENDPOINT:-https://$user:$pass@${rpc_prefix}bootnode-1.srv.glamsterdam-$net.ethpandaops.io}"
+export ETH_RPC_URL="${RPC_ENDPOINT:-https://$user:$pass@${rpc_prefix}${primary}.srv.glamsterdam-$net.ethpandaops.io}"
 
 # The shadowfork keeps the parent chain's id, so the chain id alone cannot tell it
 # from the real network. The block right after shadowfork_height can: on the
 # shadowfork it was built after our genesis, on the parent chain long before.
-chain_id="$(yq '.ethereum_genesis_chain_id' "$vars/all.yaml")"
-height="$(yq '.shadowfork_head_height // .shadowfork_height' "$vars/all.yaml")"
-genesis="$(yq '.ethereum_genesis_timestamp' "$vars/all.yaml")"
 [ "$(cast chain-id)" = "$chain_id" ] || die "RPC chain id is not $chain_id"
+expected_hash="$(yq '.shadowfork_expected_hash // ""' "$vars/all.yaml")"
+if [ -n "$expected_hash" ]; then
+  actual_hash="$(cast block "$height" --json | jq -r '.hash // empty')"
+  [ "${actual_hash,,}" = "${expected_hash,,}" ] || die "RPC anchor hash does not match the reviewed snapshot"
+fi
 ts_hex="$(cast block $((height + 1)) --json 2>/dev/null | jq -r '.timestamp // empty')" \
   || die "block $((height + 1)) not found: the shadowfork has not produced a block yet"
 [ -n "$ts_hex" ] || die "block $((height + 1)) not found: the shadowfork has not produced a block yet"
@@ -57,6 +83,9 @@ treasury="$(cast wallet address "${wallet[@]}")"
 # 10 assertoor, 3 mev-flood user, 7 manual deposits, 20 - then the agent faucet,
 # then the remaining premine accounts.
 {
+  if $only_spamoor; then
+    echo "$(cast wallet address --mnemonic "$tmp/mnemonic" --mnemonic-index 9) $each_eth mnemonic-9-spamoor"
+  else
   for i in 12 21 1 9 4 10 3 7 20; do
     echo "$(cast wallet address --mnemonic "$tmp/mnemonic" --mnemonic-index "$i") $each_eth mnemonic-$i"
   done
@@ -68,6 +97,7 @@ treasury="$(cast wallet address "${wallet[@]}")"
   echo "0x9a97ee9d32a0d68406e32b34c92afb81ce2bc467 $static_eth arbitrum"
   echo "0x107781Bc6FA8f66B843f4216fd6D5862D3aa4fcd $static_eth optimism"
   echo "0x118A1030baf8Fa56f9B8235C163d3112FA8c3b89 $static_eth lido"
+  fi
 } > "$tmp/recipients"
 
 wei() { cast to-wei "$1" ether; }

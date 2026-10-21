@@ -1,0 +1,59 @@
+---
+- name: Stage independent verified migration inputs without starting clients
+  hosts: geth:besu:nethermind
+  become: true
+  gather_facts: false
+  strategy: linear
+  tasks:
+    - name: Require an authorized input job for this worker
+      ansible.builtin.assert:
+        that: inventory_hostname in pbt_migration_input_jobs
+
+    - name: Prepare private download control directory
+      ansible.builtin.file:
+        path: /data/pbt-1/migration-input-control
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+
+    - name: Install download helpers
+      ansible.builtin.copy:
+        src: "../scripts/pbt/{{ item }}"
+        dest: "/data/pbt-1/migration-input-control/{{ item }}"
+        owner: root
+        group: root
+        mode: '0700'
+      loop:
+        - download-migration-inputs.py
+        - stream_verified_archive.py
+
+    - name: Install scoped read authorization
+      ansible.builtin.copy:
+        content: "{{ pbt_migration_input_jobs[inventory_hostname] | to_nice_json }}"
+        dest: /data/pbt-1/migration-input-control/job.json
+        owner: root
+        group: root
+        mode: '0600'
+      no_log: true
+
+    - name: Check qualification and local migration headroom
+      ansible.builtin.command:
+        argv: [python3, /data/pbt-1/migration-input-control/download-migration-inputs.py]
+      changed_when: false
+
+    - name: Start verified input download only
+      ansible.builtin.command:
+        argv:
+          - systemd-run
+          - --unit=pbt-1-migration-input-download
+          - --property=Type=exec
+          - --property=RemainAfterExit=yes
+          - --property=MemoryMax=2G
+          - --property=CPUQuota=200%
+          - --property=AllowedCPUs=0-1
+          - --property=UMask=0077
+          - --property=Restart=no
+          - /usr/bin/python3
+          - /data/pbt-1/migration-input-control/download-migration-inputs.py
+          - --run

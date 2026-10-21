@@ -1,0 +1,32 @@
+[
+  {
+    "host": "lighthouse-besu-1",
+    "image": "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4",
+    "exit_code": 0,
+    "wrapper_sha256": "d9261e6b2c20d9a2d8664d75b13942fb510e6111a17ddc3d28a8dd91eb772c02",
+    "jfr_bytes": 382135,
+    "gc_log_bytes": 16429,
+    "heap_gib": 8,
+    "process_memory_gib": 16,
+    "temporary_profile_files_only": true,
+    "client_database_mounted": false,
+    "network_mode": "none",
+    "scope": "Profiling wrapper, JVM options, nonempty JFR and GC log using --version; not full client or migration qualification",
+    "time": 1792523178.1253808
+  },
+  {
+    "host": "lighthouse-besu-2",
+    "image": "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71",
+    "exit_code": 0,
+    "wrapper_sha256": "d9261e6b2c20d9a2d8664d75b13942fb510e6111a17ddc3d28a8dd91eb772c02",
+    "jfr_bytes": 362583,
+    "gc_log_bytes": 14744,
+    "heap_gib": 8,
+    "process_memory_gib": 32,
+    "temporary_profile_files_only": true,
+    "client_database_mounted": false,
+    "network_mode": "none",
+    "scope": "Profiling wrapper, JVM options, nonempty JFR and GC log using --version; not full client or migration qualification",
+    "time": 1792523178.177324
+  }
+]

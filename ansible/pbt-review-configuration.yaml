@@ -1,0 +1,110 @@
+---
+# Controller-only assertions; no remote mutations or genesis generation.
+- name: Review PBT configuration without starting the network
+  hosts: ethereum_node
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Resolve the execution role JWT path default for controller-only rendering
+      ansible.builtin.set_fact:
+        "{{ ethereum_node_el }}_auth_jwt_path": "{{ (lookup('file', playbook_dir ~ '/vendor/collections/ansible_collections/ethpandaops/general/roles/' ~ ethereum_node_el ~ '/defaults/main.yaml') | from_yaml)[ethereum_node_el ~ '_auth_jwt_path'] }}"
+      when: (ethereum_node_el ~ '_auth_jwt_path') not in vars
+
+    - name: Match each isolated worker check to the intended deployment
+      vars:
+        pbt_review_jobs: "{{ lookup('file', inventory_dir ~ '/files/qualification-jobs.json') | from_json }}"
+        pbt_review_job: "{{ pbt_review_jobs[inventory_hostname] }}"
+      ansible.builtin.assert:
+        that:
+          - pbt_review_jobs.keys() | sort == groups['ethereum_node'] | sort
+          - pbt_review_job.host == inventory_hostname
+          - pbt_review_job.client == ethereum_node_el
+          - pbt_review_job.image == lookup('vars', ethereum_node_el ~ '_container_image')
+          - pbt_review_job.memory_gib | int == pbt_migration_memory_gib | int
+          - pbt_review_job.node_id == pbt_peer_identities[inventory_hostname].node_id
+          - pbt_review_job.head | int == shadowfork_height | int
+          - pbt_review_job.head_hash == shadowfork_expected_hash
+          - pbt_review_job.state_root == shadowfork_expected_state_root
+
+    - name: Check worker resources and peer inputs
+      ansible.builtin.assert:
+        that:
+          - ethereum_network_name == 'glamsterdam-pbt-1'
+          - groups['ethereum_node'] | length == 9
+          - groups.get('dns_server', []) == [primary_bootnode]
+          - primary_bootnode == 'lighthouse-geth-1'
+          - primary_bootnode in groups['ethereum_node']
+          - shadowfork_height | int == 24503958
+          - validator_end | int - validator_start | int == 256
+          - lookup('vars', ethereum_node_el ~ '_container_cpus') | int == 8
+          - lookup('vars', ethereum_node_el ~ '_container_memory') == (pbt_migration_memory_gib | string ~ 'g')
+          - lookup('vars', ethereum_node_el ~ '_container_memory_swap') == lookup('vars', ethereum_node_el ~ '_container_memory')
+          - ethereum_el_bootnodes | length == 8
+          - shadowfork_el_static_enodes | length == 8
+          - pbt_peer_identities[inventory_hostname].ip == ansible_host
+          - pbt_peer_identities[inventory_hostname].client == ethereum_node_el
+          - pbt_peer_identities[inventory_hostname].enode not in shadowfork_el_static_enodes
+          - "'/data/pbt-1/node-identity:/node-identity:ro' in lookup('vars', ethereum_node_el ~ '_container_volumes')"
+          - "'@sha256:' in lookup('vars', ethereum_node_el ~ '_container_image') or lookup('vars', ethereum_node_el ~ '_container_image') is match('^sha256:')"
+          - "'@sha256:' in lighthouse_container_image"
+          - not ethereum_node_images_always_pull | bool
+          # Inspect this literal flag without rendering network-file lookups;
+          # launch metadata does not exist while genesis time is unset.
+          - ethereum_node_el != 'erigon' or '--experimental.commitment-v3' in vars['erigon_shadowfork_args']
+          - ethereum_node_el != 'erigon' or '--exec.no-prune=true' in vars['erigon_shadowfork_args']
+          - ethereum_node_el != 'geth' or '--history.chain=all' in vars['geth_container_command_extra_args']
+          - "ethereum_node_el == 'erigon' or (((pbt_migration_input_host_dir ~ ':' ~ pbt_migration_input_container_dir ~ ':rw') in lookup('vars', ethereum_node_el ~ '_container_volumes')) == (pbt_migration_input_mount_enabled | bool))"
+
+    - name: Collect only public configuration fields for review
+      ansible.builtin.set_fact:
+        pbt_configuration_review:
+          client: "{{ ethereum_node_el }}"
+          client_image: "{{ lookup('vars', ethereum_node_el ~ '_container_image') }}"
+          lighthouse_image: "{{ lighthouse_container_image }}"
+          force_image_pull: "{{ ethereum_node_images_always_pull | bool }}"
+          datadir: "{{ lookup('vars', ethereum_node_el ~ '_datadir') }}"
+          recovery_head: "{{ shadowfork_height | int }}"
+          validator_start: "{{ validator_start | int }}"
+          validator_end_exclusive: "{{ validator_end | int }}"
+          cpus: "{{ lookup('vars', ethereum_node_el ~ '_container_cpus') | int }}"
+          process_memory_gib: "{{ pbt_migration_memory_gib | int }}"
+          migration_role: "{{ pbt_migration_role }}"
+          erigon_exec_no_prune: "{{ ('--exec.no-prune=true' in vars['erigon_shadowfork_args']) if ethereum_node_el == 'erigon' else none }}"
+          geth_history_chain_all: "{{ ('--history.chain=all' in vars['geth_container_command_extra_args']) if ethereum_node_el == 'geth' else none }}"
+          migration_input_mounts: "{{ pbt_migration_input_bind_mounts if ethereum_node_el in ['geth', 'besu', 'nethermind'] else [] }}"
+          static_enodes: "{{ shadowfork_el_static_enodes }}"
+          discovery_enrs: "{{ ethereum_el_bootnodes }}"
+
+    - name: Check the selected private candidate supplies the assigned signing keys
+      when: pbt_genesis_workspace is defined
+      vars:
+        pbt_candidate_validation: "{{ lookup('file', pbt_genesis_workspace ~ '/validation.json') | from_json }}"
+        pbt_keyrange: "{{ lookup('file', validator_keys_local_dir ~ '/.keyrange') | trim }}"
+      ansible.builtin.assert:
+        that:
+          - pbt_candidate_validation.status == 'structural_checks_passed'
+          - pbt_candidate_validation.validator_public_key_mapping_verified | bool
+          - pbt_candidate_validation.head_hash == shadowfork_expected_hash
+          - validator_keys_local_dir == pbt_genesis_workspace ~ '/validator-keys/' ~ inventory_hostname
+          - validator_keys_sync_files[0].src == validator_keys_local_dir ~ '/keys/'
+          - validator_keys_sync_files[1].src == validator_keys_local_dir ~ '/secrets/'
+          - pbt_keyrange == (validator_start | string ~ '-' ~ validator_end | string)
+
+- name: Save the reviewed PBT preparation configuration
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Save public review without choosing a launch time
+      ansible.builtin.copy:
+        dest: "{{ pbt_configuration_review_output | default(inventory_dir ~ '/files/configuration-review.json') }}"
+        mode: "0644"
+        content: |
+          {{ {
+            'scope': 'Preparation only; database/CL runtime gates are separate',
+            'genesis_time': pbt_genesis_timestamp | default(none),
+            'launch_authorized': false,
+            'dns_primary': primary_bootnode,
+            'dns_hosts': groups.get('dns_server', []),
+            'workers': dict(groups['ethereum_node'] | zip(groups['ethereum_node'] | map('extract', hostvars, ['pbt_configuration_review'])))
+          } | to_nice_json }}

@@ -1,0 +1,111 @@
+---
+- name: Prepare PBT recovery volumes and start verified native snapshot downloads
+  hosts: ethereum_node
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Wait for SSH
+      ansible.builtin.wait_for_connection:
+        timeout: 3600
+
+    - name: Wait for cloud-init
+      ansible.builtin.command: cloud-init status --wait
+      changed_when: false
+
+    - name: Install recovery tools
+      ansible.builtin.apt:
+        name: [python3, zstd, tar, e2fsprogs, util-linux]
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+        lock_timeout: 300
+
+    - name: Wait for the assigned recovery device
+      ansible.builtin.wait_for:
+        path: "{{ recovery_jobs[inventory_hostname].device }}"
+        timeout: 1800
+
+    - name: Check the assigned filesystem
+      ansible.builtin.command:
+        argv: [blkid, -s, TYPE, -o, value, "{{ recovery_jobs[inventory_hostname].device }}"]
+      register: recovery_fs
+      changed_when: false
+
+    - name: Require provider-created ext4
+      ansible.builtin.assert:
+        that: recovery_fs.stdout == 'ext4'
+
+    - name: Read filesystem UUID
+      ansible.builtin.command:
+        argv: [blkid, -s, UUID, -o, value, "{{ recovery_jobs[inventory_hostname].device }}"]
+      register: recovery_uuid
+      changed_when: false
+
+    - name: Remove root-only reserve on archive filesystem
+      ansible.builtin.command:
+        argv: [tune2fs, -m, "0", "{{ recovery_jobs[inventory_hostname].device }}"]
+      changed_when: false
+
+    - name: Mount recovery volume persistently
+      ansible.posix.mount:
+        path: /mnt/pbt-recovery
+        src: "UUID={{ recovery_uuid.stdout }}"
+        fstype: ext4
+        opts: defaults,nofail
+        state: mounted
+
+    - name: Prepare private job configuration directory
+      ansible.builtin.file:
+        path: /etc/pbt-recovery
+        state: directory
+        mode: "0700"
+
+    - name: Install public artifact identity
+      ansible.builtin.copy:
+        content: "{{ recovery_jobs[inventory_hostname] | to_nice_json }}\n"
+        dest: /etc/pbt-recovery/job.json
+        mode: "0600"
+
+    - name: Install object-scoped download URL
+      ansible.builtin.copy:
+        src: "{{ recovery_url_dir }}/{{ inventory_hostname }}"
+        dest: /etc/pbt-recovery/source-url
+        mode: "0600"
+      no_log: true
+
+    - name: Install resumable verified downloader
+      ansible.builtin.copy:
+        src: ../scripts/pbt/fetch-recovery-snapshot.py
+        dest: /usr/local/bin/pbt-fetch-recovery-snapshot
+        mode: "0755"
+
+    - name: Install archive download and restore service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/pbt-recovery-snapshot.service
+        mode: "0644"
+        content: |
+          [Unit]
+          Description=PBT immutable snapshot recovery download and optional restore
+          After=network-online.target
+          Wants=network-online.target
+          RequiresMountsFor=/mnt/pbt-recovery
+          [Service]
+          Type=exec
+          ExecStart=/usr/bin/python3 /usr/local/bin/pbt-fetch-recovery-snapshot
+          MemoryMax=4G
+          MemorySwapMax=0
+          CPUQuota=400%
+          Restart=no
+          TimeoutStopSec=180
+
+    - name: Inspect previous job status
+      ansible.builtin.stat:
+        path: /mnt/pbt-recovery/status.json
+      register: recovery_status
+
+    - name: Start new jobs only
+      ansible.builtin.systemd_service:
+        name: pbt-recovery-snapshot
+        daemon_reload: true
+        state: started
+      when: not recovery_status.stat.exists

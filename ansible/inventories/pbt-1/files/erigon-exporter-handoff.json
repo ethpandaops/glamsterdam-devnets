@@ -1,0 +1,59 @@
+{
+  "time": 1792538037.6548448,
+  "unit": "pbt-1-v3-source-qualification.service",
+  "worker": "lighthouse-erigon-1",
+  "source_block": 24452538,
+  "state": "source_qualified_anchor_replay_running",
+  "script_sha256": "b339943a2f11b199dc9d05738cbbc2220103c80fcace35779c861525d125505f",
+  "wait_limit_hours": 24,
+  "requires": "Successful inactive converter and all guarded phase proofs before native opens",
+  "native_reopen_limits": {
+    "cpus": 8,
+    "memory_gib": 32,
+    "network": "private"
+  },
+  "anchor_replay_queued": true,
+  "upload_queued": false,
+  "genesis_time": null,
+  "converter_result": "success",
+  "qualification_result": "success",
+  "native_reopen_started": true,
+  "reason": "Two native opens passed after correcting Type=simple namespace race; anchor replay started after read-only metrics mount check correction",
+  "previous_attempt": {
+    "time": 1792525302.7188559,
+    "state": "refused_failed_converter",
+    "converter_result": "exit-code",
+    "qualification_result": "exit-code",
+    "reason": "Native v3 conversion failed on commitment shard 1049600-1049728: accounts range 1049600-1049856 crosses its end boundary"
+  },
+  "anchor_preparation_handoff": {
+    "staging": {
+      "time": 1792529555.68828,
+      "status": "read_only_check_refused_live_predecessor",
+      "exit_code": 1,
+      "hold_unchanged": true,
+      "anchor_started": false,
+      "script_sha256": "300eb02844cc8acce601aae023a4a61042b40987aa185515bdc180823f68ce53",
+      "genesis_time": null
+    },
+    "queued": {
+      "time": 1792529588.1594412,
+      "status": "waiting_for_verified_exporter",
+      "unit": "pbt-1-erigon-anchor-preparation.service",
+      "unit_state": "MainPID=38731\nResult=success\nExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -u /data/pbt-1/handoff-erigon-anchor.py --wait ; ignore_errors=no ; start_time=[Tue 2026-10-20 20:53:08 UTC] ; stop_time=[n/a] ; pid=38731 ; code=(null) ; status=0/0 }\nCPUQuotaPerSecUSec=8s\nMemoryMax=34359738368\nPrivateNetwork=yes\nActiveState=active\n",
+      "hold_still_present": true,
+      "anchor_started": false,
+      "genesis_time": null,
+      "launch_authorized": false
+    },
+    "guard_tests_passed": 3,
+    "driver": "scripts/pbt/handoff-erigon-anchor.py",
+    "requires": "All three exporter predecessor units stopped successfully, exact O reopen proofs, unchanged reviewed anchor driver, verified 1020-block prefix, intact recovery and >300 GB free",
+    "anchor_replay_started": true,
+    "export_queued": false,
+    "current_driver_sha256": "bb62206ba8a679877c42ec12dd00496e42809d4511cbd8ba23a5425444d46b6a",
+    "current_handoff_sha256": "ae639b5f254bb7dd113cd468753f8dc64a2420e12b957a4812efd5da61b13225",
+    "preflight_attempt_preserved": "/data/pbt-1/rehearsal-24453558/anchor-preparation/mount-preflight-attempt-20261020T2312"
+  },
+  "verification_scope": "Both integration commitment verify passes fold frozen files at 24451719. stage_exec restores O with NO_PRUNE; two native reopen checks establish exact O header. This is not a separate full mutable-tail root fold."
+}

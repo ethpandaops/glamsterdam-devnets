@@ -6,7 +6,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
      + besu_extra_github_users }}
 
 # role: ethpandaops.general.snapshot_fetcher
-snapshot_fetcher_out_dir: /data/besu
+snapshot_fetcher_out_dir: /data/pbt-1/besu
+besu_datadir: /data/pbt-1/besu
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: besu
@@ -23,27 +24,30 @@ besu_container_env:
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
   BESU_OPTS: >-
-    -Xmx16g -XX:MaxHeapFreeRatio=30 -XX:MinHeapFreeRatio=10
+    -Xmx8g -XX:MaxHeapFreeRatio=30 -XX:MinHeapFreeRatio=10
     -XX:+HeapDumpOnOutOfMemoryError
   BESU_PROFILING_DIR: /profiling
-besu_container_volumes:
+pbt_besu_base_volumes:
   - "{{ besu_datadir }}:/data"
+  - "/data/pbt-1/node-identity:/node-identity:ro"
   - "{{ besu_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
   - "{{ besu_profiling_host_dir }}:/profiling"
   - "{{ besu_profiling_host_dir }}/entrypoint.sh:/opt/besu-profiling-entrypoint.sh:ro"
+besu_container_volumes: "{{ pbt_besu_base_volumes + pbt_migration_input_bind_mounts }}"
 besu_container_command_extra_args:
+  - --node-private-key-file=/node-identity/nodekey
   - --genesis-file=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
+  - --discovery-dns-url=
   - --discovery-mode=V5
-  - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3
+  - --rpc-http-api=ADMIN,ETH,MINER,NET,TXPOOL,WEB3,DEBUG
   # Restored jochemnet snapshot: nothing to sync, FULL just follows the CL from the
   # snapshot head (fusaka shadowforks). The snapshot may come from another besu
   # version, so skip the datadir version check.
   - --sync-mode=FULL
   - --version-compatibility-protection=false
-  # nimbus-el has no snapshot and snap-syncs from the restored nodes; besu serves snap
-  # only when asked (geth and nethermind do by default).
+  # Serve SNAP to peers when requested. All nine baseline workers are restored.
   - --snapsync-server-enabled=true
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
@@ -54,7 +58,8 @@ besu_container_command_extra_args:
   - --rpc-gas-cap=200000000
   # ~20k pending txs: layered pool sorts 10000 by default; the byte-capped layers (75 MB) hold the rest
   - --tx-pool-max-prioritized=20000
-besu_container_pull: true
+# Loaded from the verified build archive on both workers, not a registry tag.
+besu_container_pull: false
 
 prometheus_config: |
   global:

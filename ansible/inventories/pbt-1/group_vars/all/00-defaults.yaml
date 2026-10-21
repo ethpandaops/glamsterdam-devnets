@@ -72,6 +72,9 @@ docker_networks_shared:
 # role: geerlingguy.docker
 docker_users:
   - devops
+# The Docker role's Debian vars override its obsolete-package inventory setting.
+# Use the tagged playbook pre-task to remove the conflicting distro plugin.
+docker_remove_distro_buildx: true
 docker_daemon_options:
   "log-driver": "json-file"
   "log-opts":

@@ -1,0 +1,99 @@
+{
+  "time": "2026-10-21T01:50:44.281277+00:00",
+  "status": "implemented_tested_not_authorized_or_deployed",
+  "anchor": 24453558,
+  "import_pair_workers": [
+    "lighthouse-geth-1",
+    "lighthouse-geth-2",
+    "lighthouse-besu-1",
+    "lighthouse-besu-2",
+    "lighthouse-nethermind-1",
+    "lighthouse-nethermind-2"
+  ],
+  "preimages_only_worker": "lighthouse-geth-3",
+  "destination": "/data/pbt-1/migration-input-24453558",
+  "files_writable_by_qualified_service_user": true,
+  "master_hardlinks_used": false,
+  "reserve_after_download_bytes": 600000000000,
+  "tests_passed": 9,
+  "ansible_syntax_check_passed": true,
+  "live_controller_check": "waiting_for_verified_shared_release",
+  "authorization_issued": false,
+  "downloads_started": false,
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "sha256": {
+    "scripts/pbt/download-migration-inputs.py": "8e6aca0f811d9e6e40e9273e99324392502bd08619ce1cbee2b0016ce738e675",
+    "scripts/pbt/authorize-migration-inputs.py": "48f52c5310d41e9be04b81f180702e971a45592f8224e15583606f8705f75c73",
+    "ansible/pbt-stage-migration-inputs.yaml": "eb6a24a450de8756441f3446d1ac701ce523a3cb995484b6eacf536d9925c6cc"
+  },
+  "capacity_review": {
+    "observed_at_utc": "2026-10-21T02:00:39Z",
+    "migration_reserve_bytes": 600000000000,
+    "shared_input_total_bytes": null,
+    "release_sizes_still_pending": true,
+    "workers": {
+      "lighthouse-geth-3": {
+        "free_bytes": 1181126479872,
+        "max_input_bytes_after_reserve_and_margin": 580052738048
+      },
+      "lighthouse-geth-2": {
+        "free_bytes": 753057800192,
+        "max_input_bytes_after_reserve_and_margin": 151984058368
+      },
+      "lighthouse-nethermind-2": {
+        "free_bytes": 1235923120128,
+        "max_input_bytes_after_reserve_and_margin": 634849378304
+      },
+      "lighthouse-besu-2": {
+        "free_bytes": 1201723400192,
+        "max_input_bytes_after_reserve_and_margin": 600649658368
+      },
+      "lighthouse-nethermind-1": {
+        "free_bytes": 1185611841536,
+        "max_input_bytes_after_reserve_and_margin": 584538099712
+      },
+      "lighthouse-besu-1": {
+        "free_bytes": 1161869422592,
+        "max_input_bytes_after_reserve_and_margin": 560795680768
+      },
+      "lighthouse-geth-1": {
+        "free_bytes": 1114803597312,
+        "max_input_bytes_after_reserve_and_margin": 513729855488
+      }
+    },
+    "geth_2_temporary_checkpoint": {
+      "path": "/data/pbt-1/erigon-exporter-recovery/tree",
+      "logical_bytes": 428146525727,
+      "delete_now": false,
+      "before_removal": [
+        "Shared N artifact export and independent native verifier complete",
+        "Shared three-file release fully uploaded and remote SHA256 readback verified",
+        "Retain exporter proofs and confirm original O recovery object identity",
+        "Recovery copy service stopped successfully, transfer keys removed, exact destination and ownership reviewed"
+      ],
+      "after_removal": "Re-measure free space before staging migration inputs; keep native Geth H database and its recovery archive intact."
+    }
+  },
+  "container_mount_review": {
+    "checked_at_utc": "2026-10-21T03:16:43.774303+00:00",
+    "host_path": "/data/pbt-1/migration-input-24453558",
+    "container_path": "/pbt-migration-input",
+    "writable": true,
+    "default_enabled": false,
+    "default_mode_workers_checked": 9,
+    "enabled_mode_workers_checked": 9,
+    "enabled_mode_recipient_mount_count": 7,
+    "erigon_mount_count": 0,
+    "genesis_time": null,
+    "launch_authorized": false,
+    "enabled_mounts_deployed": false,
+    "sha256": {
+      "ansible/inventories/pbt-1/group_vars/all/all.yaml": "4663e150700e105273ef85a5fb9f70b231256d18d609019f9ed4c67463592fa6",
+      "ansible/inventories/pbt-1/group_vars/geth.yaml": "b98e680a45c79bb4f76a6177c1ef2ad49fd749b3ce83ccbb7860e7af3af8a1e5",
+      "ansible/inventories/pbt-1/group_vars/besu.yaml": "cb4e2e10ada022ba7a4144dc8b36d36440ff695384563c6234c7ece88a5c4f2b",
+      "ansible/inventories/pbt-1/group_vars/nethermind.yaml": "46f1b6802348ce157dc5b84567215aeb7969d4accd26bc3272091c7156c26a33",
+      "ansible/pbt-review-configuration.yaml": "a806fc475460a00e40d1542899cb461b09c9a15c58eb88263f3a34b3f0d55451"
+    }
+  }
+}

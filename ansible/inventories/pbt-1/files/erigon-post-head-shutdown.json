@@ -1,0 +1,50 @@
+{
+  "time": 1792573056.0574057,
+  "reason": "Execution reached H and stage returned; cancel unfinished background aggregation during native Close",
+  "target_block": 24503958,
+  "native_pid": 90441,
+  "native_start_ticks": "6121645",
+  "wrapper_pid": 90345,
+  "native_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+  "signal": "SIGINT",
+  "forced_kill": false,
+  "remaining_checks_unchanged": true,
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "profile": "/data/pbt-1/tail-performance/shutdown-20261021-0855.data",
+  "last_completed_aggregation_step": 1055099,
+  "background_lastInDB": 1055956,
+  "native_completion": {
+    "finished_at": 1792573074.8225727,
+    "exit_code": 0,
+    "command": [
+      "/data/pbt-1/v3-tools-372df0e6/integration.pinned",
+      "stage_exec",
+      "--datadir=/data/pbt-1/erigon",
+      "--chain=mainnet",
+      "--block=24503958",
+      "--experimental.commitment-v3",
+      "--batchSize=4G"
+    ],
+    "commitment_v3_env": true,
+    "binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+    "no_prune_env": "true"
+  },
+  "outcome": "Native stage exited 0 after one SIGINT; unchanged wrapper advanced to original commitment verifier",
+  "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+  "source_review": {
+    "database_close": "db/kv/temporal/kv_temporal.go: DB.Close closes stateFiles first",
+    "aggregator_close": "db/state/aggregator.go: Close calls WaitForFiles before cancellation; WaitForFiles uses aggregator context",
+    "background_range": "buildFilesInBackground scans steps up to lastInDB, beyond targetStep in its log",
+    "cancellation": "common/cli.go: RootContext cancels on SIGINT; aggregator is opened with that context",
+    "stage_completion": "cmd/integration/commands/stages.go: total is logged after stageFn returns and before deferred db.Close"
+  },
+  "profiling": {
+    "sample_seconds": 15,
+    "samples": 191,
+    "scope": "CPU samples, not a wall-time percentage",
+    "finding": "MDBX cursor traversal and Domain.collate; major kernel page-fault work",
+    "io_read_bytes_10s": 482873344,
+    "io_write_bytes_10s": 0
+  }
+}

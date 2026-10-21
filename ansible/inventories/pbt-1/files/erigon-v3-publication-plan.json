@@ -1,0 +1,112 @@
+{
+  "status": "streaming_H_archive",
+  "worker": "lighthouse-erigon-2",
+  "host": "159.89.21.191",
+  "head": 24503958,
+  "source_datadir": "/data/pbt-1/erigon",
+  "object_key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst",
+  "native_format": "v3 MPT",
+  "pbt_migration_performed": false,
+  "stream_command": [
+    "python3",
+    "/data/pbt-1/upload-v3-head-stream.py",
+    "--v3-head"
+  ],
+  "remote_publication_directory": "/data/pbt-1/v3-head-publication",
+  "multipart_job_created": true,
+  "upload_started": true,
+  "published": false,
+  "required_before_authorization": [
+    "Successful H conversion and full v3 state verification",
+    "Two pinned-image H opens at 16 GiB with matching head/root, sampled BAL bodies, and clean stops",
+    "Exact qualification report SHA-256 bound to the upload job"
+  ],
+  "required_before_release": [
+    "Stopped-source streaming with conversion and qualification locks held",
+    "Full remote compressed-archive SHA-256 readback",
+    "Publish source genesis, image/commit, conversion/reopen proof, archive bytes and checksum"
+  ],
+  "retention_scope": "Original release had full BAL-body validation. Post-conversion worker qualification currently checks three bodies; do not describe that as a new full-range audit.",
+  "recovery_volume_gate": "Measure converted archive size before replacing or downloading onto a 550 GiB recovery volume; retain the verified original archive meanwhile.",
+  "genesis_time": null,
+  "launch_authorized": false,
+  "controller": "scripts/pbt/publish-erigon-v3-head.py",
+  "controller_python": "/usr/bin/python3",
+  "controller_actions": [
+    "check",
+    "authorize",
+    "finish",
+    "auto"
+  ],
+  "controller_sha256": "e089c039e8f907a9f72ece3460136ca67f89d7b9a46ad6ea3a8a3f97a1db87a5",
+  "controller_review": {
+    "time": 1792529975.485338,
+    "tests_passed": 17,
+    "test_command": "/usr/bin/python3 -m unittest test_v3_head_publication test_upload_archive -v",
+    "live_check": "refused: H conversion-complete.json and qualification/result.json do not exist; conversion and queued qualification units still active",
+    "storage_mutation_performed": false
+  },
+  "streamer_sha256": "845930d1580e0a24117e382e8a4d808e3ac142197fbedb3c7b61b91442fe95d9",
+  "converter_provenance_policy": "For a patched converter, qualification and conversion records must contain the same converter_build. Release metadata and the conversion proof retain its base commit, patch SHA-256 and binary SHA-256 separately from the unmodified worker image.",
+  "automatic_handoff": {
+    "time": 1792529975.4853382,
+    "unit": "pbt-1-v3-head-publication.service",
+    "unit_state": "MainPID=281010\nResult=success\nActiveState=active\n",
+    "phase": "streaming_H_archive",
+    "multipart_authorized": true,
+    "upload_started": true,
+    "wait_limit_hours_per_stage": 24,
+    "credentials_scope": "Account credentials remain in the private controller environment; only object-scoped multipart URLs go to the VM",
+    "remote_upload_unit": "pbt-1-v3-head-upload.service",
+    "remote_upload_memory_gib": 16,
+    "remote_upload_cpu_quota_percent": 400,
+    "full_remote_readback_required": true,
+    "genesis_time": null,
+    "tail_batch_resume": {
+      "observed_at_utc": "2026-10-21T05:03:17Z",
+      "unit_main_pid": 281010,
+      "unit_active": true,
+      "phase": "waiting_for_H_conversion_and_reopen",
+      "reason": "Controller deliberately stopped and recreated around native tail batch handoff; no upload authorization issued",
+      "performance_evidence": "erigon-tail-performance-20261021.json"
+    },
+    "observed_at_utc": "2026-10-21T10:03:52.652430+00:00"
+  },
+  "checked_at": "2026-10-21T10:03:52.652430+00:00",
+  "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
+  "qualification_evidence": "erigon-2-v3-head-qualified.json",
+  "upload_cpu_observation": {
+    "sample_seconds": 62.21937441825867,
+    "cpu_cores_used": 1.435850036026452,
+    "throttled_seconds": 0,
+    "throttled_periods": 0,
+    "processes": [
+      {
+        "pid": 136958,
+        "name": "python3",
+        "rchar_delta": 7128920353,
+        "wchar_delta": 6695872725
+      },
+      {
+        "pid": 137081,
+        "name": "tar",
+        "rchar_delta": 17479507968,
+        "wchar_delta": 17479505920
+      },
+      {
+        "pid": 137082,
+        "name": "zstd",
+        "rchar_delta": 17479444480,
+        "wchar_delta": 3639185408
+      }
+    ],
+    "time": 1792576990.9363368,
+    "decision": "Keep existing 400% CPU quota: sampled usage was 1.44 cores with zero throttling; no live configuration change or restart"
+  },
+  "remaining_publication_gates": [
+    "Complete streamed multipart upload",
+    "Full remote archive SHA-256 readback",
+    "Publish metadata and exact archive size",
+    "Review recovery-volume capacity against final compressed size"
+  ]
+}

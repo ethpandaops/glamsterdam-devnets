@@ -6,10 +6,11 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
      + erigon_extra_github_users }}
 
 # role: ethpandaops.general.snapshot_fetcher
-snapshot_fetcher_out_dir: /data/erigon
-# Frozen up to 24401000; the ~43k release blocks above that are in the DB, so retire starts soon
-# after genesis. If it stalls (v3.7.1 retire deadlock), add --snap.stop via erigon_host_extra_args.
-snapshot_fetcher_filename: snapshot-pruned.tar.zst
+snapshot_fetcher_out_dir: /data/pbt-1/erigon
+erigon_datadir: /data/pbt-1/erigon
+# The H database contains retained blocks above its frozen snapshots. Monitor
+# snapshot retirement after launch; offline conversion checks disable maintenance.
+snapshot_fetcher_filename: snapshot.tar.zst
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: erigon
@@ -17,6 +18,11 @@ ethereum_node_el: erigon
 # role: ethpandaops.general.erigon
 erigon_container_name: execution
 erigon_container_image: "{{ default_ethereum_client_images.erigon }}"
+erigon_container_volumes:
+  - "{{ erigon_datadir }}:/data"
+  - "/data/pbt-1/node-identity:/node-identity:ro"
+  - "{{ erigon_auth_jwt_path }}:/execution-auth.jwt:ro"
+  - "{{ eth_testnet_config_dir }}:/network-config:ro"
 erigon_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
@@ -30,7 +36,15 @@ erigon_container_command_extra_args: >-
      + ((['--staticpeers=' ~ (shadowfork_el_static_enodes | join(','))]) if shadowfork_el_static_enodes | length > 0 else [])
      + (erigon_host_extra_args | default([])) }}
 erigon_shadowfork_args:
-  - --http.api=eth,erigon,engine,web3,net,txpool,admin
+  - --nodekey=/node-identity/nodekey
+  # Both H databases must pass the separate v3 format/reopen gate before launch.
+  - --experimental.commitment-v3
+  # Preserve the prepared BAL corpus through startup and the migration experiment.
+  # This pinned build prunes BlockAccessList in the Execution stage even when
+  # historical snapshots are retained. This disables all DB pruning; record it
+  # with the experiment results and review disk headroom before enabling pruning.
+  - --exec.no-prune=true
+  - --http.api=eth,erigon,engine,web3,net,txpool,admin,debug
   - --http.vhosts=*
   - --ws
   - --networkid={{ ethereum_network_id }}
@@ -56,6 +70,11 @@ erigon_shadowfork_args:
   - --pprof.port=6060
 erigon_init_custom_network: true
 erigon_init_custom_network_genesis_file: "{{ eth_testnet_config_dir }}/genesis.json"
+erigon_init_custom_network_container_command:
+  - --datadir=/data
+  - --experimental.commitment-v3
+  - init
+  - /genesis.json
 
 prometheus_config: |
   global:

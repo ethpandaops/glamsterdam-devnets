@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "PBT-1 migration workers; separate from native snapshot preparation provenance",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "besu": {
     "repository": "https://github.com/matkt/besu",
     "branch_hint": "main-pbt",
@@ -11,22 +11,467 @@
       "branch_hint": "feat/partitioned-binary-trie",
       "commit": "62b752345cce00d9119f37c37d56eb9566269578",
       "maven_coordinate": "org.hyperledger.besu:besu-stateless:0.1.8-SNAPSHOT",
-      "requirement": "Build the exact library commit, resolve Besu against that artifact, and record the resolved JAR SHA-256"
+      "requirement": "Build the exact library commit, resolve Besu against that artifact, and record the resolved JAR SHA-256",
+      "resolved_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd"
     },
-    "build_verified": false,
+    "build_verified": true,
     "migration_qualified": false,
-    "image_digest": null
+    "image_digest": null,
+    "local_build": {
+      "host": "lighthouse-besu-2",
+      "unit": "pbt-1-besu-pinned-build.service",
+      "root": "/data/pbt-1/migration-builds",
+      "status": "distribution_and_local_image_built",
+      "image_id": "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71",
+      "image_tag": "pbt-1/besu:39377a26-62b75234",
+      "version": "besu/v26.10-develop-39377a2/linux-x86_64/openjdk-java-25",
+      "stateless_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd",
+      "library_tests_passed": true,
+      "workers": {
+        "lighthouse-besu-1": {
+          "image_id": "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4",
+          "layers_match_build": true,
+          "source_labels_match": true,
+          "version_checked": true,
+          "stateless_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd"
+        },
+        "lighthouse-besu-2": {
+          "image_id": "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71",
+          "layers_match_build": true,
+          "source_labels_match": true,
+          "version_checked": true,
+          "stateless_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd"
+        }
+      },
+      "image_archive": {
+        "bytes": 344789504,
+        "sha256": "bfeb9250555b2b2f174a903f7ac3d8900014df42405bb2098e44a4b85a664cac",
+        "path": "/home/ubuntu/.local/state/pbt-1-run/genesis/besu-pinned-image.tar",
+        "published_to_registry": false
+      }
+    },
+    "worker_startup_checks": {
+      "lighthouse-besu-1": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 16,
+        "service_uid": 1002,
+        "finished_at": 1792514474.4868264,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      },
+      "lighthouse-besu-2": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 32,
+        "service_uid": 1003,
+        "finished_at": 1792518579.0119827,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      }
+    },
+    "database_format_preparation": {
+      "worker": "lighthouse-besu-1",
+      "from": "BONSAI v3",
+      "to": "BONSAI v4",
+      "code_storage_rewrite_completed": true,
+      "original_recovery_archive_preserved": true,
+      "note": "Ordinary database startup upgrade, not PBT migration.",
+      "additional_workers": {
+        "lighthouse-besu-2": {
+          "from": "BONSAI v3",
+          "to": "BONSAI v4",
+          "code_storage_rewrite_completed": true,
+          "completed_at": "2026-10-20T17:49:33Z",
+          "original_recovery_archive_preserved": true
+        }
+      }
+    }
   },
   "geth": {
     "repository": "https://github.com/CPerezz/go-ethereum",
     "branch_hint": "pbt",
-    "commit": "4f7e4b23c066932bbd399bce94955468d6039bac",
+    "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+    "previous_candidate_commit": "4f7e4b23c066932bbd399bce94955468d6039bac",
+    "disk_hotfix": "https://github.com/CPerezz/go-ethereum/pull/69",
+    "artifact_policy": "Online import consumes writable artifacts by default. Use independent disposable copies, never hardlink immutable masters; keep native recovery archives separate.",
     "procedure_source": "https://github.com/misilva73/pbt-planning/pull/12",
     "procedure_repository": "https://github.com/CPerezz/pbt-planning",
-    "procedure_commit": "ecc562fa83da7588ca6a0a1a9963c28787ce0073",
+    "procedure_commit": "b6069c1411eb0cf5096eeab5e08976bc55ba3a78",
     "procedure_pr_state_when_checked": "open",
-    "build_verified": false,
+    "build_verified": true,
     "migration_qualified": false,
-    "image_digest": null
+    "image_digest": "ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+    "docker_build": {
+      "run_id": 39452300031,
+      "url": "https://github.com/ethpandaops/eth-client-docker-image-builder/actions/runs/39452300031",
+      "tag": "ethpandaops/geth:pbt-1-84a12eff",
+      "status": "success",
+      "image_verified": true
+    },
+    "image_verification": {
+      "architecture": "amd64",
+      "image_id": "sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+      "commit_label_matches": true,
+      "version_command_passed": true
+    },
+    "startup_qualification": {
+      "status": "startup_and_sample_checks_passed",
+      "time": 1792513151.8802729,
+      "image": "ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+      "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+      "memory_gib": 16,
+      "cpus": 8,
+      "network_mode": "none",
+      "migration_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-20T16:19:12.125930245Z",
+        "FinishedAt": "2026-10-20T16:19:29.620708092Z"
+      },
+      "finished_at": 1792513169.681504
+    },
+    "worker_startup_checks": {
+      "lighthouse-geth-1": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 16,
+        "service_uid": 1002,
+        "finished_at": 1792514363.317832,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      },
+      "lighthouse-geth-3": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 16,
+        "service_uid": 1003,
+        "finished_at": 1792517532.3163881,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      },
+      "lighthouse-geth-2": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 32,
+        "service_uid": 1003,
+        "finished_at": 1792520674.6184611,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      }
+    }
+  },
+  "erigon": {
+    "repository": "https://github.com/erigontech/erigon",
+    "branch_hint": "binary-trie",
+    "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "build_verified": true,
+    "small_export_and_conversion_fixtures_passed": true,
+    "migration_qualified": false,
+    "image_digest": "ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+    "go_version": "go version go1.26.0 linux/amd64",
+    "native_binaries": {
+      "erigon": {
+        "path": "/data/pbt-1/rehearsal-tools/erigon/build/bin/erigon",
+        "sha256": "7d3c5beb8b985d54400c10cb09d6381860da387e85a8a74f0336795f08d025f4"
+      },
+      "integration": {
+        "path": "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+        "sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03"
+      }
+    },
+    "docker_build": {
+      "run_id": 39452364196,
+      "url": "https://github.com/ethpandaops/eth-client-docker-image-builder/actions/runs/39452364196",
+      "tag": "ethpandaops/erigon:pbt-1-372df0e6",
+      "status": "success",
+      "image_verified": true
+    },
+    "image_verification": {
+      "architecture": "amd64",
+      "image_id": "sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+      "commit_label_matches": true,
+      "version_command_passed": true
+    },
+    "native_tools_staged": {
+      "lighthouse-erigon-2": {
+        "directory": "/data/pbt-1/v3-tools-372df0e6",
+        "binaries_match_pinned_sha256": true,
+        "version_checked": true,
+        "database_opened": true,
+        "integration_binary": "integration.pinned",
+        "integration_entrypoint": "integration (retention launcher)",
+        "scope": "H conversion running; worker startup not yet qualified"
+      }
+    },
+    "preparation_retention_launchers": {
+      "head": {
+        "time": 1792516105.1202357,
+        "kind": "head",
+        "unit": "pbt-1-v3-head-upgrade",
+        "current_conversion_restarted": false,
+        "scope": "future stage_exec children",
+        "launcher_path": "/data/pbt-1/v3-tools-372df0e6/integration",
+        "launcher_sha256": "15a942e71a21705670a9b5b729037bf50a3909b89423720b522a683f2fb8e3a7",
+        "pinned_binary_path": "/data/pbt-1/v3-tools-372df0e6/integration.pinned",
+        "pinned_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+        "environment": {
+          "NO_PRUNE": "true"
+        },
+        "reason": "stage_exec calls PruneExecutionStage; retain the BAL corpus"
+      },
+      "exporter": {
+        "time": 1792516106.0914056,
+        "kind": "exporter",
+        "unit": "pbt-1-v3-source-upgrade-v3",
+        "current_conversion_restarted": false,
+        "scope": "future stage_exec children",
+        "launcher_path": "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration",
+        "launcher_sha256": "86b9076275e04849b8289f659f3003e0c6e0edb039065943fc1d9941ec9deacf",
+        "pinned_binary_path": "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+        "pinned_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+        "environment": {
+          "NO_PRUNE": "true"
+        },
+        "reason": "stage_exec calls PruneExecutionStage; retain the BAL corpus"
+      }
+    },
+    "head_preparation": {
+      "host": "lighthouse-erigon-2",
+      "target_block": 24503958,
+      "status": "conversion_and_worker_startup_checks_passed",
+      "rollback": "verified compressed H archive on recovery volume",
+      "conversion_cpus": 8,
+      "conversion_memory_gib": 112,
+      "worker_qualification_memory_gib": 16,
+      "worker_qualification": "startup_checks_passed",
+      "patched_snapshot_uploaded": false,
+      "memory_limit_reason": "Offline preparation used 112 GiB after the recorded cache adjustment; completed worker checks used the assigned 16 GiB, not a migration resource qualification.",
+      "patched_snapshot_publication": "streaming_H_archive",
+      "evidence": "ansible/inventories/pbt-1/files/erigon-2-v3-head-qualified.json"
+    },
+    "exporter_preparation": {
+      "host": "lighthouse-erigon-1",
+      "source_block": 24452538,
+      "target_export_block": 24453558,
+      "checked_at": 1792519957.9219284,
+      "conversion_status": "convert_v3_running",
+      "index_recovery_status": "completed_and_reviewed",
+      "index_recovery_isolated": true,
+      "converted_files_promoted": false,
+      "conversion_qualified": false,
+      "source_publication_held": true,
+      "index_recovery_sha256": "76e189fac57466016e01f3af6741662bdfb795dc7a309cd8225cd203a95c95ae",
+      "completed_shards_reused": 1,
+      "remaining_unsqueeze_files_at_resume": 218,
+      "conversion_cpus": 8,
+      "conversion_memory_gib": 96,
+      "resource_scope": "offline format preparation only",
+      "unsqueeze_completed": true,
+      "unsqueezed_files_promoted": true
+    },
+    "worker_startup_checks": {
+      "lighthouse-erigon-2": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "memory_gib": 16,
+        "cpus": 8,
+        "finished_at": 1792575491.1237776,
+        "native_reopen_verified": true,
+        "v3_format_verified": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      }
+    }
+  },
+  "nethermind": {
+    "repository": "https://github.com/NethermindEth/nethermind",
+    "branch_hint": "pbt-state",
+    "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+    "build_verified": true,
+    "migration_qualified": false,
+    "image_digest": "ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+    "docker_build": {
+      "run_id": 39452352570,
+      "url": "https://github.com/ethpandaops/eth-client-docker-image-builder/actions/runs/39452352570",
+      "tag": "ethpandaops/nethermind:pbt-1-f4e29519",
+      "status": "success",
+      "image_verified": true
+    },
+    "image_verification": {
+      "architecture": "amd64",
+      "image_id": "sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+      "commit_label_matches": true,
+      "version_command_passed": true
+    },
+    "startup_qualification": {
+      "status": "startup_and_sample_checks_passed",
+      "time": 1792513158.3655925,
+      "image": "ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+      "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+      "memory_gib": 16,
+      "cpus": 8,
+      "network_mode": "none",
+      "migration_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 130,
+        "Error": "",
+        "StartedAt": "2026-10-20T16:19:19.354912841Z",
+        "FinishedAt": "2026-10-20T16:19:39.996554204Z"
+      },
+      "finished_at": 1792513180.0689592
+    },
+    "worker_startup_checks": {
+      "lighthouse-nethermind-1": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 16,
+        "service_uid": 1002,
+        "finished_at": 1792514362.3163595,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      },
+      "lighthouse-nethermind-2": {
+        "status": "startup_checks_passed",
+        "head": 24503958,
+        "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+        "memory_gib": 32,
+        "service_uid": 1003,
+        "finished_at": 1792518879.7182176,
+        "node_identity_verified": true,
+        "sampled_bal_bodies_verified": 3,
+        "clean_shutdown": true,
+        "evidence": "md/pbt-1-worker-preparation.json"
+      }
+    }
+  },
+  "lighthouse": {
+    "repository": "https://github.com/sigp/lighthouse",
+    "branch_hint": "unstable",
+    "commit": "81a702910e64e640bff832c81bc78b781c5ea812",
+    "build_verified": true,
+    "genesis_qualified": false,
+    "image_digest": "ethpandaops/lighthouse@sha256:2104aed4cdec152fa4ee1abb407a11e7bc65ebe0da9eb290509182be96f36529",
+    "docker_build": {
+      "run_id": 39452693492,
+      "url": "https://github.com/ethpandaops/eth-client-docker-image-builder/actions/runs/39452693492",
+      "tag": "ethpandaops/lighthouse:pbt-1-81a70291",
+      "status": "success",
+      "image_verified": true
+    },
+    "image_verification": {
+      "architecture": "amd64",
+      "image_id": "sha256:2104aed4cdec152fa4ee1abb407a11e7bc65ebe0da9eb290509182be96f36529",
+      "commit_label_matches": true,
+      "version_command_passed": true
+    },
+    "genesis_qualification": {
+      "isolated_format_and_anchor_check": {
+        "status": "isolated_genesis_load_passed",
+        "scope": "Archived validation-only candidate; no launch time selected and no validator or EL connected",
+        "image": "ethpandaops/lighthouse@sha256:2104aed4cdec152fa4ee1abb407a11e7bc65ebe0da9eb290509182be96f36529",
+        "source_commit": "81a702910e64e640bff832c81bc78b781c5ea812",
+        "genesis_ssz_sha256": "cf6154061688af7b271aace7c37dfd269713b6bf1851d8d8520fce344b3e2ba6",
+        "decoded_version": "gloas",
+        "head": 24503958,
+        "execution_head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+        "genesis_validators_root": "0xea36b19488a9bcdf945f1cf4bdf74ee7dbe044d3591c91dab0a9cedcdf4c956a",
+        "validator_count": 2304,
+        "network_mode": "none",
+        "container_stopped": true,
+        "launch_authorized": false,
+        "note": "The legacy startup execution-genesis checker skips Gloas states (no latest_execution_payload_header); its log is not a check of the H anchor. H was checked directly from Lighthouse-decoded state. Live Engine API/production/finality remain untested."
+      },
+      "live_engine_and_production": "pending",
+      "launch_time": "unset"
+    }
   }
 }

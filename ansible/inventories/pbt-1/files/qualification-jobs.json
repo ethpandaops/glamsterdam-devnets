@@ -1,0 +1,357 @@
+{
+  "lighthouse-besu-1": {
+    "host": "lighthouse-besu-1",
+    "client": "besu",
+    "image": "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4",
+    "commit": "39377a2659f63c3bb230a5f57b4ef6846348f876",
+    "memory_gib": 16,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "c6284ad5ffa91fd15b452fa7b44509cc33b884e38547388c6fd0f1cf417e68c304ff42d862fc6906c4f710ec2a60882326f92c5bb0fcbe53598ead0fb4189f47",
+    "archive_bytes": 1145428233899,
+    "archive_sha256": "6130db1b49d374c49fe9715b32aeae595d7c3d8be5b2133dc81a019daf8ab64e",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    },
+    "library_commit": "62b752345cce00d9119f37c37d56eb9566269578",
+    "library_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd"
+  },
+  "lighthouse-besu-2": {
+    "host": "lighthouse-besu-2",
+    "client": "besu",
+    "image": "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71",
+    "commit": "39377a2659f63c3bb230a5f57b4ef6846348f876",
+    "memory_gib": 32,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "6fb8ff85c2370d3d13dae963498d66bdf8eed94d0234610fa6fc233832192fc12347ec8a110d59674dc2c1deb6eb23cbd2aaea05010612a9951f0177026bcaff",
+    "archive_bytes": 1145428233899,
+    "archive_sha256": "6130db1b49d374c49fe9715b32aeae595d7c3d8be5b2133dc81a019daf8ab64e",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    },
+    "library_commit": "62b752345cce00d9119f37c37d56eb9566269578",
+    "library_jar_sha256": "bccbfa042ef2b075864bdf7cebc464f233dfeced1e5a6cd82763d8aa13ca6ccd"
+  },
+  "lighthouse-geth-1": {
+    "host": "lighthouse-geth-1",
+    "client": "geth",
+    "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+    "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+    "memory_gib": 16,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "88979db4d909f9acb7cbd316deb703eed00faf20ef1c073c8ad19364811dab3dbdd319c255bdef7f2fcf929d17f031e6db21d8ef91d01fcbb18cac87f1ca469a",
+    "archive_bytes": 1129134606193,
+    "archive_sha256": "5de78409912d018c8b26bf3df3a9abccf73777fa697c3c5d8208f289d2caa5f6",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-geth-2": {
+    "host": "lighthouse-geth-2",
+    "client": "geth",
+    "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+    "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+    "memory_gib": 32,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "2096bde5681308cbd1c199afe980e68dd307ac0f0fa2c14c6887fbda85366644d051bc387376f87cc33a7a8678d5812056ad245a92aa5dc7936228bc6e1ca16e",
+    "archive_bytes": 1129134606193,
+    "archive_sha256": "5de78409912d018c8b26bf3df3a9abccf73777fa697c3c5d8208f289d2caa5f6",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-geth-3": {
+    "host": "lighthouse-geth-3",
+    "client": "geth",
+    "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+    "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+    "memory_gib": 16,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "8c1ee3b4dc98dd7a8051daa9fca0db10a400fbfdf762e5caf00f9d62d51059e778a820454a1f8395085486ffbdc79509cc8301b258da8ef3e2e6d106e3473377",
+    "archive_bytes": 1129134606193,
+    "archive_sha256": "5de78409912d018c8b26bf3df3a9abccf73777fa697c3c5d8208f289d2caa5f6",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-nethermind-1": {
+    "host": "lighthouse-nethermind-1",
+    "client": "nethermind",
+    "image": "registry-1.docker.io/ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+    "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+    "memory_gib": 16,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "10ed620fbfdefa42fa127706ef60a2a4ef2c53ba2a8abb12d3496cf5cb285a1978cb4d3e34557485909c6336a2608bf7a76388962097efa0a21fb0941c4bcf3b",
+    "archive_bytes": 1088763687494,
+    "archive_sha256": "925e81f4ccb2dd1464c29e77f5d6b3e361ae80153dbb0f49bf6bd5f34b2ba42c",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-nethermind-2": {
+    "host": "lighthouse-nethermind-2",
+    "client": "nethermind",
+    "image": "registry-1.docker.io/ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+    "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+    "memory_gib": 32,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "90cbba7c5603bd91f3defce832b65e3c77300c08a2934795ebae94e67adf9efdb0da88876ac621aee03290c52d789b4a901910440e756ee90fe0518d01019ce6",
+    "archive_bytes": 1088763687494,
+    "archive_sha256": "925e81f4ccb2dd1464c29e77f5d6b3e361ae80153dbb0f49bf6bd5f34b2ba42c",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-erigon-2": {
+    "host": "lighthouse-erigon-2",
+    "client": "erigon",
+    "image": "registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+    "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "memory_gib": 16,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "a4a71053368b8c05e7cd9bf30e07964d1390a8e65d1333a532ba00c89bf32c6effffa7a0f214de51033c8408052f06eb7305bba327583c6dd67e36f96d8996e2",
+    "archive_bytes": 534953200071,
+    "archive_sha256": "e511af776332da1497c537b58770bec0b7e962c1484cd2dcb9a9d30f6ac268a7",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  },
+  "lighthouse-erigon-1": {
+    "host": "lighthouse-erigon-1",
+    "client": "erigon",
+    "image": "registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+    "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "memory_gib": 32,
+    "head": 24503958,
+    "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+    "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+    "anchor": 24453558,
+    "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "anchor_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "node_id": "856d375bd5b0d630ae5a52c88023954fa9dc30daf746f3ba4c39e383ca5da6808d45f158a8bcf216887829689e13c221674395d2b90db36c3df9a51412ed24e9",
+    "archive_bytes": 534953200071,
+    "archive_sha256": "e511af776332da1497c537b58770bec0b7e962c1484cd2dcb9a9d30f6ac268a7",
+    "code_samples": {
+      "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+      "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+    },
+    "payload_samples": {
+      "24453559": {
+        "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+        "bal_bytes": 453456,
+        "transactions": 942
+      },
+      "24478758": {
+        "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+        "bal_bytes": 450900,
+        "transactions": 942
+      },
+      "24503958": {
+        "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+        "bal_bytes": 450901,
+        "transactions": 942
+      }
+    }
+  }
+}

@@ -6,7 +6,8 @@ bootstrap_default_user_authorized_keys_github_team_el: >-
      + nethermind_extra_github_users }}
 
 # role: ethpandaops.general.snapshot_fetcher (snapshot layout: mainnet/, FlatDb)
-snapshot_fetcher_out_dir: /data/nethermind/nethermind_db
+snapshot_fetcher_out_dir: /data/pbt-1/nethermind
+nethermind_datadir: /data/pbt-1/nethermind
 
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: nethermind
@@ -19,25 +20,29 @@ nethermind_container_env:
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
 nethermind_container_entrypoint:
   - /nethermind/nethermind
-nethermind_container_volumes:
+pbt_nethermind_base_volumes:
   - "{{ nethermind_datadir }}:/data"
+  - "/data/pbt-1/node-identity:/node-identity:ro"
   - "{{ nethermind_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
+nethermind_container_volumes: "{{ pbt_nethermind_base_volumes + pbt_migration_input_bind_mounts }}"
 nethermind_container_command_extra_args:
+  - --KeyStore.EnodeKeyFile=/node-identity/node.key.plain
   # Restored jochemnet snapshot: the built-in mainnet config with our genesis.json as
-  # the chainspec (same genesis hash, amsterdamTime moved) and the db the snapshot
+  # the chainspec (same genesis hash and inherited amsterdamTime) and the db the snapshot
   # ships. The preset turns on fast/snap sync; pin both off so nethermind only ever
-  # resumes from the restored db (nimbus-el is the only snap syncer on this network).
+  # resumes from the restored db. All nine baseline workers are restored.
   - --config=mainnet
   - --Init.ChainSpecPath=/network-config/genesis.json
-  - --Init.BaseDbPath=nethermind_db/mainnet
+  - --Init.BaseDbPath=/data/mainnet
   - --FlatDb.Enabled=true
+  - --FlatDb.Layout=Flat
   # The replay uses TTD 0; stored synthetic headers can have TD below mainnet TTD.
   # Keep them post-merge during startup re-execution as well as Engine API import.
   - --Merge.TerminalTotalDifficulty=0
   - --Sync.FastSync=false
   - --Sync.SnapSync=false
-  - --JsonRpc.EnabledModules=Eth,Subscribe,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Admin
+  - --JsonRpc.EnabledModules=Eth,Subscribe,TxPool,Web3,Personal,Proof,Net,Parity,Health,Rpc,Admin,Debug
   - --Discovery.Bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --Discovery.DiscoveryVersion=V5
   # chain id 1 otherwise adds the mainnet DNS tree and default discv5 bootnodes

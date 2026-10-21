@@ -149,6 +149,22 @@ resource "digitalocean_firewall" "bootnode" {
   depends_on = [digitalocean_project_resources.droplets]
 }
 
+resource "digitalocean_firewall" "dns" {
+  name        = "${var.ethereum_network}-dns"
+  droplet_ids = [digitalocean_droplet.main[local.primary_dns_host].id]
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "53"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "53"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
 resource "digitalocean_firewall" "mev_relay" {
   count = contains(keys(digitalocean_droplet.main), "mev-relay-1") ? 1 : 0
   name  = "${var.ethereum_network}-nodes-mev-relay"

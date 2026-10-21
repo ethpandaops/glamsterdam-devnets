@@ -1,0 +1,59 @@
+{
+  "accounts": {
+    "all_records_equal": true,
+    "domain": "accounts",
+    "fragments": 1024,
+    "inputs_unchanged": true,
+    "logical_sha256": "3b82a83458ae21146095a27c649da46db4cc49c7c3d9845fc7644ebbdd863382",
+    "merged": "/data/pbt-1/erigon/snapshots/domain/v2.0-accounts.1050624-1051648.kv",
+    "records": 66
+  },
+  "storage": {
+    "all_records_equal": true,
+    "domain": "storage",
+    "fragments": 1024,
+    "inputs_unchanged": true,
+    "logical_sha256": "190035deb01497e4ad7967ad85aaa2803782d94e55f282745519bcb59dc6bc95",
+    "merged": "/data/pbt-1/erigon/snapshots/domain/v2.0-storage.1050624-1051648.kv",
+    "records": 3489808
+  },
+  "complete": {
+    "time": 1792525788.9227636,
+    "all_records_equal": true
+  },
+  "review_unit": "MainPID=0\nResult=success\nActiveState=inactive\n",
+  "checked_at": 1792525929.3296824,
+  "worker": "lighthouse-erigon-2",
+  "target_block": 24503958,
+  "scope": "Full record equality remains the basis. Six merged-domain data/index files were subsequently preserved outside the scanned folder during the reviewed, stopped optimization handoff. See current_selection; the original failure-only recovery was not run.",
+  "conflicting_step_range": [
+    1050624,
+    1051648
+  ],
+  "genesis_time": null,
+  "recovery_staging": {
+    "time": 1792526459.6401021,
+    "script_sha256": "32f6ccbc86ab1662ef5d7b218c46678cb8eabf2c1bf5e8a337c7c8c07e9ca0a7",
+    "exit_code": 1,
+    "refusal": "active conversion lock",
+    "status_unchanged": true,
+    "file_selection_unchanged": true,
+    "recovery_started": false,
+    "unchanged_fragment_files_and_indexes": 6144,
+    "reviewed_move_files": 6,
+    "native_and_driver_sha_verified": true,
+    "fixture_sha_verified": true,
+    "full_preflight_still_requires_expected_stopped_failure": true,
+    "local_guard_tests_passed": 6,
+    "script": "scripts/pbt/resume-erigon-head-boundaries.py",
+    "apply_queued": false
+  },
+  "current_selection": {
+    "status": "reviewed_fragments_selected_during_optimization_handoff",
+    "time": 1792528853.5997138,
+    "evidence": "erigon-bounded-view-review.json",
+    "hidden_directory": "/data/pbt-1/v3-head-upgrade/bounded-view-handoff/hidden-domain-files",
+    "original_files_preserved": true,
+    "original_failure_only_recovery_not_run": true
+  }
+}

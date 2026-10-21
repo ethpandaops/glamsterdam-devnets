@@ -1,0 +1,70 @@
+{
+  "time": 1792550776.2282772,
+  "native_pid": 47602,
+  "scope": "Remaining storage section of pbt-snapshot.bin only; excludes later preimage and independent verification phases",
+  "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+  "source_sha256": {
+    "execution/commitment/eip8297/artifact/writer.go": "be586b78f41c1f7e3eea1520e2dfdf12f51800292c03ae11f8df1b147f201a9c",
+    "db/state/pbt_leaf_stream.go": "29bfe49dc4337fbd4dafe5ee14e18867d9b0fb6d4e6bc85edebf9c3b71c25183"
+  },
+  "storage_input_records_before_duplicate_elimination": 1764515941,
+  "first_observed_storage_leaf_count": 1792471040,
+  "latest_observed_storage_leaf_count": 2423570432,
+  "minimum_storage_records_already_emitted": 631099392,
+  "maximum_remaining_storage_records": 1133416549,
+  "address_count_upper_bound": 355192957,
+  "max_bytes_per_remaining_leaf": 67,
+  "max_bytes_per_address_header": 33,
+  "buffer_and_final_root_allowance_bytes": 2097185,
+  "maximum_remaining_encoded_bytes": 87662373549,
+  "operational_allocation_and_log_allowance_bytes": 1073741824,
+  "root_available_bytes": 248171814912,
+  "projected_root_available_before_scratch_reclamation_bytes": 159435699539,
+  "required_root_reserve_bytes": 150000000000,
+  "root_reserve_covered_by_bound": true,
+  "old_scratch_reclamation_credited_bytes": 0,
+  "disk_guard_changed": false,
+  "new_cleanup_or_resources": false,
+  "source_count_scope": "Binary search of sorted fixed-width native ETL zone boundaries; boundary frames, range alignment and unchanged file identities validated. Not a full content checksum audit.",
+  "first_storage_log": "[INFO] [10-21|02:16:35.111] PBT snapshot writer progress             phase=\"snapshot writer\" leaves=1792471040 key_prefix=ff01477f01633242",
+  "latest_storage_log": "[INFO] [10-21|02:46:05.440] PBT snapshot writer progress             phase=\"snapshot writer\" leaves=2423570432 key_prefix=ff2d5a4c39d84a1f",
+  "buffer_allowance_basis": "2 MiB covers the 1 MiB buffered writer plus the current storage group; final root adds 33 bytes.",
+  "bound_basis": "The native collector visits each input address once. The writer emits at most a 33-byte address header per address and at most 67 bytes per storage leaf (a singleton group with a full 32-byte value); grouping and integer trimming reduce this. The first storage progress count overstates the pre-storage leaf count, making the remaining-record estimate conservative.",
+  "preimage_transition_review": {
+    "checked_at_utc": "2026-10-21T03:21:38.482858+00:00",
+    "source_sha256": {
+      "cmd/utils/app/export_pbt_cmd.go": "0668cf03e3a1dc80d5346a74f68daa53e7969b6668aa8ed8284f4e8bb2b666dd",
+      "db/state/pbt_leaf_stream.go": "29bfe49dc4337fbd4dafe5ee14e18867d9b0fb6d4e6bc85edebf9c3b71c25183"
+    },
+    "sequence": [
+      "pbinForEachLeaf defers collector.Close until sorted leaf loading returns",
+      "WriteSnapshotStream finishes and closes snapshotFile before preimageFile creation",
+      "Preimage temporary files use tx.Debug().Dirs().Tmp, already routed to the scratch volume",
+      "Existing scratch guard only removes original ETL files after all process descriptors close and recorded identities match"
+    ],
+    "guard_unit": "pbt-1-export-scratch-guard.service",
+    "guard_observed_active_pid": 51030,
+    "reclamation_observed": true,
+    "new_deletion_performed": false,
+    "limitation": "Source ordering supports the upcoming cleanup opportunity; it does not prove files have already closed or provide a complete later-phase disk bound.",
+    "reclaimed_bytes": 345446531072,
+    "reclaimed_at": 1792554274.9398608
+  },
+  "post_snapshot_space_observation": {
+    "observed_at_utc": "2026-10-21T03:44:57Z",
+    "snapshot_written_GB": 107.9,
+    "root_free_GB": 551.5,
+    "scratch_free_GB": 554.6,
+    "native_export_pid": 47602,
+    "native_export_continues": true,
+    "phase": "preimage_generation",
+    "shared_export_verified": false,
+    "reclaimed_local_etl_bytes": 345446531072,
+    "separate_allocated_directories_at_0345_utc": {
+      "/data/pbt-1/erigon": 1054319771648,
+      "/data/pbt-1/rehearsal-24453558": 668694208512,
+      "/data/pbt-1/artifacts-24453558": 107902672896
+    },
+    "directory_measurement_scope": "du -sx -B1, allocated bytes; not a unique-reclaimable-byte guarantee or completed artifact size"
+  }
+}

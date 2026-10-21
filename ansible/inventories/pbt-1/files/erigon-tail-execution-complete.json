@@ -1,0 +1,16 @@
+{
+  "finished_at": 1792573074.8225727,
+  "exit_code": 0,
+  "command": [
+    "/data/pbt-1/v3-tools-372df0e6/integration.pinned",
+    "stage_exec",
+    "--datadir=/data/pbt-1/erigon",
+    "--chain=mainnet",
+    "--block=24503958",
+    "--experimental.commitment-v3",
+    "--batchSize=4G"
+  ],
+  "commitment_v3_env": true,
+  "binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+  "no_prune_env": "true"
+}

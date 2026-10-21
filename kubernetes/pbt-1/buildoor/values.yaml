@@ -30,5 +30,3 @@ buildoor-overview:
             pathType: Prefix
 
   hosts:
-    - https://api-buildoor-lighthouse-geth-1.srv.glamsterdam-pbt-1.ethpandaops.io
-    - https://api-buildoor-teku-nethermind-1.srv.glamsterdam-pbt-1.ethpandaops.io

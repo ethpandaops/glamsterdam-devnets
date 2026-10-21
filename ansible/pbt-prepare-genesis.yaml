@@ -1,0 +1,114 @@
+---
+# Local-only preparation. No client, validator or remote deployment roles.
+# Pass pbt_genesis_timestamp and pbt_genesis_workspace explicitly. This generates
+# a candidate; publication and network launch remain separate operations.
+- name: Prepare PBT-1 genesis candidate without deploying it
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    pbt_candidate_output: "{{ pbt_genesis_workspace }}/output"
+    pbt_candidate_input: "{{ pbt_genesis_workspace }}/input"
+  tasks:
+    - name: Validate preparation scope
+      ansible.builtin.assert:
+        that:
+          - ethereum_network_name == 'glamsterdam-pbt-1'
+          - shadowfork_height | int == 24503958
+          - ethereum_genesis_validator_count | int == 2304
+          - pbt_genesis_timestamp | int > ansible_date_time.epoch | int
+          - pbt_genesis_workspace is match('^/home/ubuntu/.local/state/pbt-1-run/genesis/')
+          - groups['ethereum_node'] | length == 9
+        fail_msg: "PBT-1 preparation inputs do not match the intended candidate."
+
+    - name: Read pinned source and head
+      ansible.builtin.set_fact:
+        pbt_source_genesis: "{{ lookup('file', inventory_dir ~ '/files/source-genesis.json') | from_json }}"
+        pbt_source_head: "{{ (lookup('file', inventory_dir ~ '/files/shadowfork_block.json') | from_json).result }}"
+
+    - name: Check source invariants
+      ansible.builtin.assert:
+        that:
+          - pbt_source_head.hash == shadowfork_expected_hash
+          - pbt_source_head.stateRoot == shadowfork_expected_state_root
+          - pbt_source_head.number | int(base=16) == shadowfork_height | int
+          - pbt_source_genesis.config.amsterdamTime | int == shadowfork_amsterdam_time | int
+          - "'binaryTrieTime' not in pbt_source_genesis.config"
+          - pbt_genesis_timestamp | int > pbt_source_head.timestamp | int(base=16)
+
+    - name: Refuse to overwrite an existing candidate
+      ansible.builtin.stat:
+        path: "{{ pbt_candidate_output }}/metadata/genesis.ssz"
+      register: pbt_existing_candidate
+
+    - name: Require a fresh candidate workspace
+      ansible.builtin.assert:
+        that:
+          - not pbt_existing_candidate.stat.exists
+        fail_msg: "Candidate already exists; validate it or choose a new workspace."
+
+    - name: Create private preparation directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0700"
+      loop:
+        - "{{ pbt_genesis_workspace }}"
+        - "{{ pbt_candidate_input }}"
+        - "{{ pbt_candidate_input }}/cl"
+        - "{{ pbt_candidate_input }}/el"
+        - "{{ pbt_candidate_output }}"
+        - "{{ pbt_candidate_output }}/metadata"
+
+    - name: Render generator inputs privately
+      ansible.builtin.copy:
+        content: "{{ item.value }}"
+        dest: "{{ pbt_candidate_input }}/{{ item.key }}"
+        mode: "0600"
+      loop: "{{ ethereum_genesis_generator_config_files | dict2items }}"
+      no_log: true
+
+    - name: Preserve the exact inherited execution genesis and schedule
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/files/source-genesis.json"
+        dest: "{{ pbt_candidate_output }}/metadata/genesis.json"
+        mode: "0600"
+
+    - name: Generate the candidate locally
+      ansible.builtin.command:
+        argv:
+          - docker
+          - run
+          - --rm
+          - --cpus=4
+          - --memory=8g
+          - --user
+          - "{{ ansible_user_uid | string }}"
+          - --volume
+          - "{{ pbt_candidate_input }}:/config:ro"
+          - --volume
+          - "{{ pbt_candidate_output }}:/data"
+          - "{{ ethereum_genesis_generator_container_image }}"
+          - all
+      register: pbt_generator_result
+      failed_when: false
+      changed_when: pbt_generator_result.rc == 0
+      no_log: true
+
+    - name: Retain generator diagnostics privately
+      ansible.builtin.copy:
+        content: "{{ pbt_generator_result.stdout }}\n{{ pbt_generator_result.stderr }}"
+        dest: "{{ pbt_genesis_workspace }}/generator.log"
+        mode: "0600"
+      no_log: true
+
+    - name: Check generation succeeded
+      ansible.builtin.assert:
+        that:
+          - pbt_generator_result.rc == 0
+        fail_msg: "Generation failed; inspect the private generator.log without exposing its mnemonic."
+
+    - name: Report local artifact location
+      ansible.builtin.debug:
+        msg: "Candidate generated at {{ pbt_candidate_output }}. No network was deployed."

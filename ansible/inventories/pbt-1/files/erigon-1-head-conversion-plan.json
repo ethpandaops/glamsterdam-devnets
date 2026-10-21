@@ -1,0 +1,110 @@
+{
+  "time": 1792531123.94705,
+  "worker": "lighthouse-erigon-1",
+  "status": "optimized_H_driver_staged_not_started",
+  "checksums": {
+    "scripts/pbt/upgrade-erigon-head-v3.py": "29ae64c4ff5498783345ee4aab6e681f9e05afc31acaa5850943fddac07fa636",
+    "scripts/pbt/qualify-worker.py": "36233de17e567000bae118da1124f41946536bcda65b81b6c3531e397b31b350",
+    "scripts/pbt/resume-erigon-head-boundaries.py": "32f6ccbc86ab1662ef5d7b218c46678cb8eabf2c1bf5e8a337c7c8c07e9ca0a7"
+  },
+  "comparisons": {
+    "complete": {
+      "time": 1792530963.636692,
+      "worker": "lighthouse-erigon-1",
+      "source": "/data/pbt-1/erigon",
+      "all_records_equal": true,
+      "inputs_unchanged": true,
+      "files_moved": false,
+      "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+      "helper_sha256": "9561101b637b20ef6dda727cf9d19ee82db8e814d02933466e10e9f99e4105bf"
+    },
+    "accounts": {
+      "all_records_equal": true,
+      "domain": "accounts",
+      "fragments": 1024,
+      "inputs_unchanged": true,
+      "logical_sha256": "3b82a83458ae21146095a27c649da46db4cc49c7c3d9845fc7644ebbdd863382",
+      "merged": "/data/pbt-1/erigon/snapshots/domain/v2.0-accounts.1050624-1051648.kv",
+      "records": 66
+    },
+    "storage": {
+      "all_records_equal": true,
+      "domain": "storage",
+      "fragments": 1024,
+      "inputs_unchanged": true,
+      "logical_sha256": "190035deb01497e4ad7967ad85aaa2803782d94e55f282745519bcb59dc6bc95",
+      "merged": "/data/pbt-1/erigon/snapshots/domain/v2.0-storage.1050624-1051648.kv",
+      "records": 3489808
+    },
+    "service": "MainPID=0\nResult=success\nActiveState=inactive\n"
+  },
+  "guard_tests_passed": 8,
+  "live_preflight": "Refused active exporter",
+  "candidate_preflight": "Refused missing completed Erigon-2 H qualification",
+  "files_moved": false,
+  "genesis_time": null,
+  "possible_verified_peer_restore": {
+    "observed_at": 1792533153.7042837,
+    "status": "read_only_size_comparison_only_not_authorized_by_this_evidence",
+    "source_worker": "lighthouse-erigon-2",
+    "target_worker": "lighthouse-erigon-1",
+    "source_still_converting": true,
+    "same_path_and_size_static_files": 179465,
+    "same_path_and_size_static_bytes": 348373536908,
+    "remaining_current_source_bytes_excluding_pending_rebuild": 288311041625,
+    "content_equality_checked": false,
+    "files_copied_or_removed": false,
+    "reason_to_review": "Reusing a fully verified H release could avoid repeating v3 format preparation; actual PBT conversion and per-worker qualification remain required.",
+    "required_before_switch": [
+      "Erigon-2 conversion, original-binary verification and two H opens complete",
+      "Final complete file manifest and full content digests; current in-progress sizes are not a transfer manifest",
+      "Preserve original Erigon-1 H database and recovery archive; never copy mutable files as shared hardlinks",
+      "Exporter artifact space reserved or exporter safely completed and retired",
+      "Separate explicit restored-release provenance and own Erigon-1 32 GiB two-open checks; never relabel peer conversion as local conversion"
+    ],
+    "default_plan_unchanged": "Staged own H conversion remains available; peer restore has not been queued."
+  },
+  "verified_release_restore": {
+    "time": 1792533852.0397,
+    "status": "helpers_staged_no_job_queued",
+    "preference": "Use verified full H release restore if measured capacity fits after exporter work; retain native conversion fallback",
+    "test_count": 30,
+    "live_preflight": "Refused missing published release bundle; no database changed",
+    "original_helpers_unchanged": true,
+    "preserve_original_database_as": "/data/pbt-1/erigon-original-h-preserved",
+    "checksums": {
+      "erigon_verified_restore.py": "d1768dc9d8322c66293bf145193a74d7ddf0c836c7027ebb4148fb94de31a186",
+      "fetch-recovery-snapshot.py": "4fea21b3ba2d5db6120a981c177302170f32b6ef398a2827d88647fba1864465",
+      "qualify-worker.py": "19c4f35fc5edabcf2460ce3ab80ee307bc87a7824b134a4f447fb0d84c892041"
+    },
+    "remote_qualifier": "/data/pbt-1/qualify-restored-worker.py",
+    "qualification_flag": "--from-verified-release",
+    "remaining": [
+      "Verified H publication and stopped-source unpacked-size measurement",
+      "Controller release bundle and scoped GET URL",
+      "Safe exporter artifact preservation and capacity review",
+      "Restore, original-directory preservation, own 32 GiB two-open qualification"
+    ],
+    "controller_handoff": {
+      "time": 1792534198.8985507,
+      "script": "scripts/pbt/prepare-erigon-release-restore.py",
+      "sha256": "514406f1d8aec311ebee12fa2cb3081615e7f68d0d267f30fe5847ae105b6f4a",
+      "tests_passed": 5,
+      "live_read_only_check": "NoSuchKey: verified H release metadata not yet published",
+      "bundle_staged": false,
+      "scoped_url_issued": false,
+      "worker_job_started": false
+    }
+  },
+  "stream_restore_option": {
+    "status": "staged_not_started",
+    "sha256": {
+      "erigon_verified_restore.py": "93f5a2ae424b0110e49009d221c5b42e619b115589bde9bfd89c3808135205d3",
+      "stream_verified_archive.py": "2869e23fa142cf523fae8ef39d480565b9e4969f597c4f5e344c090d395ccf17"
+    },
+    "guard_tests_passed": 18,
+    "capacity": "Measured unpacked upper bound plus 150 GB reserve; original H DB and recovery archive remain intact",
+    "integrity": "Ranged HTTPS transfer bound to immutable ETag; full compressed-stream SHA256 and successful fresh tar extraction required before promotion",
+    "own_qualification_required": true
+  }
+}

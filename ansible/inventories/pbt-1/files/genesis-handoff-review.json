@@ -1,0 +1,33 @@
+{
+  "status": "isolated_genesis_load_passed",
+  "checked_at": 1792531974.4883833,
+  "image": "ethpandaops/lighthouse@sha256:2104aed4cdec152fa4ee1abb407a11e7bc65ebe0da9eb290509182be96f36529",
+  "source_commit": "81a702910e64e640bff832c81bc78b781c5ea812",
+  "genesis_ssz_sha256": "cf6154061688af7b271aace7c37dfd269713b6bf1851d8d8520fce344b3e2ba6",
+  "decoded_version": "gloas",
+  "head": 24503958,
+  "execution_head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+  "genesis_validators_root": "0xea36b19488a9bcdf945f1cf4bdf74ee7dbe044d3591c91dab0a9cedcdf4c956a",
+  "validator_count": 2304,
+  "network_mode": "none",
+  "container_stopped": true,
+  "launch_authorized": false,
+  "public_metadata_sha256": {
+    "bootstrap_nodes.txt": "22f5e25e9fc43f7e0072f610b8522c1074fef1c51f5d5bc39eabbee3ca8a15fe",
+    "config.yaml": "5c914816e34d77eca569151a93f109a4d5eaaf5a9f1c0b93e03b7a624b6163dd",
+    "deposit_contract.txt": "8f0934aa294c16b6f45e8f40cc6dba969ad3527f458714146bf7d08178795d0f",
+    "deposit_contract_block.txt": "a1ed52ce2db57a0ce7a1b862b1aa2517b3838105d38c0fc156fbcfca05e1f2ec",
+    "deposit_contract_block_hash.txt": "281e0f12623174e6ea0695c95a9b4998857b2702d55af02581303c53652f779f",
+    "genesis.json": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+    "genesis.ssz": "cf6154061688af7b271aace7c37dfd269713b6bf1851d8d8520fce344b3e2ba6",
+    "genesis_validators_root.txt": "45044f31dc120ac79e889b93617df47aa5e75475b07a15f23683d1766556f3d6",
+    "validator_names.yaml": "6724fdb9923ec0adc011565045952864cbe28801b0ec01bf161432c11745f7d3"
+  },
+  "genesis_timestamp_purpose": "candidate_validation_only",
+  "genesis_time": null,
+  "preparation_script": "scripts/pbt/check-genesis-with-lighthouse.py",
+  "configuration_review_all_nine_passed": true,
+  "private_validator_key_paths_reviewed": true,
+  "metadata_promoted": false,
+  "validator_keys_distributed": false
+}

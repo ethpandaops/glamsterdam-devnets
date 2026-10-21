@@ -5,11 +5,11 @@ dns_server_is_master: "{{ inventory_hostname == primary_bootnode }}"
 dns_server_acme_zone: "{{ network_server_subdomain }}"
 
 # One or more master IPs (for slaves to pull from / accept NOTIFY from)
-dns_server_master: "{{ ([hostvars[primary_bootnode].ansible_host] if (groups.get('bootnode') is defined and primary_bootnode in groups['bootnode']) else []) | list
+dns_server_master: "{{ ([hostvars[primary_bootnode].ansible_host] if primary_bootnode in groups.get('dns_server', []) else []) | list
   }}"
 
 # All slave IPs (for master's also-notify / allow-transfer)
-dns_server_slave: "{{ (groups.get('bootnode', []) | difference([primary_bootnode])) | map('extract', hostvars, 'ansible_host') | list }}"
+dns_server_slave: "{{ (groups.get('dns_server', []) | difference([primary_bootnode])) | map('extract', hostvars, 'ansible_host') | list }}"
 
 dns_server_zones:
   - zone: "{{ network_server_subdomain }}"
@@ -23,7 +23,7 @@ dns_server_zones:
                       5m )    ; NX (TTL Negativ Cache)
               IN  NS     {{ server_fqdn }}.
       {# extra NS for each secondary, if their FQDNs are known #}
-      {% for h in groups['bootnode'] | sort if h != primary_bootnode %}
+      {% for h in groups.get('dns_server', []) | sort if h != primary_bootnode %}
       {% if hostvars[h].server_fqdn is defined %}
               IN  NS     {{ hostvars[h].server_fqdn }}.
       {% endif %}
@@ -33,7 +33,7 @@ dns_server_zones:
       cert    IN  A      {{ hostvars[primary_bootnode]['ansible_host'] }}
 
       ; bootnodes
-      {% for host in groups['bootnode'] | sort %}
+      {% for host in groups.get('bootnode', []) | sort %}
       {{ hostvars[host]['inventory_hostname'] }}                                   IN  A     {{ hostvars[host]['ansible_host'] }}
       {{ ethereum_node_rpc_prefix }}{{ hostvars[host]['inventory_hostname'] }}     IN  A     {{ hostvars[host]['ansible_host'] }}
       {{ ethereum_node_beacon_prefix }}{{ hostvars[host]['inventory_hostname'] }}  IN  A     {{ hostvars[host]['ansible_host'] }}

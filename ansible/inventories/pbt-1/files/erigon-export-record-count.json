@@ -1,0 +1,15 @@
+{
+  "time": 1792545516.6102378,
+  "seconds": 3.079927921295166,
+  "files": 1705,
+  "bytes": 429589418352,
+  "records_by_zone": {
+    "0": 768546234,
+    "1": 2130999178,
+    "255": 1764515941
+  },
+  "total_records_before_duplicate_elimination": 4664061353,
+  "method": "Binary search of sorted fixed-width native ETL zone boundaries; boundary frames, range alignment and unchanged file identities validated. Not a full content checksum audit.",
+  "synthetic_fixtures_passed": 80,
+  "unique_emitted_leaves_not_proven_by_this_count": true
+}

@@ -1,0 +1,397 @@
+{
+  "time": 1792527979.7095585,
+  "status": "independent_files_verification_passed_H_tail_replay_running",
+  "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+  "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+  "modified_source_sha256": "448b0d84b2b22cd0c2ef891eb18c79391eff169e0a4c38b779134f478a5687dc",
+  "fixture_sha256": "949893cd0881f364aff59a65778c41eeeca9b65b1baf1c92a705607842f16c4d",
+  "original_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+  "records": [
+    "PBT_RECORD_DIGEST v3.0-commitment.0-16.kv records=119 sha256=ac6d0817e34da4fb63d9d0998bb55c52d3251765b5bb46c2035793ad3967ad1f",
+    "PBT_RECORD_DIGEST v3.0-commitment.16-24.kv records=119 sha256=1743343edabdfcd7d599d1fced7a95b0635ecccc3354abdd020b1c2f5a4d2a55",
+    "PBT_RECORD_DIGEST v3.0-commitment.24-28.kv records=119 sha256=809df66ebbcdf289fe9e65b1878d4fff0a7be29b96b1c7181f08fd4a11dd6f47",
+    "PBT_RECORD_DIGEST v3.0-commitment.28-30.kv records=119 sha256=7e22e180788c1edbe4cb0356d2539c3698f23a1f5f0b00e57706efb7e9bf5e77",
+    "PBT_RECORD_DIGEST v3.0-commitment.30-31.kv records=119 sha256=5b578f93e96f390376d3842368153005a0c3ff53803df1e40b6be6d2337db132"
+  ],
+  "production_binary_changed": false,
+  "checked_at": 1792528853.5993848,
+  "fixture_suite": {
+    "top_level_tests_passed": 20,
+    "tests": [
+      "TestPBTBoundedViewPreservesSplitRejection",
+      "TestPBTBoundedViewOnlyDropsTrailingFutureFiles",
+      "TestPBTBoundedViewEmptyAndUnbounded",
+      "TestPBTBoundedViewDoesNotChangeSharedGeneration",
+      "TestConvertCommitmentFiles_V3PrefixFoldMatchesStateRecord",
+      "TestConvertCommitmentFiles_V3HistoryOrphanStorageRoot",
+      "TestConvertCommitmentFiles_V3History",
+      "TestRestoreCommitmentFiles_V3RestoresHistory",
+      "TestConvertCommitmentFiles_V3HistoryStaleStorageBranchOfRecreatedAccount",
+      "TestRestoreCommitmentFiles_V3ResumesHistoryAfterDomains",
+      "TestConvertCommitmentFiles_V3",
+      "TestConvertCommitmentFiles_V3BranchNotRewrittenAfterLeafChange",
+      "TestConvertCommitmentFiles_V3CollapsedStorageBranch",
+      "TestConvertCommitmentFiles_V3StateRecordInEveryFile",
+      "TestConvertCommitmentFiles_V3StorageRootSurvivesBranchCollapseAcrossSteps",
+      "TestPBTPreparationV3Continue",
+      "TestDomain_GetLatestMaxStepZeroWithUnitSteps",
+      "TestDomain_GetLatestMaxStepRejectsMergedFileSplit",
+      "TestDomain_GetLatestMaxStepSelectsNewestDBValue",
+      "TestDomain_GetLatestMaxStepBoundsFiles"
+    ],
+    "log_sha256": "e69b740a874ec6e8f3e826027eee54d3669faeff2ad5747c69a6dd1999f99d11"
+  },
+  "lookup_microbenchmark": {
+    "description": "Single eligible real file; future descriptors share its backing file. Measures metadata lookup overhead only. Not full conversion throughput.",
+    "nanoseconds_per_lookup": {
+      "1_files": {
+        "full": 86,
+        "trimmed": 87
+      },
+      "219_files": {
+        "full": 1314,
+        "trimmed": 88
+      },
+      "3068_files": {
+        "full": 18318,
+        "trimmed": 87
+      },
+      "4096_files": {
+        "full": 25071,
+        "trimmed": 86
+      }
+    },
+    "log_sha256": "7873917b1ab87e95a3a4b09baa2e21b690bdf4c8ded8d8f751b74e325894ba32"
+  },
+  "deployment": {
+    "active_converters": {
+      "exporter": "unchanged upstream native binary",
+      "head": "bounded-view candidate for convert-v3 only"
+    },
+    "candidate_build_unit": "pbt-1-bounded-candidate-review.service",
+    "candidate_build_state": "build_succeeded_post_build_cli_check_corrected",
+    "deployed": true,
+    "full_state_candidate_conversion_verified": false,
+    "candidate_binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+    "worker": "lighthouse-erigon-2",
+    "converter_process_switched": true,
+    "upstream_binary_overwritten": false,
+    "stop": {
+      "time": 1792528695.843869,
+      "pid": 20231,
+      "proc_start_ticks": "2678179",
+      "command": [
+        "/data/pbt-1/v3-tools-372df0e6/integration.pinned",
+        "commitment",
+        "convert",
+        "--datadir=/data/pbt-1/erigon",
+        "--chain=mainnet",
+        "--v3"
+      ],
+      "original_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+      "candidate_binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+      "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+      "reason": "Intentional switch to tested bounded file-view optimization",
+      "move": [
+        {
+          "dir": "domain",
+          "name": "v2.0-accounts.1050624-1051648.kv",
+          "size": 2619,
+          "inode": 36985958,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-accounts.1050624-1051648.bt",
+          "size": 4256,
+          "inode": 36985957,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v1.2-accounts.1050624-1051648.kvei",
+          "size": 4848,
+          "inode": 36967230,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v1.2-storage.1050624-1051648.kvei",
+          "size": 4467716,
+          "inode": 36976202,
+          "mtime_ns": 1792439584000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-storage.1050624-1051648.bt",
+          "size": 6510704,
+          "inode": 37007977,
+          "mtime_ns": 1792439583000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-storage.1050624-1051648.kv",
+          "size": 233362796,
+          "inode": 37007978,
+          "mtime_ns": 1792439582000000000
+        }
+      ],
+      "completed_shards": 0,
+      "source": "/data/pbt-1/erigon",
+      "target_block": 24503958,
+      "genesis_time": null
+    },
+    "selection": {
+      "time": 1792528742.4793,
+      "files": [
+        {
+          "dir": "domain",
+          "name": "v2.0-accounts.1050624-1051648.kv",
+          "size": 2619,
+          "inode": 36985958,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-accounts.1050624-1051648.bt",
+          "size": 4256,
+          "inode": 36985957,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v1.2-accounts.1050624-1051648.kvei",
+          "size": 4848,
+          "inode": 36967230,
+          "mtime_ns": 1792439502000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v1.2-storage.1050624-1051648.kvei",
+          "size": 4467716,
+          "inode": 36976202,
+          "mtime_ns": 1792439584000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-storage.1050624-1051648.bt",
+          "size": 6510704,
+          "inode": 37007977,
+          "mtime_ns": 1792439583000000000
+        },
+        {
+          "dir": "domain",
+          "name": "v2.0-storage.1050624-1051648.kv",
+          "size": 233362796,
+          "inode": 37007978,
+          "mtime_ns": 1792439582000000000
+        }
+      ],
+      "basis": "Full logical record equality and indexed contiguous coverage already verified"
+    },
+    "running": {
+      "time": 1792528811.9324968,
+      "native_pid": 23770,
+      "source": "/data/pbt-1/erigon",
+      "target_block": 24503958,
+      "native_binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+      "command": [
+        "/data/pbt-1/boundary-review/integration-bounded-view",
+        "commitment",
+        "convert",
+        "--datadir=/data/pbt-1/erigon",
+        "--chain=mainnet",
+        "--v3",
+        "--continue"
+      ],
+      "parent_unit": "MainPID=23668\nCPUQuotaPerSecUSec=8s\nAllowedCPUs=0-7\nMemoryMax=103079215104\nPrivateNetwork=yes\nActiveState=active\n",
+      "qualification_unit": "MainPID=23849\nExecStart={ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -u /data/pbt-1/qualify-worker.py /data/pbt-1/qualification/job.json --wait-for-erigon-conversion ; ignore_errors=no ; start_time=[Tue 2026-10-20 20:39:20 UTC] ; stop_time=[n/a] ; pid=23849 ; code=(null) ; status=0/0 }\nActiveState=active\n",
+      "qualification_script_sha256": "36233de17e567000bae118da1124f41946536bcda65b81b6c3531e397b31b350",
+      "upload_streamer_sha256": "845930d1580e0a24117e382e8a4d808e3ac142197fbedb3c7b61b91442fe95d9",
+      "handoff_script_sha256": "61b060fe8b4a62b9d2e5cdbb290e61d72479f4b984bed7e50cea114cbd35800a",
+      "full_conversion_verified": false,
+      "genesis_time": null
+    },
+    "early_rate": {
+      "time": 1792529662.7538579,
+      "original_last_progress": "[INFO] [10-20|20:37:59.934] [commitment_convert] v3 file=v2.2-commitment.0-1024000.kv 87.44k key/s at 157.40M/1.05G (1/4091 files, 14.9% overall by keys) ",
+      "candidate_latest_progress": "[INFO] [10-20|20:54:22.092] [commitment_convert] v3 file=v2.2-commitment.0-1024000.kv 373.15k key/s at 44.77M/1.05G (1/4091 files, 4.2% overall by keys) ",
+      "original_keys_per_second": 87440.0,
+      "candidate_keys_per_second": 373150.0,
+      "observed_rate_ratio": 4.267497712717292,
+      "scope": "Early record conversion only; different positions/cache state and restart compaction. Not a controlled end-to-end benchmark or completion ETA.",
+      "candidate_native_pid": 23770,
+      "conversion_complete": false
+    },
+    "phase_1_completion": {
+      "observed_at_utc": "2026-10-21T02:01:20Z",
+      "native_pid": 23770,
+      "files_converted": 4091,
+      "files_total": 4091,
+      "files_skipped": 0,
+      "reported_keys": "1.05G",
+      "reported_duration": "5h16m38s",
+      "reported_size_delta": "104.9 GB",
+      "pre_swap_check": "4091 files ok",
+      "native_conversion_exited": false,
+      "independent_verification_complete": false,
+      "worker_qualification_complete": false,
+      "scope": "All individual files rewritten. Final native conversion checks, original-binary verification, H execution restoration and own 16-GiB startup checks remain."
+    },
+    "native_promotion": {
+      "backup_completed_at_utc": "2026-10-21T02:11:40.085Z",
+      "backed_up_files": 8182,
+      "backup_directory": "/data/pbt-1/erigon/snapshots/backup/domains",
+      "promotion_completed_at_utc": "2026-10-21T02:11:40.288Z",
+      "promoted_files": 12273,
+      "native_conversion_exited": false,
+      "independent_verification_complete": false,
+      "worker_qualification_complete": false
+    },
+    "native_conversion_completion": {
+      "observed_at_utc": "2026-10-21T03:32:10.730698+00:00",
+      "phase_proof": {
+        "finished_at": 1792553444.4257536,
+        "exit_code": 0,
+        "command": [
+          "/data/pbt-1/boundary-review/integration-bounded-view",
+          "commitment",
+          "convert",
+          "--datadir=/data/pbt-1/erigon",
+          "--chain=mainnet",
+          "--v3",
+          "--continue"
+        ],
+        "commitment_v3_env": false,
+        "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+        "no_prune_env": "true",
+        "converter_build": {
+          "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+          "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+          "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+          "binary": "/data/pbt-1/boundary-review/integration-bounded-view",
+          "independent_verifier_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03"
+        }
+      },
+      "native_final_log": [
+        "[INFO] [10-21|03:30:37.773] [commitment_convert] v3 records verified root=043cca89ef74fa9547bb29d787c3e158bc606b1d1cfbfbb2ee452dc798454e9f block=24468024 txNum=3295965624 records=780.43M orphans=0 took=1h18m15.258s",
+        "[INFO] [10-21|03:30:37.775] [commitment_convert] DONE. converted 4091 files. Originals preserved at:"
+      ],
+      "verified_frozen_block": 24468024,
+      "verified_frozen_root": "0x043cca89ef74fa9547bb29d787c3e158bc606b1d1cfbfbb2ee452dc798454e9f",
+      "reported_records": "780.43M",
+      "orphans": 0,
+      "fold_duration": "1h18m15.258s",
+      "native_conversion_exited": true,
+      "independent_verification_complete": false,
+      "worker_qualification_complete": false,
+      "target_head": 24503958,
+      "remaining_head_blocks": 35934,
+      "scope": "Converter internal verification is complete at the immutable checkpoint. Original-binary verification, retained tail execution back to H, second verification and own worker startup checks remain."
+    },
+    "independent_files_verification": {
+      "observed_at_utc": "2026-10-21T04:50:26.974070+00:00",
+      "phase_proof": {
+        "finished_at": 1792558165.1543393,
+        "exit_code": 0,
+        "command": [
+          "/data/pbt-1/v3-tools-372df0e6/integration.pinned",
+          "commitment",
+          "verify",
+          "--datadir=/data/pbt-1/erigon",
+          "--chain=mainnet"
+        ],
+        "commitment_v3_env": true,
+        "binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+        "no_prune_env": "true"
+      },
+      "mutable_H_restoration_complete": false,
+      "second_verification_complete": false,
+      "worker_qualification_complete": false
+    },
+    "tail_batch_handoff": {
+      "evidence": "erigon-tail-performance-20261021.json",
+      "same_original_native_binary": true,
+      "batch_size": "4G",
+      "genesis_time": null
+    }
+  },
+  "genesis_time": null,
+  "build": {
+    "time": 1792528067.8690681,
+    "status": "candidate_built_not_deployed",
+    "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+    "modified_source_sha256": "448b0d84b2b22cd0c2ef891eb18c79391eff169e0a4c38b779134f478a5687dc",
+    "fixture_sha256": "949893cd0881f364aff59a65778c41eeeca9b65b1baf1c92a705607842f16c4d",
+    "original_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+    "records": [
+      "PBT_RECORD_DIGEST v3.0-commitment.0-16.kv records=119 sha256=ac6d0817e34da4fb63d9d0998bb55c52d3251765b5bb46c2035793ad3967ad1f",
+      "PBT_RECORD_DIGEST v3.0-commitment.16-24.kv records=119 sha256=1743343edabdfcd7d599d1fced7a95b0635ecccc3354abdd020b1c2f5a4d2a55",
+      "PBT_RECORD_DIGEST v3.0-commitment.24-28.kv records=119 sha256=809df66ebbcdf289fe9e65b1878d4fff0a7be29b96b1c7181f08fd4a11dd6f47",
+      "PBT_RECORD_DIGEST v3.0-commitment.28-30.kv records=119 sha256=7e22e180788c1edbe4cb0356d2539c3698f23a1f5f0b00e57706efb7e9bf5e77",
+      "PBT_RECORD_DIGEST v3.0-commitment.30-31.kv records=119 sha256=5b578f93e96f390376d3842368153005a0c3ff53803df1e40b6be6d2337db132"
+    ],
+    "production_binary_changed": false,
+    "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+    "binary": "/data/pbt-1/boundary-review/candidate-bin/integration",
+    "build_log_sha256": "84216ec016511d3eb01448cb3f33d15a81c8237ac8fa6ea26f40dd69da99db16",
+    "build_info_sha256": "f178c6368cdd0ce864ac1dd04910c47d5cda92e12fe4a40c183200bae59090a1",
+    "help_sha256": "5ff54b7cf886aaecbfdb71487962305e484372e23d7cb4cbd2d6a5222af777df",
+    "post_build_check_correction": "Build succeeded; integration does not support --version. Preserved initial failed check, validated commitment convert --help and go version -m instead.",
+    "full_state_candidate_conversion_verified": false
+  },
+  "followup_hot_path_review": {
+    "time": 1792536872.3667374,
+    "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "location": "db/state/domain.go:getLatestFromFiles",
+    "observation": "Each bounded read scans every file in the private view to reject a split boundary, before doing the actual newest-to-oldest lookup. Future-file trimming does not eliminate repeated scans of the growing past-file prefix.",
+    "runtime_evidence": "At 22:51 UTC, files 1222-1224 took about 1.4-1.7 seconds each, mostly collection, versus roughly 0.2 seconds for early small files. This is a likely contributor, not a CPU-profile attribution.",
+    "candidate_for_separate_testing": "Cache successful boundary validation per immutable private view and bound; preserve first-call boundary errors, before/after bounds, tombstones and exact output. No additional patch or binary has been deployed."
+  },
+  "tail_restoration_review": {
+    "checked_at_utc": "2026-10-21T03:50:22.573401+00:00",
+    "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "converter_source": "cmd/integration/commands/commitment.go:1152",
+    "reset_source": "execution/stagedsync/rawdbreset/reset_stages.go:166",
+    "behavior": "TargetV3 invokes ResetExec: clears Execution stage progress, mutable account/storage/code/commitment/receipt/cache and index tables; stage_exec reconstructs from the frozen checkpoint using retained canonical blocks.",
+    "frozen_checkpoint_block": 24468024,
+    "target_block": 24503958,
+    "height_gap": 35934,
+    "partial_checkpoint_block_may_also_be_executed": true,
+    "no_prune_required": true,
+    "actual_tail_rate_observed": false,
+    "timing_basis": "Wait for actual H-tail stage_exec progress. The older exporter O restoration executed 820 mostly empty/system-only blocks, reported gas/s=0 and is not representative of the workload tail.",
+    "native_path_changed": false,
+    "native_profiling": {
+      "source": "cmd/integration/commands/stages.go:startExecProfiling",
+      "automatic": true,
+      "output_directory": "/data/pbt-1/erigon/temp",
+      "completed_run_profiles": [
+        "stage_exec_cpu.pprof",
+        "stage_exec_heap.pprof",
+        "stage_exec_mutex.pprof",
+        "stage_exec_fgprof.pprof"
+      ],
+      "source_batch_size_default": "512M",
+      "replay_parameters_changed": false,
+      "scope": "Profiles are written by the native stage_exec command; inspect only after a completed/cleanly stopped run. This is not a measured replay rate."
+    },
+    "bal_retention_source_review": {
+      "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+      "working_files_match_commit": true,
+      "sha256": {
+        "execution/stagedsync/rawdbreset/reset_stages.go": "0caf63f88e7d5e893093adb8293a8a9cb82cef2facd7b91e8a6ccb2f0797c310",
+        "execution/stagedsync/stage_execute.go": "3e3cdef1509520293d5d13051541916cc7215db7afbc016373604fe97b63eea6",
+        "execution/stagedsync/exec3_blocksource.go": "6872b66cbe7914f4f279abd39eee57559f20b30798bae0b6edd7fe2674e3f100",
+        "cmd/integration/commands/stages.go": "38a4be77464c0512229ea464984666ad6ad37a0dac1e7dd8a7a1bd899d63c6ab"
+      },
+      "reset_keeps_bal_table": true,
+      "no_prune_bypasses_execution_bal_pruning": true,
+      "block_source_reads_retained_bal": true,
+      "new_full_corpus_audit_performed": false,
+      "scope": "Source-path review at the pinned commit. Existing full H corpus audit remains historical evidence; final worker qualification is still pending.",
+      "checked_at_utc": "2026-10-21T04:06:16.084618+00:00"
+    }
+  }
+}

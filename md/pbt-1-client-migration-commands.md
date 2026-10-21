@@ -1,11 +1,16 @@
 # PBT-1 client migration commands
 
-Updated 2026-10-20 from the operator's Besu release update and
+Use these templates with the [current experiment plan and coverage gates](pbt-1-experiment.md).
+They do not establish that every client uses the same replay mechanism or anchor.
+
+Updated 2026-10-21 from the operator's Besu release update and
 [Geth planning PR #12](https://github.com/misilva73/pbt-planning/pull/12),
-observed open at head `ecc562fa83da7588ca6a0a1a9963c28787ce0073`.
+observed open at head `b6069c1411eb0cf5096eeab5e08976bc55ba3a78`.
 These are migration-worker command templates, not commands already deployed on
-the native snapshot preparation hosts. Build and compatibility qualification
-remain outstanding. Machine-readable pins are in
+the native snapshot preparation hosts. All five client builds are now pinned and
+build-verified. Seven non-Erigon workers and Erigon-2 passed isolated startup checks at H
+([evidence](pbt-1-worker-preparation.json)). Migration qualification remains
+outstanding for every client. Machine-readable pins are in
 [`migration-builds.json`](../scripts/pbt/migration-builds.json).
 
 Use `N` for the shared finalized snapshot/preimage anchor and `S` for the agreed
@@ -13,6 +18,20 @@ future PBT activation timestamp. Preserve the prepared backlog after `N`.
 Use actual finality evidence from the launched network; a stored header alone
 does not establish finality. All templates retain the worker's normal network,
 Engine API, JWT and consensus-client configuration.
+
+The prepared delivery path on each host is
+`/data/pbt-1/migration-input-24453558`. Use it only after that worker's
+`ready.json` confirms verified downloads. For containerized migration, enable
+`pbt_migration_input_mount_enabled=true` with the migration restart: the inventory
+binds that worker's directory read/write at `/pbt-migration-input`. Use
+`/pbt-migration-input` as `<artifact-dir>` inside the container, or the host path
+for a native command. The mount is disabled by default so baseline startup
+cannot create an empty directory before the verified download is promoted.
+Enabling the mount alone does not set `S` or start migration; apply it alongside
+the reviewed client flags and fork configuration below.
+The six import workers receive both files; Geth self-migration
+receives the preimages and metadata. Delivery is staged but awaits the verified
+shared release; it does not start migration or establish finality.
 
 ## Besu
 
@@ -95,8 +114,12 @@ Source reference:
 ## Geth
 
 The updated procedure identifies
-[`CPerezz/go-ethereum` at `4f7e4b23c066932bbd399bce94955468d6039bac`](https://github.com/CPerezz/go-ethereum/tree/4f7e4b23c066932bbd399bce94955468d6039bac)
+[`CPerezz/go-ethereum` at `84a12eff96347929ab62b65cfeb1194478445518`](https://github.com/CPerezz/go-ethereum/tree/84a12eff96347929ab62b65cfeb1194478445518)
 on `pbt`. Pin that commit rather than following the branch during the experiment.
+This supersedes candidate `4f7e4b23c` and includes the merged
+[peak-disk hotfix #69](https://github.com/CPerezz/go-ethereum/pull/69).
+This build is pinned and build-verified, and all three Geth workers passed their
+isolated H startup checks. Migration qualification remains outstanding.
 
 Both modes require `config.binaryTrieTime = S`, with `S >= amsterdamTime`.
 Supply the updated genesis through `--override.genesis` on every start, or
@@ -128,6 +151,15 @@ Self-migration instead needs a complete persisted path-scheme flat state at
 can retrieve missing BALs from peers, and attests at finalized `P`.
 Record `P`, its hash and the attested root separately from the input anchor `N`.
 Compare with the import workers at `P` or a later common block.
+The pinned implementation's
+[self-converter and BAL key collection](https://github.com/CPerezz/go-ethereum/blob/84a12eff96347929ab62b65cfeb1194478445518/cmd/geth/bintrie_selfconvert.go#L44)
+confirm this handling of keys created or deleted after `N`. This source review
+does not prove a completed migration on the worker.
+The staged Geth inventory explicitly sets `--history.chain=all`, matching this
+pin's `KeepAll` default. Preserve the required BAL interval through self-conversion;
+the native reader uses either the BAL freezer table or the active key-value
+store and validates each list against its canonical header. The controller-only
+configuration review checks this setting on all three Geth workers.
 
 With light traffic, persistence can lag behind `N`. The upstream procedure
 describes `--history.state=8` as a devnet option that reduces state-history
@@ -146,7 +178,97 @@ preserve diagnostics before retrying. Failed work is removed and a stopped
 attempt restarts from the beginning. After success, retain the flags on later
 starts so completed work is recognized.
 
+The current online importer consumes writable artifact files by default:
+it punches holes while reading and ultimately truncates them. Use independent
+per-worker copies of `pbt-snapshot.bin` and `framed.bin`; never hardlink the
+immutable masters. A retry after consumption needs fresh copies. Alternatively,
+`--pbt.import.keep-artifacts` preserves the inputs at the cost of additional disk.
+After successful import, retain the emptied paths as well as the startup flags.
+This applies to the PBT artifact pair, not the compressed native database
+recovery archives on `/mnt/pbt-recovery`.
+
 The follower runs automatically: after snapshot import it begins at `N+1`;
 after self-migration it begins at `P+1`. Record actual BAL consumption and compare
 roots at the same canonical block hash. Apply the complete process memory limit
 through migration, catch-up and fork activation.
+
+## Nethermind
+
+Use `NethermindEth/nethermind` at
+`f4e295193e426230547c59dcdb8decb25d725418`. For each import worker, schedule the
+agreed future `S` through `config.binaryTrieTime` in Geth-style genesis, or
+`params.eip8347TransitionTimestamp` in a native chainspec. Supply the updated
+chainspec when restarting:
+
+```text
+nethermind --config <node-config> \
+  --Init.ChainSpecPath=<chainspec-with-S> \
+  --Pbt.Enabled=true --FlatDb.Enabled=true --FlatDb.Layout=Flat \
+  --FlatDb.HistoryEnabled=false \
+  --Pbt.MigrationSnapshotPath=<artifact-dir>/pbt-snapshot.bin \
+  --Pbt.MigrationPreimagesPath=<artifact-dir>/framed.bin \
+  --Pbt.MigrationAnchor=24453558 --Sync.FastSync=false \
+  <normal node options>
+```
+
+The [pinned mode selector](https://github.com/NethermindEth/nethermind/blob/f4e295193e426230547c59dcdb8decb25d725418/src/Nethermind/Nethermind.State.Pbt/PbtPlugin.cs)
+requires both the scheduled transition and PBT opt-in. The
+[configuration validator](https://github.com/NethermindEth/nethermind/blob/f4e295193e426230547c59dcdb8decb25d725418/src/Nethermind/Nethermind.State.Pbt/PbtMigrationConfigValidator.cs)
+requires `S` after the execution genesis, with EIP-7928 and EIP-6780 active before
+it. It rejects native FlatDB history mode and artifact paths overlapping the
+writable database. Our separate `/pbt-migration-input` mount preserves that path
+separation; retain the existing FlatDB database and layout.
+
+Supply both artifacts: without preimages, the
+[pinned configuration](https://github.com/NethermindEth/nethermind/blob/f4e295193e426230547c59dcdb8decb25d725418/src/Nethermind/Nethermind.State.Pbt/IPbtConfig.cs)
+allows an import without tying the snapshot to the anchor's MPT root. Keep
+`Pbt.ImportConcurrency` at its default of one for the initial pair of trials;
+record any later tuning. The running node handles import and subsequent BAL
+following, as described in [Maria's consumer procedure](https://github.com/misilva73/pbt-planning/blob/95ac0b56c5ad69ca99d3e3e8e77729d541d7a739/outreach/pbt-mainnet-fork-migration-test-plan.md#commands).
+Actual progress/root capture and migration success remain live qualification
+gates. A restart or a populated PBT directory is not sufficient evidence.
+
+## Erigon
+
+Use `erigontech/erigon` at `372df0e68f52f9975370bff38dee6e41aefff0d7` for
+both the client and integration tool. The completed legacy-to-v3 upgrade is
+separate from this PBT migration.
+
+After the live baseline, stop one worker at a time and run:
+
+```text
+integration commitment convert-pbt \
+  --datadir=<stopped-worker-datadir> --chain=<chain> \
+  --output.datadir=<new-converted-dir> --keep-hex \
+  --experimental.bin-commitment.hash=blake3
+```
+
+Record the output's block and transaction checkpoint. The pinned documentation
+calls the transaction number `S`; in our runbook call it `conversion_tx_num`
+to distinguish it from the activation timestamp. It may be mid-block. Review
+the exact alignment remedy from the tool before any reset, unwind or file
+removal; do not substitute H or N. Then, while stopped:
+
+```text
+integration commitment attach-pbt \
+  --datadir=<worker-datadir> --chain=<chain> --from=<new-converted-dir> \
+  --experimental.bin-commitment.hash=blake3
+```
+
+Keep the output settings and matching state salt. After successful attach,
+restart with the agreed `--override.binary-trie=<S>` on every start and the
+normal v3/node options. The
+[pinned conversion/attach procedure](https://github.com/erigontech/erigon/blob/372df0e68f52f9975370bff38dee6e41aefff0d7/docs/pbt-migration.md)
+defines alignment and restart recovery; do not use its test-only import path.
+[Maria's procedure](https://github.com/misilva73/pbt-planning/blob/95ac0b56c5ad69ca99d3e3e8e77729d541d7a739/outreach/pbt-mainnet-fork-migration-test-plan.md#commands)
+requires `debug_migrationProgress` to show `mode: "hex+bin"` and
+`shadowStopped: false` before activation. Catch-up is native re-execution after
+attach, not an asserted N-to-H BAL-import result.
+
+Maria also specifies standalone verification of the shared snapshot on receiving
+Erigon nodes. The current seven-recipient delivery job does not cover Erigon-2;
+its shared-pair verification is an explicit remaining gate, separate from its
+successful native H startup checks. Arrange a verified input copy and scratch
+space before that check; do not claim the producer's verification as Erigon-2's
+own result. No extra verification job or PBT conversion is started by this
+command sheet.

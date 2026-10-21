@@ -1,2 +1,4 @@
 network-configs/devnet-7/parsed/parsedConsensusGenesis.json filter=lfs diff=lfs merge=lfs -text
 network-configs/devnet-9/metadata/genesis.ssz filter=lfs diff=lfs merge=lfs -text
+# Preserve the reviewed patch byte-for-byte; diff context has leading spaces before tabs.
+scripts/pbt/erigon-v3-bounded-view.patch -whitespace

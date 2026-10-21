@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-21T06:41:39.248789+00:00",
+  "worker": "lighthouse-erigon-1",
+  "scope": "Read-only accounting observation during preparation; not a migration memory measurement",
+  "native_pid": 47602,
+  "native_cgroup": "/system.slice/pbt-1-native-anchor-export.service",
+  "process_kib": {
+    "VmRSS": 44358608,
+    "RssAnon": 9720948,
+    "RssFile": 34637660,
+    "RssShmem": 0
+  },
+  "cgroup_bytes": {
+    "memory_max": 34359738368,
+    "memory_current": 34355548160,
+    "memory_peak": 34359754752,
+    "anon": 9962692608,
+    "file": 23193579520,
+    "file_mapped": 13914144768,
+    "file_dirty": 0,
+    "file_writeback": 0,
+    "shmem": 0,
+    "kernel": 1170534400
+  },
+  "memory_events": {
+    "low": 0,
+    "high": 0,
+    "max": 413675,
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "interpretation": "RSS and cgroup-owned pages differ. This is consistent with file-cache ownership outside the exporter cgroup; the exact original owner of each page was not traced. The 32-GiB charge limit remains configured and no OOM occurred.",
+  "sources": [
+    "https://docs.kernel.org/admin-guide/cgroup-v2.html#memory-ownership",
+    "https://docs.kernel.org/admin-guide/sysctl/vm.html#drop-caches"
+  ],
+  "pending_handoff": "After all preparation/hash/download jobs and clients stop, sync and evict clean preparation page cache before measured client startup; record evidence. No eviction performed during live preparation.",
+  "genesis_time": null,
+  "pbt_activation_time": null
+}

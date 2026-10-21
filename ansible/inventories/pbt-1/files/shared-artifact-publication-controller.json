@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-21T00:58:09.654074+00:00",
+  "controller_unit": "pbt-1-artifact-publication.service",
+  "controller_script": "scripts/pbt/publish-pbt-artifacts-when-ready.py",
+  "controller_sha256": "a9e29fbf8f9837d86834982cd78a0c6370263848fb73d9be763e7cd40498f891",
+  "publisher_sha256": "d98d6d7ab56dc18d9aabd6f33b85ed5d82de904239265b46486e8e1dbde18493",
+  "tests_passed": 13,
+  "current": {
+    "phase": "waiting_for_export",
+    "observation": {
+      "export": {
+        "MainPID": "47501",
+        "Result": "success",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "upload": {
+        "MainPID": "0",
+        "Result": "success",
+        "LoadState": "not-found",
+        "ActiveState": "inactive"
+      },
+      "export_proof": false,
+      "upload_proof": false,
+      "publisher_sha256": "d98d6d7ab56dc18d9aabd6f33b85ed5d82de904239265b46486e8e1dbde18493"
+    },
+    "time": 1792544278.5419962
+  },
+  "upload_started": false,
+  "release_verified": false,
+  "genesis_time": null
+}
