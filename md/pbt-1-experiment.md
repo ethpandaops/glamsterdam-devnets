@@ -10,27 +10,26 @@ deferrals and distinction between already queued jobs and manual follow-up.
 
 ## Preparation checkpoint, October 21: proceeding from the completed export
 
-**18:12 UTC update:** the shared N artifacts are published with the agreed
+**19:26 UTC update:** the shared N artifacts are published with the agreed
 verification deferrals. All seven recipient input sets and cache handoffs are
-complete; their receipts match the published release. Erigon-1's corrected H
-restore is running, with its own isolated startup queued afterward. Its obsolete
-exporter data was reclaimed, preserving its original H database and recovery
-archive. Erigon-1 alone still needs restore/startup, corrected backup replacement,
-cleanup and cache handoff. See the launch handoff for the current sequence.
+complete. Erigon-1's corrected H restore completed at 19:23 UTC and its own
+32-GiB/eight-CPU startup/reopen check passed at 19:24 UTC. All nine workers now
+have their own H startup results. Erigon-1's corrected backup is downloading
+directly to its recovery volume; its old archive was removed after preserving
+provenance, while its original H database remains preserved locally.
 
-All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
-v3 recovery archive, with matching worker/controller configuration and automatic
-restore disabled. Its original provenance remains preserved; the redundant local archive cache
-was reclaimed after volume verification and configuration reconciliation. The other eight original recovery archives remain retained.
-Eight workers have passed isolated startup checks at H, including Erigon-2;
-Erigon-1 remains pending. The read-only fleet monitor reports no alerts. All workers except Erigon-1 have completed their stopped-worker cache handoffs.
+All nine recovery volumes are mounted. Erigon-2 has its corrected archive and
+reconciled worker/controller configuration. The seven non-Erigon recovery
+archives remain retained. Erigon-1 alone still needs backup completion,
+controller reconciliation, cleanup, ext4 reservation restoration and cache
+handoff. All other workers have completed their stopped-worker cache handoffs.
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
 | Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent reconstruction deferred by user; artifacts published and obsolete exporter data reclaimed |
 | Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published; recovery-volume replacement and configuration reconciliation complete |
 | Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Published from successful export with the deferral recorded explicitly; all seven recipient input sets ready |
-| Erigon-1 H database | Original H database preserved; verified H release inputs staged, with a 1,192,103,432,995-byte unpacked bound | Stream restore is running; own startup check is queued afterward |
+| Erigon-1 H database | Corrected H restore complete; own startup/reopen passed at 19:24 UTC with 32 GiB / 8 CPU | Corrected recovery backup downloading; reconciliation, cleanup and cache handoff pending |
 | Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache and stored-volume SHA-256 passed; controller and worker recovery inputs agree; scoped URL range check passed |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
 
@@ -865,20 +864,19 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 ## Immediate next work
 
 The post-publication controller completed its handoff: all seven input transfers
-have finished and Erigon-1's corrected H restore is running. Its own isolated
-startup is queued in `pbt-1-erigon-1-restored-qualification`. The 15-minute fleet
-monitor tracks the restore and startup controller.
+have finished and Erigon-1's corrected H restore and own isolated startup
+have passed. Its corrected recovery backup is downloading directly to its
+volume. The 15-minute fleet monitor tracks preparation and recovery services.
 
 1. Shared N publication and recipient delivery are complete. Independent MPT
    reconstruction and extra remote/stored-file readbacks remain explicitly
    deferred, not passed. Keep the release and ready receipts; investigate actual
    import/startup failures rather than adding further preparation checks.
-2. Let Erigon-1's active stream restore finish, preserving its original H
-   database/archive. Its queued own startup uses 32 GiB and eight CPUs;
-   Erigon-2's result cannot substitute. Do not restart either job blindly.
-3. After Erigon-1 qualifies, reconcile its corrected recovery archive and worker/
-   controller configuration. Preserve a verified recovery copy throughout the
-   replacement. The temporary 1,500-GiB export scratch volume has been unmounted
+2. Let Erigon-1's active recovery download finish. Restore and own startup
+   already passed; do not rerun them. Its original H database remains preserved.
+3. After backup completion, reconcile Erigon-1's corrected recovery archive and
+   worker/controller configuration. The published H object and Erigon-2 backup
+   remain available during replacement. The temporary 1,500-GiB export scratch volume has been unmounted
    and removed from DigitalOcean and Terraform. Restore the original ext4
    reservation after H restore/cleanup, before measured launch. Recheck actual
    free space after cleanup.

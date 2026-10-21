@@ -1,0 +1,16 @@
+{
+  "phase": "ready_for_direct_recovery_download",
+  "time": 1792610676.9934685,
+  "old_archive": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 534953200071,
+    "mtime_ns": 1792507726841456735,
+    "ctime_ns": 1792507726921457973
+  },
+  "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "archive_bytes": 461165199193,
+  "qualification_sha256": "33350e4e473a7cc2a410042affc9b6afe2ea327965d53f871dff7fa9a5895c99",
+  "live_database_unchanged": true,
+  "restore": false
+}

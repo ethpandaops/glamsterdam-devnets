@@ -1,14 +1,15 @@
 # PBT-1: preparation, genesis and operation handoff
 
-Status observed **2026-10-21 18:12 UTC**. This is the current operational
+Status observed **2026-10-21 19:26 UTC**. This is the current operational
 handoff; older dated notes describe history. Live job status takes precedence
 over this checkpoint. Preparation is authorized. **Genesis time G and PBT
 activation time S remain unset; launching the network is not yet authorized.**
 
 ## Where we are
 
-- Nine workers and their recovery volumes are provisioned. Eight workers have
-  passed isolated startup at the common head H; Erigon-1 is the remaining worker.
+- Nine workers and their recovery volumes are provisioned. All nine workers have
+  passed their own isolated startup at the common head H. Erigon-1 passed at
+  19:24 UTC under its assigned 32-GiB/eight-CPU limits.
 - Erigon legacy commitments → v3 is complete. This is MPT database preparation;
   **Erigon `convert-pbt` / `attach-pbt` is still a separate operation.**
 - The shared PBT snapshot (107,902,638,451 bytes) and preimages
@@ -18,8 +19,9 @@ activation time S remain unset; launching the network is not yet authorized.**
 - All seven recipient input sets and stopped-worker cache handoffs are complete.
   Their [completion receipts](../ansible/inventories/pbt-1/files/recipient-preparation-complete.json)
   match the published release. Erigon-1 reclaimed its obsolete
-  exporter data and started the corrected H restore at 17:35 UTC. Its own
-  isolated startup check is queued afterward. Do not start duplicate jobs.
+  exporter data and completed the corrected H restore at 19:23 UTC, then its
+  own startup/reopen check. Its corrected recovery backup is now downloading
+  directly to the recovery volume. Do not start duplicate jobs.
 - Erigon-2 has the corrected H database and recovery archive. The temporary
   1,500-GiB exporter scratch volume and Geth-2's redundant exporter copy are
   removed. Erigon-1's temporary ext4 reservation adjustment still needs reversal.
@@ -115,51 +117,33 @@ authorization files and storage credentials stay private.
    `/data/pbt-1/migration-input-24453558/ready.json`. Do not restart completed downloads.
    Migration mounts stay disabled until the migration restart.
 
-3. **Restore Erigon-1 at H — running.**
-   The controller reclaimed only its listed obsolete exporter data, then started
-   `pbt-1-v3-head-restore` with streaming extraction, 8 GiB RAM and eight CPUs.
-   The [cleanup receipt](../ansible/inventories/pbt-1/files/erigon-1-published-exporter-cleanup.json)
-   records 1.37 TB local free space afterward. The original H database and
-   recovery archive remain preserved while the corrected release is restored.
-   The current signed restore URL expires around October 22 12:17 UTC; refresh
-   it if needed, preserving the same release identity. A failed step stops the
-   controller: read its step log before resuming. Its final
-   `inputs_downloading_and_erigon_restore_started` status means jobs started,
-   **not that they completed**.
+3. **Restore Erigon-1 at H — complete at 19:23 UTC.** The archive was hashed
+   during extraction and the new database promoted. The original H database
+   remains at `/data/pbt-1/erigon-original-h-preserved`. See the
+   [restore receipt](../ansible/inventories/pbt-1/files/erigon-1-v3-restore-complete.json)
+   and [stream receipt](../ansible/inventories/pbt-1/files/erigon-1-v3-restore-stream.json).
+   The restore unit is successful and inactive. Do not rerun it.
 
-4. **Run Erigon-1's own H startup check — now queued automatically.** Controller
-   unit `pbt-1-erigon-1-restored-qualification` waits for successful restore and
-   promotion, then starts the following once on Erigon-1. Do not duplicate it:
+4. **Erigon-1's own H startup — complete at 19:24 UTC.** It opened twice with
+   the pinned Erigon build, 32 GiB RAM and eight CPUs, confirmed H and its root,
+   then stopped cleanly. The [startup result](../ansible/inventories/pbt-1/files/erigon-1-startup-result.json)
+   is this worker's own result. Controller
+   `pbt-1-erigon-1-restored-qualification` reports `own_H_startup_passed`.
+   This is isolated startup evidence, not live migration or network qualification.
 
-   ```sh
-   python3 /data/pbt-1/qualify-restored-worker.py \
-     /data/pbt-1/qualification/job.json --from-verified-release
-   ```
-
-   Read `/data/pbt-1/qualification/result.json`; confirm this worker's assigned
-   32-GiB/eight-CPU startup and clean stop. Erigon-2's result cannot substitute.
-   Controller status is in `erigon-1-restored-qualification/status.json` under
-   the private state directory. The 15-minute fleet monitor follows it. Failure
-   stops this handoff for inspection; it does not retry startup or launch CL.
-
-5. **Replace Erigon-1's recovery archive — helper staged, execution pending.** Preserve
-   original provenance, confirm its own H startup succeeded and the corrected
-   published H object/Erigon-2 backup remain available. The 550-GiB recovery
-   volume cannot hold both archives. Reconcile worker and controller recovery
-   jobs to the corrected release, set `restore: false`, and replace the old
-   archive by downloading directly to that volume, hashing during transfer.
-   The helper is now staged at
-   `/data/pbt-1/direct-recovery-replacement/prepare.py`, with original provenance.
-   Its preflight correctly refuses before the H restore completes. After own H
-   startup, run the helper without arguments, then with `--run` after its
-   preflight succeeds. A single-object `source-url` is already staged in that
-   directory and valid until October 22 at 17:49 UTC; refresh it if necessary.
-   The latter removes the exact old archive and stages the corrected job with
-   `restore: false`; it starts no service and changes no database. Then start
-   `pbt-recovery-snapshot.service`, follow `/mnt/pbt-recovery/status.json`, and
-   reconcile controller recovery inputs when it finishes. This operation is
-   **not queued**; do not blindly restart the service with its old job. Source:
-   [replacement helper](../scripts/pbt/prepare-erigon-1-recovery-replacement.py).
+5. **Replace Erigon-1's recovery archive — download running.** The replacement
+   helper's preflight and `--run` succeeded after its own startup. The exact old
+   archive was removed, with its provenance preserved, and the corrected job
+   staged with `restore: false`. `pbt-recovery-snapshot.service` started at
+   19:24 UTC and hashes while downloading directly to the recovery volume.
+   The restored database is untouched. Follow `/mnt/pbt-recovery/status.json`;
+   completion requires `recovery_ready_existing_db_preserved` and a successful
+   terminal service. Then reconcile controller recovery inputs to the worker's
+   corrected job. Do not rerun the replacement helper or restore the old job.
+   Its [staging receipt](../ansible/inventories/pbt-1/files/erigon-1-recovery-replacement-started.json)
+   records the removed archive's identity and the own-startup receipt checksum;
+   it does not claim the new download is complete. The published H object and
+   Erigon-2's corrected recovery backup remain available during this replacement.
 
    Corrected H object:
    `pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst`,
@@ -186,7 +170,7 @@ authorization files and storage credentials stay private.
    removal of `erigon-original-h-preserved`, restored ext4 reservation and
    stopped clients/preparation jobs. It reads only metadata and small receipts;
    it performs no database/archive scan. This helper has been syntax-checked
-   but has **not run**; its prerequisites are still pending. Source:
+   but has **not run**; backup completion and cleanup are still pending. Source:
    [Erigon-1 cache handoff](../scripts/pbt/handoff-erigon-1-cache.py).
 
 At this point: nine H startup results, nine usable recovery archives, seven
