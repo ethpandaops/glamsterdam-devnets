@@ -22,7 +22,7 @@ v3 recovery archive, with matching worker/controller configuration and automatic
 restore disabled. Its original provenance remains preserved; the redundant local archive cache
 was reclaimed after volume verification and configuration reconciliation. The other eight original recovery archives remain retained.
 Eight workers have passed isolated startup checks at H, including Erigon-2;
-Erigon-1 remains pending. The read-only fleet monitor reports no alerts. Erigon-2's stopped-worker cache handoff is complete; eight workers remain pending.
+Erigon-1 remains pending. The read-only fleet monitor reports no alerts. Erigon-2 and Geth-3 have completed their stopped-worker cache handoffs; seven workers remain pending.
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
@@ -702,8 +702,11 @@ measured migration. Any later out-of-cgroup scan of database/input contents requ
 repeating that stopped-worker handoff. Erigon-2 completed this step at 16:12 UTC
 on October 21, after its recovery replacement and cleanup. Its clean page cache
 fell from about 115 GiB to 181 MiB, with the qualification and archive identity
-unchanged; see `files/erigon-2-memory-handoff.json`. The other eight workers
-remain pending. If Erigon-2 later verifies the shared pair before measured
+unchanged; see `files/erigon-2-memory-handoff.json`. Geth-3 completed its
+preimages download and cache handoff at 17:47 UTC; cached data fell from about
+10.9 GiB to 300 MiB, with qualification, archive and input identities unchanged.
+See `files/geth-3-memory-handoff.json` and `files/geth-3-migration-inputs-ready.json`.
+The other seven workers remain pending. If Erigon-2 later verifies the shared pair before measured
 startup, repeat its handoff after that preparation.
 Record `memory.current`, `memory.peak`, `memory.stat`, `memory.events` and process
 RSS/PSS during the experiment. Existing startup checks remain startup evidence,
