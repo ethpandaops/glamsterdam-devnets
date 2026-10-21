@@ -10,27 +10,26 @@ deferrals and distinction between already queued jobs and manual follow-up.
 
 ## Preparation checkpoint, October 21: proceeding from the completed export
 
-**19:26 UTC update:** the shared N artifacts are published with the agreed
-verification deferrals. All seven recipient input sets and cache handoffs are
-complete. Erigon-1's corrected H restore completed at 19:23 UTC and its own
-32-GiB/eight-CPU startup/reopen check passed at 19:24 UTC. All nine workers now
-have their own H startup results. Erigon-1's corrected backup is downloading
-directly to its recovery volume; its old archive was removed after preserving
-provenance, while its original H database remains preserved locally.
+**20:56 UTC update:** all nine workers have passed their own H startup checks,
+all seven recipient input sets are ready, and all nine stopped-worker cache
+handoffs are complete. Erigon-1's corrected recovery archive finished at
+20:54 UTC with its streamed checksum accepted. Its worker/controller recovery
+configuration is reconciled, the preserved old local database has been removed,
+and the original ext4 reservation restored. It now has about **1.17 TB free**
+on local SSD. The active database and corrected recovery archive are preserved.
 
-All nine recovery volumes are mounted. Erigon-2 has its corrected archive and
-reconciled worker/controller configuration. The seven non-Erigon recovery
-archives remain retained. Erigon-1 alone still needs backup completion,
-controller reconciliation, cleanup, ext4 reservation restoration and cache
-handoff. All other workers have completed their stopped-worker cache handoffs.
+All nine recovery volumes hold their prepared archives. No preparation transfer
+remains running. G and S stay unset. The existing private test genesis is
+validated; the actual launch files must be generated and reviewed once G is
+chosen. Verification deferrals for the shared N artifacts remain explicit.
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
 | Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent reconstruction deferred by user; artifacts published and obsolete exporter data reclaimed |
 | Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published; recovery-volume replacement and configuration reconciliation complete |
 | Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Published from successful export with the deferral recorded explicitly; all seven recipient input sets ready |
-| Erigon-1 H database | Corrected H restore complete; own startup/reopen passed at 19:24 UTC with 32 GiB / 8 CPU | Corrected recovery backup downloading; reconciliation, cleanup and cache handoff pending |
-| Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache and stored-volume SHA-256 passed; controller and worker recovery inputs agree; scoped URL range check passed |
+| Erigon-1 H database | Corrected H restore and own startup/reopen passed with 32 GiB / 8 CPU; corrected recovery backup, cleanup and cache handoff complete | Ready for genesis configuration; live migration remains unqualified |
+| Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC; both Erigon recovery volumes complete | Controller/worker recovery inputs agree; Erigon-1 used streaming SHA-256 and Erigon-2 completed its earlier stored-volume check |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
 
 Erigon-2's one-shot recovery replacement completed its full stored-volume checksum
@@ -708,7 +707,9 @@ preimages download and cache handoff at 17:47 UTC; cached data fell from about
 See `files/geth-3-memory-handoff.json` and `files/geth-3-migration-inputs-ready.json`.
 By 18:12 UTC all six other recipients also completed their input downloads and
 cache handoffs, with qualification, archive and input identities unchanged.
-See `files/recipient-preparation-complete.json`. Only Erigon-1 remains pending.
+See `files/recipient-preparation-complete.json`. Erigon-1 completed at 20:56 UTC
+after backup reconciliation and cleanup, with clean page cache reduced to about
+242 MiB; see `files/erigon-1-memory-handoff.json`. All nine handoffs are complete.
 If later preparation rereads a completed worker's database or input contents,
 repeat the handoff after that preparation.
 Record `memory.current`, `memory.peak`, `memory.stat`, `memory.events` and process
@@ -863,36 +864,26 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 
 ## Immediate next work
 
-The post-publication controller completed its handoff: all seven input transfers
-have finished and Erigon-1's corrected H restore and own isolated startup
-have passed. Its corrected recovery backup is downloading directly to its
-volume. The 15-minute fleet monitor tracks preparation and recovery services.
+Preparation transfers, H startup checks, recovery reconciliation, obsolete-data
+cleanup and all nine cache handoffs are complete. The 15-minute fleet monitor
+continues to observe the stopped workers and recovery state.
 
-1. Shared N publication and recipient delivery are complete. Independent MPT
-   reconstruction and extra remote/stored-file readbacks remain explicitly
-   deferred, not passed. Keep the release and ready receipts; investigate actual
-   import/startup failures rather than adding further preparation checks.
-2. Let Erigon-1's active recovery download finish. Restore and own startup
-   already passed; do not rerun them. Its original H database remains preserved.
-3. After backup completion, reconcile Erigon-1's corrected recovery archive and
-   worker/controller configuration. The published H object and Erigon-2 backup
-   remain available during replacement. The temporary 1,500-GiB export scratch volume has been unmounted
-   and removed from DigitalOcean and Terraform. Restore the original ext4
-   reservation after H restore/cleanup, before measured launch. Recheck actual
-   free space after cleanup.
-4. Complete Erigon-1's stopped-worker cache handoff after its final preparation.
-   The other eight workers' handoffs are complete; preserve their recorded state. Review all nine H
-   qualification and recovery records, input readiness, resource limits and
-   network/validator assignments. Erigon-2's optional standalone shared-pair
-   verification is explicitly deferred under the user's October 21 instruction.
-   Additional fixture/source reviews are not preparation blockers. During the
-   actual experiment, record replay mechanisms, progress, roots and finality;
-   investigate concrete import/startup failures rather than claiming unperformed
-   verification has passed.
-5. Keep G and S unset. When the user supplies G, generate a new private candidate,
-   validate its H anchor and all 2,304 validators, and regenerate the tooling
-   values using the morning-handoff commands above. This preparation sequence
-   does not launch the shadowfork or activate PBT.
+1. Keep G and S unset until the user chooses G. Then generate a fresh private
+   launch candidate, validate its H anchor and all 2,304 validators, and
+   regenerate the time-dependent tooling values using the
+   [launch handoff](pbt-1-launch-handoff.md). The existing validation candidate
+   must not be deployed as the launch genesis.
+2. Review the resulting configuration and complete the explicitly authorized
+   launch sequence: EL/beacon peers first, validator keys and enablement, then
+   first post-H blocks, finality and funding. Preparation completion does not
+   authorize launching the shadowfork or activating PBT.
+3. During the actual experiment, record replay mechanisms, progress, roots and
+   finality for all nine migration paths. Independent N reconstruction, extra
+   remote/stored-file readbacks and Erigon-2's standalone shared-pair check
+   remain deferred, not passed. Investigate concrete import/startup failures.
+4. Preserve the completed cache-handoff state. If later preparation rereads a
+   database or input contents, perform a fresh stopped-worker cache handoff
+   before measuring that worker. Do not rerun completed one-shot helpers.
 
 Command templates remain in [client migration commands](pbt-1-client-migration-commands.md).
 The [older process](pbt-1-migration-process.md) records snapshot-generation results;

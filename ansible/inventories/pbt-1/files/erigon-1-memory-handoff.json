@@ -1,0 +1,73 @@
+{
+  "worker": "lighthouse-erigon-1",
+  "checked_at": 1792616193.9200764,
+  "qualification_sha256": "33350e4e473a7cc2a410042affc9b6afe2ea327965d53f871dff7fa9a5895c99",
+  "recovery_archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "recovery_archive_identity": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 461165199193,
+    "mtime_ns": 1792616074582093873,
+    "ctime_ns": 1792616074698095570
+  },
+  "recovery_ready_receipt_sha256": "5652d2b1e226e11cf254bb6073ab0ffda57bd7ba05277a5f9c44fe7e78edd03f",
+  "recovery_job_sha256": "c6c7ab1de924cdd9c33a3accbc64bcf109376109e43ab6e5f729c87d3df6bd46",
+  "preparation_and_clients_stopped": true,
+  "allowed_running_containers": [
+    "nginx-proxy",
+    "nginx-proxy-cert-linker",
+    "nginx-proxy-cert-loader",
+    "nginx-proxy-gen",
+    "node_exporter",
+    "prometheus",
+    "vector"
+  ],
+  "before_memory_kib": {
+    "MemTotal": 131911700,
+    "MemFree": 109635320,
+    "MemAvailable": 129525672,
+    "Buffers": 354564,
+    "Cached": 19811296,
+    "SwapCached": 0,
+    "Dirty": 316,
+    "Writeback": 0,
+    "Shmem": 4692,
+    "SReclaimable": 978100
+  },
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "migration_memory_measurement": false,
+  "after_sync_memory_kib": {
+    "MemTotal": 131911700,
+    "MemFree": 109635008,
+    "MemAvailable": 129525360,
+    "Buffers": 354564,
+    "Cached": 19811296,
+    "SwapCached": 0,
+    "Dirty": 372,
+    "Writeback": 0,
+    "Shmem": 4692,
+    "SReclaimable": 978100
+  },
+  "after_drop_memory_kib": {
+    "MemTotal": 131911700,
+    "MemFree": 130184396,
+    "MemAvailable": 129653492,
+    "Buffers": 4352,
+    "Cached": 248036,
+    "SwapCached": 0,
+    "Dirty": 0,
+    "Writeback": 0,
+    "Shmem": 4700,
+    "SReclaimable": 390144
+  },
+  "completed_at": 1792616197.9212544,
+  "qualification_unchanged": true,
+  "recovery_archive_identity_unchanged": true,
+  "phase": "stopped_worker_cache_handoff_complete",
+  "commands": [
+    "sync",
+    "write 1 to /proc/sys/vm/drop_caches"
+  ],
+  "repeat_required_after": "Any later preparation read of database or migration-input contents before measured client startup"
+}

@@ -1,6 +1,6 @@
 # PBT-1: preparation, genesis and operation handoff
 
-Status observed **2026-10-21 19:26 UTC**. This is the current operational
+Status observed **2026-10-21 21:00 UTC**. This is the current operational
 handoff; older dated notes describe history. Live job status takes precedence
 over this checkpoint. Preparation is authorized. **Genesis time G and PBT
 activation time S remain unset; launching the network is not yet authorized.**
@@ -20,11 +20,13 @@ activation time S remain unset; launching the network is not yet authorized.**
   Their [completion receipts](../ansible/inventories/pbt-1/files/recipient-preparation-complete.json)
   match the published release. Erigon-1 reclaimed its obsolete
   exporter data and completed the corrected H restore at 19:23 UTC, then its
-  own startup/reopen check. Its corrected recovery backup is now downloading
-  directly to the recovery volume. Do not start duplicate jobs.
+  own startup/reopen check. Its corrected recovery backup completed at 20:54 UTC;
+  recovery records, obsolete-database cleanup and the final cache handoff are
+  complete. All nine workers now have recovery copies and cache-handoff receipts.
 - Erigon-2 has the corrected H database and recovery archive. The temporary
   1,500-GiB exporter scratch volume and Geth-2's redundant exporter copy are
-  removed. Erigon-1's temporary ext4 reservation adjustment still needs reversal.
+  removed. Erigon-1's original ext4 reservation is restored, with about 1.17 TB
+  free locally after cleanup.
 - Infrastructure DNS, proxy certificates and node metrics were checked. Running
   EL/CL endpoints, their metrics and the actual network still need launch checks.
   Platform PR #1573 was rolled out; #471 was closed. Reuse the existing certificate pack.
@@ -75,7 +77,7 @@ Use the pinned digests in [migration-builds.json](../scripts/pbt/migration-build
 and inventory, including Besu `39377a2659…` with stateless `62b752345c…`.
 Do not replace them with floating tags during launch.
 
-## Active jobs and where to follow them
+## Monitoring and completion records
 
 Controller: `/home/ubuntu/repos/glamsterdam-devnets`; private state:
 `/home/ubuntu/.local/state/pbt-1-run/`. SSH uses root and
@@ -86,13 +88,13 @@ Controller: `/home/ubuntu/repos/glamsterdam-devnets`; private state:
 systemctl --user status pbt-1-fleet-monitor.timer pbt-1-rehearsal-monitor.timer
 cat ~/.local/state/pbt-1-run/fleet/latest.json
 
-# On Erigon-1: the remaining live transfer.
+# On Erigon-1: completed recovery transfer (successful and inactive).
 systemctl status pbt-recovery-snapshot.service
 cat /mnt/pbt-recovery/status.json
-journalctl -fu pbt-recovery-snapshot.service
+journalctl -u pbt-recovery-snapshot.service --no-pager -n 20
 ```
 
-Publication, recipient transfers, H restore and own startup are completed
+Publication, recipient transfers, H restore, own startup and recovery replacement are completed
 one-shot jobs. Do not restart them. Their historical phase labels can precede
 later completion receipts; use the corresponding receipts above.
 
@@ -100,93 +102,54 @@ The 15-minute fleet monitor writes `fleet/latest.json` under the private state
 directory. Post-publication step logs are in `post-publication/`. Signed URLs,
 authorization files and storage credentials stay private.
 
-## Remaining work before choosing genesis
+## Preparation completed before choosing genesis
 
-1. **N publication — complete.** The release is recorded in
-   `artifact-publication/release.json`. The controller's terminal label
-   `published_verified` means the selected transfer checks passed; under this
-   mode it does not mean independent reconstruction or full remote readback.
+The [nine-worker readiness record](../ansible/inventories/pbt-1/files/preparation-ready-for-genesis.json)
+matches each worker's current recovery job, archive identity, startup receipt,
+cache-handoff receipt and input identities to the controller/public records.
+This used small receipts and file metadata, with no database or archive rereads.
+All execution clients are stopped; local free space ranges from about 898 GB to 1.17 TB.
 
-2. **Recipient transfers and cache handoffs — all seven complete.** The post-publication controller
-   ran `authorize-migration-inputs.py --stage` and
-   `ansible/pbt-stage-migration-inputs.yaml`. Geth-1/2, Besu-1/2 and Nethermind-1/2
-   received the snapshot, preimages and metadata; Geth-3 received preimages and
-   metadata. Each has an independent writable copy under
-   `/data/pbt-1/migration-input-24453558`. Follow
-   `pbt-1-migration-input-download` and
-   `/data/pbt-1/migration-input-24453558/ready.json`. Do not restart completed downloads.
-   Migration mounts stay disabled until the migration restart.
+- **Nine H startup results:** every worker opened its own database at H under
+  its assigned process limits and stopped cleanly. See
+  [worker preparation](pbt-1-worker-preparation.json). These are isolated startup
+  results; live migration and network behavior remain experiment work.
+- **Shared N inputs:** publication and all seven recipient downloads are
+  complete. Geth-1/2, Besu-1/2 and Nethermind-1/2 have snapshot, preimages and
+  metadata; Geth-3 has preimages and metadata. Independent writable copies are
+  under `/data/pbt-1/migration-input-24453558`. Migration mounts remain disabled
+  until their migration restart. See
+  [recipient completion](../ansible/inventories/pbt-1/files/recipient-preparation-complete.json).
+- **Corrected Erigon H recovery:** both workers have the v3 archive on their
+  recovery volumes. Erigon-1 completed at 20:54 UTC; its worker and controller
+  recovery jobs now agree. See its
+  [backup acceptance](../ansible/inventories/pbt-1/files/erigon-1-v3-recovery-ready.json)
+  and [reconciliation](../ansible/inventories/pbt-1/files/erigon-1-recovery-reconciled.json).
+  The 461,165,199,193-byte object is
+  `pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst`, SHA-256
+  `b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146`.
+- **Cleanup:** Erigon-1's preserved old H database was removed after corrected
+  backup acceptance. Its active database and backup identities remained
+  unchanged. Original ext4 reservation is restored to 25,171,402 blocks; local
+  free space is about 1.17 TB. See
+  [cleanup receipt](../ansible/inventories/pbt-1/files/erigon-1-local-cleanup.json).
+  The obsolete exporter copies and temporary 1,500-GiB scratch volume are also
+  removed. Do not rerun their one-shot cleanup procedures.
+- **Nine cache handoffs:** Erigon-1 finished at 20:56 UTC, after its final
+  preparation; clean page cache fell to about 242 MiB. See its
+  [handoff receipt](../ansible/inventories/pbt-1/files/erigon-1-memory-handoff.json).
+  Erigon-2 and the seven input recipients completed earlier. Do not rerun their
+  single-use helpers. Any later preparation read of database/input contents
+  requires a new stopped-worker cache handoff before measured startup.
+- **Genesis preparation:** the existing private validation candidate passed
+  structural, validator-key mapping and isolated Lighthouse load checks. Its
+  nine public files still match that evidence, and all 2,304 validator indices
+  are assigned once. It is a test candidate, not the actual launch genesis.
 
-3. **Restore Erigon-1 at H — complete at 19:23 UTC.** The archive was hashed
-   during extraction and the new database promoted. The original H database
-   remains at `/data/pbt-1/erigon-original-h-preserved`. See the
-   [restore receipt](../ansible/inventories/pbt-1/files/erigon-1-v3-restore-complete.json)
-   and [stream receipt](../ansible/inventories/pbt-1/files/erigon-1-v3-restore-stream.json).
-   The restore unit is successful and inactive. Do not rerun it.
-
-4. **Erigon-1's own H startup — complete at 19:24 UTC.** It opened twice with
-   the pinned Erigon build, 32 GiB RAM and eight CPUs, confirmed H and its root,
-   then stopped cleanly. The [startup result](../ansible/inventories/pbt-1/files/erigon-1-startup-result.json)
-   is this worker's own result. Controller
-   `pbt-1-erigon-1-restored-qualification` reports `own_H_startup_passed`.
-   This is isolated startup evidence, not live migration or network qualification.
-
-5. **Replace Erigon-1's recovery archive — download running.** The replacement
-   helper's preflight and `--run` succeeded after its own startup. The exact old
-   archive was removed, with its provenance preserved, and the corrected job
-   staged with `restore: false`. `pbt-recovery-snapshot.service` started at
-   19:24 UTC and hashes while downloading directly to the recovery volume.
-   The restored database is untouched. Follow `/mnt/pbt-recovery/status.json`;
-   completion requires `recovery_ready_existing_db_preserved` and a successful
-   terminal service. Then reconcile controller recovery inputs to the worker's
-   corrected job. Do not rerun the replacement helper or restore the old job.
-   Its [staging receipt](../ansible/inventories/pbt-1/files/erigon-1-recovery-replacement-started.json)
-   records the removed archive's identity and the own-startup receipt checksum;
-   it does not claim the new download is complete. The published H object and
-   Erigon-2's corrected recovery backup remain available during this replacement.
-
-   The controller reconciliation helper is staged privately at
-   `~/.local/state/pbt-1-run/v3-head-restore/reconcile-e1-controller.py`.
-   After download completion, run it without arguments for preflight and then
-   with `--run`. It requires terminal service success, the streamed archive
-   checksum receipt and Erigon-1's own startup receipt. It refreshes access to
-   the same published object and updates only Erigon-1's recovery job, retaining
-   the previous controller configuration. It does not scan the archive again,
-   change the active database or start a client. This helper is prepared and
-   syntax-checked; reconciliation has **not run**.
-
-   Corrected H object:
-   `pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst`,
-   461,165,199,193 bytes, SHA-256
-   `b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146`.
-
-6. **Finish local cleanup and memory preparation.** After the new H database,
-   own startup and corrected backup are ready, remove only explicitly obsolete
-   preserved Erigon-1 copies. Restore its original ext4 reservation with
-   `tune2fs -r 25171402 /dev/vda1`, after confirming the root device. Do this
-   **after restore/cleanup**, since doing it earlier removes needed free space.
-   Check free space on each actual database filesystem. Erigon-1 alone still
-   needs its stopped-worker cache handoff after its remaining preparation.
-   Erigon-2 and all seven input recipients have completed this step; repeat
-   only if later preparation rereads their database or input contents. Record
-   the memory/cgroup baseline without another full database scan. The recipient
-   helper at `/data/pbt-1/prepare-cache-handoff.py` is single-use and must not be
-   rerun on these completed workers. Source:
-   [recipient cache handoff](../scripts/pbt/handoff-recipient-cache.py).
-   Erigon-1's final helper is staged at
-   `/data/pbt-1/handoff-erigon-1-cache.py`. After its backup replacement and
-   cleanup, run it without arguments for preflight, then with `--run`. It
-   requires this worker's own startup receipt, corrected recovery archive,
-   removal of `erigon-original-h-preserved`, restored ext4 reservation and
-   stopped clients/preparation jobs. It reads only metadata and small receipts;
-   it performs no database/archive scan. This helper has been syntax-checked
-   but has **not run**; backup completion and cleanup are still pending. Source:
-   [Erigon-1 cache handoff](../scripts/pbt/handoff-erigon-1-cache.py).
-
-At this point: nine H startup results, nine usable recovery archives, seven
-ready migration-input sets, no conflicting preparation writers, and sufficient
-local migration space. These are the remaining preparation outcomes, not a
-request for another comprehensive verification campaign.
+No preparation transfer remains running. Keep the 15-minute fleet monitoring
+active. **G and S remain unset.** The next required input is the actual genesis
+time G; then generate and review the launch-specific files below. Live Engine,
+peer, block-production and finality checks happen during the authorized launch.
 
 ## Configure genesis once G is chosen
 

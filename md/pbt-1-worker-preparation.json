@@ -896,5 +896,17 @@
   },
   "runtime_review": "ansible/inventories/pbt-1/files/runtime-review.json",
   "worker_results_updated_at": "2026-10-21T19:26:02.465846+00:00",
-  "fleet_observation_note": "Historical runtime checkpoint at checked_at; use fleet/latest.json and current launch handoff for live preparation/recovery status."
+  "fleet_observation_note": "Historical runtime checkpoint at checked_at; use fleet/latest.json and current launch handoff for live preparation/recovery status.",
+  "preparation_completion": {
+    "checked_at": "2026-10-21T21:00:11.873252+00:00",
+    "status": "worker_preparation_complete_pending_genesis_time",
+    "workers": 9,
+    "migration_input_recipients": 7,
+    "recovery_copies_ready": 9,
+    "stopped_worker_cache_handoffs_complete": 9,
+    "evidence": "../ansible/inventories/pbt-1/files/preparation-ready-for-genesis.json",
+    "genesis_time": null,
+    "launch_authorized": false,
+    "migration_qualified": false
+  }
 }
