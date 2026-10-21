@@ -1,6 +1,6 @@
 # PBT-1: preparation, genesis and operation handoff
 
-Status observed **2026-10-21 17:07 UTC**. This is the current operational
+Status observed **2026-10-21 17:35 UTC**. This is the current operational
 handoff; older dated notes describe history. Live job status takes precedence
 over this checkpoint. Preparation is authorized. **Genesis time G and PBT
 activation time S remain unset; launching the network is not yet authorized.**
@@ -11,11 +11,13 @@ activation time S remain unset; launching the network is not yet authorized.**
   passed isolated startup at the common head H; Erigon-1 is the remaining worker.
 - Erigon legacy commitments → v3 is complete. This is MPT database preparation;
   **Erigon `convert-pbt` / `attach-pbt` is still a separate operation.**
-- The shared PBT export at N completed successfully. At this checkpoint,
-  72,074,919,936 of 107,902,638,451 snapshot bytes had uploaded. The
-  66,850,271,320-byte preimages file follows. Publication is not yet complete.
-- A controller is already waiting to start seven recipient downloads and then
-  Erigon-1's corrected H restore. Do not start duplicate jobs.
+- The shared PBT snapshot (107,902,638,451 bytes) and preimages
+  (66,850,271,320 bytes) at N were published at 17:34 UTC. The
+  [release receipt](../ansible/inventories/pbt-1/files/pbt-anchor-24453558-release.json)
+  records checksums, object identities and the verification deferrals.
+- All seven recipient downloads are running. Erigon-1 reclaimed its obsolete
+  exporter data and started the corrected H restore at 17:35 UTC. Its own
+  isolated startup check is queued afterward. Do not start duplicate jobs.
 - Erigon-2 has the corrected H database and recovery archive. The temporary
   1,500-GiB exporter scratch volume and Geth-2's redundant exporter copy are
   removed. Erigon-1's temporary ext4 reservation adjustment still needs reversal.
@@ -96,13 +98,13 @@ authorization files and storage credentials stay private.
 
 ## Remaining work before choosing genesis
 
-1. **Finish N publication — already running.** Expect
+1. **N publication — complete.** The release is recorded in
    `artifact-publication/release.json`. The controller's terminal label
    `published_verified` means the selected transfer checks passed; under this
    mode it does not mean independent reconstruction or full remote readback.
 
-2. **Start recipient transfers — already queued.** The post-publication controller
-   runs `authorize-migration-inputs.py --stage` and
+2. **Finish recipient transfers — all seven running.** The post-publication controller
+   ran `authorize-migration-inputs.py --stage` and
    `ansible/pbt-stage-migration-inputs.yaml`. Geth-1/2, Besu-1/2 and Nethermind-1/2
    receive the snapshot, preimages and metadata; Geth-3 receives preimages and
    metadata. Each receives an independent writable copy under
@@ -111,10 +113,12 @@ authorization files and storage credentials stay private.
    `/data/pbt-1/migration-input-24453558/ready.json`. Wait for all seven to finish.
    Migration mounts stay disabled until the migration restart.
 
-3. **Restore Erigon-1 at H — already queued after publication and transfer start.**
-   The controller reclaims only its listed obsolete exporter data, then starts
+3. **Restore Erigon-1 at H — running.**
+   The controller reclaimed only its listed obsolete exporter data, then started
    `pbt-1-v3-head-restore` with streaming extraction, 8 GiB RAM and eight CPUs.
-   It preserves the original H database while restoring the corrected release.
+   The [cleanup receipt](../ansible/inventories/pbt-1/files/erigon-1-published-exporter-cleanup.json)
+   records 1.37 TB local free space afterward. The original H database and
+   recovery archive remain preserved while the corrected release is restored.
    The current signed restore URL expires around October 22 12:17 UTC; refresh
    it if needed, preserving the same release identity. A failed step stops the
    controller: read its step log before resuming. Its final

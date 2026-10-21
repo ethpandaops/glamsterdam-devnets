@@ -10,6 +10,13 @@ deferrals and distinction between already queued jobs and manual follow-up.
 
 ## Preparation checkpoint, October 21: proceeding from the completed export
 
+**17:35 UTC update:** the shared N artifacts are published with the agreed
+verification deferrals. All seven recipient downloads and Erigon-1's corrected
+H restore are running. Its obsolete exporter data was reclaimed, preserving
+the original H database and recovery archive. Its own isolated startup is
+queued after restore. See the launch handoff and the published release/cleanup
+receipts for this newer checkpoint; earlier observations below remain dated.
+
 All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
 v3 recovery archive, with matching worker/controller configuration and automatic
 restore disabled. Its original provenance remains preserved; the redundant local archive cache

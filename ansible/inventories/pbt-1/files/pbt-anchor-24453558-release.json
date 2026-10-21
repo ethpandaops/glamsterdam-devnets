@@ -1,0 +1,52 @@
+{
+  "anchor": 24453558,
+  "block_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+  "mpt_state_root": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+  "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+  "proof_sha256": "d197d7c9dce024cbf1cd1f1356f9fdc5c22d749ff15ffe56c0fb5a8d3ff5466c",
+  "metadata": {
+    "chainId": "1",
+    "block": 24453558,
+    "blockHash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+    "txNum": 3282310200,
+    "hashSuite": "blake3",
+    "stateRoot": "0x90fe96f02a1d1009e48ccfb82d15bdf5aa130907acd6c4ebe2f2624e5a911260",
+    "pbtRoot": "0xd4597ecebdacec3c8633fe0fac261b4667f3bcbb3fcc29bed25cd24298b14eab",
+    "headerCount": 355192957,
+    "codeGroupCount": 5633804,
+    "storageCount": 5159468,
+    "snapshotDigest": "0x2cf0e6bc46ed827be15d851d0a2a38e7b2594c58730c04aa3f2f6cb18c7f8870",
+    "preimageDigest": "0x6a2ea717644a20fed259397d96259c742619b53927bcefbf171734f1c35370a9",
+    "finalized": true
+  },
+  "full_remote_sha256_verified": false,
+  "transfer_integrity": "source_sha256_and_content_md5_multipart_upload",
+  "independent_mpt_reconstruction_verified": false,
+  "verification_deferred_by_user": true,
+  "shadowfork_finality_established": false,
+  "cross_client_imports_verified": false,
+  "genesis_time": null,
+  "files": {
+    "pbt-snapshot.bin": {
+      "key": "pbt-1/20261020-pbt-anchor-24453558/pbt-snapshot.bin",
+      "bytes": 107902638451,
+      "sha256": "b99eca890c24201868e15b037be2af56890e8bf3ef0cbc292ac77f9e6bc861fe",
+      "etag": "\"e6968ea3b4593f467cc83f05fd7453ce-1608\"",
+      "time": 1792604045.6298265
+    },
+    "framed.bin": {
+      "key": "pbt-1/20261020-pbt-anchor-24453558/framed.bin",
+      "bytes": 66850271320,
+      "sha256": "43234716d86afb5ca8eb49290da25fc8ea16774d6ba4f9ed426af0c433549a00",
+      "etag": "\"27eed3b2aba5287547bd6dfc2948f828-997\"",
+      "time": 1792604055.8816257
+    },
+    "pbt-snapshot.meta.json": {
+      "key": "pbt-1/20261020-pbt-anchor-24453558/pbt-snapshot.meta.json",
+      "bytes": 628,
+      "sha256": "9ed89e7b53dcd25b4c2b17b805cc67a1c47e627706c36cbfa22e6c8229dc79eb",
+      "etag": "\"d5c26ca9a8f849542e838213a021b6cc-1\"",
+      "time": 1792604056.5500152
+    }
+  }
+}
