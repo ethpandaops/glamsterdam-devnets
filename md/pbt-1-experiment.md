@@ -845,6 +845,12 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 
 ## Immediate next work
 
+The controller `pbt-1-post-publication` is queued behind the active upload. On
+publication it stages and starts the seven input transfers, reclaims the exact
+published exporter subtrees/files on Erigon-1, then starts its streamed H restore.
+It stops on a failed step and never starts EL/CL clients or chooses genesis time.
+The 15-minute fleet monitor also tracks this handoff.
+
 1. Proceed from Erigon-1's successful native export, as requested by the user.
    Independent MPT reconstruction is deferred, not passed. The export-only
    publication controller computes transfer checksums, uploads the completed
@@ -869,17 +875,19 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
      under 32 GiB and eight CPUs; Erigon-2's result cannot substitute for it.
 3. After Erigon-1 qualifies, reconcile its corrected recovery archive and worker/
    controller configuration. Preserve a verified recovery copy throughout the
-   replacement. Remove the temporary export scratch volume only after its guard
-   is stopped and both mount points have no owners; restore the original ext4
-   reservation. Recheck actual free space after cleanup.
+   replacement. The temporary 1,500-GiB export scratch volume has been unmounted
+   and removed from DigitalOcean and Terraform. Restore the original ext4
+   reservation after H restore/cleanup, before measured launch. Recheck actual
+   free space after cleanup.
 4. Once every worker's last preparation copy and content scan has finished,
    complete and record the stopped-worker cache handoff. Review all nine H
    qualification and recovery records, input readiness, resource limits and
-   network/validator assignments. Keep the unresolved Erigon-2 shared-artifact
-   verification procedure explicitly gated before migration. Also retain the
-   small-fixture checks for backlog controls, root capture and historical-anchor
-   requirements, the Besu BAL-path coverage question, and the supported live
-   catch-up/finality sequence for self-converting workers.
+   network/validator assignments. Erigon-2's optional standalone shared-pair
+   verification is explicitly deferred under the user's October 21 instruction.
+   Additional fixture/source reviews are not preparation blockers. During the
+   actual experiment, record replay mechanisms, progress, roots and finality;
+   investigate concrete import/startup failures rather than claiming unperformed
+   verification has passed.
 5. Keep G and S unset. When the user supplies G, generate a new private candidate,
    validate its H anchor and all 2,304 validators, and regenerate the tooling
    values using the morning-handoff commands above. This preparation sequence

@@ -273,9 +273,9 @@
           "evidence": []
         },
         "shared_artifact_verification": {
-          "status": "procedure_decision_pending",
+          "status": "deferred_by_user",
           "phase": "after_genesis_before_migration",
-          "scope": "Maria includes standalone shared-pair verification on receiving Erigon nodes; current delivery targets seven other workers. Confirm separate E2 verification or an explicitly recorded exception.",
+          "scope": "Standalone shared-pair verification is deferred under the October 21 instruction to proceed from the successful native export and investigate concrete import/startup failures. This is an explicit exception to the planning guide, not a passed verification.",
           "evidence": [],
           "source": "https://github.com/misilva73/pbt-planning/blob/95ac0b56c5ad69ca99d3e3e8e77729d541d7a739/outreach/pbt-mainnet-fork-migration-test-plan.md#commands",
           "blocks_initial_mpt_launch": false

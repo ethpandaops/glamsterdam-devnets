@@ -83,7 +83,9 @@
     "remove_before_launch": true,
     "native_restarted": false,
     "evidence": "erigon-export-scratch-routing.json",
-    "resize_evidence": "erigon-export-scratch-resize.json"
+    "resize_evidence": "erigon-export-scratch-resize.json",
+    "removed": true,
+    "removal_evidence": "erigon-export-scratch-removal.json"
   },
   "provisional_H_archive_sizing": {
     "checked_at": "2026-10-21T06:18:14.187823+00:00",
@@ -207,5 +209,17 @@
     "controller": "scripts/pbt/prepare-erigon-release-restore.py --stage",
     "worker_directory": "/data/pbt-1/v3-head-restore",
     "next_gate": "Verified shared N publication, stopped exporter and exact cleanup; remeasure free space before read-only restore preflight"
+  },
+  "current_reclamation_policy": {
+    "updated": "2026-10-21",
+    "user_instruction": "Proceed from successful native export; investigate further if imports/startup fail",
+    "independent_mpt_reconstruction": "deferred_by_user",
+    "separate_remote_and_recipient_readbacks": "deferred_by_user",
+    "required_before_exporter_reclamation": [
+      "N release published with matching source SHA-256 and Content-MD5 multipart transfer evidence",
+      "Uploader stopped and no remaining file owners",
+      "Preserve original H database/archive, metadata and logs",
+      "Measure actual free space before H restore"
+    ]
   }
 }

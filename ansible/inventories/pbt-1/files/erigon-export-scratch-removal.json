@@ -1,0 +1,14 @@
+{
+  "completed_at": 1792601900.1044078,
+  "phase": "temporary_scratch_volume_removed",
+  "volume_id": "634c5395-cce7-11f1-b928-12c5d35e2ba6",
+  "size_gib": 1500,
+  "digitalocean_get_status": 404,
+  "terraform_scratch_resources_remaining": false,
+  "both_mounts_unmounted_before_detach": true,
+  "snapshot_preimages_and_recovery_volumes_preserved": true,
+  "native_verification": "deferred_by_user",
+  "root_ext4_reservation_restored": false,
+  "remaining_reservation_action": "Restore original reserved block count after H restore and cleanup, before measured launch",
+  "initial_provider_race": "Project membership move preceded detach and was rejected; detach completed, then a fresh plan removed only project membership and volume"
+}

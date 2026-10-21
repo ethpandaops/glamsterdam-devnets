@@ -329,8 +329,23 @@ def main():
             alerts.append('Shared N artifact publication controller failed; inspect private evidence')
         elif artifacts['status'].get('phase') != 'published_verified' and artifacts['service'].get('ActiveState') != 'active':
             alerts.append('Shared N artifact publication controller stopped before verified release')
+    post_publication = None
+    post_status = ROOT.parent / 'post-publication/status.json'
+    if post_status.exists():
+        post_publication = {'status': json.loads(post_status.read_text())}
+        service = subprocess.run(['systemctl', '--user', 'show', 'pbt-1-post-publication',
+                                  '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'],
+                                 capture_output=True, text=True, timeout=10)
+        post_publication['service'] = dict(line.split('=', 1) for line in service.stdout.splitlines() if '=' in line)
+        phase = post_publication['status'].get('phase')
+        active = post_publication['service'].get('ActiveState')
+        if phase == 'failed' or active == 'failed':
+            alerts.append('Post-publication input/restore handoff failed; inspect private evidence')
+        elif phase != 'inputs_downloading_and_erigon_restore_started' and active != 'active':
+            alerts.append('Post-publication input/restore handoff stopped before completion')
     report = {'checked_at': time.time(), 'hosts': results, 'alerts': alerts,
-              'head_publication': publication, 'artifact_publication': artifacts}
+              'head_publication': publication, 'artifact_publication': artifacts,
+              'post_publication': post_publication}
     temporary = ROOT / 'latest.tmp'
     temporary.write_text(json.dumps(report, indent=2) + '\n')
     temporary.replace(previous_path)
