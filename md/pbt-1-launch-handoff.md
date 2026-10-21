@@ -132,15 +132,23 @@ authorization files and storage credentials stay private.
    Read `/data/pbt-1/qualification/result.json`; confirm this worker's assigned
    32-GiB/eight-CPU startup and clean stop. Erigon-2's result cannot substitute.
 
-5. **Replace Erigon-1's recovery archive — procedure still to stage.** Preserve
+5. **Replace Erigon-1's recovery archive — helper staged, execution pending.** Preserve
    original provenance, confirm its own H startup succeeded and the corrected
    published H object/Erigon-2 backup remain available. The 550-GiB recovery
    volume cannot hold both archives. Reconcile worker and controller recovery
    jobs to the corrected release, set `restore: false`, and replace the old
    archive by downloading directly to that volume, hashing during transfer.
-   Use the existing `pbt-recovery-snapshot.service` downloader once its job and
-   scoped URL are staged. This direct replacement is **not yet implemented or
-   queued**; do not blindly restart the service with its old job.
+   The helper is now staged at
+   `/data/pbt-1/direct-recovery-replacement/prepare.py`, with original provenance.
+   Its preflight correctly refuses before the H restore completes. After own H
+   startup, stage a fresh single-object `source-url` in that directory, run the
+   helper without arguments, then with `--run` after its preflight succeeds.
+   The latter removes the exact old archive and stages the corrected job with
+   `restore: false`; it starts no service and changes no database. Then start
+   `pbt-recovery-snapshot.service`, follow `/mnt/pbt-recovery/status.json`, and
+   reconcile controller recovery inputs when it finishes. This operation is
+   **not queued**; do not blindly restart the service with its old job. Source:
+   [replacement helper](../scripts/pbt/prepare-erigon-1-recovery-replacement.py).
 
    Corrected H object:
    `pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst`,
