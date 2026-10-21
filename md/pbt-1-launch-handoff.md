@@ -150,8 +150,9 @@ authorization files and storage credentials stay private.
    The helper is now staged at
    `/data/pbt-1/direct-recovery-replacement/prepare.py`, with original provenance.
    Its preflight correctly refuses before the H restore completes. After own H
-   startup, stage a fresh single-object `source-url` in that directory, run the
-   helper without arguments, then with `--run` after its preflight succeeds.
+   startup, run the helper without arguments, then with `--run` after its
+   preflight succeeds. A single-object `source-url` is already staged in that
+   directory and valid until October 22 at 17:49 UTC; refresh it if necessary.
    The latter removes the exact old archive and stages the corrected job with
    `restore: false`; it starts no service and changes no database. Then start
    `pbt-recovery-snapshot.service`, follow `/mnt/pbt-recovery/status.json`, and
