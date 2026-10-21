@@ -238,6 +238,8 @@ The corrected H upload finished on October 21 at 11:12 UTC with **461,165,199,19
 
 The first H remote readback ended with a transport `ProtocolError` at 11:18 UTC. The upload remains complete. Both publication tools now hash ordered, ETag-bound 64-MiB ranges using four workers and up to five attempts per range. A short or interrupted range is retried before its bytes enter the hash; changed object identities and mismatched checksums still prevent publication. The H controller was restarted with `finish`, without repeating the upload. The N publication waiter was updated before authorization; native verification was not restarted. Six range-transfer tests and the existing publication/handoff tests passed. Full remote checksum verification remains required.
 
+Erigon-2 also retains **148.43 GB** in the eight files under `/data/pbt-1/v3-head-upgrade/unsqueeze-backup`. The inode scan found no external hard links. Keep this rollback directory until the corrected recovery-volume copy passes its stored-file checksum and its job/proofs identify the new release. Then recheck its exact directory identity and process ownership before removing only this directory; preserve the live database and all surrounding conversion, verification and qualification evidence. See `files/erigon-2-space-plan.json`. No cleanup has run.
+
 The cache downloader also accepts the separate, download-only profile
 `verified-erigon-v3-head-recovery-cache` on Erigon-2, restricted to
 `/data/pbt-1/v3-head-recovery/cache`. Erigon-1's existing restore-cache profile

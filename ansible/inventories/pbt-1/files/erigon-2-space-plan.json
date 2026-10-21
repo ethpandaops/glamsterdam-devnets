@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-21T12:08:28.267068+00:00",
+  "worker": "lighthouse-erigon-2",
+  "host": "159.89.21.191",
+  "root_filesystem": {
+    "total_bytes": 2536325763072,
+    "used_bytes": 1683726102528,
+    "available_bytes": 749480816640
+  },
+  "live_erigon_allocated_bytes": 1528990081024,
+  "published_archive_apparent_source_bytes": 1172094659363,
+  "recovery_archive_bytes": 461165199193,
+  "recovery_archive_full_remote_verification_pending": true,
+  "cache_fits_with_150GB_reserve": true,
+  "cleanup_candidate": {
+    "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup",
+    "checked_at": 1792584465.3369749,
+    "files": 8,
+    "unique_files": 8,
+    "allocated_file_bytes": 148433989632,
+    "exclusive_file_bytes": 148433989632,
+    "files_with_external_hardlinks": 0,
+    "directory_device": 65025,
+    "directory_inode": 68681751
+  },
+  "cleanup_performed": false,
+  "requires_before_cleanup": [
+    "Corrected H release passes full remote SHA-256 readback",
+    "Erigon-2 own H qualification remains valid",
+    "Corrected local recovery cache passes independent stored-file SHA-256",
+    "Corrected recovery-volume copy passes stored-file SHA-256 and active recovery job/proofs identify the new release",
+    "Recheck exact directory identity and exclusive allocated bytes; no active conversion or process owns the backup files"
+  ],
+  "preserve": [
+    "/data/pbt-1/erigon",
+    "/data/pbt-1/v3-head-upgrade conversion/verification/tail proof files and logs",
+    "/data/pbt-1/qualification",
+    "/data/pbt-1/node-identity"
+  ],
+  "note": "The unsqueeze backup is required only for an unfinished conversion resume. Conversion has completed and qualified; retain this rollback data until the corrected recovery copy is proven. No database compaction or pruning is proposed."
+}
