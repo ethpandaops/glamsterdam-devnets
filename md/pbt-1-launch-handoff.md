@@ -1,6 +1,6 @@
 # PBT-1: preparation, genesis and operation handoff
 
-Status observed **2026-10-21 17:47 UTC**. This is the current operational
+Status observed **2026-10-21 18:12 UTC**. This is the current operational
 handoff; older dated notes describe history. Live job status takes precedence
 over this checkpoint. Preparation is authorized. **Genesis time G and PBT
 activation time S remain unset; launching the network is not yet authorized.**
@@ -15,8 +15,9 @@ activation time S remain unset; launching the network is not yet authorized.**
   (66,850,271,320 bytes) at N were published at 17:34 UTC. The
   [release receipt](../ansible/inventories/pbt-1/files/pbt-anchor-24453558-release.json)
   records checksums, object identities and the verification deferrals.
-- Geth-3 has completed its preimages/metadata download and stopped-worker cache
-  handoff. The other six recipient downloads are running. Erigon-1 reclaimed its obsolete
+- All seven recipient input sets and stopped-worker cache handoffs are complete.
+  Their [completion receipts](../ansible/inventories/pbt-1/files/recipient-preparation-complete.json)
+  match the published release. Erigon-1 reclaimed its obsolete
   exporter data and started the corrected H restore at 17:35 UTC. Its own
   isolated startup check is queued afterward. Do not start duplicate jobs.
 - Erigon-2 has the corrected H database and recovery archive. The temporary
@@ -104,14 +105,14 @@ authorization files and storage credentials stay private.
    `published_verified` means the selected transfer checks passed; under this
    mode it does not mean independent reconstruction or full remote readback.
 
-2. **Finish recipient transfers — Geth-3 complete, six running.** The post-publication controller
+2. **Recipient transfers and cache handoffs — all seven complete.** The post-publication controller
    ran `authorize-migration-inputs.py --stage` and
    `ansible/pbt-stage-migration-inputs.yaml`. Geth-1/2, Besu-1/2 and Nethermind-1/2
-   receive the snapshot, preimages and metadata; Geth-3 receives preimages and
-   metadata. Each receives an independent writable copy under
+   received the snapshot, preimages and metadata; Geth-3 received preimages and
+   metadata. Each has an independent writable copy under
    `/data/pbt-1/migration-input-24453558`. Follow
    `pbt-1-migration-input-download` and
-   `/data/pbt-1/migration-input-24453558/ready.json`. Wait for all seven to finish.
+   `/data/pbt-1/migration-input-24453558/ready.json`. Do not restart completed downloads.
    Migration mounts stay disabled until the migration restart.
 
 3. **Restore Erigon-1 at H — running.**
@@ -170,15 +171,14 @@ authorization files and storage credentials stay private.
    preserved Erigon-1 copies. Restore its original ext4 reservation with
    `tune2fs -r 25171402 /dev/vda1`, after confirming the root device. Do this
    **after restore/cleanup**, since doing it earlier removes needed free space.
-   Check free space on each actual database filesystem. With preparation jobs
-   and clients stopped, finish the documented clean page-cache handoff on the
-   remaining seven workers (`sync`, then `echo 1 > /proc/sys/vm/drop_caches`).
-   Erigon-2 and Geth-3 already completed this; repeat only if later preparation
-   rereads their database or input contents. Record the memory/cgroup baseline
-   without another full database scan. The six pending non-Erigon recipients
-   have `/data/pbt-1/prepare-cache-handoff.py` staged: default is preflight;
-   `--run` clears clean cache after it passes. Do not repeat Geth-3's completed
-   handoff. Source: [recipient cache handoff](../scripts/pbt/handoff-recipient-cache.py).
+   Check free space on each actual database filesystem. Erigon-1 alone still
+   needs its stopped-worker cache handoff after its remaining preparation.
+   Erigon-2 and all seven input recipients have completed this step; repeat
+   only if later preparation rereads their database or input contents. Record
+   the memory/cgroup baseline without another full database scan. The recipient
+   helper at `/data/pbt-1/prepare-cache-handoff.py` is single-use and must not be
+   rerun on these completed workers. Source:
+   [recipient cache handoff](../scripts/pbt/handoff-recipient-cache.py).
 
 At this point: nine H startup results, nine usable recovery archives, seven
 ready migration-input sets, no conflicting preparation writers, and sufficient

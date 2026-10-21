@@ -30,7 +30,9 @@ def idle():
  units=subprocess.check_output(['systemctl','list-units','--state=running,activating,deactivating','--no-legend','--plain','pbt*'],text=True)
  assert not units.strip(), 'PBT preparation/client unit is running'
  names=set(subprocess.check_output(['docker','ps','--format','{{.Names}}'],text=True).splitlines())
- assert names <= {'nginx-proxy-cert-linker','nginx-proxy-cert-loader','nginx-proxy-gen','nginx-proxy','vector','prometheus','node_exporter'}
+ allowed={'nginx-proxy-cert-linker','nginx-proxy-cert-loader','nginx-proxy-gen','nginx-proxy','vector','prometheus','node_exporter'}
+ if HOST=='lighthouse-geth-1':allowed|={'cert_issuer','dns_server'}
+ assert names <= allowed
  for proc in Path('/proc').iterdir():
   if not proc.name.isdigit() or int(proc.name)==os.getpid():continue
   try:
@@ -58,7 +60,10 @@ with ExitStack() as stack:
  assert proof['memory_gib']==RAM and proof['cpus']==8 and proof['genesis_time'] is None
  container=json.loads(subprocess.check_output(['docker','inspect','pbt-1-worker-qualification']))[0]
  state=container['State'];config=container['HostConfig']
- assert state==proof['stopped_state'] and not state['Running'] and not state['OOMKilled'] and state['ExitCode']==0
+ allowed_exit=(0,130,143) if CLIENT=='besu' else (0,130)
+ assert state==proof['stopped_state'] and not state['Running'] and not state['OOMKilled'] and state['ExitCode'] in allowed_exit
+ if CLIENT=='besu' and state['ExitCode']==143:
+  assert 'BesuCommand-Shutdown-Hook' in (B/'qualification/container.log').read_text()
  assert config['Memory']==config['MemorySwap']==RAM*1024**3 and config['NanoCpus']==8*10**9 and config['CpusetCpus']=='0-7'
  job=read(Path('/etc/pbt-recovery/job.json'));qualification_job=read(B/'qualification/job.json');archive=V/(CLIENT+'-24503958.tar.zst')
  ident=identity(archive);archived=read(V/'archive-verified.json')

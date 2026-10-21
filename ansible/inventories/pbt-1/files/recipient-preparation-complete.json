@@ -1,0 +1,67 @@
+{
+  "recorded_at": 1792606384.2164774,
+  "phase": "all_seven_recipient_inputs_and_cache_handoffs_complete",
+  "anchor": 24453558,
+  "genesis_time": null,
+  "migration_started": false,
+  "independent_mpt_reconstruction_verified": false,
+  "verification_deferred_by_user": true,
+  "workers": {
+    "lighthouse-geth-1": {
+      "ready_receipt": "geth-1-migration-inputs-ready.json",
+      "ready_receipt_sha256": "1382c379a30183e791cd0c27c8c025074d3b1bfc93fecefb3e74ad504b2dcbb0",
+      "memory_handoff_receipt": "geth-1-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "e0ef1814e02cde815f0b18cc1cd0833dc31f50479d269f44028506c397767adc",
+      "completed_at": 1792606182.416793,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-geth-2": {
+      "ready_receipt": "geth-2-migration-inputs-ready.json",
+      "ready_receipt_sha256": "365fb44481c189f7f19411679f1a8a22bf87af2c3ae072214d1fec9fbc2d8f2f",
+      "memory_handoff_receipt": "geth-2-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "4f0944f71fef7c235eda921e0d9bb9fb611f95ca868b036000206c54a5f520ef",
+      "completed_at": 1792606270.3712409,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-geth-3": {
+      "ready_receipt": "geth-3-migration-inputs-ready.json",
+      "ready_receipt_sha256": "737a571f38b5685c60038400e5c5056390a164340f5d47c77e6900b97da2e83b",
+      "memory_handoff_receipt": "geth-3-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "ca136137895f3bed40890dd46162c1f764b10b9f1ac26a57e349b99d1baf5dac",
+      "completed_at": 1792604841.9269493,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-besu-1": {
+      "ready_receipt": "besu-1-migration-inputs-ready.json",
+      "ready_receipt_sha256": "db9637541006fe9ed444153ba41537b9aa0fa3dcdb5cd8503554d70dbb6d059e",
+      "memory_handoff_receipt": "besu-1-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "8fed8492c0d34a1e6319bffee4ad722447a6b62cc4ea9c3b103fae4999ab8cfc",
+      "completed_at": 1792606270.5753853,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-besu-2": {
+      "ready_receipt": "besu-2-migration-inputs-ready.json",
+      "ready_receipt_sha256": "9e5ac96ebc75716ffdb96c9077f1244cc634559e2f1dd64288a0f9e2e6ae8846",
+      "memory_handoff_receipt": "besu-2-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "6a525a79a4a0f7ae45889f87de0b6b048aca6913be54011ed2bf5690dc635b5a",
+      "completed_at": 1792606271.091541,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-nethermind-1": {
+      "ready_receipt": "nethermind-1-migration-inputs-ready.json",
+      "ready_receipt_sha256": "273220ff5d8b9cbc849b384add87526141dd63b15880cc94c9140eda1b104cfe",
+      "memory_handoff_receipt": "nethermind-1-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "866739c3adada8155168c6b164653c0c815240a0abb288727fb9d3ac6570dc83",
+      "completed_at": 1792606182.6476698,
+      "input_identities_unchanged": true
+    },
+    "lighthouse-nethermind-2": {
+      "ready_receipt": "nethermind-2-migration-inputs-ready.json",
+      "ready_receipt_sha256": "ea2af80bd1d1f9a913c82d22240882ae41cc6ef773c349112f7b8c32352cf589",
+      "memory_handoff_receipt": "nethermind-2-memory-handoff.json",
+      "memory_handoff_receipt_sha256": "43d173e1c3f21d5621234fc9efa2c26b3d2daa814c2e5ddb5893d1256922b36d",
+      "completed_at": 1792606182.4823964,
+      "input_identities_unchanged": true
+    }
+  }
+}
