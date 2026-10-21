@@ -179,6 +179,15 @@ authorization files and storage credentials stay private.
    helper at `/data/pbt-1/prepare-cache-handoff.py` is single-use and must not be
    rerun on these completed workers. Source:
    [recipient cache handoff](../scripts/pbt/handoff-recipient-cache.py).
+   Erigon-1's final helper is staged at
+   `/data/pbt-1/handoff-erigon-1-cache.py`. After its backup replacement and
+   cleanup, run it without arguments for preflight, then with `--run`. It
+   requires this worker's own startup receipt, corrected recovery archive,
+   removal of `erigon-original-h-preserved`, restored ext4 reservation and
+   stopped clients/preparation jobs. It reads only metadata and small receipts;
+   it performs no database/archive scan. This helper has been syntax-checked
+   but has **not run**; its prerequisites are still pending. Source:
+   [Erigon-1 cache handoff](../scripts/pbt/handoff-erigon-1-cache.py).
 
 At this point: nine H startup results, nine usable recovery archives, seven
 ready migration-input sets, no conflicting preparation writers, and sufficient
