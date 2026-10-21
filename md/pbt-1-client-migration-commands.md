@@ -266,9 +266,9 @@ requires `debug_migrationProgress` to show `mode: "hex+bin"` and
 attach, not an asserted N-to-H BAL-import result.
 
 Maria also specifies standalone verification of the shared snapshot on receiving
-Erigon nodes. The current seven-recipient delivery job does not cover Erigon-2;
-its shared-pair verification is an explicit remaining gate, separate from its
-successful native H startup checks. Arrange a verified input copy and scratch
-space before that check; do not claim the producer's verification as Erigon-2's
-own result. No extra verification job or PBT conversion is started by this
-command sheet.
+Erigon nodes. The current seven-recipient delivery job does not cover Erigon-2.
+The user has explicitly deferred this extra shared-pair check so preparation
+can proceed; record it as a coverage exception, not a passed check or remaining
+launch gate. Erigon-2's successful native H startup is a separate result. See the
+[launch handoff](pbt-1-launch-handoff.md) for current sequencing. No extra
+verification job or PBT conversion is started by this command sheet.

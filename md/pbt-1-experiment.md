@@ -4,6 +4,10 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
+For the remaining preparation, genesis, launch and operation sequence, use the
+[launch handoff](pbt-1-launch-handoff.md), including its explicit verification
+deferrals and distinction between already queued jobs and manual follow-up.
+
 ## Preparation checkpoint, October 21: proceeding from the completed export
 
 All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
@@ -98,14 +102,15 @@ H worker. The native command result is retained in
 Before choosing G, require all nine workers' H startup checks, the Erigon
 conversion evidence, recoverable snapshots and an explicit status for the shared
 N artifacts. The current checkpoint above is dated; use the fleet monitor and
-completed proof files to establish readiness. Shared N verification/publication
-and Erigon-1 restore are still pending.
+completed proof files to establish readiness. Independent N reconstruction is
+deferred by user instruction; N publication is running and Erigon-1 restore is
+queued behind it. Do not reinstate the deferred verification as a launch gate.
 The corrected H release is fully verified and published. Erigon-2's recovery
 replacement is complete; Erigon-1's replacement follows its own H restore and
 qualification.
-Restore Erigon-1's original ext4 reservation and remove its temporary export
-scratch volume before launch. Preserve the verified exporter recovery on Geth-2
-until safely redundant; then reclaim it so it does not constrain that worker.
+Restore Erigon-1's original ext4 reservation after H restore and cleanup, before
+launch. Its temporary export scratch volume and Geth-2's redundant exporter
+recovery copy have already been removed, with cleanup receipts retained.
 Complete the stopped-worker preparation-cache handoff described under the
 worker matrix after the last database/input scan. Record its evidence before
 calling the workers ready for the memory-limited experiment.
