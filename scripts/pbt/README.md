@@ -236,6 +236,8 @@ separate from the shared N inputs above.
 
 The corrected H upload finished on October 21 at 11:12 UTC with **461,165,199,193 compressed bytes (429.49 GiB)**. Full remote checksum verification is still running. Both existing 550-GiB recovery volumes fit this archive after the reviewed replacement, with about 124.51 GB free afterward; no volume expansion is required. Erigon-2 has room for the local cache plus its 150-GB reserve while retaining its original backup. Erigon-1 still needs the restore/qualification/cleanup sequence above before caching the replacement.
 
+The first H remote readback ended with a transport `ProtocolError` at 11:18 UTC. The upload remains complete. Both publication tools now hash ordered, ETag-bound 64-MiB ranges using four workers and up to five attempts per range. A short or interrupted range is retried before its bytes enter the hash; changed object identities and mismatched checksums still prevent publication. The H controller was restarted with `finish`, without repeating the upload. The N publication waiter was updated before authorization; native verification was not restarted. Six range-transfer tests and the existing publication/handoff tests passed. Full remote checksum verification remains required.
+
 The cache downloader also accepts the separate, download-only profile
 `verified-erigon-v3-head-recovery-cache` on Erigon-2, restricted to
 `/data/pbt-1/v3-head-recovery/cache`. Erigon-1's existing restore-cache profile

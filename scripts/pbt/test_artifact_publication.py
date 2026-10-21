@@ -95,7 +95,11 @@ class Publication(unittest.TestCase):
                 def get_object(self, **kwargs):
                     if kwargs['Key'].endswith('release.json'):
                         return {'Body': io.BytesIO(releases[-1])}
-                    return {'Body': io.BytesIO(b'wrong' if corrupt else b'abcde')}
+                    assert kwargs['IfMatch'] == 'object'
+                    start, end = map(int, kwargs['Range'].removeprefix('bytes=').split('-'))
+                    data = (b'wrong' if corrupt else b'abcde')[start:end + 1]
+                    return {'Body': io.BytesIO(data), 'ETag': 'object',
+                            'ContentRange': f'bytes {start}-{end}/5', 'ContentLength': len(data)}
 
                 def put_object(self, **kwargs):
                     releases.append(kwargs['Body'])

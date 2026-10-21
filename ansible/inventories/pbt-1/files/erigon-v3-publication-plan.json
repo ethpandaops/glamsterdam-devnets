@@ -38,7 +38,7 @@
     "finish",
     "auto"
   ],
-  "controller_sha256": "e089c039e8f907a9f72ece3460136ca67f89d7b9a46ad6ea3a8a3f97a1db87a5",
+  "controller_sha256": "6cc41b67fe36039ceda053fc0ab2061e23f3afee411474877b339e85c43ac6dc",
   "controller_review": {
     "time": 1792529975.485338,
     "tests_passed": 17,
@@ -51,7 +51,7 @@
   "automatic_handoff": {
     "time": 1792529975.4853382,
     "unit": "pbt-1-v3-head-publication.service",
-    "unit_state": "MainPID=281010\nResult=success\nActiveState=active\n",
+    "unit_state": "MainPID=1591696\nResult=success\nActiveState=active\n",
     "phase": "full_remote_sha256_readback",
     "multipart_authorized": true,
     "upload_started": true,
@@ -70,9 +70,9 @@
       "reason": "Controller deliberately stopped and recreated around native tail batch handoff; no upload authorization issued",
       "performance_evidence": "erigon-tail-performance-20261021.json"
     },
-    "observed_at_utc": "2026-10-21T11:13:28.393702+00:00"
+    "observed_at_utc": "2026-10-21T11:24:57.055902+00:00"
   },
-  "checked_at": "2026-10-21T11:13:28.393702+00:00",
+  "checked_at": "2026-10-21T11:24:57.055902+00:00",
   "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
   "qualification_evidence": "erigon-2-v3-head-qualified.json",
   "upload_cpu_observation": {
@@ -150,5 +150,23 @@
       }
     ],
     "gate": "Retain each original archive until the corrected local cache is fully hashed and the worker has passed its own H qualification; Erigon-1 first needs its restore/cleanup sequence."
+  },
+  "readback_recovery": {
+    "first_failure": {
+      "phase": "failed",
+      "time": 1792581505.4173315,
+      "error_class": "ProtocolError"
+    },
+    "replacement_action": "finish",
+    "upload_repeated": false,
+    "range_bytes": 67108864,
+    "workers": 4,
+    "attempts_per_range": 5,
+    "etag_bound": true,
+    "whole_archive_sha256_still_required": true,
+    "helper": "scripts/pbt/remote_readback.py",
+    "helper_sha256": "bb5b38be64caaa312949cf8ab9c90816fbec7ef49549016a9098df5a3ec14f1e",
+    "tests_passed": 23,
+    "verification_complete": false
   }
 }

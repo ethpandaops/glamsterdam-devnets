@@ -12,6 +12,7 @@ import time
 from botocore.exceptions import ClientError
 from storage import BUCKET, client
 from upload import PART_SIZE, V3_HEAD_KEY, validate_v3_head_proof
+from remote_readback import readback
 
 ROOT = Path.home() / '.local/state/pbt-1-run/v3-head-publication'
 REMOTE = '/data/pbt-1/v3-head-publication'
@@ -206,18 +207,16 @@ def finish(s3):
     head = s3.head_object(Bucket=BUCKET, Key=V3_HEAD_KEY)
     assert head['ContentLength'] == report['archive_bytes']
     assert head['Metadata']['qualification-sha256'] == job['qualification_sha256']
-    digest = hashlib.sha256()
-    length = last_saved = 0
-    with s3.get_object(Bucket=BUCKET, Key=V3_HEAD_KEY, IfMatch=head['ETag'])['Body'] as body:
-        for chunk in iter(lambda: body.read(8 * 1024**2), b''):
-            digest.update(chunk)
-            length += len(chunk)
-            if length - last_saved >= 1024**3:
-                save('status.json', {'phase': 'full_remote_sha256_readback',
-                                     'bytes': length, 'total': report['archive_bytes'],
-                                     'time': time.time()})
-                last_saved = length
-    assert length == report['archive_bytes'] and digest.hexdigest() == report['archive_sha256']
+    last_saved = 0
+    def progress(length):
+        nonlocal last_saved
+        if length - last_saved >= 1024**3:
+            save('status.json', {'phase': 'full_remote_sha256_readback',
+                                 'bytes': length, 'total': report['archive_bytes'],
+                                 'time': time.time()})
+            last_saved = length
+    length, digest = readback(s3, BUCKET, V3_HEAD_KEY, head['ETag'], report['archive_bytes'], progress)
+    assert length == report['archive_bytes'] and digest == report['archive_sha256']
     genesis_raw = ssh(['cat', '/data/pbt-1/qualification/config/genesis.json'])
     assert hashlib.sha256(genesis_raw).hexdigest() == (
         '3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a')
@@ -227,7 +226,7 @@ def finish(s3):
         'client': 'erigon', 'head': 24503958, 'head_hash': proof['head_hash'],
         'state_root': proof['state_root'], 'commitment_format': 'v3', 'tree': 'MPT',
         'pbt_migration_performed': False, 'erigon_commit': proof['commit'],
-        'image': proof['image'], 'archive_bytes': length, 'archive_sha256': digest.hexdigest(),
+        'image': proof['image'], 'archive_bytes': length, 'archive_sha256': digest,
         'qualification_sha256': job['qualification_sha256'],
         'native_reopen_verified': True, 'full_remote_sha256_verified': True,
         'post_conversion_bal_validation': 'Three sampled bodies; no new full-range audit',

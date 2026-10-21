@@ -246,6 +246,7 @@ def validate_parts(result, expected):
 
 def finish(s3):
     from storage import BUCKET
+    from remote_readback import readback
     job = json.loads((LOCAL / 'job.json').read_text())
     evidence = check()
     require(evidence == {k: job[k] for k in ('proof', 'proof_sha256')}, 'Export evidence changed')
@@ -267,17 +268,16 @@ def finish(s3):
         head = s3.head_object(Bucket=BUCKET, Key=info['key'])
         require(head['ContentLength'] == info['bytes'] and head['Metadata']['proof-sha256'] == job['proof_sha256']
                 and head['Metadata']['sha256'] == info['sha256'], 'Stored artifact metadata mismatch')
-        checksum, length, last_saved = hashlib.sha256(), 0, 0
-        with s3.get_object(Bucket=BUCKET, Key=info['key'], IfMatch=head['ETag'])['Body'] as body:
-            for chunk in iter(lambda: body.read(8 * 1024**2), b''):
-                checksum.update(chunk)
-                length += len(chunk)
-                if length - last_saved >= 1024**3:
-                    save(LOCAL, 'status.json', {'phase': 'remote_sha256_readback', 'file': name,
-                         'bytes': length, 'total': info['bytes'], 'time': time.time()})
-                    last_saved = length
-        require(length == info['bytes'] and checksum.hexdigest() == info['sha256'], 'Full remote checksum mismatch')
-        save(LOCAL, name + '.verified.json', {'key': info['key'], 'bytes': length, 'sha256': checksum.hexdigest(),
+        last_saved = 0
+        def progress(length):
+            nonlocal last_saved
+            if length - last_saved >= 1024**3:
+                save(LOCAL, 'status.json', {'phase': 'remote_sha256_readback', 'file': name,
+                     'bytes': length, 'total': info['bytes'], 'time': time.time()})
+                last_saved = length
+        length, checksum = readback(s3, BUCKET, info['key'], head['ETag'], info['bytes'], progress)
+        require(length == info['bytes'] and checksum == info['sha256'], 'Full remote checksum mismatch')
+        save(LOCAL, name + '.verified.json', {'key': info['key'], 'bytes': length, 'sha256': checksum,
                                              'etag': head['ETag'], 'time': time.time()})
     release = {'anchor': 24453558, 'block_hash': BLOCK_HASH, 'mpt_state_root': STATE_ROOT,
                'source_commit': COMMIT, 'proof_sha256': job['proof_sha256'],
