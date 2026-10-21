@@ -7,12 +7,12 @@ No genesis time is selected and no shadowfork is authorized to launch.
 The private timestamped validation candidate is archived test evidence only;
 regenerate it after the user selects a launch time.
 
-Preparation checkpoint, **2026-10-21 09:42 UTC**:
+Preparation checkpoint, **2026-10-21 11:13 UTC**:
 
 | Component | Verified so far | Still required |
 | --- | --- | --- |
 | Three Geth, two Besu, two Nethermind workers | Each passed isolated startup checks at H=24,503,958 with its assigned process limits | Verified migration-file delivery to the seven recipients |
-| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive upload running; full remote readback and recovery-volume replacement remain |
+| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive uploaded (461.17 GB); full remote readback and recovery-volume replacement remain |
 | Erigon-1 | Original H database and recovery archive preserved; N export (107.90 GB snapshot, 66.85 GB preimages) exited 0 at 07:18 UTC with matching metadata | Independent verification running; then preserve N artifacts, restore the verified v3 H release and run its own 32-GiB startup checks |
 | Genesis configuration | Private test candidate loaded in isolated Lighthouse at H with 2,304 validators; all nine inventory reviews passed | Regenerate and validate a fresh candidate after the user chooses G; distribute keys and promote only the public files afterward |
 
@@ -233,6 +233,8 @@ first. Keep any new local cache until the recovery-volume copy also passes its
 full checksum; retain the original download proofs as historical provenance.
 Do not leave two complete databases competing for migration scratch. This is
 separate from the shared N inputs above.
+
+The corrected H upload finished on October 21 at 11:12 UTC with **461,165,199,193 compressed bytes (429.49 GiB)**. Full remote checksum verification is still running. Both existing 550-GiB recovery volumes fit this archive after the reviewed replacement, with about 124.51 GB free afterward; no volume expansion is required. Erigon-2 has room for the local cache plus its 150-GB reserve while retaining its original backup. Erigon-1 still needs the restore/qualification/cleanup sequence above before caching the replacement.
 
 The cache downloader also accepts the separate, download-only profile
 `verified-erigon-v3-head-recovery-cache` on Erigon-2, restricted to

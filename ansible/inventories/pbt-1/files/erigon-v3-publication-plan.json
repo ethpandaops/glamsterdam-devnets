@@ -1,5 +1,5 @@
 {
-  "status": "streaming_H_archive",
+  "status": "full_remote_sha256_readback",
   "worker": "lighthouse-erigon-2",
   "host": "159.89.21.191",
   "head": 24503958,
@@ -52,7 +52,7 @@
     "time": 1792529975.4853382,
     "unit": "pbt-1-v3-head-publication.service",
     "unit_state": "MainPID=281010\nResult=success\nActiveState=active\n",
-    "phase": "streaming_H_archive",
+    "phase": "full_remote_sha256_readback",
     "multipart_authorized": true,
     "upload_started": true,
     "wait_limit_hours_per_stage": 24,
@@ -70,9 +70,9 @@
       "reason": "Controller deliberately stopped and recreated around native tail batch handoff; no upload authorization issued",
       "performance_evidence": "erigon-tail-performance-20261021.json"
     },
-    "observed_at_utc": "2026-10-21T10:03:52.652430+00:00"
+    "observed_at_utc": "2026-10-21T11:13:28.393702+00:00"
   },
-  "checked_at": "2026-10-21T10:03:52.652430+00:00",
+  "checked_at": "2026-10-21T11:13:28.393702+00:00",
   "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
   "qualification_evidence": "erigon-2-v3-head-qualified.json",
   "upload_cpu_observation": {
@@ -104,9 +104,51 @@
     "decision": "Keep existing 400% CPU quota: sampled usage was 1.44 cores with zero throttling; no live configuration change or restart"
   },
   "remaining_publication_gates": [
-    "Complete streamed multipart upload",
     "Full remote archive SHA-256 readback",
-    "Publish metadata and exact archive size",
-    "Review recovery-volume capacity against final compressed size"
-  ]
+    "Publish metadata and checksum"
+  ],
+  "upload_completed": true,
+  "completed_upload": {
+    "archive_bytes": 461165199193,
+    "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+    "multipart_etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
+    "multipart_completed_at": 1792581120.7168245,
+    "worker_unit_result": "success",
+    "full_remote_sha256_verified": false
+  },
+  "recovery_capacity_review": {
+    "checked_at": "2026-10-21T11:13:28.393702+00:00",
+    "archive_bytes": 461165199193,
+    "archive_gib": 429.49356063548476,
+    "existing_volume_size_gib": 550,
+    "expansion_required": false,
+    "replacement_started": false,
+    "observations": [
+      {
+        "host": "glamsterdam-pbt-1-lighthouse-erigon-1",
+        "mounted": true,
+        "volume_total_bytes": 585693347840,
+        "volume_free_bytes": 50721173504,
+        "old_archive_bytes": 534953200071,
+        "old_archive_allocated_bytes": 534953259008,
+        "root_free_bytes": 484671012864,
+        "free_after_reviewed_old_archive_reclaim_and_new_copy_bytes": 124509233319,
+        "new_archive_fits_after_replacement": true,
+        "local_cache_fits_with_150GB_reserve": false
+      },
+      {
+        "host": "glamsterdam-pbt-1-lighthouse-erigon-2",
+        "mounted": true,
+        "volume_total_bytes": 585693347840,
+        "volume_free_bytes": 50721165312,
+        "old_archive_bytes": 534953200071,
+        "old_archive_allocated_bytes": 534953259008,
+        "root_free_bytes": 749481947136,
+        "free_after_reviewed_old_archive_reclaim_and_new_copy_bytes": 124509225127,
+        "new_archive_fits_after_replacement": true,
+        "local_cache_fits_with_150GB_reserve": true
+      }
+    ],
+    "gate": "Retain each original archive until the corrected local cache is fully hashed and the worker has passed its own H qualification; Erigon-1 first needs its restore/cleanup sequence."
+  }
 }
