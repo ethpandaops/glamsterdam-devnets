@@ -82,19 +82,19 @@ Controller: `/home/ubuntu/repos/glamsterdam-devnets`; private state:
 `/home/ubuntu/.ssh/devops_eth2_shared_key`.
 
 ```sh
-# Controller: observe, do not restart these one-shot workflows blindly.
-systemctl --user status pbt-1-artifact-publication-export-only pbt-1-post-publication
-journalctl --user -fu pbt-1-post-publication
-cat ~/.local/state/pbt-1-run/artifact-publication/auto-status.json
-cat ~/.local/state/pbt-1-run/post-publication/status.json
+# Controller: recurring fleet observations.
+systemctl --user status pbt-1-fleet-monitor.timer pbt-1-rehearsal-monitor.timer
+cat ~/.local/state/pbt-1-run/fleet/latest.json
 
-# On Erigon-1:
-systemctl status pbt-1-pbt-artifact-upload
-cat /data/pbt-1/pbt-artifact-publication/status.json
-journalctl -fu pbt-1-pbt-artifact-upload
-# Once restore has started:
-journalctl -fu pbt-1-v3-head-restore
+# On Erigon-1: the remaining live transfer.
+systemctl status pbt-recovery-snapshot.service
+cat /mnt/pbt-recovery/status.json
+journalctl -fu pbt-recovery-snapshot.service
 ```
+
+Publication, recipient transfers, H restore and own startup are completed
+one-shot jobs. Do not restart them. Their historical phase labels can precede
+later completion receipts; use the corresponding receipts above.
 
 The 15-minute fleet monitor writes `fleet/latest.json` under the private state
 directory. Post-publication step logs are in `post-publication/`. Signed URLs,
@@ -144,6 +144,16 @@ authorization files and storage credentials stay private.
    records the removed archive's identity and the own-startup receipt checksum;
    it does not claim the new download is complete. The published H object and
    Erigon-2's corrected recovery backup remain available during this replacement.
+
+   The controller reconciliation helper is staged privately at
+   `~/.local/state/pbt-1-run/v3-head-restore/reconcile-e1-controller.py`.
+   After download completion, run it without arguments for preflight and then
+   with `--run`. It requires terminal service success, the streamed archive
+   checksum receipt and Erigon-1's own startup receipt. It refreshes access to
+   the same published object and updates only Erigon-1's recovery job, retaining
+   the previous controller configuration. It does not scan the archive again,
+   change the active database or start a client. This helper is prepared and
+   syntax-checked; reconciliation has **not run**.
 
    Corrected H object:
    `pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst`,
