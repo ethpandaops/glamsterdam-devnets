@@ -1095,3 +1095,35 @@ directory substitution and worker identity/resource limits. This route is
 staged only. The corrected H release is complete; Erigon-1 still waits for
 verified N publication, exporter cleanup and sufficient local restore space.
 The current sequence is in `md/pbt-1-experiment.md` under "Immediate next work".
+
+After Erigon-1's streamed H restore and its own successful 32-GiB qualification,
+the controller can stage its corrected recovery cache with:
+
+```sh
+/usr/bin/python3 scripts/pbt/prepare-erigon-release-restore.py --stage-restored-recovery-cache
+```
+
+This requires the published release to match the restored release, an unchanged
+promoted database identity, the full streamed archive checksum, two clean worker
+opens at H, stopped preparation units and the same stopped qualification container.
+It holds the qualification and restore locks during staging. Erigon-2's proof
+cannot substitute for this worker's qualification. The staging check also requires
+the archive size plus 150 GB and bounded download buffers to be free locally.
+If necessary, first review removal of the preserved original H database after
+qualification; keep its original recovery-volume archive and all provenance.
+
+The command writes private download-only inputs under
+`/data/pbt-1/v3-head-recovery`; it starts no service and changes no recovery archive.
+Its dedicated `verified-erigon-1-restored-head-recovery-cache` profile is accepted
+only on Erigon-1 at that cache path. Start the reviewed download separately, then
+use `verify-erigon-recovery-cache.py` for independent stored-file SHA-256 readback.
+The readback helper also checks the worker/profile pairing and preserves both
+archives. These changes are controller preparation only; no Erigon-1 cache job
+has been staged or started.
+
+Actual volume replacement still requires Erigon-1's measured volume UUID, exact
+old/new file identities, preserved original provenance, its own qualification
+checksum, stopped jobs and no file owners. Do not run the Erigon-2 one-shot
+replacement script on Erigon-1. Keep the verified local cache until the stored
+volume copy passes SHA-256, then reconcile controller/worker recovery jobs and
+record cleanup separately. The original qualification record remains unchanged.

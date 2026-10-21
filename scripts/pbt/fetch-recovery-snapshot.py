@@ -48,6 +48,9 @@ def validate_local_cache_job(job, root, hostname):
         'verified-erigon-v3-head-recovery-cache': (
             'glamsterdam-pbt-1-lighthouse-erigon-2',
             Path('/data/pbt-1/v3-head-recovery/cache')),
+        'verified-erigon-1-restored-head-recovery-cache': (
+            'glamsterdam-pbt-1-lighthouse-erigon-1',
+            Path('/data/pbt-1/v3-head-recovery/cache')),
     }
     assert job['profile'] in scopes
     assert (hostname, root) == scopes[job['profile']]

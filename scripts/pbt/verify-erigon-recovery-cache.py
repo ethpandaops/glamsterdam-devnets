@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Wait for the E2 cache download, then hash the stored file; never alter archives."""
+"""Wait for an authorized Erigon recovery cache, then hash it; never alter archives."""
 from contextlib import ExitStack
 import fcntl
 import hashlib
@@ -36,13 +36,18 @@ def main():
 
 
 def _main(handles):
-    assert socket.gethostname() == 'glamsterdam-pbt-1-lighthouse-erigon-2'
+    profiles = {
+        'glamsterdam-pbt-1-lighthouse-erigon-2': 'verified-erigon-v3-head-recovery-cache',
+        'glamsterdam-pbt-1-lighthouse-erigon-1': 'verified-erigon-1-restored-head-recovery-cache',
+    }
+    hostname = socket.gethostname()
+    assert hostname in profiles
     assert ROOT.resolve() == ROOT
     assert not (ROOT / 'stored-cache-verified.json').exists()
     guard = handles.enter_context((ROOT / 'stored-cache-readback.lock').open('a'))
     fcntl.flock(guard, fcntl.LOCK_EX | fcntl.LOCK_NB)
     job = json.loads((ROOT / 'job.json').read_text())
-    assert job['profile'] == 'verified-erigon-v3-head-recovery-cache'
+    assert job['profile'] == profiles[hostname]
     assert job['archive_sha256'] == EXPECTED_SHA and job['archive_bytes'] == EXPECTED_SIZE
     assert job['restore'] is False
     save('stored-cache-readback-status.json', {'phase':'waiting_for_download','time':time.time()})

@@ -26,6 +26,57 @@ proof=json.loads((root.parent/'qualification/result.json').read_text())
 assert proof==x['bundle']['peer']['proof'], 'Worker qualification changed'
 '''
 
+RESTORED_RECOVERY_PREFLIGHT = '''import fcntl,hashlib,json,pathlib,shutil,socket,subprocess,sys
+x=json.load(sys.stdin);root=pathlib.Path('/data/pbt-1/v3-head-recovery');base=root.parent
+assert socket.gethostname()=='glamsterdam-pbt-1-lighthouse-erigon-1'
+assert base.resolve()==base and not root.exists() and not root.is_symlink()
+locks=[]
+for path in (base/'qualification/run.lock',base/'v3-head-restore/restore.lock'):
+ handle=path.open('a');fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(handle)
+read=lambda path:json.loads(path.read_text())
+bundle_path=base/'v3-head-restore/release-bundle.json'
+bundle=read(bundle_path);meta=x['bundle']['metadata']
+for field in ('key','etag','metadata','integrity'):
+ assert bundle[field]==x['bundle'][field], 'Restored and requested releases differ'
+complete=read(base/'v3-head-restore/complete.json')
+assert complete['host']==socket.gethostname() and complete['profile']=='restored_verified_H_release'
+assert complete['bundle_sha256']==hashlib.sha256(bundle_path.read_bytes()).hexdigest()
+assert complete['archive_sha256']==meta['archive_sha256'] and complete['archive_transfer']=='stream'
+assert complete['local_v3_conversion_performed'] is False
+db=base/'erigon';assert db.resolve()==db
+st=db.stat();assert complete['restored_identity']=={'device':st.st_dev,'inode':st.st_ino}
+stream=read(base/'v3-head-restore/stream-verified.json')
+assert stream['whole_archive_verified'] is True
+assert stream['method']=='etag_bound_ranges_to_fresh_directory'
+assert stream['sha256']==meta['archive_sha256'] and stream['bytes']==meta['archive_bytes']
+assert stream['key']==bundle['key'] and stream['etag']==bundle['etag']
+assert stream['bundle_sha256']==complete['bundle_sha256']
+assert stream['restored_identity']==complete['restored_identity']
+proof=read(base/'qualification/result.json')
+assert proof['host']=='lighthouse-erigon-1' and proof['client']=='erigon'
+assert proof['status']=='startup_checks_passed'
+for field in ('head','head_hash','state_root','image','converter_build'):
+ assert proof[field]==meta[field], 'Own qualification differs from release'
+assert proof['commit']==meta['erigon_commit']
+assert proof['memory_gib']==32 and proof['cpus']==8 and proof['cpuset']=='0-7'
+assert proof['network_mode']=='none' and proof['genesis_time'] is None
+assert proof['preparation_path']=='restored_verified_H_release'
+assert proof['source_release_key']==bundle['key']
+assert proof['source_release_archive_sha256']==meta['archive_sha256']
+assert proof['local_v3_conversion_performed'] is False
+assert proof['native_reopen_verified'] is True and proof['v3_format_verified'] is True
+assert not proof['missing_builder_contracts']
+for field in ('first_stopped_state','stopped_state'):
+ state=proof[field];assert not state['Running'] and not state['OOMKilled'] and state['ExitCode']==0
+for unit in ('pbt-1-v3-head-restore','pbt-1-worker-qualification'):
+ state=dict(line.split('=',1) for line in subprocess.check_output(
+  ['systemctl','show',unit,'-p','MainPID','-p','ActiveState','-p','Result'],text=True).splitlines())
+ assert state=={'MainPID':'0','ActiveState':'inactive','Result':'success'}, 'Preparation job is not stopped successfully'
+state=json.loads(subprocess.check_output(['docker','inspect','pbt-1-worker-qualification']))[0]['State']
+assert not state['Running'] and state['FinishedAt']==proof['stopped_state']['FinishedAt']
+assert shutil.disk_usage(base).free >= meta['archive_bytes']+150_000_000_000+4*64*1024**2
+'''
+
 
 def module(name, filename):
     spec = importlib.util.spec_from_file_location(name, HERE / filename)
@@ -124,16 +175,20 @@ print('Verified release inputs staged; no worker job started')
     print(result.decode().strip())
 
 
-def stage_recovery_cache(s3, bundle):
-    """Stage E2's download-only cache; preserve its database and recovery volume."""
+def stage_recovery_cache(s3, bundle, restored_worker=False):
+    """Stage a qualified worker's download-only cache; never replace its backup."""
     validate_bundle(bundle, module('upgrade_guard', 'upgrade-erigon-head-v3.py'),
                     module('worker_guard', 'qualify-worker.py'))
     payload = {'bundle': bundle}
+    preflight = RESTORED_RECOVERY_PREFLIGHT if restored_worker else RECOVERY_PREFLIGHT
+    host = '164.92.239.96' if restored_worker else '159.89.21.191'
     # Reject inadequate capacity or a different worker before issuing a URL.
-    remote('159.89.21.191', RECOVERY_PREFLIGHT, payload)
+    remote(host, preflight, payload)
     helper = (HERE / 'fetch-recovery-snapshot.py').read_text()
     digest = hashlib.sha256(helper.encode()).hexdigest()
-    job = {'profile': 'verified-erigon-v3-head-recovery-cache', 'client': 'erigon',
+    profile = ('verified-erigon-1-restored-head-recovery-cache' if restored_worker
+               else 'verified-erigon-v3-head-recovery-cache')
+    job = {'profile': profile, 'client': 'erigon',
            'head': 24503958, 'restore': False, 'key': KEY, 'etag': bundle['etag'],
            'archive_bytes': bundle['metadata']['archive_bytes'],
            'archive_sha256': bundle['metadata']['archive_sha256']}
@@ -150,7 +205,7 @@ fetch.main(local_v3_cache=True)
     payload['files'] = {'release-bundle.json': json.dumps(bundle, indent=2)+'\n',
                         'job.json': json.dumps(job, indent=2)+'\n', 'source-url': url+'\n',
                         'fetch.py': helper, 'download.py': runner}
-    code = RECOVERY_PREFLIGHT + '''
+    code = preflight + '''
 import os
 root.mkdir(mode=0o700)
 (root/'cache').mkdir(mode=0o700)
@@ -159,9 +214,9 @@ for name,data in x['files'].items():
  fd=os.open(root/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
  with os.fdopen(fd,'w') as stream:
   stream.write(data);stream.flush();os.fsync(stream.fileno())
-print('Erigon-2 recovery cache inputs staged; download not started; existing backup preserved')
+print('Recovery cache inputs staged; download not started; existing backup preserved')
 '''
-    print(remote('159.89.21.191', code, payload).decode().strip())
+    print(remote(host, code, payload).decode().strip())
 
 
 if __name__ == '__main__':
@@ -170,11 +225,15 @@ if __name__ == '__main__':
     actions.add_argument('--stage', action='store_true')
     actions.add_argument('--stage-recovery-cache', action='store_true',
                          help='Stage Erigon-2 download-only recovery cache; never starts a job')
+    actions.add_argument('--stage-restored-recovery-cache', action='store_true',
+                         help='Stage Erigon-1 cache only after its stream restore and own 32-GiB qualification')
     args = parser.parse_args()
     try:
         s3 = client()
         bundle = assemble(s3)
-        if args.stage_recovery_cache:
+        if args.stage_restored_recovery_cache:
+            stage_recovery_cache(s3, bundle, restored_worker=True)
+        elif args.stage_recovery_cache:
             stage_recovery_cache(s3, bundle)
         elif args.stage:
             stage(s3, bundle)

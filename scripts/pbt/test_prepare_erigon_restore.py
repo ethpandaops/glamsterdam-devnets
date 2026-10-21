@@ -130,5 +130,148 @@ class ControllerRestoreInputs(unittest.TestCase):
             self.assertEqual(backup.read_bytes(), b'original backup')
 
 
+class RestoredWorkerRecoveryInputs(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.base = Path(self.tmp.name)
+        self.bundle = fixtures.bundle_fixture()
+        self.s3 = Mock()
+        self.s3.generate_presigned_url.return_value = 'https://fixture.invalid/scoped'
+        self.free = 1_000_000_000_000
+        self.unit_active = False
+        self.container_running = False
+        for name in ('qualification', 'v3-head-restore', 'erigon'):
+            (self.base / name).mkdir()
+        self.backup = self.base / 'old-recovery-archive'
+        self.backup.write_bytes(b'original backup remains')
+        bundle_path = self.base / 'v3-head-restore/release-bundle.json'
+        bundle_path.write_text(json.dumps(self.bundle))
+        st = (self.base / 'erigon').stat()
+        self.complete = {
+            'host': 'glamsterdam-pbt-1-lighthouse-erigon-1',
+            'profile': 'restored_verified_H_release', 'archive_transfer': 'stream',
+            'bundle_sha256': hashlib.sha256(bundle_path.read_bytes()).hexdigest(),
+            'archive_sha256': self.bundle['metadata']['archive_sha256'],
+            'local_v3_conversion_performed': False,
+            'restored_identity': {'device': st.st_dev, 'inode': st.st_ino}}
+        self.stream = {
+            'whole_archive_verified': True, 'method': 'etag_bound_ranges_to_fresh_directory',
+            'sha256': self.complete['archive_sha256'], 'bytes': self.bundle['metadata']['archive_bytes'],
+            'key': self.bundle['key'], 'etag': self.bundle['etag'],
+            'bundle_sha256': self.complete['bundle_sha256'],
+            'restored_identity': self.complete['restored_identity']}
+        self.proof = copy.deepcopy(self.bundle['peer']['proof'])
+        self.proof.update(host='lighthouse-erigon-1', memory_gib=32, cpuset='0-7',
+                          genesis_time=None, preparation_path='restored_verified_H_release',
+                          source_release_key=self.bundle['key'],
+                          source_release_archive_sha256=self.complete['archive_sha256'],
+                          local_v3_conversion_performed=False)
+        self.proof['stopped_state']['FinishedAt'] = 'fixture-clean-stop'
+        self.write_evidence()
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def write_evidence(self):
+        for name, value in [('qualification/result.json', self.proof),
+                            ('v3-head-restore/complete.json', self.complete),
+                            ('v3-head-restore/stream-verified.json', self.stream)]:
+            (self.base / name).write_text(json.dumps(value))
+
+    def execute(self, host, code, payload):
+        self.assertEqual(host, '164.92.239.96')
+        code = code.replace('/data/pbt-1/v3-head-recovery', str(self.base / 'v3-head-recovery'))
+        unit = 'MainPID=123\nActiveState=active\nResult=success\n' if self.unit_active else (
+            'MainPID=0\nActiveState=inactive\nResult=success\n')
+        container = json.dumps([{'State': {'Running': self.container_running,
+                                          'FinishedAt': 'fixture-clean-stop'}}])
+        overrides = (
+            'import socket,shutil,subprocess,types\n'
+            "socket.gethostname=lambda:'glamsterdam-pbt-1-lighthouse-erigon-1'\n"
+            f'shutil.disk_usage=lambda p:types.SimpleNamespace(free={self.free})\n'
+            f'subprocess.check_output=lambda args,**kw: {unit!r} if args[0]=="systemctl" else {container!r}\n')
+        return subprocess.check_output(['/usr/bin/python3', '-c', overrides + code],
+                                       input=json.dumps(payload).encode(), stderr=subprocess.PIPE)
+
+    def stage(self):
+        with patch.object(prepare, 'remote', side_effect=self.execute):
+            prepare.stage_recovery_cache(self.s3, self.bundle, restored_worker=True)
+
+    def assert_rejected_before_url(self):
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.stage()
+        self.s3.generate_presigned_url.assert_not_called()
+        self.assertFalse((self.base / 'v3-head-recovery').exists())
+        self.assertEqual(self.backup.read_bytes(), b'original backup remains')
+
+    def test_own_restore_and_qualification_stage_only_private_download_inputs(self):
+        before = {name: (self.base / name).read_bytes() for name in (
+            'qualification/result.json', 'v3-head-restore/complete.json', 'old-recovery-archive')}
+        self.stage()
+        root = self.base / 'v3-head-recovery'
+        job = json.loads((root / 'job.json').read_text())
+        self.assertIs(job['restore'], False)
+        self.assertEqual(job['profile'], 'verified-erigon-1-restored-head-recovery-cache')
+        spec = importlib.util.spec_from_file_location('staged_cache_fetch', root / 'fetch.py')
+        fetch = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fetch)
+        fetch.validate_local_cache_job(job, Path('/data/pbt-1/v3-head-recovery/cache'),
+                                       'glamsterdam-pbt-1-lighthouse-erigon-1')
+        with self.assertRaises(AssertionError):
+            fetch.validate_local_cache_job(job, Path('/data/pbt-1/v3-head-recovery/cache'),
+                                           'glamsterdam-pbt-1-lighthouse-erigon-2')
+        self.assertEqual(job['archive_sha256'], self.complete['archive_sha256'])
+        self.assertEqual(job['key'], self.bundle['key'])
+        self.assertFalse(list((root / 'cache').iterdir()))
+        for path in root.iterdir():
+            if path.is_file():
+                self.assertEqual(path.stat().st_mode & 0o777, 0o600)
+        for name, data in before.items():
+            self.assertEqual((self.base / name).read_bytes(), data)
+        self.s3.generate_presigned_url.reset_mock()
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.stage()
+        self.s3.generate_presigned_url.assert_not_called()
+
+    def test_peer_proof_cannot_substitute_for_own_qualification(self):
+        for field, wrong in [('host', 'lighthouse-erigon-2'), ('memory_gib', 16),
+                             ('status', 'starting'), ('native_reopen_verified', False)]:
+            with self.subTest(field=field):
+                original = self.proof[field]
+                self.proof[field] = wrong
+                self.write_evidence()
+                self.assert_rejected_before_url()
+                self.proof[field] = original
+
+    def test_corrupt_or_changed_restore_evidence_rejected(self):
+        for record, field, wrong in [(self.stream, 'whole_archive_verified', False),
+                                     (self.stream, 'sha256', 'b' * 64),
+                                     (self.complete, 'bundle_sha256', 'b' * 64),
+                                     (self.complete, 'restored_identity', {'device': 0, 'inode': 0})]:
+            with self.subTest(field=field):
+                original = record[field]
+                record[field] = wrong
+                self.write_evidence()
+                self.assert_rejected_before_url()
+                record[field] = original
+
+    def test_active_preparation_and_running_client_rejected(self):
+        self.unit_active = True
+        self.assert_rejected_before_url()
+        self.unit_active = False
+        self.container_running = True
+        self.assert_rejected_before_url()
+
+    def test_insufficient_cache_capacity_rejected_before_url(self):
+        self.free = 100
+        self.assert_rejected_before_url()
+
+    def test_failed_qualification_lock_rejected(self):
+        import fcntl
+        with (self.base / 'qualification/run.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            self.assert_rejected_before_url()
+
+
 if __name__ == '__main__':
     unittest.main()

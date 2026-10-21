@@ -62,6 +62,23 @@ class CacheReadbackTests(unittest.TestCase):
         self.assertEqual(proof['bytes'], len(self.data))
         self.assertEqual(self.archive.read_bytes(), self.data)
 
+    def test_first_erigon_reads_its_own_cache_profile(self):
+        job = json.loads((self.root / 'job.json').read_text())
+        job['profile'] = 'verified-erigon-1-restored-head-recovery-cache'
+        self.write(self.root / 'job.json', job)
+        with patch.object(readback.socket, 'gethostname',
+                          return_value='glamsterdam-pbt-1-lighthouse-erigon-1'):
+            self.run_unit()
+        proof = json.loads((self.root / 'stored-cache-verified.json').read_text())
+        self.assertEqual(proof['sha256'], self.checksum)
+
+    def test_peer_cache_profile_rejected_before_readback(self):
+        with patch.object(readback.socket, 'gethostname',
+                          return_value='glamsterdam-pbt-1-lighthouse-erigon-1'):
+            with self.assertRaises(AssertionError):
+                self.run_unit()
+        self.assert_no_proof()
+
     def test_collected_transient_unit_requires_completed_file_proofs(self):
         self.run_unit(load='not-found')
         self.assertTrue((self.root / 'stored-cache-verified.json').exists())
