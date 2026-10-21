@@ -75,7 +75,7 @@ class Publication(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 m.validate_files(expected)
 
-    def exercise_finish(self, corrupt=False, missing_part=False, changed_proof=False):
+    def exercise_finish(self, corrupt=False, missing_part=False, changed_proof=False, deferred=False):
         with tempfile.TemporaryDirectory() as directory, patch.object(m, 'LOCAL', Path(directory)), \
                 patch.object(m, 'PART_SIZE', 4):
             evidence = {'proof': proof(), 'proof_sha256': 'a' * 64}
@@ -110,6 +110,7 @@ class Publication(unittest.TestCase):
                 def get_object(self, **kwargs):
                     if kwargs['Key'].endswith('release.json'):
                         return {'Body': io.BytesIO(releases[-1])}
+                    assert not deferred, 'Deferred mode unexpectedly reread the remote object'
                     assert kwargs['IfMatch'] == 'object'
                     start, end = map(int, kwargs['Range'].removeprefix('bytes=').split('-'))
                     data = (b'wrong' if corrupt else b'abcde')[start:end + 1]
@@ -122,7 +123,7 @@ class Publication(unittest.TestCase):
             observed = copy.deepcopy(evidence)
             if changed_proof:
                 observed['proof_sha256'] = 'b' * 64
-            with patch.object(m, 'check', return_value=observed), \
+            with patch.object(m, 'EXPORT_ONLY', deferred), patch.object(m, 'check', return_value=observed), \
                     patch.object(m, 'ssh', return_value=json.dumps(report).encode()), \
                     patch.object(m, 'require_absent'), \
                     patch.object(m, 'put_release', side_effect=lambda s3, raw: s3.put_object(Body=raw)):
@@ -134,11 +135,16 @@ class Publication(unittest.TestCase):
                 else:
                     m.finish(Storage())
                     release = json.loads(releases[0])
-                    self.assertTrue(release['full_remote_sha256_verified'])
+                    self.assertEqual(release['full_remote_sha256_verified'], not deferred)
+                    self.assertEqual(release['independent_mpt_reconstruction_verified'], not deferred)
+                    self.assertEqual(release['verification_deferred_by_user'], deferred)
                     self.assertFalse(release['shadowfork_finality_established'])
                     self.assertFalse(release['cross_client_imports_verified'])
                     self.assertIsNone(release['genesis_time'])
                     self.assertEqual(set(release['files']), set(m.FILES))
+
+    def test_deferred_mode_reports_transport_scope_without_remote_reread(self):
+        self.exercise_finish(deferred=True)
 
     def test_corrupt_remote_object_never_releases(self):
         self.exercise_finish(corrupt=True)

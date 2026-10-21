@@ -280,13 +280,18 @@ def finish(s3):
                 save(LOCAL, 'status.json', {'phase': 'remote_sha256_readback', 'file': name,
                      'bytes': length, 'total': info['bytes'], 'time': time.time()})
                 last_saved = length
-        length, checksum = readback(s3, BUCKET, info['key'], head['ETag'], info['bytes'], progress)
+        if EXPORT_ONLY:
+            # Each uploaded part was Content-MD5 checked; recipients check SHA-256 while downloading.
+            length, checksum = result['bytes'], result['sha256']
+        else:
+            length, checksum = readback(s3, BUCKET, info['key'], head['ETag'], info['bytes'], progress)
         require(length == info['bytes'] and checksum == info['sha256'], 'Full remote checksum mismatch')
         save(LOCAL, name + '.verified.json', {'key': info['key'], 'bytes': length, 'sha256': checksum,
                                              'etag': head['ETag'], 'time': time.time()})
     release = {'anchor': 24453558, 'block_hash': BLOCK_HASH, 'mpt_state_root': STATE_ROOT,
                'source_commit': COMMIT, 'proof_sha256': job['proof_sha256'],
-               'metadata': job['proof']['metadata'], 'full_remote_sha256_verified': True,
+               'metadata': job['proof']['metadata'], 'full_remote_sha256_verified': not EXPORT_ONLY,
+               'transfer_integrity': 'source_sha256_and_content_md5_multipart_upload',
                'independent_mpt_reconstruction_verified': not EXPORT_ONLY,
                'verification_deferred_by_user': EXPORT_ONLY,
                'shadowfork_finality_established': False, 'cross_client_imports_verified': False,

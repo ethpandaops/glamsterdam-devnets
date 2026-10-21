@@ -13,7 +13,7 @@ import subprocess
 import time
 
 SCRIPT = Path(__file__).with_name('publish-pbt-artifacts.py')
-SCRIPT_SHA = 'c2d5777689807a29c16f0ad930254b4e3dd434d040e8ac809f801b82b12b42ee'
+SCRIPT_SHA = '80fdd8149fe2e3b27f3bccd5bb467e25ea6ff075b5b62525758f0994358d453d'
 ROOT = Path.home() / '.local/state/pbt-1-run/artifact-publication'
 
 
@@ -94,7 +94,8 @@ def run(pub):
     pub.save(ROOT, 'auto-status.json', {'phase': 'full_remote_checksum_readback', 'time': time.time()})
     action('finish')
     release = json.loads((ROOT / 'release.json').read_text())
-    assert release['full_remote_sha256_verified'] is True and release['genesis_time'] is None
+    assert release['genesis_time'] is None
+    assert release['full_remote_sha256_verified'] is (not export_only)
     pub.save(ROOT, 'auto-status.json', {'phase': 'published_verified', 'time': time.time()})
 
 

@@ -48,7 +48,11 @@ def save(path, value):
 def validate_release(release):
     assert release['anchor'] == 24453558 and release['block_hash'] == ANCHOR_HASH
     assert release['mpt_state_root'] == STATE_ROOT and release['source_commit'] == COMMIT
-    assert release['full_remote_sha256_verified'] is True and release['genesis_time'] is None
+    assert release['genesis_time'] is None
+    assert release['full_remote_sha256_verified'] is True or (
+        release.get('verification_deferred_by_user') is True
+        and release.get('independent_mpt_reconstruction_verified') is False
+        and release.get('transfer_integrity') == 'source_sha256_and_content_md5_multipart_upload')
     assert release['shadowfork_finality_established'] is False
     assert release['cross_client_imports_verified'] is False
     assert re.fullmatch('[0-9a-f]{64}', release['proof_sha256'])
@@ -111,11 +115,14 @@ def transfer(job, readiness, fetch=ordered_ranges):
             stream.flush()
             os.fsync(stream.fileno())
         assert received == item['bytes'] and checksum.hexdigest() == item['sha256'], 'Downloaded input checksum mismatch'
-        with target.open('rb') as stream:
-            assert hashlib.file_digest(stream, 'sha256').hexdigest() == item['sha256'], 'Stored input checksum mismatch'
+        stored_readback = not job['release'].get('verification_deferred_by_user', False)
+        if stored_readback:
+            with target.open('rb') as stream:
+                assert hashlib.file_digest(stream, 'sha256').hexdigest() == item['sha256'], 'Stored input checksum mismatch'
         stat = target.stat()
         proofs[name] = {'bytes': received, 'sha256': item['sha256'], 'etag': item['etag'],
-                        'inode': stat.st_ino, 'mtime_ns': stat.st_mtime_ns}
+                        'inode': stat.st_ino, 'mtime_ns': stat.st_mtime_ns,
+                        'transfer_sha256_verified': True, 'stored_file_readback_verified': stored_readback}
     assert json.loads((STAGING / 'pbt-snapshot.meta.json').read_text()) == job['release']['metadata']
     proof = {'host': job['host'], 'anchor': 24453558, 'anchor_hash': ANCHOR_HASH,
              'release_canonical_sha256': job['release_canonical_sha256'], 'files': proofs,

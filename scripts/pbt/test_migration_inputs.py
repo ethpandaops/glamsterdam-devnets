@@ -32,8 +32,13 @@ def fixture(host='lighthouse-geth-1'):
 
 
 class Inputs(unittest.TestCase):
-    def exercise(self, host='lighthouse-geth-1', failure=None):
+    def exercise(self, host='lighthouse-geth-1', failure=None, deferred=False):
         job, data = fixture(host)
+        if deferred:
+            job['release'].update(full_remote_sha256_verified=False, verification_deferred_by_user=True,
+                independent_mpt_reconstruction_verified=False,
+                transfer_integrity='source_sha256_and_content_md5_multipart_upload')
+            job['release_canonical_sha256'] = inputs.digest(job['release'])
         if failure == 'wrong-meta':
             other = dict(job['release']['metadata'], block=24453559)
             data['pbt-snapshot.meta.json'] = json.dumps(other).encode()
@@ -69,10 +74,18 @@ class Inputs(unittest.TestCase):
                     self.assertFalse(proof['shadowfork_finality_established'])
                     self.assertIsNone(proof['genesis_time'])
                     for name in inputs.names(host):
+                        self.assertTrue(proof['files'][name]['transfer_sha256_verified'])
+                        self.assertEqual(proof['files'][name]['stored_file_readback_verified'], not deferred)
                         self.assertEqual((final / name).read_bytes(), data[name])
                         self.assertEqual((final / name).stat().st_mode & 0o777, 0o640)
                     self.assertEqual(set(seen), set(inputs.names(host)))
                     self.assertFalse(staging.exists())
+
+    def test_deferred_release_preserves_transfer_checksum_and_records_readback_scope(self):
+        self.exercise(deferred=True)
+
+    def test_deferred_release_still_rejects_corrupt_transfer(self):
+        self.exercise(deferred=True, failure='corrupt')
 
     def test_complete_pair_is_promoted_as_writable_independent_inputs(self):
         self.exercise()

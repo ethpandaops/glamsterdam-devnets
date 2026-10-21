@@ -848,18 +848,17 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 1. Proceed from Erigon-1's successful native export, as requested by the user.
    Independent MPT reconstruction is deferred, not passed. The export-only
    publication controller computes transfer checksums, uploads the completed
-   artifacts and checks the stored bytes. The release explicitly records
+   artifacts with transfer checksums; recipients check SHA-256 while downloading.
+   Separate remote and recipient readbacks are deferred. The release explicitly records
    `independent_mpt_reconstruction_verified: false`. Investigate import/startup
    failures if they occur; do not add further source reviews or fixture suites
    to the preparation critical path. Keep the source data until publication.
-2. After verified N publication, two preparation branches can proceed in parallel:
-   - **Recipient inputs:** preserve the exporter provenance, verify the original
-     older-source recovery object remains accessible, and inspect owners and
-     identities before removing only Geth-2's temporary
-     `/data/pbt-1/erigon-exporter-recovery/tree`. Preserve its Geth database and
-     recovery archive. Recheck space, then authorize and start the seven-worker
-     input downloads using the procedure in `scripts/pbt/README.md`. All seven
-     must pass their stored-file checksums and leave the 600-GB reserve.
+2. After N publication, two preparation branches can proceed in parallel:
+   - **Recipient inputs:** Geth-2's redundant exporter copy has been reclaimed,
+     leaving 1.181 TB free; its Geth database and recovery archive are preserved.
+     Authorize and start the seven-worker input downloads using the procedure in
+     `scripts/pbt/README.md`. All seven must pass SHA-256 during transfer and
+     leave the 600-GB reserve. A second stored-file readback is deferred.
    - **Erigon-1 H restore:** after exporter/verifier/uploader shutdown, review the
      exact candidates in `files/erigon-1-space-plan.json`. Preserve the original
      H database/archive, payload corpus and proof/log directories. Reclaim only

@@ -1,0 +1,25 @@
+{
+  "time": 1792601073.0790834,
+  "phase": "redundant_exporter_copy_reclaimed",
+  "path": "/data/pbt-1/erigon-exporter-recovery/tree",
+  "reason": "Redundant older exporter copy; original recovery object accessible and completed N artifact files preserved on Erigon-1",
+  "remote_recovery_key": "jochemnet/erigon/24452538/snapshot-pruned.tar.zst",
+  "remote_recovery_bytes": 276341609865,
+  "remote_recovery_etag": "\"2240fe1dc4db000cabbe16c13d9a8680-4118\"",
+  "remote_access_check": "Controller HEAD and If-Match range read passed immediately before cleanup",
+  "free_bytes_before": 752886071296,
+  "qualification_sha256": "695ce5180c860692a0013401c384f9406f24e7159f416fbe8bf4c6ce0b87520d",
+  "geth_archive_identity": [
+    2048,
+    15,
+    1129134606193,
+    1792511872329806953
+  ],
+  "geth_database_identity": [
+    65025,
+    15990805
+  ],
+  "finished_at": 1792601074.2557588,
+  "free_bytes_after": 1181054844928,
+  "geth_database_and_recovery_preserved": true
+}
