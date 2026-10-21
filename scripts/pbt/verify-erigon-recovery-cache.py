@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Wait for the E2 cache download, then hash the stored file; never alter archives."""
+from contextlib import ExitStack
 import fcntl
 import hashlib
 import json
@@ -30,10 +31,15 @@ def unit():
          '-p', 'MainPID', '-p', 'Result'], text=True).splitlines())
 
 def main():
+    with ExitStack() as handles:
+        _main(handles)
+
+
+def _main(handles):
     assert socket.gethostname() == 'glamsterdam-pbt-1-lighthouse-erigon-2'
     assert ROOT.resolve() == ROOT
     assert not (ROOT / 'stored-cache-verified.json').exists()
-    guard = (ROOT / 'stored-cache-readback.lock').open('a')
+    guard = handles.enter_context((ROOT / 'stored-cache-readback.lock').open('a'))
     fcntl.flock(guard, fcntl.LOCK_EX | fcntl.LOCK_NB)
     job = json.loads((ROOT / 'job.json').read_text())
     assert job['profile'] == 'verified-erigon-v3-head-recovery-cache'
@@ -42,13 +48,19 @@ def main():
     save('stored-cache-readback-status.json', {'phase':'waiting_for_download','time':time.time()})
     while True:
         state = unit()
-        assert state['LoadState'] == 'loaded', 'Download unit missing; inspect before proceeding'
+        if state['LoadState'] == 'not-found':
+            # systemd may collect a completed transient unit before this poll.
+            # Missing alone is not success: require the final download phase,
+            # matching archive proof and exclusive lock below, then hash afresh.
+            assert state['ActiveState'] == 'inactive' and state['MainPID'] == '0'
+            break
+        assert state['LoadState'] == 'loaded', 'Unexpected download unit state'
         if state['ActiveState'] == 'inactive':
             assert state['Result'] == 'success' and state['MainPID'] == '0'
             break
         assert state['ActiveState'] in ('active', 'activating', 'deactivating'), 'Download failed'
         time.sleep(30)
-    download_lock = (ROOT / 'cache/download.lock').open('a')
+    download_lock = handles.enter_context((ROOT / 'cache/download.lock').open('a'))
     fcntl.flock(download_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     progress = json.loads((ROOT / 'cache/status.json').read_text())
     assert progress['phase'] == 'archive_ready_for_staged_restore'

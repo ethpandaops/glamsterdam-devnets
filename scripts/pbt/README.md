@@ -295,6 +295,16 @@ is not yet a successful checksum; recovery replacement still requires its
 completed proof and the separate review above. The 15-minute fleet monitor
 records this checksum unit and reports failure or an incomplete stopped job.
 
+The E2 cache download completed at 13:39 UTC with the expected whole-stream
+SHA-256 and 461,165,199,193 bytes. Its first stored-file checksum attempt
+stopped before hashing because systemd had collected the completed transient
+download unit. The helper now accepts that missing-unit state only with the
+completed download phase, matching archive proof, no service PID and the
+exclusive download lock; it still hashes the entire stored file independently.
+Eight targeted tests passed, including a collected unit, incomplete or corrupt
+downloads and a held lock. The terminal failed helper was updated and restarted
+at 13:42 UTC; no download was repeated and no backup was replaced.
+
 The October 20 exporter boundary recovery is recorded in
 `files/erigon-boundary-recovery.json` and `md/pbt-1-erigon-v3-source-2026-10-20.md`.
 `verify-erigon-domain-fragments.go` is a read-only diagnostic built against the

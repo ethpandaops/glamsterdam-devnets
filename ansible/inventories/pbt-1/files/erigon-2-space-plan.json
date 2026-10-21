@@ -50,14 +50,20 @@
     "checked_at": "2026-10-21T12:14:58.993499+00:00",
     "stored_file_readback": {
       "unit": "pbt-1-v3-head-cache-readback",
-      "main_pid": 151840,
-      "phase": "waiting_for_download",
+      "main_pid": 156253,
+      "phase": "running_stored_file_checksum",
       "script": "scripts/pbt/verify-erigon-recovery-cache.py",
-      "script_sha256": "99dad507bbb500e0c4807f8d62234011fc7e9775a8f0946cdd0ae0e4f7728064",
+      "script_sha256": "76b2e84233e1b09fb32fbd3c4437c87e442b4653ccd22d8598823752a1aa4116",
       "memory_max_bytes": 1073741824,
       "cpu_quota_percent": 100,
       "archive_replacement_authorized_by_this_job": false,
-      "checked_at": "2026-10-21T12:39:23Z"
-    }
+      "checked_at": "2026-10-21T13:42:52Z",
+      "first_attempt_failure": "Completed transient download unit was collected by systemd before the waiter polled; stopped before hashing.",
+      "fix": "Require completed download proof and exclusive lock when transient service is no longer loaded; always independently hash stored file.",
+      "targeted_tests_passed": 8
+    },
+    "download_completed": true,
+    "archive_bytes": 461165199193,
+    "stream_sha256_verified": true
   }
 }
