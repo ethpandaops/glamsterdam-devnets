@@ -4,7 +4,7 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
-## Preparation checkpoint, October 21 at 09:42 UTC
+## Preparation checkpoint, October 21 at 12:39 UTC
 
 All nine recovery volumes are mounted and their original archives are retained.
 Eight workers have passed isolated startup checks at H, including Erigon-2;
@@ -13,10 +13,10 @@ Erigon-1 remains pending. The read-only fleet monitor reports no alerts.
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
 | Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent native verifier running |
-| Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected H archive publication and recovery-volume replacement |
-| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier reached 3.48 billion snapshot-leaf records at 09:39 UTC; publication follows its success |
-| Erigon-1 H database | Original H database preserved; verified-release restore and native conversion fallback staged | Finish exporter work, preserve its artifacts, review space, then restore the verified H release and run this worker's own checks |
-| Patched H recovery archive | Upload running from stopped, qualified Erigon-2; 22.28 GB uploaded at 09:41 UTC | Finish upload and full remote checksum readback; final compressed size is not known yet |
+| Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published and fully verified; recovery-volume replacement pending |
+| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier is checking joined slots; publication follows its success |
+| Erigon-1 H database | Original H database preserved; verified H release inputs staged, with a 1,192,103,432,995-byte unpacked bound | Finish exporter work, preserve its artifacts, review space, then restore the verified H release and run this worker's own checks |
+| Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 cache downloading (142.20 GB at 12:39); stored-file readback queued before recovery-volume replacement |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
 
 The conversion's frozen checkpoint is not the common launch head H. Native
@@ -73,8 +73,10 @@ H worker. The native command result is retained in
 Before choosing G, require all nine workers' H startup checks, the Erigon
 conversion evidence, recoverable snapshots and an explicit status for the shared
 N artifacts. The current checkpoint above is dated; use the fleet monitor and
-completed proof files to establish readiness. Erigon verification, publication
+completed proof files to establish readiness. Shared N verification/publication
 and Erigon-1 restore are still pending.
+The corrected H release is fully verified and published; local recovery-volume
+replacement remains pending.
 Restore Erigon-1's original ext4 reservation and remove its temporary export
 scratch volume before launch. Preserve the verified exporter recovery on Geth-2
 until safely redundant; then reclaim it so it does not constrain that worker.

@@ -72,6 +72,13 @@ if recovery_cache_root.exists():
  result=subprocess.run(['systemctl','show','pbt-1-v3-head-recovery-cache','-p','LoadState','-p','ActiveState',
                         '-p','SubState','-p','MainPID','-p','Result'],capture_output=True,text=True)
  head_recovery_cache['service']=dict(l.split('=',1) for l in result.stdout.splitlines() if '=' in l)
+ readback_status=recovery_cache_root/'stored-cache-readback-status.json'
+ if readback_status.exists():
+  value=json.loads(readback_status.read_text())
+  head_recovery_cache['stored_readback']={k:value[k] for k in ('phase','time','completed_bytes','archive_bytes','bytes','sha256','error_class') if k in value}
+  result=subprocess.run(['systemctl','show','pbt-1-v3-head-cache-readback','-p','LoadState','-p','ActiveState',
+                         '-p','SubState','-p','MainPID','-p','Result'],capture_output=True,text=True)
+  head_recovery_cache['stored_readback_service']=dict(l.split('=',1) for l in result.stdout.splitlines() if '=' in l)
 input_status=pathlib.Path('/data/pbt-1/migration-input-control/status.json')
 if input_status.exists():
  value=json.loads(input_status.read_text())
@@ -198,6 +205,13 @@ def main():
                 and cache_status.get('completed_bytes') == old_cache.get('completed_bytes')
                 and state['time'] - cache_status.get('time', 0) > 900):
             alerts.append(name + ': corrected H recovery cache has no progress for 15 minutes; inspect live process')
+        readback = recovery_cache.get('stored_readback', {})
+        readback_service = recovery_cache.get('stored_readback_service', {})
+        if readback.get('phase') == 'failed' or readback_service.get('ActiveState') == 'failed':
+            alerts.append(name + ': corrected H stored-cache checksum failed; inspect before backup replacement')
+        elif (readback and readback.get('phase') != 'stored_cache_verified'
+              and readback_service.get('ActiveState') not in ('active', 'activating')):
+            alerts.append(name + ': corrected H stored-cache checksum stopped before completion')
         restored = state.get('head_restore') or {}
         if restored:
             service = restored.get('service', {})

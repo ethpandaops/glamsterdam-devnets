@@ -283,6 +283,18 @@ the cache step: independently hash the stored cache before proceeding with the
 reviewed backup replacement above. The E1 restore staging option `--stage`
 remains separate. Neither option can choose genesis time or launch a client.
 
+At 12:39 UTC, `verify-erigon-recovery-cache.py` was queued on Erigon-2 as
+`pbt-1-v3-head-cache-readback` (1 GiB RAM, one CPU). It waits for the cache
+download unit to stop successfully, checks the completed download proof, holds
+the download lock, and independently hashes the stored archive. It records
+file identity and rejects a changed file or checksum mismatch. Progress and
+completion are `stored-cache-readback-status.json` and
+`stored-cache-verified.json` under `/data/pbt-1/v3-head-recovery`.
+It cannot replace a recovery archive or start a client. The queued checksum
+is not yet a successful checksum; recovery replacement still requires its
+completed proof and the separate review above. The 15-minute fleet monitor
+records this checksum unit and reports failure or an incomplete stopped job.
+
 The October 20 exporter boundary recovery is recorded in
 `files/erigon-boundary-recovery.json` and `md/pbt-1-erigon-v3-source-2026-10-20.md`.
 `verify-erigon-domain-fragments.go` is a read-only diagnostic built against the

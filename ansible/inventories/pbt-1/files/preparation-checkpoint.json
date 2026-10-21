@@ -320,13 +320,13 @@
     "resize_evidence": "erigon-export-scratch-resize.json"
   },
   "latest_erigon_export_observation": {
-    "checked_at": "2026-10-21T08:58:57Z",
-    "phase": "independent_verification_snapshot_leaves",
+    "checked_at": "2026-10-21T12:39:23Z",
+    "phase": "independent_verification_joined_slots",
     "native_pid": 64456,
     "snapshot_bytes": 107902638451,
     "framed_bytes": 66850271320,
     "root_free_bytes_rounded": 484700000000,
-    "scratch_free_bytes_rounded": 1213800000000,
+    "scratch_free_bytes_rounded": 812600000000,
     "independent_verification_complete": false,
     "native_export_exit_code": 0,
     "metadata_evidence": "pbt-snapshot-meta-24453558.json",
@@ -346,14 +346,16 @@
     "deployed": false
   },
   "fleet_monitor": {
-    "checked_at": "2026-10-21T09:55:34.215729+00:00",
+    "checked_at": "2026-10-21T12:41:34.366181+00:00",
     "hosts_checked": 9,
     "startup_qualified": 8,
     "alerts": [],
-    "script_sha256": "8b615443aee61c9a4de015560d216931f26262d4c598ad0cc71605d85d70a2e4",
+    "script_sha256": "1c37a3f75f260e7bd5bece70dee9fa3027b3722d1ea412d07e0238781f2f1864",
     "recovery_cache_unit": "pbt-1-v3-head-recovery-cache",
-    "recovery_cache_staged": false,
-    "recovery_cache_started": false,
-    "automatically_restarts_jobs": false
+    "recovery_cache_staged": true,
+    "recovery_cache_started": true,
+    "automatically_restarts_jobs": false,
+    "stored_cache_readback_unit": "pbt-1-v3-head-cache-readback",
+    "stored_cache_readback_phase": "waiting_for_download"
   }
 }
