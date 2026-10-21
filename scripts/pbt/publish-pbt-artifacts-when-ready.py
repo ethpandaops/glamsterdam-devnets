@@ -13,7 +13,7 @@ import subprocess
 import time
 
 SCRIPT = Path(__file__).with_name('publish-pbt-artifacts.py')
-SCRIPT_SHA = 'd59c10f8af6aec683a129b68f6db0a732ee5d36ad12db4ba8e461eed78e967a0'
+SCRIPT_SHA = 'c2d5777689807a29c16f0ad930254b4e3dd434d040e8ac809f801b82b12b42ee'
 ROOT = Path.home() / '.local/state/pbt-1-run/artifact-publication'
 
 
@@ -33,6 +33,8 @@ def unit(name):
 print(json.dumps({'export':unit('pbt-1-native-anchor-export'),
  'upload':unit('pbt-1-pbt-artifact-upload'),
  'export_proof':(b/'pbt-export-24453558/complete.json').is_file(),
+ 'export_preparation':unit('pbt-1-export-publication-preparation'),
+ 'export_preparation_proof':(b/'pbt-export-24453558/export-ready.json').is_file(),
  'upload_proof':(b/'pbt-artifact-publication/parts-complete.json').is_file(),
  'publisher_sha256':hashlib.sha256((b/'publish-pbt-artifacts.py').read_bytes()).hexdigest()}))
 '''
@@ -73,16 +75,20 @@ def action(name):
 
 
 def run(pub):
-    assert not (ROOT / 'auto-started.json').exists(), 'Prior automatic attempt requires inspection'
+    export_only = pub.EXPORT_ONLY is True
+    started_name = 'export-only-auto-started.json' if export_only else 'auto-started.json'
+    assert not (ROOT / started_name).exists(), 'Prior automatic attempt requires inspection'
     assert not (ROOT / 'authorization-started.json').exists(), 'Prior authorization requires inspection'
-    pub.save(ROOT, 'auto-started.json', {'time': time.time(), 'publisher_sha256': SCRIPT_SHA})
-    state = wait_for(pub, 'export')
+    pub.save(ROOT, started_name, {'time': time.time(), 'publisher_sha256': SCRIPT_SHA,
+                                  'independent_verification_deferred': export_only})
+    state = wait_for(pub, 'export_preparation' if export_only else 'export')
     assert state['upload']['LoadState'] == 'not-found' and not state['upload_proof'], 'Prior upload requires inspection'
     pub.check()  # Full native result, metadata and file identity gates precede authorization.
     action('authorize')
     pub.ssh(['systemd-run', '--unit=pbt-1-pbt-artifact-upload', '--property=Type=exec',
              '--property=MemoryMax=4G', '--property=CPUQuota=400%', '--property=AllowedCPUs=0-3',
              '--property=UMask=0077', '--property=Restart=no',
+             *(['--setenv=PBT_ARTIFACT_EXPORT_ONLY=1'] if export_only else []),
              '/usr/bin/python3', '/data/pbt-1/publish-pbt-artifacts.py', 'stream'])
     wait_for(pub, 'upload')
     pub.save(ROOT, 'auto-status.json', {'phase': 'full_remote_checksum_readback', 'time': time.time()})

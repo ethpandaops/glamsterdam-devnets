@@ -38,6 +38,7 @@ for kind,unit in (('qualification','pbt-1-v3-source-qualification'),('native_cli
                   ('anchor_preparation','pbt-1-erigon-anchor-preparation'),
                   ('anchor_capture_recovery','pbt-1-anchor-capture-recovery'),
                   ('native_export','pbt-1-native-anchor-export'),
+                  ('export_publication_preparation','pbt-1-export-publication-preparation'),
                   ('export_scratch_guard','pbt-1-export-scratch-guard'),
                   ('artifact_upload','pbt-1-pbt-artifact-upload'),
                   ('exporter_recovery_copy','pbt-1-exporter-recovery-copy')):
@@ -317,7 +318,10 @@ def main():
     artifact_status = ROOT.parent / 'artifact-publication/auto-status.json'
     if artifact_status.exists():
         artifacts = {'status': json.loads(artifact_status.read_text())}
-        service = subprocess.run(['systemctl', '--user', 'show', 'pbt-1-artifact-publication',
+        controller_unit = ('pbt-1-artifact-publication-export-only'
+                           if (artifact_status.parent / 'export-only-auto-started.json').exists()
+                           else 'pbt-1-artifact-publication')
+        service = subprocess.run(['systemctl', '--user', 'show', controller_unit,
                                   '-p', 'MainPID', '-p', 'ActiveState', '-p', 'Result'],
                                  capture_output=True, text=True, timeout=10)
         artifacts['service'] = dict(line.split('=', 1) for line in service.stdout.splitlines() if '=' in line)

@@ -4,7 +4,7 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
-## Preparation checkpoint, October 21 at 16:12 UTC
+## Preparation checkpoint, October 21: proceeding from the completed export
 
 All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
 v3 recovery archive, with matching worker/controller configuration and automatic
@@ -15,9 +15,9 @@ Erigon-1 remains pending. The read-only fleet monitor reports no alerts. Erigon-
 
 | Work | Current evidence | Next gate |
 | --- | --- | --- |
-| Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent native verifier running |
+| Erigon-1 older exporter | Native export exited 0 at 07:18 UTC; metadata matches N's hash and MPT root | Independent reconstruction deferred by user; transfer checksums and publication proceeding |
 | Erigon-2 H database | Conversion, both original-binary verifications and H reconstruction passed; two worker opens passed at 09:38 UTC under 16 GiB / 8 CPU and stopped cleanly | Corrected archive published; recovery-volume replacement and configuration reconciliation complete |
-| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent verifier completed the account scan/merge and is reconstructing MPT storage roots; publication follows full verification |
+| Shared N artifacts | Snapshot is 107,902,638,451 bytes; preimages are 66,850,271,320 bytes; exporter internal validation passed | Independent MPT reconstruction stopped at user request; publish from successful export with the deferral recorded explicitly |
 | Erigon-1 H database | Original H database preserved; verified H release inputs staged, with a 1,192,103,432,995-byte unpacked bound | Finish exporter work, preserve its artifacts, review space, then restore the verified H release and run this worker's own checks |
 | Patched H recovery archive | 461,165,199,193 bytes published; full remote SHA-256 passed at 12:11 UTC | Erigon-2 stored-cache and stored-volume SHA-256 passed; controller and worker recovery inputs agree; scoped URL range check passed |
 | Genesis configuration | Local test candidate validated; G and S unset | User supplies G, then regenerate and revalidate launch artifacts |
@@ -845,10 +845,13 @@ complete from a healthy dashboard, matching MPT heads or an exporter success.
 
 ## Immediate next work
 
-1. Let Erigon-1's native N verifier finish. Require its successful exit and
-   completion proof, then let the existing publication controller upload the
-   artifacts and complete full remote checksum readback. Do not start a second
-   publisher or reclaim its inputs before the verified release exists.
+1. Proceed from Erigon-1's successful native export, as requested by the user.
+   Independent MPT reconstruction is deferred, not passed. The export-only
+   publication controller computes transfer checksums, uploads the completed
+   artifacts and checks the stored bytes. The release explicitly records
+   `independent_mpt_reconstruction_verified: false`. Investigate import/startup
+   failures if they occur; do not add further source reviews or fixture suites
+   to the preparation critical path. Keep the source data until publication.
 2. After verified N publication, two preparation branches can proceed in parallel:
    - **Recipient inputs:** preserve the exporter provenance, verify the original
      older-source recovery object remains accessible, and inspect owners and

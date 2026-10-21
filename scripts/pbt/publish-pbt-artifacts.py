@@ -23,7 +23,8 @@ import urllib.request
 
 BASE = Path('/data/pbt-1')
 ARTIFACTS = BASE / 'artifacts-24453558'
-PROOF = BASE / 'pbt-export-24453558/complete.json'
+EXPORT_ONLY = os.environ.get('PBT_ARTIFACT_EXPORT_ONLY') == '1'
+PROOF = BASE / 'pbt-export-24453558' / ('export-ready.json' if EXPORT_ONLY else 'complete.json')
 REMOTE = BASE / 'pbt-artifact-publication'
 LOCAL = Path.home() / '.local/state/pbt-1-run/artifact-publication'
 FILES = ('pbt-snapshot.bin', 'framed.bin', 'pbt-snapshot.meta.json')
@@ -59,7 +60,11 @@ def valid_sha(value):
 
 
 def validate_proof(proof):
-    require(proof['status'] == 'native_export_and_verification_passed', 'Native verification incomplete')
+    expected_status = 'native_export_passed_independent_verification_deferred' if EXPORT_ONLY else 'native_export_and_verification_passed'
+    require(proof['status'] == expected_status, 'Wrong export qualification mode')
+    if EXPORT_ONLY:
+        require(proof.get('independent_mpt_reconstruction_verified') is False
+                and proof.get('verification_deferred_by_user') is True, 'Missing explicit verification deferral')
     require(proof['anchor'] == 24453558 and proof['block_hash'] == BLOCK_HASH
             and proof['mpt_state_root'] == STATE_ROOT, 'Wrong artifact anchor')
     require(proof['source'] == '/data/pbt-1/rehearsal-24453558/erigon', 'Wrong exporter source')
@@ -96,7 +101,7 @@ def remote_readiness():
     proof = json.loads(raw)
     validate_proof(proof)
     validate_files(proof)
-    for phase in ('export', 'verify'):
+    for phase in (('export',) if EXPORT_ONLY else ('export', 'verify')):
         result = json.loads((PROOF.parent / (phase + '.json')).read_text())
         require(result['exit_code'] == 0 and result['binary_sha256'] == BINARY_SHA,
                 'Missing native phase evidence: ' + phase)
@@ -282,6 +287,8 @@ def finish(s3):
     release = {'anchor': 24453558, 'block_hash': BLOCK_HASH, 'mpt_state_root': STATE_ROOT,
                'source_commit': COMMIT, 'proof_sha256': job['proof_sha256'],
                'metadata': job['proof']['metadata'], 'full_remote_sha256_verified': True,
+               'independent_mpt_reconstruction_verified': not EXPORT_ONLY,
+               'verification_deferred_by_user': EXPORT_ONLY,
                'shadowfork_finality_established': False, 'cross_client_imports_verified': False,
                'genesis_time': None, 'files': {name: json.loads((LOCAL / (name + '.verified.json')).read_text()) for name in FILES}}
     require_absent(s3, PREFIX + 'release.json')

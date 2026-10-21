@@ -26,6 +26,21 @@ def proof():
 
 
 class Publication(unittest.TestCase):
+    def test_deferred_verification_requires_explicit_mode_and_record(self):
+        exported = proof()
+        exported.update(status='native_export_passed_independent_verification_deferred',
+                        independent_mpt_reconstruction_verified=False,
+                        verification_deferred_by_user=True)
+        with self.assertRaises(RuntimeError):
+            m.validate_proof(exported)
+        with patch.object(m, 'EXPORT_ONLY', True):
+            m.validate_proof(exported)
+            for change in ({'verification_deferred_by_user': False},
+                           {'independent_mpt_reconstruction_verified': True},
+                           {'anchor': 24503958}):
+                with self.subTest(change=change), self.assertRaises(RuntimeError):
+                    m.validate_proof({**exported, **change})
+
     def test_reject_wrong_anchor_build_or_unverified_export(self):
         m.validate_proof(proof())
         for key, value in [('anchor', 24503958), ('block_hash', '0x00'),
