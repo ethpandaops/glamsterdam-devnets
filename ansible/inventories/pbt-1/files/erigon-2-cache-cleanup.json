@@ -1,0 +1,33 @@
+{
+  "phase": "local_cache_reclaimed_after_verified_recovery",
+  "time": 1792595649.652219,
+  "path": "/data/pbt-1/v3-head-recovery/cache/erigon-24503958.tar.zst",
+  "cache": {
+    "device": 65025,
+    "inode": 15990850,
+    "bytes": 461165199193,
+    "mtime_ns": 1792589988909014087,
+    "ctime_ns": 1792589988957015222,
+    "allocated": 461165248512
+  },
+  "volume": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 461165199193,
+    "mtime_ns": 1792593191722096567,
+    "ctime_ns": 1792594963900730579,
+    "allocated": 461165248512
+  },
+  "recovery_ready_sha256": "239f663c51855a4bb040d7b84eec6423ae59c3f70d1f10e4a28aa0af7c10d805",
+  "preserved_provenance": {
+    "archive-verified.json": "6bddf88e6d29490b77aa5f8c61ab8ad39e815aad98dac4ed8a770433121356b3",
+    "status.json": "ac796fbd2fff655899923a80e5a9f88368554f4e8370e47c57af012f1b214a42",
+    "download-state.json": "83a0c7ec606f2239bd79d9f6deda0f4714add9d4e7928e77fb1851f0eebbfd58"
+  },
+  "free_before": 436746665984,
+  "completed_at": 1792595650.8713577,
+  "reclaimed_allocated_bytes": 461165248512,
+  "free_after": 897911918592,
+  "recovery_archive_preserved": true,
+  "live_database_unchanged": true
+}

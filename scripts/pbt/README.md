@@ -7,12 +7,12 @@ No genesis time is selected and no shadowfork is authorized to launch.
 The private timestamped validation candidate is archived test evidence only;
 regenerate it after the user selects a launch time.
 
-Preparation checkpoint, **2026-10-21 15:10 UTC**:
+Preparation checkpoint, **2026-10-21 15:15 UTC**:
 
 | Component | Verified so far | Still required |
 | --- | --- | --- |
 | Three Geth, two Besu, two Nethermind workers | Each passed isolated startup checks at H=24,503,958 with its assigned process limits | Verified migration-file delivery to the seven recipients |
-| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive and recovery-volume copy verified; worker/controller configuration reconciled, unsqueeze rollback reclaimed; local cache remains for separate cleanup |
+| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive and recovery-volume copy verified; worker/controller configuration reconciled, unsqueeze rollback and redundant local cache reclaimed; about 898 GB free locally |
 | Erigon-1 | Original H database and recovery archive preserved; N export (107.90 GB snapshot, 66.85 GB preimages) exited 0 at 07:18 UTC with matching metadata | Independent verification running; then preserve N artifacts, restore the verified v3 H release and run its own 32-GiB startup checks |
 | Genesis configuration | Private test candidate loaded in isolated Lighthouse at H with 2,304 validators; all nine inventory reviews passed | Regenerate and validate a fresh candidate after the user chooses G; distribute keys and promote only the public files afterward |
 
@@ -244,9 +244,12 @@ Erigon-2's eight-file `/data/pbt-1/v3-head-upgrade/unsqueeze-backup` directory
 was removed after the corrected recovery-volume checksum, configuration handoff,
 exact inode/no-owner review and original qualification checks passed. This
 reclaimed **148.43 GB**, with no database compaction or pruning. The live database,
-conversion logs, qualification evidence and verified local archive cache remain
-preserved. See `files/erigon-2-unsqueeze-cleanup.json` and
-`files/erigon-2-v3-recovery-ready.json`. The local archive cache has not been deleted.
+conversion logs and qualification evidence remain preserved. See `files/erigon-2-unsqueeze-cleanup.json` and
+`files/erigon-2-v3-recovery-ready.json`. The local archive cache was subsequently removed after checking its exact
+identity, closed file handles and the completed volume/configuration receipts.
+This reclaimed another 461.17 GB, leaving about 897.91 GB free locally. See
+`files/erigon-2-cache-cleanup.json`. Monitoring recognizes intentional cache
+reclamation only with completed recovery and cleanup evidence.
 
 The published metadata is recorded in `files/erigon-v3-head-release.json`. An anonymous HEAD request to the snapshot hostname returned HTTP 403 for both this object and the previous release. Authorized storage access worked: Erigon-2 completed its scoped-URL download at 13:39 UTC and independently verified the stored cache at 14:04 UTC. Do not describe the anonymous download route as verified.
 
@@ -323,8 +326,8 @@ recovery job with `restore: false`. The controller input update is complete afte
 The other eight controller entries remain unchanged, and the refreshed
 scoped URL passed a worker range-read check. Progress is `replacement-status.json` under
 `/data/pbt-1/v3-head-recovery`; the 15-minute monitor watches the job. Do not
-rerun this completed one-shot replacement script. Review the exact local cache
-identity and ownership separately before reclaiming that remaining temporary copy.
+rerun this completed one-shot replacement script. The separate local-cache identity/ownership review and cleanup are complete;
+the recovery-volume archive and remote release remain available.
 
 The October 20 exporter boundary recovery is recorded in
 `files/erigon-boundary-recovery.json` and `md/pbt-1-erigon-v3-source-2026-10-20.md`.

@@ -4,12 +4,12 @@ Updated 2026-10-21. This is the current experiment plan. The older process,
 dependency graph, instruction audit and source-upgrade notes retain historical
 evidence; they do not independently define the next operation.
 
-## Preparation checkpoint, October 21 at 15:10 UTC
+## Preparation checkpoint, October 21 at 15:15 UTC
 
 All nine recovery volumes are mounted. Erigon-2 now has the verified corrected
 v3 recovery archive, with matching worker/controller configuration and automatic
-restore disabled. Its original provenance and verified local cache remain
-preserved. The other eight original recovery archives remain retained.
+restore disabled. Its original provenance remains preserved; the redundant local archive cache
+was reclaimed after volume verification and configuration reconciliation. The other eight original recovery archives remain retained.
 Eight workers have passed isolated startup checks at H, including Erigon-2;
 Erigon-1 remains pending. The read-only fleet monitor reports no alerts.
 
@@ -28,7 +28,10 @@ with `restore: false`; the new scoped URL passed a worker range-read check.
 Original qualification files remain unchanged. The reviewed eight-file unsqueeze
 rollback directory was then removed, reclaiming **148.43 GB**. See
 `files/erigon-2-v3-recovery-ready.json` and `files/erigon-2-unsqueeze-cleanup.json`
-under the PBT inventory. The local verified archive cache is still preserved.
+under the PBT inventory. The redundant local archive cache was subsequently
+removed after exact identity, backup-proof and no-owner checks, reclaiming
+another **461.17 GB**. Erigon-2 now has about **897.91 GB free locally**. See
+`files/erigon-2-cache-cleanup.json`; the recovery-volume archive remains intact.
 The replacement procedure is
 [`replace-erigon-2-recovery-volume.py`](../scripts/pbt/replace-erigon-2-recovery-volume.py).
 

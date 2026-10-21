@@ -86,6 +86,10 @@ if recovery_cache_root.exists():
   result=subprocess.run(['systemctl','show','pbt-1-v3-recovery-volume-replacement','-p','LoadState','-p','ActiveState',
                          '-p','SubState','-p','MainPID','-p','Result'],capture_output=True,text=True)
   head_recovery_cache['volume_replacement_service']=dict(l.split('=',1) for l in result.stdout.splitlines() if '=' in l)
+ cache_cleanup=recovery_cache_root/'cache-cleanup.json'
+ if cache_cleanup.exists():
+  value=json.loads(cache_cleanup.read_text())
+  head_recovery_cache['cache_cleanup']={k:value[k] for k in ('phase','time','completed_at','reclaimed_allocated_bytes','recovery_archive_preserved') if k in value}
 input_status=pathlib.Path('/data/pbt-1/migration-input-control/status.json')
 if input_status.exists():
  value=json.loads(input_status.read_text())
@@ -203,10 +207,18 @@ def main():
         cache_service = recovery_cache.get('service', {})
         cache_phase = cache_status.get('phase')
         if cache_phase == 'failed' or cache_service.get('ActiveState') == 'failed':
-            alerts.append(name + ': corrected H recovery cache failed; original backup remains protected')
-        elif (cache_phase and cache_phase not in ('archive_verified', 'archive_ready_for_staged_restore')
+            alerts.append(name + ': corrected H recovery cache failed; inspect retained recovery proofs')
+        elif (cache_phase and cache_phase not in ('archive_verified', 'archive_ready_for_staged_restore',
+                                                       'cache_reclaimed_after_verified_volume_replacement')
               and cache_service.get('ActiveState') not in ('active', 'activating')):
             alerts.append(name + ': corrected H recovery cache stopped before verification')
+        if cache_phase == 'cache_reclaimed_after_verified_volume_replacement':
+            cleanup = recovery_cache.get('cache_cleanup', {})
+            replacement = recovery_cache.get('volume_replacement', {})
+            if (cleanup.get('phase') != 'local_cache_reclaimed_after_verified_recovery'
+                    or not cleanup.get('recovery_archive_preserved')
+                    or replacement.get('phase') != 'recovery_replacement_complete'):
+                alerts.append(name + ': local cache reclaimed without completed recovery/cleanup evidence')
         old_cache = old_state.get('head_recovery_cache', {}).get('status', {})
         if (cache_phase == old_cache.get('phase') == 'downloading'
                 and cache_status.get('completed_bytes') == old_cache.get('completed_bytes')

@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-10-21T15:10:12Z",
+  "checked_at": "2026-10-21T15:14:12.231723+00:00",
   "worker": "lighthouse-erigon-2",
   "host": "159.89.21.191",
   "root_filesystem": {
     "total_bytes": 2536325763072,
-    "used_bytes": 1996460154880,
-    "available_bytes": 436746764288
+    "used_bytes": 1535295000576,
+    "available_bytes": 897911918592
   },
   "live_erigon_allocated_bytes": 1528990081024,
   "published_archive_apparent_source_bytes": 1172094659363,
@@ -30,7 +30,7 @@
     "/data/pbt-1/qualification",
     "/data/pbt-1/node-identity"
   ],
-  "note": "The eight unsqueeze rollback files were removed after full recovery-volume verification and configuration reconciliation. The live database and all surrounding qualification/conversion evidence are preserved. The verified local archive cache remains present; its later cleanup is separate.",
+  "note": "Both temporary copies are reclaimed: the eight unsqueeze rollback files and the verified local archive cache. The corrected recovery-volume archive is verified and configured, and the remote release is fully verified. Live database, original qualification and conversion evidence are preserved. No database compaction or pruning was performed.",
   "recovery_cache": {
     "staged": true,
     "download_started": true,
@@ -40,7 +40,7 @@
     "stored_cache_independent_hash_pending": false,
     "volume_replacement_started": true,
     "old_volume_archive_preserved": false,
-    "checked_at": "2026-10-21T15:10:12Z",
+    "checked_at": "2026-10-21T15:14:12.231723+00:00",
     "stored_file_readback": {
       "unit": "pbt-1-v3-head-cache-readback",
       "main_pid": 0,
@@ -60,8 +60,10 @@
     "stream_sha256_verified": true,
     "volume_replacement_completed": true,
     "original_provenance_preserved": true,
-    "local_cache_preserved": true,
-    "recovery_ready_receipt": "erigon-2-v3-recovery-ready.json"
+    "local_cache_preserved": false,
+    "recovery_ready_receipt": "erigon-2-v3-recovery-ready.json",
+    "local_cache_reclaimed": true,
+    "local_cache_cleanup_receipt": "erigon-2-cache-cleanup.json"
   },
   "root_filesystem_before_cache": {
     "total_bytes": 2536325763072,
