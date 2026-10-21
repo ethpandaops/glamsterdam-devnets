@@ -114,7 +114,8 @@ def ssh(args, data=None):
 
 
 def check():
-    evidence = json.loads(ssh(['python3', str(BASE / 'publish-pbt-artifacts.py'), 'worker-check']))
+    mode = ['env', 'PBT_ARTIFACT_EXPORT_ONLY=1'] if EXPORT_ONLY else []
+    evidence = json.loads(ssh(mode + ['python3', str(BASE / 'publish-pbt-artifacts.py'), 'worker-check']))
     validate_proof(evidence['proof'])
     return evidence
 

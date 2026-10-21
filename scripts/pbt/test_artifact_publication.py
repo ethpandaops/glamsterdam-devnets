@@ -26,6 +26,16 @@ def proof():
 
 
 class Publication(unittest.TestCase):
+    def test_export_only_check_passes_mode_to_remote_worker(self):
+        exported = proof()
+        exported.update(status='native_export_passed_independent_verification_deferred',
+                        independent_mpt_reconstruction_verified=False,
+                        verification_deferred_by_user=True)
+        evidence = {'proof': exported, 'proof_sha256': 'a' * 64}
+        with patch.object(m, 'EXPORT_ONLY', True), patch.object(m, 'ssh', return_value=json.dumps(evidence).encode()) as ssh:
+            self.assertEqual(m.check(), evidence)
+            self.assertEqual(ssh.call_args.args[0][:2], ['env', 'PBT_ARTIFACT_EXPORT_ONLY=1'])
+
     def test_deferred_verification_requires_explicit_mode_and_record(self):
         exported = proof()
         exported.update(status='native_export_passed_independent_verification_deferred',

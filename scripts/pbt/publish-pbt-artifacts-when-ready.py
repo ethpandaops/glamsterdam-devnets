@@ -13,7 +13,7 @@ import subprocess
 import time
 
 SCRIPT = Path(__file__).with_name('publish-pbt-artifacts.py')
-SCRIPT_SHA = '80fdd8149fe2e3b27f3bccd5bb467e25ea6ff075b5b62525758f0994358d453d'
+SCRIPT_SHA = '3ec657d5f20bbccc0d6ce1f343ac0f9b38a63920b0a8c30edd8784adac0a8b80'
 ROOT = Path.home() / '.local/state/pbt-1-run/artifact-publication'
 
 
