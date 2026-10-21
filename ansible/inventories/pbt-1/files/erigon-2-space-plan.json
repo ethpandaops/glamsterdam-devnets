@@ -10,7 +10,7 @@
   "live_erigon_allocated_bytes": 1528990081024,
   "published_archive_apparent_source_bytes": 1172094659363,
   "recovery_archive_bytes": 461165199193,
-  "recovery_archive_full_remote_verification_pending": true,
+  "recovery_archive_full_remote_verification_pending": false,
   "cache_fits_with_150GB_reserve": true,
   "cleanup_candidate": {
     "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup",
@@ -37,5 +37,16 @@
     "/data/pbt-1/qualification",
     "/data/pbt-1/node-identity"
   ],
-  "note": "The unsqueeze backup is required only for an unfinished conversion resume. Conversion has completed and qualified; retain this rollback data until the corrected recovery copy is proven. No database compaction or pruning is proposed."
+  "note": "The unsqueeze backup is required only for an unfinished conversion resume. Conversion has completed and qualified; retain this rollback data until the corrected recovery copy is proven. No database compaction or pruning is proposed.",
+  "recovery_cache": {
+    "staged": true,
+    "download_started": true,
+    "unit": "pbt-1-v3-head-recovery-cache",
+    "main_pid": 150731,
+    "path": "/data/pbt-1/v3-head-recovery/cache",
+    "stored_cache_independent_hash_pending": true,
+    "volume_replacement_started": false,
+    "old_volume_archive_preserved": true,
+    "checked_at": "2026-10-21T12:14:58.993499+00:00"
+  }
 }

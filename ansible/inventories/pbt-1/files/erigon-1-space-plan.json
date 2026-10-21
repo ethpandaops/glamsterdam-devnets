@@ -161,7 +161,7 @@
     "erigon_2_cache_path": "/data/pbt-1/v3-head-recovery/cache",
     "local_reserve_bytes": 150000000000,
     "download_only": true,
-    "new_mode_staged": false,
+    "new_mode_staged": true,
     "replacement_started": false,
     "tests_passed": {
       "recovery_downloader": 7,
@@ -180,11 +180,20 @@
       "sha256": "1a74fe1a8cba8064b6dd02c6546b4c88291df00afda68d3844135ae520f643f8",
       "option": "--stage-recovery-cache",
       "worker": "lighthouse-erigon-2",
-      "staged": false,
+      "staged": true,
       "starts_download": false,
       "changes_original_backup": false,
       "requires_current_worker_qualification_match": true,
       "checks_capacity_before_issuing_url": true
+    },
+    "erigon_2_cache_download": {
+      "unit": "pbt-1-v3-head-recovery-cache",
+      "main_pid": 150731,
+      "phase": "downloading",
+      "archive_bytes": 461165199193,
+      "old_volume_archive_preserved": true,
+      "replacement_started": false,
+      "checked_at": "2026-10-21T12:14:58.993499+00:00"
     }
   }
 }

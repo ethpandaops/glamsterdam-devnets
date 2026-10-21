@@ -7,12 +7,12 @@ No genesis time is selected and no shadowfork is authorized to launch.
 The private timestamped validation candidate is archived test evidence only;
 regenerate it after the user selects a launch time.
 
-Preparation checkpoint, **2026-10-21 11:13 UTC**:
+Preparation checkpoint, **2026-10-21 12:13 UTC**:
 
 | Component | Verified so far | Still required |
 | --- | --- | --- |
 | Three Geth, two Besu, two Nethermind workers | Each passed isolated startup checks at H=24,503,958 with its assigned process limits | Verified migration-file delivery to the seven recipients |
-| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive uploaded (461.17 GB); full remote readback and recovery-volume replacement remain |
+| Erigon-2 | All 4,091 commitment files converted; both original-binary verifications and retained-tail execution passed; two own H opens passed under 16 GiB / 8 CPU at 09:38 UTC | H archive fully published (461.17 GB); corrected recovery cache downloading; stored-copy checks and volume replacement remain |
 | Erigon-1 | Original H database and recovery archive preserved; N export (107.90 GB snapshot, 66.85 GB preimages) exited 0 at 07:18 UTC with matching metadata | Independent verification running; then preserve N artifacts, restore the verified v3 H release and run its own 32-GiB startup checks |
 | Genesis configuration | Private test candidate loaded in isolated Lighthouse at H with 2,304 validators; all nine inventory reviews passed | Regenerate and validate a fresh candidate after the user chooses G; distribute keys and promote only the public files afterward |
 
@@ -21,7 +21,7 @@ retained tail contained another 35,934 blocks. The native
 `stage_exec --block=24503958` reached H and exited successfully at 08:57 UTC;
 the second independent verifier passed at 09:37 UTC, followed by two clean
 worker opens at 09:38 UTC. The first independent verifier passed at 04:49 UTC.
-The corrected H archive is now uploading. See
+The corrected H archive passed full remote readback and publication at 12:11 UTC. See
 `files/erigon-2-v3-head-qualified.json`; migration remains unqualified.
 
 At 05:01 UTC, a recorded graceful interruption stopped tail reconstruction at
@@ -45,7 +45,7 @@ waiters were restored after the intentional handoff. Genesis and PBT times
 remain unset.
 
 The remaining preparation order is: finish the shared-artifact verification;
-publish and fully read back the shared N artifacts and corrected H archive;
+publish and fully read back the shared N artifacts (the corrected H archive is published);
 deliver independent inputs to seven workers; restore and qualify Erigon-1;
 reconcile recovery archive capacity and temporary storage; then audit all nine
 workers. After the last file-content checks/downloads and with preparation and
@@ -234,18 +234,20 @@ full checksum; retain the original download proofs as historical provenance.
 Do not leave two complete databases competing for migration scratch. This is
 separate from the shared N inputs above.
 
-The corrected H upload finished on October 21 at 11:12 UTC with **461,165,199,193 compressed bytes (429.49 GiB)**. Full remote checksum verification is still running. Both existing 550-GiB recovery volumes fit this archive after the reviewed replacement, with about 124.51 GB free afterward; no volume expansion is required. Erigon-2 has room for the local cache plus its 150-GB reserve while retaining its original backup. Erigon-1 still needs the restore/qualification/cleanup sequence above before caching the replacement.
+The corrected H upload finished on October 21 at 11:12 UTC with **461,165,199,193 compressed bytes (429.49 GiB)**. Full remote checksum verification passed at 12:11 UTC. Both existing 550-GiB recovery volumes fit this archive after the reviewed replacement, with about 124.51 GB free afterward; no volume expansion is required. Erigon-2 has room for the local cache plus its 150-GB reserve while retaining its original backup. Erigon-1 still needs the restore/qualification/cleanup sequence above before caching the replacement.
 
-The first H remote readback ended with a transport `ProtocolError` at 11:18 UTC. The upload remains complete. Both publication tools now hash ordered, ETag-bound 64-MiB ranges using four workers and up to five attempts per range. A short or interrupted range is retried before its bytes enter the hash; changed object identities and mismatched checksums still prevent publication. The H controller was restarted with `finish`, without repeating the upload. The N publication waiter was updated before authorization; native verification was not restarted. Six range-transfer tests and the existing publication/handoff tests passed. Full remote checksum verification remains required.
+The first H remote readback ended with a transport `ProtocolError` at 11:18 UTC. The upload remains complete. Both publication tools now hash ordered, ETag-bound 64-MiB ranges using four workers and up to five attempts per range. A short or interrupted range is retried before its bytes enter the hash; changed object identities and mismatched checksums still prevent publication. The H controller was restarted with `finish`, without repeating the upload. The N publication waiter was updated before authorization; native verification was not restarted. Six range-transfer tests and the existing publication/handoff tests passed. Both publishers still require a matching whole-object checksum before release.
 
 Erigon-2 also retains **148.43 GB** in the eight files under `/data/pbt-1/v3-head-upgrade/unsqueeze-backup`. The inode scan found no external hard links. Keep this rollback directory until the corrected recovery-volume copy passes its stored-file checksum and its job/proofs identify the new release. Then recheck its exact directory identity and process ownership before removing only this directory; preserve the live database and all surrounding conversion, verification and qualification evidence. See `files/erigon-2-space-plan.json`. No cleanup has run.
+
+The published metadata is recorded in `files/erigon-v3-head-release.json`. An anonymous HEAD request to the snapshot hostname returned HTTP 403 for both this object and the previous release. Authorized storage access works: Erigon-2 is downloading the verified object through its scoped URL. Do not describe the anonymous download route as verified.
 
 The cache downloader also accepts the separate, download-only profile
 `verified-erigon-v3-head-recovery-cache` on Erigon-2, restricted to
 `/data/pbt-1/v3-head-recovery/cache`. Erigon-1's existing restore-cache profile
 and path remain separate. Both local cache modes preserve 150 GB of root-disk
 space in addition to the remaining archive and range buffers. The new
-Erigon-2 mode is prepared locally, not staged or running. It does not delete,
+Erigon-2 mode is staged and downloading in its preparation unit. It does not delete,
 extract or replace anything. Seven downloader tests and eleven related restore
 tests passed after this change.
 

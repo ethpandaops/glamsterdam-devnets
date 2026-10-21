@@ -1,5 +1,5 @@
 {
-  "status": "full_remote_sha256_readback",
+  "status": "published_verified",
   "worker": "lighthouse-erigon-2",
   "host": "159.89.21.191",
   "head": 24503958,
@@ -15,7 +15,7 @@
   "remote_publication_directory": "/data/pbt-1/v3-head-publication",
   "multipart_job_created": true,
   "upload_started": true,
-  "published": false,
+  "published": true,
   "required_before_authorization": [
     "Successful H conversion and full v3 state verification",
     "Two pinned-image H opens at 16 GiB with matching head/root, sampled BAL bodies, and clean stops",
@@ -51,8 +51,8 @@
   "automatic_handoff": {
     "time": 1792529975.4853382,
     "unit": "pbt-1-v3-head-publication.service",
-    "unit_state": "MainPID=1591696\nResult=success\nActiveState=active\n",
-    "phase": "full_remote_sha256_readback",
+    "unit_state": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "phase": "published_verified",
     "multipart_authorized": true,
     "upload_started": true,
     "wait_limit_hours_per_stage": 24,
@@ -70,9 +70,9 @@
       "reason": "Controller deliberately stopped and recreated around native tail batch handoff; no upload authorization issued",
       "performance_evidence": "erigon-tail-performance-20261021.json"
     },
-    "observed_at_utc": "2026-10-21T11:24:57.055902+00:00"
+    "observed_at_utc": "2026-10-21T12:14:58.993499+00:00"
   },
-  "checked_at": "2026-10-21T11:24:57.055902+00:00",
+  "checked_at": "2026-10-21T12:14:58.993499+00:00",
   "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
   "qualification_evidence": "erigon-2-v3-head-qualified.json",
   "upload_cpu_observation": {
@@ -103,10 +103,7 @@
     "time": 1792576990.9363368,
     "decision": "Keep existing 400% CPU quota: sampled usage was 1.44 cores with zero throttling; no live configuration change or restart"
   },
-  "remaining_publication_gates": [
-    "Full remote archive SHA-256 readback",
-    "Publish metadata and checksum"
-  ],
+  "remaining_publication_gates": [],
   "upload_completed": true,
   "completed_upload": {
     "archive_bytes": 461165199193,
@@ -114,7 +111,7 @@
     "multipart_etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
     "multipart_completed_at": 1792581120.7168245,
     "worker_unit_result": "success",
-    "full_remote_sha256_verified": false
+    "full_remote_sha256_verified": true
   },
   "recovery_capacity_review": {
     "checked_at": "2026-10-21T11:13:28.393702+00:00",
@@ -167,6 +164,14 @@
     "helper": "scripts/pbt/remote_readback.py",
     "helper_sha256": "bb5b38be64caaa312949cf8ab9c90816fbec7ef49549016a9098df5a3ec14f1e",
     "tests_passed": 23,
-    "verification_complete": false
+    "verification_complete": true
+  },
+  "release_evidence": "erigon-v3-head-release.json",
+  "public_hostname_probe": {
+    "checked_at": "2026-10-21T12:14:58.993499+00:00",
+    "anonymous_head_status": 403,
+    "original_release_control_head_status": 403,
+    "authorized_storage_download_working": true,
+    "launch_blocker": false
   }
 }
