@@ -32,14 +32,23 @@ to genesis-pbt.json, mounts `/data/pbt-1/migration-input-24453558` and adds the
 pinned flags from the [command sheet](pbt-1-client-migration-commands.md). Keep
 it true on every later start.
 
+Waves mix clients (user, 09:03 UTC): one instance of each client stays on plain MPT
+while its sibling migrates, and Geth/Besu import the same N snapshot first for an
+early cross-client root comparison. Each wave starts only on the user's go.
+
+| Wave | Workers | Budget |
+| --- | --- | --- |
+| 1 | Geth-1 + Besu-1 (import) | 16 + 16 GiB |
+| 2 | Nethermind-1 (import) + Geth-3 (self; record P) | 16 + 16 GiB |
+| 3 | Geth-2 + Besu-2 (import) | 32 + 32 GiB |
+| 4 | Nethermind-2 (import) + Erigon-1 (offline convert/attach) | 32 + 32 GiB |
+| 5 | Erigon-2 (offline convert/attach) | 16 GiB |
+
 ```sh
-# From ansible/: one pair at a time; commit the host_vars change first.
-ansible-playbook playbook.yaml -t ethereum_node -l lighthouse-geth-1,lighthouse-geth-2
-# Then: besu-1+2, nethermind-1+2, geth-3 (self-migration; record P).
-# Erigon, one at a time: stop execution, run convert-pbt --keep-hex and attach-pbt
-# per the command sheet, then set pbt_migration_enabled and redeploy that host.
-# The pinned image lacks the tool: use /data/pbt-1/v3-tools-372df0e6/integration
-# (commit 372df0e6, has convert-pbt/attach-pbt) on both Erigon hosts.
+# From ansible/: set pbt_migration_enabled: true in both hosts' host_vars, commit, then:
+ansible-playbook playbook.yaml -t ethereum_node -l lighthouse-geth-1,lighthouse-besu-1
+# Erigon: stop execution, run /data/pbt-1/v3-tools-372df0e6/integration commitment
+# convert-pbt --keep-hex and attach-pbt per the command sheet, then enable and redeploy.
 # Progress: debug_migrationProgress; compare roots at identical block hashes.
 ```
 
