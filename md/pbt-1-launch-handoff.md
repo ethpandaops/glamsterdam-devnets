@@ -42,14 +42,14 @@ early cross-client root comparison. Each wave starts only on the user's go.
 | 2 | Nethermind-1 (import) + Geth-3 (self; record P) | 16 + 16 GiB |
 | 3 | Geth-2 + Besu-2 (import) | 32 + 32 GiB |
 | 4 | Nethermind-2 (import) | 32 GiB |
-| optional | Erigon-1, then Erigon-2 (convert-pbt on a hardlinked frozen copy, short stop for attach-pbt) | 32 / 16 GiB |
+| 5 | Erigon-1, then Erigon-2 (convert-pbt on a hardlinked frozen copy, short stop for attach-pbt) | 32 / 16 GiB |
 
 Priority (user, 09:35 UTC): the live-migration replay and measurements come from
 Geth, Besu and Nethermind (online import, BAL follower). Erigon already served as
-the shared N snapshot producer; its workers stay hex-only MPT at head unless time
-allows. Erigon conversion at this pin is offline convert-pbt plus attach-pbt and
-native re-execution catch-up (no BAL import). Its memory under a 16/32 GiB cap is
-unmeasured: Erigon's notes report an 88.4 GB RSS mainnet peak, mmap included.
+the shared N snapshot producer. Erigon conversion is required before S but runs
+after the Geth/Besu/Nethermind waves. Erigon conversion at this pin is offline convert-pbt plus attach-pbt and
+native re-execution catch-up (no BAL import). convert-pbt must run within the worker's 16/32 GiB
+bound (user); its memory under that cap is unmeasured: Erigon's notes report an 88.4 GB RSS mainnet peak, mmap included.
 
 ```sh
 # From ansible/: set pbt_migration_enabled: true in both hosts' host_vars, commit, then:
@@ -323,3 +323,10 @@ roots are observed at common canonical hashes, the network remains healthy,
 and the planned observation period is complete. After S, confirm all clients
 continue on one chain with advancing finality under the sustained workload;
 retain logs, configuration, resource peaks and explicit coverage exceptions.
+
+### Wave log
+
+- Wave 1 (Geth-1 + Besu-1) restarted 09:38:33–42 UTC with `-t ethereum_node_el`
+  (commit 5df86b9). Geth: `Phase=importing` from 09:38:47. Besu: in sync, migrator
+  verifying/loading the N snapshot from 09:39:01. Evidence:
+  `~/.local/state/pbt-1-run/migration/wave-1/` (baseline, deploy log, progress.jsonl).
