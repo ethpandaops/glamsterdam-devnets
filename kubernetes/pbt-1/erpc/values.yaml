@@ -133,9 +133,7 @@ erpc:
             - "rpc_modules"
             - "web3_clientVersion"
             - "debug_getRawReceipts"
-            - "debug_traceBlock"
-            - "trace_transaction"
-            - "trace_block"
+            # No tracing (debug_trace*/trace_*): keep trace load off the PBT workers.
         upstreams:
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-besu-1.srv.glamsterdam-pbt-1.ethpandaops.io
           - endpoint: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-besu-2.srv.glamsterdam-pbt-1.ethpandaops.io
