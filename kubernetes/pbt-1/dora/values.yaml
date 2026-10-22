@@ -4,7 +4,8 @@ dora:
   fullnameOverride: dora
   image:
     repository: registry-1.docker.io/ethpandaops/dora
-    tag: master-latest
+    # PBT migration column: ethpandaops/dora branch qu0b/pbt-migration-progress (PR pending).
+    tag: pbt-migration-progress
     pullPolicy: Always
   resources:
     requests:
@@ -56,6 +57,8 @@ dora:
       value: "24452538"
     - name: EXECUTIONAPI_GLOAS_DEPLOY_BLOCK
       value: "24452538"
+    - name: EXECUTIONAPI_PBT_MIGRATION_PROGRESS
+      value: "true"
     - name: FRONTEND_PPROF
       value: "true"
     - name: FRONTEND_SHOW_SENSITIVE_PEER_INFOS
