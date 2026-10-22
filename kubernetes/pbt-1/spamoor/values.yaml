@@ -28,8 +28,8 @@ spamoor:
           - path: /
             pathType: Prefix
 
-  # Preparation only: regenerate from the reviewed launch CL config after G is chosen.
-  customArgs: []
+  customArgs:
+    - --fulu-activation=1792659600
 
   persistence:
     enabled: true

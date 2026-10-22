@@ -54,9 +54,11 @@ ethereum_genesis_network_seed: glamsterdam-pbt-1
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Supply an explicit timestamp for generation. Preparing configs does not launch
-# the network; never inherit MSF-2's expired time or silently choose a launch time.
-ethereum_genesis_timestamp: "{{ pbt_genesis_timestamp | mandatory }}"
+# Launch genesis G: 2026-10-22 09:00:00 UTC (GENESIS_DELAY 0). Validator keys stay
+# in the private controller workspace and are never committed.
+pbt_genesis_timestamp: 1792659600
+pbt_genesis_workspace: /home/ubuntu/.local/state/pbt-1-run/genesis/launch-20261022-0900z
+ethereum_genesis_timestamp: "{{ pbt_genesis_timestamp }}"
 ethereum_genesis_timedelay: 0
 # The refreshed four-client MPT release, including 50,400 qualifying workload blocks.
 # CL genesis builds on H; N=24453558 is only the PBT migration artifact anchor.

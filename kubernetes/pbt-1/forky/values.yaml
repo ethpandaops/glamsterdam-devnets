@@ -76,8 +76,7 @@ forky:
           spec:
             seconds_per_slot: 12
             slots_per_epoch: 32
-            # Preparation only: regenerate after the user chooses G.
-            genesis_time: null
+            genesis_time: 1792659600
       sources:
         - name: lighthouse-besu-1
           type: "beacon_node"
