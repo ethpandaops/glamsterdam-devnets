@@ -173,6 +173,12 @@ coredevs_api_url: https://coredevs.analytics.production.platform.ethpandaops.io
 # in the coredevs team go in the extra list.
 github_all_extra_users:
   - bharath-123
+  # PBT client implementers: Geth (CPerezz), Besu (matkt), Erigon (awskii),
+  # Nethermind (asdacap).
+  - CPerezz
+  - matkt
+  - awskii
+  - asdacap
 bootstrap_default_user_authorized_keys_github_all: >-
   {{ (query('ethpandaops.general.url_cached', coredevs_api_url ~ '/api/v1/users/ethpandaops?format=txt') | select | list)
      + github_all_extra_users }}
