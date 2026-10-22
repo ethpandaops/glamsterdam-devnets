@@ -58,6 +58,12 @@
         - docker_remove_distro_buildx | default(false) | bool
         - ansible_facts.os_family == 'Debian'
       tags: [init-server, docker]
+    # The bootstrap role creates the default user without a shell (Debian: /bin/sh).
+    - name: Give the default user a bash login shell
+      ansible.builtin.user:
+        name: "{{ bootstrap_default_user | default('devops') }}"
+        shell: /bin/bash
+      tags: [init-server, bootstrap, bootstrap-default-user]
   roles:
     # - role: robertdebock.fail2ban
     #   tags: [init-server, fail2ban]
