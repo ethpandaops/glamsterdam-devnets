@@ -3,6 +3,9 @@
 pbt_migration_role: self
 pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
+# Started early with wave 1 (2026-10-22, user): self-migration takes longest.
+# Keep true on every later start.
+pbt_migration_enabled: true
 geth_container_memory: "16g"
 geth_container_memory_swap: "16g"
 geth_container_memory_swappiness: 0
