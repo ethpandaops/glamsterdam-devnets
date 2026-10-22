@@ -8,7 +8,7 @@ sections below the launch record are the preparation history they replaced.
 **Decisions (user, 2026-10-22):** G = `1792659600` (2026-10-22 09:00:00 UTC).
 S = `1793264400` (2026-10-29 09:00 UTC, i.e. 10:00 CET): a one-week window, so
 Maria's two-week observation goal is a recorded coverage exception. Migration
-starts after ≥2 finalized epochs and ~1 h of steady Spamoor load. At most two
+starts once ≥2 epochs are finalized; there is no load warm-up window (user, 08:58 UTC). At most two
 workers restart at once (each holds 11 % of stake). Erigon converts one at a
 time. Spamoor is funded only; the user starts load.
 
@@ -38,6 +38,8 @@ ansible-playbook playbook.yaml -t ethereum_node -l lighthouse-geth-1,lighthouse-
 # Then: besu-1+2, nethermind-1+2, geth-3 (self-migration; record P).
 # Erigon, one at a time: stop execution, run convert-pbt --keep-hex and attach-pbt
 # per the command sheet, then set pbt_migration_enabled and redeploy that host.
+# The pinned image lacks the tool: use /data/pbt-1/v3-tools-372df0e6/integration
+# (commit 372df0e6, has convert-pbt/attach-pbt) on both Erigon hosts.
 # Progress: debug_migrationProgress; compare roots at identical block hashes.
 ```
 
