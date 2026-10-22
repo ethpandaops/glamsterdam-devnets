@@ -333,3 +333,6 @@ retain logs, configuration, resource peaks and explicit coverage exceptions.
 - Geth-3 self-migration started early (user) at 09:51:16–25 UTC (commit c2aa154):
   `BinaryTrie: @1793264400` in chain config, `Phase=importing` from start. Evidence:
   `~/.local/state/pbt-1-run/migration/geth-3-self/`.
+- Wave 2: Nethermind-1 restarted 10:00:31–10:02:47 UTC (commit d638141; clean
+  shutdown took ~2 min). Re-processed 146 blocks to head, then `PBT verify preimages`.
+  Evidence: `~/.local/state/pbt-1-run/migration/wave-2/`.
