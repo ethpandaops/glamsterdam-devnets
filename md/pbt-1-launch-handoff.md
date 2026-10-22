@@ -41,8 +41,15 @@ early cross-client root comparison. Each wave starts only on the user's go.
 | 1 | Geth-1 + Besu-1 (import) | 16 + 16 GiB |
 | 2 | Nethermind-1 (import) + Geth-3 (self; record P) | 16 + 16 GiB |
 | 3 | Geth-2 + Besu-2 (import) | 32 + 32 GiB |
-| 4 | Nethermind-2 (import) + Erigon-1 (offline convert/attach) | 32 + 32 GiB |
-| 5 | Erigon-2 (offline convert/attach) | 16 GiB |
+| 4 | Nethermind-2 (import) | 32 GiB |
+| optional | Erigon-1, then Erigon-2 (convert-pbt on a hardlinked frozen copy, short stop for attach-pbt) | 32 / 16 GiB |
+
+Priority (user, 09:50 UTC): the live-migration replay and measurements come from
+Geth, Besu and Nethermind (online import, BAL follower). Erigon already served as
+the shared N snapshot producer; its workers stay hex-only MPT at head unless time
+allows. Erigon conversion at this pin is offline convert-pbt plus attach-pbt and
+native re-execution catch-up (no BAL import). Its memory under a 16/32 GiB cap is
+unmeasured: Erigon's notes report an 88.4 GB RSS mainnet peak, mmap included.
 
 ```sh
 # From ansible/: set pbt_migration_enabled: true in both hosts' host_vars, commit, then:
