@@ -362,4 +362,20 @@ retain logs, configuration, resource peaks and explicit coverage exceptions.
   - **Next:** a short stop to roll the node back to (B, S) per the printed remedy, then
     `attach-pbt --from=/data/pbt-1/erigon-pbt-out`, then enable `pbt_migration_enabled`
     (`--override.binary-trie=S`) and let native re-execution catch up.
+- Wave 5 (Erigon-2): converter started 10:40:56 UTC with the same procedure as Erigon-1, at
+  MemoryMax=16G, uid 1003, `/data/pbt-1/v3-tools-372df0e6/integration.pinned` (`c55a62b6…`).
+  Source: 9,162 hardlinked snapshot files.
+
+### Client issues observed (not caused by the migration)
+
+- **Erigon `372df0e6` builds invalid payloads.** About 10% of Erigon proposals have a wrong
+  state root, and every EL rejects them; 8 since genesis, the first at 09:13 UTC before any
+  migration. Matches devnet-8 BUG-906/BUG-892 (BAL-driven commitment). User decision: no
+  `BAL_DRIVEN_COMMITMENT=false` workaround. Evidence: Geth-2 `debug_getBadBlocks`.
+- **Erigon-2 SIGSEGV at 10:39:00 UTC** inside `mdbx_cursor_get`, while building block
+  24,504,421 (`SpawnBuilderExecStage` → commitment `BranchOwned` → `DomainRoTx.getLatestFromDb`).
+  Docker restarted it (exit 2, not OOM). RPC was overloaded and the EL offline until 10:40:33.
+  Same build-and-commitment path as the bad payloads.
+- **One block lost per EL migration restart:** for example slot 198 after the Besu-1 restart.
+  Expected; nothing to fix.
 
