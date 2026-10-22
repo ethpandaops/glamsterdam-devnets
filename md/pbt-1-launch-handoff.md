@@ -344,4 +344,22 @@ retain logs, configuration, resource peaks and explicit coverage exceptions.
   its inputs.
 - Ansible: EL host_vars no longer set memory_swappiness (permanent cgroup-v2 diff that
   recreated containers; commit 02f734e). Dry-run any multi-host EL deploy first.
+- Wave 5 (Erigon-1), online conversion, started 10:25:41 UTC; the node keeps following head:
+  - **Source** `/data/pbt-1/erigon-pbt-src`: the 956 snapshot files hardlinked at 10:25:01
+    (frozen set, no extra disk) plus a symlink to the live `chaindata`, which the converter
+    opens read-only like rpcdaemon (verified: no lock conflict).
+  - **Unit:** `systemd-run --unit=pbt-1-erigon-convert --uid=1002 -p MemoryMax=32G
+    -p MemorySwapMax=0 -p AllowedCPUs=8-15` (the node keeps CPUs 0-7 and its own 32 GiB),
+    `COMMITMENT_V3=true GOMAXPROCS=8`, running
+    `/data/pbt-1/v3-tools-372df0e6/integration commitment convert-pbt --datadir=<src>
+    --chain= --output.datadir=/data/pbt-1/erigon-pbt-out --keep-hex
+    --experimental.bin-commitment.hash=blake3`.
+  - **`--chain=` must be empty:** the custom-genesis DB stores no chain name, and `mainnet`
+    is refused.
+  - **The output dir must be pre-created** and owned by uid 1002.
+  - **Evidence:** `/data/pbt-1/erigon-pbt-convert/` (job.json, convert.log) and the controller
+    `migration/erigon-1-convert.jsonl`.
+  - **Next:** a short stop to roll the node back to (B, S) per the printed remedy, then
+    `attach-pbt --from=/data/pbt-1/erigon-pbt-out`, then enable `pbt_migration_enabled`
+    (`--override.binary-trie=S`) and let native re-execution catch up.
 
