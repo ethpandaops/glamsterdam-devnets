@@ -1,0 +1,95 @@
+{
+  "status": "startup_checks_passed",
+  "host": "lighthouse-erigon-1",
+  "client": "erigon",
+  "time": 1792610629.3229096,
+  "image": "registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+  "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+  "memory_gib": 32,
+  "cpus": 8,
+  "cpuset": "0-7",
+  "network_mode": "none",
+  "genesis_time": null,
+  "migration_qualified": false,
+  "full_deployment_qualified": false,
+  "converter_build": {
+    "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+    "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+    "binary": "/data/pbt-1/boundary-review/integration-bounded-view",
+    "independent_verifier_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03"
+  },
+  "preparation_path": "restored_verified_H_release",
+  "source_release_key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst",
+  "source_release_archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "local_v3_conversion_performed": false,
+  "head": 24503958,
+  "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+  "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+  "anchor": 24453558,
+  "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+  "node_id": "856d375bd5b0d630ae5a52c88023954fa9dc30daf746f3ba4c39e383ca5da6808d45f158a8bcf216887829689e13c221674395d2b90db36c3df9a51412ed24e9",
+  "state_code_samples": {
+    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+    "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+    "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+  },
+  "builder_contracts": {
+    "0x0000bff46984e3725691fa540a8c7589300d8282": {
+      "bytes": 628,
+      "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+    },
+    "0x000064d678505ad48f8ccb093bc65613800e8282": {
+      "bytes": 458,
+      "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+    }
+  },
+  "sampled_payload_bodies": {
+    "24453559": {
+      "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+      "bal_bytes": 453456,
+      "transactions": 942
+    },
+    "24478758": {
+      "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+      "bal_bytes": 450900,
+      "transactions": 942
+    },
+    "24503958": {
+      "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+      "bal_bytes": 450901,
+      "transactions": 942
+    }
+  },
+  "service_uid": 1002,
+  "missing_builder_contracts": [],
+  "first_stopped_state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-21T19:23:49.499197585Z",
+    "FinishedAt": "2026-10-21T19:24:15.127831478Z"
+  },
+  "native_reopen_verified": true,
+  "v3_format_verified": true,
+  "stopped_state": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-21T19:24:15.209072147Z",
+    "FinishedAt": "2026-10-21T19:24:20.645087667Z"
+  },
+  "finished_at": 1792610660.7385066
+}

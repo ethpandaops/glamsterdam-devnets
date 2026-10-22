@@ -1,0 +1,649 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-21",
+  "plan": "pbt-1-experiment.md",
+  "status": "planning_not_migration_evidence",
+  "anchors": {
+    "original_source": 24452538,
+    "shared_pbt_anchor": 24453558,
+    "worker_native_head": 24503958
+  },
+  "open_gates": [
+    "Migration-qualify the pinned client builds (all five pinned and build-verified; see scripts/pbt/migration-builds.json)",
+    "Qualify retained anchor and BAL access on each client (all nine workers passed sampled H/N/BAL startup checks; see pbt-1-worker-preparation.json)",
+    "Qualify per-client progress and PBT root capture",
+    "Qualify live migration catch-up and measure actual backlog per worker",
+    "Prove Besu BAL-path coverage separately from trie-log catch-up",
+    "Establish live finality and dual-tree observation requirements"
+  ],
+  "workers": [
+    {
+      "worker": "lighthouse-besu-1",
+      "client": "besu",
+      "memory_gib": 16,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792514474.4868264
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-besu-2",
+      "client": "besu",
+      "memory_gib": 32,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792518579.0119827
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-erigon-1",
+      "client": "erigon",
+      "memory_gib": 32,
+      "cpus": 8,
+      "mode": "local_conversion_and_attach",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": null,
+      "actual_conversion_point": null,
+      "historical_catchup_target": null,
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Own restored corrected H database; two isolated opens at 32 GiB / 8 CPU with H/N, state and retained BAL samples; migration and measured memory behavior remain unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json",
+            "../ansible/inventories/pbt-1/files/erigon-1-startup-result.json",
+            "../ansible/inventories/pbt-1/files/erigon-1-v3-restore-complete.json"
+          ],
+          "finished_at": 1792610660.7385066
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-erigon-2",
+      "client": "erigon",
+      "memory_gib": 16,
+      "cpus": 8,
+      "mode": "local_conversion_and_attach",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": null,
+      "actual_conversion_point": null,
+      "historical_catchup_target": null,
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Own converted H database; two isolated opens at 16 GiB / 8 CPU with H/N, state and retained BAL samples; migration and measured memory behavior remain unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json",
+            "../ansible/inventories/pbt-1/files/erigon-2-v3-head-qualified.json"
+          ],
+          "finished_at": 1792575491.1237776
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "shared_artifact_verification": {
+          "status": "deferred_by_user",
+          "phase": "after_genesis_before_migration",
+          "scope": "Standalone shared-pair verification is deferred under the October 21 instruction to proceed from the successful native export and investigate concrete import/startup failures. This is an explicit exception to the planning guide, not a passed verification.",
+          "evidence": [],
+          "source": "https://github.com/misilva73/pbt-planning/blob/95ac0b56c5ad69ca99d3e3e8e77729d541d7a739/outreach/pbt-mainnet-fork-migration-test-plan.md#commands",
+          "blocks_initial_mpt_launch": false
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-geth-1",
+      "client": "geth",
+      "memory_gib": 16,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792514363.317832
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-geth-2",
+      "client": "geth",
+      "memory_gib": 32,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792520674.6184611
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-geth-3",
+      "client": "geth",
+      "memory_gib": 16,
+      "cpus": 8,
+      "mode": "self_conversion",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": null,
+      "actual_conversion_point": null,
+      "historical_catchup_target": null,
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792517532.3163881
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-nethermind-1",
+      "client": "nethermind",
+      "memory_gib": 16,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792514362.3163595
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    {
+      "worker": "lighthouse-nethermind-2",
+      "client": "nethermind",
+      "memory_gib": 32,
+      "cpus": 8,
+      "mode": "shared_import",
+      "worker_mpt_start_block": 24503958,
+      "expected_import_anchor_block": 24453558,
+      "actual_conversion_point": null,
+      "historical_catchup_target": {
+        "first_block": 24453559,
+        "last_block": 24503958,
+        "blocks": 50400
+      },
+      "observed_replay_mechanism": null,
+      "observed_replay_ranges": [],
+      "gates": {
+        "build_and_restore": {
+          "status": "startup_checks_passed",
+          "scope": "Pinned build and H database startup, state/BAL samples and clean shutdown; migration remains unqualified",
+          "evidence": [
+            "pbt-1-worker-preparation.json"
+          ],
+          "finished_at": 1792518879.7182176
+        },
+        "migration": {
+          "status": "pending",
+          "evidence": []
+        },
+        "initial_catchup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "root_agreement": {
+          "status": "pending",
+          "evidence": []
+        },
+        "restart": {
+          "status": "pending",
+          "evidence": []
+        },
+        "resource_limits": {
+          "status": "pending",
+          "evidence": []
+        },
+        "dual_tree_observation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "activation": {
+          "status": "pending",
+          "evidence": []
+        },
+        "final_backup": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_workload": {
+          "status": "pending",
+          "evidence": []
+        },
+        "live_migration_catchup": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    }
+  ],
+  "scope": "Live shadowfork migration and catch-up; no mandatory offline checkpoint replay benchmark",
+  "live_workload": {
+    "status": "pending_shadowfork_launch",
+    "execution_and_state_gas_target_fraction": 0.5,
+    "fixed_additional_block_count": null
+  },
+  "memory_accounting": {
+    "status": "pending_stopped_worker_cache_handoff",
+    "evidence": "ansible/inventories/pbt-1/files/memory-accounting-review.json",
+    "observed_during_preparation": true,
+    "migration_memory_result": false,
+    "required_before_measured_startup": [
+      "All preparation, download and checksum jobs stopped",
+      "Execution clients stopped",
+      "Clean preparation page cache evicted after sync, with per-worker evidence",
+      "No later database/input content scan outside the measured client cgroup"
+    ],
+    "measurement_fields": [
+      "memory.current",
+      "memory.peak",
+      "memory.stat",
+      "memory.events",
+      "process_RSS",
+      "process_PSS"
+    ]
+  }
+}

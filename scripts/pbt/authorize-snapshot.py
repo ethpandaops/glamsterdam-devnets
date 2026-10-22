@@ -8,6 +8,8 @@ import argparse
 import hashlib
 import json
 import os
+from pathlib import PurePosixPath
+import shlex
 import subprocess
 import urllib.request
 
@@ -21,7 +23,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--host', required=True, help='SSH destination, e.g. root@164.92.239.96')
     parser.add_argument('--identity', required=True, help='SSH private key path')
+    parser.add_argument('--state-dir', default='/data/pbt-1/snapshot-fetcher',
+                        help='Dedicated remote fetcher directory beneath /data/pbt-1')
     args = parser.parse_args()
+    state_dir = PurePosixPath(args.state_dir)
+    if not state_dir.is_relative_to('/data/pbt-1') or '..' in state_dir.parts:
+        parser.error('--state-dir must be beneath /data/pbt-1 without parent traversal')
     token = os.environ['TF_VAR_cloudflare_api_token']
     request = urllib.request.Request(
         'https://api.cloudflare.com/client/v4/user/tokens/verify',
@@ -48,9 +55,9 @@ def main():
     signed_url = aws('s3', 'presign', f's3://{BUCKET}/{OBJECT}', '--expires-in', '86400')
     subprocess.run(
         ['ssh', '-i', args.identity, '-o', 'BatchMode=yes', '--', args.host,
-         'umask 077; mkdir -p /data/pbt-1/snapshot-fetcher; '
-         'cat > /data/pbt-1/snapshot-fetcher/source-url; '
-         'chmod 600 /data/pbt-1/snapshot-fetcher/source-url'],
+         'umask 077; mkdir -p ' + shlex.quote(str(state_dir)) + ' && '
+         'cat > ' + shlex.quote(str(state_dir / 'source-url')) + ' && '
+         'chmod 600 ' + shlex.quote(str(state_dir / 'source-url'))],
         input=signed_url, text=True, check=True,
     )
     print(f'Verified {SIZE} bytes; installed a 24-hour read URL on {args.host}.')

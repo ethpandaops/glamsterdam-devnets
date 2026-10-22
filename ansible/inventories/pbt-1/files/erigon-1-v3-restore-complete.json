@@ -1,0 +1,20 @@
+{
+  "time": 1792610618.764187,
+  "profile": "restored_verified_H_release",
+  "host": "glamsterdam-pbt-1-lighthouse-erigon-1",
+  "bundle_sha256": "aa1f372f6d73abf7d877fd631e9481004c17abe2b4cea363f93f83082d16ff45",
+  "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "restored_identity": {
+    "device": 65025,
+    "inode": 17039362
+  },
+  "original_identity": {
+    "device": 65025,
+    "inode": 15990787
+  },
+  "preserved_path": "/data/pbt-1/erigon-original-h-preserved",
+  "local_v3_conversion_performed": false,
+  "worker_qualified": false,
+  "archive_transfer": "stream",
+  "genesis_time": null
+}

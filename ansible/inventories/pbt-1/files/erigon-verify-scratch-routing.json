@@ -1,0 +1,31 @@
+{
+  "time": 1792545875.1824996,
+  "temporary_volume_id": "634c5395-cce7-11f1-b928-12c5d35e2ba6",
+  "tmpdir_argument": "/data/pbt-1/artifacts-24453558/verify-tmp",
+  "target": "/mnt/pbt-export-scratch/verify-temp",
+  "device": 2064,
+  "free_bytes": 471999909888,
+  "native_verifier_command": [
+    "/data/pbt-1/rehearsal-tools/erigon/build/bin/erigon",
+    "snapshots",
+    "verify-pbt",
+    "--datadir=/data/pbt-1/rehearsal-24453558/erigon",
+    "--snapshot=/data/pbt-1/artifacts-24453558/pbt-snapshot.bin",
+    "--preimages=/data/pbt-1/artifacts-24453558/framed.bin",
+    "--block=24453558",
+    "--tmpdir=/data/pbt-1/artifacts-24453558/verify-tmp"
+  ],
+  "native_source_sha256": "f352cf63abcedd91c38efc3c3b0f58e6328ffd5354704ee4cf26346f18547e9e",
+  "guard_sha256": "cb38c96d396309ee8d36602d4af9948031ff2c2b6c365135d6c8894ba8824759",
+  "guard_scope": "export_and_verify_scratch",
+  "scratch_reserve_bytes": 50000000000,
+  "root_reserve_unchanged_bytes": 150000000000,
+  "native_export_restarted": false,
+  "verification_started": false,
+  "remove_before_launch": true,
+  "capacity_adjustment": {
+    "evidence": "erigon-export-scratch-resize.json",
+    "size_gib": 1500,
+    "completed_before_verification": true
+  }
+}

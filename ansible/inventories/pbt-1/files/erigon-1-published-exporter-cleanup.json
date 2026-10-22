@@ -1,0 +1,36 @@
+{
+  "phase": "published_exporter_reclaimed",
+  "time": 1792604094.5234609,
+  "paths": [
+    "/data/pbt-1/v3-source-index-recovery/datadir",
+    "/data/pbt-1/rehearsal-24453558/erigon",
+    "/data/pbt-1/artifacts-24453558/pbt-snapshot.bin",
+    "/data/pbt-1/artifacts-24453558/framed.bin"
+  ],
+  "protected": {
+    "/data/pbt-1/erigon": {
+      "device": 65025,
+      "inode": 15990787,
+      "bytes": 4096,
+      "mtime_ns": 1792439838747654067
+    },
+    "/mnt/pbt-recovery/erigon-24503958.tar.zst": {
+      "device": 2048,
+      "inode": 15,
+      "bytes": 534953200071,
+      "mtime_ns": 1792507726841456735
+    },
+    "/data/pbt-1/pipeline": {
+      "device": 65025,
+      "inode": 17432581,
+      "bytes": 12288,
+      "mtime_ns": 1792493870435747419
+    }
+  },
+  "release_proof_sha256": "d197d7c9dce024cbf1cd1f1356f9fdc5c22d749ff15ffe56c0fb5a8d3ff5466c",
+  "independent_mpt_reconstruction_verified": false,
+  "reason": "User chose successful native export and transfer checks; N release published and source recovery retained remotely",
+  "free_bytes_before": 484635910144,
+  "finished_at": 1792604115.4916594,
+  "free_bytes_after": 1369547280384
+}

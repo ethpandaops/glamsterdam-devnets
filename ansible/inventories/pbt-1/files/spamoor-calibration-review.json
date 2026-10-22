@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-10-21T09:29:35.067797+00:00",
+  "status": "stopped bounded calibration file prepared; live workload qualification pending",
+  "config": "scripts/pbt/spamoor-calibration.yaml",
+  "sha256": "96d129ea9b602d21304e04bd65961eb4f48e2b2048ce7e79f84c98daab86004c",
+  "spamoor_source_commit": "dabf895fa1891a93a654ae7201515045ca989167",
+  "native_checks": [
+    "ResolveConfigImports",
+    "ResolveRunConfigs",
+    "ValidateScenarioConfig",
+    "typed YAML decoding against each ScenarioDefaultOptions",
+    "all four start=false, finite counts, positive rates, 20-minute timeout"
+  ],
+  "rpc_contacted": false,
+  "wallets_initialized": false,
+  "imported": false,
+  "started": false,
+  "qualified_50_percent": false,
+  "genesis_time": null,
+  "scenarios": [
+    {
+      "name": "eoatx",
+      "per_slot": 20,
+      "total_count": 1200,
+      "timeout": "20m",
+      "start": false
+    },
+    {
+      "name": "erc20tx",
+      "per_slot": 20,
+      "total_count": 1200,
+      "timeout": "20m",
+      "start": false
+    },
+    {
+      "name": "uniswap-swaps",
+      "per_slot": 2,
+      "total_count": 120,
+      "timeout": "20m",
+      "start": false
+    },
+    {
+      "name": "storagespam",
+      "per_slot": 1,
+      "total_count": 60,
+      "timeout": "20m",
+      "start": false
+    }
+  ],
+  "target": {
+    "execution_gas": 100000000,
+    "state_gas": 100000000,
+    "block_gas_limit": 200000000,
+    "dimension_tolerance": 5000000,
+    "minimum_bal_bytes": 307200
+  },
+  "pending": [
+    "Verify deployed Spamoor image/options and Amsterdam gas estimation",
+    "Launch and observe treasury withdrawals, then fund Spamoor",
+    "Import stopped and review configuration before starting calibration",
+    "Measure both actual EIP-8037 gas dimensions and BAL size on matching canonical hashes",
+    "Tune and qualify sustained live 50% load before measured migration"
+  ]
+}

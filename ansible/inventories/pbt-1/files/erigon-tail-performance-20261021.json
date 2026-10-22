@@ -1,0 +1,98 @@
+{
+  "observed_at_utc": "2026-10-21T05:03:31Z",
+  "worker": "lighthouse-erigon-2",
+  "scope": "H restoration preparation; not a PBT migration benchmark",
+  "original_native_binary_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+  "before": {
+    "native_pid": 88242,
+    "first_committed_block": 24468052,
+    "last_sample_block": 24468651,
+    "sample_seconds": 449.02099990844727,
+    "blocks_per_second": 1.3340133314970404,
+    "late_execution_only_rate_blocks_per_second": 10,
+    "between_batch_gap_seconds_approx": 8,
+    "wall_profile_seconds": 692.96,
+    "main_exec_caller_commit_seconds_approx": 299.08,
+    "cpu_profile_samples": 5993,
+    "cpu_get_latest_from_files_inclusive_percent": 39.78,
+    "major_fault_samples": 210107,
+    "major_fault_lookup_from_files_inclusive_percent": 85.56,
+    "major_fault_prefetch_path_inclusive_percent": 67.36,
+    "major_fault_background_merge_inclusive_percent": 14.15,
+    "main_exec_caller_mdbx_commit_seconds_approx": 168.87,
+    "main_exec_caller_temporal_buffer_flush_seconds_approx": 117.18
+  },
+  "decision": {
+    "change": "native --batchSize=4G from default 512M",
+    "native_binary_changed": false,
+    "background_maintenance_changed": false,
+    "memory_limit_gib": 112,
+    "cpu_limit": 8,
+    "no_prune_env": "true",
+    "qualification_memory_gib": 16,
+    "same_validation_and_publication_gates": true
+  },
+  "handoff": {
+    "native_stop": "SIGINT requested by interrupted wrapper finally block",
+    "forced_kill": false,
+    "stopped_block": 24469105,
+    "resumed_from": 24469106,
+    "new_wrapper_pid": 90345,
+    "new_native_pid": 90441,
+    "helper_sha256": "4bc8479a016e28a4c5de8d3a45c06ae8f997555785a45ff31d38f5408939a553",
+    "remote_evidence": "/data/pbt-1/v3-head-upgrade/tail-batch-handoff",
+    "local_test_cases": 2,
+    "invalid_proof_variants_rejected": 14,
+    "initial_helper_preflight_error": "Missing sha attribute in older pinned driver; corrected to local checksum function before native database opened",
+    "transient_units_recreated_after_collection": true,
+    "qualification_waiter_restarted": true,
+    "publication_waiter_restarted": true
+  },
+  "after_first_batch": {
+    "blocks": 256,
+    "execution_seconds": 20.219242033,
+    "invalid": 0,
+    "includes_final_database_flush": false,
+    "sustained_rate_pending": true
+  },
+  "genesis_time": null,
+  "pbt_activation": false,
+  "after_measured_interval": {
+    "observed_at_utc": "2026-10-21T05:06:06.892Z",
+    "first_batch_start_block": 24469106,
+    "latest_batch_start_block": 24470127,
+    "committed_blocks": 1021,
+    "seconds_including_database_flushes": 175.11800003051758,
+    "blocks_per_second": 5.830354388595528,
+    "nonzero_invalid_log_lines": 0,
+    "oom_kills": 0,
+    "caveat": "Short interval; cache warming and changing file layout also affect rate. Not a controlled same-block A/B comparison."
+  },
+  "later_sample": {
+    "observed_at_epoch": 1792560044.3889868,
+    "sample_seconds": 10.000518321990967,
+    "native_cpu_cores": 5.431718462087236,
+    "write_MB_s": 175.15308463044505,
+    "read_MB_s": 68.36729797259979,
+    "memory_current_GiB": 97.01436614990234,
+    "io_pressure_some_avg10_percent": 16.68,
+    "memory_pressure_some_avg10_percent": 0.07,
+    "rate_since_batch_change_blocks_per_second": 4.41967530894112,
+    "note": "Rate declined after the initial interval; no additional runtime setting changed. Native default already uses SafeNoSync; setting MDBX_NO_FSYNC alone would not select a different mode."
+  },
+  "bounded_syscall_observation": {
+    "native_pid": 90441,
+    "fsync_fdatasync_trace_seconds": 40,
+    "fsync_fdatasync_calls_above_1ms_observed": 0,
+    "write_and_sync_trace_seconds": 90,
+    "calls_above_100ms": [
+      {
+        "syscall": "msync",
+        "duration_ms": 12248.334
+      }
+    ],
+    "observer_exit_code": 124,
+    "exit_reason": "Expected timeout of perf observer, not termination of native replay",
+    "decision": "Retain existing runtime settings; a long msync confirms flush cost but this limited sample does not establish a further beneficial tuning change."
+  }
+}

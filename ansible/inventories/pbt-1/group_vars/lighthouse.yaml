@@ -6,14 +6,16 @@ bootstrap_default_user_authorized_keys_github_team_cl: >-
      + lighthouse_extra_github_users }}
 
 # role: validator_keys
+# Select signing files from the explicitly chosen, validated private candidate.
+validator_keys_local_dir: "{{ pbt_genesis_workspace | mandatory }}/validator-keys/{{ inventory_hostname }}"
 validator_keys_sync_files:
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/keys/"
+  - src: "{{ validator_keys_local_dir }}/keys/"
     dest: "{{ lighthouse_validator_datadir }}/keys/"
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/secrets/"
+  - src: "{{ validator_keys_local_dir }}/secrets/"
     dest: "{{ lighthouse_validator_datadir }}/secrets/"
 
 validator_bls_sync_files:
-  - src: "{{ inventory_dir }}/files/validator_keys/{{ inventory_hostname }}/change_operations.json"
+  - src: "{{ validator_keys_local_dir }}/change_operations.json"
     dest: "{{ lighthouse_validator_datadir }}/change_operations.json"
     owner: lighthouse
     group: lighthouse

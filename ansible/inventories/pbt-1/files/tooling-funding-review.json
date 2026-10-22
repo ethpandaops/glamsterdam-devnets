@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-21T09:11:59.783070+00:00",
+  "status": "MSF-2 funding configuration matched; live funding pending",
+  "withdrawal_funding": {
+    "recipient": "0x454b0EA7d8aD3C56D0CF2e44Ed97b2Feab4D7AF2",
+    "credential_type": "0x01",
+    "validator_balance_eth": 10000,
+    "effective_balance_eth": 32,
+    "initial_excess_eth": 22966272,
+    "funding_path": "CL excess-balance withdrawals to account 0, then transfer to Spamoor account 9",
+    "live_withdrawals_verified": false
+  },
+  "spamoor_root_wallet": "0x455f42d91096c4Aa708D7Cbcb2DC499dE89C402c",
+  "spamoor_mnemonic_index": 9,
+  "configured_spamoor_private_key_address_verified": true,
+  "verification_scope": "Selected SOPS fields derived in memory; only addresses recorded. Existing isolated Lighthouse decoded genesis confirms all 2304 withdrawal credentials and balances.",
+  "same_secret_reference_as_msf_2": true,
+  "genesis_ssz_sha256": "cf6154061688af7b271aace7c37dfd269713b6bf1851d8d8520fce344b3e2ba6",
+  "genesis_time": null,
+  "live_funding_sent": false,
+  "rpc_endpoints_reconciled": 9,
+  "funding_script": "scripts/fund-shadowfork.sh",
+  "after_launch_dry_run": "scripts/fund-shadowfork.sh pbt-1 --only-spamoor --dry-run",
+  "after_launch_fund": "scripts/fund-shadowfork.sh pbt-1 --only-spamoor",
+  "negative_checks_passed": [
+    "wrong withdrawal type",
+    "wrong recipient",
+    "missing excess balance",
+    "wrong effective balance"
+  ],
+  "pending": [
+    "User-selected G and regenerated/revalidated launch genesis",
+    "Live CL withdrawal sweep observed in canonical EL payloads and treasury balance",
+    "Recipient code/balance check, funding transfer receipt, Spamoor root balance",
+    "Start and measure the live mixed workload after funding"
+  ]
+}

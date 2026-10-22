@@ -2,6 +2,7 @@ localhost
 
 [all:vars]
 ethereum_network_name=${ethereum_network_name}
+primary_bootnode=${primary_dns_host}
 
 %{ for gid, group in groups ~}
 [${replace(gid, "-", "_")}]
@@ -106,10 +107,11 @@ buildoor
 consensus_node
 execution_node
 
-%{ if contains(keys(groups), "bootnode") ~}
-[dns_server:children]
-bootnode
-%{ endif ~}
+[dns_server]
+${primary_dns_host}
+
+# Tooling templates include this group; discovery uses the existing Geth worker.
+[bootnode]
 
 [mev_boost:children]
 consensus_node

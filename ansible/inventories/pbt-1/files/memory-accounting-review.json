@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-21T06:41:39.248789+00:00",
+  "worker": "lighthouse-erigon-1",
+  "scope": "Read-only accounting observation during preparation; not a migration memory measurement",
+  "native_pid": 47602,
+  "native_cgroup": "/system.slice/pbt-1-native-anchor-export.service",
+  "process_kib": {
+    "VmRSS": 44358608,
+    "RssAnon": 9720948,
+    "RssFile": 34637660,
+    "RssShmem": 0
+  },
+  "cgroup_bytes": {
+    "memory_max": 34359738368,
+    "memory_current": 34355548160,
+    "memory_peak": 34359754752,
+    "anon": 9962692608,
+    "file": 23193579520,
+    "file_mapped": 13914144768,
+    "file_dirty": 0,
+    "file_writeback": 0,
+    "shmem": 0,
+    "kernel": 1170534400
+  },
+  "memory_events": {
+    "low": 0,
+    "high": 0,
+    "max": 413675,
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "interpretation": "RSS and cgroup-owned pages differ. This is consistent with file-cache ownership outside the exporter cgroup; the exact original owner of each page was not traced. The 32-GiB charge limit remains configured and no OOM occurred.",
+  "sources": [
+    "https://docs.kernel.org/admin-guide/cgroup-v2.html#memory-ownership",
+    "https://docs.kernel.org/admin-guide/sysctl/vm.html#drop-caches"
+  ],
+  "pending_handoff": "Erigon-2 completed its stopped-worker preparation-cache handoff at 16:12 UTC on October 21. Eight workers remain pending. Repeat on any worker after later preparation reads of database/input contents before measured client startup.",
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "handoff_checkpoint": {
+    "checked_at": "2026-10-21T16:12:14.428056+00:00",
+    "completed_workers": {
+      "lighthouse-erigon-2": {
+        "evidence": "erigon-2-memory-handoff.json",
+        "before_cached_kib": 121128456,
+        "after_cached_kib": 185192,
+        "migration_memory_measurement": false
+      }
+    },
+    "pending_workers": [
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2",
+      "lighthouse-erigon-1"
+    ],
+    "requires_repeat_after_later_preparation_content_reads": true
+  }
+}

@@ -76,8 +76,8 @@ config:
 
     # Ansible generated ethereum nodes inventory
     - path: /api/v1/nodes/inventory
-      upstream: bootnode-1.srv.glamsterdam-pbt-1.ethpandaops.io
+      upstream: lighthouse-geth-1.srv.glamsterdam-pbt-1.ethpandaops.io
       target: /meta/api/v1/inventory.json
     - path: /api/v1/nodes/validator-ranges
-      upstream: bootnode-1.srv.glamsterdam-pbt-1.ethpandaops.io
+      upstream: lighthouse-geth-1.srv.glamsterdam-pbt-1.ethpandaops.io
       target: /meta/api/v1/validator-ranges.json

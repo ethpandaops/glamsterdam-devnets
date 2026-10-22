@@ -38,6 +38,7 @@ bad() { echo "FAIL $*"; fail=1; }
 ok() { echo "ok   $*"; }
 
 want_hash="$(jq -r '.result.hash' "$block_json")"
+want_state_root="$(jq -r '.result.stateRoot' "$block_json")"
 amsterdam="$(jq -r '.config.amsterdamTime' "$meta/genesis.json")"
 printf 'expect head %s %s, amsterdamTime %s\n' "$height" "$want_hash" "$amsterdam"
 
@@ -53,6 +54,21 @@ blobs="$(jq -r '.config.blobSchedule | keys[]' "$meta/genesis.json" | grep -vxE 
 [ -z "$blobs" ] && ok "genesis.json blobSchedule" || bad "genesis.json has unexpected blobSchedule entries: $blobs"
 cl_hash="$(cat "$meta/deposit_contract_block_hash.txt" 2>/dev/null || true)"
 [ "$cl_hash" = "$want_hash" ] && ok "CL genesis builds on $want_hash" || bad "deposit_contract_block_hash.txt '$cl_hash' != block file hash"
+if [ "$net" = pbt-1 ]; then
+  # PBT starts from the prepared MPT head. Scheduling migration is a later gate.
+  if [ -e "$meta/mnemonics.yaml" ] || [ -e "$meta/values.env" ] || [ -d "$meta/validator-keys" ]; then
+    bad "PBT public metadata contains signing inputs; copy only the validated public file list"
+  else
+    ok "PBT public metadata excludes generator signing inputs"
+  fi
+  provenance="$root/ansible/inventories/pbt-1/files/genesis-input-provenance.json"
+  [ "$height" = 24503958 ] && ok "PBT execution anchor height" || bad "PBT must start at 24503958"
+  [ "$want_hash" = "$(jq -r '.hash' "$provenance")" ] \
+    && [ "$want_state_root" = "$(jq -r '.state_root' "$provenance")" ] \
+    && ok "PBT anchor hash and MPT root" || bad "PBT anchor differs from pinned provenance"
+  cmp -s "$meta/genesis.json" "$root/ansible/inventories/pbt-1/files/source-genesis.json" \
+    && ok "PBT preserves inherited execution genesis" || bad "PBT execution genesis changed before initial launch"
+fi
 fee="$(jq -r '.result.baseFeePerGas' "$block_json")"
 echo "info head gasLimit $(( $(jq -r '.result.gasLimit' "$block_json") )) baseFee $(( fee )) wei"
 [ $(( fee )) -lt 100000000000 ] || echo "warn baseFee >= 100 gwei: the 8282 deploy txs (100 gwei cap) wait for it to decay"
@@ -74,6 +90,10 @@ for h in $hosts; do
   if [ -z "$num" ]; then bad "$h: no RPC answer"; continue; fi
   [ "$(( num ))" = "$height" ] && [ "$hash" = "$want_hash" ] && ok "$h head $height" \
     || bad "$h head $(( num )) $hash"
+  if [ "$net" = pbt-1 ]; then
+    state_root="$(jq -r '.result.stateRoot // empty' <<<"$b")"
+    [ "$state_root" = "$want_state_root" ] && ok "$h MPT state root" || bad "$h MPT state root $state_root"
+  fi
   # a post-Amsterdam snapshot (msf-2) has no next fork: amsterdam is current
   next="$(rpc "$h" eth_config '[]' | jq -r '(.result.next // .result.current).activationTime // empty' 2>/dev/null || true)"
   if [ -z "$next" ]; then echo "warn $h: no eth_config, check amsterdamTime in its startup log"
@@ -111,6 +131,7 @@ cd "$root/ansible"
 ansible -i "$inv" 'ethereum_node:bootnode' -b -o -m shell -a '
   u=$(df -P /data | awk "NR==2{print int(\$5)}"); [ "$u" -lt 85 ] && echo "disk=${u}%" || echo "BAD disk=${u}%"
   [ ! -d /data/erigon ] || { [ -f /data/erigon/snapshots/preverified.toml ] && echo erigon-preverified || echo "BAD no erigon preverified.toml"; }
+  [ ! -d /data/pbt-1/erigon ] || { [ -f /data/pbt-1/erigon/snapshots/preverified.toml ] && echo pbt-erigon-preverified || echo "BAD no PBT erigon preverified.toml"; }
   [ ! -d /data/ethrex/chain-1 ] || { [ -f /data/ethrex/chain-1/metadata.json ] && echo ethrex-metadata || echo "BAD no ethrex metadata.json"; }' 2>/dev/null \
   | sed -nE 's/^([^ ]+) \| [A-Z]+.*\(stdout\) (.*)$/\1 \2/p; t; s/^([^ ]+) \| (FAILED|UNREACHABLE).*/\1 BAD \2/p' \
   > "$ids.disk" || true

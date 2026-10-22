@@ -1,0 +1,31 @@
+{
+  "time": 1792539012.253596,
+  "script_sha256": "bc6222ddc335abaca122457b0ff0e750f84216196687e22211af42d450ad211b",
+  "exit_code": null,
+  "refusal": null,
+  "conversion_status_unchanged": true,
+  "output_created": true,
+  "export_started": true,
+  "genesis_time": null,
+  "status": "native_export_running",
+  "script": "scripts/pbt/export-erigon-anchor.py",
+  "worker": "lighthouse-erigon-1",
+  "target_block": 24453558,
+  "source": "/data/pbt-1/rehearsal-24453558/erigon",
+  "output": "/data/pbt-1/artifacts-24453558",
+  "native_binary_sha256": "7d3c5beb8b985d54400c10cb09d6381860da387e85a8a74f0336795f08d025f4",
+  "guard_tests_passed": 8,
+  "free_space_start_bytes": 450000000000,
+  "free_space_stop_bytes": 150000000000,
+  "automatic_start_queued": false,
+  "full_state_export_verified": false,
+  "shadowfork_finality_established": false,
+  "anchor_qualified": true,
+  "current": {
+    "phase": "export",
+    "pid": 47602,
+    "time": 1792538988.2720637,
+    "free_bytes": 448952229888,
+    "anchor": 24453558
+  }
+}

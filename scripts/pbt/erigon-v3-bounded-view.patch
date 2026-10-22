@@ -1,0 +1,38 @@
+--- a/db/state/commitment_convert_v3.go
++++ b/db/state/commitment_convert_v3.go
+@@ -215,6 +215,9 @@
+ 			defer converting.Done()
+ 			wat := at.a.BeginFilesRo()
+ 			defer wat.Close()
++			for _, domain := range []kv.Domain{kv.AccountsDomain, kv.StorageDomain, kv.CommitmentDomain} {
++				limitLegacyConversionFiles(wat.d[domain], stepTo-1)
++			}
+ 			vals := &legacyFileValues{accounts: wat.d[kv.AccountsDomain], storage: wat.d[kv.StorageDomain], maxStep: stepTo - 1}
+ 			conv := v3.NewLegacyConverter(vals, st.keysV2, incremental)
+ 			prevs := wat.d[kv.CommitmentDomain]
+@@ -595,6 +598,25 @@
+ 		return nil
+ 	})
+ 	return next, ok, err
++}
++
++// limitLegacyConversionFiles narrows a freshly opened worker-owned view before
++// its first lookup. The converter never reads past maxStep. Remove only a
++// trailing suffix whose files start after the bound: all original indices and
++// any file crossing the bound stay intact, so getLatestFromFiles still rejects
++// split boundaries. The aggregator's shared visible generation is unchanged.
++// The narrowed view lives until its worker closes it; do not widen it later
++// after lazy reader arrays have been allocated for the shorter file list.
++func limitLegacyConversionFiles(dt *DomainRoTx, maxStep kv.Step) {
++	if maxStep == kv.NoStepBound {
++		return
++	}
++	maxTxNum := maxStep.LastTxNum(dt.stepSize)
++	end := len(dt.files)
++	for end > 0 && dt.files[end-1].startTxNum > maxTxNum {
++		end--
++	}
++	dt.files = dt.files[:end]
+ }
+ 
+ type legacyFileValues struct {

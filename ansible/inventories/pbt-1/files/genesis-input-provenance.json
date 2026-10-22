@@ -1,0 +1,11 @@
+{
+  "head": 24503958,
+  "hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+  "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+  "source_key": "pbt-1/20261019-mixed-8037-v2/geth/24503958/_snapshot_eth_getBlockByNumber.json",
+  "source_genesis_sha256": "3efbcddc03af8e09a40d4a0440e656bc43340e5374e3b4336f60782fd607fd0a",
+  "published_hash_only_block_sha256": "c0d0ce3a1ed58290603d10dd2506f92f88d633719b9ef82aa6305383623745ae",
+  "block_file_sha256": "4ebd9c9724dad154b8ba0332053c40db4f0a8197f327aa3cffc7c100764ee9bd",
+  "full_transactions_source": "Isolated original Geth source, eth_getBlockByNumber(H, true); stopped after export",
+  "transaction_count": 942
+}

@@ -1,4 +1,8 @@
 ---
+# Override the shared all-group default at the worker-group level. The umbrella
+# role forwards this to client roles; local Besu image IDs cannot be pulled.
+ethereum_node_images_always_pull: false
+
 ethereum_cl_bootnodes: >-
   {{
     (
@@ -10,7 +14,7 @@ ethereum_cl_bootnodes: >-
     )
     +
     (
-      [primary_bootnode, 'lighthouse-geth-1', 'prysm-geth-1', 'teku-nethermind-1', 'nimbus-besu-1', 'prysm-reth-1', 'teku-erigon-1']
+      groups['ethereum_node'] | unique | list
       | map('extract', hostvars, ['ethereum_node_fact_discovery_cl_enr'])
       | select('defined')
       | reject('equalto', '')
@@ -20,25 +24,23 @@ ethereum_cl_bootnodes: >-
 
 ethereum_el_bootnodes: >-
   {{
-    (
-      [primary_bootnode]
-      | map('extract', hostvars, ['bootnodoor_fact_el_enr'])
-      | select('defined')
-      | reject('equalto', '')
-      | list
-    )
-    +
-    (
-      [primary_bootnode, 'lighthouse-geth-1', 'prysm-geth-1', 'teku-nethermind-1', 'nimbus-besu-1', 'prysm-reth-1', 'teku-erigon-1']
-      | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr'])
-      | select('defined')
-      | reject('equalto', '')
-      | list
-    )
+    groups['ethereum_node']
+    | reject('equalto', inventory_hostname)
+    | map('extract', pbt_peer_identities, 'enr')
+    | unique
+    | list
   }}
 
 
 ethereum_node_xatu_sentry_enabled: true
+
+# Peer identities are prepared outside DB snapshots; discovery must read those
+# same keys rather than the cloned keys inside restored databases.
+ethereum_node_fact_discovery_el_key_cmd:
+  geth: cat /data/pbt-1/node-identity/nodekey
+  besu: cat /data/pbt-1/node-identity/nodekey
+  erigon: cat /data/pbt-1/node-identity/nodekey
+  nethermind: xxd -p -c32 /data/pbt-1/node-identity/node.key.plain
 
 # role: ethpandaops.general.brakebear
 brakebear_download_speed: "{{ ethereum_node_cl_supernode_enabled | ternary('1000Mbps', '100Mbps') }}"

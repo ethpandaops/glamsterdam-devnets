@@ -1,0 +1,225 @@
+{
+  "time": 1792528959.4377546,
+  "worker": "lighthouse-erigon-1",
+  "measurement": "du -sx --block-size=1 with the listed directories in one invocation, so hardlinks are counted once across the invocation",
+  "bytes": {
+    "exporter_upgrade_and_recovery": 428075167744,
+    "exporter_restore_additional": 395487686656,
+    "preserved_H_database": 1054319771648,
+    "pipeline": 49348694016,
+    "boundary_review": 198901760,
+    "rehearsal_tools": 8720826368,
+    "filesystem_free": 469204631552
+  },
+  "exporter_combined_bytes": 823562854400,
+  "head_conversion_required_free_bytes": 1000000000000,
+  "projected_free_before_new_export_artifacts_bytes": 1292767485952,
+  "projection_excludes_future_growth_and_retained_artifacts": true,
+  "reclamation_performed": false,
+  "required_before_reclamation": [
+    "Exporter reaches exact N and native reopen checks pass",
+    "Shared artifact pair passes native verification at N",
+    "Artifact pair and provenance safely preserved with verified recovery/readback",
+    "Preserve logs/proofs and original older-source recovery location",
+    "All exporter processes stopped; inspect inode/link sharing and exact deletion paths",
+    "Re-measure actual free space before starting H conversion"
+  ],
+  "protected": [
+    "/data/pbt-1/erigon",
+    "/mnt/pbt-recovery/erigon-24503958.tar.zst",
+    "/data/pbt-1/pipeline"
+  ],
+  "genesis_time": null,
+  "original_source_recovery_review": {
+    "evidence": "erigon-original-source-recovery.json",
+    "checked_at": 1792531354.6731582,
+    "object_key": "jochemnet/erigon/24452538/snapshot-pruned.tar.zst",
+    "bytes": 276341609865,
+    "etag": "\"2240fe1dc4db000cabbe16c13d9a8680-4118\"",
+    "object_access_verified": true,
+    "full_archive_sha256_rechecked": false
+  },
+  "checkpoint_offload": {
+    "time": 1792539900.7454233,
+    "status": "full_checksum_verified_and_exclusive_old_checkpoints_reclaimed",
+    "source": "lighthouse-erigon-1:/data/pbt-1/v3-source-upgrade",
+    "destination": "lighthouse-geth-2:/data/pbt-1/erigon-exporter-recovery/tree",
+    "method": "rsync -aH over pinned-host-key VPC SSH, followed by full --checksum dry-run comparison",
+    "source_access": "Restricted transfer key removed after full checksum verification",
+    "measured_unique_bytes": 428075384832,
+    "measured_exclusive_bytes": 115968249856,
+    "reclamation_performed": true,
+    "new_resources_provisioned": false,
+    "reason": "Preserve the older exporter checkpoint on existing spare local storage before considering reclaiming its exclusive old files during export",
+    "do_not_remove": [
+      "source proof/log files",
+      "live exporter database",
+      "original H database",
+      "original H recovery archive"
+    ],
+    "exclusive_bytes_reclaimed": 115966246912,
+    "reclaimed_paths": [
+      "/data/pbt-1/v3-source-upgrade/original-checkpoint",
+      "/data/pbt-1/v3-source-upgrade/unsqueeze-backup"
+    ],
+    "evidence": "erigon-exporter-checkpoint-offload.json",
+    "restricted_transfer_key_removed": true,
+    "private_key_removed": true
+  },
+  "temporary_filesystem_reserve": {
+    "evidence": "erigon-export-filesystem-reserve.json",
+    "original_reserved_blocks": 25171402,
+    "temporary_reserved_blocks": 6291125,
+    "block_size": 4096,
+    "available_increase_bytes": 77333614592,
+    "export_guard_reserve_unchanged_bytes": 150000000000,
+    "restore_before_launch": true,
+    "restored": false
+  },
+  "temporary_export_scratch": {
+    "volume_id": "634c5395-cce7-11f1-b928-12c5d35e2ba6",
+    "volume_size_gib": 1500,
+    "temporary_preparation_only": true,
+    "remove_before_launch": true,
+    "native_restarted": false,
+    "evidence": "erigon-export-scratch-routing.json",
+    "resize_evidence": "erigon-export-scratch-resize.json",
+    "removed": true,
+    "removal_evidence": "erigon-export-scratch-removal.json"
+  },
+  "provisional_H_archive_sizing": {
+    "checked_at": "2026-10-21T06:18:14.187823+00:00",
+    "worker": "lighthouse-erigon-2",
+    "source_running": true,
+    "measurement": "Metadata-only file sizes using the pinned uploader archive exclusions; not a final archive size or restore authorization",
+    "apparent_bytes": 830884937119,
+    "directory_apparent_bytes": {
+      "snapshots": 360718601631,
+      "txpool": 939528192,
+      "chaindata": 468152467456,
+      "migrations": 1073778688,
+      "caplin": 294912,
+      "downloader": 266240
+    },
+    "disappeared_entries": 0,
+    "excludes_conversion_backups_and_temp": true,
+    "original_recovery_volume_filesystem_capacity_bytes": 585693347840,
+    "original_recovery_archive_bytes": 534953200071,
+    "original_archive_identity_matches_prior_full_checksum": true,
+    "required_next": "After H qualification and publication, measure the stopped source and actual compressed release; preserve the existing E1 H database until the reviewed replacement path has passed its recovery checks."
+  },
+  "post_tail_restore_capacity_review": {
+    "source_measurement": {
+      "time": 1792573271.8000958,
+      "scope": "provisional metadata-only sizing during read-only verification; not final stopped-source authorization",
+      "apparent_bytes": 1172364122915,
+      "estimated_bound_bytes": 1192372896547,
+      "directory_bytes": {
+        "snapshots": 360747887395,
+        "txpool": 939528192,
+        "chaindata": 809602367488,
+        "migrations": 1073778688,
+        "caplin": 294912,
+        "downloader": 266240
+      },
+      "entries": 1071,
+      "disappeared_entries": 0,
+      "root_free_bytes": 749489831936
+    },
+    "candidate_reclamation": {
+      "time": 1792573418.8259265,
+      "paths": [
+        "/data/pbt-1/v3-source-index-recovery/datadir",
+        "/data/pbt-1/rehearsal-24453558/erigon",
+        "/data/pbt-1/artifacts-24453558/pbt-snapshot.bin",
+        "/data/pbt-1/artifacts-24453558/framed.bin"
+      ],
+      "exclusive_file_bytes": 884909174784,
+      "shared_file_bytes_not_reclaimable": 4395995136,
+      "directory_allocated_bytes": 2207744,
+      "root_free_bytes": 484683210752,
+      "entries_disappeared": 0,
+      "scope": "Read-only inode accounting; symlinks not followed; no cleanup authorized by this measurement alone"
+    },
+    "restore_reserve_bytes": 150000000000,
+    "projected_free_bytes": 1369592385536,
+    "projected_margin_above_restore_bound_and_reserve_bytes": 27219488989,
+    "reclamation_performed": false,
+    "new_storage_required_by_projection": false,
+    "requirements": [
+      "Independent N verification and full remote artifact readback complete",
+      "Exporter/verifier/uploader stopped and no remaining file owners",
+      "Keep source proof/log directories and metadata; inspect exact database subtrees only",
+      "Recheck hardlink ownership and filesystem free space before removal",
+      "Use final stopped, qualified H source size and verified release for restore authorization",
+      "Preserve original H database, original H recovery archive and payload corpus"
+    ],
+    "limitation": "Provisional sizes while verifiers run. No cleanup or restore authorization; final source measurement and actual free space remain mandatory."
+  },
+  "recovery_archive_replacement_preparation": {
+    "checked_at": "2026-10-21T09:53:23.002495+00:00",
+    "downloader_sha256": "aff2f94c2b85bdb61bcdd1987dd44258ece6e0481af20389dad9f09d71510e3e",
+    "erigon_2_cache_profile": "verified-erigon-v3-head-recovery-cache",
+    "erigon_2_cache_path": "/data/pbt-1/v3-head-recovery/cache",
+    "local_reserve_bytes": 150000000000,
+    "download_only": true,
+    "new_mode_staged": true,
+    "replacement_started": false,
+    "tests_passed": {
+      "recovery_downloader": 7,
+      "verified_restore": 11,
+      "release_staging": 8
+    },
+    "requires": [
+      "Verified H release, actual archive size/checksum/ETag",
+      "Own worker H qualification",
+      "Complete hashed corrected local cache before reclaiming original volume archive",
+      "Stored recovery-volume copy checksum before removing local cache",
+      "Preserved original provenance and updated corrected recovery job/proof"
+    ],
+    "controller_staging": {
+      "script": "scripts/pbt/prepare-erigon-release-restore.py",
+      "sha256": "1a74fe1a8cba8064b6dd02c6546b4c88291df00afda68d3844135ae520f643f8",
+      "option": "--stage-recovery-cache",
+      "worker": "lighthouse-erigon-2",
+      "staged": true,
+      "starts_download": false,
+      "changes_original_backup": false,
+      "requires_current_worker_qualification_match": true,
+      "checks_capacity_before_issuing_url": true
+    },
+    "erigon_2_cache_download": {
+      "unit": "pbt-1-v3-head-recovery-cache",
+      "main_pid": 150731,
+      "phase": "downloading",
+      "archive_bytes": 461165199193,
+      "old_volume_archive_preserved": true,
+      "replacement_started": false,
+      "checked_at": "2026-10-21T12:14:58.993499+00:00"
+    }
+  },
+  "verified_H_release_staged": {
+    "bundle_sha256": "aa1f372f6d73abf7d877fd631e9481004c17abe2b4cea363f93f83082d16ff45",
+    "archive_bytes": 461165199193,
+    "unpacked_upper_bound_bytes": 1192103432995,
+    "private_modes_verified": true,
+    "restore_started": false,
+    "cache_download_started": false,
+    "checked_at": "2026-10-21T12:19:01.213777+00:00",
+    "controller": "scripts/pbt/prepare-erigon-release-restore.py --stage",
+    "worker_directory": "/data/pbt-1/v3-head-restore",
+    "next_gate": "Verified shared N publication, stopped exporter and exact cleanup; remeasure free space before read-only restore preflight"
+  },
+  "current_reclamation_policy": {
+    "updated": "2026-10-21",
+    "user_instruction": "Proceed from successful native export; investigate further if imports/startup fail",
+    "independent_mpt_reconstruction": "deferred_by_user",
+    "separate_remote_and_recipient_readbacks": "deferred_by_user",
+    "required_before_exporter_reclamation": [
+      "N release published with matching source SHA-256 and Content-MD5 multipart transfer evidence",
+      "Uploader stopped and no remaining file owners",
+      "Preserve original H database/archive, metadata and logs",
+      "Measure actual free space before H restore"
+    ]
+  }
+}

@@ -1,0 +1,912 @@
+{
+  "checked_at": "2026-10-21T09:41:41.634544+00:00",
+  "genesis_time": null,
+  "launch_authorized": false,
+  "scope": "Isolated worker startup checks; not PBT migration qualification",
+  "workers": {
+    "lighthouse-geth-1": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-geth-1",
+      "client": "geth",
+      "time": 1792514345.212783,
+      "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+      "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+      "memory_gib": 16,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "88979db4d909f9acb7cbd316deb703eed00faf20ef1c073c8ad19364811dab3dbdd319c255bdef7f2fcf929d17f031e6db21d8ef91d01fcbb18cac87f1ca469a",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1002,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-20T16:39:05.38352312Z",
+        "FinishedAt": "2026-10-20T16:39:23.258868081Z"
+      },
+      "finished_at": 1792514363.317832
+    },
+    "lighthouse-nethermind-1": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-nethermind-1",
+      "client": "nethermind",
+      "time": 1792514346.3264031,
+      "image": "registry-1.docker.io/ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+      "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+      "memory_gib": 16,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "10ed620fbfdefa42fa127706ef60a2a4ef2c53ba2a8abb12d3496cf5cb285a1978cb4d3e34557485909c6336a2608bf7a76388962097efa0a21fb0941c4bcf3b",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1002,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 130,
+        "Error": "",
+        "StartedAt": "2026-10-20T16:39:06.55007497Z",
+        "FinishedAt": "2026-10-20T16:39:22.247148103Z"
+      },
+      "finished_at": 1792514362.3163595
+    },
+    "lighthouse-besu-1": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-besu-1",
+      "client": "besu",
+      "time": 1792514457.9677122,
+      "image": "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4",
+      "commit": "39377a2659f63c3bb230a5f57b4ef6846348f876",
+      "memory_gib": 16,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "c6284ad5ffa91fd15b452fa7b44509cc33b884e38547388c6fd0f1cf417e68c304ff42d862fc6906c4f710ec2a60882326f92c5bb0fcbe53598ead0fb4189f47",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1002,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 143,
+        "Error": "",
+        "StartedAt": "2026-10-20T16:40:58.143479968Z",
+        "FinishedAt": "2026-10-20T16:41:14.424469868Z"
+      },
+      "finished_at": 1792514474.4868264
+    },
+    "lighthouse-geth-2": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-geth-2",
+      "client": "geth",
+      "time": 1792520654.8137348,
+      "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+      "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+      "memory_gib": 32,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "2096bde5681308cbd1c199afe980e68dd307ac0f0fa2c14c6887fbda85366644d051bc387376f87cc33a7a8678d5812056ad245a92aa5dc7936228bc6e1ca16e",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1003,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-20T18:24:15.542726393Z",
+        "FinishedAt": "2026-10-20T18:24:34.52585829Z"
+      },
+      "finished_at": 1792520674.6184611
+    },
+    "lighthouse-geth-3": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-geth-3",
+      "client": "geth",
+      "time": 1792517514.4285762,
+      "image": "registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826",
+      "commit": "84a12eff96347929ab62b65cfeb1194478445518",
+      "memory_gib": 16,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "8c1ee3b4dc98dd7a8051daa9fca0db10a400fbfdf762e5caf00f9d62d51059e778a820454a1f8395085486ffbdc79509cc8301b258da8ef3e2e6d106e3473377",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1003,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-20T17:31:54.501685912Z",
+        "FinishedAt": "2026-10-20T17:32:12.244129831Z"
+      },
+      "finished_at": 1792517532.3163881
+    },
+    "lighthouse-nethermind-2": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-nethermind-2",
+      "client": "nethermind",
+      "time": 1792518863.2436695,
+      "image": "registry-1.docker.io/ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17",
+      "commit": "f4e295193e426230547c59dcdb8decb25d725418",
+      "memory_gib": 32,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "90cbba7c5603bd91f3defce832b65e3c77300c08a2934795ebae94e67adf9efdb0da88876ac621aee03290c52d789b4a901910440e756ee90fe0518d01019ce6",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1003,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 130,
+        "Error": "",
+        "StartedAt": "2026-10-20T17:54:23.865776603Z",
+        "FinishedAt": "2026-10-20T17:54:39.644197241Z"
+      },
+      "finished_at": 1792518879.7182176
+    },
+    "lighthouse-besu-2": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-besu-2",
+      "client": "besu",
+      "time": 1792518532.339561,
+      "image": "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71",
+      "commit": "39377a2659f63c3bb230a5f57b4ef6846348f876",
+      "memory_gib": 32,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "6fb8ff85c2370d3d13dae963498d66bdf8eed94d0234610fa6fc233832192fc12347ec8a110d59674dc2c1deb6eb23cbd2aaea05010612a9951f0177026bcaff",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1003,
+      "missing_builder_contracts": [],
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 143,
+        "Error": "",
+        "StartedAt": "2026-10-20T17:48:52.439413973Z",
+        "FinishedAt": "2026-10-20T17:49:38.935053825Z"
+      },
+      "finished_at": 1792518579.0119827
+    },
+    "lighthouse-erigon-1": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-erigon-1",
+      "client": "erigon",
+      "time": 1792610629.3229096,
+      "image": "registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+      "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+      "memory_gib": 32,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "converter_build": {
+        "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+        "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+        "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+        "binary": "/data/pbt-1/boundary-review/integration-bounded-view",
+        "independent_verifier_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03"
+      },
+      "preparation_path": "restored_verified_H_release",
+      "source_release_key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst",
+      "source_release_archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+      "local_v3_conversion_performed": false,
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "856d375bd5b0d630ae5a52c88023954fa9dc30daf746f3ba4c39e383ca5da6808d45f158a8bcf216887829689e13c221674395d2b90db36c3df9a51412ed24e9",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1002,
+      "missing_builder_contracts": [],
+      "first_stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-21T19:23:49.499197585Z",
+        "FinishedAt": "2026-10-21T19:24:15.127831478Z"
+      },
+      "native_reopen_verified": true,
+      "v3_format_verified": true,
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-21T19:24:15.209072147Z",
+        "FinishedAt": "2026-10-21T19:24:20.645087667Z"
+      },
+      "finished_at": 1792610660.7385066
+    },
+    "lighthouse-erigon-2": {
+      "status": "startup_checks_passed",
+      "host": "lighthouse-erigon-2",
+      "client": "erigon",
+      "time": 1792575479.947087,
+      "image": "registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69",
+      "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+      "memory_gib": 16,
+      "cpus": 8,
+      "cpuset": "0-7",
+      "network_mode": "none",
+      "genesis_time": null,
+      "migration_qualified": false,
+      "full_deployment_qualified": false,
+      "converter_build": {
+        "base_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+        "patch_sha256": "4b04368aad6cf9ee38058eb5d6e6bed79ac251a49138b9c9c28a0c6455483ab9",
+        "binary_sha256": "1f807caefedc534ae837641ebff1dfdc37c0378ea8e3556263bddd1eb276e9f3",
+        "binary": "/data/pbt-1/boundary-review/integration-bounded-view",
+        "independent_verifier_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03"
+      },
+      "head": 24503958,
+      "head_hash": "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216",
+      "state_root": "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22",
+      "anchor": 24453558,
+      "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+      "node_id": "a4a71053368b8c05e7cd9bf30e07964d1390a8e65d1333a532ba00c89bf32c6effffa7a0f214de51033c8408052f06eb7305bba327583c6dd67e36f96d8996e2",
+      "state_code_samples": {
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+        "0x00000961ef480eb55e80d19ad83579a64c007002": "22ac79b68752353c9bfbc6213fee1ec168df0f5abd2336c9ec239fc324e370b7",
+        "0x0000bbddc7ce488642fb579f8b00f3a590007251": "99e3d84dc4a4440c78a64619a2b451c08654cc83b44441585cb6db159478d661"
+      },
+      "builder_contracts": {
+        "0x0000bff46984e3725691fa540a8c7589300d8282": {
+          "bytes": 628,
+          "sha256": "2c49dcf745b1304f3dac0ea7487eae6d8fd07812ada980d542f79e8e5e53eb8d"
+        },
+        "0x000064d678505ad48f8ccb093bc65613800e8282": {
+          "bytes": 458,
+          "sha256": "c889ed88730d157d192aae28c2dee61324d0df3bd01ff0078386808b4adb27aa"
+        }
+      },
+      "sampled_payload_bodies": {
+        "24453559": {
+          "sha256": "bb10d33af91d7d3978ae4c04d44d6d5cbf6be77f4bf8dd16f944d2e794aa654e",
+          "bal_bytes": 453456,
+          "transactions": 942
+        },
+        "24478758": {
+          "sha256": "2cb47e480c050d4810236137518a3bdf831dde574a09b81632ee04b9b01f4c06",
+          "bal_bytes": 450900,
+          "transactions": 942
+        },
+        "24503958": {
+          "sha256": "3e407f4d48c417c12852fd4d7b18433e462dd804122e20ead8da3ba7ac1657c1",
+          "bal_bytes": 450901,
+          "transactions": 942
+        }
+      },
+      "service_uid": 1003,
+      "missing_builder_contracts": [],
+      "first_stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-21T09:38:00.027384307Z",
+        "FinishedAt": "2026-10-21T09:38:05.555049121Z"
+      },
+      "native_reopen_verified": true,
+      "v3_format_verified": true,
+      "stopped_state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-21T09:38:05.631755504Z",
+        "FinishedAt": "2026-10-21T09:38:11.049626003Z"
+      },
+      "finished_at": 1792575491.1237776
+    }
+  },
+  "fleet_observation": {
+    "lighthouse-geth-3": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-geth-2": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-nethermind-2": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-erigon-2": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "active"
+      },
+      "erigon_upgrades": {
+        "head": {
+          "status": {
+            "phase": "unsqueeze",
+            "time": 1792515723.6941936,
+            "target_block": 24503958,
+            "command": [
+              "/data/pbt-1/v3-tools-372df0e6/integration",
+              "commitment",
+              "convert",
+              "--datadir=/data/pbt-1/erigon",
+              "--chain=mainnet",
+              "--squeeze=false"
+            ],
+            "free_bytes": 1375482822656
+          },
+          "service": {
+            "MainPID": "11152",
+            "Result": "success",
+            "ActiveState": "active",
+            "SubState": "running"
+          },
+          "log": {
+            "bytes": 94179,
+            "mtime": 1792520584.8384068
+          },
+          "latest_progress": "[INFO] [10-20|18:19:38.382] [commitment_convert] phase 1 file=v1.1-commitment.0-1024000.kv processing 147.97k key/s at 639.24M/1.05G (1/4091 files, 60.7% overall by keys) ",
+          "memory_events": {
+            "low": "0",
+            "high": "0",
+            "max": "185471",
+            "oom": "0",
+            "oom_kill": "0",
+            "oom_group_kill": "0"
+          },
+          "memory_limits": {
+            "memory.max": "103079215104",
+            "memory.current": "103078723584"
+          },
+          "io_stat": [
+            "254:0 rbytes=895311794176 wbytes=255389298688 rios=35089814 wios=507418 dbytes=0 dios=0",
+            "8:0 rbytes=4096 wbytes=0 rios=1 wios=0 dbytes=0 dios=0"
+          ],
+          "cpu_usage_usec": 2927250634
+        }
+      }
+    },
+    "lighthouse-besu-2": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-nethermind-1": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-besu-1": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-geth-1": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {}
+    },
+    "lighthouse-erigon-1": {
+      "extraction": null,
+      "download_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "erigon_upgrades": {
+        "exporter": {
+          "status": {
+            "phase": "convert-v3",
+            "time": 1792519684.3989334,
+            "command": [
+              "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+              "commitment",
+              "convert",
+              "--datadir=/data/pbt-1/rehearsal-24453558/erigon",
+              "--chain=mainnet",
+              "--v3"
+            ],
+            "free_bytes": 639893528576
+          },
+          "service": {
+            "MainPID": "14835",
+            "Result": "success",
+            "ActiveState": "active",
+            "SubState": "running"
+          },
+          "log": {
+            "bytes": 47048,
+            "mtime": 1792520724.9898362
+          },
+          "latest_progress": "[INFO] [10-20|18:25:06.891] [commitment_convert] v3 file=v2.2-commitment.0-1024000.kv 444.96k key/s at 387.12M/910.15M (1/219 files, 42.5% overall by keys) ",
+          "memory_events": {
+            "low": "0",
+            "high": "0",
+            "max": "43428",
+            "oom": "0",
+            "oom_kill": "0",
+            "oom_group_kill": "0"
+          },
+          "memory_limits": {
+            "memory.max": "103079215104",
+            "memory.current": "103077433344"
+          },
+          "io_stat": [
+            "254:0 rbytes=592641900544 wbytes=76036591616 rios=14689664 wios=138522 dbytes=0 dios=0"
+          ],
+          "cpu_usage_usec": 6544156226
+        },
+        "exporter_index_recovery": {
+          "status": {
+            "phase": "indexes_reused_by_conversion",
+            "time": 1792520108.4149432,
+            "review": "review.json"
+          },
+          "service": {
+            "MainPID": "0",
+            "Result": "success",
+            "ActiveState": "inactive",
+            "SubState": "dead"
+          },
+          "log": {
+            "bytes": 10875,
+            "mtime": 1792519068.2359674
+          },
+          "latest_progress": "[INFO] [10-20|17:57:29.777] [snapshots] Indexing                     progress=\"v2.1-commitment.0-1024000.kvi=99%\" total-indexing-time=11m20s alloc=3.9GB sys=4.4GB",
+          "memory_events": null,
+          "memory_limits": {},
+          "io_stat": null,
+          "cpu_usage_usec": 0
+        }
+      }
+    }
+  },
+  "runtime_review": "ansible/inventories/pbt-1/files/runtime-review.json",
+  "worker_results_updated_at": "2026-10-21T19:26:02.465846+00:00",
+  "fleet_observation_note": "Historical runtime checkpoint at checked_at; use fleet/latest.json and current launch handoff for live preparation/recovery status.",
+  "preparation_completion": {
+    "checked_at": "2026-10-21T21:00:11.873252+00:00",
+    "status": "worker_preparation_complete_pending_genesis_time",
+    "workers": 9,
+    "migration_input_recipients": 7,
+    "recovery_copies_ready": 9,
+    "stopped_worker_cache_handoffs_complete": 9,
+    "evidence": "../ansible/inventories/pbt-1/files/preparation-ready-for-genesis.json",
+    "genesis_time": null,
+    "launch_authorized": false,
+    "migration_qualified": false
+  }
+}

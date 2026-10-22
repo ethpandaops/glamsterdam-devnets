@@ -1,0 +1,12 @@
+---
+# Separate restore for the full seven-day migration anchor. The existing
+# final-head source and published release are never overwritten.
+- name: Restore Erigon for the full PBT-1 experiment
+  ansible.builtin.import_playbook: pbt-source-seed.yaml
+  vars:
+    seed_hosts: lighthouse-erigon-1
+    seed_client: erigon
+    seed_root: /data/pbt-1/rehearsal-24453558
+    seed_container: pbt-1-erigon-rehearsal-snapshot
+    seed_authenticated_source: true
+    seed_min_free_bytes: 550000000000

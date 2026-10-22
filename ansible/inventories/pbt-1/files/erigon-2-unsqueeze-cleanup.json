@@ -1,0 +1,97 @@
+{
+  "phase": "unsqueeze_backup_reclaimed",
+  "time": 1792595395.9846327,
+  "directory": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup",
+  "files": [
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.0-1024000.kv",
+      "device": 65025,
+      "inode": 36962331,
+      "bytes": 107054628292,
+      "allocated": 107054641152,
+      "mtime_ns": 1766799139000000000,
+      "ctime_ns": 1792524483582166955
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1024000-1040000.kv",
+      "device": 65025,
+      "inode": 36962332,
+      "bytes": 21832243610,
+      "allocated": 21832249344,
+      "mtime_ns": 1768754467000000000,
+      "ctime_ns": 1792524483750173111
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1040000-1048000.kv",
+      "device": 65025,
+      "inode": 36962333,
+      "bytes": 11877787031,
+      "allocated": 11877793792,
+      "mtime_ns": 1769638567000000000,
+      "ctime_ns": 1792524483918179268
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1048000-1049000.kv",
+      "device": 65025,
+      "inode": 36962334,
+      "bytes": 2946778251,
+      "allocated": 2946785280,
+      "mtime_ns": 1769738185000000000,
+      "ctime_ns": 1792524484082185276
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.0-1024000.kvi",
+      "device": 65025,
+      "inode": 37002303,
+      "bytes": 4097762847,
+      "allocated": 4097769472,
+      "mtime_ns": 1766800476000000000,
+      "ctime_ns": 1792524483582166955
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1024000-1040000.kvi",
+      "device": 65025,
+      "inode": 37002304,
+      "bytes": 393472636,
+      "allocated": 393478144,
+      "mtime_ns": 1768754594000000000,
+      "ctime_ns": 1792524483750173111
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1040000-1048000.kvi",
+      "device": 65025,
+      "inode": 37002305,
+      "bytes": 196284556,
+      "allocated": 196292608,
+      "mtime_ns": 1769638630000000000,
+      "ctime_ns": 1792524483918179268
+    },
+    {
+      "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1048000-1049000.kvi",
+      "device": 65025,
+      "inode": 37002306,
+      "bytes": 34977879,
+      "allocated": 34979840,
+      "mtime_ns": 1769738199000000000,
+      "ctime_ns": 1792524484082185276
+    }
+  ],
+  "removed": [
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.0-1024000.kv",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1024000-1040000.kv",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1040000-1048000.kv",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v1.1-commitment.1048000-1049000.kv",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.0-1024000.kvi",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1024000-1040000.kvi",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1040000-1048000.kvi",
+    "/data/pbt-1/v3-head-upgrade/unsqueeze-backup/domains/v2.0-commitment.1048000-1049000.kvi"
+  ],
+  "exclusive_allocated_bytes": 148433989632,
+  "recovery_ready_sha256": "239f663c51855a4bb040d7b84eec6423ae59c3f70d1f10e4a28aa0af7c10d805",
+  "free_before": 288312770560,
+  "completed_at": 1792595396.165971,
+  "free_after": 436746764288,
+  "live_database_unchanged": true,
+  "recovery_archive_preserved": true,
+  "local_cache_preserved": true
+}

@@ -1,0 +1,30 @@
+---
+# Local key preparation only; no key distribution or validator service start.
+- name: Generate the candidate validator keys locally
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    ethereum_genesis_generator_output_dir: "{{ pbt_genesis_workspace }}/output"
+    ethereum_genesis_validator_keys_output_dir: "{{ pbt_genesis_workspace }}/validator-keys"
+  tasks:
+    - name: Require the validated PBT-1 candidate
+      ansible.builtin.assert:
+        that:
+          - ethereum_network_name == 'glamsterdam-pbt-1'
+          - (lookup('file', pbt_genesis_workspace ~ '/validation.json') | from_json).status == 'structural_checks_passed'
+          - ethereum_genesis_validator_keyranges | length == 9
+          - pbt_genesis_workspace is match('^/home/ubuntu/.local/state/pbt-1-run/genesis/')
+    - name: Generate keys without displaying sensitive role arguments
+      ansible.builtin.include_role:
+        name: ethpandaops.general.ethereum_genesis
+        tasks_from: generate_validator_keys.yaml
+        apply:
+          no_log: true
+      no_log: true
+    - name: Restrict the private key directory
+      ansible.builtin.file:
+        path: "{{ ethereum_genesis_validator_keys_output_dir }}"
+        state: directory
+        mode: "0700"

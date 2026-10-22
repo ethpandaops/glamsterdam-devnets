@@ -1,0 +1,16 @@
+{
+  "time": 1792540543.310702,
+  "device": "/dev/vda1",
+  "filesystem": "ext4",
+  "original_reserved_blocks": 25171402,
+  "temporary_reserved_blocks": 6291125,
+  "block_size": 4096,
+  "expected_available_increase_bytes": 77333614592,
+  "original_free_bytes": 329538912256,
+  "reason": "Temporary preparation scratch headroom; exporter retains its independent 150 GB reserve",
+  "restore_before_launch": true,
+  "restored": false,
+  "genesis_time": null,
+  "applied": true,
+  "observed_free_bytes": 406872522752
+}

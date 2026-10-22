@@ -1,0 +1,209 @@
+{
+  "comparisons": {
+    "accounts": {
+      "all_records_equal": true,
+      "domain": "accounts",
+      "fragments": 20,
+      "inputs_unchanged": true,
+      "logical_sha256": "4da72cb7241ce72d5ec6fe94490b7407395f8b4764faaeb5a366943851fa87ce",
+      "merged": "/data/pbt-1/rehearsal-24453558/erigon/snapshots/domain/v2.0-accounts.1049600-1049856.kv",
+      "records": 262756
+    },
+    "storage": {
+      "all_records_equal": true,
+      "domain": "storage",
+      "fragments": 20,
+      "inputs_unchanged": true,
+      "logical_sha256": "70512ed9999c75e17b2c40428b99a6f2e0fc6718466c69ebc23184c80c8ac72e",
+      "merged": "/data/pbt-1/rehearsal-24453558/erigon/snapshots/domain/v2.0-storage.1049600-1049856.kv",
+      "records": 335569656
+    }
+  },
+  "fixture": {
+    "time": 1792525575.1770515,
+    "service": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "InvocationID": ""
+    },
+    "source_commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "test_file_sha256": "6067202eca9f099fbaeb61a401d8de2caf42024ef8e2dee8c845c26f3e02d7a9",
+    "scope": "Small native v3 interrupted-conversion resume plus boundary rejection and preflightResume fixtures; no production DB opened",
+    "log_note": "final log ends at latest successful go test result; raw log retains stale tail from previous failed accessor-version assertion because systemd StandardOutput=file does not truncate"
+  },
+  "recovery_preflight": {
+    "time": 1792525703.306606,
+    "move": [
+      {
+        "dir": "domain",
+        "name": "v1.2-accounts.1049600-1049856.kvei",
+        "size": 394500,
+        "inode": 16155304,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-accounts.1049600-1049856.kv",
+        "size": 14723263,
+        "inode": 16156186,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-accounts.1049600-1049856.bt",
+        "size": 353112,
+        "inode": 16156185,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v1.2-storage.1049600-1049856.kvei",
+        "size": 378629124,
+        "inode": 16155065,
+        "mtime_ns": 1791719808000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-storage.1049600-1049856.kv",
+        "size": 3491023932,
+        "inode": 16157282,
+        "mtime_ns": 1791719695000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-storage.1049600-1049856.bt",
+        "size": 510845696,
+        "inode": 16157279,
+        "mtime_ns": 1791719740000000000
+      }
+    ],
+    "completed_shards_preserved": 5,
+    "integration_sha256": "c55a62b6ef462020fdf825872ac1c8badf34c1e44af33ac17a7115c6e0290e03",
+    "native_resume_options": [
+      "--v3",
+      "--continue"
+    ]
+  },
+  "selection": {
+    "time": 1792525703.3114548,
+    "files": [
+      {
+        "dir": "domain",
+        "name": "v1.2-accounts.1049600-1049856.kvei",
+        "size": 394500,
+        "inode": 16155304,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-accounts.1049600-1049856.kv",
+        "size": 14723263,
+        "inode": 16156186,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-accounts.1049600-1049856.bt",
+        "size": 353112,
+        "inode": 16156185,
+        "mtime_ns": 1791718508000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v1.2-storage.1049600-1049856.kvei",
+        "size": 378629124,
+        "inode": 16155065,
+        "mtime_ns": 1791719808000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-storage.1049600-1049856.kv",
+        "size": 3491023932,
+        "inode": 16157282,
+        "mtime_ns": 1791719695000000000
+      },
+      {
+        "dir": "domain",
+        "name": "v2.0-storage.1049600-1049856.bt",
+        "size": 510845696,
+        "inode": 16157279,
+        "mtime_ns": 1791719740000000000
+      }
+    ]
+  },
+  "status": {
+    "phase": "convert-v3",
+    "time": 1792525703.311569,
+    "command": [
+      "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+      "commitment",
+      "convert",
+      "--datadir=/data/pbt-1/rehearsal-24453558/erigon",
+      "--chain=mainnet",
+      "--v3",
+      "--continue"
+    ],
+    "free_bytes": 497813876736
+  },
+  "resume_confirmation": [
+    "[INFO] [10-20|19:48:39.938] [commitment_convert] --continue: resuming. complete shards in rebuild dir: 5 (steps 0-1049600), remaining: 214 input files (steps 1049600-1050050) "
+  ],
+  "unit": "MainPID=24427\nResult=success\nActiveState=active\n",
+  "driver_sha256": "55f528d8eb1663226836e3ed324a6fcb85f02d91fe8456bd917315ebe7c48c4b",
+  "checked_at": 1792526243.1302433,
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "scope": "Older exporter O only; unchanged native converter; full conversion and native reopen still pending",
+  "first_conflicting_file_completed": "[INFO] [10-20|19:56:07.766] [commitment_convert] v3 file done v2.2-commitment.1049600-1049728.kv legacy=82.93M records=82.93M sizeDelta=52.2% in 7m19.292s (188.79k key/s) collect=4m52.978s write=31.742s build=1m54.572s (1/214 files, 51.4% overall by keys) ",
+  "qualification_requeued": {
+    "time": 1792526058.3472593,
+    "script_sha256": "73b088879fdaef0e0a970ab9d420a46e521cbd0ca624a7101da9d62a4473fbd5",
+    "previous": {
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ActiveState": "failed"
+    },
+    "scope": "Guarded two native opens at O after successful conversion; no anchor replay or upload",
+    "current": {
+      "MainPID": "24887",
+      "Result": "success",
+      "ActiveState": "active"
+    }
+  },
+  "conversion_result": {
+    "checked_at": 1792530493.9043727,
+    "conversion": {
+      "finished_at": 1792530328.5373309,
+      "exit_code": 0,
+      "command": [
+        "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+        "commitment",
+        "convert",
+        "--datadir=/data/pbt-1/rehearsal-24453558/erigon",
+        "--chain=mainnet",
+        "--v3",
+        "--continue"
+      ],
+      "commitment_v3_env": false,
+      "no_prune_env": null
+    },
+    "verification_summary": [
+      "[INFO] [10-20|21:05:27.611] [commitment_convert] v3 records verified root=508613d0e4bc1b2b11efdb00ce56dbbe4fa155d6b43c0aad792fb7d79268157e block=24451719 txNum=3281406249 records=774.83M orphans=0 took=59m6.28s"
+    ],
+    "current_phase": {
+      "phase": "verify-v3-files",
+      "time": 1792530328.537782,
+      "command": [
+        "/data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned",
+        "commitment",
+        "verify",
+        "--datadir=/data/pbt-1/rehearsal-24453558/erigon",
+        "--chain=mainnet"
+      ],
+      "free_bytes": 469203783680
+    },
+    "process": "    PID    PPID     ELAPSED     TIME STAT COMMAND\n  39249   24427       02:45 00:01:48 Sl   /data/pbt-1/rehearsal-tools/erigon/build/bin/integration.pinned commitment verify --datadir=/data/pbt-1/rehearsal-24453558/erigon --chain=mainnet\n"
+  }
+}

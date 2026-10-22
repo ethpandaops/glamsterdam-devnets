@@ -1,0 +1,11 @@
+---
+# Measured migration limits; restore/build jobs have separate resource limits.
+pbt_migration_role: import
+pbt_migration_memory_gib: 32
+pbt_migration_anchor: 24453558
+besu_container_image: "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71"
+besu_container_memory: "32g"
+besu_container_memory_swap: "32g"
+besu_container_memory_swappiness: 0
+besu_container_cpus: 8
+besu_container_cpuset_cpus: "0-7"

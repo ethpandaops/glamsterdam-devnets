@@ -1,7 +1,12 @@
 # PBT-1 migration process
 
+**Current execution plan and coverage gates:** [PBT-1 experiment](pbt-1-experiment.md).
+This document retains the preparation history and earlier planning details.
+Use the current plan where sequences or coverage claims differ.
+
 Updated: 2026-10-20. Status: process draft based on the call notes and the
-confirmed nine-machine matrix. This document does not provision the remaining fleet.
+confirmed nine-machine matrix. All nine workers are now provisioned; the deployed
+mapping is the [current plan's worker matrix](pbt-1-experiment.md#worker-matrix).
 
 ## Immediate delivery target: refreshed snapshots
 
@@ -250,6 +255,11 @@ refreshed head as the migration anchor would remove this prepared replay backlog
 ## Machine matrix
 
 Names below are proposed experiment identifiers, not deployed inventory names.
+**Superseded:** the [current worker matrix](pbt-1-experiment.md#worker-matrix)
+maps these roles to `lighthouse-<client>-<n>` inventory hosts. Geth self-migration
+runs on `lighthouse-geth-3`, and both Erigon workers use local conversion and
+attach. All nine run `so-16vcpu-128gb-intel` (16 vCPU, 128 GiB). The reuse
+proposal and Erigon-1 specs below describe the earlier plan.
 
 | Machine | Client | Path | EL/migration memory limit |
 | --- | --- | --- | --- |
@@ -586,6 +596,13 @@ accumulate the history before starting the measured replay trial.
 
 ## Execution sequence and completion evidence
 
+The [rehearsal DAG and history-expiry trial](pbt-1-rehearsal-dag.md) records
+the October 20 source review, pivot alternatives, parallel work and storage
+measurement gates. It also identifies the Besu BAL-retention minimum mismatch
+and the newer Geth disk-saving candidate. Those Geth `84a12eff` and Besu
+`39377a26` builds have since passed isolated startup checks on the full-state
+workers. Expiry has not been trialed, and no build is migration-qualified.
+
 ### 1. Qualify source data and builds
 
 Finish the Jochemnet restore. Open the source in isolation and verify its release
@@ -598,8 +615,9 @@ The [Besu and Geth migration command update](pbt-1-client-migration-commands.md)
 records the operator's exact Besu/library pins and Geth planning PR #12,
 including both Geth online migration paths. The
 [migration build pins](../scripts/pbt/migration-builds.json) are separate from
-native snapshot preparation provenance; builds and compatibility trials remain
-required. Run a small compatibility trial before
+native snapshot preparation provenance. All five builds are now pinned and
+build-verified, and seven workers passed isolated startup checks; migration
+compatibility trials remain required. Run a small compatibility trial before
 the full-state measurement. Preserve finality when scheduling worker downtime.
 
 **Evidence:** source validation, build manifest, per-client commands, memory-limit
@@ -671,9 +689,9 @@ restart results, resource measurements and database-backup locations.
 
 - Measure the actual BAL window and preservation mechanism on the chosen network.
 - Qualify Erigon's source-format upgrade and consumer path.
-- Pin and test the Geth self-migration command and its anchor behavior.
+- Test the Geth self-migration command and its anchor behavior (build pinned at `84a12eff`).
 - Confirm storage capacity after measured Nethermind cleanup and conversion scratch.
 - Set the pre-fork observation duration; the upstream two-week window remains
   the reference until explicitly revised.
-- Map these nine logical roles to inventory names, consensus clients and validator
-  assignments. Preserve enough active stake during import/restarts for finality.
+- Preserve enough active stake during import/restarts for finality. The roles are
+  mapped to inventory hosts with Lighthouse, at 256 validators each (2,304 total).

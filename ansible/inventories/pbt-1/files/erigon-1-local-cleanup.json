@@ -1,0 +1,28 @@
+{
+  "phase": "preserved_old_database_removed_and_reservation_restored",
+  "time": 1792616134.0306065,
+  "removed_path": "/data/pbt-1/erigon-original-h-preserved",
+  "old_identity": {
+    "device": 65025,
+    "inode": 15990787
+  },
+  "preserved_database_identity": {
+    "device": 65025,
+    "inode": 17039362
+  },
+  "recovery_archive_identity": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 461165199193,
+    "mtime_ns": 1792616074582093873,
+    "ctime_ns": 1792616074698095570
+  },
+  "qualification_sha256": "33350e4e473a7cc2a410042affc9b6afe2ea327965d53f871dff7fa9a5895c99",
+  "free_bytes_before": 197443735552,
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "free_bytes_after_removal": 1251763499008,
+  "finished_at": 1792616145.3795736,
+  "reserved_block_count": 25171402,
+  "free_bytes_after": 1174429884416
+}

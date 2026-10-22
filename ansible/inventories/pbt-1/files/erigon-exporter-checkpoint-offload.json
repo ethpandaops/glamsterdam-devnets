@@ -1,0 +1,53 @@
+{
+  "time": 1792542443.8700898,
+  "verified_copy": {
+    "proof": {
+      "time": 1792542297.2855737,
+      "status": "full_tree_checksum_comparison_passed",
+      "source": "/data/pbt-1/v3-source-upgrade",
+      "destination": "/data/pbt-1/erigon-exporter-recovery/tree",
+      "source_host": "lighthouse-erigon-1",
+      "comparison": "rsync --dry-run --checksum --itemize-changes: zero changes",
+      "geth_database_modified": false,
+      "source_deleted": false
+    },
+    "unit": {
+      "MainPID": "0",
+      "Result": "success",
+      "ActiveState": "inactive"
+    },
+    "symlinks": 0,
+    "private_key_removed": true
+  },
+  "paths": [
+    "/data/pbt-1/v3-source-upgrade/original-checkpoint",
+    "/data/pbt-1/v3-source-upgrade/unsqueeze-backup"
+  ],
+  "exclusive_bytes": 115966246912,
+  "protected_before": {
+    "/data/pbt-1/erigon": {
+      "dev": 65025,
+      "ino": 15990787,
+      "size": 4096,
+      "mtime_ns": 1792439838747654067
+    },
+    "/mnt/pbt-recovery/erigon-24503958.tar.zst": {
+      "dev": 2048,
+      "ino": 15,
+      "size": 534953200071,
+      "mtime_ns": 1792507726841456735
+    },
+    "/data/pbt-1/pipeline": {
+      "dev": 65025,
+      "ino": 17432581,
+      "size": 12288,
+      "mtime_ns": 1792493870435747419
+    }
+  },
+  "free_before": 247101886464,
+  "native_export_pid": 47602,
+  "finished": 1792542446.0383942,
+  "free_after": 363068768256,
+  "restricted_transfer_key_removed": true,
+  "protected_unchanged": true
+}

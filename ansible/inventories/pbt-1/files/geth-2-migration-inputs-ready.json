@@ -1,0 +1,41 @@
+{
+  "host": "lighthouse-geth-2",
+  "anchor": 24453558,
+  "anchor_hash": "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155",
+  "release_canonical_sha256": "650ae5fe9f395befe6f132b0d6a86355aaca8002764f801aeda409c44b982164",
+  "files": {
+    "pbt-snapshot.bin": {
+      "bytes": 107902638451,
+      "sha256": "b99eca890c24201868e15b037be2af56890e8bf3ef0cbc292ac77f9e6bc861fe",
+      "etag": "\"e6968ea3b4593f467cc83f05fd7453ce-1608\"",
+      "inode": 93323312,
+      "mtime_ns": 1792605336776953129,
+      "transfer_sha256_verified": true,
+      "stored_file_readback_verified": false
+    },
+    "framed.bin": {
+      "bytes": 66850271320,
+      "sha256": "43234716d86afb5ca8eb49290da25fc8ea16774d6ba4f9ed426af0c433549a00",
+      "etag": "\"27eed3b2aba5287547bd6dfc2948f828-997\"",
+      "inode": 93323313,
+      "mtime_ns": 1792606198529413714,
+      "transfer_sha256_verified": true,
+      "stored_file_readback_verified": false
+    },
+    "pbt-snapshot.meta.json": {
+      "bytes": 628,
+      "sha256": "9ed89e7b53dcd25b4c2b17b805cc67a1c47e627706c36cbfa22e6c8229dc79eb",
+      "etag": "\"d5c26ca9a8f849542e838213a021b6cc-1\"",
+      "inode": 93323314,
+      "mtime_ns": 1792606199105424808,
+      "transfer_sha256_verified": true,
+      "stored_file_readback_verified": false
+    }
+  },
+  "time": 1792606199.112772,
+  "status": "verified_inputs_ready",
+  "independent_writable_copies": true,
+  "migration_started": false,
+  "shadowfork_finality_established": false,
+  "genesis_time": null
+}

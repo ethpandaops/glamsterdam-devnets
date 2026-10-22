@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-21T11:24:57.055902+00:00",
+  "controller_unit": "pbt-1-artifact-publication.service",
+  "controller_script": "scripts/pbt/publish-pbt-artifacts-when-ready.py",
+  "controller_sha256": "55366b87ebc2507af834d684ba715e4919d77d94e52862ef1896962989edd83d",
+  "publisher_sha256": "d59c10f8af6aec683a129b68f6db0a732ee5d36ad12db4ba8e461eed78e967a0",
+  "tests_passed": 19,
+  "current": {
+    "phase": "waiting_for_export",
+    "observation": {
+      "export": {
+        "MainPID": "47501",
+        "Result": "success",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "upload": {
+        "MainPID": "0",
+        "Result": "success",
+        "LoadState": "not-found",
+        "ActiveState": "inactive"
+      },
+      "export_proof": false,
+      "upload_proof": false,
+      "publisher_sha256": "d59c10f8af6aec683a129b68f6db0a732ee5d36ad12db4ba8e461eed78e967a0"
+    },
+    "time": 1792581844.4664671
+  },
+  "upload_started": false,
+  "release_verified": false,
+  "genesis_time": null,
+  "controller_pid": 1597379,
+  "readback": {
+    "helper_sha256": "bb5b38be64caaa312949cf8ab9c90816fbec7ef49549016a9098df5a3ec14f1e",
+    "range_bytes": 67108864,
+    "workers": 4,
+    "attempts_per_range": 5,
+    "whole_object_sha256_required": true
+  },
+  "handoff_update": {
+    "native_verifier_restarted": false,
+    "native_verifier_pid": 64456,
+    "publisher_updated_before_authorization": true,
+    "previous_waiter_evidence_preserved": true
+  }
+}

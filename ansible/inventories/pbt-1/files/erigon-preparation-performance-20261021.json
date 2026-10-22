@@ -1,0 +1,31 @@
+{
+  "measured_at_utc": "2026-10-21T01:04:32Z",
+  "sample_seconds": 10,
+  "scope": "Read-only process and cgroup counters during live preparation; not a migration benchmark or CPU stack profile",
+  "erigon_1": {
+    "phase": "native snapshot leaf load and writer",
+    "native_pid": 47602,
+    "native_cpu_cores": 1.01894,
+    "physical_read_MB_s": 28.4541,
+    "memory_current_GiB": 31.9949,
+    "io_pressure_some_avg10_percent": 0.77,
+    "memory_pressure_some_avg10_percent": 0.0,
+    "allocated_memory_GiB": 32,
+    "allocated_cpu_cores": 8
+  },
+  "erigon_2": {
+    "phase": "native v3 conversion",
+    "native_pid": 23770,
+    "native_cpu_cores": 7.48356,
+    "physical_read_MB_s": 5.92697,
+    "memory_current_GiB": 111.9884,
+    "io_pressure_some_avg10_percent": 0.08,
+    "memory_pressure_some_avg10_percent": 0.0,
+    "allocated_memory_GiB": 112,
+    "allocated_cpu_cores": 8
+  },
+  "decision": "Keep the running processes and their existing limits. The export sample shows approximately one core in use and little I/O or memory pressure; additional allocation is not justified by this sample. Conversion throughput varies but continues.",
+  "limits_changed": false,
+  "native_processes_restarted": false,
+  "genesis_time": null
+}

@@ -1,0 +1,52 @@
+{
+  "reason": "Observed repeated file-cache refaults and IO pressure during preparation; give the existing VM more cache capacity",
+  "before": {
+    "time": 1792534339.8061895,
+    "native_pid": 23770,
+    "memory_max": 103079215104,
+    "memory_current": 103068610560,
+    "memory_pressure": "some avg10=12.34 avg60=11.88 avg300=9.94 total=249140272\nfull avg10=12.27 avg60=11.77 avg300=9.84 total=245949697\n",
+    "io_pressure": "some avg10=60.76 avg60=60.77 avg300=53.97 total=1806147118\nfull avg10=59.44 avg60=59.80 avg300=53.27 total=1777344384\n",
+    "memory_events": "low 0\nhigh 0\nmax 152453\noom 0\noom_kill 0\noom_group_kill 0\n"
+  },
+  "scope": "Snapshot preparation only; Erigon-2 qualification remains 16 GiB and 8 CPU",
+  "after": {
+    "time": 1792534339.8153393,
+    "memory_max": 120259084288,
+    "native_pid": 23770,
+    "cpu_max": "800000 100000",
+    "swap_max": "0"
+  },
+  "samples": [
+    {
+      "time": 1792534413.6876001,
+      "seconds": 10.0003821849823,
+      "cpu_seconds": 30.989919,
+      "refault_file_pages": 682816,
+      "scan_pages": 1419776,
+      "initial_io": "254:0 rbytes=2204346392576 wbytes=642012467200 rios=70776165 wios=1471553 dbytes=0 dios=0\n",
+      "final_io": "254:0 rbytes=2207143497728 wbytes=642012467200 rios=70797528 wios=1471553 dbytes=0 dios=0\n",
+      "memory_current": 120254885888,
+      "memory_pressure": "some avg10=2.13 avg60=7.68 avg300=9.29 total=254729292\nfull avg10=2.12 avg60=7.54 avg300=9.16 total=251351233\n",
+      "io_pressure": "some avg10=14.08 avg60=39.89 avg300=50.24 total=1834639905\nfull avg10=14.03 avg60=38.85 avg300=49.35 total=1804605063\n",
+      "events": {
+        "low": 0,
+        "high": 0,
+        "max": 154618,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      }
+    }
+  ],
+  "interpretation": "Lower refaults and PSI after the change are confounded by collection finishing at 22:12:56 UTC; no isolated conversion speedup claim.",
+  "prior_observation": {
+    "seconds": 10.000569343566895,
+    "cpu_seconds": 32.843619,
+    "refault_file_pages": 2409343,
+    "scan_pages": 2905408,
+    "read_bytes_delta": 9868926976,
+    "memory_pressure_some_avg10": 14.21,
+    "io_pressure_some_avg10": 59.72
+  }
+}

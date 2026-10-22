@@ -1,0 +1,361 @@
+{
+  "checked_at": "2026-10-21T09:42:50.240456+00:00",
+  "scope": "Dated read-only fleet observation; not migration or launch qualification",
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "alerts": [],
+  "workers": {
+    "lighthouse-geth-3": {
+      "recovery_mounted": true,
+      "recovery_phase": "restored_unopened",
+      "archive_bytes": 1129134606193,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1181068705792,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-geth-2": {
+      "recovery_mounted": true,
+      "recovery_phase": "restored_unopened",
+      "archive_bytes": 1129134606193,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 752889503744,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-nethermind-2": {
+      "recovery_mounted": true,
+      "recovery_phase": "restored_unopened",
+      "archive_bytes": 1088763687494,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1235755499520,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-erigon-2": {
+      "recovery_mounted": true,
+      "recovery_phase": "restored_unopened",
+      "archive_bytes": 534953200071,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 747878232064,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "conversion": {
+        "head": {
+          "phase": "converted_pending_native_reopen",
+          "service": {
+            "MainPID": "0",
+            "Result": "success",
+            "ActiveState": "inactive",
+            "SubState": "dead"
+          },
+          "memory_events": null,
+          "latest_progress": null
+        }
+      },
+      "exporter_services": {}
+    },
+    "lighthouse-besu-2": {
+      "recovery_mounted": true,
+      "recovery_phase": "restored_unopened",
+      "archive_bytes": 1145428233899,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1201658806272,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-nethermind-1": {
+      "recovery_mounted": true,
+      "recovery_phase": "recovery_ready_existing_db_preserved",
+      "archive_bytes": 1088763687494,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1185603125248,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-besu-1": {
+      "recovery_mounted": true,
+      "recovery_phase": "recovery_ready_existing_db_preserved",
+      "archive_bytes": 1145428233899,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1161857490944,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-geth-1": {
+      "recovery_mounted": true,
+      "recovery_phase": "recovery_ready_existing_db_preserved",
+      "archive_bytes": 1129134606193,
+      "startup_status": "startup_checks_passed",
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 1114801041408,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "cert_issuer",
+        "dns_server",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "exporter_services": {}
+    },
+    "lighthouse-erigon-1": {
+      "recovery_mounted": true,
+      "recovery_phase": "recovery_ready_existing_db_preserved",
+      "archive_bytes": 534953200071,
+      "startup_status": null,
+      "qualification_service": {
+        "Result": "success",
+        "ActiveState": "inactive"
+      },
+      "local_free_bytes": 484682309632,
+      "running_containers": [
+        "nginx-proxy-cert-linker",
+        "nginx-proxy-cert-loader",
+        "nginx-proxy-gen",
+        "nginx-proxy",
+        "vector",
+        "prometheus",
+        "node_exporter"
+      ],
+      "conversion": {
+        "exporter": {
+          "phase": "v3_source_verified_stopped",
+          "service": {
+            "MainPID": "0",
+            "Result": "success",
+            "ActiveState": "inactive",
+            "SubState": "dead"
+          },
+          "memory_events": null,
+          "latest_progress": null
+        },
+        "exporter_index_recovery": {
+          "phase": "indexes_reused_by_conversion",
+          "service": {
+            "MainPID": "0",
+            "Result": "success",
+            "ActiveState": "inactive",
+            "SubState": "dead"
+          },
+          "memory_events": null,
+          "latest_progress": "[INFO] [10-20|17:57:29.777] [snapshots] Indexing                     progress=\"v2.1-commitment.0-1024000.kvi=99%\" total-indexing-time=11m20s alloc=3.9GB sys=4.4GB"
+        }
+      },
+      "exporter_services": {
+        "qualification": {
+          "MainPID": "0",
+          "Result": "success",
+          "MemoryCurrent": "[not set]",
+          "MemoryMax": "2147483648",
+          "LoadState": "loaded",
+          "ActiveState": "inactive"
+        },
+        "native_client": {
+          "MainPID": "0",
+          "Result": "success",
+          "MemoryCurrent": "[not set]",
+          "MemoryMax": "34359738368",
+          "LoadState": "loaded",
+          "ActiveState": "inactive"
+        },
+        "anchor_preparation": {
+          "MainPID": "0",
+          "Result": "success",
+          "MemoryCurrent": "[not set]",
+          "MemoryMax": "34359738368",
+          "LoadState": "loaded",
+          "ActiveState": "inactive"
+        },
+        "native_export": {
+          "MainPID": "47501",
+          "Result": "success",
+          "MemoryCurrent": "34359201792",
+          "MemoryMax": "34359738368",
+          "LoadState": "loaded",
+          "ActiveState": "active"
+        },
+        "export_scratch_guard": {
+          "MainPID": "51030",
+          "Result": "success",
+          "MemoryCurrent": "13594624",
+          "MemoryMax": "536870912",
+          "LoadState": "loaded",
+          "ActiveState": "active"
+        }
+      }
+    }
+  },
+  "publication": {
+    "service": {
+      "MainPID": "281010",
+      "Result": "success",
+      "ActiveState": "active"
+    },
+    "phase": "streaming_H_archive",
+    "upload_complete": false,
+    "qualification_evidence": "erigon-2-v3-head-qualified.json"
+  },
+  "remaining_preparation": [
+    "Erigon-1 shared artifact independent verification and remote checksum readback; native export passed",
+    "Preserve verified shared artifacts before reclaiming exporter working data",
+    "Verified shared migration-input delivery to seven recipients after safe cleanup of the redundant Geth-2 exporter checkpoint",
+    "Erigon-1 verified H release restore and 32 GiB worker opens, or staged native H conversion fallback",
+    "Finish corrected H archive upload and full remote readback, then recovery capacity review/replacement",
+    "Remove temporary export scratch volume and restore Erigon-1 original ext4 reservation before launch",
+    "Regenerate and validate launch genesis only after the user supplies G; do not launch",
+    "After all preparation/content scans stop, record the clean-page-cache handoff on all nine workers before measured startup"
+  ],
+  "anchor_capture": {
+    "status": "native_reexecution_and_two_opens_passed",
+    "block": 24453558,
+    "evidence": "erigon-anchor-recovery-qualified.json",
+    "shared_export": "native_export_passed_independent_verification_running"
+  },
+  "recovery_copy": {
+    "source": "lighthouse-erigon-1",
+    "destination": "lighthouse-geth-2",
+    "phase": "full_checksum_verified",
+    "source_deleted": false,
+    "exclusive_old_checkpoints_reclaimed": true,
+    "exclusive_bytes_reclaimed": 115966246912,
+    "evidence": "erigon-exporter-checkpoint-offload.json",
+    "source_deleted_scope": "Full source tree not deleted; only two verified redundant checkpoint directories reclaimed"
+  },
+  "temporary_export_storage": {
+    "evidence": "erigon-export-scratch-routing.json",
+    "volume_gib": 1500,
+    "new_scratch_routed": true,
+    "native_export_restarted": false,
+    "remove_before_launch": true,
+    "resize_evidence": "erigon-export-scratch-resize.json"
+  },
+  "latest_erigon_export_observation": {
+    "checked_at": "2026-10-21T12:39:23Z",
+    "phase": "independent_verification_joined_slots",
+    "native_pid": 64456,
+    "snapshot_bytes": 107902638451,
+    "framed_bytes": 66850271320,
+    "root_free_bytes_rounded": 484700000000,
+    "scratch_free_bytes_rounded": 812600000000,
+    "independent_verification_complete": false,
+    "native_export_exit_code": 0,
+    "metadata_evidence": "pbt-snapshot-meta-24453558.json",
+    "metadata_finalized_is_not_shadowfork_finality": true
+  },
+  "shared_artifact_publication": {
+    "evidence": "shared-artifact-publication-controller.json",
+    "phase": "waiting_for_export",
+    "upload_started": false
+  },
+  "launch_vs_migration": "PBT import, catch-up and root agreement are post-genesis gates. Shared artifacts gate migration; this fleet also needs exporter cleanup before Erigon-1 H restore.",
+  "tooling_configuration": {
+    "checked_at": "2026-10-21T09:24:19.966384+00:00",
+    "evidence": "tooling-configuration-review.json",
+    "status": "nine-worker topology rendered, 15 Helm charts passed; launch-time regeneration pending",
+    "genesis_time": null,
+    "deployed": false
+  },
+  "fleet_monitor": {
+    "checked_at": "2026-10-21T12:41:34.366181+00:00",
+    "hosts_checked": 9,
+    "startup_qualified": 8,
+    "alerts": [],
+    "script_sha256": "1c37a3f75f260e7bd5bece70dee9fa3027b3722d1ea412d07e0238781f2f1864",
+    "recovery_cache_unit": "pbt-1-v3-head-recovery-cache",
+    "recovery_cache_staged": true,
+    "recovery_cache_started": true,
+    "automatically_restarts_jobs": false,
+    "stored_cache_readback_unit": "pbt-1-v3-head-cache-readback",
+    "stored_cache_readback_phase": "waiting_for_download"
+  }
+}

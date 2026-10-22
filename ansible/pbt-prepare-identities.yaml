@@ -1,0 +1,95 @@
+---
+# Offline peer preparation. Does not need a genesis timestamp or start clients.
+- name: Prepare unique PBT execution peer identities outside restored databases
+  hosts: ethereum_node
+  become: true
+  gather_facts: false
+  vars:
+    # devp2p from the pinned alltools-v1.17.7 image, used only for ENR encoding.
+    pbt_identity_tools_image: ethereum/client-go@sha256:1934ef250942aafdd04e384422d8a1048c0a165c9d8dba4af4818f7ca371a54e
+  tasks:
+    - name: Check preparation scope
+      ansible.builtin.assert:
+        that:
+          - ethereum_network_name == 'glamsterdam-pbt-1'
+          - ethereum_node_el in ['geth', 'nethermind', 'besu', 'erigon']
+          - groups['ethereum_node'] | unique | length == 9
+
+    - name: Create the execution service account
+      ansible.builtin.user:
+        name: "{{ ethereum_node_el }}"
+
+    - name: Ensure the local key generation dependency is installed
+      ansible.builtin.apt:
+        name: python3-cryptography
+        state: present
+        lock_timeout: 120
+
+    - name: Install the identity preparation helper
+      ansible.builtin.copy:
+        src: ../scripts/pbt/prepare-node-identity.py
+        dest: /usr/local/bin/pbt-prepare-node-identity
+        mode: "0755"
+
+    - name: Prepare persistent node identity and collect only public information
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/python3
+          - /usr/local/bin/pbt-prepare-node-identity
+          - --client
+          - "{{ ethereum_node_el }}"
+          - --owner
+          - "{{ ethereum_node_el }}"
+          - --ip
+          - "{{ ansible_host }}"
+      register: pbt_public_identity
+      changed_when: false
+
+    - name: Sign the public ENR locally without exporting the private key
+      ansible.builtin.command:
+        argv:
+          - docker
+          - run
+          - --rm
+          - --network=none
+          - --cpus=1
+          - --memory=256m
+          - --volume=/data/pbt-1/node-identity:/identity:ro
+          - --entrypoint=devp2p
+          - "{{ pbt_identity_tools_image }}"
+          - key
+          - to-enr
+          - --ip
+          - "{{ ansible_host }}"
+          - --tcp
+          - "30303"
+          - --udp
+          - "30303"
+          - /identity/nodekey
+      register: pbt_public_enr
+      changed_when: false
+
+    - name: Save public peer facts for configuration
+      ansible.builtin.set_fact:
+        pbt_node_identity: "{{ pbt_public_identity.stdout | from_json | combine({'enr': pbt_public_enr.stdout | trim}) }}"
+        ethereum_node_fact_discovery_el_enode: "{{ (pbt_public_identity.stdout | from_json).enode }}"
+        ethereum_node_fact_discovery_el_enr: "{{ pbt_public_enr.stdout | trim }}"
+        cacheable: true
+
+- name: Verify all nine PBT peer identities are distinct
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Require complete distinct public identities
+      ansible.builtin.assert:
+        that:
+          - groups['ethereum_node'] | map('extract', hostvars, ['pbt_node_identity', 'node_id']) | unique | length == 9
+          - groups['ethereum_node'] | map('extract', hostvars, ['ethereum_node_fact_discovery_el_enr']) | select('match', '^enr:') | unique | length == 9
+
+    - name: Save public peer manifest for review and cache-independent loading
+      ansible.builtin.copy:
+        dest: "{{ inventory_dir }}/files/peer-identities.json"
+        mode: "0644"
+        content: |
+          {{ dict(groups['ethereum_node'] | zip(groups['ethereum_node'] | map('extract', hostvars, ['pbt_node_identity']))) | to_nice_json }}

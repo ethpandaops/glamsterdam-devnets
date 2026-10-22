@@ -1,0 +1,29 @@
+{
+  "checked_at": 1792531354.6731582,
+  "object_key": "jochemnet/erigon/24452538/snapshot-pruned.tar.zst",
+  "bytes": 276341609865,
+  "etag": "\"2240fe1dc4db000cabbe16c13d9a8680-4118\"",
+  "last_modified": "2026-10-11T12:57:50+00:00",
+  "source_metadata": {
+    "data_size_bytes": 428144697343,
+    "docker_image": "erigontech/erigon:v3.7.1",
+    "shadowfork": {
+      "amsterdam_time": 1769856769,
+      "base": 24402727,
+      "built_by": "https://github.com/ethpandaops/benchmarkoor-tests/actions/runs/e2e-sf-build-erigon",
+      "eest": "e269bb4483917217c5a4af71a90a3e23a4204e3e",
+      "filler": "geth",
+      "gas_limit": 200000000,
+      "head": 24452538,
+      "head_hash": "0x0fd7242bab5055dda36f374f352c78cae381daae9b3e8febe895dce35c907591",
+      "network": "jochemnet",
+      "notes": "already on Amsterdam: a devnet must start on Gloas with amsterdamTime = amsterdam_time",
+      "ramp_blocks": 8718,
+      "release": "eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260916-124530"
+    }
+  },
+  "object_access_verified": true,
+  "full_archive_sha256_rechecked": false,
+  "local_checkpoint_deleted": false,
+  "protected_H_database_deleted": false
+}

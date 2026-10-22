@@ -1,0 +1,200 @@
+{
+  "checked_at": "2026-10-21T09:23:33.692212+00:00",
+  "status": "nine-worker topology rendered; time-dependent tooling gated on user-selected G",
+  "deployment_performed": false,
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "template_source": "ansible/vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config",
+  "private_preview": "~/.local/state/pbt-1-run/tooling-preview-20261021",
+  "render_scope": "15 existing charts, controller-only Ansible render; archived candidate used privately and its time removed from preparation files",
+  "helm_template_passed": [
+    "assertoor",
+    "authenticatoor",
+    "buildoor",
+    "checkpointz",
+    "config",
+    "dora",
+    "dugtrio",
+    "erpc",
+    "faucet-agents",
+    "forkmon",
+    "forky",
+    "slashoor",
+    "spamoor",
+    "syncoor-server",
+    "syncoor-web"
+  ],
+  "endpoint_workers": {
+    "assertoor/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "checkpointz/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "dora/endpoints-cl.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "dora/endpoints-el.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "dugtrio/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "erpc/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "faucet-agents/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "forkmon/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "forky/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-erigon-1",
+      "lighthouse-geth-1",
+      "lighthouse-nethermind-1"
+    ],
+    "slashoor/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ],
+    "spamoor/values.yaml": [
+      "lighthouse-besu-1",
+      "lighthouse-besu-2",
+      "lighthouse-erigon-1",
+      "lighthouse-erigon-2",
+      "lighthouse-geth-1",
+      "lighthouse-geth-2",
+      "lighthouse-geth-3",
+      "lighthouse-nethermind-1",
+      "lighthouse-nethermind-2"
+    ]
+  },
+  "unknown_workers": [],
+  "secret_scan": {
+    "input_scope": "38 selected inventory/environment secret values, exact match >=12 characters",
+    "plaintext_matches": 0
+  },
+  "preserved_overrides": [
+    "Dora EXECUTIONAPI_{DEPOSIT,ELECTRA,GLOAS}_DEPLOY_BLOCK=24452538",
+    "Agent faucet NODE_OPTIONS for IPv4 fallback"
+  ],
+  "pending": [
+    "After G is selected, regenerate Spamoor Fulu activation and Forky genesis_time from validated launch CL config",
+    "Preserve the documented Dora and agent-faucet overrides when regenerating",
+    "Review and deploy tooling through GitOps; no live EL/CL endpoint success claimed"
+  ],
+  "file_sha256": {
+    "assertoor/Chart.yaml": "7f7ac2d23628545971a5a3e838d559eac26733670868e56371377dcfe1b0db12",
+    "assertoor/values.yaml": "4cf2e60f45f28755cc1670dd7290e5995a483660d187ad887069ed2eea3f00ea",
+    "authenticatoor/Chart.yaml": "75d05dbb869e3d6bc7efce095b0a8917c6dca6c6245ccd3816d7876c5067275d",
+    "authenticatoor/values.yaml": "b0f19c1c5fac04856e12d81c1955c59c940a36e25ae26be8b07dc17755e241c4",
+    "buildoor/Chart.yaml": "2a43bf6d8179c9e4ce264608c0bc9762281ace240d683b32e51acdd96a3288fc",
+    "buildoor/values.yaml": "1a44a12790a28aac50d8f6eb0d28d171bdff502f167730777c04da829586f94b",
+    "checkpointz/Chart.yaml": "bd5dc80587ee9fc4857c7a910fcd76be0c57ad6f1b044e5f0585cd49dbb5c478",
+    "checkpointz/values.yaml": "150f9e9685ae4880c589ca494fdd68afbbed61efcbcc4bd568a1a9a267acb8f7",
+    "config/Chart.yaml": "4d9ac5bd4e8992bfec93f7769e66ec620e16a5a04b92ae06bd1cc3b784184503",
+    "config/templates/ingress.config.yaml": "b88c3d7e6306be46156dc274d3024b7a242917203b400355676294614b5becdd",
+    "config/values.yaml": "4445b216d6fa22be6bb3ab94e25f046f65481f05f3dcf9511b61285322b6b88e",
+    "dora/Chart.yaml": "1d4aff1cec97593c96e905d22ceb50548176dab17e4dc4f0404fab1fc7df93b9",
+    "dora/endpoints-cl.yaml": "5d1b3a7b9aa762c6367314d92ab9b7146a9255f84b326da8d04b3f525b653606",
+    "dora/endpoints-el.yaml": "cdc2180b1e1105cfc89c7fc8671b38138613341b57d5b4ec3d404dda96d1f1f4",
+    "dora/values.yaml": "f266b8cb630cea797175f7dc133e31e428ba30a3fc4862f7fd608c563aeae5c0",
+    "dugtrio/Chart.yaml": "43517ecc5b4e757f4423aa85a8e1c66c7b244cf4411b25823d4becd922f5858b",
+    "dugtrio/values.yaml": "04188741fbef5ac4ab5aed0c9ed551bad6ae59e42ac97177c677e0d27df31715",
+    "erpc/Chart.yaml": "3173255a87391319e2ca1b5706a203fe65cf38771e9fe7e492c2b499398cfef2",
+    "erpc/values.yaml": "41dc3465e4677a3d8b20e6c665084948e2e8d915b5c9f94d5c0490615f7babd8",
+    "faucet-agents/Chart.yaml": "e98cc7a94c5412c5dd9ed462eef86dc8b13467628209d35f96d2c85320be40ad",
+    "faucet-agents/values.yaml": "7f92e9b289996757aea37aba94a1c38056e2be8a5b76bb9aea26edfb949ce78a",
+    "forkmon/Chart.yaml": "eca56e0b6adcb6444b578230121de13e3c683a09e4bd81a6f30169f1b4392647",
+    "forkmon/values.yaml": "0f85892be5475acee508280af041a5b5411fa0a77af327785b2e8757a1c3f091",
+    "forky/Chart.yaml": "c77962d0b3f6c32d72171029ff5e7248100969cd940cf61873aecf89f6d0d94a",
+    "forky/values.yaml": "9b7b0cd2ac0623cdb2e386f4c546c6cdbd08ea5d4a6625806bc16702b3282ffe",
+    "slashoor/Chart.yaml": "62acb9a058a30d0beeb9e3809680c1316a6c7cee107f11cbaa1d65b5f86d2cb4",
+    "slashoor/values.yaml": "f64baa8fea326da9e960e8adf55910ef9962e9e0675943ff0ee09f8cc95bb2c2",
+    "spamoor/Chart.yaml": "1bfeb96c1a7f7bc5091bcee62dfe98c78b5d4f97a9d02fe700dfea6de7af8786",
+    "spamoor/values.yaml": "97bd153b9c05e4ed6d20a3328add9a0e9e85b6d5e7c265017d115169ba978302",
+    "syncoor-server/Chart.yaml": "6d89ed434255350c3fe288155469224f802e982b2cd9a5c5692bade5399f0244",
+    "syncoor-server/values.yaml": "17d62c0520f7f7efbb8316ce76a186577f5b52b8f3c14e766c4e4306e93c0db1",
+    "syncoor-web/Chart.yaml": "14a74d3177dbb49e1ea007a9f7cdbe8ade5b0addb50fb715827862cfc60e83ef",
+    "syncoor-web/values.yaml": "a00a3ef45d970130fd5df7f36547cdb3e9d931da325458e5036b300ea8c928b5"
+  },
+  "worker_configuration_recheck": {
+    "checked_at": "2026-10-21T09:24:19.965967+00:00",
+    "workers_passed": 9,
+    "remote_mutations": false,
+    "evidence": "configuration-review.json"
+  }
+}

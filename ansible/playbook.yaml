@@ -49,6 +49,15 @@
 - hosts: all:!localhost
   serial: "{{ batch_count | default('100%') }}"
   become: true
+  pre_tasks:
+    - name: Remove conflicting Debian buildx plugin before installing Docker CE
+      ansible.builtin.package:
+        name: docker-buildx
+        state: absent
+      when:
+        - docker_remove_distro_buildx | default(false) | bool
+        - ansible_facts.os_family == 'Debian'
+      tags: [init-server, docker]
   roles:
     # - role: robertdebock.fail2ban
     #   tags: [init-server, fail2ban]
@@ -184,7 +193,9 @@
         - not ansible_check_mode
       tags: [ethereum, ethereum_node, besu_profiling]
 
-- hosts: bootnode
+# The metadata service can live on a worker when no dedicated bootnode exists.
+# Its role is still restricted to primary_bootnode below.
+- hosts: bootnode:ethereum_node
   become: true
   tasks:
     - name: Refresh inventory web

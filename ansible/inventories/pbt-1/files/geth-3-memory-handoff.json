@@ -1,0 +1,89 @@
+{
+  "worker": "lighthouse-geth-3",
+  "checked_at": 1792604839.8338451,
+  "qualification_sha256": "16cb9e9d49f4292cc85cd5503bda0a8bb9efd20d4ee5157ecc1c1c76f1858ff6",
+  "recovery_archive_sha256": "5de78409912d018c8b26bf3df3a9abccf73777fa697c3c5d8208f289d2caa5f6",
+  "recovery_archive_identity": {
+    "device": 2048,
+    "inode": 15,
+    "bytes": 1129134606193,
+    "mtime_ns": 1792511741508257275,
+    "ctime_ns": 1792511741568258100
+  },
+  "migration_input_ready_sha256": "737a571f38b5685c60038400e5c5056390a164340f5d47c77e6900b97da2e83b",
+  "migration_input_identities": {
+    "framed.bin": {
+      "device": 65025,
+      "inode": 82707965,
+      "bytes": 66850271320,
+      "mtime_ns": 1792604825592730557,
+      "ctime_ns": 1792604825912734936
+    },
+    "pbt-snapshot.meta.json": {
+      "device": 65025,
+      "inode": 82707967,
+      "bytes": 628,
+      "mtime_ns": 1792604825908734881,
+      "ctime_ns": 1792604825912734936
+    }
+  },
+  "preparation_and_clients_stopped": true,
+  "allowed_running_containers": [
+    "nginx-proxy",
+    "nginx-proxy-cert-linker",
+    "nginx-proxy-cert-loader",
+    "nginx-proxy-gen",
+    "node_exporter",
+    "prometheus",
+    "vector"
+  ],
+  "before_memory_kib": {
+    "MemTotal": 131911692,
+    "MemFree": 118921764,
+    "MemAvailable": 129790288,
+    "Buffers": 215052,
+    "Cached": 11393112,
+    "SwapCached": 0,
+    "Dirty": 448,
+    "Writeback": 0,
+    "Shmem": 4684,
+    "SReclaimable": 513956
+  },
+  "genesis_time": null,
+  "pbt_activation_time": null,
+  "migration_memory_measurement": false,
+  "after_sync_memory_kib": {
+    "MemTotal": 131911692,
+    "MemFree": 118915052,
+    "MemAvailable": 129783584,
+    "Buffers": 215172,
+    "Cached": 11393000,
+    "SwapCached": 0,
+    "Dirty": 52,
+    "Writeback": 0,
+    "Shmem": 4684,
+    "SReclaimable": 513956
+  },
+  "after_drop_memory_kib": {
+    "MemTotal": 131911692,
+    "MemFree": 130571432,
+    "MemAvailable": 129959956,
+    "Buffers": 4612,
+    "Cached": 307204,
+    "SwapCached": 0,
+    "Dirty": 4,
+    "Writeback": 0,
+    "Shmem": 4692,
+    "SReclaimable": 169568
+  },
+  "completed_at": 1792604841.9269493,
+  "qualification_unchanged": true,
+  "recovery_archive_identity_unchanged": true,
+  "migration_input_identities_unchanged": true,
+  "phase": "stopped_worker_cache_handoff_complete",
+  "commands": [
+    "sync",
+    "write 1 to /proc/sys/vm/drop_caches"
+  ],
+  "repeat_required_after": "Any later preparation read of database or migration-input contents before measured client startup"
+}

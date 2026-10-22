@@ -1,0 +1,68 @@
+{
+  "phase": "controller_recovery_configuration_reconciled",
+  "time": 1792616100.4948163,
+  "host": "lighthouse-erigon-1",
+  "job": {
+    "client": "erigon",
+    "head": 24503958,
+    "archive_bytes": 461165199193,
+    "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+    "unpacked_bytes": 1192103432995,
+    "etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
+    "restore": false,
+    "datadir": "/data/pbt-1/erigon",
+    "device": "/dev/disk/by-id/scsi-0DO_Volume_glamsterdam-pbt-1-lighthouse-erigon-1-recovery",
+    "key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst"
+  },
+  "worker": {
+    "phase": "corrected_recovery_backup_accepted",
+    "time": 1792616100.2076683,
+    "host": "lighthouse-erigon-1",
+    "job": {
+      "archive_bytes": 461165199193,
+      "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+      "client": "erigon",
+      "datadir": "/data/pbt-1/erigon",
+      "device": "/dev/disk/by-id/scsi-0DO_Volume_glamsterdam-pbt-1-lighthouse-erigon-1-recovery",
+      "etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
+      "head": 24503958,
+      "restore": false,
+      "unpacked_bytes": 1192103432995,
+      "key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst"
+    },
+    "archive_proof": {
+      "sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+      "bytes": 461165199193,
+      "mtime_ns": 1792616074582093873,
+      "time": 1792616074.7028866
+    },
+    "archive_identity": {
+      "device": 2048,
+      "inode": 15,
+      "bytes": 461165199193,
+      "mtime_ns": 1792616074582093873,
+      "ctime_ns": 1792616074698095570
+    },
+    "qualification_sha256": "33350e4e473a7cc2a410042affc9b6afe2ea327965d53f871dff7fa9a5895c99",
+    "restored_database_identity": {
+      "device": 65025,
+      "inode": 17039362
+    },
+    "service": {
+      "MainPID": "0",
+      "Result": "success",
+      "ActiveState": "inactive"
+    },
+    "existing_database_preserved": true,
+    "full_archive_reread": false,
+    "genesis_time": null,
+    "scoped_source_range_check": "passed",
+    "source_url_refreshed": true
+  },
+  "other_eight_jobs_unchanged": true,
+  "worker_qualification_unchanged": true,
+  "url_expires_in_seconds": 86400,
+  "controller_file_sha256": "c28131e23116289a8f62a6f552284f99ecdea08d7c4e547313ab01962c1ecd09",
+  "clients_started": false,
+  "genesis_time": null
+}

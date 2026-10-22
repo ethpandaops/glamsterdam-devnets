@@ -24,7 +24,8 @@ ethereum_node_beacon_prefix: bn- # prefix for beacon URLs
 ethereum_node_rcp_hostname: "{{ ethereum_node_rpc_prefix }}{{ server_fqdn }}"
 ethereum_node_beacon_hostname: "{{ ethereum_node_beacon_prefix }}{{ server_fqdn }}"
 
-primary_bootnode: bootnode-1
+# Seed discovery and checkpoint service use an existing worker; no tenth EL.
+primary_bootnode: lighthouse-geth-1
 
 ### Checkpoint sync specific for Ansible & Kubernetes
 checkpoint_sync_node: "{{ primary_bootnode }}"
@@ -46,36 +47,37 @@ checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethe
 
 # role: ethpandaops.general.ethereum_genesis
 ethereum_genesis_generator_container_image: "{{ default_tooling_images.ethereum_genesis_generator }}"
-ethereum_genesis_generator_version: "{{ ethereum_genesis_generator_container_image.split(':')[-1] }}"
+ethereum_genesis_generator_version: "6.2.5"
 ethereum_genesis_network_seed: glamsterdam-pbt-1
 # Chain id 1 = egg mainnet shadowfork mode: keeps osaka/bpo1/bpo2 at their real times,
 # adds our amsterdamTime, no allocs.
 ethereum_genesis_chain_id: "1"
 ethereum_genesis_fork_version_suffix: "{{ 999999 | random(start=100000, seed=ethereum_genesis_network_seed) }}"
 ethereum_genesis_generator_output_dir: ../network-configs/{{ network_iteration }}
-# Genesis: 2026-10-12 13:03 UTC (15:03 Europe/Vienna).
-ethereum_genesis_timestamp: 1791810180
+# Supply an explicit timestamp for generation. Preparing configs does not launch
+# the network; never inherit MSF-2's expired time or silently choose a launch time.
+ethereum_genesis_timestamp: "{{ pbt_genesis_timestamp | mandatory }}"
 ethereum_genesis_timedelay: 0
-# The jochemnet release (benchmarkoor): mainnet 24350000 + bloat blocks to 24402727, then the
-# release pre-run to 24443820 (crosses Amsterdam at 1769856769), ramped down to 200M, cleaned and
-# re-exported per client to shadowfork-images.ethpandaops.io/jochemnet/<client>/<head>/. Not on
-# mainnet, so no mainnet txs replay.
-# The release head: 24443820 + the 8718-block ramp to 200M (built 2026-10-08/11, head hash
-# 0x0fd7242bab5055dda36f374f352c78cae381daae9b3e8febe895dce35c907591).
-shadowfork_height: 24452538
-# No shadowfork_head_height: nothing is imported on top of the snapshot (msf-1 had a prestate).
-# The snapshot is already on Amsterdam, so the CL starts on Gloas (no live transition, builders
-# from genesis) and genesis.json carries the release's own amsterdamTime: egg would put it at
-# genesis, after the release's Amsterdam blocks, and every EL would rewind them.
+# The refreshed four-client MPT release, including 50,400 qualifying workload blocks.
+# CL genesis builds on H; N=24453558 is only the PBT migration artifact anchor.
+shadowfork_height: 24503958
+shadowfork_expected_hash: "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216"
+shadowfork_expected_state_root: "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22"
+# Enable with the migration restart only after each recipient's inputs are verified.
+# Keeping this off avoids Docker creating the downloader's final directory early.
+pbt_migration_input_mount_enabled: false
+pbt_migration_input_host_dir: /data/pbt-1/migration-input-24453558
+pbt_migration_input_container_dir: /pbt-migration-input
+pbt_migration_input_bind_mounts: >-
+  {{ [pbt_migration_input_host_dir ~ ':' ~ pbt_migration_input_container_dir ~ ':rw']
+     if (pbt_migration_input_mount_enabled | bool) else [] }}
+# The source is already Amsterdam. Preserve its historical activation time;
+# moving Amsterdam to the new CL genesis would invalidate the retained blocks.
 shadowfork_snapshot_root: "{{ shadowfork_snapshot_base_url }}/{{ snapshot_fetcher_network }}/geth/{{ shadowfork_height }}"
-# 1769856769 for the jochemnet release.
-shadowfork_amsterdam_time: >-
-  {{ (lookup('ansible.builtin.url', shadowfork_snapshot_root ~ '/_snapshot_metadata.json', split_lines=false)
-      | from_json).shadowfork.amsterdam_time }}
+shadowfork_amsterdam_time: 1769856769
 gloas_fork_epoch: 0
-# 36 supernodes x 1000 keys (terraform/pbt-1/nodes.tf). A reduced fleet passes its own total
-# with -e, or finality never comes (participation is counted against this number).
-ethereum_genesis_validator_count: 36000
+# Nine workers x 256 keys, assigned by terraform/pbt-1/nodes.tf.
+ethereum_genesis_validator_count: 2304
 ethereum_genesis_mnemonic: "{{ secret_genesis_mnemonic }}"
 ethereum_genesis_generator_config_files:
   cl/config.yaml: "{{ lookup('ansible.builtin.url', 'https://raw.githubusercontent.com/ethpandaops/ethereum-genesis-generator/v{{ethereum_genesis_generator_version}}/config-example/cl/config.yaml',
@@ -118,17 +120,18 @@ ethereum_genesis_generator_config_files:
     export VALIDATOR_BALANCE=10000000000000
     export DEPOSIT_CONTRACT_ADDRESS=0x00000000219ab540356cBB839Cbe05303d7705Fa
     export SHADOW_FORK_FILE=/config/shadowfork_block.json
-  shadowfork_block.json: "{{ lookup('ansible.builtin.url', shadowfork_snapshot_root ~ '/_snapshot_eth_getBlockByNumber.json', split_lines=false) }}"  # noqa yaml[line-length]
+    export CL_EXEC_BLOCK={{ shadowfork_height }}
+  shadowfork_block.json: "{{ lookup('ansible.builtin.file', inventory_dir ~ '/files/shadowfork_block.json') }}"
 
 # role: ethpandaops.general.snapshot_fetcher (variable names reused by
 # ansible/shadowfork.yaml, which downloads with parallel ranged GETs instead).
 # snapshot_fetcher_out_dir/_filename are set per EL in its group_vars file.
-snapshot_fetcher_network: jochemnet
+snapshot_fetcher_network: pbt-1/20261019-mixed-8037-v2
 shadowfork_snapshot_base_url: https://shadowfork-images.ethpandaops.io
 snapshot_fetcher_client: "{{ ethereum_node_el }}"
 snapshot_fetcher_block: "{{ shadowfork_height }}"
 
-ethereum_genesis_validator_keys_output_dir: "{{ ansible_inventory_sources[0] | dirname }}/files/validator_keys"
+ethereum_genesis_validator_keys_output_dir: "{{ pbt_genesis_workspace | mandatory }}/validator-keys"
 ethereum_genesis_validator_bls_change_execution_address: "{{ ethereum_node_cl_validator_fee_recipient }}"
 ethereum_genesis_validator_keyranges: >-
   {%- set ns = namespace() -%}
@@ -185,7 +188,6 @@ vector_container_image: "{{ default_tooling_images.vector }}"
 json_rpc_snooper_container_image: "{{ default_tooling_images.json_rpc_snooper }}"
 
 # role: ethpandaops.general.ethereum_node
-ethereum_node_images_always_pull: true
 ethereum_node_metrics_exporter_enabled: true
 ethereum_node_xatu_sentry_enabled: true
 ethereum_node_cl_validator_enabled: "{{ validator_start is defined and validator_end is defined }}"
@@ -582,11 +584,14 @@ vector_config: |
 # Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
 # Firewall EL p2p on every host right after -t init-server (before any EL starts):
 #   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh pbt-1
-# Live fleet seeds collected from admin_nodeInfo after deployment.
-shadowfork_el_static_enodes:
-  # bootnode-1
-  - enode://1521610424ba20404cce5959bb4dd0e63af6d3da47d2281acb7ecc07f0b991ce91e9e128b251945bfe7994a281408443d4511c4f8be76926646cd62e796679c9@139.59.24.87:30303
-  # buildoor-lighthouse-geth-1
-  - enode://bd88e0d7e6cd3f8094d8d93a499bd25ad1e82c5a5138febd65f39638bf8506088a601c51efbe3896be60a3853c5d96662bbf2b4df4a5416e15006ec21c0efac9@165.227.94.57:30303
-  # buildoor-teku-nethermind-1
-  - enode://93fe6a83d98ce8608e0aa03767d035e88790f1c58882eac233ee3ad9444778dfa3945e6796dc93d1d1775fcb63b83e0723edb9d2a01f1f718d704f5af90763bb@159.65.76.207:30303
+# PBT fleet only. Generate the public manifest with pbt-prepare-identities.yaml;
+# never reuse the inherited msf-2 seed addresses or keys cloned in snapshots.
+pbt_peer_identities: "{{ lookup('ansible.builtin.file', inventory_dir ~ '/files/peer-identities.json') | from_json }}"
+shadowfork_el_static_enodes: >-
+  {{
+    groups['ethereum_node']
+    | reject('equalto', inventory_hostname)
+    | map('extract', pbt_peer_identities, 'enode')
+    | unique
+    | list
+  }}

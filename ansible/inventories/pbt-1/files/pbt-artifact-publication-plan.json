@@ -1,0 +1,18 @@
+{
+  "time": 1792530780.994502,
+  "status": "staged_not_authorized",
+  "script": "scripts/pbt/publish-pbt-artifacts.py",
+  "script_sha256": "d59c10f8af6aec683a129b68f6db0a732ee5d36ad12db4ba8e461eed78e967a0",
+  "worker": "lighthouse-erigon-1",
+  "target_block": 24453558,
+  "guard_tests_passed": 9,
+  "live_check": "Refused missing completed native export/verification proof",
+  "multipart_authorized": false,
+  "upload_started": false,
+  "full_remote_sha256_verified": false,
+  "source_cleanup_performed": false,
+  "genesis_time": null,
+  "conditional_release_creation": "If-None-Match: * header signed by installed SDK; no network used in compatibility test",
+  "storage_sdk_version": "1.34.46",
+  "readback_helper_sha256": "bb5b38be64caaa312949cf8ab9c90816fbec7ef49549016a9098df5a3ec14f1e"
+}

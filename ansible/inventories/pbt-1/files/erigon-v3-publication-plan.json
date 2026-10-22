@@ -1,0 +1,177 @@
+{
+  "status": "published_verified",
+  "worker": "lighthouse-erigon-2",
+  "host": "159.89.21.191",
+  "head": 24503958,
+  "source_datadir": "/data/pbt-1/erigon",
+  "object_key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst",
+  "native_format": "v3 MPT",
+  "pbt_migration_performed": false,
+  "stream_command": [
+    "python3",
+    "/data/pbt-1/upload-v3-head-stream.py",
+    "--v3-head"
+  ],
+  "remote_publication_directory": "/data/pbt-1/v3-head-publication",
+  "multipart_job_created": true,
+  "upload_started": true,
+  "published": true,
+  "required_before_authorization": [
+    "Successful H conversion and full v3 state verification",
+    "Two pinned-image H opens at 16 GiB with matching head/root, sampled BAL bodies, and clean stops",
+    "Exact qualification report SHA-256 bound to the upload job"
+  ],
+  "required_before_release": [
+    "Stopped-source streaming with conversion and qualification locks held",
+    "Full remote compressed-archive SHA-256 readback",
+    "Publish source genesis, image/commit, conversion/reopen proof, archive bytes and checksum"
+  ],
+  "retention_scope": "Original release had full BAL-body validation. Post-conversion worker qualification currently checks three bodies; do not describe that as a new full-range audit.",
+  "recovery_volume_gate": "Measure converted archive size before replacing or downloading onto a 550 GiB recovery volume; retain the verified original archive meanwhile.",
+  "genesis_time": null,
+  "launch_authorized": false,
+  "controller": "scripts/pbt/publish-erigon-v3-head.py",
+  "controller_python": "/usr/bin/python3",
+  "controller_actions": [
+    "check",
+    "authorize",
+    "finish",
+    "auto"
+  ],
+  "controller_sha256": "6cc41b67fe36039ceda053fc0ab2061e23f3afee411474877b339e85c43ac6dc",
+  "controller_review": {
+    "time": 1792529975.485338,
+    "tests_passed": 17,
+    "test_command": "/usr/bin/python3 -m unittest test_v3_head_publication test_upload_archive -v",
+    "live_check": "refused: H conversion-complete.json and qualification/result.json do not exist; conversion and queued qualification units still active",
+    "storage_mutation_performed": false
+  },
+  "streamer_sha256": "845930d1580e0a24117e382e8a4d808e3ac142197fbedb3c7b61b91442fe95d9",
+  "converter_provenance_policy": "For a patched converter, qualification and conversion records must contain the same converter_build. Release metadata and the conversion proof retain its base commit, patch SHA-256 and binary SHA-256 separately from the unmodified worker image.",
+  "automatic_handoff": {
+    "time": 1792529975.4853382,
+    "unit": "pbt-1-v3-head-publication.service",
+    "unit_state": "MainPID=0\nResult=success\nActiveState=inactive\n",
+    "phase": "published_verified",
+    "multipart_authorized": true,
+    "upload_started": true,
+    "wait_limit_hours_per_stage": 24,
+    "credentials_scope": "Account credentials remain in the private controller environment; only object-scoped multipart URLs go to the VM",
+    "remote_upload_unit": "pbt-1-v3-head-upload.service",
+    "remote_upload_memory_gib": 16,
+    "remote_upload_cpu_quota_percent": 400,
+    "full_remote_readback_required": true,
+    "genesis_time": null,
+    "tail_batch_resume": {
+      "observed_at_utc": "2026-10-21T05:03:17Z",
+      "unit_main_pid": 281010,
+      "unit_active": true,
+      "phase": "waiting_for_H_conversion_and_reopen",
+      "reason": "Controller deliberately stopped and recreated around native tail batch handoff; no upload authorization issued",
+      "performance_evidence": "erigon-tail-performance-20261021.json"
+    },
+    "observed_at_utc": "2026-10-21T12:14:58.993499+00:00"
+  },
+  "checked_at": "2026-10-21T12:14:58.993499+00:00",
+  "qualification_sha256": "ea437a555a69eb58a256f3bb2cbfb7820a0c1cbea43db759adee4bfb7c55c4c7",
+  "qualification_evidence": "erigon-2-v3-head-qualified.json",
+  "upload_cpu_observation": {
+    "sample_seconds": 62.21937441825867,
+    "cpu_cores_used": 1.435850036026452,
+    "throttled_seconds": 0,
+    "throttled_periods": 0,
+    "processes": [
+      {
+        "pid": 136958,
+        "name": "python3",
+        "rchar_delta": 7128920353,
+        "wchar_delta": 6695872725
+      },
+      {
+        "pid": 137081,
+        "name": "tar",
+        "rchar_delta": 17479507968,
+        "wchar_delta": 17479505920
+      },
+      {
+        "pid": 137082,
+        "name": "zstd",
+        "rchar_delta": 17479444480,
+        "wchar_delta": 3639185408
+      }
+    ],
+    "time": 1792576990.9363368,
+    "decision": "Keep existing 400% CPU quota: sampled usage was 1.44 cores with zero throttling; no live configuration change or restart"
+  },
+  "remaining_publication_gates": [],
+  "upload_completed": true,
+  "completed_upload": {
+    "archive_bytes": 461165199193,
+    "archive_sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+    "multipart_etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
+    "multipart_completed_at": 1792581120.7168245,
+    "worker_unit_result": "success",
+    "full_remote_sha256_verified": true
+  },
+  "recovery_capacity_review": {
+    "checked_at": "2026-10-21T11:13:28.393702+00:00",
+    "archive_bytes": 461165199193,
+    "archive_gib": 429.49356063548476,
+    "existing_volume_size_gib": 550,
+    "expansion_required": false,
+    "replacement_started": false,
+    "observations": [
+      {
+        "host": "glamsterdam-pbt-1-lighthouse-erigon-1",
+        "mounted": true,
+        "volume_total_bytes": 585693347840,
+        "volume_free_bytes": 50721173504,
+        "old_archive_bytes": 534953200071,
+        "old_archive_allocated_bytes": 534953259008,
+        "root_free_bytes": 484671012864,
+        "free_after_reviewed_old_archive_reclaim_and_new_copy_bytes": 124509233319,
+        "new_archive_fits_after_replacement": true,
+        "local_cache_fits_with_150GB_reserve": false
+      },
+      {
+        "host": "glamsterdam-pbt-1-lighthouse-erigon-2",
+        "mounted": true,
+        "volume_total_bytes": 585693347840,
+        "volume_free_bytes": 50721165312,
+        "old_archive_bytes": 534953200071,
+        "old_archive_allocated_bytes": 534953259008,
+        "root_free_bytes": 749481947136,
+        "free_after_reviewed_old_archive_reclaim_and_new_copy_bytes": 124509225127,
+        "new_archive_fits_after_replacement": true,
+        "local_cache_fits_with_150GB_reserve": true
+      }
+    ],
+    "gate": "Retain each original archive until the corrected local cache is fully hashed and the worker has passed its own H qualification; Erigon-1 first needs its restore/cleanup sequence."
+  },
+  "readback_recovery": {
+    "first_failure": {
+      "phase": "failed",
+      "time": 1792581505.4173315,
+      "error_class": "ProtocolError"
+    },
+    "replacement_action": "finish",
+    "upload_repeated": false,
+    "range_bytes": 67108864,
+    "workers": 4,
+    "attempts_per_range": 5,
+    "etag_bound": true,
+    "whole_archive_sha256_still_required": true,
+    "helper": "scripts/pbt/remote_readback.py",
+    "helper_sha256": "bb5b38be64caaa312949cf8ab9c90816fbec7ef49549016a9098df5a3ec14f1e",
+    "tests_passed": 23,
+    "verification_complete": true
+  },
+  "release_evidence": "erigon-v3-head-release.json",
+  "public_hostname_probe": {
+    "checked_at": "2026-10-21T12:14:58.993499+00:00",
+    "anonymous_head_status": 403,
+    "original_release_control_head_status": 403,
+    "authorized_storage_download_working": true,
+    "launch_blocker": false
+  }
+}

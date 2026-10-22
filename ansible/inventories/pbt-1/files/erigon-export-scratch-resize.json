@@ -1,0 +1,59 @@
+{
+  "time": 1792559886.4339514,
+  "volume_id": "634c5395-cce7-11f1-b928-12c5d35e2ba6",
+  "uuid": "fc1c8f01-c8d6-4d04-b2f4-2a5520e64895",
+  "device": "/dev/sdb",
+  "mount": "/mnt/pbt-export-scratch",
+  "size_gib": 1500,
+  "before": {
+    "total": 585693347840,
+    "used": 67303366656,
+    "free": 488845303808
+  },
+  "after": {
+    "total": 1597712162816,
+    "used": 67369426944,
+    "free": 1459975405568
+  },
+  "native_pid_unchanged": true,
+  "remove_before_launch": true,
+  "reason": "Independent verify-pbt keeps multiple expanded sorted representations while constructing MPT rows; the former 550-GiB scratch allocation is not a proven sufficient peak bound.",
+  "pinned_verifier_source": {
+    "commit": "372df0e68f52f9975370bff38dee6e41aefff0d7",
+    "path": "cmd/utils/app/verify_pbt_stream.go",
+    "sha256": "8d24e56d048d7d20bd84257b0f666719daaf11b312d05e2a0814665e6cccf869",
+    "matches_working_source": true
+  },
+  "retained_phase_outputs": [
+    "headers.bin",
+    "leaves.sorted",
+    "code-actual.sorted",
+    "code-requirements.sorted",
+    "addresses.sorted",
+    "joined-slots.sorted",
+    "code-expected.sorted",
+    "code-rows.sorted",
+    "mpt-storage.sorted",
+    "mpt-accounts.sorted",
+    "mpt-account-rows.sorted"
+  ],
+  "source_review": "Each collector is closed after its sorted output is written, but prior sorted outputs remain until the verifier temporary directory is removed. MPT storage/account sorting therefore overlaps earlier materialized representations.",
+  "measured_peak_proven": false,
+  "terraform_plan": {
+    "mutations": 1,
+    "address": "digitalocean_volume.export_scratch",
+    "action": "update",
+    "changed_attribute": "size",
+    "before_gib": 550,
+    "after_gib": 1500,
+    "apply_exit_code": 0
+  },
+  "scratch_guard_reserve_bytes": 50000000000,
+  "root_guard_reserve_bytes": 150000000000,
+  "mount_targets_to_unmount_before_detach": [
+    "/mnt/glamsterdam_pbt_1_erigon_export_scratch",
+    "/mnt/pbt-export-scratch"
+  ],
+  "migration_storage_changed": false,
+  "genesis_time": null
+}

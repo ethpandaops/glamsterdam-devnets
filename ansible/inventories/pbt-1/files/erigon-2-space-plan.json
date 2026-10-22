@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-10-21T15:14:12.231723+00:00",
+  "worker": "lighthouse-erigon-2",
+  "host": "159.89.21.191",
+  "root_filesystem": {
+    "total_bytes": 2536325763072,
+    "used_bytes": 1535295000576,
+    "available_bytes": 897911918592
+  },
+  "live_erigon_allocated_bytes": 1528990081024,
+  "published_archive_apparent_source_bytes": 1172094659363,
+  "recovery_archive_bytes": 461165199193,
+  "recovery_archive_full_remote_verification_pending": false,
+  "cache_fits_with_150GB_reserve": true,
+  "cleanup_candidate": {
+    "path": "/data/pbt-1/v3-head-upgrade/unsqueeze-backup",
+    "checked_at": 1792584465.3369749,
+    "files": 8,
+    "unique_files": 8,
+    "allocated_file_bytes": 148433989632,
+    "exclusive_file_bytes": 148433989632,
+    "files_with_external_hardlinks": 0,
+    "directory_device": 65025,
+    "directory_inode": 68681751
+  },
+  "cleanup_performed": true,
+  "preserve": [
+    "/data/pbt-1/erigon",
+    "/data/pbt-1/v3-head-upgrade conversion/verification/tail proof files and logs",
+    "/data/pbt-1/qualification",
+    "/data/pbt-1/node-identity"
+  ],
+  "note": "Both temporary copies are reclaimed: the eight unsqueeze rollback files and the verified local archive cache. The corrected recovery-volume archive is verified and configured, and the remote release is fully verified. Live database, original qualification and conversion evidence are preserved. No database compaction or pruning was performed.",
+  "recovery_cache": {
+    "staged": true,
+    "download_started": true,
+    "unit": "pbt-1-v3-head-recovery-cache",
+    "main_pid": 0,
+    "path": "/data/pbt-1/v3-head-recovery/cache",
+    "stored_cache_independent_hash_pending": false,
+    "volume_replacement_started": true,
+    "old_volume_archive_preserved": false,
+    "checked_at": "2026-10-21T15:14:12.231723+00:00",
+    "stored_file_readback": {
+      "unit": "pbt-1-v3-head-cache-readback",
+      "main_pid": 0,
+      "phase": "stored_cache_verified",
+      "script": "scripts/pbt/verify-erigon-recovery-cache.py",
+      "script_sha256": "76b2e84233e1b09fb32fbd3c4437c87e442b4653ccd22d8598823752a1aa4116",
+      "memory_max_bytes": 1073741824,
+      "cpu_quota_percent": 100,
+      "archive_replacement_authorized_by_this_job": false,
+      "checked_at": "2026-10-21T14:04:49Z",
+      "first_attempt_failure": "Completed transient download unit was collected by systemd before the waiter polled; stopped before hashing.",
+      "fix": "Require completed download proof and exclusive lock when transient service is no longer loaded; always independently hash stored file.",
+      "targeted_tests_passed": 8
+    },
+    "download_completed": true,
+    "archive_bytes": 461165199193,
+    "stream_sha256_verified": true,
+    "volume_replacement_completed": true,
+    "original_provenance_preserved": true,
+    "local_cache_preserved": false,
+    "recovery_ready_receipt": "erigon-2-v3-recovery-ready.json",
+    "local_cache_reclaimed": true,
+    "local_cache_cleanup_receipt": "erigon-2-cache-cleanup.json"
+  },
+  "root_filesystem_before_cache": {
+    "total_bytes": 2536325763072,
+    "used_bytes": 1683726102528,
+    "available_bytes": 749480816640
+  },
+  "cleanup_receipt": "erigon-2-unsqueeze-cleanup.json",
+  "cleanup_requirements_satisfied": true,
+  "cleanup_requirements": [
+    "Corrected H release passes full remote SHA-256 readback",
+    "Erigon-2 own H qualification remains valid",
+    "Corrected local recovery cache passes independent stored-file SHA-256",
+    "Corrected recovery-volume copy passes stored-file SHA-256 and active recovery job/proofs identify the new release",
+    "Recheck exact directory identity and exclusive allocated bytes; no active conversion or process owns the backup files"
+  ]
+}

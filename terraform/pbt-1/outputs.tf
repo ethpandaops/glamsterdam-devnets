@@ -6,6 +6,7 @@ resource "local_file" "ansible_inventory" {
   content = templatefile("ansible_inventory.tmpl",
     {
       ethereum_network_name = "${var.ethereum_network}"
+      primary_dns_host      = local.primary_dns_host
       groups = merge(
         { for group in local.digitalocean_vm_groups : "${group.group_name}" => true... },
         { for group in local.hetzner_vm_groups : "${group.group_name}" => true... },

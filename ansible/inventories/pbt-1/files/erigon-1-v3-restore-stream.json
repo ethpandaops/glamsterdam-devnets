@@ -1,0 +1,14 @@
+{
+  "time": 1792610618.6031265,
+  "method": "etag_bound_ranges_to_fresh_directory",
+  "sha256": "b4ab8e0831bd95ddce05b9f52c040de7eaf4a9b8b1fa49106cb3e9cd88938146",
+  "bytes": 461165199193,
+  "etag": "\"886ec54f00b80499902a532f0cab37e4-1718\"",
+  "key": "pbt-1/20261020-erigon-v3-head/erigon/24503958/snapshot.tar.zst",
+  "bundle_sha256": "aa1f372f6d73abf7d877fd631e9481004c17abe2b4cea363f93f83082d16ff45",
+  "restored_identity": {
+    "device": 65025,
+    "inode": 17039362
+  },
+  "whole_archive_verified": true
+}

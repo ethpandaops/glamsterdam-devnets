@@ -1,0 +1,44 @@
+{
+  "checked_at": 1792561779.878911,
+  "scope": "Central gateway node metrics only; EL/CL remain separate runtime checks",
+  "status": "passed",
+  "problems": [],
+  "workers": {
+    "glamsterdam-pbt-1-lighthouse-besu-1": {
+      "up": 1.0,
+      "sample_age_seconds": 0.10399985313415527
+    },
+    "glamsterdam-pbt-1-lighthouse-besu-2": {
+      "up": 1.0,
+      "sample_age_seconds": 6.07099986076355
+    },
+    "glamsterdam-pbt-1-lighthouse-erigon-1": {
+      "up": 1.0,
+      "sample_age_seconds": 6.290999889373779
+    },
+    "glamsterdam-pbt-1-lighthouse-erigon-2": {
+      "up": 1.0,
+      "sample_age_seconds": 14.069000005722046
+    },
+    "glamsterdam-pbt-1-lighthouse-geth-1": {
+      "up": 1.0,
+      "sample_age_seconds": 22.722999811172485
+    },
+    "glamsterdam-pbt-1-lighthouse-geth-2": {
+      "up": 1.0,
+      "sample_age_seconds": 24.221999883651733
+    },
+    "glamsterdam-pbt-1-lighthouse-geth-3": {
+      "up": 1.0,
+      "sample_age_seconds": 27.978999853134155
+    },
+    "glamsterdam-pbt-1-lighthouse-nethermind-1": {
+      "up": 1.0,
+      "sample_age_seconds": 7.236999988555908
+    },
+    "glamsterdam-pbt-1-lighthouse-nethermind-2": {
+      "up": 1.0,
+      "sample_age_seconds": 5.611999988555908
+    }
+  }
+}
