@@ -3,6 +3,8 @@
 pbt_migration_role: import
 pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
+# Wave 2 (2026-10-22): PBT migration restart; keep true on every later start.
+pbt_migration_enabled: true
 nethermind_container_memory: "16g"
 nethermind_container_memory_swap: "16g"
 nethermind_container_memory_swappiness: 0
