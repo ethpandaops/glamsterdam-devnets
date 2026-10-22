@@ -12,6 +12,8 @@ nethermind_datadir: /data/pbt-1/nethermind
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: nethermind
 # role: ethpandaops.general.nethermind
+# Init.MemoryHint sizes DB caches; per host so the 32 GiB trial can use its budget.
+nethermind_memory_hint: 2500000000
 nethermind_container_name: execution
 nethermind_container_image: "{{ default_ethereum_client_images.nethermind }}"
 nethermind_container_env:
@@ -53,7 +55,7 @@ pbt_nethermind_base_args:
   # Size * 40 KB <= half the MemoryHint left after fixed allowances (MemoryHintMan.cs); the
   # preset's 1 GB hint rejects 20000, so raise it.
   - --TxPool.Size=20000
-  - --Init.MemoryHint=2500000000
+  - --Init.MemoryHint={{ nethermind_memory_hint }}
   - --log=INFO
   - --Seq.MinLevel=Info
   - --Seq.ServerUrl={{ nethermind_seq_server }}

@@ -3,6 +3,10 @@
 pbt_migration_role: import
 pbt_migration_memory_gib: 32
 pbt_migration_anchor: 24453558
+# Wave 4 (2026-10-22): PBT migration restart; keep true on every later start.
+pbt_migration_enabled: true
+# 32 GiB budget: larger DB caches (Nethermind-1 measured ~6.5 GiB anon at the 2.5 GB hint).
+nethermind_memory_hint: 12000000000
 nethermind_container_memory: "32g"
 nethermind_container_memory_swap: "32g"
 nethermind_container_cpus: 8
