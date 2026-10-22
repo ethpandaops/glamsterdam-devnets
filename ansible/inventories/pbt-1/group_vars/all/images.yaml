@@ -12,7 +12,8 @@ default_ethereum_client_images:
   # Exact Besu/stateless pair built locally; host_vars pin each loaded image ID.
   besu: pbt-1/besu:39377a26-62b75234
   geth: registry-1.docker.io/ethpandaops/geth@sha256:d2de25f100593299d8e09e2b685cf8a0a14d4e992496bb8fe6133f8bb8634826
-  erigon: registry-1.docker.io/ethpandaops/erigon@sha256:4aec40c643590ec9496c982b22f0efb04835ff071233e92c418f9380cc84db69
+  # binary-trie b4a42b6b1a99 (awskii request 2026-10-22); was 372df0e6 @sha256:4aec40c6…
+  erigon: registry-1.docker.io/ethpandaops/erigon@sha256:86dc1995e9332b6d8462837a2f8be5be2c0772ee2f02b38a84d77081b5b0a561
   nethermind: registry-1.docker.io/ethpandaops/nethermind@sha256:60bb6209888af0b5e11622cff15a7a14c64f3849b0aeb50b46a1a77f64b75d17
   reth: ghcr.io/paradigmxyz/reth:v2.7.0
   nimbusel: registry-1.docker.io/statusim/nimbus-eth1:v0.4.2
