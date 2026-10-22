@@ -336,3 +336,12 @@ retain logs, configuration, resource peaks and explicit coverage exceptions.
 - Wave 2: Nethermind-1 restarted 10:00:31–10:02:47 UTC (commit d638141; clean
   shutdown took ~2 min). Re-processed 146 blocks to head, then `PBT verify preimages`.
   Evidence: `~/.local/state/pbt-1-run/migration/wave-2/`.
+- Wave 3: Besu-2 started 10:12 UTC, then restarted 10:13:58 with a 24 GiB heap in
+  its 32 GiB budget (commit c11f0b7; Besu-1 keeps 8 GiB in 16 GiB). Geth-2 is gated
+  on Geth-1 logging `Verified consensus anchoring` (Geth consumes its inputs).
+- Wave 4: Nethermind-2 restarted 10:17:51–10:21:06 UTC with a 12 GB memory hint
+  (commit e09d476; Nethermind-1 keeps 2.5 GB). Nethermind reads but does not consume
+  its inputs.
+- Ansible: EL host_vars no longer set memory_swappiness (permanent cgroup-v2 diff that
+  recreated containers; commit 02f734e). Dry-run any multi-host EL deploy first.
+
