@@ -3,6 +3,8 @@
 pbt_migration_role: import
 pbt_migration_memory_gib: 32
 pbt_migration_anchor: 24453558
+# Wave 3 (2026-10-22): PBT migration restart, same flags as Geth-1; keep true.
+pbt_migration_enabled: true
 geth_container_memory: "32g"
 geth_container_memory_swap: "32g"
 geth_container_cpus: 8
