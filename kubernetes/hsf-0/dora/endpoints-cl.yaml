@@ -1,0 +1,46 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/dora-endpoints-cl.yaml.j2
+# Consensus layer endpoints
+
+- url: https://bn-bootnode-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: bootnode-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-buildoor-teku-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: buildoor-teku-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-grandine-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: grandine-geth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-lighthouse-ethrex-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: lighthouse-ethrex-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lighthouse-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: lighthouse-geth-1
+  authGroup: pandaops
+  priority: -1
+  archive: true
+- url: https://bn-lodestar-erigon-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: lodestar-erigon-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-nimbus-nimbusel-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: nimbus-nimbusel-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-nimbus-reth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: nimbus-reth-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-prysm-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: prysm-nethermind-1
+  authGroup: pandaops
+  priority: -1
+- url: https://bn-teku-besu-1.srv.glamsterdam-hsf-0.ethpandaops.io
+  name: teku-besu-1
+  authGroup: pandaops
+  priority: -1
+

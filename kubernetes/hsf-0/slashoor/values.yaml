@@ -1,0 +1,54 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/slashoor.yaml.j2
+
+slashoor:
+  fullnameOverride: slashoor
+  replicas: 1
+
+  image:
+    repository: registry-1.docker.io/ethpandaops/slashoor
+    tag: master
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+  config:
+    beacon:
+      endpoints:
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-reth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+        - https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      timeout: 30s
+
+    indexer:
+      max_epochs_to_keep: 54000
+
+    detector:
+      enabled: true
+
+    submitter:
+      enabled: true
+      dry_run: false
+
+    proposer:
+      enabled: true
+
+    dora:
+      enabled: true
+      url: https://dora.glamsterdam-hsf-0.ethpandaops.io
+      scan_on_startup: true
+
+    # Committee resolution for deep history needs archive states; the Dora
+    # scan covers older proposer slashings, so keep the backfill shallow.
+    backfill_slots: 320

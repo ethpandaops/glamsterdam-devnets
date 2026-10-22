@@ -1,0 +1,59 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/forkmon.yaml.j2
+
+forkmon:
+  fullnameOverride: forkmon
+  image:
+    repository: registry-1.docker.io/skylenet/nodemonitor
+    tag: darkmode
+    pullPolicy: IfNotPresent
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: forkmon.glamsterdam-hsf-0.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+  network: "glamsterdam-hsf-0"
+  endpoints:
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: bootnode-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-teku-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: buildoor-teku-nethermind-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: grandine-geth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: lighthouse-ethrex-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: lighthouse-geth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-erigon-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: lodestar-erigon-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nimbusel-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: nimbus-nimbusel-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-reth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: nimbus-reth-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: prysm-nethermind-1
+  - addr: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-besu-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    name: teku-besu-1
+
+  config: |
+    # How often to reload data from the nodes
+    reload_interval = "10s"
+    # If specified, a http server will serve static content here
+    server_address = "0.0.0.0:{{ .Values.httpPort}}"
+    # Shown in the document title, if specified
+    chain_name="{{ .Values.network }}"
+    # Local or non third party connection require rpc kind
+    {{- range .Values.endpoints }}
+    [[clients]]
+      url  = {{ .addr | quote }}
+      name = {{ .name | quote }}
+      kind = "rpc"
+    {{- end }}

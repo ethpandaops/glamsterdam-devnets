@@ -1,0 +1,94 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/assertoor.yaml.j2
+
+assertoor:
+  fullnameOverride: assertoor
+
+  image:
+    repository: registry-1.docker.io/ethpandaops/assertoor
+    tag: master-latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 500m
+      memory: 500Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
+        sub_filter_types text/html;
+        sub_filter_once off;
+    hosts:
+      - host: assertoor.glamsterdam-hsf-0.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  persistence:
+    enabled: true
+
+  authProviderUrl: "https://auth.glamsterdam-hsf-0.ethpandaops.io"
+
+  endpoints:
+    - name:  bootnode-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-bootnode-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-bootnode-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  buildoor-teku-nethermind-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-buildoor-teku-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-buildoor-teku-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  grandine-geth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-grandine-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  lighthouse-ethrex-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-ethrex-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-ethrex-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  lighthouse-geth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lighthouse-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-geth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  lodestar-erigon-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-lodestar-erigon-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-erigon-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  nimbus-nimbusel-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-nimbusel-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  nimbus-reth-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-nimbus-reth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-reth-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  prysm-nethermind-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-prysm-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-prysm-nethermind-1.srv.glamsterdam-hsf-0.ethpandaops.io
+    - name:  teku-besu-1
+      executionUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@rpc-teku-besu-1.srv.glamsterdam-hsf-0.ethpandaops.io
+      consensusUrl: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-1.srv.glamsterdam-hsf-0.ethpandaops.io
+
+  validatorNamesInventory: https://config.glamsterdam-hsf-0.ethpandaops.io/api/v1/nodes/validator-ranges
+  globalVariables:
+    walletPrivkey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.assertoor_private_key}>"
+    clientPairNames:
+      - bootnode-1
+      - buildoor-teku-nethermind-1
+      - grandine-geth-1
+      - lighthouse-ethrex-1
+      - lighthouse-geth-1
+      - lodestar-erigon-1
+      - nimbus-nimbusel-1
+      - nimbus-reth-1
+      - prysm-nethermind-1
+      - teku-besu-1
+    validatorPairNames:
+      - grandine-geth-1
+      - lighthouse-ethrex-1
+      - lodestar-erigon-1
+      - nimbus-nimbusel-1
+      - nimbus-reth-1
+      - prysm-nethermind-1
+      - teku-besu-1
+
+  assertoorTests: []
