@@ -39,7 +39,7 @@ early cross-client root comparison. Each wave starts only on the user's go.
 | Wave | Workers | Budget |
 | --- | --- | --- |
 | 1 | Geth-1 + Besu-1 (import) | 16 + 16 GiB |
-| 2 | Nethermind-1 (import) + Geth-3 (self; record P) | 16 + 16 GiB |
+| 2 | Nethermind-1 (import); Geth-3 (self; record P) started early, 09:51 UTC | 16 + 16 GiB |
 | 3 | Geth-2 + Besu-2 (import) | 32 + 32 GiB |
 | 4 | Nethermind-2 (import) | 32 GiB |
 | 5 | Erigon-1, then Erigon-2 (convert-pbt on a hardlinked frozen copy, short stop for attach-pbt) | 32 / 16 GiB |
@@ -330,3 +330,6 @@ retain logs, configuration, resource peaks and explicit coverage exceptions.
   (commit 5df86b9). Geth: `Phase=importing` from 09:38:47. Besu: in sync, migrator
   verifying/loading the N snapshot from 09:39:01. Evidence:
   `~/.local/state/pbt-1-run/migration/wave-1/` (baseline, deploy log, progress.jsonl).
+- Geth-3 self-migration started early (user) at 09:51:16–25 UTC (commit c2aa154):
+  `BinaryTrie: @1793264400` in chain config, `Phase=importing` from start. Evidence:
+  `~/.local/state/pbt-1-run/migration/geth-3-self/`.
