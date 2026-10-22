@@ -3,6 +3,8 @@
 pbt_migration_role: import
 pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
+# Wave 1 (2026-10-22): PBT migration restart; keep true on every later start.
+pbt_migration_enabled: true
 besu_container_image: "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4"
 besu_container_memory: "16g"
 besu_container_memory_swap: "16g"
