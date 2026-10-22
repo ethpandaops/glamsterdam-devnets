@@ -5,6 +5,5 @@ pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
 erigon_container_memory: "16g"
 erigon_container_memory_swap: "16g"
-erigon_container_memory_swappiness: 0
 erigon_container_cpus: 8
 erigon_container_cpuset_cpus: "0-7"

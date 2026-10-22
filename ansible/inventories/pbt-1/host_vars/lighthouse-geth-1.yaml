@@ -7,6 +7,5 @@ pbt_migration_anchor: 24453558
 pbt_migration_enabled: true
 geth_container_memory: "16g"
 geth_container_memory_swap: "16g"
-geth_container_memory_swappiness: 0
 geth_container_cpus: 8
 geth_container_cpuset_cpus: "0-7"

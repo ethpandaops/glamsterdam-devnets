@@ -7,6 +7,5 @@ pbt_migration_anchor: 24453558
 pbt_migration_enabled: true
 nethermind_container_memory: "16g"
 nethermind_container_memory_swap: "16g"
-nethermind_container_memory_swappiness: 0
 nethermind_container_cpus: 8
 nethermind_container_cpuset_cpus: "0-7"
