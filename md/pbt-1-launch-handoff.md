@@ -44,7 +44,7 @@ early cross-client root comparison. Each wave starts only on the user's go.
 | 4 | Nethermind-2 (import) | 32 GiB |
 | optional | Erigon-1, then Erigon-2 (convert-pbt on a hardlinked frozen copy, short stop for attach-pbt) | 32 / 16 GiB |
 
-Priority (user, 09:50 UTC): the live-migration replay and measurements come from
+Priority (user, 09:35 UTC): the live-migration replay and measurements come from
 Geth, Besu and Nethermind (online import, BAL follower). Erigon already served as
 the shared N snapshot producer; its workers stay hex-only MPT at head unless time
 allows. Erigon conversion at this pin is offline convert-pbt plus attach-pbt and
