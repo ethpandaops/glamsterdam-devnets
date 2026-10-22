@@ -82,6 +82,22 @@ prometheus_config: |
         username: {{ prometheus_remote_write_username }}
         password: {{ prometheus_remote_write_password }}
   scrape_configs:
+    # Container CPU/memory against the EL limits (cAdvisor, playbook.yaml).
+    - job_name: "cadvisor"
+      metrics_path: "/metrics"
+      static_configs:
+        - targets: ["cadvisor:8080"]
+          labels:
+            instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
+      metric_relabel_configs:
+        - source_labels: [__name__]
+          regex: "container_(cpu_usage_seconds_total|cpu_cfs_throttled_seconds_total|memory_working_set_bytes|memory_rss|memory_cache|memory_usage_bytes|memory_max_usage_bytes|memory_failcnt|spec_memory_limit_bytes|spec_cpu_quota|oom_events_total|fs_reads_bytes_total|fs_writes_bytes_total|network_receive_bytes_total|network_transmit_bytes_total)"
+          action: keep
+        - source_labels: [name]
+          regex: ".+"
+          action: keep
+        - regex: "id|image|container_label_.*"
+          action: labeldrop
     - job_name: "prometheus"
       metrics_path: "/metrics"
       static_configs:

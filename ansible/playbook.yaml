@@ -199,6 +199,34 @@
         - not ansible_check_mode
       tags: [ethereum, ethereum_node, besu_profiling]
 
+# Container-level CPU/memory for Prometheus (job "cadvisor"). Opt-in per inventory.
+- hosts: ethereum_node
+  become: true
+  tasks:
+    - name: Run cAdvisor
+      when: cadvisor_enabled | default(false) | bool
+      tags: [cadvisor]
+      community.docker.docker_container:
+        name: cadvisor
+        image: "{{ cadvisor_container_image }}"
+        state: started
+        restart_policy: always
+        privileged: true
+        devices: ["/dev/kmsg"]
+        networks: "{{ docker_networks_shared }}"
+        volumes:
+          - /:/rootfs:ro
+          - /var/run:/var/run:ro
+          - /sys:/sys:ro
+          - /var/lib/docker/:/var/lib/docker:ro
+          - /dev/disk/:/dev/disk:ro
+        command:
+          - --docker_only=true
+          - --housekeeping_interval=15s
+          - --store_container_labels=false
+          - --disable_metrics=advtcp,cpu_topology,cpuset,hugetlb,memory_numa,percpu,process,referenced_memory,resctrl,sched,tcp,udp
+        memory: 512m
+
 # The metadata service can live on a worker when no dedicated bootnode exists.
 # Its role is still restricted to primary_bootnode below.
 - hosts: bootnode:ethereum_node

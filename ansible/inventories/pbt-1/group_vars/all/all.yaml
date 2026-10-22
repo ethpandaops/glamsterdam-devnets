@@ -200,6 +200,9 @@ bootstrap_default_user_authorized_keys_github: "{{ bootstrap_default_user_author
 bootstrap_harden_sshd_config: false
 
 node_exporter_container_image: "{{ default_tooling_images.node_exporter }}"
+# Container-level CPU/memory (EL cgroup vs its 16/32 GiB limit); see playbook.yaml.
+cadvisor_enabled: true
+cadvisor_container_image: gcr.io/cadvisor/cadvisor:v0.52.1@sha256:f40e65878e25c2e78ea037f73a449527a0fb994e303dc3e34cb6b187b4b91435
 prometheus_container_image: "{{ default_tooling_images.prometheus }}"
 vector_container_image: "{{ default_tooling_images.vector }}"
 json_rpc_snooper_container_image: "{{ default_tooling_images.json_rpc_snooper }}"
