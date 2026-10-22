@@ -1,21 +1,21 @@
 ---
 default_ethereum_client_images:
   ### Consensus layer clients
-  lighthouse: ethpandaops/lighthouse:unstable
-  lodestar: ethpandaops/lodestar:unstable
-  nimbus: ethpandaops/nimbus-eth2:unstable
-  prysm: ethpandaops/prysm-beacon-chain:develop
-  prysm_validator: ethpandaops/prysm-validator:develop
-  teku: ethpandaops/teku:master
-  grandine: ethpandaops/grandine:develop
+  lighthouse: sigp/lighthouse:v8.3.1
+  lodestar: chainsafe/lodestar:v1.50.0
+  nimbus: statusim/nimbus-eth2:multiarch-v26.10.1
+  prysm: offchainlabs/prysm-beacon-chain:v7.3.0
+  prysm_validator: offchainlabs/prysm-validator:v7.3.0
+  teku: consensys/teku:26.10.1
+  grandine: sifrai/grandine:3.0.0-rc.1
   ### Execution layer clients
-  besu: ethpandaops/besu:main
-  geth: ethpandaops/geth:master
-  erigon: ethpandaops/erigon:main
+  besu: hyperledger/besu:26.10.0
+  geth: ethereum/client-go:v1.17.9
+  erigon: erigontech/erigon:v3.8.0
   nethermind: ethpandaops/nethermind:master
-  reth: ethpandaops/reth:main
-  nimbusel: ethpandaops/nimbus-eth1:master
-  ethrex: ethpandaops/ethrex:main
+  reth: ghcr.io/paradigmxyz/reth:v2.8.0
+  nimbusel: statusim/nimbus-eth1:v0.4.3
+  ethrex: ghcr.io/lambdaclass/ethrex:30.0.0
 
 default_tooling_images:
   mev_boost: ethpandaops/mev-boost:develop

@@ -1,0 +1,3 @@
+---
+erigon_host_extra_args:
+  - --snap.stop
