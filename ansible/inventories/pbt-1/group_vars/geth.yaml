@@ -27,9 +27,9 @@ pbt_geth_base_volumes:
   - "{{ geth_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 geth_container_volumes: "{{ pbt_geth_base_volumes + pbt_migration_input_bind_mounts }}"
-geth_container_command_extra_args:
+pbt_geth_base_args:
   - --nodekey=/node-identity/nodekey
-  - --override.genesis=/network-config/genesis.json
+  - --override.genesis=/network-config/{{ pbt_genesis_file }}
   - --http.api=eth,net,web3,admin,txpool,debug
   - --http.vhosts=*
   - --networkid={{ ethereum_network_id }}
@@ -45,6 +45,15 @@ geth_container_command_extra_args:
   # ~20k pending txs (default 4096+1024 slots of 32 KiB, 1024 queued)
   - --txpool.globalslots=20000
   - --txpool.globalqueue=5000
+# PBT migration restart (pbt_migration_enabled): import workers load the N snapshot;
+# self-migration (Geth-3) omits it and seeds from its own flat state at P >= N.
+pbt_geth_migration_args: >-
+  {{ (['--pbt.import.snapshot=' ~ pbt_migration_input_container_dir ~ '/pbt-snapshot.bin']
+      if pbt_migration_role == 'import' else [])
+     + ['--pbt.import.preimages=' ~ pbt_migration_input_container_dir ~ '/framed.bin',
+        '--pbt.import.anchor=' ~ pbt_anchor_hash,
+        '--pbt.import.workers=4'] }}
+geth_container_command_extra_args: "{{ pbt_geth_base_args + (pbt_geth_migration_args if pbt_migration_enabled | bool else []) }}"
 geth_container_pull: true
 
 prometheus_config: |

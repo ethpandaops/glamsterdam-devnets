@@ -35,9 +35,9 @@ pbt_besu_base_volumes:
   - "{{ besu_profiling_host_dir }}:/profiling"
   - "{{ besu_profiling_host_dir }}/entrypoint.sh:/opt/besu-profiling-entrypoint.sh:ro"
 besu_container_volumes: "{{ pbt_besu_base_volumes + pbt_migration_input_bind_mounts }}"
-besu_container_command_extra_args:
+pbt_besu_base_args:
   - --node-private-key-file=/node-identity/nodekey
-  - --genesis-file=/network-config/genesis.json
+  - --genesis-file=/network-config/{{ pbt_genesis_file }}
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --discovery-dns-url=
   - --discovery-mode=V5
@@ -58,6 +58,16 @@ besu_container_command_extra_args:
   - --rpc-gas-cap=200000000
   # ~20k pending txs: layered pool sorts 10000 by default; the byte-capped layers (75 MB) hold the rest
   - --tx-pool-max-prioritized=20000
+# PBT migration restart (pbt_migration_enabled): waits for sync and finality of N,
+# then loads the snapshot in the background while MPT execution continues.
+pbt_besu_migration_args:
+  - --Xpbt-snapshot-file={{ pbt_migration_input_container_dir }}/pbt-snapshot.bin
+  - --Xpbt-preimages-file={{ pbt_migration_input_container_dir }}/framed.bin
+  - --Xpbt-snapshot-anchor-block-hash={{ pbt_anchor_hash }}
+  - --Xpbt-migration-threads=4
+  - --Xpbt-migration-blocks-per-roll=128
+  - --Xpbt-migration-sort-buffer=64
+besu_container_command_extra_args: "{{ pbt_besu_base_args + (pbt_besu_migration_args if pbt_migration_enabled | bool else []) }}"
 # Loaded from the verified build archive on both workers, not a registry tag.
 besu_container_pull: false
 

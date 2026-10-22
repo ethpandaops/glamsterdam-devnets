@@ -26,14 +26,14 @@ pbt_nethermind_base_volumes:
   - "{{ nethermind_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 nethermind_container_volumes: "{{ pbt_nethermind_base_volumes + pbt_migration_input_bind_mounts }}"
-nethermind_container_command_extra_args:
+pbt_nethermind_base_args:
   - --KeyStore.EnodeKeyFile=/node-identity/node.key.plain
   # Restored jochemnet snapshot: the built-in mainnet config with our genesis.json as
   # the chainspec (same genesis hash and inherited amsterdamTime) and the db the snapshot
   # ships. The preset turns on fast/snap sync; pin both off so nethermind only ever
   # resumes from the restored db. All nine baseline workers are restored.
   - --config=mainnet
-  - --Init.ChainSpecPath=/network-config/genesis.json
+  - --Init.ChainSpecPath=/network-config/{{ pbt_genesis_file }}
   - --Init.BaseDbPath=/data/mainnet
   - --FlatDb.Enabled=true
   - --FlatDb.Layout=Flat
@@ -59,6 +59,15 @@ nethermind_container_command_extra_args:
   - --Seq.ServerUrl={{ nethermind_seq_server }}
   - --Seq.ApiKey={{ nethermind_seq_api_key }}
   - --Metrics.PushGatewayUrl={{ nethermind_push_gateway }}
+# PBT migration restart (pbt_migration_enabled): keeps the prepared FlatDB layout;
+# the validator rejects FlatDB history mode, so it is pinned off here.
+pbt_nethermind_migration_args:
+  - --Pbt.Enabled=true
+  - --FlatDb.HistoryEnabled=false
+  - --Pbt.MigrationSnapshotPath={{ pbt_migration_input_container_dir }}/pbt-snapshot.bin
+  - --Pbt.MigrationPreimagesPath={{ pbt_migration_input_container_dir }}/framed.bin
+  - --Pbt.MigrationAnchor={{ pbt_anchor_block }}
+nethermind_container_command_extra_args: "{{ pbt_nethermind_base_args + (pbt_nethermind_migration_args if pbt_migration_enabled | bool else []) }}"
 nethermind_container_pull: true
 
 prometheus_config: |

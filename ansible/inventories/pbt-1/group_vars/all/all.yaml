@@ -65,9 +65,19 @@ ethereum_genesis_timedelay: 0
 shadowfork_height: 24503958
 shadowfork_expected_hash: "0x47c3596789c3d65824cb157d470e558266242bf2415b900ab81299c022a2d216"
 shadowfork_expected_state_root: "0x8cab6f81e370f341e67e66d2333cdf3e6074861f861aa3e490b9411460ad7f22"
-# Enable with the migration restart only after each recipient's inputs are verified.
-# Keeping this off avoids Docker creating the downloader's final directory early.
-pbt_migration_input_mount_enabled: false
+# PBT migration (decided 2026-10-22). N = shared snapshot/preimage anchor;
+# S = activation, 2026-10-29 09:00 UTC, identical on all nine workers.
+pbt_anchor_block: 24453558
+pbt_anchor_hash: "0x331c54fd1b37302697157dec30d2a1e0a13682843301f60d8ebac004f8bc4155"
+pbt_activation_time: 1793264400
+# Per-worker switch: set true in that worker's host_vars for its migration
+# restart, then keep it true on every later start so completed work is recognized.
+# Selects genesis-pbt.json (binaryTrieTime=S) and the client's migration flags.
+pbt_migration_enabled: false
+pbt_genesis_file: "{{ 'genesis-pbt.json' if pbt_migration_enabled | bool else 'genesis.json' }}"
+# Import/self workers read the verified inputs from this read/write bind mount
+# (Geth consumes its copies). Erigon converts its own database instead.
+pbt_migration_input_mount_enabled: "{{ (pbt_migration_enabled | bool) and pbt_migration_role in ['import', 'self'] }}"
 pbt_migration_input_host_dir: /data/pbt-1/migration-input-24453558
 pbt_migration_input_container_dir: /pbt-migration-input
 pbt_migration_input_bind_mounts: >-
@@ -600,5 +610,6 @@ shadowfork_el_static_enodes: >-
     | reject('equalto', inventory_hostname)
     | map('extract', pbt_peer_identities, 'enode')
     | unique
+    | sort
     | list
   }}

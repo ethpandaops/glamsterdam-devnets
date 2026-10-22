@@ -28,6 +28,7 @@ ethereum_el_bootnodes: >-
     | reject('equalto', inventory_hostname)
     | map('extract', pbt_peer_identities, 'enr')
     | unique
+    | sort
     | list
   }}
 
