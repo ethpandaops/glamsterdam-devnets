@@ -12,6 +12,9 @@
 # IP: its TCP dials use ephemeral source ports and real peers listen on other ports too (msf-1
 # dialed mainnet nodes on 30304/30404). Re-run after an EL container is recreated (its IP can
 # change). Rules do not survive a reboot.
+# Extra sources (e.g. an external node joining the shadowfork): FW_ALLOW_EXTRA="1.2.3.4 5.6.7.8"
+# emits -s/-d RETURN rules for those addresses; keep them in sync with the cloud firewall's
+# el_p2p_extra_source_addresses, otherwise the chain drops what the cloud firewall just allowed.
 # Needs docker on the hosts (run right after `playbook.yaml -t init-server`).
 set -euo pipefail
 
@@ -40,6 +43,10 @@ script="$(mktemp)"; trap 'rm -f "$script"' EXIT
     done
     # the EL's traffic to its own containers (snooper, nginx) and the VPC
     echo 'for n in 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 127.0.0.0/8; do iptables -A $C -d $n -j RETURN; done'
+    for ip in ${FW_ALLOW_EXTRA:-}; do
+      echo "iptables -A \$C -s $ip -j RETURN"
+      echo "iptables -A \$C -d $ip -j RETURN"
+    done
     echo 'iptables -A $C -j DROP'
     echo 'ip6tables -A $C -j DROP'
     echo 'for t in iptables ip6tables; do for p in tcp udp; do for d in --dport --sport; do $t -I DOCKER-USER 1 -p $p $d 30303 -j $C; done; done; done'

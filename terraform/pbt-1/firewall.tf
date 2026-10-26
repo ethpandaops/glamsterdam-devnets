@@ -4,7 +4,12 @@
 variable "el_p2p_extra_source_addresses" {
   description = "Extra CIDRs allowed to reach EL p2p 30303 (e.g. a local join host)"
   type        = list(string)
-  default     = []
+  # External shadowfork joiners, /32 only (no 0.0.0.0/0: chain id 1 + a pre-Amsterdam-time
+  # fork id let real mainnet peers connect). Keep in the committed default so the rule
+  # survives the next `terraform apply` of pbt-1 instead of living in a gitignored tfvars.
+  default = [
+    "54.156.192.243/32", # matkt (Karim) besu node, admitted 2026-10-26
+  ]
 }
 
 resource "digitalocean_firewall" "main" {
