@@ -3,6 +3,9 @@
 pbt_migration_role: convert
 pbt_migration_memory_gib: 32
 pbt_migration_anchor: 24453558
+# Activated 2026-10-26: convert-pbt/attach-pbt completed, so arm S (adds
+# --override.binary-trie=1793264400 to every start). Keep true on all later starts.
+pbt_migration_enabled: true
 erigon_container_memory: "32g"
 erigon_container_memory_swap: "32g"
 erigon_container_cpus: 8
