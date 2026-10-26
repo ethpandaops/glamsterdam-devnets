@@ -16,6 +16,37 @@ trial**.
 
 ---
 
+## Built artifacts (2026-10-26) — done, not deployed
+
+Both trial images exist and are staged. Neither is referenced by any inventory file yet,
+so no worker's configuration changed: Besu-1 still runs `sha256:850c5bae…` and
+Nethermind-1 still runs `sha256:9ceb3fa7…`.
+
+| artifact | identity | verification |
+|---|---|---|
+| Besu self-convert image | tag `pbt-1/besu:cc564258-e49e3008`; build host ID `sha256:033612e5cadc421965a46a9a654145cef9df9f9cc0c4e0dabcd75d16ef4aeff8`; loaded on Besu-1 as `sha256:d8013fb001d2241f99c4c816076624c41a7e86e9e1ffa3f84b3b4f746360f83a`; 985 MB | labels `org.opencontainers.image.revision=cc564258…`, `pbt.stateless.revision=e49e3008…`; `besu --version` → `besu/v26.10-develop-cc56425/linux-x86_64/openjdk-java-25`; `sha256sum /opt/besu/lib/besu-stateless-0.1.8-SNAPSHOT.jar` inside the image = `d182e1e86d8ae6ce48e3bcb34f58a3bffc4e579c8e6885ed103d2a9e7a4bae1e`, identical to the JAR published to the isolated Maven cache during the build |
+| Nethermind trial image | tag `ethpandaops/nethermind:pbt-1-merge-ten-lights-cover`; registry index digest `sha256:4428e138c00da790860a0dc85e02ac04dbf70b0211ee5e90db2dfbe952c0397b` (pin this one in the inventory — it is multi-arch, matching how the current Nethermind pin is written); amd64 platform manifest `sha256:b464feb8d4e01b6f0b76202e3c8dc3e5262e9974db0da4ba053cf748dc145e56` (665 MB, created 2026-10-26T20:20:54Z), pulled onto Nethermind-1 as `sha256:db64a1985cabf5512a934a264ba3779b5db953d2a7e832828c048ebf0ac46d96` | CI run `40394147124` concluded success; image labels `org.opencontainers.image.revision=3f29bb53ab55297f0f0bb5466e314c84f30fc344`, `ethpandaops.io.commitRef=merge-ten-lights-cover`, `ethpandaops.io.repo=NethermindEth/nethermind`; `--help` from the image lists `--Pbt.MigrationPreimagesPath` whose help text is exactly the preimages-only mode, so no extra self-import flag is needed |
+
+Both images were produced without touching a running node beyond the build host's CPU: the
+Besu build ran in a containerified Gradle invocation (8 CPU / 16 GiB) alongside the live
+Besu-2 worker, which stayed synced and peering throughout (`Binary.synced`, cursor at head).
+
+The two local Besu image IDs differ because the build loads an attestation manifest list;
+identity is carried by the revision labels and the resolved stateless JAR hash, both
+checked on the target host after the load.
+
+Flag-surface notes taken from the built images (not from source):
+- Nethermind: the import mode is selected purely by omitting `--Pbt.MigrationSnapshotPath`
+  and keeping `--Pbt.MigrationPreimagesPath` + `--Pbt.MigrationAnchor`. The image also
+  exposes `--Pbt.FakeMatchingStateRoot`, which reports the child header's root instead of the
+  computed PBT root and therefore bypasses the very check these trials exist to obtain —
+  it must stay `false` in both trials.
+- Besu: `--Xpbt-migration-self-convert` is mutually exclusive with `--Xpbt-snapshot-file`
+  (the option parser rejects the pair), so the inventory branch must remove the snapshot
+  flag rather than add the new one alongside it.
+
+---
+
 ## TODO A — Besu-1: self-conversion from the node's own flat database
 
 ### Goal
