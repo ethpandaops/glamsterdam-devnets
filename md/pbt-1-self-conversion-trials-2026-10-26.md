@@ -397,3 +397,22 @@ Evidence: `~/.local/state/pbt-1-run/migration/selfconvert-trials/` (`trials.json
 - Deployed 10:17:19–32; the check-mode diff showed the image only. "PBT state already
   populated; skipping the self import", flat and PBT both at 24,536,934, `synced` at 10:18:18.
   All nine workers agree at 24,537,098–100 (`verify-nm1-f609f2fd.json`).
+
+**Geth-1/2/3 image update (2026-10-27, implementer request: lower RAM under the XEN load)**
+- `CPerezz/go-ethereum` `pbt` moved 84a12eff → 91b1f422a. That is a fast-forward of one PR
+  (#78, "trie/bintrie: recurse into children from one call site"): a hashing, copy,
+  collect and proof traversal refactor with no encoding change. Before the update, Geth-1
+  was OOM-killed at 04:52:00 (anon-rss 16.3 GB at 16 GiB); Geth-2 had anon 15.8 GB of 32 GiB
+  and Geth-3 15.6 GB of 16 GiB.
+- Built with `panda build geth --repo CPerezz/go-ethereum --ref 91b1f422a68c7383029a0bda436cccd374f67d04 --tag pbt-1-91b1f422`
+  (run 40506481810, success). Digest `sha256:68940562…` carries the commitRef label
+  91b1f422a, and `geth version` reports Git Commit 91b1f422a.
+- Pinned as the group default in `group_vars/all/images.yaml`; no bootnode hosts, so only
+  the three Geths use it. The check-mode diff showed the image only on each. Rolled out one
+  at a time, and each was `synced` within 20 s. All nine workers agree on the three blocks
+  after each restart:
+  - Geth-2 12:53:20: 24,537,870–72.
+  - Geth-3 12:56:12: 24,537,882–84.
+  - Geth-1 12:58:01: 24,537,893–95.
+  Anon right after start was 3.5–4.0 GB on each; the steady-state effect under load is
+  not measured yet.
