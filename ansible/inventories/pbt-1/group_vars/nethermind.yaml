@@ -69,7 +69,15 @@ pbt_nethermind_migration_args:
   - --Pbt.MigrationSnapshotPath={{ pbt_migration_input_container_dir }}/pbt-snapshot.bin
   - --Pbt.MigrationPreimagesPath={{ pbt_migration_input_container_dir }}/framed.bin
   - --Pbt.MigrationAnchor={{ pbt_anchor_block }}
-nethermind_container_command_extra_args: "{{ pbt_nethermind_base_args + (pbt_nethermind_migration_args if pbt_migration_enabled | bool else []) }}"
+# Per host: pbt_nethermind_migration_preimages: false drops the preimages input;
+# pbt_nethermind_migration_snapshot: false drops the snapshot, so the preimages alone
+# import the node's own flat state (self import, merge-ten-lights-cover 3f29bb53).
+pbt_nethermind_migration_args_effective: >-
+  {{ pbt_nethermind_migration_args
+     | reject('match', '^$' if pbt_nethermind_migration_preimages | default(true) | bool else '--Pbt.MigrationPreimagesPath=')
+     | reject('match', '^$' if pbt_nethermind_migration_snapshot | default(true) | bool else '--Pbt.MigrationSnapshotPath=')
+     | list }}
+nethermind_container_command_extra_args: "{{ pbt_nethermind_base_args + (pbt_nethermind_migration_args_effective if pbt_migration_enabled | bool else []) }}"
 nethermind_container_pull: true
 
 prometheus_config: |

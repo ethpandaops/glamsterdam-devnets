@@ -101,6 +101,17 @@ snapshot flag, keeping preimages + anchor hash + tuning flags. Then set
 `pbt_migration_role: self` on Besu-1 only.
 
 ### Data prerequisite — found during preparation, resolve before starting
+> **Correction (2026-10-27, read at cc564258):** `Chain.bals` is backed by
+> `PbtMigrator.storedOrFetchedBals`, which fetches the BALs missing from local storage from
+> peers before it throws, so a missing local BAL is not fatal by itself. The target is the
+> latest finalized block once the head is < 2 min old and ≤ 128 blocks ahead of it; the flat DB
+> is read at the head and rewound to the target through trie logs (`TargetPriors`, ≤ 2M changed
+> keys). The migrator also stops unless the DB is `FlatDbMode.FULL` with code by hash
+> (`JumpDestCodeStorageStrategy` qualifies: it extends `CodeHashCodeStorageStrategy`); the H
+> restore is both. A from-scratch snap sync is therefore possible in principle, but it was not
+> attempted: on this 9-peer shadowfork it also downloads ~24.5M mainnet headers and ~1 TB of
+> state, which may not finish before S. The trial uses the H restore, as below.
+
 `SelfConversion.Collect` reads `chain.bals(blocks)` for every block from `anchor+1` to the
 conversion target in 128-block batches, and that interface **throws if a BAL is missing**.
 BALs are served from local block storage (`DefaultBlockchain.getBlockAccessList` →
@@ -199,6 +210,15 @@ image — e.g. `pbt_nethermind_migration_snapshot` (default `true`) that removes
 `--Pbt.MigrationSnapshotPath=` — and set it `false` on Nethermind-1 for the trial.
 
 ### Data prerequisite
+> **Correction (2026-10-27, read at 3f29bb53):** no re-extract is needed. `PbtSelfImport.Import`
+> imports at the node's *current* persisted flat state (`reader.CurrentState`, pinned for the
+> scan), resolves the keys the anchor lacked through the BALs N+1 … that state
+> (`balFetcher.EnsureRange` fetches missing ones from peers), and skips only if the PBT DB is
+> already valid. Removing `mainnet/pbt/` (376 GB) is enough; flat state, blocks and BALs stay.
+> `PbtMigrationConfigValidator` requires `FlatLayout.Flat` for this mode (open question 3:
+> satisfied), and rejects `FakeMatchingStateRoot` with a scheduled binaryTrieTime. The import
+> passes `expectedRoot: null`, so like Besu it has no built-in root check.
+
 The existing PBT column was built from the snapshot, and a populated PBT database seeded
 from another anchor is rejected by the configuration validator, so the migration namespace
 has to go: wipe `/data/pbt-1/nethermind`, re-extract
@@ -257,3 +277,112 @@ documentation task, and neither trial blocks `S`; if a trial is still running ne
    the preimages, but the branch should be confirmed once on a throwaway DB).
 4. Whether either trial should stop short of `S` on purpose (i.e. do we want a worker that
    converts and then crosses `S` in self-conversion mode, or only a pre-`S` root check?).
+
+---
+
+## Run log (2026-10-27)
+
+Monitor: user unit `pbt-1-selfconvert-trials` →
+`~/.local/state/pbt-1-run/migration/selfconvert-trials/{trials.jsonl,events.log}` (5 min:
+state, memory, disk, restarts, OOM, `debug_migrationProgress`, PBT log lines). Fleet watch
+keeps running alongside. Pre-flight 00:19 UTC: nine workers at 24,534,265, finalized epoch
+1041, 80 shadow roots compared, no alerts. Abort line: S − 12 h = 10-28 21:00 UTC.
+
+**Nethermind-1 (TODO B)**
+- Final state of the snapshot-import run: `synced`, cursor 24,534,311 (`0xcded5ad7…`), shadow
+  root `0x784ab6f9…`, RestartCount 29. Evidence:
+  `/data/pbt-1/nethermind-1-snapshot-run-evidence/` (inspect, progress, logs since 10-26 11:29).
+- EL stopped 00:28:41–45 (clean: "All DBs closed"). `mainnet/pbt/` (376 GB) deleted 00:29:19;
+  795 GB free; `pbt-snapshot.bin` kept for the rollback. Check-mode diff: snapshot flag out,
+  preimages flag in, image `79ff97fa…` → `4428e138…`; nothing else.
+- Deployed 00:29:27 (`2.3.0-preview+3f29bb53`, 16 GiB, 2.5 GB memory hint). **Self import
+  started 00:29:52** at flat state 24,534,182 (`0x2489b215…`) through the preimages of N.
+- Phases: the scan ran 00:29:52 to about 02:47 (~2 h 17 m), then Account (~03:20), Code
+  (to about 04:05), then Storage (2.6 % at 04:18, 68 % at 05:09, ~370k leaves/s, 3.21 B leaves).
+  The follower stayed at head the whole time.
+- Memory (cgroup): anon 14.2 GB at 05:10, page cache squeezed to 1.3 GB, memory.peak at the
+  16 GiB limit, `max` events 2.39 M, oom_kill 0. Docker stats: 7.4 → 11.8 GiB during the
+  scan, then 14.3 → 15.3 GiB from Code onward.
+- Disk free: 801 → 608 GB over the scan, then 254 GB at 05:10 (migration-work 228 GB +
+  pbt/ 316 GB), falling about 2.5 GB/min during Storage.
+- **Import done 05:27:31** after 4 h 57 m 38 s at 24,534,182 (`0xa20fd86e…`). It imported
+  355,693,479 accounts and 1,877,822,062 slots (3,609,274,444 leaves in 36,093 windows).
+  Root `0xa477d05c5532ae670a8e6bbf61e6d9c9eee3380de51c89c23bb98f8300b05924`.
+  **Independent check: Geth-1/2/3 and Besu-2 report the same binary root at 24,534,182.**
+  The Nethermind workers return null for that older block. The follower reached `following`
+  at once (cursor 24,535,554 at 05:28). Peak: anon 16.0 GB at the limit, memory.peak
+  16 GiB, `max` events 2.90 M, oom_kill 0, RestartCount 0. Scratch freed: 429 GB free and
+  pbt/ 368 GB afterwards; disk low point about 250 GB.
+- Root check before restart (`verify-nm1-pre-restart-1.json`): all eight non-trial workers
+  agree on hash, stateRoot and binary root at 24,535,644–46. Besu-1 was skipped because it
+  is converting.
+- Restarted 05:28:48–57: a clean shutdown ("All DBs closed"), then "PBT state already
+  populated; skipping the self import", flat and PBT both at 24,535,494, and `synced` at
+  05:29:27.
+- Root check after restart (`verify-nm1-post-restart-2.json`, blocks processed after it):
+  the eight workers agree at 24,535,662–64 (binary root at 24,535,664 is
+  `0x636bfcd9…f1`). **TODO B acceptance met for the eight non-trial workers.** The
+  nine-way check including Besu-1 follows once its conversion is done.
+
+**Besu-1 (TODO A)**
+- Final state of the snapshot-import run 3: `synced`, cursor 24,534,301 (`0xe277fce7…`),
+  shadow root `0xefd79651…`. Evidence: `/data/pbt-1/besu-1-run3-evidence/`.
+- EL stopped 00:26:23–26; restore unit `pbt-1-besu-1-restore-selfconvert` (same
+  `restore.sh` as run 3) started 00:26:26, DB deleted 00:26:41 (1,956 GB free).
+  `pbt-snapshot.bin` kept: the work dir needs ~4 × preimages and the post-restore disk
+  (877 GB in run 3) covers it. Check-mode diff: `--Xpbt-snapshot-file` →
+  `--Xpbt-migration-self-convert=true`, image `850c5bae…` → `d8013fb0…`; nothing else.
+- Memory kept at 16 GiB / 8 GiB heap, the same as Geth-3's self-migration, for comparison.
+- H restore done 02:35:19 (1,132 GB extracted, 824 GB free). The check-mode diff was re-run
+  at 02:35 and was unchanged. Deployed 02:36:03 (`26.10-develop-cc56425`). It logs "Flat db
+  mode found FULL" and "code stored using code hash enabled = true". RPC was up at H
+  (24,503,958) at 02:37:10, and `admin_changeLogLevel DEBUG …PbtMigrator` was sent then.
+  Backward sync to head (~30k blocks) comes next, then the finality wait, then self-conversion.
+- Backward sync H → head took about 2 h 30 m (02:37 to 05:07). The migrator started at
+  05:07:28. **Self-conversion started 05:07:36** at flat block 24,535,469 (`0x3ea4bf0b…`),
+  using the preimages of N and the BALs of the 81,911 blocks after N. At 05:10 cgroup anon was
+  8.3 GB (page cache 5.6 GB), oom_kill 0, 795 GB free.
+- **Self-conversion done 07:46:41** in 2 h 39 m 05 s, at target block 24,535,469 (`0x3ea4bf0b…`):
+  - BAL preimages of the 81,911 blocks after N: 9 m 33 s.
+  - Flat DB read (4 ranges at a time): 33 m 43 s.
+  - New keys: 1 m 37 s.
+  - Codes of 69,059,319 contracts: 8 m 23 s.
+  - PBT build from 3,610,963,005 leaves: 1 h 45 m 47 s.
+- Bootstrapped 07:46:58 with leaves 3,610,963,005, codes 3,150,083, root
+  `0x8acd5af00d843d6f21b1ae791d1826bd495e53f555539653245fc9fc73744a7c`.
+  **Independent check: Geth-1/2/3 and Besu-2 report the same binary root at 24,535,469**
+  (`verify-besu1-bootstrap-block.json`, MPT stateRoot `0x873725ec…`). It then rolled in
+  128-block steps, about 13 s per roll.
+- Resources during the conversion:
+  - Memory: Docker stats peaked at 14.57 GiB (5-min samples). cgroup memory.peak reached
+    the 16 GiB limit, including page cache; anon was 8.3 GB at the start and 10.1 GB after
+    the bootstrap. oom_kill 0.
+  - Disk: free fell from 795 GB to a low of 542 GB at 07:46, so the work dir peaked at about
+    253 GB. It was 4 KB after the bootstrap, with 600 GB free.
+- Caught up with head at 07:48:43 (24,536,349, 880 blocks rolled, ~2 min), then `synced`.
+- Nine-worker root check before restart (`verify-besu1-pre-restart-1.json`): all nine agree
+  on hash, stateRoot and binary root at 24,536,350–52 (binary root at 24,536,352 is
+  `0x931333c0…`).
+- Restarted 07:50:27–31 (shutdown hooks ran). Startup again logged FULL with code by hash.
+  "PBT migrator resuming from previously-materialised base block 24536358" (no
+  re-conversion), `synced` at 07:50:46, DEBUG log level re-sent.
+- Nine-worker root check after restart (`verify-besu1-post-restart-1.json`, blocks after
+  the restart): all nine agree at 24,536,364–66 (binary root at 24,536,366 is
+  `0x7568d303…`). **TODO A acceptance met.** This check also covers Nethermind-1 in the
+  nine-way comparison.
+
+**Summary (both trials accepted, 2026-10-27)**
+
+| | Besu-1 self-convert (cc564258) | Nethermind-1 self import (3f29bb53) |
+|---|---|---|
+| Start → bootstrap | 05:07:36 → 07:46:58 (2 h 39 m) | 00:29:52 → 05:27:31 (4 h 58 m) |
+| Target block | 24,535,469 | 24,534,182 (flat state at start) |
+| Leaves / codes | 3,610,963,005 / 3,150,083 | 3,609,274,444 (355.7 M accounts, 1.878 B slots) |
+| Root at target | `0x8acd5af0…4a7c` = Geth-1/2/3, Besu-2 | `0xa477d05c…5924` = Geth-1/2/3, Besu-2 |
+| Peak memory (16 GiB limit) | anon ~10 GB, no OOM | anon 16.0 GB at the limit, 2.9 M `max` events, no OOM |
+| Peak scratch | ~253 GB work dir | ~228 GB migration-work + pbt/ growth; low point ~250 GB free |
+| Before restart / after restart | 9/9 agree / 9/9 agree | 8/8 agree (Besu-1 converting) / 9/9 agree |
+| Extra | 2 h 30 m backward sync from the H restore first | No re-extract; the node stayed at head throughout |
+
+Evidence: `~/.local/state/pbt-1-run/migration/selfconvert-trials/` (`trials.jsonl`,
+`events.log`, `verify-*.json`).

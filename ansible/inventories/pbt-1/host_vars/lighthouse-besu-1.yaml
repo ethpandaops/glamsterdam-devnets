@@ -1,11 +1,14 @@
 ---
 # Measured migration limits; restore/build jobs have separate resource limits.
-pbt_migration_role: import
+# 2026-10-27: self-conversion trial (md/pbt-1-self-conversion-trials-2026-10-26.md, TODO A)
+# from the H restore; rollback = H restore + role import + the 850c5bae image below.
+pbt_migration_role: self
 pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
 # Wave 1 (2026-10-22): PBT migration restart; keep true on every later start.
 pbt_migration_enabled: true
-besu_container_image: "sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4"
+# 2026-10-27: pbt-1/besu:cc564258-e49e3008 (self-convert); was 76a88a11 sha256:850c5bae…7d0.
+besu_container_image: "sha256:d8013fb001d2241f99c4c816076624c41a7e86e9e1ffa3f84b3b4f746360f83a"
 besu_container_memory: "16g"
 besu_container_memory_swap: "16g"
 besu_container_cpus: 8

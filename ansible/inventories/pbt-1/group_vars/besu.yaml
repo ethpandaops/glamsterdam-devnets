@@ -70,7 +70,13 @@ pbt_besu_migration_args:
   - --Xpbt-migration-threads=4
   - --Xpbt-migration-blocks-per-roll=128
   - --Xpbt-migration-sort-buffer=64
-besu_container_command_extra_args: "{{ pbt_besu_base_args + (pbt_besu_migration_args if pbt_migration_enabled | bool else []) }}"
+# pbt_migration_role: self converts the node's own flat DB (besu cc564258) instead of loading
+# the snapshot; the option parser rejects --Xpbt-migration-self-convert with --Xpbt-snapshot-file.
+pbt_besu_migration_args_effective: >-
+  {{ (pbt_besu_migration_args | reject('match', '--Xpbt-snapshot-file=') | list)
+     + ['--Xpbt-migration-self-convert=true']
+     if pbt_migration_role == 'self' else pbt_besu_migration_args }}
+besu_container_command_extra_args: "{{ pbt_besu_base_args + (pbt_besu_migration_args_effective if pbt_migration_enabled | bool else []) }}"
 # Loaded from the verified build archive on both workers, not a registry tag.
 besu_container_pull: false
 
