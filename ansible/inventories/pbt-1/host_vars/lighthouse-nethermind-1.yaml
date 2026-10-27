@@ -12,7 +12,9 @@ pbt_migration_enabled: true
 # preimages only, no snapshot, on merge-ten-lights-cover 3f29bb53, still 16 GiB.
 # Rollback = snapshot back on, preimages off, the 79ff97fa image, after deleting pbt/.
 pbt_nethermind_migration_snapshot: false
-nethermind_container_image: "registry-1.docker.io/ethpandaops/nethermind@sha256:4428e138c00da790860a0dc85e02ac04dbf70b0211ee5e90db2dfbe952c0397b"
+# 2026-10-27: merge-ten-lights-cover f609f2fd (pbt-1-merge-ten-lights-cover-f609f2fd; no
+# on-disk change, keeps the imported PBT state); was 3f29bb53 sha256:4428e138….
+nethermind_container_image: "registry-1.docker.io/ethpandaops/nethermind@sha256:c802581255947915377a4fb4916f0d539c1264e47e528353b39501d761ecf4f7"
 nethermind_container_memory: "16g"
 nethermind_container_memory_swap: "16g"
 nethermind_container_cpus: 8

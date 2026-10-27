@@ -386,3 +386,14 @@ keeps running alongside. Pre-flight 00:19 UTC: nine workers at 24,534,265, final
 
 Evidence: `~/.local/state/pbt-1-run/migration/selfconvert-trials/` (`trials.jsonl`,
 `events.log`, `verify-*.json`).
+
+**Nethermind-1 image update (2026-10-27, on request)**
+- `merge-ten-lights-cover` moved 3f29bb53 → f609f2fd. That is a fast-forward of 28 files:
+  in-memory trie node buffer compaction (new `FlatDb.CompressedNodeRecordBufferMemoryBudget`,
+  default 500 MiB) and persisted snapshot sizing. No on-disk PBT change.
+- Built with `panda build nethermind --repo NethermindEth/nethermind --ref f609f2fd37f4a3a731d861b4cab4903de8fc8307 --tag pbt-1-merge-ten-lights-cover-f609f2fd`
+  (run 40485234454, success). The index digest `sha256:c8025812…` carries revision label
+  f609f2fd, and the binary reports `2.3.0-preview+f609f2fd`.
+- Deployed 10:17:19–32; the check-mode diff showed the image only. "PBT state already
+  populated; skipping the self import", flat and PBT both at 24,536,934, `synced` at 10:18:18.
+  All nine workers agree at 24,537,098–100 (`verify-nm1-f609f2fd.json`).
