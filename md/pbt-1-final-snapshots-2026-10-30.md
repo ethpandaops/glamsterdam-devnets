@@ -94,7 +94,7 @@ access. Full flag lists: `ansible/inventories/pbt-1/group_vars/<client>.yaml`.
 | [pbt-1-storage-benchmark-2026-10-20.md](pbt-1-storage-benchmark-2026-10-20.md), [pbt-1-self-conversion-trials-2026-10-26.md](pbt-1-self-conversion-trials-2026-10-26.md), [pbt-1-8037-pilot-2026-10-19.md](pbt-1-8037-pilot-2026-10-19.md) | Benchmarks and trials |
 | [`scripts/pbt/`](../scripts/pbt) | Controller tooling: presigned R2 uploads (`final-head-snapshot.py`, `storage.py`), migration-input publishing, fleet monitors, Erigon conversion helpers; `migration-builds.json` pins every client build |
 | [`ansible/inventories/pbt-1/`](../ansible/inventories/pbt-1) | Inventory, images (`group_vars/all/images.yaml`), per-client flags, per-host roles |
-| [`network-configs/pbt-1/`](../network-configs/pbt-1), [`terraform/pbt-1/`](../terraform/pbt-1), [`kubernetes-archive/pbt-1/`](../kubernetes-archive/pbt-1) | Genesis/config, DO infrastructure, k8s tooling |
+| [`network-configs/pbt-1/`](../network-configs/pbt-1), [`terraform/pbt-1/`](../terraform/pbt-1), [`kubernetes-archive/pbt-1/`](../kubernetes-archive/pbt-1) | Genesis/config, DO infrastructure (destroyed 2026-10-30), k8s tooling (archived) |
 
 **Client sources:** [CPerezz/go-ethereum](https://github.com/CPerezz/go-ethereum) `pbt`;
 [besu-eth/besu-stateless](https://github.com/besu-eth/besu-stateless) and [matkt/besu](https://github.com/matkt/besu);
