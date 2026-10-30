@@ -7,9 +7,16 @@ pbt_migration_memory_gib: 16
 pbt_migration_anchor: 24453558
 # Wave 1 (2026-10-22): PBT migration restart; keep true on every later start.
 pbt_migration_enabled: true
+# 2026-10-22: full replay from the H restore on 76a88a1 (BAL catch-up batching),
+# pbt-1/besu:76a88a11-62b75234, built on Besu-2 in /data/pbt-1/migration-builds-76a88a1.
+# Was 39377a26 sha256:333a557604f6271690312192db120afa48aa5e754a932e65854200c893b191b4.
 # 2026-10-27: pbt-1/besu:cc564258-e49e3008 (self-convert); was 76a88a11 sha256:850c5bae…7d0.
 besu_container_image: "sha256:d8013fb001d2241f99c4c816076624c41a7e86e9e1ffa3f84b3b4f746360f83a"
 besu_container_memory: "16g"
 besu_container_memory_swap: "16g"
 besu_container_cpus: 8
 besu_container_cpuset_cpus: "0-7"
+# 2026-10-22: OOM at 13:49 UTC traced to RocksDB max-open-files auto-detection
+# ignoring the heap size; cap it explicitly.
+besu_extra_args:
+  - --Xplugin-rocksdb-max-open-files=2048

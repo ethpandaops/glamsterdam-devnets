@@ -27,8 +27,7 @@ pbt_erigon_base_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
-  SAVE_HEAP_PROFILE: "true"
-# Per-host additions (host_vars erigon_extra_env), e.g. the BAL_DRIVEN_COMMITMENT A/B.
+# Per-host additions (host_vars erigon_extra_env), e.g. SAVE_HEAP_PROFILE on Erigon-1.
 erigon_container_env: "{{ pbt_erigon_base_env | combine(erigon_extra_env | default({})) }}"
 # PBT: set pbt_migration_enabled only after the offline convert-pbt/attach-pbt
 # succeeded on that worker; it adds --override.binary-trie=S to every start.
@@ -44,11 +43,9 @@ erigon_shadowfork_args:
   - --nodekey=/node-identity/nodekey
   # Both H databases must pass the separate v3 format/reopen gate before launch.
   - --experimental.commitment-v3
-  # Preserve the prepared BAL corpus through startup and the migration experiment.
-  # This pinned build prunes BlockAccessList in the Execution stage even when
-  # historical snapshots are retained. This disables all DB pruning; record it
-  # with the experiment results and review disk headroom before enabling pruning.
-  - --exec.no-prune=true
+  # --exec.no-prune=true removed 2026-10-22: it kept everything in MDBX and
+  # stopped snapshot building (809 GB chaindata, minute-long commits). It had preserved
+  # the BAL corpus, which this build prunes in the Execution stage.
   - --http.api=eth,erigon,engine,web3,net,txpool,admin,debug
   - --http.vhosts=*
   - --ws

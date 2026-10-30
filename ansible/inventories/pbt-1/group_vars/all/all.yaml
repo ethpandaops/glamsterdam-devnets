@@ -201,8 +201,9 @@ bootstrap_harden_sshd_config: false
 
 node_exporter_container_image: "{{ default_tooling_images.node_exporter }}"
 # Container-level CPU/memory (EL cgroup vs its 16/32 GiB limit); see playbook.yaml.
+# v0.60+: v0.52 cannot map containers on hosts using the containerd image store (-2/-3 workers).
 cadvisor_enabled: true
-cadvisor_container_image: gcr.io/cadvisor/cadvisor:v0.52.1@sha256:f40e65878e25c2e78ea037f73a449527a0fb994e303dc3e34cb6b187b4b91435
+cadvisor_container_image: ghcr.io/google/cadvisor:v0.60.6@sha256:b8e7d1093144fd088f425ff003d75a4aa405de075db78dae3bc563730b1bd07a
 prometheus_container_image: "{{ default_tooling_images.prometheus }}"
 vector_container_image: "{{ default_tooling_images.vector }}"
 json_rpc_snooper_container_image: "{{ default_tooling_images.json_rpc_snooper }}"
@@ -604,6 +605,12 @@ vector_config: |
 # Static EL peers (erigon, ethrex, nimbus-el): mainnet peers have none of our blocks.
 # Firewall EL p2p on every host right after -t init-server (before any EL starts):
 #   FW_HOSTS='ethereum_node:bootnode' scripts/shadowfork-ethrex-firewall.sh pbt-1
+# pbt-1 currently has no SF-P2P/DOCKER-USER chain (checked 2026-10-26), so 30303 is only
+# filtered by the DigitalOcean cloud firewall. An external node that should be able to peer
+# needs its public IP as a /32 in terraform/pbt-1/firewall.tf
+# `el_p2p_extra_source_addresses` (2026-10-26: 54.156.192.243/32, matkt's besu) **and**, if the
+# host chain is ever installed, the same IP in FW_ALLOW_EXTRA (see the script) - otherwise
+# DOCKER-USER drops it before the EL container sees it.
 # PBT fleet only. Generate the public manifest with pbt-prepare-identities.yaml;
 # never reuse the inherited msf-2 seed addresses or keys cloned in snapshots.
 pbt_peer_identities: "{{ lookup('ansible.builtin.file', inventory_dir ~ '/files/peer-identities.json') | from_json }}"

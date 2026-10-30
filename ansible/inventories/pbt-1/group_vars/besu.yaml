@@ -55,7 +55,8 @@ pbt_besu_base_args:
   - --data-storage-format=BONSAI
   - --bonsai-limit-trie-logs-enabled=false
   - --color-enabled=false
-  - --cache-last-blocks=2048
+  # --cache-last-blocks=2048 (msf-2 baseline) removed 2026-10-23: the Besu-1 heap
+  # dumps trace the 8 GiB heap OOMs to that block cache.
   - --rpc-http-max-active-connections=1000
   # devnet8 block gas limit is 200M; raise the RPC cap so eth_call/estimateGas can simulate full-block txs
   - --rpc-gas-cap=200000000
@@ -70,13 +71,16 @@ pbt_besu_migration_args:
   - --Xpbt-migration-threads=4
   - --Xpbt-migration-blocks-per-roll=128
   - --Xpbt-migration-sort-buffer=64
+  # 2026-10-23: fixed 2 s pause between catch-up rolls (default: as long as the last
+  # roll took), to shorten the catch-up.
+  - --Xpbt-migration-roll-pause=2000
 # pbt_migration_role: self converts the node's own flat DB (besu cc564258) instead of loading
 # the snapshot; the option parser rejects --Xpbt-migration-self-convert with --Xpbt-snapshot-file.
 pbt_besu_migration_args_effective: >-
   {{ (pbt_besu_migration_args | reject('match', '--Xpbt-snapshot-file=') | list)
      + ['--Xpbt-migration-self-convert=true']
      if pbt_migration_role == 'self' else pbt_besu_migration_args }}
-besu_container_command_extra_args: "{{ pbt_besu_base_args + (pbt_besu_migration_args_effective if pbt_migration_enabled | bool else []) }}"
+besu_container_command_extra_args: "{{ pbt_besu_base_args + (pbt_besu_migration_args_effective if pbt_migration_enabled | bool else []) + (besu_extra_args | default([])) }}"
 # Loaded from the verified build archive on both workers, not a registry tag.
 besu_container_pull: false
 

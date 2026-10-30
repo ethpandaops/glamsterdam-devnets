@@ -7,8 +7,15 @@ pbt_migration_anchor: 24453558
 pbt_migration_enabled: true
 # 32 GiB budget: heap 24 GiB leaves ~8 GiB for native memory (user, 10:15 UTC).
 besu_jvm_heap: 24g
-besu_container_image: "sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71"
+# pbt-1/besu:cd2e2279-62b75234 (see besu_extra_args below).
+# Was 39377a26 sha256:01f1c805ad35f82b9ab37e5416d7e52320f356374d488612a89e9bd27b278a71.
+besu_container_image: "sha256:2277f92ab26cd1dae59a01e62c1f410fa2aa9ea6f150c319c534756b1b9b4b5c"
 besu_container_memory: "32g"
 besu_container_memory_swap: "32g"
 besu_container_cpus: 8
 besu_container_cpuset_cpus: "0-7"
+# 2026-10-23: full replay from the H restore on cd2e2279 (76a88a1 + progress
+# logging), built on Besu-2 in /data/pbt-1/migration-builds-cd2e2279, with a smaller
+# block cache (group_vars no longer sets --cache-last-blocks).
+besu_extra_args:
+  - --cache-last-blocks=128

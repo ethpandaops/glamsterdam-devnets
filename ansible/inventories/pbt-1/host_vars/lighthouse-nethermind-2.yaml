@@ -7,6 +7,9 @@ pbt_migration_anchor: 24453558
 pbt_migration_enabled: true
 # 32 GiB budget: larger DB caches (Nethermind-1 measured ~6.5 GiB anon at the 2.5 GB hint).
 nethermind_memory_hint: 12000000000
+# 2026-10-30 (Nethermind request): pbt-state afc0e1f9 (pbt-1-pbt-state-afc0e1f9, run 41000659662);
+# was the group default f4e29519 sha256:60bb6209….
+nethermind_container_image: "registry-1.docker.io/ethpandaops/nethermind@sha256:6a570a4038248460f066907702dcbe1cff9809e9df411d9c30173d5d33d505f0"
 nethermind_container_memory: "32g"
 nethermind_container_memory_swap: "32g"
 nethermind_container_cpus: 8

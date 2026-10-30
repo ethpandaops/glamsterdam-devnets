@@ -53,7 +53,10 @@ pbt_geth_migration_args: >-
      + ['--pbt.import.preimages=' ~ pbt_migration_input_container_dir ~ '/framed.bin',
         '--pbt.import.anchor=' ~ pbt_anchor_hash,
         '--pbt.import.workers=4'] }}
-geth_container_command_extra_args: "{{ pbt_geth_base_args + (pbt_geth_migration_args if pbt_migration_enabled | bool else []) }}"
+# After S (2026-10-29 09:00 UTC) the head commits the binary tree and Geth refuses to start with
+# --pbt.import.* ("binary tree import refused", core/blockchain.go). genesis-pbt.json stays.
+pbt_geth_import_retired: true
+geth_container_command_extra_args: "{{ pbt_geth_base_args + (pbt_geth_migration_args if pbt_migration_enabled | bool and not pbt_geth_import_retired | bool else []) }}"
 geth_container_pull: true
 
 prometheus_config: |
