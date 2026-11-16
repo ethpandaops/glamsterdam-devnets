@@ -22,10 +22,42 @@ authenticatoor:
     - "*.glamsterdam-devnet-8.ethpandaops.io"
     - "*.plataberget.ethpandaops.io"
 
-  cloudflareAccess:
-    verifyJWT: true
-    teamDomain: "ethpandaops.cloudflareaccess.com"
-    audTag: ""
+  authMode: [authentik]
+  providers:
+    - name: authentik
+      type: oidc
+      oidc:
+        issuerURL: "https://authentik.analytics.production.platform.ethpandaops.io/application/o/authenticatoor/"
+        callbackURL: "https://auth.glamsterdam-devnet-8.ethpandaops.io/authentik/callback"
+        clientId: "authenticatoor"
+        clientSecretFile: "/etc/authenticatoor/secrets/oidc-client-secret"
+        # Non-browser clients (panda's devnet relay) present a token of this
+        # IdP application at /authentik/token and get the same grants. Off
+        # without grants: tokens would carry no services claim (full access).
+        bearer:
+          issuerURL: "https://authentik.analytics.production.platform.ethpandaops.io/application/o/devnet-authenticatoor/"
+          audiences: ["devnet-authenticatoor"]
+        # A group "team:<name>" of the IdP becomes the team <name>.
+        teamRules:
+          - claim: groups
+            prefix: "team:"
+
+  providerSecrets:
+    files:
+      oidc-client-secret: "<path:/secrets/services/services.enc.yaml#authenticatoor | jsonPath {.oidc_client_secret}>"
+
+  grants:
+    - members:
+      - authentik/team:ethpandaops
+      - authentik/groups:ethpandaops:Core
+      name: staff
+      services:
+      - all:all
+    - members:
+      - authentik/groups:panda-access
+      name: core-devs
+      services:
+      - faucet:drop_100eth
 
   persistence:
     enabled: true
