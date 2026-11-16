@@ -236,6 +236,7 @@ jobs:
             ${{
               (matrix.el-client == 'reth') && '["--full"]' ||
               (matrix.el-client == 'erigon') && '["--prune.mode=full"]' ||
+              (matrix.el-client == 'besu') && '["--sync-mode=SNAP2"]' ||
               (matrix.el-client == 'geth') && '["--snap.v2"]' ||
               '[]'
             }}
