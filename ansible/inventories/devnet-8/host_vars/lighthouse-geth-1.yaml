@@ -1,0 +1,11 @@
+# Trial on one node before the rest of the devnet: nginx-proxy runs OpenResty
+# with a JSON-RPC method filter on the RPC vhost, and serves the rpc-snooper API
+# itself so only /_snooper/control and /_snooper/status are reachable.
+docker_nginx_proxy_container_image: openresty/openresty:1.31.8.1-alpine
+docker_nginx_proxy_container_published_ports: ["80:80", "443:443", "8961:8961"]
+gen_jsonrpc_filter_nginx_enabled: true
+gen_snooper_api_nginx_enabled: true
+gen_snooper_api_nginx_port: "{{ snooper_engine_api_port }}"
+gen_snooper_api_nginx_upstream_port: "{{ snooper_engine_api_port }}"
+gen_snooper_api_nginx_ipv6: "{{ docker_network_enable_ipv6 }}"
+ethereum_node_json_rpc_snooper_engine_public_port: 0

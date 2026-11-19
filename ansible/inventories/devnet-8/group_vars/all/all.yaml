@@ -207,9 +207,12 @@ docker_watchtower_container_additional_args:
 ethereum_node_json_rpc_snooper_engine_enabled: true
 ethereum_node_json_rpc_snooper_engine_name: snooper-engine
 ethereum_node_json_rpc_snooper_engine_port: 8561
-ethereum_node_json_rpc_snooper_engine_public_port: 8961
+# The snooper API port inside the container. Hosts that serve it through
+# nginx-proxy (gen_snooper_api_nginx_enabled) set the public port to 0.
+snooper_engine_api_port: 8961
+ethereum_node_json_rpc_snooper_engine_public_port: "{{ snooper_engine_api_port }}"
 ethereum_node_json_rpc_snooper_engine_container_env:
-  SNOOPER_API_PORT: "{{ ethereum_node_json_rpc_snooper_engine_public_port | quote }}"
+  SNOOPER_API_PORT: "{{ snooper_engine_api_port | quote }}"
   SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
   SNOOPER_XATU_ENABLED: "true"
   SNOOPER_XATU_NAME: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
