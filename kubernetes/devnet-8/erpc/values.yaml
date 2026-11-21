@@ -15,7 +15,9 @@ erpc:
       memory: 1Gi
   ingress:
     enabled: true
-    className: ingress-nginx-public
+    className: traefik-devnets
+    annotations:
+      ethpandaops.io/exposure: "public"
     hosts:
       - host: rpc.glamsterdam-devnet-8.ethpandaops.io
         paths:

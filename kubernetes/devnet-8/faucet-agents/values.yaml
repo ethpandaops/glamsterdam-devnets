@@ -25,10 +25,12 @@ powfaucet:
   ingress:
     enabled: true
 
-    className: ingress-nginx-public
-    # Lock the faucet behind basic auth that only the panda proxy holds, so it is
-    # reachable solely via the proxy (which authenticates the caller first).
-    basicAuth: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.username}>:{PLAIN}<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.password}>"
+    className: traefik-devnets
+    annotations:
+      # Behind the class's basic-auth gate (node_ingress credentials), which
+      # only the panda proxy holds: auth tier, priority 2000.
+      traefik.ingress.kubernetes.io/router.priority: "2000"
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-devnets-basic-auth-glamsterdam@kubernetescrd
 
     hosts:
       - host: faucet-agents.glamsterdam-devnet-8.ethpandaops.io

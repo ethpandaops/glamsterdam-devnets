@@ -26,7 +26,9 @@ syncoor-server:
 
   ingress:
     main:
-      className: ingress-nginx-public
+      className: traefik-devnets
+      annotations:
+        ethpandaops.io/exposure: "public"
       enabled: true
       hosts:
         - host: syncoor-api.glamsterdam-devnet-8.ethpandaops.io
