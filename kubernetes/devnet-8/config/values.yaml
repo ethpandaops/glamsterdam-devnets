@@ -4,6 +4,7 @@ network: devnet-8
 chainId: 7091047534
 
 domain: glamsterdam-devnet-8.ethpandaops.io
+ingressClassName: traefik-devnets
 
 config:
   enabled: true

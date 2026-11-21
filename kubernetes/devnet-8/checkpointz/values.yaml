@@ -14,14 +14,10 @@ checkpointz:
       memory: 256Mi
   ingress:
     enabled: true
-    className: ingress-nginx-public
+    className: traefik-devnets
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-production
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/configuration-snippet: |
-        sub_filter '</head>' '<script src="https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js" integrity="sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2" crossorigin="anonymous"></script></head>';
-        sub_filter_types text/html;
-        sub_filter_once off;
+      ethpandaops.io/exposure: "public"
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-devnets-pandamenu@kubernetescrd
     hosts:
       - host: checkpoint-sync.glamsterdam-devnet-8.ethpandaops.io
         paths:
@@ -32,11 +28,6 @@ checkpointz:
           - path: /
             pathType: Prefix
 
-    tls:
-    - hosts:
-      - checkpoint-sync.glamsterdam-devnet-8.ethpandaops.io
-      - checkpoint-sync.plataberget.ethpandaops.io
-      secretName: glamsterdam-devnet-8-checkpoint-sync-tls
 
   config:
     global:

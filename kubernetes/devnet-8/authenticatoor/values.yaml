@@ -65,7 +65,9 @@ authenticatoor:
 
   ingress:
     enabled: true
-    className: ingress-nginx-public
+    className: traefik-devnets
+    annotations:
+      ethpandaops.io/exposure: "public"
     hosts:
       - host: auth.glamsterdam-devnet-8.ethpandaops.io
         paths:
