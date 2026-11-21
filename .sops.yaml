@@ -12,7 +12,11 @@ creation_rules:
   # can open these files (and nothing else here) to create each network's
   # ingress users.
   - path_regex: (^|/)ingress\.sops\.yaml$
-    age: age1jzmeqmpu70anvkt78pl5y0w67r6jpdkamr4cr95mts9vthjly58qfctt55
+    # First: the platform primary key, being retired. Second: the devnet ingress
+    # key, held only by the platform ArgoCD devnet ingress plugin.
+    age: >-
+      age1jzmeqmpu70anvkt78pl5y0w67r6jpdkamr4cr95mts9vthjly58qfctt55,
+      age1mzvjwqm3vqlq0v6lqgppadn9lwkzqssukehf5l784z346mph4uuqeu63pa
     pgp: >-
       80DB2B4EF6CA4D9829C280605636BC0E08138A24,
       69F66EEA7AE36CCB77DDB8CA1BC39532FB4A2DBD,
