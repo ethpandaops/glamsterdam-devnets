@@ -1,0 +1,24 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/forkmon-debug-deny.yaml.j2
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: glamsterdam-devnet-8-forkmon-debug-deny
+  namespace: traefik-devnets
+  annotations:
+    traefik.ingress.kubernetes.io/router.priority: "3000"
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  ingressClassName: traefik-devnets
+  rules:
+  {{- range .Values.forkmon.ingress.hosts }}
+  - host: {{ .host | quote }}
+    http:
+      paths:
+      - path: /debug
+        pathType: Prefix
+        backend:
+          service:
+            name: traefik-devnets-deny
+            port:
+              number: 80
+  {{- end }}
