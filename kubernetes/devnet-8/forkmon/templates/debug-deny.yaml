@@ -3,9 +3,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: glamsterdam-devnet-8-forkmon-debug-deny
-  namespace: traefik-devnets
   annotations:
-    traefik.ingress.kubernetes.io/router.priority: "3000"
+    traefik.ingress.kubernetes.io/router.priority: "2000"
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-devnets-allow-none@kubernetescrd
     argocd.argoproj.io/sync-wave: "-1"
 spec:
   ingressClassName: traefik-devnets
@@ -18,7 +18,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: traefik-devnets-deny
+            name: {{ $.Values.forkmon.fullnameOverride }}
             port:
-              number: 80
+              name: http
   {{- end }}
