@@ -4,7 +4,7 @@ dugtrio:
   fullnameOverride: dugtrio
   image:
     repository: registry-1.docker.io/ethpandaops/dugtrio
-    tag: bbusa-block-finalized-state-queries
+    tag: master-c5525bb
     pullPolicy: IfNotPresent
   extraEnv:
     - name: PROXY_BLOCK_FINALIZED_STATES
