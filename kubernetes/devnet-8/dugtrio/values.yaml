@@ -4,8 +4,11 @@ dugtrio:
   fullnameOverride: dugtrio
   image:
     repository: registry-1.docker.io/ethpandaops/dugtrio
-    tag: bbusa-endpoint-failover
+    tag: bbusa-block-finalized-state-queries
     pullPolicy: IfNotPresent
+  extraEnv:
+    - name: PROXY_BLOCK_FINALIZED_STATES
+      value: "true"
   resources:
     requests:
       cpu: 100m
