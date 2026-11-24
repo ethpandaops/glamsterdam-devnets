@@ -4,8 +4,8 @@ dugtrio:
   fullnameOverride: dugtrio
   image:
     repository: registry-1.docker.io/ethpandaops/dugtrio
-    tag: master-c5525bb
-    pullPolicy: IfNotPresent
+    tag: master-latest
+    pullPolicy: Always
   extraEnv:
     - name: PROXY_BLOCK_FINALIZED_STATES
       value: "true"
