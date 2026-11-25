@@ -35,9 +35,10 @@ tysm_secret_access_key: ENC[AES256_GCM,data:/iXmKhlYw2bzSzirLg==,iv:MRRoJgUc6V8B
 secret_dockerhub:
     username: ENC[AES256_GCM,data:CROGDtAGPOxIBOI=,iv:kd9imvumG1WRBSUKfgjfpHIOhrUy6jHL2h6808Z0IUY=,tag:SdMBMeINeT1iouCPZWBR9g==,type:str]
     token: ENC[AES256_GCM,data:eSROwx/YdGm+LxygbpG1Zrqftilp5ogfXkVpratOBQId0D3a,iv:/1UyFsGqodzel2opDTR62ZVbRvQMB6EGCmehv9SlxZ8=,tag:0S/W4eXpZlVJ893u1eTpvg==,type:str]
+secret_upgradoor_seed: ENC[AES256_GCM,data:2hl7r/kDTlFfmtUeA6ERD6Nz0LZIC2wWL1D1Wr9RGa2Quycmw5Vux7gl+zXjo51/OhlQtHPa3yuo3UvlTor6bA==,iv:dNgHYi7J9yzSzX1JTywD8izTsVivRftFN1Ys4Ta/k2g=,tag:dKAoaclUNG1aGtslx3LZVA==,type:str]
 sops:
-    lastmodified: "2026-11-16T02:45:52Z"
-    mac: ENC[AES256_GCM,data:iV9lrx4/zISdxvXvXtqzlM67Xr9kHKP0zIlWommJQTeI5H94vP2M6hdgj4v9fE4ikxkEn/Fqrut1znJszBFra7qjNPXOoT9VvrW9yzvpfty7WxXDSwYzEdKVXwXVVy1nVtWjA9EXHEYZpq1qGQJN2/RzmoQFI2ZVQQasPlW4MVc=,iv:NNaodOwIyJHaurAaAKSHUMCPgrUXqqN/5KhELpytzrY=,tag:Em7WGjre+oHB3Rfln7kDEg==,type:str]
+    lastmodified: "2026-11-25T10:53:18Z"
+    mac: ENC[AES256_GCM,data:5Kd4H0ctDx68M1yXSTtGDfTjLriyX4aeifrZeno2GslKiPQry9MhuMo6vAaO8Enns1rFcMAqQ/H/wNzI8SXWmG5wRlnew9wIHkEG/NBhn3ulUEPtYQythgVTlD6GQjyszTIAjwEFrqBXU+ifGVDXgqWMOhPJpFUMPBRt7v08MZM=,iv:lwEyeuXi9bzNmLZiNzcq/kqYBGw+rUhckxqJa90bKwU=,tag:CU3/9XdSQAv/UukiLjM5TA==,type:str]
     pgp:
         - created_at: "2025-10-27T13:25:35Z"
           enc: |-
@@ -187,4 +188,4 @@ sops:
             -----END PGP MESSAGE-----
           fp: F93098C3D8ED15D0924A6DDAEB4E93A88660C55B
     unencrypted_suffix: _unencrypted
-    version: 3.8.1
+    version: 3.13.3

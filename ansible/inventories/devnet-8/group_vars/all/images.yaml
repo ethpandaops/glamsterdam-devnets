@@ -23,6 +23,7 @@ default_tooling_images:
   mev_relay: ethpandaops/mev-boost-relay:main
   buildoor: ethpandaops/buildoor:main-latest
   authenticatoor: ethpandaops/service-authenticatoor:main-latest
+  upgradoor: ghcr.io/ethpandaops/upgradoor:master-latest
   xatu_sentry: ethpandaops/xatu:1.30.2
   xatu_cannon: ethpandaops/xatu:latest
   xatu_mimicry: ethpandaops/xatu:latest
