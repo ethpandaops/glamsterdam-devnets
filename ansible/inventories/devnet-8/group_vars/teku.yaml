@@ -32,6 +32,9 @@ teku_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
+  # CVE-2026-114938 (Java4Shell): the Teku image's JDK (Temurin <25.0.5.1 / <27.0.1.1) is affected;
+  # disabling the Base64 intrinsic is the vendor mitigation (same flag as besu-eth/besu#11994).
+  JAVA_OPTS: "-XX:-UseBASE64Intrinsics"
 teku_container_volumes:
   - "{{ teku_datadir }}:/data"
   - "{{ teku_auth_jwt_path }}:/execution-auth.jwt:ro"
