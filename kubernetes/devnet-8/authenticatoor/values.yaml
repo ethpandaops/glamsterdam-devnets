@@ -4,7 +4,7 @@ authenticatoor:
   fullnameOverride: authenticatoor
 
   image:
-    repository: registry-1.docker.io/ethpandaops/service-authenticatoor
+    repository: ethpandaops/service-authenticatoor
     tag: main-latest
     pullPolicy: Always
   resources:
@@ -58,6 +58,7 @@ authenticatoor:
       name: core-devs
       services:
       - faucet:drop_100eth
+      - upgradoor:details
 
   persistence:
     enabled: true

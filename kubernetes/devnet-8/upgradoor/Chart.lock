@@ -1,0 +1,6 @@
+dependencies:
+- name: upgradoor
+  repository: https://ethpandaops.github.io/ethereum-helm-charts
+  version: 0.1.0
+digest: sha256:dbc6464b173ffdc2e5ff282ef8afc75db3dbf1848f68275eef7a313b0eb0303f
+generated: "2026-11-25T12:07:30.013912953+01:00"

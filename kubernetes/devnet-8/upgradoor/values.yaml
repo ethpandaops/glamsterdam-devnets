@@ -1,0 +1,88 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/upgradoor.yaml.j2
+
+upgradoor:
+  fullnameOverride: upgradoor
+
+  image:
+    repository: ghcr.io/ethpandaops/upgradoor
+    tag: master-latest
+    pullPolicy: Always
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  network: "glamsterdam-devnet-8"
+  signerPublicKey: "Bg7WJ__UFPET9TAKFdwZvZ7-uE1QuzDABHHicdYkLdy5dmJQNfpXiOEJL7fx1cTBkVls4QvrGR8pMn3J0gvOYJ4RUZDCaSXwyvmrEopD9EEVuPSorhTTTYzz966tEQPYngia9DqcwyZQlIpC7z9onlf__bJ2HyhYINYEWi3kyqIeu1RPuyDgjgCupVdXj1lPdsqRPCE1KaH4B-3kQ--PdVT4e8VHuKJFLtQ90EoHRyxO94x6mzKmUunaWXVHeoCG557HCHCGtcrVDtRGIO_TdLtBEOgrsxMNeDaLvJ-4phELM38mr1pUIPtoq8-e6PESmXNYTtGQ_X_vmMMUDPu4KoL9L7KSZDChQRKYIDyl_Z7m7eElqHu1OTolw0RjWM432XQ-4Y_a8oS-KOOrMfp0-Cslhl5IK8t2_E6TBlVMXAnaNJDykmcLv_skelQzsjKXDRqrVYLD5NGAfSmJEi19SaEYsOgo2d8-Yd76Fl-Cs7h1R6yNX88SYIyzuy5AXzVIyTFhzPsxL5Q7N4PZz1yqWonc4QeJ0igSsMTLBFbwuKYvKfBy7PS1vQnQt5-8DTI2-TZb46aABy4dQmPvIyksdfJIkuSl_yDS-tNsYuLxZLWfGGL4pOoTel34hW_DAbBkytMWPID9p_O7rU2ozF2iX3XLoIDwQI9LdSDCzX6BwJnpon4m0E0kTW7ZFuk193yKOBfrZZ3N9OG0TjuGuhhhzGrgcMtFALuGV2Fs8tNm3Pnay0Z9JTDnvvVgWsdiIHcBcLX2lC0-LNIjzzgd2S-PFUCwV4TUAwNTyonko2FVShzo4CDZk5hmKcN3xxaLk8a1BfDRvcA-OoEN3T9E6YAbW_H58jKm7ZVLsXeVqkkWsengaklERFPnZbhZlidoVlgDuL2ULem7soTMLsatE7xFp1qCP47Rs-oCdW4NQ6iz16Uz03mLDkw7csuXGpiMHUkzPyDVjlc2ON20jIOL2tH55LqZ1CQj9zhN94ISB3saLxNmc9THQIDSyHgbd5_9XX7rKkbu5CF4sWWk3o4OEyrBNYgyAuOWn5R8OYsjYYhT45YTg7QwC9TEsLOmSaWY-ZaZr7hLW2lDtuMzTb_AmZjeXQG2F9GozVJNpF8xwazgLixnvCCnpYdcS64p8bYb4JqT5tQl0jaqrNX1kN9paC1_QzMiXiLKjiPp5KC1fg_1bmef-xW6rOa8oo3owlmL8dlsTAqGVOURRfODPhecHzLIF0tkOuOCMo63n0iUBaicksqGYVCLnNCPUfRdKWCnafDJDGx1OtuBXIpzcu_eaTPQ4VIMlDNTBv2bBM6oqi9LAV5jOZJDp_UAVfz2dwt5wxcuPKMPGwl9Fx5937-jX2cfUMPDBn813q7g1D2rmxVANwn18xyvVfu-ukvA1tLMV2SZcYJDZYUYFvspqxLv9Hs1Ku11OQYd8ZK-emqhEOawOYXSmtVv69zAsEqNetQ_36Y6jO5h8kzOFqgQ3ofJD-iQDBzZUgbZFjYFHN0mbnF9dfZu3Jc0HGxGzXRQ52bOm_qqibR8_llNT8KkzyCo9AdVZ3sxrNlupxAMrUB5ON6szTgSSTyNAiRKdRlcJwCKPfGDNRnqtHsYhsnMH0E3K32AkHO9RsAIUWoSgCKZ8iSHXzJ9BEADAfQBivUwG8AJ7kHtUlUjTQajUz9U3mnOPtORGOVhpyZPim4HDE3LT6H92QlP3UMRMaO_9M8C7FFSYt3TXmcWMHU79N9wzYd5_LCe6w"
+  authProviderUrl: "https://auth.glamsterdam-devnet-8.ethpandaops.io"
+  controllerSeed: "<path:/secrets/services/services.enc.yaml#upgradoor | jsonPath {.controller_seed}>"
+  registry:
+    auth: >-
+      {"auths": {"https://index.docker.io/v1/": {"username": "<path:/secrets/services/services.enc.yaml#upgradoor | jsonPath {.dockerhub_user}>",
+      "password": "<path:/secrets/services/services.enc.yaml#upgradoor | jsonPath {.dockerhub_token}>"}}}
+  # Agents sign the URL they call, so every public URL must be listed.
+  publicUrls:
+    - "https://upgradoor.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://upgradoor.plataberget.ethpandaops.io"
+  # Queried in parallel; the chain most of them follow is used.
+  beaconEndpoints:
+    - "http://prysm-geth-001:5052"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+  validatorRangesUrl: "https://config.glamsterdam-devnet-8.ethpandaops.io/api/v1/nodes/validator-ranges"
+  # The UI includes the menu itself; its Content-Security-Policy admits the menu's data.
+  extraArgs:
+    - "--ui-script=https://pandamenu.ethpandaops.io/panda-menu-1.0.1.js"
+    - "--ui-script-integrity=sha384-icGX6g6CzB0tqlhDc6Su4c6IPVbcbUvfM3xjbbFYsYBwuZR79WkmOxDhGEPfmyn2"
+    - "--ui-origin=https://ethpandaops-platform-production-cartographoor.ams3.digitaloceanspaces.com"
+
+  settings:
+    actionPolicies:
+      security-upgrades: manual
+    hostStaleAfter: 10m
+    leaseTtl: 1h
+    maxIndependentPercent: 25
+    maxLeasedPercent: 25
+    maxUnavailablePercent: 25
+    minParticipationPercent: 80
+    policyImage: manual
+    policyKinds:
+      cl: manual
+      el: manual
+      other: manual
+      snooper: manual
+      vc: manual
+    policyPackages: manual
+    policyReboot: manual
+    readinessTimeout: 1h
+
+  persistence:
+    enabled: true
+    size: "1Gi"
+
+  ingress:
+    enabled: true
+    className: traefik-devnets
+    annotations:
+      ethpandaops.io/exposure: "public"
+    hosts:
+      - host: upgradoor.glamsterdam-devnet-8.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+      - host: upgradoor.plataberget.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
