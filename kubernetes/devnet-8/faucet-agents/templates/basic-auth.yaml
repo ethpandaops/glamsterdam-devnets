@@ -7,8 +7,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 type: kubernetes.io/basic-auth
 stringData:
-  username: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.username}>"
-  password: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.password}>"
+  username: "<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.username}>"
+  password: "<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.password}>"
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware

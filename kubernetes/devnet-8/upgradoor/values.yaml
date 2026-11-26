@@ -31,16 +31,16 @@ upgradoor:
   # Queried in parallel; the chain most of them follow is used.
   beaconEndpoints:
     - "http://prysm-geth-001:5052"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-2.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-2.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-2.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
-    - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-ethrex-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-grandine-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-teku-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lodestar-geth-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nethermind-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-nimbusel-1.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-erigon-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-nimbus-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
+    - "https://<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>@bn-lighthouse-besu-2.srv.glamsterdam-devnet-8.ethpandaops.io"
   validatorRangesUrl: "https://config.glamsterdam-devnet-8.ethpandaops.io/api/v1/nodes/validator-ranges"
   # The UI includes the menu itself; its Content-Security-Policy admits the menu's data.
   extraArgs:

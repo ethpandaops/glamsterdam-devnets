@@ -22,7 +22,7 @@ syncoor-server:
     secretenv:
       enabled: true
       stringData:
-        AUTH_TOKEN: "syncoor<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>"
+        AUTH_TOKEN: "syncoor<path:../../secrets.sops.yaml#ethereum | jsonPath {.testnets.glamsterdam-devnets.node_ingress.combined}>"
 
   ingress:
     main:
