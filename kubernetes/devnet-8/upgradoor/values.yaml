@@ -65,24 +65,20 @@ upgradoor:
       dataDir: /data
       auditRetention: "0s"
       sshLoginRetention: "0s"
+    deployWindow: "24h"
     settingDefaults:
       actionPolicies:
-        security-upgrades: manual
+        security-upgrades: auto
       hostStaleAfter: 10m
       leaseTtl: 1h
       maxIndependentPercent: 25
-      maxLeasedPercent: 25
-      maxUnavailablePercent: 25
-      minParticipationPercent: 80
-      policyImage: manual
-      policyKinds:
-        cl: manual
-        el: manual
-        other: manual
-        snooper: manual
-        vc: manual
-      policyPackages: manual
-      policyReboot: manual
+      maxLeasedPercent: 10
+      maxUnavailablePercent: 10
+      minParticipationPercent: 90
+      policyImage: auto
+      policyKinds: {}
+      policyPackages: auto
+      policyReboot: auto
       readinessTimeout: 1h
 
   persistence:
